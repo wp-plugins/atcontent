@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 0.9
+    Version: 1.0
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -73,11 +73,21 @@ END;
      function atcontent_setting_section() {
          $userid = wp_get_current_user()->ID;
          $hidden_field_name = 'ac_submit_hidden';
+         $form_message = '';
+         $form_message_block = '';
          if (isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y') {
              update_user_meta($userid, "ac_api_key", $_POST["ac_api_key"]);
+             $form_message .= 'Settings saved.';
+         }
+         if (strlen($form_message) > 0) {
+             $form_message_block .= <<<END
+<div class="updated settings-error" id="setting-error-settings_updated"> 
+<p><strong>{$form_message}</strong></p></div>
+END;
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          echo <<<END
+{$form_message_block}
 <form action="" method="POST">
 <div class="wrap">
 <div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
