@@ -1,7 +1,7 @@
 === AtContent ===
 Contributors: vadnov
 Donate link: 
-Tags: publishing, paid repost, social distribution
+Tags: publishing, paid repost, social distribution, AtContent, widget, post, plugin, protection, monetization, statistics, comments
 Requires at least: 3.3
 Tested up to: 3.4
 Stable tag: trunk
