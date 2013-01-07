@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.1
+    Version: 1.0.2
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -78,17 +78,55 @@ END;
          $hidden_field_name = 'ac_submit_hidden';
          $form_message = '';
          $form_message_block = '';
-         if (isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y') {
+         if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+              isset( $_POST[ "ac_api_key" ] ) ) {
              update_user_meta($userid, "ac_api_key", $_POST["ac_api_key"]);
              $form_message .= 'Settings saved.';
          }
+         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+         if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+              isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
+            $wp_query_args = array(
+                'post_author' => $userid,
+                'post_status' => array('publish')
+                );
+                $posts_query = new WP_Query( $wp_query_args );
+
+            while( $posts_query->have_posts() ):
+	            $posts_query->next_post();
+                $ac_postid = get_post_meta( $posts_query->post->ID, "ac_postid", true );
+                $post = get_post( $posts_query->post->ID );
+                if ( $post == null ) continue;
+	            if ( strlen($ac_postid) == 0 ) {
+                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, atcontent_convert_paragraphs( $post->post_content ), 
+                        $post_published, NULL,
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        $ac_postid = $api_answer["PublicationID"];
+                        update_post_meta($post->ID, "ac_postid", $ac_postid);
+                        update_post_meta($post->ID, "ac_is_process", "1");
+                    }
+                } else {
+                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, atcontent_convert_paragraphs( $post->post_content ),
+                        $post_published, NULL,
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        update_post_meta($post->ID, "ac_is_process", "1");
+                    }
+                }
+            endwhile;
+
+            // Restore original Query & Post Data
+            wp_reset_query();
+            wp_reset_postdata();
+                $form_message .= 'Import completed.';
+            }
          if (strlen($form_message) > 0) {
              $form_message_block .= <<<END
 <div class="updated settings-error" id="setting-error-settings_updated"> 
 <p><strong>{$form_message}</strong></p></div>
 END;
          }
-         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          echo <<<END
 {$form_message_block}
 <form action="" method="POST">
@@ -112,82 +150,30 @@ END;
 </div>
 </div>
 </form>
-<?php 
-     }
-
-     function atcontent_import_section() {
-         $userid = wp_get_current_user()->ID;
-         $hidden_field_name = 'ac_submit_hidden';
-         $form_message = '';
-         $form_message_block = '';
-         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-         if (strlen($ac_api_key) == 0) {
-            echo <<<END
+<form action="" method="POST" name="import-form">
 <div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Import</h2>
-<p>Posts import is possible only after API Key registration. Please, go to the AtContent Settings page and setup API Key.</p>
-</div>
+<div class="icon32 icon-page" id="icon-import"><br></div><h3>Posts Import</h3>
+    <?php 
+ if (strlen($ac_api_key) == 0) {
+            echo <<<END
+<p>You can import all your blog posts to AtContent. For this, you need to set up your API Key above.</p>
 END;
          } else {
-
-             if (isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y') {
-                $wp_query_args = array(
-                    'post_author' => $userid,
-                    'post_status' => array('publish')
-                    );
-                    $posts_query = new WP_Query( $wp_query_args );
-
-                while( $posts_query->have_posts() ):
-	                $posts_query->next_post();
-                    $ac_postid = get_post_meta( $posts_query->post->ID, "ac_postid", true );
-                    $post = get_post( $posts_query->post->ID );
-                    if ( $post == null ) continue;
-	                if ( strlen($ac_postid) == 0 ) {
-                        $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, atcontent_convert_paragraphs( $post->post_content ), 
-                            $post_published, NULL,
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
-                        if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                            $ac_postid = $api_answer["PublicationID"];
-                            update_post_meta($post->ID, "ac_postid", $ac_postid);
-                        }
-                    } else {
-                        $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, atcontent_convert_paragraphs( $post->post_content ),
-                            $post_published, NULL,
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
-                        if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                        }
-                    }
-                endwhile;
-
-                // Restore original Query & Post Data
-                wp_reset_query();
-                wp_reset_postdata();
-                 $form_message .= 'Import completed.';
-             }
-             if (strlen($form_message) > 0) {
-                 $form_message_block .= <<<END
-<div class="updated settings-error" id="setting-error-settings_updated"> 
-<p><strong>{$form_message}</strong></p></div>
-END;
-             }
-     
-                echo <<<END
-{$form_message_block}
-<form action="" method="POST">
-<div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Import</h2>
+                             echo <<<END
 <div class="tool-box">
-    <p>To import all posts to AtContent press "Do Import!" button!</p>
+    <p>To import all your blog posts to AtContent press "Import".</p>
     <input type="hidden" name="{$hidden_field_name}" value="Y">
+    <input type="hidden" name="ac_import" value="Y">
 END;
-         }
+         
 ?>
     <p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Do Import!') ?>" />
+        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Import') ?>" />
     </p>
-
 </div>
-</div>
+    <?php
+         }
+?>
 </form>
 <?php 
      }

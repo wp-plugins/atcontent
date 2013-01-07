@@ -3,7 +3,7 @@ Contributors: vadnov
 Donate link: 
 Tags: publishing, paid repost, social distribution
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ You will need an AtContent Native API key to start using this plugin. To get it,
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Unzip and upload files to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to AtContent settings in Admin Panel and enter AtContent Native API Key
 
@@ -32,11 +32,15 @@ You will need an AtContent Native API key to start using this plugin. To get it,
 
 == Changelog ==
 
+1.0.2
 
+1. Blog posts import options
+
+1.0.1
+
+1. Posts header issue fixed
 
 == Upgrade notice ==
 
-
-
-== Arbitrary section 1 ==
+Now available blog post import options!
 
