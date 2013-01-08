@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.2
+    Version: 1.0.3
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -35,7 +35,8 @@
                     $ac_is_paidrepost =  get_post_meta($post->ID, "ac_is_paidrepost", true);
                     if ($ac_is_process != "1") return;
                     if (strlen($ac_postid) == 0) {
-                        $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, atcontent_convert_paragraphs( $post->post_content ), 
+                        $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                            atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ), 
                             $post->post_date_gmt, NULL,
                             $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                         if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
@@ -43,7 +44,8 @@
                             update_post_meta($post->ID, "ac_postid", $ac_postid);
                         }
                     } else {
-                        $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, atcontent_convert_paragraphs( $post->post_content ),
+                        $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
+                            atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                             $post->post_date_gmt, NULL,
                             $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                         if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
@@ -98,8 +100,9 @@ END;
                 $post = get_post( $posts_query->post->ID );
                 if ( $post == null ) continue;
 	            if ( strlen($ac_postid) == 0 ) {
-                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, atcontent_convert_paragraphs( $post->post_content ), 
-                        $post_published, NULL,
+                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
+                        $post->post_date_gmt, NULL,
                         $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -107,8 +110,9 @@ END;
                         update_post_meta($post->ID, "ac_is_process", "1");
                     }
                 } else {
-                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, atcontent_convert_paragraphs( $post->post_content ),
-                        $post_published, NULL,
+                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
+                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
+                        $post->post_date_gmt, NULL,
                         $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");
