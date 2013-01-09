@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.3
+    Version: 1.0.4
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -11,6 +11,7 @@
     require_once("atcontent_api.php");
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1);
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
@@ -70,6 +71,20 @@ END;
 <script src="https://w.atcontent.com/vadim/{$ac_postid}/Body"></script>
 END;
             }
+            return $code;
+        }
+        return $content;
+    } 
+
+    function atcontent_the_excerpt($content) {
+        global $post;
+        $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+        $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+            $code = <<<END
+<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
+<script src="https://w.atcontent.com/vadim/{$ac_postid}/Face"></script>
+END;
             return $code;
         }
         return $content;
