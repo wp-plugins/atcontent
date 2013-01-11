@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.5
+    Version: 1.0.6
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
