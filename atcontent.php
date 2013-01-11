@@ -64,15 +64,16 @@
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
+<script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/vadim/{$ac_postid}/Face"></script>
 END;
             if (is_single()) {
                 $code .= <<<END
-<!--more-->
 <script src="https://w.atcontent.com/vadim/{$ac_postid}/Body"></script>
 END;
             }
+            $code = str_replace( PHP_EOL, " ", $code );
             return $code;
         }
         return $content;
@@ -84,9 +85,11 @@ END;
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
+<script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/vadim/{$ac_postid}/Face"></script>
 END;
+            $code = str_replace( PHP_EOL, " ", $code );
             return $code;
         }
         return $content;
