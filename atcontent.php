@@ -3,15 +3,15 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.6
+    Version: 1.0.7
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
     require_once("atcontent_api.php");
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
-    add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1);
+    add_filter( 'the_content', 'atcontent_the_content', 100 );
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
