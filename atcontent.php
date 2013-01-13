@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.7
+    Version: 1.0.9
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -110,11 +110,16 @@ END;
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             $wp_query_args = array(
                 'post_author' => $userid,
-                'post_status' => array('publish')
+                'post_status' => array('publish'),
+                'nopaging' => true
                 );
                 $posts_query = new WP_Query( $wp_query_args );
             remove_filter( 'the_content', 'atcontent_the_content', 1 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1);
+            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+
+            $posts_headers = "";
+            $posts_created = 0;
+            $posts_updated = 0;
 
             while( $posts_query->have_posts() ):
 	            $posts_query->next_post();
@@ -123,20 +128,24 @@ END;
                 if ( $post == null ) continue;
 	            if ( strlen($ac_postid) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content, "missing_atcontent" ) ),
+                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                         $post->post_date_gmt, NULL,
                         $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        $posts_headers .= "\"" . $post->post_title . "\" created<br>";
+                        $posts_created += 1;
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
                         update_post_meta($post->ID, "ac_is_process", "1");
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content, "missing_atcontent" ) ),
+                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                         $post->post_date_gmt, NULL,
                         $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        $posts_headers .= "\"" . $post->post_title . "\" updated<br>";
+                        $posts_updated += 1;
                         update_post_meta($post->ID, "ac_is_process", "1");
                     }
                 }
@@ -145,10 +154,16 @@ END;
             // Restore original Query & Post Data
             wp_reset_query();
             wp_reset_postdata();
-                $form_message .= 'Import completed.';
+                $form_message .= 'Import completed.<br>Created: ' . $posts_created . '<br>Updated: ' . $posts_updated . '<br>' .
+                    '<a href="javascript:showImportedHeaders();">Show detailed</a><div id="importedHeaders" style="display:none">' . $posts_headers . '</div>';
             }
          if (strlen($form_message) > 0) {
              $form_message_block .= <<<END
+<script type="text/javascript">
+function showImportedHeaders(){
+    document.getElementById('importedHeaders').style.display='block';
+}
+</script>
 <div class="updated settings-error" id="setting-error-settings_updated"> 
 <p><strong>{$form_message}</strong></p></div>
 END;
