@@ -15,10 +15,11 @@
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
+    add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     //
     //add_settings_field();
     function atcontent_add_tools_menu() {
-        add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent', 'atcontent_setting_section' );
+        add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
         //add_submenu_page( 'atcontent', 'AtContent Import', 'Import', 'publish_posts', 'atcontent_import', 'atcontent_import_section' );
     }
 
@@ -35,8 +36,8 @@
                     $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
                     $ac_is_paidrepost =  get_post_meta($post->ID, "ac_is_paidrepost", true);
                     if ($ac_is_process != "1") return;
-                    remove_filter( 'the_content', 'atcontent_the_content', 1 );
-                    remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1);
+                    remove_filter( 'the_content', 'atcontent_the_content', 100 );
+                    remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
                     if (strlen($ac_postid) == 0) {
                         $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ), 
@@ -58,7 +59,7 @@
 	    }
     }
 
-    function atcontent_the_content($content, $missing_atcontent) {
+    function atcontent_the_content($content) {
         global $post;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
@@ -93,133 +94,9 @@ END;
             return $code;
         }
         return $content;
-    } 
- 
-     function atcontent_setting_section() {
-         $userid = wp_get_current_user()->ID;
-         $hidden_field_name = 'ac_submit_hidden';
-         $form_message = '';
-         $form_message_block = '';
-         if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-              isset( $_POST[ "ac_api_key" ] ) ) {
-             update_user_meta($userid, "ac_api_key", $_POST["ac_api_key"]);
-             $form_message .= 'Settings saved.';
-         }
-         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-         if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-              isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
-            $wp_query_args = array(
-                'post_author' => $userid,
-                'post_status' => array('publish'),
-                'nopaging' => true
-                );
-                $posts_query = new WP_Query( $wp_query_args );
-            remove_filter( 'the_content', 'atcontent_the_content', 1 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+    }
 
-            $posts_headers = "";
-            $posts_created = 0;
-            $posts_updated = 0;
-
-            while( $posts_query->have_posts() ):
-	            $posts_query->next_post();
-                $ac_postid = get_post_meta( $posts_query->post->ID, "ac_postid", true );
-                $post = get_post( $posts_query->post->ID );
-                if ( $post == null ) continue;
-	            if ( strlen($ac_postid) == 0 ) {
-                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
-                        $post->post_date_gmt, NULL,
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                        $posts_headers .= "\"" . $post->post_title . "\" created<br>";
-                        $posts_created += 1;
-                        $ac_postid = $api_answer["PublicationID"];
-                        update_post_meta($post->ID, "ac_postid", $ac_postid);
-                        update_post_meta($post->ID, "ac_is_process", "1");
-                    }
-                } else {
-                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
-                        $post->post_date_gmt, NULL,
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                        $posts_headers .= "\"" . $post->post_title . "\" updated<br>";
-                        $posts_updated += 1;
-                        update_post_meta($post->ID, "ac_is_process", "1");
-                    }
-                }
-            endwhile;
-
-            // Restore original Query & Post Data
-            wp_reset_query();
-            wp_reset_postdata();
-                $form_message .= 'Import completed.<br>Created: ' . $posts_created . '<br>Updated: ' . $posts_updated . '<br>' .
-                    '<a href="javascript:showImportedHeaders();">Show detailed</a><div id="importedHeaders" style="display:none">' . $posts_headers . '</div>';
-            }
-         if (strlen($form_message) > 0) {
-             $form_message_block .= <<<END
-<script type="text/javascript">
-function showImportedHeaders(){
-    document.getElementById('importedHeaders').style.display='block';
-}
-</script>
-<div class="updated settings-error" id="setting-error-settings_updated"> 
-<p><strong>{$form_message}</strong></p></div>
-END;
-         }
-         echo <<<END
-{$form_message_block}
-<form action="" method="POST">
-<div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
-<div class="tool-box">
-    <p>AtContent API key connects your WordPress content with the AtContent social publishing and distribution platform.<br>
-    With this key, all your newly published posts get wrapped in special distribution widgets that adjust to any website, 
-    and are simultaneously published on WordPress and AtContent.<br>
-    The key can be obtained here: 
-    <a href="https://atcontent.com/Profile/NativeAPIKey">https://atcontent.com/Profile/NativeAPIKey</a>.<br>
-    <h3>AtContent Native API Key</h3>
-    <input type="hidden" name="{$hidden_field_name}" value="Y">
-    <input type="text" name="ac_api_key" value="$ac_api_key" size="50">
-END;
-?>
-    <p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-    </p>
-
-</div>
-</div>
-</form>
-<form action="" method="POST" name="import-form">
-<div class="wrap">
-<div class="icon32 icon-page" id="icon-import"><br></div><h3>Posts Import</h3>
-    <?php 
- if (strlen($ac_api_key) == 0) {
-            echo <<<END
-<p>You can import all your blog posts to AtContent. For this, you need to set up your API Key above.</p>
-END;
-         } else {
-                             echo <<<END
-<div class="tool-box">
-    <p>To import all your blog posts to AtContent press "Import".</p>
-    <input type="hidden" name="{$hidden_field_name}" value="Y">
-    <input type="hidden" name="ac_import" value="Y">
-END;
-         
-?>
-    <p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Import') ?>" />
-    </p>
-</div>
-    <?php
-         }
-?>
-</form>
-<?php 
-     }
-
-     function atcontent_convert_paragraphs($content){
+    function atcontent_convert_paragraphs($content){
         return $content;
         $content = explode(PHP_EOL . PHP_EOL, $content);
         $htmlcontent = '';
@@ -227,18 +104,18 @@ END;
             $htmlcontent .= '<p>' . str_replace(PHP_EOL, '<br />' , $line) . '</p>';
         }
         return $htmlcontent;  
-     }
+    }
 
-     function atcontent_add_meta_boxes(){
+    function atcontent_add_meta_boxes(){
          add_meta_box( 
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
             'atcontent_inner_custom_box',
             'post' 
         );
-     }
+    }
 
-     function atcontent_inner_custom_box($post) {
+    function atcontent_inner_custom_box($post) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
           
@@ -270,9 +147,9 @@ END;
 <label for="atcontent_paidrepost_cost">Paid repost cost, $</label> <input type="text" name="atcontent_paidrepost_cost" value="{$ac_paidrepost_cost}" size="10" /></div>
 END;
 
-     }
+    }
 
-     function atcontent_save_post( $post_id ){
+    function atcontent_save_post( $post_id ){
         // verify if this is an auto save routine. 
         // If it is our form has not been submitted, so we dont want to do anything
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
@@ -305,5 +182,62 @@ END;
 
         update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
 
-     }
+    }
+
+    function atcontent_import_handler(){
+
+        $userid = wp_get_current_user()->ID;
+        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        if ( current_user_can( 'edit_posts' ) && strlen($ac_api_key) > 0 ) {
+            remove_filter( 'the_content', 'atcontent_the_content', 100 );
+            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+	        // get the submitted parameters
+	        $postID = $_POST['postID'];
+            $ac_is_copyprotect = $_POST['copyProtection'];
+            $ac_is_paidrepost = $_POST['paidRepost'];
+            $ac_paidrepost_cost = $_POST['cost'];
+
+            $ac_postid = get_post_meta( $postID, "ac_postid", true );
+            $ac_action = "";
+            $post = get_post( $postID );
+            if ( $post == null ) continue;
+	        if ( strlen($ac_postid) == 0 ) {
+                $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                    atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
+                    $post->post_date_gmt, NULL,
+                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    $ac_postid = $api_answer["PublicationID"];
+                    update_post_meta($post->ID, "ac_postid", $ac_postid);
+                    update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
+                    update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                    update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                    update_post_meta($post->ID, "ac_is_process", "1");
+                    $ac_action = "created";
+                }
+            } else {
+                $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
+                    atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
+                    $post->post_date_gmt, NULL,
+                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    update_post_meta($post->ID, "ac_is_process", "1");
+                    update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
+                    update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                    update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                    $ac_action = "updated";
+                }
+            }
+
+	        // generate the response
+	        $response = json_encode( array( 'IsOK' => true, "AC_action" => $ac_action ) );
+ 
+	        // response output
+	        header( "Content-Type: application/json" );
+	        echo $response;
+        }
+ 
+        // IMPORTANT: don't forget to "exit"
+        exit;
+    }
 ?>
