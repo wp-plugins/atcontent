@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.12
+    Version: 1.0.13
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -152,7 +152,7 @@ END;
             if (strlen($ac_postid) > 0) {
                 echo <<<END
 <div class="misc-pub-section">
-You can make this post paid for users on <a href="">AtContent publication page</a>. We will add this functionality to WP plugin soon, thanks.<br>
+You can make this post paid for users on <a href="https://atcontent.com/Studio/Publication/View/{$ac_postid}/">AtContent publication page</a>. We will add this functionality to WP plugin soon, thanks.<br>
 Note. If you change publication outside WordPress do not update it within WordPress.
 </div>
 END;
