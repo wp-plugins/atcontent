@@ -32,7 +32,7 @@
             update_user_meta($userid, "ac_copyprotect", $copyProtection);
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
-            $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 0.1;
+            $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 2.5;
             update_user_meta($userid, "ac_paidrepostcost", $paidRepostCost);
 
             // Restore original Query & Post Data

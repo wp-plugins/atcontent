@@ -51,13 +51,17 @@ When you have several blogs and are interested in our multiple system solution, 
 
 == Installation ==
 
-1. Unzip and upload files to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to AtContent settings in Admin Panel and enter AtContent Native API Key
+Upload the AtContent plugin to your blog, Activate it, then enter your [AtContent.com API key](https://atcontent.com/Profile/NativeAPIKey).
+
+1, 2, 3: You're done!
+
 
 == Frequently asked questions ==
 
+= I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
 
+AtContent settings are different for each user in WordPress blog. If you have two different users in your blog you should setup API Key for each user separately. And posts from each author will be in different AtContent accounts.
+If you have "guests" publications on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
 
 == Screenshots ==
 

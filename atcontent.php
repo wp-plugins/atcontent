@@ -138,7 +138,7 @@ END;
           }
 
           $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
-          if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "0.10"; }
+          if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
           // The actual fields for data entry
           echo <<<END
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" {$ac_is_process_checked} /> Process post throught AtContent API</div>
