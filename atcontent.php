@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.11
+    Version: 1.0.12
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -147,6 +147,16 @@ END;
 <label for="atcontent_paidrepost_cost">Paid repost cost, $</label> <input type="text" name="atcontent_paidrepost_cost" value="{$ac_paidrepost_cost}" size="10" /><br>
 * If you have professional, popular blog, we recommend you to set $20 price for repost.</div>
 END;
+
+            $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+            if (strlen($ac_postid) > 0) {
+                echo <<<END
+<div class="misc-pub-section">
+You can make this post paid for users on <a href="">AtContent publication page</a>. We will add this functionality to WP plugin soon, thanks.<br>
+Note. If you change publication outside WordPress do not update it within WordPress.
+</div>
+END;
+            }
 
     }
 
