@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-AtContent is a platform for managing digital content. With AtContent you protect your content, reach new audiences and make more money.
+With AtContent plugin you protect your content, reach new audiences and make more money on your blog.
 
 == Description ==
 
@@ -23,23 +23,23 @@ AtContent is a platform for managing digital content. With AtContent you protect
 
 AtContent is a platform for managing digital content. With AtContent you protect your content (we prevent scraping), reach new audiences and make more money.
 
-Protect your content and monetize reposts
+#### Protect your content and monetize reposts ####
 
 * Readers repost your content legally for a fee, and it’s protected from copying and pasting functions.
 * [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — no one can copy text, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
 
-Track and manage your publications across the Internet
+#### Track and manage your publications across the Internet ####
 
 * Every time somebody shares or reposts your content you will know. You will see statistics showing who, when, where. You can update your content and even block specific articles from being published.
 * [Demo example 1](http://test.ariser.ru/Stat/graph.html)
 * [Demo example 2](http://test.ariser.ru/Stat/)
 
-Find new audiences
+#### Find new audiences ####
 
 * The comments people leave on your posts appear on every site where your posts appear. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that? 
 * [Demo example](https://atcontent.com/EmbedTour/#Comments)
 
-Sell your premium articles
+#### Sell your premium articles ####
 
 * AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account any time. 
 * [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)
