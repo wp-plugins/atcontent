@@ -117,6 +117,7 @@ END;
     <input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" {$ac_paidrepost_checked}> Turn on paid repost for all publications<br>
     Cost for paid repost, $<br>
     <input type="input" name="ac_paidrepostcost" id="ac_paidrepostcost" value="{$ac_paidrepostcost}"><br>
+    * If you have professional, popular blog, we recommend you to set $20 price for repost.
 END;
          
 ?>
