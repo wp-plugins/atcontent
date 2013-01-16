@@ -61,7 +61,8 @@ When you have several blogs and are interested in our multiple system solution, 
 
 == Screenshots ==
 
-
+1. AtContent settings page
+2. Plugin panel example
 
 == Changelog ==
 
