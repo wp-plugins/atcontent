@@ -34,6 +34,8 @@
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
             $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 2.5;
             update_user_meta($userid, "ac_paidrepostcost", $paidRepostCost);
+            $importComments = isset($_POST["ac_comments"]) && $_POST["ac_comments"] == "Y" ? 1 : 0;
+            update_user_meta($userid, "ac_is_import_comments", $importComments);
 
             // Restore original Query & Post Data
             wp_reset_query();
@@ -48,7 +50,7 @@
     jQuery(function(){
         for (var i in postIDs) {
             jQuery.post('{$form_action}', {action: 'atcontent_import', postID: postIDs[i], copyProtection: {$copyProtection}, 
-                paidRepost: {$paidRepost}, cost: {$paidRepostCost}}, function(d){
+                paidRepost: {$paidRepost}, cost: {$paidRepostCost}, comments: {$importComments}}, function(d){
                 if (d.IsOK) {
                     imported++;
                     jQuery("#importResult").html("Imported " + imported + " of " + postIDs.length);
@@ -102,10 +104,13 @@ END;
              $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
              if (strlen($ac_paidrepost) == 0) $ac_paidrepost = "0";
              $ac_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
-             if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "0.10";
+             if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "2.50";
+             $ac_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
+             if (strlen($ac_is_import_comments) == 0) $ac_is_import_comments = "1";
 
              $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
              $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
+             $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
 
                              echo <<<END
 {$form_script}
@@ -117,7 +122,9 @@ END;
     <input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" {$ac_paidrepost_checked}> Turn on paid repost for all publications<br>
     Cost for paid repost, $<br>
     <input type="input" name="ac_paidrepostcost" id="ac_paidrepostcost" value="{$ac_paidrepostcost}"><br>
-    * If you have professional, popular blog, we recommend you to set $20 price for repost.
+    * If you have professional, popular blog, we recommend you to set $20 price for repost.<br>
+    <input type="checkbox" name="ac_comments" id="ac_comments" value="Y" {$ac_is_import_comments_checked}> Import post comments into AtContent<br>
+    * We recomend you import comments into AtContent and disable WordPress comments.<br>
 END;
          
 ?>

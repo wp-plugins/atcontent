@@ -70,6 +70,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Comment imports are available!
+
 = 1.0.10 =
 
 * Interface improvement
@@ -84,5 +88,5 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-Now available blog post import options!
+Now available comments import options!
 

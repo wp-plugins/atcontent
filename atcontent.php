@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.0.13
+    Version: 1.1.1
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -34,15 +34,28 @@
                     $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
                     $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
                     $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
-                    $ac_is_paidrepost =  get_post_meta($post->ID, "ac_is_paidrepost", true);
+                    $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
+                    $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                     if ($ac_is_process != "1") return;
                     remove_filter( 'the_content', 'atcontent_the_content', 100 );
                     remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+                    $comments_json = "";
+                    if ($ac_is_import_comments == "1") {
+                        $comments = get_comments( array(
+                            'post_id' => $post->ID,
+                            'order' => 'ASC',
+                            'orderby' => 'comment_date_gmt',
+                            'status' => 'approve',
+                        ) );
+                        if(!empty($comments)){
+                            $comments_json .= json_encode($comments);
+                        }
+                    }
                     if (strlen($ac_postid) == 0) {
                         $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ), 
                             $post->post_date_gmt, NULL,
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                         if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                             $ac_postid = $api_answer["PublicationID"];
                             update_post_meta($post->ID, "ac_postid", $ac_postid);
@@ -51,7 +64,9 @@
                         $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
                             atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                             $post->post_date_gmt, NULL,
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost,
+                            $comments_json
+                             );
                         if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         }
                     }
@@ -75,6 +90,8 @@ END;
 END;
             }
             $code = str_replace( PHP_EOL, " ", $code );
+
+            
             return $code;
         }
         return $content;
@@ -137,6 +154,12 @@ END;
               $ac_is_paidrepost_checked = "checked=\"checked\"";
           }
 
+          $ac_is_import_comments = get_post_meta( $post->ID, "ac_is_import_comments", true );
+          $ac_is_import_comments_checked = "";
+          if ($ac_is_import_comments == "1") {
+              $ac_is_import_comments_checked = "checked=\"checked\"";
+          }
+
           $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
           // The actual fields for data entry
@@ -155,6 +178,7 @@ END;
 You can make this post paid for users on <a href="https://atcontent.com/Studio/Publication/View/{$ac_postid}/">AtContent publication page</a>. We will add this functionality to WP plugin soon, thanks.<br>
 Note. If you change publication outside WordPress do not update it within WordPress.
 </div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" {$ac_is_import_comments_checked} /> Import post comments into AtContent</div>
 END;
             }
 
@@ -181,6 +205,7 @@ END;
         $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
         $ac_is_paidrepost = $_POST['atcontent_is_paidrepost'];
         $ac_paidrepost_cost = $_POST['atcontent_paidrepost_cost'];
+        $ac_is_import_comments = $_POST['atcontent_is_import_comments'];
 
         if ($ac_is_process != "1") $ac_is_process = "0";
         update_post_meta($post_id, "ac_is_process", $ac_is_process);
@@ -193,6 +218,8 @@ END;
 
         update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
 
+        if ($ac_is_import_comments != "1") $ac_is_import_comments = "0";
+        update_post_meta( $post_id, "ac_is_import_comments", $ac_is_import_comments );
     }
 
     function atcontent_import_handler(){
@@ -207,22 +234,36 @@ END;
             $ac_is_copyprotect = $_POST['copyProtection'];
             $ac_is_paidrepost = $_POST['paidRepost'];
             $ac_paidrepost_cost = $_POST['cost'];
+            $ac_is_import_comments = $_POST['comments'];
 
             $ac_postid = get_post_meta( $postID, "ac_postid", true );
             $ac_action = "";
             $post = get_post( $postID );
             if ( $post == null ) continue;
+            $comments_json = "";
+            if ($ac_is_import_comments == "1") {
+                $comments = get_comments( array(
+                    'post_id' => $post->ID,
+                    'order' => 'ASC',
+                    'orderby' => 'comment_date_gmt',
+                    'status' => 'approve',
+                ) );
+                if(!empty($comments)){
+                    $comments_json .= json_encode($comments);
+                }
+            }
 	        if ( strlen($ac_postid) == 0 ) {
                 $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                     atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                     $post->post_date_gmt, NULL,
-                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                 if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
                     update_post_meta($post->ID, "ac_postid", $ac_postid);
                     update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
                     update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
                     update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                    update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                     update_post_meta($post->ID, "ac_is_process", "1");
                     $ac_action = "created";
                 }
@@ -230,12 +271,13 @@ END;
                 $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
                     atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
                     $post->post_date_gmt, NULL,
-                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost );
+                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                 if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     update_post_meta($post->ID, "ac_is_process", "1");
                     update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
                     update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
                     update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                    update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                     $ac_action = "updated";
                 }
             }

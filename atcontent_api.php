@@ -2,7 +2,7 @@
 
 function atcontent_create_publication($ac_api_key, 
 $post_title, $post_content, $post_published, $original_url,
-$cost, $is_copyprotect, $is_paidrepost
+$cost, $is_copyprotect, $is_paidrepost, $comments
 ) {
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
@@ -25,6 +25,7 @@ urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
 '&IsCopyProtected='.urlencode($is_copyprotect).
 '&IsPaidRepost='.urlencode($is_paidrepost).
 '&Published='.urlencode($post_published).
+'&Comments='.urlencode($comments).
 '&AddToIndex=true'.
 ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
 '');
@@ -47,7 +48,7 @@ return $out_array;
 
 function atcontent_api_update_publication($ac_api_key, 
 $post_id, $post_title, $post_content, $post_published, $original_url,
-$cost, $is_copyprotect, $is_paidrepost
+$cost, $is_copyprotect, $is_paidrepost, $comments
 ) {
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
@@ -70,6 +71,7 @@ urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
 '&FreeContent='.urlencode($post_body).
 '&IsCopyProtected='.urlencode($is_copyprotect).
 '&Published='.urlencode($post_published).
+'&Comments='.urlencode($comments).
 '&IsPaidRepost='.urlencode($is_paidrepost).
 '&AddToIndex=true'.
 ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
