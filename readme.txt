@@ -50,6 +50,10 @@ We are now in a new era of content! Joining AtContent costs you nothing - plugin
 
 When you have several blogs and are interested in our multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm)
 
+#### Quote of the day ####
+
+A successful man is one who makes more money than his wife can spend. A successful woman is one who can find such a man.
+
 
 == Installation ==
 
