@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.1.1
+    Version: 1.1.2
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -53,8 +53,8 @@
                     }
                     if (strlen($ac_postid) == 0) {
                         $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ), 
-                            $post->post_date_gmt, NULL,
+                             apply_filters( "the_content", $post->post_content ), 
+                            $post->post_date_gmt, get_permalink($post->ID),
                             $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                         if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                             $ac_postid = $api_answer["PublicationID"];
@@ -62,8 +62,8 @@
                         }
                     } else {
                         $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                            atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
-                            $post->post_date_gmt, NULL,
+                            apply_filters( "the_content", $post->post_content ) ,
+                            $post->post_date_gmt, get_permalink($post->ID),
                             $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost,
                             $comments_json
                              );
@@ -254,8 +254,8 @@ END;
             }
 	        if ( strlen($ac_postid) == 0 ) {
                 $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                    atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
-                    $post->post_date_gmt, NULL,
+                    apply_filters( "the_content", $post->post_content ),
+                    $post->post_date_gmt, get_permalink($post->ID),
                     $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                 if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
@@ -269,8 +269,8 @@ END;
                 }
             } else {
                 $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                    atcontent_convert_paragraphs( apply_filters( "the_content", $post->post_content ) ),
-                    $post->post_date_gmt, NULL,
+                    apply_filters( "the_content", $post->post_content ),
+                    $post->post_date_gmt, get_permalink($post->ID),
                     $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
                 if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     update_post_meta($post->ID, "ac_is_process", "1");

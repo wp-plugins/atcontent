@@ -75,6 +75,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.1.2 =
+
+* Automatic original url
+
 = 1.1.1 =
 
 * Comment imports are available!
