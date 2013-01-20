@@ -75,6 +75,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.1.3 =
+
+* Pen name settings
+
 = 1.1.2 =
 
 * Automatic original url

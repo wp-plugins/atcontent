@@ -6,10 +6,12 @@
          $form_message_block = '';
          if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_api_key" ] ) ) {
-             update_user_meta($userid, "ac_api_key", $_POST["ac_api_key"]);
+             update_user_meta( $userid, "ac_pen_name", $_POST["ac_pen_name"] );
+             update_user_meta( $userid, "ac_api_key", $_POST["ac_api_key"] );
              $form_message .= 'Settings saved.';
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+         $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             $wp_query_args = array(
@@ -80,7 +82,10 @@ END;
     <a href="https://atcontent.com/Profile/NativeAPIKey">https://atcontent.com/Profile/NativeAPIKey</a>.<br>
     <h3>AtContent Native API Key</h3>
     <input type="hidden" name="{$hidden_field_name}" value="Y">
-    <input type="text" name="ac_api_key" value="$ac_api_key" size="50">
+    <input type="text" name="ac_api_key" value="{$ac_api_key}" size="50">
+    <h3>AtContent Pen Name</h3>
+    <p>You can view your pen name at <a href="https://atcontent.com/Profile/">your AtContent profile page</a></p>
+    <input type="text" name="ac_pen_name" value="{$ac_pen_name}" size="50">
 END;
 ?>
     <p class="submit">

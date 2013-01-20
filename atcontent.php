@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.1.2
+    Version: 1.1.3
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -78,15 +78,17 @@
         global $post;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
+        if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
-<script src="https://w.atcontent.com/vadim/{$ac_postid}/Face"></script>
+<script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
 END;
             if (is_single()) {
                 $code .= <<<END
-<script src="https://w.atcontent.com/vadim/{$ac_postid}/Body"></script>
+<script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script>
 END;
             }
             $code = str_replace( PHP_EOL, " ", $code );
@@ -101,11 +103,13 @@ END;
         global $post;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        $ac_pen_name = get_user_meta(intval($post->post_author), "ac_pen_name", true);
+        if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
-<script src="https://w.atcontent.com/vadim/{$ac_postid}/Face"></script>
+<script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
 END;
             $code = str_replace( PHP_EOL, " ", $code );
             return $code;
