@@ -1,4 +1,4 @@
-=== AtContent ===
+﻿=== AtContent ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: publishing, paid repost, social distribution, AtContent, widget, post, posts, plugin, protection, monetization, monetize, repost, social repost, statistics, comments, embed
@@ -27,7 +27,7 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 
 #### Track and manage your publications across the Internet ####
 
-* You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being published.
+* You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being shared and reposted.
 * [Demo example 1](http://test.ariser.ru/Stat/graph.html)
 * [Demo example 2](http://test.ariser.ru/Stat/)
 
