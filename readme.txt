@@ -51,8 +51,7 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A word to the wise ain't necessary - it's the stupid ones that need the advice.
-
+When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity.
 
 == Installation ==
 
