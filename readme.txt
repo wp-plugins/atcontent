@@ -51,7 +51,7 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A successful man is one who makes more money than his wife can spend. A successful woman is one who can find such a man.
+A word to the wise ain't necessary - it's the stupid ones that need the advice.
 
 
 == Installation ==
