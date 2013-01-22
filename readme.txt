@@ -51,7 +51,7 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity.
+As a child my family's menu consisted of two choices: take it or leave it.
 
 == Installation ==
 
