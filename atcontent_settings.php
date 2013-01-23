@@ -133,7 +133,7 @@ END;
     <a href="http://atcontent.com/Profile/NativeAPIKey" target="_blank">AtContent API key page</a>
 </p>
 <p>Pen name<br><input type="text" disabled="disabled" value="<?php echo $ac_pen_name; ?>" size="50"><br>
-    * We get pen name automatically from your <a href="https://atcontet.com/Profile/" target="_blank">AtContent account</a>
+    * We get pen name automatically from your <a href="https://atcontent.com/Profile/" target="_blank">AtContent account</a>
 </p>
 <p class="submit">
         <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Renew connection data') ?>" />
