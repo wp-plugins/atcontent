@@ -90,4 +90,24 @@ $out_array = json_decode($res, true);
 return $out_array;
 }
 
+function atcontent_api_get_nickname( $ac_api_key ) {
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'http://api.atcontent.com/v1/native/nickname');
+curl_setopt($curl, CURLOPT_HEADER, 0);
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, 'Key='.
+urlencode( $ac_api_key ) . '&AppID=' . urlencode( 'WordPress' ) );
+curl_setopt($curl, CURLOPT_USERAGENT, 'IE 10.00');
+$res = curl_exec($curl);
+if(!$res){
+	$error = curl_error($curl).'('.curl_errno($curl).')';
+	$out = $error;
+}
+curl_close($curl);
+$out_array = json_decode($res, true);
+return $out_array;
+}
+
+
 ?>

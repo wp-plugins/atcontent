@@ -74,6 +74,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.2.1 =
+
+* New settings page
+
 = 1.1.3 =
 
 * Pen name settings
@@ -100,5 +104,5 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-Now available comments import options!
+New amazing settings page!
 

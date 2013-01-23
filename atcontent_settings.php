@@ -6,8 +6,10 @@
          $form_message_block = '';
          if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_api_key" ] ) ) {
-             update_user_meta( $userid, "ac_pen_name", $_POST["ac_pen_name"] );
-             update_user_meta( $userid, "ac_api_key", $_POST["ac_api_key"] );
+             $ac_api_key = trim( $_POST[ "ac_api_key" ] );
+             update_user_meta( $userid, "ac_api_key", $ac_api_key );
+             $ac_pen_name = atcontent_api_get_nickname( $_POST[ "ac_api_key" ] );
+             update_user_meta( $userid, "ac_pen_name", $ac_pen_name );
              $form_message .= 'Settings saved.';
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
@@ -27,7 +29,9 @@
 
             while( $posts_query->have_posts() ):
 	            $posts_query->next_post();
-                array_push( $posts_id, $posts_query->post->ID );
+                if ($posts_query->post->post_author == $userid) {
+                    array_push( $posts_id, $posts_query->post->ID );
+                }
             endwhile;
 
             $copyProtection = isset($_POST["ac_copyprotect"]) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
@@ -69,39 +73,85 @@ END;
 <p><strong>{$form_message}</strong></p></div>
 END;
          }
-         echo <<<END
-{$form_message_block}
+         echo $form_message_block;
+?>
 <form action="" method="POST">
 <div class="wrap">
 <div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
 <div class="tool-box">
-    <p>AtContent API key connects your WordPress content with the AtContent social publishing and distribution platform.<br>
-    With this key, all your newly published posts get wrapped in special distribution widgets that adjust to any website, 
-    and are simultaneously published on WordPress and AtContent.<br>
-    The key can be obtained here: 
-    <a href="https://atcontent.com/Profile/NativeAPIKey">https://atcontent.com/Profile/NativeAPIKey</a>.<br>
-    <h3>AtContent Native API Key</h3>
-    <input type="hidden" name="{$hidden_field_name}" value="Y">
-    <input type="text" name="ac_api_key" value="{$ac_api_key}" size="50">
-    <h3>AtContent Pen Name</h3>
-    <p>You can view your pen name at <a href="https://atcontent.com/Profile/">your AtContent profile page</a></p>
-    <input type="text" name="ac_pen_name" value="{$ac_pen_name}" size="50">
-END;
-?>
-    <p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-    </p>
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <p style="max-width: 600px;">AtContent is a social publishing platform. With AtContent you can protect your publications from copying, monetize your reposts, increase your search engine rankings, track and manage your content across the Internet and sell your premium content (available in February).</p>
+<?php
+         if ( strlen($ac_api_key) == 0 ) {
+             ?>
+<p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
+<div id="ac_progress">
+     <img src="https://atcontent.com/Images/loader2.gif" alt="Please wait&hellip;">
+</div>
+<script type="text/javascript">
+    function ac_admin_init(c) {
+        var sc = document.createElement("script");
+        sc.src = "https://atcontent.com/Ajax/WordPress/AdminInit.ashx?callback=" + c;
+        document.head.appendChild(sc);
+    }
+    window.getApiTry = false;
+    (function ($) {
+        $(function () {
+            ac_admin_init("authCheck");
+        });
+        window.authCheck = function (d) {
+            $("#ac_progress").html("<ol id='ac_progress_ol'></ol>");
+            if (d.IsAuth) {
+                $("#ac_progress_ol")
+                .append("<li>You are logged into AtContent as <a href=\"https://atcontent.com/Profile/" +
+                    d.User.nickname + "/\" target=\"_blank\">" + d.User.showname + "</a></li>")
+                .append("<li>Copy this API Key<br><iframe border=0 scrolling=\"no\" style=\"width:255px;height:16px;\" " +
+                "src=\"https://atcontent.com/Ajax/WordPress/APIKey.ashx\"></iframe><br>into field below<br>" +
+                "<input type=\"text\" name=\"ac_api_key\" size=\"50\"></li>");
+            } else {
+                $("#ac_progress_ol")
+                .append("<li id=\"ac_step1\"><a href=\"https://atcontent.com/SignIn/\" target=\"_blank\">Sign In</a>" +
+                " or <a href=\"https://atcontent.com/SignUp/\" target=\"_blank\">Sign Up</a> on AtContent</li>")
+                .append("<li id=\"ac_step2\">" + (window.getApiTry ? "Still need to do step 1 and then " : "") + "<a href=\"javascript:getApiKey();\">Get AtContent API Key</a></li>");
+            }
+            $("#ac_progress_ol").append('<li id="ac_step3"><span class="submit"><input type="submit" name="Submit" class="button-primary"' + 
+            ' value="<?php esc_attr_e('Connect blog to AtContent') ?>" /></span></li>');
+        };
+        window.getApiKey = function () {
+            $("#ac_step2").html('<img src="https://atcontent.com/Images/loader2.gif" alt="Please wait&hellip;">');
+            window.getApiTry = true;
+            ac_admin_init("authCheck");
+        };
+    })(jQuery);
 
+</script>
+<?php
+         } else {
+?>
+<p>You have connected an AtContent account to your blog</p>
+<p>API Key<br><input type="text" name="ac_api_key" value="<?php echo $ac_api_key; ?>" size="50"><br>* Can be found at your
+    <a href="http://atcontent.com/Profile/NativeAPIKey" target="_blank">AtContent API key page</a>
+</p>
+<p>Pen name<br><input type="text" disabled="disabled" value="<?php echo $ac_pen_name; ?>" size="50"><br>
+    * We get pen name automatically from your <a href="https://atcontet.com/Profile/" target="_blank">AtContent account</a>
+</p>
+<p class="submit">
+        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Renew connection data') ?>" />
+    </p>
+<?php           
+         }
+?>
 </div>
 </div>
 </form>
+
 <form action="" method="POST" name="import-form">
 <div class="wrap">
 <div class="icon32 icon-page" id="icon-import"><br></div><h3>Posts Import</h3>
     <?php 
  if (strlen($ac_api_key) == 0) {
             echo <<<END
-<p>You can import all your blog posts to AtContent. For this, you need to set up your API Key above.</p>
+<p>You can import all your blog posts to AtContent. For this, you need to connecct your blog to AtContent service.</p>
 END;
          } else {
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );

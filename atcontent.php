@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.1.3
+    Version: 1.2.1
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -241,50 +241,55 @@ END;
             $ac_is_import_comments = $_POST['comments'];
 
             $ac_postid = get_post_meta( $postID, "ac_postid", true );
+            $ac_is_process = get_post_meta( $postID, "ac_is_process", true );
             $ac_action = "";
             $post = get_post( $postID );
-            if ( $post == null ) continue;
-            $comments_json = "";
-            if ($ac_is_import_comments == "1") {
-                $comments = get_comments( array(
-                    'post_id' => $post->ID,
-                    'order' => 'ASC',
-                    'orderby' => 'comment_date_gmt',
-                    'status' => 'approve',
-                ) );
-                if(!empty($comments)){
-                    $comments_json .= json_encode($comments);
-                }
-            }
-	        if ( strlen($ac_postid) == 0 ) {
-                $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                    apply_filters( "the_content", $post->post_content ),
-                    $post->post_date_gmt, get_permalink($post->ID),
-                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
-                if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                    $ac_postid = $api_answer["PublicationID"];
-                    update_post_meta($post->ID, "ac_postid", $ac_postid);
-                    update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                    update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
-                    update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
-                    update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
-                    update_post_meta($post->ID, "ac_is_process", "1");
-                    $ac_action = "created";
-                }
+            if ( $post == null || $ac_is_process == "0" ) { 
+                $ac_action = "skiped";
             } else {
-                $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                    apply_filters( "the_content", $post->post_content ),
-                    $post->post_date_gmt, get_permalink($post->ID),
-                    $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
-                if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                    update_post_meta($post->ID, "ac_is_process", "1");
-                    update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                    update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
-                    update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
-                    update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
-                    $ac_action = "updated";
+                $comments_json = "";
+                if ($ac_is_import_comments == "1") {
+                    $comments = get_comments( array(
+                        'post_id' => $post->ID,
+                        'order' => 'ASC',
+                        'orderby' => 'comment_date_gmt',
+                        'status' => 'approve',
+                    ) );
+                    if(!empty($comments)){
+                        $comments_json .= json_encode($comments);
+                    }
+                }
+	            if ( strlen($ac_postid) == 0 ) {
+                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                        apply_filters( "the_content", $post->post_content ),
+                        $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        $ac_postid = $api_answer["PublicationID"];
+                        update_post_meta($post->ID, "ac_postid", $ac_postid);
+                        update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
+                        update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                        update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                        update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
+                        update_post_meta($post->ID, "ac_is_process", "1");
+                        $ac_action = "created";
+                    }
+                } else {
+                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
+                        apply_filters( "the_content", $post->post_content ),
+                        $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        update_post_meta($post->ID, "ac_is_process", "1");
+                        update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
+                        update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                        update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
+                        update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
+                        $ac_action = "updated";
+                    }
                 }
             }
+        
 
 	        // generate the response
 	        $response = json_encode( array( 'IsOK' => true, "AC_action" => $ac_action ) );
