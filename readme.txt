@@ -51,11 +51,11 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-As a child my family's menu consisted of two choices: take it or leave it.
+People who think they know everything are a great annoyance to those of us who do.
 
 == Installation ==
 
-Upload the AtContent plugin to your blog, Activate it, then enter your [AtContent.com API key](https://atcontent.com/Profile/NativeAPIKey).
+Upload the AtContent plugin to your blog, Activate it, then go to AtContent section and do 3 simple steps!
 
 1, 2, 3: You're done!
 
