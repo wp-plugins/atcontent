@@ -74,6 +74,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.2.4 =
+
+* Excert fixed
+
 = 1.2.1 =
 
 * New settings page
