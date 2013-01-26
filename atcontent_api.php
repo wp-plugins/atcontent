@@ -109,5 +109,26 @@ $out_array = json_decode($res, true);
 return $out_array;
 }
 
+function atcontent_api_get_key( $nounce, $grant ) {
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'http://api.atcontent.com/v1/native/requestkey');
+curl_setopt($curl, CURLOPT_HEADER, 0);
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, 
+'Nounce='. urlencode( $nounce ) . 
+'&Grant='. urlencode( $grant ) . 
+'&AppID=' . urlencode( 'WordPress' ) );
+curl_setopt($curl, CURLOPT_USERAGENT, 'IE 10.00');
+$res = curl_exec($curl);
+if(!$res){
+	$error = curl_error($curl).'('.curl_errno($curl).')';
+	$out = $error;
+}
+curl_close($curl);
+$out_array = json_decode($res, true);
+return $out_array;
+}
+
 
 ?>

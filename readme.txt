@@ -43,7 +43,7 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 
 #### Free backup in AtContent cloud ####
 
-* After the installation click “Import” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
+* After the installation click “Import posts into AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
 
 We are now in a new era of content distribution! Joining AtContent costs you nothing – the plugin is free. Get started today! You lose nothing and gain more readers and income.
 
@@ -55,7 +55,7 @@ People who think they know everything are a great annoyance to those of us who d
 
 == Installation ==
 
-Upload the AtContent plugin to your blog, Activate it, then go to AtContent section and do 3 simple steps!
+Upload the AtContent plugin to your blog, Activate it, connect blog to AtContent and import your posts!
 
 1, 2, 3: You're done!
 

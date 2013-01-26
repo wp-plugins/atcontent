@@ -83,61 +83,41 @@ END;
     <p style="max-width: 600px;">AtContent is a social publishing platform. With AtContent you can protect your publications from copying, monetize your reposts, increase your search engine rankings, track and manage your content across the Internet and sell your premium content (available in February).</p>
 <?php
          if ( strlen($ac_api_key) == 0 ) {
+             $form_action = admin_url( 'admin-ajax.php' );
              ?>
 <p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
-<div id="ac_progress">
-     <img src="https://atcontent.com/Images/loader2.gif" alt="Please wait&hellip;">
-</div>
+<div id="ac_connect_result"></div>
+<iframe id="ac_connect" onload="ac_connect_test();" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:500px;height:50px;" border="0" scrolling="no"></iframe>
 <script type="text/javascript">
-    function ac_admin_init(c) {
-        var sc = document.createElement("script");
-        sc.src = "https://atcontent.com/Ajax/WordPress/AdminInit.ashx?callback=" + c;
-        document.head.appendChild(sc);
-    }
-    window.getApiTry = false;
     (function ($) {
-        $(function () {
-            ac_admin_init("authCheck");
-        });
-        window.authCheck = function (d) {
-            $("#ac_progress").html("<ol id='ac_progress_ol'></ol>");
-            if (d.IsAuth) {
-                $("#ac_progress_ol")
-                .append("<li>You are logged into AtContent as <a href=\"https://atcontent.com/Profile/" +
-                    d.User.nickname + "/\" target=\"_blank\">" + d.User.showname + "</a></li>")
-                .append("<li>Copy this API Key<br><iframe border=0 scrolling=\"no\" style=\"width:255px;height:16px;\" " +
-                "src=\"https://atcontent.com/Ajax/WordPress/APIKey.ashx\"></iframe><br>into field below<br>" +
-                "<input type=\"text\" name=\"ac_api_key\" size=\"50\"></li>");
-            } else {
-                $("#ac_progress_ol")
-                .append("<li id=\"ac_step1\"><a href=\"https://atcontent.com/SignIn/\" target=\"_blank\">Sign In</a>" +
-                " or <a href=\"https://atcontent.com/SignUp/\" target=\"_blank\">Sign Up</a> on AtContent</li>")
-                .append("<li id=\"ac_step2\">" + (window.getApiTry ? "Still need to do step 1 and then " : "") + "<a href=\"javascript:getApiKey();\">Get AtContent API Key</a></li>");
+        window.ac_connect_test = function () {
+            var hash = window.location.hash.replace("#", '');
+            if (hash.length > 0) {
+                if (hash == "ok") window.location.reload();
+                else
+                    $("#ac_connect_result").html( 
+                    'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
             }
-            $("#ac_progress_ol").append('<li id="ac_step3"><span class="submit"><input type="submit" name="Submit" class="button-primary"' + 
-            ' value="<?php esc_attr_e('Connect blog to AtContent') ?>" /></span></li>');
-        };
-        window.getApiKey = function () {
-            $("#ac_step2").html('<img src="https://atcontent.com/Images/loader2.gif" alt="Please wait&hellip;">');
-            window.getApiTry = true;
-            ac_admin_init("authCheck");
-        };
+        }
     })(jQuery);
-
 </script>
 <?php
          } else {
 ?>
-<p>You have connected an AtContent account to your blog</p>
-<p>API Key<br><input type="text" name="ac_api_key" value="<?php echo $ac_api_key; ?>" size="50"><br>* Can be found at your
-    <a href="http://atcontent.com/Profile/NativeAPIKey" target="_blank">AtContent API key page</a>
+<p>You have connected blog to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><?php echo $ac_pen_name; ?></a>.
+<input type="hidden" name="ac_api_key" value="">
+<span class="submit" style="padding-left: 2em;"><input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Disconnect') ?>" /></span>
 </p>
-<p>Pen name<br><input type="text" disabled="disabled" value="<?php echo $ac_pen_name; ?>" size="50"><br>
-    * We get pen name automatically from your <a href="https://atcontent.com/Profile/" target="_blank">AtContent account</a>
-</p>
-<p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Renew connection data') ?>" />
-    </p>
+<p>From now, all your future publications will be processed with AtContent service and get all its advantages, such as</p>
+<ul style="padding-left: 25px;list-style: disc;">
+    <li>Protect your content & Monetize reposts</li>
+    <li>Increase search ranking for your site</li>
+    <li>Track and manage your publications across the Internet</li>
+    <li>Sell your premium content</li>
+    <li>Reach new audience</li>
+    <li>Free backup in AtContent cloud</li>
+</ul>
+<p>It is needed to import your publications created before to get these advantages for them. Look at the form below</p>
 <?php           
          }
 ?>
@@ -184,7 +164,7 @@ END;
          
 ?>
     <p class="submit">
-        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Import') ?>" />
+        <input type="submit" name="Submit" class="button button-primary button-hero" value="<?php esc_attr_e('Import posts into AtContent') ?>" />
     </p>
 </div>
     <?php

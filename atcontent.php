@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.2.1
+    Version: 1.2.2
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -16,6 +16,7 @@
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
+    add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     //
     //add_settings_field();
     function atcontent_add_tools_menu() {
@@ -297,6 +298,36 @@ END;
 	        // response output
 	        header( "Content-Type: application/json" );
 	        echo $response;
+        }
+ 
+        // IMPORTANT: don't forget to "exit"
+        exit;
+    }
+
+    function atcontent_api_key()
+    {
+        $userid = wp_get_current_user()->ID;
+        if ( current_user_can( 'edit_posts' ) ) {
+
+            $response = "";
+
+            $api_key_result = atcontent_api_get_key($_GET["nounce"], $_GET["grant"]);
+
+            if (!$api_key_result["IsOK"]) {
+                $response .= "processResult(false);";
+            } else {
+                update_user_meta( $userid, "ac_api_key", $api_key_result["APIKey"] );
+                update_user_meta( $userid, "ac_pen_name", $api_key_result["Nickname"] );
+                update_user_meta( $userid, "ac_showname", $api_key_result["Showname"] );
+                $response .= "processResult(true);";
+            }
+
+            //$response = "alert('grant:{$_GET["grant"]}');";
+
+	        // response output
+	        header( "Content-Type: application/x-javascript" );
+	        echo $response;
+
         }
  
         // IMPORTANT: don't forget to "exit"
