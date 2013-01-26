@@ -87,17 +87,13 @@ END;
              ?>
 <p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
 <div id="ac_connect_result"></div>
-<iframe id="ac_connect" onload="ac_connect_test();" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:500px;height:50px;" border="0" scrolling="no"></iframe>
+<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:500px;height:50px;" border="0" scrolling="no"></iframe>
 <script type="text/javascript">
     (function ($) {
-        window.ac_connect_test = function () {
-            var hash = window.location.hash.replace("#", '');
-            if (hash.length > 0) {
-                if (hash == "ok") window.location.reload();
-                else
-                    $("#ac_connect_result").html( 
+        window.ac_connect_res = function (d) {
+            if (d) window.location.reload();
+            else $("#ac_connect_result").html( 
                     'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-            }
         }
     })(jQuery);
 </script>
