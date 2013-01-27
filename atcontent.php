@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.2.4
+    Version: 1.3.1
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -21,6 +21,7 @@
     //add_settings_field();
     function atcontent_add_tools_menu() {
         add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
+        add_submenu_page( 'atcontent/atcontent_settings.php', 'Advanced Settings', 'Advanced Settings', 'publish_posts', 'atcontent/atcontent_advanced.php', '' );
         //add_submenu_page( 'atcontent', 'AtContent Import', 'Import', 'publish_posts', 'atcontent_import', 'atcontent_import_section' );
     }
 
@@ -106,9 +107,15 @@ END;
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta(intval($post->post_author), "ac_pen_name", true);
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+        $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
+        if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
+        $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
+        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+        if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
+            $ac_excerpt_class = "atcontent_excerpt";
+            if ($ac_excerpt_image_remove == "1") $ac_excerpt_class = "atcontent_excerpt_no_image";
             $code = <<<END
-<div class="atcontent_excerpt">
+<div class="{$ac_excerpt_class}">
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
