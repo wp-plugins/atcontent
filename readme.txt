@@ -74,6 +74,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.3.3 =
+
+* Excerpt without processing fix
+
 = 1.3.1 =
 
 * Advanced settings for excerpts
@@ -112,5 +116,4 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-New amazing settings page!
-
+New amazing settings page and advanced settings page! 
