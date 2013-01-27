@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.1
+    Version: 1.3.2
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -107,9 +107,9 @@ END;
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta(intval($post->post_author), "ac_pen_name", true);
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
-        if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
-        $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
+        $ac_excerpt_image_remove = get_user_meta( intval($post->post_author), "ac_excerpt_image_remove", true );
+        if ( strlen($ac_excerpt_image_remove) == 0 ) $ac_excerpt_image_remove = "0";
+        $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
         if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
             $ac_excerpt_class = "atcontent_excerpt";
