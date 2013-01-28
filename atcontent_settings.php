@@ -80,7 +80,7 @@ END;
 <div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
 <div class="tool-box">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
-    <p style="max-width: 600px;">AtContent is a social publishing platform. With AtContent you can protect your publications from copying, monetize your reposts, increase your search engine rankings, track and manage your content across the Internet and sell your premium content (available in February).</p>
+    <p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
 <?php
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
@@ -104,16 +104,16 @@ END;
 <input type="hidden" name="ac_api_key" value="">
 <span class="submit" style="padding-left: 2em;"><input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Disconnect') ?>" /></span>
 </p>
-<p>From now, all your future publications will be processed with AtContent service and get all its advantages, such as</p>
+<p>All posts you publish will be processed with AtContent plugin. AtContent provides the ability to:</p>
 <ul style="padding-left: 25px;list-style: disc;">
     <li>Protect your content & Monetize reposts</li>
     <li>Increase search ranking for your site</li>
     <li>Track and manage your publications across the Internet</li>
     <li>Sell your premium content</li>
     <li>Reach new audience</li>
-    <li>Free backup in AtContent cloud</li>
+    <li>Get free backup in AtContent cloud</li>
 </ul>
-<p>It is needed to import your publications created before to get these advantages for them. Look at the form below</p>
+<p>To activate the AtCotnent plugin features for your existing articles, please choose options below and click on Import.</p>
 <?php           
          }
 ?>
@@ -154,13 +154,16 @@ END;
     Cost for paid repost, $<br>
     <input type="input" name="ac_paidrepostcost" id="ac_paidrepostcost" value="{$ac_paidrepostcost}"><br>
     * If you have professional, popular blog, we recommend you to set $20 price for repost.<br>
-    <input type="checkbox" name="ac_comments" id="ac_comments" value="Y" {$ac_is_import_comments_checked}> Import post comments into AtContent<br>
-    * We recomend you import comments into AtContent and disable WordPress comments.<br>
+    <input type="checkbox" name="ac_comments" id="ac_comments" value="Y" {$ac_is_import_comments_checked}> Import post comments into AtContent plugin comments<br>
+    * We recomend you to import comments into AtContent plugin and disable WordPress comments,<br>
+    because the comments people leave on your posts appear on every site where posts are reposted.<br>
+    Users on different sites will discuss your content in the comment section on their site and you will <br>
+    collaborate with them all by replying on your site!<br>
 END;
          
 ?>
     <p class="submit">
-        <input type="submit" name="Submit" class="button button-primary button-hero" value="<?php esc_attr_e('Import posts into AtContent') ?>" />
+        <input type="submit" name="Submit" class="button button-primary button-hero" value="<?php esc_attr_e('Import') ?>" />
     </p>
 </div>
     <?php
