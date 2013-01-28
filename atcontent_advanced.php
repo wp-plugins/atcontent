@@ -22,7 +22,7 @@ END;
          $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
          if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
          $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
-         if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+         if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "1";
 
          $ac_excerpt_image_remove_checked = "";
          if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";

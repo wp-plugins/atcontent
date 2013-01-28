@@ -51,7 +51,8 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-People who think they know everything are a great annoyance to those of us who do.
+A lot of people are afraid of heights. Not me, I'm afraid of widths.
+Steven Wright
 
 == Installation ==
 
