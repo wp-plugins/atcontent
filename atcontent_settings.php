@@ -14,6 +14,14 @@
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
+         if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+              isset( $_POST[ "ac_advanced_settings" ] ) ) {
+             $ac_excerpt_image_remove = (isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y") ? "1" : "0";
+             update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
+             $ac_excerpt_no_process = (isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y") ? "1" : "0";
+             update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+             $form_message .= 'Settings saved.';
+         }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             $wp_query_args = array(
@@ -79,12 +87,12 @@ END;
 <div class="wrap">
 <div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
 <div class="tool-box">
-    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
-    <p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">    
 <?php
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
+<p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
 <p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
 <div id="ac_connect_result"></div>
 <iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:500px;height:50px;" border="0" scrolling="no"></iframe>
@@ -104,16 +112,6 @@ END;
 <input type="hidden" name="ac_api_key" value="">
 <span class="submit" style="padding-left: 2em;"><input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Disconnect') ?>" /></span>
 </p>
-<p>All posts you publish will be processed with AtContent plugin. AtContent provides the ability to:</p>
-<ul style="padding-left: 25px;list-style: disc;">
-    <li>Protect your content & Monetize reposts</li>
-    <li>Increase search ranking for your site</li>
-    <li>Track and manage your publications across the Internet</li>
-    <li>Sell your premium content</li>
-    <li>Reach new audience</li>
-    <li>Get free backup in AtContent cloud</li>
-</ul>
-<p>To activate the AtCotnent plugin features for your existing articles, please choose options below and click on Import.</p>
 <?php           
          }
 ?>
@@ -121,15 +119,15 @@ END;
 </div>
 </form>
 
+<?php 
+if (strlen($ac_api_key) > 0) {
+?>
 <form action="" method="POST" name="import-form">
 <div class="wrap">
-<div class="icon32 icon-page" id="icon-import"><br></div><h3>Posts Import</h3>
+<div class="icon32" id="icon-plugins"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Plugin activation for existing posts</h3>
+<p style="padding: 0;margin: 0;">To activate the <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin features</a>
+     for your existing articles, please choose options below and click on Import.</p>
     <?php 
- if (strlen($ac_api_key) == 0) {
-            echo <<<END
-<p>You can import all your blog posts to AtContent. For this, you need to connecct your blog to AtContent service.</p>
-END;
-         } else {
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
              $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
@@ -143,31 +141,60 @@ END;
              $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
              $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
 
-                             echo <<<END
-{$form_script}
+             echo $form_script;
+?>
 <div class="tool-box">
-    <p>To import all your blog posts to AtContent press "Import".</p>
-    <input type="hidden" name="{$hidden_field_name}" value="Y">
+    
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
-    <input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" {$ac_copyprotect_checked}> Prevent copy action for all publications<br>
-    <input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" {$ac_paidrepost_checked}> Turn on paid repost for all publications<br>
+    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent copy action for all publications</p>
+    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for all publications</p>
     Cost for paid repost, $<br>
-    <input type="input" name="ac_paidrepostcost" id="ac_paidrepostcost" value="{$ac_paidrepostcost}"><br>
+    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"><br>
     * If you have professional, popular blog, we recommend you to set $20 price for repost.<br>
-    <input type="checkbox" name="ac_comments" id="ac_comments" value="Y" {$ac_is_import_comments_checked}> Import post comments into AtContent plugin comments<br>
+    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Import post comments into AtContent plugin comments<br>
     * We recomend you to import comments into AtContent plugin and disable WordPress comments,<br>
     because the comments people leave on your posts appear on every site where posts are reposted.<br>
     Users on different sites will discuss your content in the comment section on their site and you will <br>
-    collaborate with them all by replying on your site!<br>
-END;
-         
-?>
-    <p class="submit">
-        <input type="submit" name="Submit" class="button button-primary button-hero" value="<?php esc_attr_e('Import') ?>" />
-    </p>
+    collaborate with them all by replying on your site!</p>
+
+    <span class="submit">
+        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
+    </span>
 </div>
-    <?php
-         }
-?>
+</div>
 </form>
+<?php
+    $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
+    if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
+    $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
+    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+
+    $ac_excerpt_image_remove_checked = "";
+    if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
+    $ac_excerpt_no_process_checked = "";
+    if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
+?>
+<form action="" method="POST">
+<div class="wrap">
+<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
+<p style="color:#f00;background:#fff;padding:0;margin:0;">You could have excerpts displaying problems on the main page. Fix it easy by the options below</p>
+
+<div class="tool-box">
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <input type="hidden" name="ac_advanced_settings" value="Y">
+    <p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
+    Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>
+    <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
+    Turn off plugin features for excerpts on your main page (don't worry, all features are working good for the articles pages, check it out)</p>
+     <span class="submit">
+        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
+    </span>
+</div>
+</div>
+</form>
+
+<p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
+<p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
 <?php 
+}

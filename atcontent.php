@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.5
+    Version: 1.3.6
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -21,7 +21,7 @@
     //add_settings_field();
     function atcontent_add_tools_menu() {
         add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
-        add_submenu_page( 'atcontent/atcontent_settings.php', 'Advanced Settings', 'Advanced Settings', 'publish_posts', 'atcontent/atcontent_advanced.php', '' );
+        //add_submenu_page( 'atcontent/atcontent_settings.php', 'Advanced Settings', 'Advanced Settings', 'publish_posts', 'atcontent/atcontent_advanced.php', '' );
         //add_submenu_page( 'atcontent', 'AtContent Import', 'Import', 'publish_posts', 'atcontent_import', 'atcontent_import_section' );
     }
 
@@ -111,7 +111,7 @@ END;
         $ac_excerpt_image_remove = get_user_meta( intval($post->post_author), "ac_excerpt_image_remove", true );
         if ( strlen($ac_excerpt_image_remove) == 0 ) $ac_excerpt_image_remove = "0";
         $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
-        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "1";
+        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
         if ($ac_excerpt_no_process == "1") {
             remove_filter( 'the_content', 'atcontent_the_content', 100 );
             remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
