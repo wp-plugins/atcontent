@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.6
+    Version: 1.3.7
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -78,7 +78,6 @@
 
     function atcontent_the_content($content) {
         global $post;
-        return $content;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
@@ -95,8 +94,6 @@ END;
 END;
             }
             $code = str_replace( PHP_EOL, " ", $code );
-
-            
             return $code;
         }
         return $content;
