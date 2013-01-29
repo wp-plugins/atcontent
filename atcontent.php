@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.7
+    Version: 1.3.8
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -21,8 +21,6 @@
     //add_settings_field();
     function atcontent_add_tools_menu() {
         add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
-        //add_submenu_page( 'atcontent/atcontent_settings.php', 'Advanced Settings', 'Advanced Settings', 'publish_posts', 'atcontent/atcontent_advanced.php', '' );
-        //add_submenu_page( 'atcontent', 'AtContent Import', 'Import', 'publish_posts', 'atcontent_import', 'atcontent_import_section' );
     }
 
     function atcontent_publish_publication( $post_id ){
@@ -31,48 +29,48 @@
 		    $post = get_post( $post_id );
             if ($post == null) return;
             $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
-                if (strlen($ac_api_key) > 0) {
-                    $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-                    $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
-                    $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
-                    $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
-                    $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
-                    $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
-                    if ($ac_is_process != "1") return;
-                    remove_filter( 'the_content', 'atcontent_the_content', 100 );
-                    remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
-                    $comments_json = "";
-                    if ($ac_is_import_comments == "1") {
-                        $comments = get_comments( array(
-                            'post_id' => $post->ID,
-                            'order' => 'ASC',
-                            'orderby' => 'comment_date_gmt',
-                            'status' => 'approve',
-                        ) );
-                        if(!empty($comments)){
-                            $comments_json .= json_encode($comments);
-                        }
-                    }
-                    if (strlen($ac_postid) == 0) {
-                        $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                             apply_filters( "the_content", $post->post_content ), 
-                            $post->post_date_gmt, get_permalink($post->ID),
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
-                        if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                            $ac_postid = $api_answer["PublicationID"];
-                            update_post_meta($post->ID, "ac_postid", $ac_postid);
-                        }
-                    } else {
-                        $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ) ,
-                            $post->post_date_gmt, get_permalink($post->ID),
-                            $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost,
-                            $comments_json
-                             );
-                        if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
-                        }
+            if (strlen($ac_api_key) > 0) {
+                $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+                $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+                $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
+                $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
+                $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
+                $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
+                if ($ac_is_process != "1") return;
+                remove_filter( 'the_content', 'atcontent_the_content', 100 );
+                remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+                $comments_json = "";
+                if ($ac_is_import_comments == "1") {
+                    $comments = get_comments( array(
+                        'post_id' => $post->ID,
+                        'order' => 'ASC',
+                        'orderby' => 'comment_date_gmt',
+                        'status' => 'approve',
+                    ) );
+                    if(!empty($comments)){
+                        $comments_json .= json_encode($comments);
                     }
                 }
+                if (strlen($ac_postid) == 0) {
+                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                            apply_filters( "the_content", $post->post_content ), 
+                        $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                        $ac_postid = $api_answer["PublicationID"];
+                        update_post_meta($post->ID, "ac_postid", $ac_postid);
+                    }
+                } else {
+                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
+                        apply_filters( "the_content", $post->post_content ) ,
+                        $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost,
+                        $comments_json
+                            );
+                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    }
+                }
+            }
 	    }
     }
 
