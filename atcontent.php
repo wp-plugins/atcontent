@@ -3,15 +3,15 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.8
+    Version: 1.3.9
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
     require_once("atcontent_api.php");
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
-    add_filter( 'the_content', 'atcontent_the_content', 100 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+    add_filter( 'the_content', 'atcontent_the_content', 1 );
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
@@ -37,8 +37,8 @@
                 $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
                 $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                 if ($ac_is_process != "1") return;
-                remove_filter( 'the_content', 'atcontent_the_content', 100 );
-                remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+                remove_filter( 'the_content', 'atcontent_the_content', 1 );
+                remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                 $comments_json = "";
                 if ($ac_is_import_comments == "1") {
                     $comments = get_comments( array(
@@ -74,8 +74,14 @@
 	    }
     }
 
-    function atcontent_the_content($content) {
-        global $post;
+    function atcontent_the_content( $content = '' ) {
+        global $post, $wp_current_filter;
+        if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
+            return $content;
+        }
+        if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
+		    return $content;
+	    }
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
@@ -97,8 +103,8 @@ END;
         return $content;
     } 
 
-    function atcontent_the_excerpt( $content ) {
-        global $post;
+    function atcontent_the_excerpt( $content = '' ) {
+        global $post, $wp_current_filter;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta(intval($post->post_author), "ac_pen_name", true);
@@ -108,11 +114,6 @@ END;
         $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
         if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
         if ($ac_excerpt_no_process == "1") {
-            remove_filter( 'the_content', 'atcontent_the_content', 100 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
-            $content = get_the_excerpt( $post->ID );
-            add_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
-            add_filter( 'the_content', 'atcontent_the_content', 100 );
             return $content;
         }
         if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
@@ -182,7 +183,7 @@ END;
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
           // The actual fields for data entry
           echo <<<END
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" {$ac_is_process_checked} /> Process post throught AtContent API</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" {$ac_is_process_checked} /> Process post through AtContent API</div>
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" {$ac_is_copyprotect_checked} /> Prevent copy actions</div>
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_paidrepost" name="atcontent_is_paidrepost" value="1" {$ac_is_paidrepost_checked} /> Paid repost<br><br>
 <label for="atcontent_paidrepost_cost">Paid repost cost, $</label> <input type="text" name="atcontent_paidrepost_cost" value="{$ac_paidrepost_cost}" size="10" /><br>
@@ -245,8 +246,8 @@ END;
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( current_user_can( 'edit_posts' ) && strlen($ac_api_key) > 0 ) {
-            remove_filter( 'the_content', 'atcontent_the_content', 100 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 100 );
+            remove_filter( 'the_content', 'atcontent_the_content', 1 );
+            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
 	        // get the submitted parameters
 	        $postID = $_POST['postID'];
             $ac_is_copyprotect = $_POST['copyProtection'];

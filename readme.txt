@@ -75,6 +75,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.3.9 =
+
+* Other plugin influence fix
+
 = 1.3.3 =
 
 * Excerpt without processing fix
