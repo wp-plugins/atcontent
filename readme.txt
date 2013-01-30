@@ -8,13 +8,11 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-With AtContent plugin you protect your content, reach new audiences and make more money on your blog.
+A Blogging Social Network. Share posts rather than statuses. Repost, don’t retweet. Connect to other bloggers, protect content, earn money, and many more!
 
 == Description ==
 
-### Make Money and Protect Your Content! ###
-
-AtContent plugin gives you the opportunity to take a step in the future of the digital content world. Read features below, try it and never come back to the old world.
+AtContent plugin gives you the opportunity to take a step in the future of the digital content world. By installing it you become a part of a social network for bloggers and authors where you share posts rather than statuses, repost rather than retweet, get exposure for your blog, protect your content, control it across the web, earn money and many more. Read features below, try it and never come back to the old world.
 
 #### Protect your content & Monetize reposts ####
 
