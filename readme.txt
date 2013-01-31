@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A Blogging Social Network. Share posts rather than statuses. Repost, don’t retweet. Connect to other bloggers, protect content, earn money, and many more!
+A Blogging Social Network. Share posts rather than statuses. Repost, don’t retweet. Connect to other bloggers, protect content, earn money, and more!
 
 == Description ==
 
