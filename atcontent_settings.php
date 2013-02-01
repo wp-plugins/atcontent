@@ -20,6 +20,8 @@
              update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
              $ac_excerpt_no_process = (isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y") ? "1" : "0";
              update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+             $ac_comments_disable = (isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y") ? "1" : "0";
+             update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
              $form_message .= 'Settings saved.';
          }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
@@ -169,11 +171,16 @@ if (strlen($ac_api_key) > 0) {
     if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
     $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
     if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+    $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
+    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
 
     $ac_excerpt_image_remove_checked = "";
     if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
     $ac_excerpt_no_process_checked = "";
     if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
+    $ac_comments_disable_checked = "";
+    if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
+
 ?>
 <form action="" method="POST">
 <div class="wrap">
@@ -187,6 +194,8 @@ if (strlen($ac_api_key) > 0) {
     Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>
     <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
     Turn off plugin features for excerpts on your main page (don't worry, all features are working good for the articles pages, check it out)</p>
+    <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
+    Turn off plugin comments</p>
      <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
     </span>

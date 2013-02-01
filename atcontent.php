@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.3.9
+    Version: 1.4.0
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -85,16 +85,23 @@
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
+        $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+        $ac_additional_classes = "";
+        if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
+<div class=\"atcontent_widget{$ac_additional_classes}\">
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
+</div>
 END;
             if (is_single()) {
                 $code .= <<<END
+<div class=\"atcontent_widget{$ac_additional_classes}\">
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script>
+</div>
 END;
             }
             $code = str_replace( PHP_EOL, " ", $code );
@@ -117,10 +124,13 @@ END;
             return $content;
         }
         if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
+            $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+            $ac_additional_classes = "";
+            if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
             $ac_excerpt_class = "atcontent_excerpt";
             if ($ac_excerpt_image_remove == "1") $ac_excerpt_class = "atcontent_excerpt_no_image";
             $code = <<<END
-<div class="{$ac_excerpt_class}">
+<div class="{$ac_excerpt_class}{$ac_additional_classes}">
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
