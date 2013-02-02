@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.4.0
+    Version: 1.4.1
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -91,7 +91,7 @@
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
-<div class=\"atcontent_widget{$ac_additional_classes}\">
+<div class="atcontent_widget{$ac_additional_classes}">
 <script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script>
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script>
@@ -99,7 +99,7 @@
 END;
             if (is_single()) {
                 $code .= <<<END
-<div class=\"atcontent_widget{$ac_additional_classes}\">
+<div class="atcontent_widget{$ac_additional_classes}">
 <script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script>
 </div>
 END;
