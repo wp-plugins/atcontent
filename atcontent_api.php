@@ -155,5 +155,28 @@ $out_array = json_decode($res, true);
 return $out_array;
 }
 
+function atcontent_api_pingback( $email, $status, $api_key ) {
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'http://api.atcontent.com/v1/native/pingback');
+curl_setopt($curl, CURLOPT_HEADER, 0);
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, 
+'Email='. urlencode( $email ) . 
+'&AppID=' . urlencode( 'WordPress' ) .
+( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
+( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
+( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' ) );
+curl_setopt($curl, CURLOPT_USERAGENT, 'IE 10.00');
+$res = curl_exec($curl);
+if(!$res){
+	$error = curl_error($curl).'('.curl_errno($curl).')';
+	$out = $error;
+}
+curl_close($curl);
+$out_array = json_decode($res, true);
+return $out_array;
+}
+
 
 ?>

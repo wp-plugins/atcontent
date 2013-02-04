@@ -3,12 +3,15 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.2
+    Version: 1.5.3
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
+    define( 'AC_VERSION', "1.5.3" );
+
     require_once("atcontent_api.php");
+    require_once("atcontent_pingback.php"); 
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
@@ -20,6 +23,12 @@
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
+    add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
+
+    register_activation_hook( __FILE__, 'atcontent_activate' );
+    register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
+    register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
+
     //
     //add_settings_field();
     function atcontent_add_tools_menu() {

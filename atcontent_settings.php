@@ -204,7 +204,7 @@ if (strlen($ac_api_key) > 0) {
     <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
-    Turn off distribution hint panel</p>
+    Turn off line "Share  and repost and get $$$..."</p>
      <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
     </span>
@@ -214,5 +214,19 @@ if (strlen($ac_api_key) > 0) {
 
 <p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
 <p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+
 <?php 
 }
+
+$form_action = admin_url( 'admin-ajax.php' );
+?>
+<script type="text/javascript">
+    jQuery(function(){
+        jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
+            if (d.IsOK) {
+            }
+        }, "json");
+    });
+</script>
+
+<?php
