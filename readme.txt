@@ -75,6 +75,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.5.0 =
+
+* Extended comments integration
+
 = 1.4.0 =
 
 * AtContent comments disable option
@@ -125,4 +129,4 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-New amazing settings page and advanced settings page! 
+Extended comments integration!

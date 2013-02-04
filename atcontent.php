@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.4.1
+    Version: 1.5.0
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -14,6 +14,9 @@
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
+    add_action( 'comment_post', 'atcontent_comment_post' );
+    add_action( 'deleted_comment', 'atcontent_comment_post' );
+    add_action( 'trashed_comment', 'atcontent_comment_post' );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
@@ -365,5 +368,37 @@ END;
  
         // IMPORTANT: don't forget to "exit"
         exit;
+    }
+
+    function atcontent_comment_post($comment_id, $status) {
+        $comment = get_comment( $comment_id );
+        if ( $comment != NULL ) {
+            atcontent_process_comments( $comment->comment_post_ID );
+        }
+    }
+
+    function atcontent_process_comments($post_id) {
+        $post = get_post( $post_id );
+        if ($post == null) return;
+        $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
+        if (strlen($ac_api_key) > 0) {
+            $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+            $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+            $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
+            if ($ac_is_process == "1" && $ac_is_import_comments == "1") {
+                $comments_json = "";
+                $comments = get_comments( array(
+                    'post_id' => $post->ID,
+                    'order' => 'ASC',
+                    'orderby' => 'comment_date_gmt',
+                    'status' => 'approve',
+                ) );
+                if(!empty($comments)){
+                    $comments_json .= json_encode($comments);
+                }
+                
+                atcontent_api_update_publication_comments($ac_api_key, $ac_postid, $comments_json);
+            }
+        }
     }
 ?>
