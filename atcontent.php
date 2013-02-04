@@ -3,7 +3,7 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.0
+    Version: 1.5.1
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
@@ -89,8 +89,10 @@
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+        $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
         $ac_additional_classes = "";
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
+        if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
             $code = <<<END
@@ -128,8 +130,10 @@ END;
         }
         if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
             $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+            $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
             $ac_additional_classes = "";
             if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
+            if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
             $ac_excerpt_class = "atcontent_excerpt";
             if ($ac_excerpt_image_remove == "1") $ac_excerpt_class = "atcontent_excerpt_no_image";
             $code = <<<END

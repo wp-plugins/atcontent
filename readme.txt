@@ -75,6 +75,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.5.1 =
+
+* Distribution hint panel settings
+
 = 1.5.0 =
 
 * Extended comments integration
@@ -130,3 +134,4 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 == Upgrade notice ==
 
 Extended comments integration!
+Distribution hint panel settings.
