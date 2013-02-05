@@ -3,17 +3,19 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.3
+    Version: 1.5.4
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
-    define( 'AC_VERSION', "1.5.3" );
+    define( 'AC_VERSION', "1.5.4" );
 
     require_once("atcontent_api.php");
     require_once("atcontent_pingback.php"); 
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
+    add_filter( 'the_content', 'atcontent_the_content_after', 100);
+    add_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication', 20 );
@@ -33,6 +35,7 @@
     //add_settings_field();
     function atcontent_add_tools_menu() {
         add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
+        add_submenu_page( 'atcontent/atcontent_settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/atcontent_knownplugins.php',  '');
     }
 
     function atcontent_publish_publication( $post_id ){
@@ -50,7 +53,9 @@
                 $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                 if ($ac_is_process != "1") return;
                 remove_filter( 'the_content', 'atcontent_the_content', 1 );
+                remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+                remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
                 $comments_json = "";
                 if ($ac_is_import_comments == "1") {
                     $comments = get_comments( array(
@@ -99,6 +104,7 @@
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
+        $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
         $ac_additional_classes = "";
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
@@ -112,7 +118,7 @@ END;
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
             }
-            $code = str_replace( PHP_EOL, " ", $code );
+            $code = str_replace( PHP_EOL, " ", $code );           
             return $code;
         }
         return $content;
@@ -134,6 +140,7 @@ END;
         if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
             $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
             $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
+            $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
             $ac_additional_classes = "";
             if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
             if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
@@ -148,15 +155,37 @@ END;
         return $content;
     }
 
-    function atcontent_convert_paragraphs($content){
-        return $content;
-        $content = explode(PHP_EOL . PHP_EOL, $content);
-        $htmlcontent = '';
-        foreach($content as $line){
-            $htmlcontent .= '<p>' . str_replace(PHP_EOL, '<br />' , $line) . '</p>';
+    function atcontent_the_content_after( $content = '' ) {
+        global $post, $wp_current_filter;
+        if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
+            return $content;
         }
-        return $htmlcontent;  
-    }
+        if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
+		    return $content;
+	    }
+        $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+        $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
+        $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+        $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
+        $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
+        $ac_additional_classes = "";
+        if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
+        if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
+        if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
+        if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+            if (strlen($ac_script_init) > 0) {
+                $content .= <<<END
+<script>
+CPlase.evt.add('load', function (event, p, w) {
+{$ac_script_init}    
+});
+</script>
+END;
+            }
+        }
+        return $content;
+    } 
 
     function atcontent_add_meta_boxes(){
          add_meta_box( 
@@ -263,7 +292,10 @@ END;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( current_user_can( 'edit_posts' ) && strlen($ac_api_key) > 0 ) {
             remove_filter( 'the_content', 'atcontent_the_content', 1 );
+            remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
             remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+            remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+
 	        // get the submitted parameters
 	        $postID = $_POST['postID'];
             $ac_is_copyprotect = $_POST['copyProtection'];

@@ -24,6 +24,7 @@
              update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
              $ac_hint_panel_disable = (isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y") ? "1" : "0";
              update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
+             update_user_meta( $userid, "ac_script_init", $_POST[ "ac_script_init" ] );
              $form_message .= 'Settings saved.';
          }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
@@ -177,6 +178,7 @@ if (strlen($ac_api_key) > 0) {
     if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
     $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
     if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
+    $ac_script_init = get_user_meta($userid, "ac_script_init", true );
 
     $ac_excerpt_image_remove_checked = "";
     if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
@@ -205,6 +207,11 @@ if (strlen($ac_api_key) > 0) {
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
     Turn off line "Share  and repost and get $$$..."</p>
+    <p>JavaScript Code for Plugin Init Script<br>
+        <textarea rows="5" cols="80" name="ac_script_init"><?php echo $ac_script_init ?></textarea><br>
+        * this code will run after AtContent widget load. If you have plugins that interact with your post content (like Lightbox, FancyBox, etc.) you should use this option.
+        See <a href="<?php echo admin_url('admin.php?page=atcontent/atcontent_knownplugins.php') ?>">examples of known plugins</a>.
+    </p>
      <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
     </span>
