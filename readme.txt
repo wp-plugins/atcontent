@@ -19,7 +19,7 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 #### Protect your content & Monetize reposts ####
 
 * Readers repost your copy-protected content legally and for a fee.
-* [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
+* **[Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
 
 #### Increase search ranking for your site ####
 
@@ -28,18 +28,18 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 #### Track and manage your publications across the Internet ####
 
 * You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being shared and reposted.
-* [Demo example 1](http://test.ariser.ru/Stat/graph.html)
-* [Demo example 2](http://test.ariser.ru/Stat/)
+* **[Demo example 1](http://test.ariser.ru/Stat/graph.html)**
+* **[Demo example 2](http://test.ariser.ru/Stat/)**
 
 #### Sell your premium content ####
 
 * AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account anytime.
-* [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)
+* **[Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)**
 
 #### Reach new audience ####
 
 * The comments people leave on your posts appear on every site where posts are copied. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that?
-* [Demo example](https://atcontent.com/EmbedTour/#Comments)
+* **[Demo example](https://atcontent.com/EmbedTour/#Comments)**
 
 #### Free backup in AtContent cloud ####
 
