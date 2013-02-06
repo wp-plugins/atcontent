@@ -4,6 +4,7 @@ function atcontent_create_publication($ac_api_key,
 $post_title, $post_content, $post_published, $original_url,
 $cost, $is_copyprotect, $is_paidrepost, $comments
 ) {
+    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
@@ -50,6 +51,7 @@ function atcontent_api_update_publication($ac_api_key,
 $post_id, $post_title, $post_content, $post_published, $original_url,
 $cost, $is_copyprotect, $is_paidrepost, $comments
 ) {
+    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";

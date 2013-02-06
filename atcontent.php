@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.5
+    Version: 1.5.6
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
-    define( 'AC_VERSION', "1.5.5" );
+    define( 'AC_VERSION', "1.5.6" );
 
     require_once("atcontent_api.php");
     require_once("atcontent_pingback.php"); 
@@ -76,6 +76,8 @@
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
+                    } else {
+                        update_post_meta($post->ID, "ac_postid", "");
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
@@ -85,6 +87,8 @@
                         $comments_json
                             );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    } else {
+                        update_post_meta($post->ID, "ac_postid", "");
                     }
                 }
             }
