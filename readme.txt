@@ -1,14 +1,14 @@
 ﻿=== AtContent ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: publishing, paid repost, social distribution, AtContent, widget, post, posts, plugin, protection, monetization, monetize, repost, social repost, statistics, comments, embed
+Tags: publishing, paid repost, social distribution, AtContent, widget, post, posts, plugin, protection, monetization, monetize, repost, social repost, statistics, comments, embed, plagiarism, anti-plagiarism, SEO
 Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-AtContent plugin allows you to protect your content, monetize reposts, increase search ranking, reach new audiences, earn money, and many more!
+Protect your content from plagiarism, monetize reposts, increase search ranking, reach new audiences, earn money, and many more with AtContent!
 
 == Description ==
 
@@ -23,7 +23,7 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 
 #### Increase search ranking for your site ####
 
-* Each repost contains a backlink to your site. No penalties from Google.
+* With AtContent plugin you get a backlink from AtContent to each of your post. For example, if you have 100 posts, then with the plugin you get 100 unique backlinks from AtContent immediately. Each repost also contains a backlink to your site. No penalties from Google.
 
 #### Track and manage your publications across the Internet ####
 
