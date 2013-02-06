@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.4
+    Version: 1.5.5
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
-    define( 'AC_VERSION', "1.5.4" );
+    define( 'AC_VERSION', "1.5.5" );
 
     require_once("atcontent_api.php");
     require_once("atcontent_pingback.php"); 

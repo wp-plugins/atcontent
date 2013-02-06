@@ -99,8 +99,9 @@ END;
              ?>
 <p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
 <p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
+<p>To connect your blog to AtContent, please press button below.</p>
 <div id="ac_connect_result"></div>
-<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:500px;height:50px;" border="0" scrolling="no"></iframe>
+<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>
 <script type="text/javascript">
     (function ($) {
         window.ac_connect_res = function (d) {
