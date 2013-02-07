@@ -54,6 +54,14 @@ When you have several blogs and are interested in our multiple system solution, 
 People who think they know everything are a great annoyance to those of us who do. 
 Isaac Asimov
 
+== Examples ==
+
+* **[Anti-plagiarism Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
+* **[Track & Statistics Demo example 1](http://test.ariser.ru/Stat/graph.html)**
+* **[Track & Statistics Demo example 2](http://test.ariser.ru/Stat/)**
+* **[Premium Content Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)**
+* **[Comments Demo example](https://atcontent.com/EmbedTour/#Comments)**
+
 == Installation ==
 
 Upload the AtContent plugin to your blog, Activate it, connect blog to AtContent and import your posts!
