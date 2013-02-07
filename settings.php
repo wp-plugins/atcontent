@@ -120,8 +120,7 @@ if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
 <div class="wrap">
-<p>To activate the <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin</a>
-     for your existing articles, please choose options below and click on Import.</p>
+<p>To activate the AtCotnent plugin for your existing articles, please choose options below and click on Import.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
