@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.0
+    Version: 1.7.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.0" );
+    define( 'AC_VERSION', "1.7.1" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -35,7 +35,7 @@
     //add_settings_field();
     function atcontent_add_tools_menu() {
         add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/settings.php', '' );
-        add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connect', 'publish_posts', 'atcontent/connect.php',  '');
+        add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
     }
 

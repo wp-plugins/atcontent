@@ -109,10 +109,6 @@ END;
     })(jQuery);
 </script>
 <?php
-         } else {
-?>
-<p>You have connected blog to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><?php echo $ac_pen_name; ?></a>.</p>
-<?php           
          }
 ?>
 </div>
@@ -124,8 +120,7 @@ if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
 <div class="wrap">
-<div class="icon32" id="icon-plugins"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Plugin activation for existing posts</h3>
-<p style="padding: 0;margin: 0;">To activate the <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin features</a>
+<p>To activate the <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin</a>
      for your existing articles, please choose options below and click on Import.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
@@ -191,6 +186,7 @@ if (strlen($ac_api_key) > 0) {
     
 
 ?>
+<br><br><br>
 <form action="" method="POST">
 <div class="wrap">
 <div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
