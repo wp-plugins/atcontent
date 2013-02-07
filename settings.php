@@ -24,7 +24,6 @@
              update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
              $ac_hint_panel_disable = (isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y") ? "1" : "0";
              update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
-             update_user_meta( $userid, "ac_script_init", $_POST[ "ac_script_init" ] );
              $form_message .= 'Settings saved.';
          }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
@@ -61,7 +60,7 @@
             wp_reset_postdata();
                 $postIDs = join( "','" , $posts_id );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= 'Import started.<div id="importResult">Imported 0 of ...</div>Note: Updating posts takes few seconds, please be patient. The old version will be displayed for a while.';
+                $form_message .= 'Import started.<div id="importResult">Imported 0 of ...</div>Note: Updating posts takes few seconds, please be patient.';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
@@ -97,9 +96,7 @@ END;
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
-<p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
-<p>To start using AtContent you need to have an AtContent account, connected to your blog.</p>
-<p>To connect your blog to AtContent, please press button below.</p>
+<p>To start using AtContent plugin you need to connect it to AtContent platform.</p>
 <div id="ac_connect_result"></div>
 <iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>
 <script type="text/javascript">
@@ -114,10 +111,7 @@ END;
 <?php
          } else {
 ?>
-<p>You have connected blog to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><?php echo $ac_pen_name; ?></a>.
-<input type="hidden" name="ac_api_key" value="">
-<span class="submit" style="padding-left: 2em;"><input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Disconnect') ?>" /></span>
-</p>
+<p>You have connected blog to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><?php echo $ac_pen_name; ?></a>.</p>
 <?php           
          }
 ?>
@@ -149,20 +143,25 @@ if (strlen($ac_api_key) > 0) {
 
              echo $form_script;
 ?>
+<script>
+    function showCool() {
+        jQuery("#whyCool").toggle();
+    }
+</script>
 <div class="tool-box">
     
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
-    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent copy action for all publications</p>
-    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for all publications</p>
+    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for all posts</p>
+    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for all posts</p>
     Cost for paid repost, $<br>
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"><br>
     * If you have professional, popular blog, we recommend you to set $20 price for repost.<br>
-    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Import post comments into AtContent plugin comments<br>
-    * We recomend you to import comments into AtContent plugin and disable WordPress comments,<br>
+    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Import post comments into AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
+    <span id="whyCool" style="display: none;">* We highly recomend you to import comments into AtContent plugin and disable WordPress comments,<br>
     because the comments people leave on your posts appear on every site where posts are reposted.<br>
     Users on different sites will discuss your content in the comment section on their site and you will <br>
-    collaborate with them all by replying on your site!</p>
+    collaborate with them all by replying on your site!</span></p>
 
     <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
@@ -208,11 +207,6 @@ if (strlen($ac_api_key) > 0) {
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
     Turn off line "Share  and repost and get $$$..."</p>
-    <p>JavaScript Code for Plugin Init Script<br>
-        <textarea rows="5" cols="80" name="ac_script_init"><?php echo $ac_script_init ?></textarea><br>
-        * this code will run after AtContent widget load. If you have plugins that interact with your post content (like Lightbox, FancyBox, etc.) you should use this option.
-        See <a href="<?php echo admin_url('admin.php?page=atcontent/atcontent_knownplugins.php') ?>">examples of known plugins</a>.
-    </p>
      <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
     </span>

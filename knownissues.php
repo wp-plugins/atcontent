@@ -1,0 +1,111 @@
+<?php 
+$userid = wp_get_current_user()->ID;
+$hidden_field_name = 'ac_submit_hidden';
+$form_message = '';
+$form_script = '';
+$form_message_block = '';
+$ac_api_key = get_user_meta($userid, "ac_api_key", true );
+$ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
+if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+    isset( $_POST[ "ac_advanced_settings" ] ) ) {
+    update_user_meta( $userid, "ac_script_init", $_POST[ "ac_script_init" ] );
+    $form_message .= 'Settings saved.';
+}
+?>
+<div class="icon32" id="icon-tools"><br></div><h2>Known Plugins List</h2>
+<?php 
+ if (strlen($form_message) > 0) {
+    $form_message_block .= <<<END
+<div class="updated settings-error" id="setting-error-settings_updated"> 
+<p><strong>{$form_message}</strong></p></div>
+END;
+}
+echo $form_message_block;
+  ?>
+<br><br>
+<h3>FancyBox for WordPress</h3>
+<p><a href="http://plugins.josepardilla.com/fancybox-for-wordpress/">Visit plugin site</a></p>
+<p>To integrate this plugin with AtContent copy code in textarea into "JavaScript Code for Plugin Init Script" field on AtContent Settings Page.
+    <br><textarea>
+jQuery(function(){
+
+jQuery.fn.getTitle = function() { // Copy the title of every IMG tag and add it to its parent A so that fancybox can show titles
+	var arr = jQuery("a.fancybox");
+	jQuery.each(arr, function() {
+		var title = jQuery(this).children("img").attr("title");
+		jQuery(this).attr('title',title);
+	})
+}
+
+// Supported file extensions
+var thumbnails = jQuery("a:has(img)").not(".nolightbox").filter( function() { return /\.(jpe?g|png|gif|bmp)$/i.test(jQuery(this).attr('href')) });
+
+thumbnails.addClass("fancybox").attr("rel","fancybox").getTitle();
+jQuery("a.fancybox").fancybox({
+	'cyclic': false,
+	'autoScale': true,
+	'padding': 10,
+	'opacity': true,
+	'speedIn': 500,
+	'speedOut': 500,
+	'changeSpeed': 300,
+	'overlayShow': true,
+	'overlayOpacity': "0.3",
+	'overlayColor': "#666666",
+	'titleShow': true,
+	'titlePosition': 'inside',
+	'enableEscapeButton': true,
+	'showCloseButton': true,
+	'showNavArrows': true,
+	'hideOnOverlayClick': true,
+	'hideOnContentClick': false,
+	'width': 560,
+	'height': 340,
+	'transitionIn': "fade",
+	'transitionOut': "fade",
+	'centerOnScroll': true,
+});
+
+});
+</textarea></p>
+
+<?php 
+if (strlen($ac_api_key) > 0) {
+    $ac_script_init = get_user_meta($userid, "ac_script_init", true );
+?>
+<form action="" method="POST">
+<div class="wrap">
+<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
+<br>
+
+<div class="tool-box">
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <input type="hidden" name="ac_advanced_settings" value="Y">
+    <p>JavaScript Code for Plugin Init Script<br>
+        <textarea rows="5" cols="80" name="ac_script_init"><?php echo $ac_script_init ?></textarea><br>
+        * this code will run after AtContent widget load. If you have plugins that interact with your post content (like Lightbox, FancyBox, etc.) you should use this option.
+    </p>
+     <span class="submit">
+        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
+    </span>
+</div>
+</div>
+</form>
+
+<p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
+<p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+
+<?php 
+}
+$form_action = admin_url( 'admin-ajax.php' );
+?>
+<script type="text/javascript">
+    jQuery(function(){
+        jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
+            if (d.IsOK) {
+            }
+        }, "json");
+    });
+</script>
+
+<?php

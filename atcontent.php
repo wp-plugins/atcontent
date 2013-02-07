@@ -3,15 +3,15 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.5.6
+    Version: 1.6.0
     Author: Vadim Novitskiy
     Author URI: http://fb.com/vadim.novitskiy/
     */
 
-    define( 'AC_VERSION', "1.5.6" );
+    define( 'AC_VERSION', "1.6.0" );
 
     require_once("atcontent_api.php");
-    require_once("atcontent_pingback.php"); 
+    require_once("pingback.php"); 
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_content', 'atcontent_the_content_after', 100);
@@ -34,8 +34,9 @@
     //
     //add_settings_field();
     function atcontent_add_tools_menu() {
-        add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/atcontent_settings.php', '' );
-        add_submenu_page( 'atcontent/atcontent_settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/atcontent_knownplugins.php',  '');
+        add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/settings.php', '' );
+        add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connect', 'publish_posts', 'atcontent/connect.php',  '');
+        add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
     }
 
     function atcontent_publish_publication( $post_id ){
