@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.6.0
+    Version: 1.7.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.6.0" );
+    define( 'AC_VERSION', "1.7.0" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -48,9 +48,10 @@
             if (strlen($ac_api_key) > 0) {
                 $ac_postid = get_post_meta($post->ID, "ac_postid", true);
                 $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
-                $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
+                $ac_cost = get_post_meta($post->ID, "ac_cost", true);
                 $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
-                $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
+                $ac_type = get_post_meta($post->ID, "ac_type", true);
+                $ac_paid_portion = get_post_meta($post->ID, "ac_paid_portion", true);
                 $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                 if ($ac_is_process != "1") return;
                 remove_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -71,25 +72,24 @@
                 }
                 if (strlen($ac_postid) == 0) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ), 
+                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion), $ac_type,
                         $post->post_date_gmt, get_permalink($post->ID),
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                        $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
                     } else {
-                        update_post_meta($post->ID, "ac_postid", "");
+                        update_post_meta($post->ID, "ac_is_process", "0");
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ) ,
-                        $post->post_date_gmt, get_permalink($post->ID),
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost,
-                        $comments_json
+                        apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
+                        $ac_type , $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_cost, $ac_is_copyprotect, $comments_json
                             );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     } else {
-                        update_post_meta($post->ID, "ac_postid", "");
+                        update_post_meta($post->ID, "ac_is_process", "0");
                     }
                 }
             }
@@ -199,6 +199,13 @@ END;
             'atcontent_inner_custom_box',
             'post' 
         );
+
+        add_meta_box( 
+            'atcontent_secondeditor',
+            __( 'AtContent Paid Portion', 'atcontent_textdomain' ),
+            'atcontent_paid_portion',
+            'post'
+        );
     }
 
     function atcontent_inner_custom_box($post) {
@@ -231,26 +238,78 @@ END;
 
           $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
-          // The actual fields for data entry
-          echo <<<END
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" {$ac_is_process_checked} /> Process post through AtContent API</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" {$ac_is_copyprotect_checked} /> Prevent copy actions</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_paidrepost" name="atcontent_is_paidrepost" value="1" {$ac_is_paidrepost_checked} /> Paid repost<br><br>
-<label for="atcontent_paidrepost_cost">Paid repost cost, $</label> <input type="text" name="atcontent_paidrepost_cost" value="{$ac_paidrepost_cost}" size="10" /><br>
-* If you have professional, popular blog, we recommend you to set $20 price for repost.</div>
-END;
+          
+          $ac_cost = get_post_meta($post->ID, "ac_cost", true);
+          if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
 
-            $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-            if (strlen($ac_postid) > 0) {
-                echo <<<END
-<div class="misc-pub-section">
-You can make this post paid for users on <a href="https://atcontent.com/Studio/Publication/View/{$ac_postid}/">AtContent publication page</a>. We will add this functionality to WP plugin soon, thanks.<br>
-Note. If you change publication outside WordPress do not update it within WordPress.
-</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" {$ac_is_import_comments_checked} /> Import post comments into AtContent</div>
-END;
+          $ac_type = get_post_meta( $post->ID, "ac_type", true );
+          if ($ac_type == "") {
+              if ($ac_is_paidrepost == "1") $ac_type = "paidrepost";
+              else $ac_type = "free";
+          }
+
+          $ac_type_free_selected = ($ac_type == "free") ? "selected=\"selected\"" : "";
+          $ac_type_paidrepost_selected = ($ac_type == "paidrepost") ? "selected=\"selected\"" : "";
+          $ac_type_donate_selected = ($ac_type == "donate") ? "selected=\"selected\"" : "";
+          $ac_type_paid_selected = ($ac_type == "paid") ? "selected=\"selected\"" : "";
+
+          ?>
+<script type="text/javascript">
+    (function ($) {
+        $(function () {
+            $("#atcontent_type").change(function () {
+                ac_type_init($(this).val());
+            });
+            ac_type_init('<?php echo $ac_type ?>');
+        });
+        window.ac_type_init = function (val) {
+            $("#atcontent_cost").hide();
+            $("#atcontent_secondeditor").hide();
+            if (val == 'paid' || val == 'paidrepost') {
+                $("#atcontent_cost").show();
             }
+            if (val == 'paid') {
+                $("#atcontent_secondeditor").show();    
+            }
+        };
+    })(jQuery)
+</script>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked ?> /> Process post through AtContent API</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked ?> /> Protect post from plagiarism</div>
+<div class="misc-pub-section">
+    Post type: 
+<select name="atcontent_type" id="atcontent_type">
+    <option value="free" <?php echo $ac_type_free_selected; ?>>Free</option>
+    <option value="paidrepost" <?php echo $ac_type_paidrepost_selected; ?>>Paid repost</option>
+    <option value="donate" <?php echo $ac_type_donate_selected; ?>>Donate</option>
+    <option value="paid" <?php echo $ac_type_paid_selected; ?>>Paid</option>
+</select>
+</div>
+<div class="misc-pub-section" id="atcontent_cost">
+<label for="atcontent_paidrepost_cost">Cost, $</label> <input type="text" name="atcontent_cost" value="<?php echo $ac_cost ?>" size="10" /><br>
+* If you have professional, popular blog, we recommend you to set $20 price for repost.
+</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" <?php echo $ac_is_import_comments_checked?> /> Import post comments into AtContent</div>
+<?php
+    }
 
+    function atcontent_paid_portion($post) {
+        // Use nonce for verification
+        $args = array( 
+            'wpautop' => 1  
+            ,'media_buttons' => 1  
+            ,'textarea_name' => 'ac_paid_portion' //нужно указывать!  
+            ,'textarea_rows' => 20  
+            ,'tabindex' => null  
+            ,'editor_css' => ''  
+            ,'editor_class' => ''  
+            ,'teeny' => 0  
+            ,'dfw' => 0  
+            ,'tinymce' => 1  
+            ,'quicktags' => 1  
+        );
+        $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
+        wp_editor( $ac_paid_portion, "atcontentpaidportion", $args);
     }
 
     function atcontent_save_post( $post_id ){
@@ -273,8 +332,10 @@ END;
         $ac_is_process = $_POST['atcontent_is_process'];
         $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
         $ac_is_paidrepost = $_POST['atcontent_is_paidrepost'];
-        $ac_paidrepost_cost = $_POST['atcontent_paidrepost_cost'];
+        $ac_cost = $_POST['atcontent_cost'];
         $ac_is_import_comments = $_POST['atcontent_is_import_comments'];
+        $ac_paid_portion = $_POST['ac_paid_portion'];
+        $ac_type = $_POST['atcontent_type'];
 
         if ($ac_is_process != "1") $ac_is_process = "0";
         update_post_meta($post_id, "ac_is_process", $ac_is_process);
@@ -285,10 +346,16 @@ END;
         if ($ac_is_paidrepost != "1") $ac_is_paidrepost = "0";
         update_post_meta($post_id, "ac_is_paidrepost", $ac_is_paidrepost);
 
-        update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
+        update_post_meta($post_id, "ac_cost", $ac_cost);
 
         if ($ac_is_import_comments != "1") $ac_is_import_comments = "0";
         update_post_meta( $post_id, "ac_is_import_comments", $ac_is_import_comments );
+
+        update_post_meta( $post_id, 'ac_type', $ac_type );
+
+        if ($ac_paid_portion != NULL) {
+            update_post_meta( $post_id, "ac_paid_portion", $ac_paid_portion );
+        }
     }
 
     function atcontent_import_handler(){
@@ -310,6 +377,22 @@ END;
 
             $ac_postid = get_post_meta( $postID, "ac_postid", true );
             $ac_is_process = get_post_meta( $postID, "ac_is_process", true );
+
+            $ac_cost = get_post_meta( $postID, "ac_cost", true );
+            $ac_is_copyprotect = get_post_meta( $postID, "ac_is_copyprotect", true );
+            $ac_type = get_post_meta( $postID, "ac_type", true );
+            $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
+
+            if ($ac_type == "") {
+                if ($ac_is_paidrepost == "1") { 
+                    $ac_type = "paidrepost";
+                } else {
+                    $ac_type = "free";
+                }
+            }
+
+            if ($ac_cost = "") $ac_cost = $ac_paidrepost_cost;
+
             $ac_action = "";
             $post = get_post( $postID );
             if ( $post == null || $ac_is_process == "0" ) { 
@@ -329,9 +412,9 @@ END;
                 }
 	            if ( strlen($ac_postid) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ),
+                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion), $ac_type,
                         $post->post_date_gmt, get_permalink($post->ID),
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                        $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
@@ -341,12 +424,15 @@ END;
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         update_post_meta($post->ID, "ac_is_process", "1");
                         $ac_action = "created";
+                    } else {
+                        $ac_action = "skiped";
+                        update_post_meta($post->ID, "ac_is_process", "0");
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ),
-                        $post->post_date_gmt, get_permalink($post->ID),
-                        $ac_paidrepost_cost, $ac_is_copyprotect, $ac_is_paidrepost, $comments_json );
+                        apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
+                        $ac_type , $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
@@ -354,6 +440,8 @@ END;
                         update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         $ac_action = "updated";
+                    } else {
+                        update_post_meta($post->ID, "ac_is_process", "0");
                     }
                 }
             }

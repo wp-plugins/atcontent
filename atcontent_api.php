@@ -1,15 +1,16 @@
 <?php
 
 function atcontent_create_publication($ac_api_key, 
-$post_title, $post_content, $post_published, $original_url,
-$cost, $is_copyprotect, $is_paidrepost, $comments
+$post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
+$cost, $is_copyprotect, $comments
 ) {
-    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
+    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
-    $commercial_type = "free";
-    if ($is_paidrepost != NULL && $is_paidrepost == "1") { $commercial_type = "paidrepost"; }
+    $post_paid_splited_content = split("<!--more-->", $paid_portion);
+    $paid_face = $post_paid_splited_content[0];
+    $paid_content = count($post_paid_splited_content) > 0 ? $post_paid_splited_content[1] : "";
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, 'http://api.atcontent.com/v1/native/create');
 curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -23,6 +24,8 @@ urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
 '&Price='.urlencode($cost).
 '&FreeFace='.urlencode($post_face).
 '&FreeContent='.urlencode($post_body).
+'&PaidFace='.urlencode($paid_face).
+'&PaidContent='.urlencode($paid_content).
 '&IsCopyProtected='.urlencode($is_copyprotect).
 '&IsPaidRepost='.urlencode($is_paidrepost).
 '&Published='.urlencode($post_published).
@@ -48,15 +51,17 @@ return $out_array;
 }
 
 function atcontent_api_update_publication($ac_api_key, 
-$post_id, $post_title, $post_content, $post_published, $original_url,
-$cost, $is_copyprotect, $is_paidrepost, $comments
+$post_id, $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
+$cost, $is_copyprotect, $comments
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
+    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
-    $commercial_type = "free";
-    if ($is_paidrepost != NULL && $is_paidrepost == "1") { $commercial_type = "paidrepost"; }
+    $post_paid_splited_content = split("<!--more-->", $paid_portion);
+    $paid_face = $post_paid_splited_content[0];
+    $paid_content = count($post_paid_splited_content) > 0 ? $post_paid_splited_content[1] : "";
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, 'http://api.atcontent.com/v1/native/update');
 curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -71,6 +76,8 @@ urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
 '&Price='.urlencode($cost).
 '&FreeFace='.urlencode($post_face).
 '&FreeContent='.urlencode($post_body).
+'&PaidFace='.urlencode($paid_face).
+'&PaidContent='.urlencode($paid_content).
 '&IsCopyProtected='.urlencode($is_copyprotect).
 '&Published='.urlencode($post_published).
 '&Comments='.urlencode($comments).

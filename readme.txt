@@ -83,6 +83,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.7.0 = 
+
+* Paid and donate types of publications were introduced
+
 = 1.5.1 =
 
 * Distribution hint panel settings
@@ -141,5 +145,4 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-Extended comments integration!
-Distribution hint panel settings.
+Now available paid and donate types of publication!
