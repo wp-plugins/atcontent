@@ -4,8 +4,8 @@
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
     Version: 1.6.0
-    Author: Vadim Novitskiy
-    Author URI: http://fb.com/vadim.novitskiy/
+    Author: AtContent, IFFace, Inc., Vadim Novitskiy
+    Author URI: http://atcontent.com/
     */
 
     define( 'AC_VERSION', "1.6.0" );
