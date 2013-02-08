@@ -10,6 +10,10 @@ if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 
     update_user_meta( $userid, "ac_api_key", $ac_api_key );
     $ac_pen_name = atcontent_api_get_nickname( $_POST[ "ac_api_key" ] );
     update_user_meta( $userid, "ac_pen_name", $ac_pen_name );
+    $admin_url_main = admin_url("admin.php?page=atcontent/settings.php");
+    ?>
+<script>window.location = '<?php echo $admin_url_main ?>';</script>
+<?php
     $form_message .= 'Settings saved.';
 }
 $ac_api_key = get_user_meta($userid, "ac_api_key", true );
@@ -24,7 +28,11 @@ $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
-<p style="max-width: 600px;">With AtContent plugin for Wordpress you can protect your publications from plagiarism, monetize reposts, increase search ranking for your site, track and manage your content across the Internet and even sell your premium articles, music and other content (available in February).</p>
+<p style="max-width: 600px;">With AtContent plugin you brand content by your name and control it across the Web.<br>
+If somebody reposted your content to other site – you see how many views your content get on this site. You even can block your content on site you don’t like.<br>
+Each reposted publication signed by your name and has backlink to your site. It brings new audiences and increase search ranking for your site.<br>
+Now your content is branded and valuable, because you have power to control it across the Internet.<br>
+AtContent plugin gives you the opportunity to take a step in the future of the digital content world. Read other features below, try it and never come back to the old world.</p>
 <p>To start using AtContent plugin you need to connect it to AtContent platform.</p>
 <div id="ac_connect_result"></div>
 <iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>

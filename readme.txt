@@ -21,7 +21,7 @@ AtContent plugin gives you the opportunity to take a step in the future of the d
 * Readers repost your copy-protected content legally and for a fee.
 * **[Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
 
-#### Increase search ranking for your site ####
+#### Improve your WordPress site for Search Engines ####
 
 * With AtContent plugin you get a backlink from AtContent to each of your post. For example, if you have 100 posts, then with the plugin you get 100 unique backlinks from AtContent immediately. Each repost also contains a backlink to your site. No penalties from Google.
 

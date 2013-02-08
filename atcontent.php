@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.2
+    Version: 1.7.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.2" );
+    define( 'AC_VERSION', "1.7.3" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -218,6 +218,8 @@ END;
               $ac_is_process_checked = "checked=\"checked\"";
           }
 
+          $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+
           $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
           $ac_is_copyprotect_checked = "";
           if ($ac_is_copyprotect == "1") {
@@ -291,6 +293,13 @@ END;
 </div>
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" <?php echo $ac_is_import_comments_checked?> /> Import post comments into AtContent</div>
 <?php
+        if ( strlen( $ac_postid ) > 0 ) {
+        ?>
+<div class="misc-pub-section">
+<a href="https://www.atcontent.com/Studio/Publication/Stat/<?php echo $ac_postid ?>/" target="_blank">View statistics</a>
+</div>
+        <?php
+        }
     }
 
     function atcontent_paid_portion($post) {
