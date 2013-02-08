@@ -8,13 +8,17 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Protect your content from plagiarism, monetize reposts, increase search ranking, reach new audiences, earn money, and many more with AtContent!
+Brand your content and control it across the Web, reach new audiences, increase search ranking, prevent plagiarism, monetize reposts, earn money!
 
 == Description ==
 
-### Earn Money and Protect Your Content! ###
+### Brand your content and controll it across the Internet! ###
 
-AtContent plugin gives you the opportunity to take a step in the future of the digital content world. Read features below, try it and never come back to the old world.
+With AtContent plugin you brand content by your name and control it across the Web. 
+If somebody reposted your content to other site – you see how many views your content get on this site. You even can block your content on site you don’t like. 
+Each reposted publication signed by your name and has backlink to your site. It brings new audiences and increase search ranking for your site.
+Now your content is branded and valuable, because you have power to control it across the Internet.
+AtContent plugin gives you the opportunity to take a step in the future of the digital content world. Read other features below, try it and never come back to the old world.
 
 #### Protect your content & Monetize reposts ####
 
