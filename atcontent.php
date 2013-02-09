@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.3
+    Version: 1.7.4
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.3" );
+    define( 'AC_VERSION', "1.7.4" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -390,7 +390,7 @@ END;
             $ac_cost = get_post_meta( $postID, "ac_cost", true );
             $ac_is_copyprotect = get_post_meta( $postID, "ac_is_copyprotect", true );
             $ac_type = get_post_meta( $postID, "ac_type", true );
-            $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
+            $ac_paid_portion = get_post_meta( $postID, "ac_paid_portion", true );
 
             if ($ac_type == "") {
                 if ($ac_is_paidrepost == "1") { 
@@ -415,14 +415,14 @@ END;
                         'orderby' => 'comment_date_gmt',
                         'status' => 'approve',
                     ) );
-                    if(!empty($comments)){
+                    if( !empty($comments) ) {
                         $comments_json .= json_encode($comments);
                     }
                 }
 	            if ( strlen($ac_postid) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion), $ac_type,
-                        $post->post_date_gmt, get_permalink($post->ID),
+                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion ), $ac_type,
+                        $post->post_date_gmt, get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -435,7 +435,7 @@ END;
                         $ac_action = "created";
                     } else {
                         $ac_action = "skiped";
-                        update_post_meta($post->ID, "ac_is_process", "0");
+                        update_post_meta( $post->ID, "ac_is_process", "0" );
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
@@ -450,7 +450,7 @@ END;
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         $ac_action = "updated";
                     } else {
-                        update_post_meta($post->ID, "ac_is_process", "0");
+                        update_post_meta( $post->ID, "ac_is_process", "0" );
                     }
                 }
             }

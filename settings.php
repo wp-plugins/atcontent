@@ -38,11 +38,13 @@
             remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
 
             $posts_id = array();
+            $posts_title = array();
 
             while( $posts_query->have_posts() ):
 	            $posts_query->next_post();
                 if ($posts_query->post->post_author == $userid) {
                     array_push( $posts_id, $posts_query->post->ID );
+                    array_push( $posts_title, $posts_query->post->post_title );
                 }
             endwhile;
 
@@ -59,21 +61,39 @@
             wp_reset_query();
             wp_reset_postdata();
                 $postIDs = join( "','" , $posts_id );
+                $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= 'Import started.<div id="importResult">Imported 0 of ...</div>Note: Updating posts takes few seconds, please be patient.';
+                $form_message .= 'Import started.<div id="importResult">Imported 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importErrors"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
+    var postTitles = ['{$postTitles}'];
     var imported = 0;
+    function doImport(i) {
+        jQuery.ajax({url: '{$form_action}', 
+                         type: 'post', 
+                         data: {action: 'atcontent_import', 
+                                postID: postIDs[i], 
+                                copyProtection: {$copyProtection}, 
+                                paidRepost: {$paidRepost}, 
+                                cost: {$paidRepostCost}, 
+                                comments: {$importComments}},
+                         success: function(d){
+                                        if (d.IsOK) {
+                                            imported++;
+                                            jQuery("#importResult").html("Imported " + imported + " of " + postIDs.length);
+                                        }
+                                    },
+                         error: function(d, s, e) {
+                                if (e == 'timeout') { doImport(i); return; }
+                                if (e.length == 0) e = "Error";
+                                jQuery("#importErrors").append("<p>" + e + " for \"" + postTitles[i] + "\"</p>");
+                             },
+                         });
+    }
     jQuery(function(){
         for (var i in postIDs) {
-            jQuery.post('{$form_action}', {action: 'atcontent_import', postID: postIDs[i], copyProtection: {$copyProtection}, 
-                paidRepost: {$paidRepost}, cost: {$paidRepostCost}, comments: {$importComments}}, function(d){
-                if (d.IsOK) {
-                    imported++;
-                    jQuery("#importResult").html("Imported " + imported + " of " + postIDs.length);
-                }
-            }, "json");
+            doImport(i);
         }
     });
 </script>
