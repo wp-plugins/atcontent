@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.5
+    Version: 1.7.6
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.5" );
+    define( 'AC_VERSION', "1.7.6" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 

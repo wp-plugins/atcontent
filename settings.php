@@ -68,7 +68,13 @@
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
     var postTitles = ['{$postTitles}'];
+    var retryIDs = [];
     var imported = 0;
+    var errors = 0;
+    function doRetry(i) {
+        jQuery("#error" + i).remove();
+        doImport(retryIDs[i]); 
+    }
     function doImport(i) {
         jQuery.ajax({url: '{$form_action}', 
                          type: 'post', 
@@ -78,16 +84,24 @@
                                 paidRepost: {$paidRepost}, 
                                 cost: {$paidRepostCost}, 
                                 comments: {$importComments}},
+                         dataType: "json",
                          success: function(d){
                                         if (d.IsOK) {
                                             imported++;
                                             jQuery("#importResult").html("Imported " + imported + " of " + postIDs.length);
+                                        } else {
+                                            errors++;
+                                            retryIDs[errors] = i;
+                                            jQuery("#importErrors").append("<p id=\"error" + errors + "\">Error for \"" + postTitles[i] + 
+                                                "\" <a href=\"javascript:doRetry(" + errors + ");\">Retry</a><br>" + d + "</p>")
                                         }
                                     },
                          error: function(d, s, e) {
                                 if (e == 'timeout') { doImport(i); return; }
                                 if (e.length == 0) e = "Error";
-                                jQuery("#importErrors").append("<p>" + e + " for \"" + postTitles[i] + "\"</p>");
+                                errors++;
+                                retryIDs[errors] = i;
+                                jQuery("#importErrors").append("<p id=\"error" + errors + "\">" + e + " for \"" + postTitles[i] + "\" <a href=\"javascript:doRetry(" + errors + ");\">Retry</a></p>");
                              },
                          });
     }

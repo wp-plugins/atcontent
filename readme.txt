@@ -87,6 +87,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.7.6 =
+
+* Extended error handle
+
 = 1.7.0 = 
 
 * Paid and donate types of publications were introduced
