@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.4
+    Version: 1.7.5
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.4" );
+    define( 'AC_VERSION', "1.7.5" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -307,7 +307,7 @@ END;
         $args = array( 
             'wpautop' => 1  
             ,'media_buttons' => 1  
-            ,'textarea_name' => 'ac_paid_portion' //нужно указывать!  
+            ,'textarea_name' => 'ac_paid_portion'
             ,'textarea_rows' => 20  
             ,'tabindex' => null  
             ,'editor_css' => ''  
@@ -435,7 +435,7 @@ END;
                         $ac_action = "created";
                     } else {
                         $ac_action = "skiped";
-                        update_post_meta( $post->ID, "ac_is_process", "0" );
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
@@ -450,7 +450,7 @@ END;
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         $ac_action = "updated";
                     } else {
-                        update_post_meta( $post->ID, "ac_is_process", "0" );
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 }
             }

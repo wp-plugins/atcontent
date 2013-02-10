@@ -11,6 +11,30 @@ if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 
     update_user_meta( $userid, "ac_script_init", $_POST[ "ac_script_init" ] );
     $form_message .= 'Settings saved.';
 }
+if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+    isset( $_POST[ "ac_reset_posts_processing" ] ) ) {
+         $wp_query_args = array(
+                'post_author' => $userid,
+                'post_status' => array('publish'),
+                'nopaging' => true
+                );
+                $posts_query = new WP_Query( $wp_query_args );
+            remove_filter( 'the_content', 'atcontent_the_content', 1 );
+            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+
+            $posts_id = array();
+            $posts_title = array();
+
+            while( $posts_query->have_posts() ):
+	            $posts_query->next_post();
+                if ($posts_query->post->post_author == $userid) {
+                    $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+                    $ac_is_process = ($ac_postid == "") ? "" : "1";
+                    update_post_meta( $posts_query->post->ID, "ac_is_process", $ac_is_process );
+                }
+            endwhile;
+            $form_message .= "Post processing settings are reseted.";
+    }
 ?>
 <div class="icon32" id="icon-tools"><br></div><h2>Known Plugins List</h2>
 <?php 
@@ -91,9 +115,36 @@ if (strlen($ac_api_key) > 0) {
 </div>
 </div>
 </form>
+<br><br><br>
+<h3>Service functions</h3>
+<form action="" method="POST">
+<div class="wrap">
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <input type="hidden" name="ac_reset_posts_processing" value="Y">
+    <span class="submit">
+        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Reset AtContent processing settings for all posts') ?>" />
+    </span>
+</div>
+</form>
 
 <p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
 <p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+
+<br><br>
+Diagnostic info<br>
+<textarea id="diag" rows="10" cols="60">
+<?php echo "Plugin version: " . AC_VERSION . "\r\n" ?>
+</textarea>
+
+<script>
+    (function ($) {
+        $(function () {
+            var val = $("#diag").val();
+            val += "jQuery: " + $().jquery + "\r\n";
+            $("#diag").val(val);
+        });
+    })(jQuery)
+</script>
 
 <?php 
 }
