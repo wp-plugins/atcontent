@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.6
+    Version: 1.7.7
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.6" );
+    define( 'AC_VERSION', "1.7.7" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -104,6 +104,9 @@
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
 		    return $content;
 	    }
+        $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
+        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+        if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );

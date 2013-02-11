@@ -87,6 +87,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.7.7 =
+
+* Fucking kostyil excerpt fix
+
 = 1.7.6 =
 
 * Extended error handle
