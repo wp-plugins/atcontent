@@ -201,7 +201,7 @@ if (strlen($ac_api_key) > 0) {
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
     if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
     $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
-    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
     $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
     if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
     $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );

@@ -3,12 +3,13 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.7
+    Version: 1.7.8
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.7" );
+    define( 'AC_VERSION', "1.7.8" );
+    define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
@@ -105,7 +106,7 @@
 		    return $content;
 	    }
         $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
-        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
         $ac_postid = get_post_meta($post->ID, "ac_postid", true);
         $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
@@ -141,7 +142,7 @@ END;
         $ac_excerpt_image_remove = get_user_meta( intval($post->post_author), "ac_excerpt_image_remove", true );
         if ( strlen($ac_excerpt_image_remove) == 0 ) $ac_excerpt_image_remove = "0";
         $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
-        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = "0";
+        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ($ac_excerpt_no_process == "1") {
             return $content;
         }
