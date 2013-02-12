@@ -44,7 +44,7 @@
 	            $posts_query->next_post();
                 if ($posts_query->post->post_author == $userid) {
                     array_push( $posts_id, $posts_query->post->ID );
-                    array_push( $posts_title, addcslashes( $posts_query->post->post_title, "'" ) );
+                    array_push( $posts_title, addcslashes( $posts_query->post->post_title, "'\\" ) );
                 }
             endwhile;
 
