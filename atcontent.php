@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.8
+    Version: 1.7.9
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.8" );
+    define( 'AC_VERSION', "1.7.9" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -392,7 +392,6 @@ END;
             $ac_is_process = get_post_meta( $postID, "ac_is_process", true );
 
             $ac_cost = get_post_meta( $postID, "ac_cost", true );
-            $ac_is_copyprotect = get_post_meta( $postID, "ac_is_copyprotect", true );
             $ac_type = get_post_meta( $postID, "ac_type", true );
             $ac_paid_portion = get_post_meta( $postID, "ac_paid_portion", true );
 
@@ -404,7 +403,7 @@ END;
                 }
             }
 
-            if ($ac_cost = "") $ac_cost = $ac_paidrepost_cost;
+            if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
 
             $ac_action = "";
             $post = get_post( $postID );
@@ -432,7 +431,7 @@ END;
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                        update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                        update_post_meta($post->ID, "ac_type" , $ac_type );
                         update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         update_post_meta($post->ID, "ac_is_process", "1");
@@ -449,16 +448,16 @@ END;
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                        update_post_meta($post->ID, "ac_is_paidrepost" , $ac_is_paidrepost );
+                        update_post_meta($post->ID, "ac_type" , $ac_type );
                         update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         $ac_action = "updated";
                     } else {
+                        $ac_action = "skiped";
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 }
             }
-        
 
 	        // generate the response
 	        $response = json_encode( array( 'IsOK' => true, "AC_action" => $ac_action ) );
