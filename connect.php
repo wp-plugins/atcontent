@@ -64,10 +64,6 @@ $form_action = admin_url( 'admin-ajax.php' );
 <script type="text/javascript">
     jQuery(function(){
         jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
-            if (d.IsOK) {
-            }
         }, "json");
     });
 </script>
-
-<?php
