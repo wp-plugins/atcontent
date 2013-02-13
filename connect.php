@@ -1,3 +1,17 @@
+<script type='text/javascript'>
+    window.Muscula = { settings:{
+        logId:"4f1fbfb7-5f25-4ae4-b2a0-b8fb074d6a3b", googleAnalyticsEvents: 'none', branding: 'none'
+    }};
+    (function () {
+        var m = document.createElement('script'); m.type = 'text/javascript'; m.async = true;
+        m.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//musculahq.appspot.com/Muscula.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(m, s);
+        window.Muscula.run=function(c){eval(c);window.Muscula.run=function(){};};
+        window.Muscula.errors=[];window.onerror=function(){window.Muscula.errors.push(arguments);
+        return window.Muscula.settings.suppressErrors===undefined;}
+    })();
+</script>
 <?php 
 $userid = wp_get_current_user()->ID;
 $hidden_field_name = 'ac_submit_hidden';
