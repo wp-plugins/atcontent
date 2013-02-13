@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.11
+    Version: 1.7.12
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.11" );
+    define( 'AC_VERSION', "1.7.12" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -74,18 +74,18 @@
                 if (strlen($ac_postid) == 0) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion), $ac_type,
-                        $post->post_date_gmt, get_permalink($post->ID),
+                        get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
-                        update_post_meta($post->ID, "ac_postid", $ac_postid);
+                        update_post_meta( $post->ID, "ac_postid", $ac_postid );
                     } else {
-                        update_post_meta($post->ID, "ac_is_process", "0");
+                        update_post_meta( $post->ID, "ac_is_process", "0" );
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
                         apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
-                        $ac_type , $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json
                             );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
@@ -118,7 +118,7 @@
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+        if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0 ) {
             $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
 END;
@@ -425,7 +425,7 @@ END;
 	            if ( strlen($ac_postid) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion ), $ac_type,
-                        $post->post_date_gmt, get_permalink( $post->ID ),
+                        get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -443,7 +443,7 @@ END;
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
                         apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
-                        $ac_type , $post->post_date_gmt, get_permalink($post->ID),
+                        $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");

@@ -37,6 +37,9 @@
             remove_filter( 'the_content', 'atcontent_the_content', 1 );
             remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
 
+            $ac_reset = $_POST['ac_reset'] == "Y";
+            if ($ac_reset) $form_message .= "Reset done. ";
+
             $posts_id = array();
             $posts_title = array();
 
@@ -45,6 +48,15 @@
                 if ($posts_query->post->post_author == $userid) {
                     array_push( $posts_id, $posts_query->post->ID );
                     array_push( $posts_title, addcslashes( $posts_query->post->post_title, "'\\" ) );
+                    if ($ac_reset) {
+                        update_post_meta( $posts_query->post->ID, "ac_is_process", "2" );
+                        update_post_meta( $posts_query->post->ID, "ac_cost", "" );
+                        update_post_meta( $posts_query->post->ID, "ac_paidrepostcost", "" );
+                        update_post_meta( $posts_query->post->ID, "ac_is_paidrepost", "" );
+                        update_post_meta( $posts_query->post->ID, "ac_is_copyprotect", "" );
+                        update_post_meta( $posts_query->post->ID, "ac_is_import_comments", "" );
+                        update_post_meta( $posts_query->post->ID, "ac_type", "" );
+                    }
                 }
             endwhile;
 
@@ -63,7 +75,7 @@
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= 'Import started.<div id="importResult">Imported 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importErrors"></div>';
+                $form_message .= 'Import started.<div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importErrors"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
@@ -88,20 +100,22 @@
                          success: function(d){
                                         if (d.IsOK) {
                                             imported++;
-                                            jQuery("#importResult").html("Imported " + imported + " of " + postIDs.length);
+                                            jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
                                         } else {
                                             errors++;
                                             retryIDs[errors] = i;
-                                            jQuery("#importErrors").append("<p id=\"error" + errors + "\">Error for \"" + postTitles[i] + 
-                                                "\" <a href=\"javascript:doRetry(" + errors + ");\">Retry</a><br>" + d + "</p>")
+                                            jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + 
+                                                ");\">Retry</a>. WordPress hosting error for \"" + 
+                                                postTitles[i] + "\" (" + d + ")</p>")
                                         }
                                     },
                          error: function(d, s, e) {
                                 if (e == 'timeout') { doImport(i); return; }
-                                if (e.length == 0) e = "Error";
+                                var err = "WordPress hosting error";
+                                if (e.length > 0) err += ": " + e;
                                 errors++;
                                 retryIDs[errors] = i;
-                                jQuery("#importErrors").append("<p id=\"error" + errors + "\">" + e + " for \"" + postTitles[i] + "\" <a href=\"javascript:doRetry(" + errors + ");\">Retry</a></p>");
+                                jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + e + " for \"" + postTitles[i] + "\"</p>");
                              },
                          });
     }
@@ -191,6 +205,9 @@ if (strlen($ac_api_key) > 0) {
     Users on different sites will discuss your content in the comment section on their site and you will <br>
     collaborate with them all by replying on your site!</span></p>
 
+    <p><input type="checkbox" name="ac_reset" value="Y">
+        Reset all AtContent settings. Settings above wil be applied to all publications.</p>
+
     <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
     </span>
@@ -254,10 +271,6 @@ $form_action = admin_url( 'admin-ajax.php' );
 <script type="text/javascript">
     jQuery(function(){
         jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
-            if (d.IsOK) {
-            }
         }, "json");
     });
 </script>
-
-<?php
