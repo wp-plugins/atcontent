@@ -12,7 +12,12 @@
         return window.Muscula.settings.suppressErrors===undefined;}
     })();
 </script>
-<?php 
+<?php
+    try {
+ini_set("display_errors", "On");
+error_reporting(E_ALL);
+    } catch (Exception $e) {
+    }
          $userid = wp_get_current_user()->ID;
          $hidden_field_name = 'ac_submit_hidden';
          $form_message = '';
@@ -42,39 +47,41 @@
          }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
-            $wp_query_args = array(
-                'post_author' => $userid,
-                'post_status' => array('publish'),
-                'nopaging' => true
-                );
-                $posts_query = new WP_Query( $wp_query_args );
-            remove_filter( 'the_content', 'atcontent_the_content', 1 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
 
-            $ac_reset = $_POST['ac_reset'] == "Y";
-            if ($ac_reset) $form_message .= "Reset done. ";
+    
+            $ac_reset = isset( $_POST['ac_reset'] ) && $_POST['ac_reset'] == "Y";
+            if ( $ac_reset ) $form_message .= "Reset done. ";
 
             $posts_id = array();
             $posts_title = array();
 
-            while( $posts_query->have_posts() ):
-	            $posts_query->next_post();
-                if ($posts_query->post->post_author == $userid) {
-                    array_push( $posts_id, $posts_query->post->ID );
-                    array_push( $posts_title, addcslashes( $posts_query->post->post_title, "'\\" ) );
-                    if ($ac_reset) {
-                        update_post_meta( $posts_query->post->ID, "ac_is_process", "2" );
-                        update_post_meta( $posts_query->post->ID, "ac_cost", "" );
-                        update_post_meta( $posts_query->post->ID, "ac_paidrepostcost", "" );
-                        update_post_meta( $posts_query->post->ID, "ac_is_paidrepost", "" );
-                        update_post_meta( $posts_query->post->ID, "ac_is_copyprotect", "" );
-                        update_post_meta( $posts_query->post->ID, "ac_is_import_comments", "" );
-                        update_post_meta( $posts_query->post->ID, "ac_type", "" );
-                    }
-                }
-            endwhile;
+            $posts = $wpdb->get_results( 
+	            "
+	            SELECT ID, post_title, post_author
+	            FROM {$wpdb->posts}
+	            WHERE post_status = 'publish' 
+		            AND post_author = {$userid}
+	            "
+            );
 
-            $copyProtection = isset($_POST["ac_copyprotect"]) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
+            foreach ( $posts as $post ) 
+            {
+                if ($post->post_author == $userid) {
+                    array_push( $posts_id, $post->ID );
+                    array_push( $posts_title, addcslashes( $post->post_title, "'\\" ) );
+                    if ($ac_reset) {
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
+                        update_post_meta( $post->ID, "ac_cost", "" );
+                        update_post_meta( $post->ID, "ac_paidrepostcost", "" );
+                        update_post_meta( $post->ID, "ac_is_paidrepost", "" );
+                        update_post_meta( $post->ID, "ac_is_copyprotect", "" );
+                        update_post_meta( $post->ID, "ac_is_import_comments", "" );
+                        update_post_meta( $post->ID, "ac_type", "" );
+                    }
+                }	
+            }
+
+            $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_copyprotect", $copyProtection);
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
@@ -83,9 +90,7 @@
             $importComments = isset($_POST["ac_comments"]) && $_POST["ac_comments"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_is_import_comments", $importComments);
 
-            // Restore original Query & Post Data
-            wp_reset_query();
-            wp_reset_postdata();
+            
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
