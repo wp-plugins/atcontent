@@ -115,7 +115,7 @@
                                 if (e.length > 0) err += ": " + e;
                                 errors++;
                                 retryIDs[errors] = i;
-                                jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + e + " for \"" + postTitles[i] + "\"</p>");
+                                jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + err + " for \"" + postTitles[i] + "\"</p>");
                              },
                          });
     }
