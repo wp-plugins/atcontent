@@ -163,9 +163,21 @@ END;
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
-<p>To start using AtContent plugin you need to connect it to AtContent platform.</p>
+<p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
+<p id="ac_platform_description" style="display: none;width: 640px;">
+AtContent is a digital content platform which is actually brands content by your name, provide backlinks and many other valuable features. 
+    AtContent plugin is a part of AtContent platform on your site. Our professional team working on it for 3 years already. 
+    We are US company and based in Silicon Valley. So, be sure it's safety.<br><br>
+    Watch the video how AtContent plugin works:<br>
+    <iframe width="640" height="360" src="http://www.youtube.com/embed/Ex8EKJOjYJI" frameborder="0" allowfullscreen></iframe>
+</p>
+<script>
+    function AtContentPlatform() {
+        jQuery("#ac_platform_description").toggle();
+    }
+</script>
 <div id="ac_connect_result"></div>
-<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>
+<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" frameborder="0" scrolling="no"></iframe>
 <script type="text/javascript">
     (function ($) {
         window.ac_connect_res = function (d) {
@@ -187,7 +199,7 @@ if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
 <div class="wrap">
-<p>To activate the AtCotnent plugin for your existing articles, please choose options below and click on Import.</p>
+<p>To activate plugin for existing posts, brand it all and get backlinks — click Import. You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
