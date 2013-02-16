@@ -1,7 +1,7 @@
 ﻿=== AtContent. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: publishing, paid repost, social distribution, AtContent, widget, post, posts, plugin, protection, monetization, monetize, repost, social repost, statistics, comments, embed, plagiarism, anti-plagiarism, SEO, backlinks
+Tags: publishing, paid repost, social distribution, AtContent, widget, post, posts, plugin, protection, monetization, monetize, repost, social repost, statistics, comments, embed, plagiarism, anti-plagiarism, SEO, backlinks, links
 Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: trunk
