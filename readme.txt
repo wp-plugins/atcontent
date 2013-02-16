@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-People who think they know everything are a great annoyance to those of us who do. 
+My definition of an intellectual is someone who can listen to the William Tell Overture without thinking of the Lone Ranger. 
 
-Isaac Asimov.
+Billy Connolly
 
 == Examples ==
 
