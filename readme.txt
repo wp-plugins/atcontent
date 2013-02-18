@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I like long walks, especially when they are taken by people who annoy me. 
+Weather forecast for tonight: dark. 
 
-Fred Allen 
+George Carlin 
 
 == Examples ==
 
