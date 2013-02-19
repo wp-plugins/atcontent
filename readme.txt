@@ -8,25 +8,25 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Brand content and control it across the Web! Get infinite backlinks pipeline. Reach new audiences, prevent plagiarism, monetize reposts, earn money!
+Reach new readership, increase search ranking! Brand content and control it across the Internet. More features with demos below.
 
 == Description ==
 
-### Brand your content and control it across the Internet! ###
+### Reach new readership and increase search ranking for your content! ###
 
-With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it is still signed with your brand and you see how many views your content gets on this site. You even can block your content on site you don’t like. It brings new audiences to your content and highlight your own brand. Now your content is branded and valuable, because you have power to control it across the Internet. With AtContent plugin you take a step in the future of the digital content world. Read other features below, try it and share with friends.
+After plugin installation and importing all articles you immediately get a unique backlink from AtContent for each article on your site. It increases your site search ranking. You also get new readership from AtContent. Other people can now legally repost your publications from AtContent and your site. They provide backlinks to your site and new readership too. If you write regularly then you get new backlinks regularly too. This boosts your site in Google faster than ever!
+
+###Brand your content and control it across the Internet! ###
+
+With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it is still signed with your brand and you see how many views your content gets on this site. You even can block your content on site you don’t like. It brings new audiences to your content and highlight your own brand. Now your content is branded and valuable, because you have power to control it across the Internet.  With AtContent plugin you take a step in the future of the digital content world. Watch the video, read advanced features below, try it and share with friends. 
 
 [youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
-
-#### Get infinite backlinks pipeline – increase your site search ranking! ####
-
-After plugin installation and importing all articles you immediately get a unique backlink from AtContent for each article on your site. Other people who repost your publications from AtContent and your site also provide backlinks to your site. Each backlink increase your site search ranking and your site grows in Google faster. This is what bloggers called Backlinks Pipeline. If you write regularly then you get new backlinks from AtContent and other sites who repost your content. This is The Infinite Backlinks Pipeline, which is boost your site in Google faster than ever!
 
 #### Protect your content & Monetize reposts ####
 
 * Readers repost your copy-protected content legally for free or for a fee.
-* [Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
-* [Demo example 2](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money.
+* Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
+* [Demo example 2](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
 
 #### Reach new audience ####
 
@@ -35,7 +35,7 @@ After plugin installation and importing all articles you immediately get a uniqu
 
 #### Track and manage your publications across the Internet ####
 
-* You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being shared and reposted. 
+* You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being shared and reposted.
 * [Demo example 1](http://test.ariser.ru/Stat/graph.html)
 * [Demo example 2](http://test.ariser.ru/Stat/)
 
