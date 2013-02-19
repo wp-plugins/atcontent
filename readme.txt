@@ -16,7 +16,7 @@ Brand content and control it across the Web! Get infinite backlinks pipeline. Re
 
 With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it is still signed with your brand and you see how many views your content gets on this site. You even can block your content on site you don’t like. It brings new audiences to your content and highlight your own brand. Now your content is branded and valuable, because you have power to control it across the Internet. With AtContent plugin you take a step in the future of the digital content world. Read other features below, try it and share with friends.
 
-[youtube http://www.youtube.com/watch?v=Ex8EKJOjYJI]
+[youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
 
 #### Get infinite backlinks pipeline – increase your site search ranking! ####
 
