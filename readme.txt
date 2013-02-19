@@ -58,6 +58,8 @@ Weather forecast for tonight: dark.
 
 George Carlin 
 
+![code](http://www.google-analytics.com/__utm.gif?utmac=UA-25429129-5&utmcn=1&utmcs=-&utmdt=AtContentPlugin&utmwv=1)
+
 == Examples ==
 
 * **[Anti-plagiarism Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
