@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I have yet to hear a man ask for advice on how to combine marriage and a career. 
+I was the kid next door's imaginary friend. 
 
-Gloria Steinem 
+Emo Philips
 
 == Examples ==
 
