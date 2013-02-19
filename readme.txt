@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I saw a woman wearing a sweatshirt with Guess on it. I said, Thyroid problem? 
+I have yet to hear a man ask for advice on how to combine marriage and a career. 
 
-Arnold Schwarzenegger
+Gloria Steinem 
 
 == Examples ==
 
