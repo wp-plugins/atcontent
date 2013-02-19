@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Weather forecast for tonight: dark. 
+I saw a woman wearing a sweatshirt with Guess on it. I said, Thyroid problem? 
 
-George Carlin 
+Arnold Schwarzenegger
 
 == Examples ==
 
