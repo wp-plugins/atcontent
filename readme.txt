@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I was the kid next door's imaginary friend. 
+What contemptible scoundrel has stolen the cork to my lunch? 
 
-Emo Philips
+W. Clement Stone
 
 == Examples ==
 
