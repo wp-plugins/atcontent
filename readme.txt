@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Smoking kills. If you're killed, you've lost a very important part of your life. 
+I wanna make a jigsaw puzzle that's 40,000 pieces. And when you finish it, it says 'go outside.' 
 
-Brooke Shields 
+Demetri Martin
 
 == Examples ==
 
