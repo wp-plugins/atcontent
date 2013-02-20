@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-What contemptible scoundrel has stolen the cork to my lunch? 
+Smoking kills. If you're killed, you've lost a very important part of your life. 
 
-W. Clement Stone
+Brooke Shields 
 
 == Examples ==
 
