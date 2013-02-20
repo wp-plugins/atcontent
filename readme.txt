@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I wanna make a jigsaw puzzle that's 40,000 pieces. And when you finish it, it says 'go outside.' 
+Do not take life too seriously. You will never get out of it alive. 
 
-Demetri Martin
+Elbert Hubbard 
 
 == Examples ==
 
