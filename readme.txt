@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Do not take life too seriously. You will never get out of it alive. 
+I found there was only one way to look thin: hang out with fat people. 
 
-Elbert Hubbard 
+Rodney Dangerfield 
 
 == Examples ==
 
