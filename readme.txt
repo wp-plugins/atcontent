@@ -54,10 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-If I want to knock a story off the front page, I just change my hairstyle.
+If I had to live my life again, I'd make the same mistakes, only sooner.
 
-Hillary Clinton 
-
+Tallulah Bankhead
 
 == Examples ==
 
