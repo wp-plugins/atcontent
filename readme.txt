@@ -54,9 +54,10 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-In comic strips, the person on the left always speaks first.
+If I want to knock a story off the front page, I just change my hairstyle.
 
-George Carlin 
+Hillary Clinton 
+
 
 == Examples ==
 
