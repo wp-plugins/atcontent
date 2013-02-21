@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I found there was only one way to look thin: hang out with fat people. 
+Change is the law of life. And those who look only to the past or present are certain to miss the future.
 
-Rodney Dangerfield 
+John F. Kennedy
 
 == Examples ==
 
