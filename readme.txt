@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Be thankful we're not getting all the government we're paying for.
+A will finds a way.
 
-Will Rogers
+Orison Swett Marden
 
 == Examples ==
 
