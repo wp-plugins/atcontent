@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-There are only three things women need in life: food, water, and compliments.
+Everything that used to be a sin is now a disease.
 
-Chris Rock 
+Bill Maher 
 
 == Examples ==
 
