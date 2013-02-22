@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.15
+    Version: 1.7.16
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.15" );
+    define( 'AC_VERSION', "1.7.16" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -183,6 +183,17 @@ END;
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
         if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+             //Chameleon theme thumb fix
+            if (function_exists( 'get_thumbnail' ) && get_option('chameleon_thumbnails') == 'on' ){
+                $ac_script_init .= <<<END
+(function($) { 
+$(".CPlase_face").prepend($(".post-thumbnail").clone());
+$(".post-thumbnail:first").remove();
+})(jQuery)
+END;
+            }
+            //Chameleon theme thumb fix end
+
             if (strlen($ac_script_init) > 0) {
                 $content .= <<<END
 <script>
