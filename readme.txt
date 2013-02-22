@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Happiness is not something ready made. It comes from your own actions.
+Be thankful we're not getting all the government we're paying for.
 
-Dalai Lama 
+Will Rogers
 
 == Examples ==
 
