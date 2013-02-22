@@ -25,7 +25,7 @@ With AtContent plugin you brand content by your name. If somebody reposted your 
 #### Protect your content & Monetize reposts ####
 
 * Readers repost your copy-protected content legally for free or for a fee.
-* Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
+* [Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
 * [Demo example 2](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
 
 #### Reach new audience ####
