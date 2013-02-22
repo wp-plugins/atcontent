@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-If I had to live my life again, I'd make the same mistakes, only sooner.
+There are lots of people who mistake their imagination for their memory.
 
-Tallulah Bankhead
+Josh Billings 
 
 == Examples ==
 
