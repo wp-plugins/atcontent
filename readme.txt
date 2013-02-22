@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A committee is a group that keeps minutes and loses hours.
+Happiness is not something ready made. It comes from your own actions.
 
-Milton Berle 
+Dalai Lama 
 
 == Examples ==
 
