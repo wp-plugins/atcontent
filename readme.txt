@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-There are lots of people who mistake their imagination for their memory.
+A committee is a group that keeps minutes and loses hours.
 
-Josh Billings 
+Milton Berle 
 
 == Examples ==
 
