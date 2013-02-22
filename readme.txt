@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A will finds a way.
+There are only three things women need in life: food, water, and compliments.
 
-Orison Swett Marden
+Chris Rock 
 
 == Examples ==
 
