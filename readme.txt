@@ -54,9 +54,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Everything that used to be a sin is now a disease.
+Even if the music industry simply gave away all their music people would complain that they don't have the bandwidth to download all the stuff - the problem would merely shift from availability to distribution.
 
-Bill Maher 
+Dan Farmer 
 
 == Examples ==
 
