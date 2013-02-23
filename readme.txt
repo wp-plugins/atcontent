@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I intend to live forever. So far, so good.
+Everything that used to be a sin is now a disease.
 
-Steven Wright
+Bill Maher 
 
 == Examples ==
 
