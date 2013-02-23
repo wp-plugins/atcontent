@@ -8,41 +8,38 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Reach new readership, increase search ranking! Brand content and control it across the Internet. More features with demos below.
+Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking! More features and demos below.
 
 == Description ==
 
 ### Reach new readership and increase search ranking for your content! ###
 
-After plugin installation and importing all articles you immediately get a unique backlink from AtContent for each article on your site. It increases your site search ranking. You also get new readership from AtContent. Other people can now legally repost your publications from AtContent and your site. They provide backlinks to your site and new readership too. If you write regularly then you get new backlinks regularly too. This boosts your site in Google faster than ever!
+[Diagram](http://i.imgur.com/CCIRdX4.png)
+With AtContent plugin you get an unique backlink from AtContent for all articles on your site, increasing your site search ranking. You also get new readership from AtContent – up to 20% - 70%, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and new readership. This boosts your search ranking and readership faster than ever, and it’s free!
 
 ###Brand your content and control it across the Internet! ###
 
-With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it is still signed with your brand and you see how many views your content gets on this site. You even can block your content on site you don’t like. It brings new audiences to your content and highlight your own brand. Now your content is branded and valuable, because you have power to control it across the Internet.  With AtContent plugin you take a step in the future of the digital content world. Watch the video, read advanced features below, try it and share with friends. 
+With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
+
+With AtContent plugin you take a step in the future of the digital content world. With AtContent you can do more! Try it and share with friends.
 
 [youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
 
 #### Protect your content & Monetize reposts ####
 
-* Readers repost your copy-protected content legally for free or for a fee.
+* Readers repost your copy-protected content legally, for free or for a fee.
 * [Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
 * [Demo example 2](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
 
-#### Reach new audience ####
+#### Boost reader’s engagement with AtContent comments ####
 
-* The comments people leave on your posts appear on every site where posts are copied. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that? 
 * [Demo example](https://atcontent.com/EmbedTour/#Comments)
-
-#### Track and manage your publications across the Internet ####
-
-* You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being shared and reposted.
-* [Demo example 1](http://test.ariser.ru/Stat/graph.html)
-* [Demo example 2](http://test.ariser.ru/Stat/)
+* The comments people leave on your posts appear on every site where posts are copied. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that? 
 
 #### Sell your premium content ####
 
-* AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account anytime. 
 * [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)
+* AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account anytime. 
 
 #### Free backup in AtContent cloud ####
 
