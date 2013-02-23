@@ -14,7 +14,7 @@ Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach ne
 
 ### Reach new readership and increase search ranking for your content! ###
 
-Diagram](http://i.imgur.com/CCIRdX4.png)
+[Diagram](http://i.imgur.com/CCIRdX4.png)
 
 With AtContent plugin you get an unique backlink from AtContent for all articles on your site, increasing your site search ranking. You also get new readership from AtContent – up to 20% - 70%, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and new readership. This boosts your search ranking and readership faster than ever, and it’s free!
 
