@@ -60,7 +60,7 @@ error_reporting(E_ALL);
 	            SELECT ID, post_title, post_author
 	            FROM {$wpdb->posts}
 	            WHERE post_status = 'publish' 
-		            AND post_author = {$userid}
+		            AND post_author = {$userid} AND post_type = 'post'
 	            "
             );
 
