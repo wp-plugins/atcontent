@@ -14,12 +14,12 @@ Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach ne
 
 ### Reach new readership and increase search ranking for your content! ###
 
-*[Diagram](http://i.imgur.com/CCIRdX4.png)
-*With AtContent plugin you get an unique backlink from AtContent for all articles on your site, increasing your site search ranking. You also get new readership from AtContent – up to 20% - 70%, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and new readership. This boosts your search ranking and readership faster than ever, and it’s free!
+* [Diagram](http://i.imgur.com/CCIRdX4.png)
+* With AtContent plugin you get an unique backlink from AtContent for all articles on your site, increasing your site search ranking. You also get new readership from AtContent – up to 20% - 70%, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and new readership. This boosts your search ranking and readership faster than ever, and it’s free!
 
 ###Brand your content and control it across the Internet! ###
 * [Demo example 1](http://test.ariser.ru/Stat/graph.html) [Demo example 2](http://test.ariser.ru/Stat/)
-*With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
+* With AtContent plugin you brand content by your name. If somebody reposted your content to other site – it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
 
 With AtContent plugin you take a step in the future of the digital content world. With AtContent you can do more! Try it and share with friends.
 
