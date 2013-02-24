@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Everything that used to be a sin is now a disease.
+There's no better feeling in the world than a warm pizza box on your lap.
 
-Bill Maher 
+Kevin James 
 
 == Examples ==
 
