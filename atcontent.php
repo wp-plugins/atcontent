@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/Plugins/WordPress/
     Description: AtContent Plugin
-    Version: 1.7.17
+    Version: 1.7.18
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.17" );
+    define( 'AC_VERSION', "1.7.18" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -59,6 +59,12 @@
                 remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                 remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+
+                //Sociable fix
+                remove_filter('the_content', 'auto_sociable');
+                remove_filter('the_excerpt', 'auto_sociable');
+                //end Sociable fix
+
                 $comments_json = "";
                 if ($ac_is_import_comments == "1") {
                     $comments = get_comments( array(
@@ -391,6 +397,11 @@ END;
             remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
             remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
             remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+
+            //Sociable fix
+            remove_filter('the_content', 'auto_sociable');
+            remove_filter('the_excerpt', 'auto_sociable');
+            //end Sociable fix
 
 	        // get the submitted parameters
 	        $postID = $_POST['postID'];

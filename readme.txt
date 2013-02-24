@@ -84,6 +84,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.7.18 =
+
+* Sociable plugin collaboration fixes
+
 = 1.7.8 =
 
 * Change defaults for list of publications
@@ -156,3 +160,4 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 == Upgrade notice ==
 
 Now available paid and donate types of publication!
+Now we work with sociable correctly.
