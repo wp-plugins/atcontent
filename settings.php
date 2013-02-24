@@ -163,11 +163,13 @@ END;
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
+<p style="width: 640px;">Why Over 3000 sites have chosen AtContent plugin? Because it’s the easiest and fastest way to reach new readership, increase search ranking, protect and monetize your content!</p>
 <p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
 <p id="ac_platform_description" style="display: none;width: 640px;">
-AtContent is a digital content platform which is actually brands content by your name, provide backlinks and many other valuable features. 
-    AtContent plugin is a part of AtContent platform on your site. Our professional team working on it for 3 years already. 
-    We are US company and based in Silicon Valley. So, be sure it's safety.<br><br>
+AtContent is a digital content platform which is actually brands content by your name, provide new readership, 
+    backlinks for search ranking and many other valuable features. AtContent plugin is a part of AtContent platform on your site. 
+    Our professional team working on it for 3 years already. We are US company and based in Silicon Valley and use cloud technologies. 
+    So, be sure it's safety.<br><br>
     Watch the video how AtContent plugin works:<br>
     <iframe width="640" height="360" src="http://www.youtube.com/embed/Ex8EKJOjYJI" frameborder="0" allowfullscreen></iframe>
 </p>

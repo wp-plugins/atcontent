@@ -42,12 +42,22 @@ $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
-<p style="max-width: 600px;">With AtContent plugin you brand content by your name and control it across the Web.<br>
-If somebody reposted your content to other site – you see how many views your content get on this site. You even can block your content on site you don’t like.<br>
-Each reposted publication signed by your name and has backlink to your site. It brings new audiences and increase search ranking for your site.<br>
-Now your content is branded and valuable, because you have power to control it across the Internet.<br>
-AtContent plugin gives you the opportunity to take a step in the future of the digital content world. Read other features below, try it and never come back to the old world.</p>
-<p>To start using AtContent plugin you need to connect it to AtContent platform.</p>
+<p style="width: 640px;">Why Over 3000 sites have chosen AtContent plugin? Because it’s the easiest and fastest way to reach new readership, 
+    increase search ranking, protect and monetize your content!</p>
+<p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
+<p id="ac_platform_description" style="display: none;width: 640px;">
+AtContent is a digital content platform which is actually brands content by your name, provide new readership, 
+    backlinks for search ranking and many other valuable features. AtContent plugin is a part of AtContent platform on your site. 
+    Our professional team working on it for 3 years already. We are US company and based in Silicon Valley and use cloud technologies. 
+    So, be sure it's safety.<br><br>
+    Watch the video how AtContent plugin works:<br>
+    <iframe width="640" height="360" src="http://www.youtube.com/embed/Ex8EKJOjYJI" frameborder="0" allowfullscreen></iframe>
+</p>
+<script>
+    function AtContentPlatform() {
+        jQuery("#ac_platform_description").toggle();
+    }
+</script>
 <div id="ac_connect_result"></div>
 <iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>
 <script type="text/javascript">
