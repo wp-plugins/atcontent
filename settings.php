@@ -278,10 +278,10 @@ if (strlen($ac_api_key) > 0) {
 <div class="tool-box">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_advanced_settings" value="Y">
-    <p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
-    Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>
+    <!--<p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
+    Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>-->
     <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-    Turn off plugin features for excerpts on your main page (don't worry, all features are working good for the articles pages, check it out)</p>
+    Turn off plugin features on your main page (don't worry, all features are working good for the articles pages, check it out)</p>
     <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
