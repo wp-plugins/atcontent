@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/
     Description: AtContent Plugin
-    Version: 1.7.21
+    Version: 1.7.22
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.21" );
+    define( 'AC_VERSION', "1.7.22" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -35,7 +35,9 @@
     //
     //add_settings_field();
     function atcontent_add_tools_menu() {
-        add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/settings.php', '' );
+        add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '', 
+            plugins_url( 'assets/logo.png', __FILE__ ) );
+        //add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/settings.php', '' );
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
     }
@@ -55,15 +57,9 @@
                 $ac_paid_portion = get_post_meta($post->ID, "ac_paid_portion", true);
                 $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                 if ($ac_is_process != "1") return;
-                remove_filter( 'the_content', 'atcontent_the_content', 1 );
-                remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
-                remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-                remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+                
 
-                //Sociable fix
-                remove_filter('the_content', 'auto_sociable');
-                remove_filter('the_excerpt', 'auto_sociable');
-                //end Sociable fix
+                atcontent_coexistense_fixes();
 
                 $comments_json = "";
                 if ($ac_is_import_comments == "1") {
@@ -393,15 +389,8 @@ END;
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( current_user_can( 'edit_posts' ) && strlen($ac_api_key) > 0 ) {
-            remove_filter( 'the_content', 'atcontent_the_content', 1 );
-            remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-            remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
-
-            //Sociable fix
-            remove_filter('the_content', 'auto_sociable');
-            remove_filter('the_excerpt', 'auto_sociable');
-            //end Sociable fix
+           
+            atcontent_coexistense_fixes();
 
 	        // get the submitted parameters
 	        $postID = $_POST['postID'];
@@ -562,5 +551,25 @@ END;
                 atcontent_api_update_publication_comments($ac_api_key, $ac_postid, $comments_json);
             }
         }
+    }
+
+    function atcontent_coexistense_fixes(){
+        remove_filter( 'the_content', 'atcontent_the_content', 1 );
+        remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+        remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+
+        //Sociable fix
+        remove_filter('the_content', 'auto_sociable');
+        remove_filter('the_excerpt', 'auto_sociable');
+        //end Sociable fix
+
+        //Facebook fix
+        remove_filter('the_content', 'facebook_the_content_like_button');
+        remove_filter('the_content', 'facebook_the_content_send_button');
+        remove_filter('the_content', 'facebook_the_content_follow_button');
+        remove_filter('the_content', 'facebook_the_content_recommendations_bar');
+        remove_filter('the_content', 'the_content_comments_box');
+        //end Facebook fix
     }
 ?>
