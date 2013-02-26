@@ -268,7 +268,7 @@ if (strlen($ac_api_key) > 0) {
 <form action="" method="POST">
 <div class="wrap">
 <div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
-<p style="color:#f00;background:#fff;padding:0;margin:0;">You could have excerpts displaying problems on the main page. Fix it easy by the options below</p>
+<p style="color:#f00;background:#fff;padding:0;margin:0;">You could have displaying problems. Fix it easy by the options below</p>
 
 <div class="tool-box">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">

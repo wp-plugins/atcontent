@@ -3,12 +3,12 @@
     Plugin Name: AtContent Plugin
     Plugin URI: http://atcontent.com/
     Description: AtContent Plugin
-    Version: 1.7.23
+    Version: 1.7.24
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.23" );
+    define( 'AC_VERSION', "1.7.24" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -32,12 +32,9 @@
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
-    //
-    //add_settings_field();
     function atcontent_add_tools_menu() {
         add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ) );
-        //add_menu_page( 'AtContent Settings', 'AtContent', 'publish_posts', 'atcontent/settings.php', '' );
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
     }
@@ -57,7 +54,6 @@
                 $ac_paid_portion = get_post_meta($post->ID, "ac_paid_portion", true);
                 $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
                 if ($ac_is_process != "1") return;
-                
 
                 atcontent_coexistense_fixes();
 
@@ -82,7 +78,7 @@
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta( $post->ID, "ac_postid", $ac_postid );
                     } else {
-                        update_post_meta( $post->ID, "ac_is_process", "0" );
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
@@ -92,7 +88,7 @@
                             );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                     } else {
-                        update_post_meta($post->ID, "ac_is_process", "0");
+                        update_post_meta($post->ID, "ac_is_process", "2");
                     }
                 }
             }
