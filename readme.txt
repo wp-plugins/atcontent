@@ -84,6 +84,10 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Changelog ==
 
+= 1.7.26 =
+
+* Facebook plugin collaboration fixes
+
 = 1.7.18 =
 
 * Sociable plugin collaboration fixes

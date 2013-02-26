@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 1.7.25
+    Version: 1.7.26
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.25" );
+    define( 'AC_VERSION', "1.7.26" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -557,16 +557,22 @@ END;
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
 
         //Sociable fix
-        remove_filter('the_content', 'auto_sociable');
-        remove_filter('the_excerpt', 'auto_sociable');
+        if ( defined( "SOCIABLE_ABSPATH" ) ) {
+            remove_filter( 'the_content', 'auto_sociable' );
+            remove_filter( 'the_excerpt', 'auto_sociable' );
+        }
         //end Sociable fix
 
         //Facebook fix
-        remove_filter('the_content', 'facebook_the_content_like_button');
-        remove_filter('the_content', 'facebook_the_content_send_button');
-        remove_filter('the_content', 'facebook_the_content_follow_button');
-        remove_filter('the_content', 'facebook_the_content_recommendations_bar');
-        remove_filter('the_content', 'the_content_comments_box');
+        if ( class_exists( 'Facebook_Loader' ) ) {
+            remove_filter( 'the_content', 'facebook_the_content_like_button' );
+            remove_filter( 'the_content', 'facebook_the_content_send_button' );
+            remove_filter( 'the_content', 'facebook_the_content_follow_button' );
+            remove_filter( 'the_content', 'facebook_the_content_recommendations_bar' );
+            if ( class_exists( 'Facebook_Comments' ) ) {
+                remove_filter( 'the_content', array( 'Facebook_Comments', 'the_content_comments_box' ) );
+            }
+        }
         //end Facebook fix
     }
 

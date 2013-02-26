@@ -234,7 +234,7 @@ if (strlen($ac_api_key) > 0) {
     collaborate with them all by replying on your site!</span></p>
 
     <p><input type="checkbox" name="ac_reset" value="Y">
-        Reset all AtContent settings. Settings above wil be applied to all publications.</p>
+        Reset all AtContent settings. Settings above will be applied to all publications.</p>
 
     <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
