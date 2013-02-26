@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-There's no better feeling in the world than a warm pizza box on your lap.
+Every saint has a past and every sinner has a future.
 
-Kevin James 
+Oscar Wilde 
 
 == Examples ==
 
