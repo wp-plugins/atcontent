@@ -1,14 +1,14 @@
 <?php
     /*
-    Plugin Name: AtContent Plugin
+    Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: AtContent Plugin
-    Version: 1.7.24
+    Description: Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
+    Version: 1.7.25
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.24" );
+    define( 'AC_VERSION', "1.7.25" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -27,6 +27,7 @@
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
+    add_action( 'admin_head', 'atcontent_admin_head');
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
@@ -567,5 +568,22 @@ END;
         remove_filter('the_content', 'facebook_the_content_recommendations_bar');
         remove_filter('the_content', 'the_content_comments_box');
         //end Facebook fix
+    }
+
+    function atcontent_admin_head(){
+        $userid = wp_get_current_user()->ID;
+        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        $connect_url = admin_url("admin.php?page=atcontent/settings.php");
+        $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+        if (strlen($ac_api_key) == 0) {
+        ?>
+<script type="text/javascript">
+$j = jQuery;
+$j().ready(function(){
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> To activate AtContent features, please, <a href="<?php echo $connect_url; ?>">connect</a> your blog to AtContent</div>');
+});
+</script>
+<?php
+        }
     }
 ?>
