@@ -13,11 +13,6 @@
     })();
 </script>
 <?php
-    try {
-ini_set("display_errors", "On");
-error_reporting(E_ALL);
-    } catch (Exception $e) {
-    }
          $userid = wp_get_current_user()->ID;
          $hidden_field_name = 'ac_submit_hidden';
          $form_message = '';
