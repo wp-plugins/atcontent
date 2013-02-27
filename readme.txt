@@ -65,7 +65,9 @@ Mark Twain
 
 == Installation ==
 
-Upload the AtContent plugin to your blog, Activate it, connect blog to AtContent and import your posts!
+1) After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings [Screenshot](http://i.imgur.com/3euuvNn.png). 
+2) If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook" [Screenshot](http://i.imgur.com/Xnz3Ux8.png).  
+3) After account creation you can import all your posts to AtContent to get free backlinks and cloud backup. For this just click "Import" button on plugin settings page [Screenshot](http://i.imgur.com/wmOFHgi.png).
 
 1, 2, 3: You're done!
 
@@ -75,7 +77,7 @@ Upload the AtContent plugin to your blog, Activate it, connect blog to AtContent
 = I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
 
 AtContent settings are different for each user in WordPress blog. If you have two different users in your blog you should setup API Key for each user separately. And posts from each author will be in different AtContent accounts.
-If you have "guests" publications on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
+If you have "guest" publications on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
 
 == Screenshots ==
 
@@ -89,20 +91,20 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 = 1.7.27 =
 
-* EmbedPlus plugin collaboration fixes
+* EmbedPlus plugin interacton fixes
 
 = 1.7.26 =
 
-* Facebook plugin collaboration fixes
+* Facebook plugin interaction fixes
 
 = 1.7.18 =
 
-* Sociable plugin collaboration fixes
+* Sociable plugin interaction fixes
 
 = 1.7.8 =
 
-* Change defaults for list of publications
-* Change behaviour for list of publications
+* Changed defaults for list of publications
+* Changed behaviour for list of publications
 
 = 1.7.6 =
 
@@ -110,7 +112,7 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 = 1.7.0 = 
 
-* Paid and donate types of publications were introduced
+* Paid and donatable publications introduced
 
 = 1.5.1 =
 
@@ -122,11 +124,11 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 = 1.4.0 =
 
-* AtContent comments disable option
+* The option to disable AtContent comments.
 
 = 1.3.9 =
 
-* Other plugin influence fix
+* Other plugin affects fixed
 
 = 1.3.3 =
 
@@ -138,7 +140,7 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 = 1.2.4 =
 
-* Excert fixed
+* Excerts fixed
 
 = 1.2.1 =
 
@@ -154,11 +156,11 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 = 1.1.1 =
 
-* Comment imports are available!
+* Comment import is available!
 
 = 1.0.10 =
 
-* Interface improvement
+* Interface improvements
 
 = 1.0.2 =
 
@@ -170,5 +172,5 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Upgrade notice ==
 
-Now available paid and donate types of publication!
+Paid and donatable publications now available!
 Now we work with sociable correctly.
