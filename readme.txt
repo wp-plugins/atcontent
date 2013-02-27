@@ -79,8 +79,11 @@ If you have "guests" publications on your blog, you can not use AtContent plugin
 
 == Screenshots ==
 
-1. AtContent settings page
-2. Plugin panel example
+1. AtContent settings page. The arrow shows the first step: connection with your AtContent account.
+2. Plugin panel example. The button importing posts to AtContent is highlighted.
+3. AtContent publication wrapped in a widget. After importing all your posts must have the highlighted panel at the bottom.
+4. Sample of a paid repost. It is needed to pay the article author for reposting his work.
+5. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
 == Changelog ==
 
