@@ -66,7 +66,7 @@ Mark Twain
 == Installation ==
 
 1. After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings. [Screenshot](http://i.imgur.com/3euuvNn.png). 
-2. If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook". [Screenshot].(http://i.imgur.com/Xnz3Ux8.png).  
+2. If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook". [Screenshot](http://i.imgur.com/Xnz3Ux8.png).  
 3. After account creation you can import all your posts to AtContent to get free backlinks and cloud backup. For this just click "Import" button on plugin settings page. [Screenshot](http://i.imgur.com/wmOFHgi.png).
 
 **1, 2, 3: You're done!**
