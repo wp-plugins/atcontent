@@ -271,7 +271,7 @@ if (strlen($ac_api_key) > 0) {
     <!--<p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
     Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>-->
     <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-    Turn off plugin features on your main page (don't worry, all features are working good for the articles pages, check it out)</p>
+    Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
     <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
@@ -283,8 +283,8 @@ if (strlen($ac_api_key) > 0) {
 </div>
 </form>
 <br><br><br>
-<p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
-<p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+<p>For feedback please <a href="http://atcontent.com/Support/">contact us</a>.</p>
+<p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
 
 <?php 
 }

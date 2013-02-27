@@ -27,27 +27,43 @@ if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 
 }
 if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
     isset( $_POST[ "ac_reset_posts_processing" ] ) ) {
-         $wp_query_args = array(
-                'post_author' => $userid,
-                'post_status' => array('publish'),
-                'nopaging' => true
-                );
-                $posts_query = new WP_Query( $wp_query_args );
-            remove_filter( 'the_content', 'atcontent_the_content', 1 );
-            remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+          $posts = $wpdb->get_results( 
+	            "
+	            SELECT ID, post_title, post_author
+	            FROM {$wpdb->posts}
+	            WHERE post_status = 'publish' 
+		            AND post_author = {$userid} AND post_type = 'post'
+	            "
+            );
 
-            $posts_id = array();
-            $posts_title = array();
-
-            while( $posts_query->have_posts() ):
-	            $posts_query->next_post();
-                if ($posts_query->post->post_author == $userid) {
+            foreach ( $posts as $post ) 
+            {
+                if ($post->post_author == $userid) {
                     $ac_postid = get_post_meta($post->ID, "ac_postid", true);
                     $ac_is_process = ($ac_postid == "") ? "" : "1";
-                    update_post_meta( $posts_query->post->ID, "ac_is_process", $ac_is_process );
+                    update_post_meta( $post->ID, "ac_is_process", $ac_is_process );
                 }
-            endwhile;
+            }
             $form_message .= "Post processing settings are reseted.";
+    }
+if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+    isset( $_POST[ "ac_turn_off_pages" ] ) ) {
+         $posts = $wpdb->get_results( 
+	            "
+	            SELECT ID, post_author
+	            FROM {$wpdb->posts}
+	            WHERE post_status = 'publish' 
+		            AND post_author = {$userid} AND post_type = 'page'
+	            "
+            );
+
+            foreach ( $posts as $post ) 
+            {
+                if ($post->post_author == $userid) {
+                    update_post_meta( $post->ID, "ac_is_process", "2" );
+                }
+            }
+            $form_message .= "AtContent is turned off for pages.";
     }
 ?>
 <div class="icon32" id="icon-tools"><br></div><h2>Known Plugins List</h2>
@@ -140,7 +156,16 @@ if (strlen($ac_api_key) > 0) {
     </span>
 </div>
 </form>
-
+<form action="" method="POST">
+    <div class="wrap">
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <input type="hidden" name="ac_turn_off_pages" value="Y">
+    <span class="submit">
+        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Turn off AtContent for pages') ?>" />
+    </span>
+</div>
+</form>
+<br><br>
 <p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
 <p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
 
