@@ -149,24 +149,20 @@ END;
          }
          echo $form_message_block;
 ?>
-<form action="" method="POST">
+
 <div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Settings</h2>
-<div class="tool-box">
-    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">    
+<div class="icon32" id="icon-tools"><br></div><h2>AtContent Dashboard</h2>
+<div class="tool-box"> 
 <?php
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
              ?>
-<p style="width: 640px;">Why Over 3000 sites have chosen AtContent plugin? Because it’s the easiest and fastest way to reach new readership, increase search ranking, protect and monetize your content!</p>
+<p style="width: 640px;">Over 5000 sites have chosen AtContent plugin, because it’s the easiest way to reach new readership & increase search ranking, protect, monetize and control your content across the Internet!</p>
 <p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
 <p id="ac_platform_description" style="display: none;width: 640px;">
-AtContent is a digital content platform which is actually brands content by your name, provide new readership, 
-    backlinks for search ranking and many other valuable features. AtContent plugin is a part of AtContent platform on your site. 
-    Our professional team working on it for 3 years already. We are US company and based in Silicon Valley and use cloud technologies. 
-    So, be sure it's safety.<br><br>
-    Watch the video how AtContent plugin works:<br>
-    <iframe width="640" height="360" src="http://www.youtube.com/embed/Ex8EKJOjYJI" frameborder="0" allowfullscreen></iframe>
+AtContent platform brands content by your name, provide new readership, backlinks for search ranking and many other valuable features. 
+AtContent plugin is a part of AtContent platform on your site.<br>
+You can find more about AtContent on <a href="http://atcontent.com">www.atcontent.com</a>
 </p>
 <script>
     function AtContentPlatform() {
@@ -184,19 +180,20 @@ AtContent is a digital content platform which is actually brands content by your
         }
     })(jQuery);
 </script>
+    <br><br>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/1U4zq5qhRmk?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
 <?php
          }
 ?>
 </div>
 </div>
-</form>
 
 <?php 
 if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
 <div class="wrap">
-<p>To activate plugin for existing posts, brand it all and get backlinks — click Import. You also can choose additional options.</p>
+<p>To brand existing posts, get backlinks and additional readership from AtContent — click Import. You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
@@ -222,16 +219,14 @@ if (strlen($ac_api_key) > 0) {
     
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
-    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for all posts</p>
-    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for all posts</p>
-    Cost for paid repost, $<br>
-    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"><br>
-    * If you have professional, popular blog, we recommend you to set $20 price for repost.<br>
+    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for imported posts</p>
+    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for imported posts.
+    Price is, $
+    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"></p>
     <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Import post comments into AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
-    <span id="whyCool" style="display: none;">* We highly recomend you to import comments into AtContent plugin and disable WordPress comments,<br>
-    because the comments people leave on your posts appear on every site where posts are reposted.<br>
-    Users on different sites will discuss your content in the comment section on their site and you will <br>
-    collaborate with them all by replying on your site!</span></p>
+    <span id="whyCool" style="display: none;">* People will be able to see each other comments from different sites and<br> 
+        even answer to each other from different sites!<br>
+        This way you engage your users and get more comments!</span></p>
 
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
@@ -287,7 +282,7 @@ if (strlen($ac_api_key) > 0) {
 </div>
 </div>
 </form>
-
+<br><br><br>
 <p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
 <p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
 
