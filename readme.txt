@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A person who won't read has no advantage over one who can't read.
+Do your duty in all things. You cannot do more, you should never wish to do less.
 
-Mark Twain 
+Robert E. Lee 
 
 == Examples ==
 
