@@ -13,7 +13,7 @@ Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach ne
 == Description ==
 
 ### Reach new readership and increase search ranking for your content! ###
-
+* Tip - after the installation connect the plugin to AtContent platform on plugin settings page.
 * [Diagram](http://i.imgur.com/CCIRdX4.png)
 * With AtContent plugin you get an unique backlink from AtContent for every article on your site, increasing your site search ranking. You also get up to 20% - 70% new readers from AtContent, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and attract new readers. This boosts your search ranking and readership faster than ever, and it’s free!  
 
@@ -45,7 +45,7 @@ With AtContent plugin you take a step in the future of the digital content world
 
 * After the installation click “Import” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
 
-We are now in a new era of content content! Joining AtContent costs you nothing – the plugin is free. Get started today! You lose nothing and gain more readers and income. 
+We are now in a new era of content! Joining AtContent costs you nothing – the plugin is free. You gain more traffic, brand your content and control it across the web! Get started today!
 
 When you have several blogs and are interested in our multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
 
