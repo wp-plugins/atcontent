@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Do your duty in all things. You cannot do more, you should never wish to do less.
+They say marriages are made in Heaven. But so is thunder and lightning.
 
-Robert E. Lee 
+Clint Eastwood 
 
 == Examples ==
 
