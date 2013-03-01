@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Always bear in mind that your own resolution to succeed is more important than any other.
+Always end the name of your child with a vowel, so that when you yell the name will carry.
 
-Abraham Lincoln 
+Bill Cosby 
 
 == Examples ==
 
