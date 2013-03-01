@@ -1,4 +1,4 @@
-=== AtContent. It's free! ===
+﻿=== AtContent. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-plagiarism, anti-spam, api, archive, AtContent, audio, authentication, author, automatic, backlinks, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, content, counter, CSS, custom, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, monetization, monetize, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, paid repost, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plagiarism, plugin, plugins, Post, posts, profile, protection, publishing, random, Reddit, redirect, register, registration, related, repost, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social distribution, social repost, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, type, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, everything, profit, crazy russians, justin bieber, moscow, vodka, bears, sex
@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-They say marriages are made in Heaven. But so is thunder and lightning.
+Always bear in mind that your own resolution to succeed is more important than any other.
 
-Clint Eastwood 
+Abraham Lincoln 
 
 == Examples ==
 
