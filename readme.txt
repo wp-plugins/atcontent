@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-If two wrongs don't make a right, try three.
+The way is not in the sky. The way is in the heart.
 
-Laurence J. Peter 
+Buddha 
 
 == Examples ==
 
