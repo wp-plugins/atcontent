@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Always end the name of your child with a vowel, so that when you yell the name will carry.
+If two wrongs don't make a right, try three.
 
-Bill Cosby 
+Laurence J. Peter 
 
 == Examples ==
 
