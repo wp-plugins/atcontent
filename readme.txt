@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-The way is not in the sky. The way is in the heart.
+The great artist is a slave to his ideals.
 
-Buddha 
+Christian Nestell Bovee
 
 == Examples ==
 
