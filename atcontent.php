@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 1.7.30
+    Version: 1.7.31
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.30" );
+    define( 'AC_VERSION', "1.7.31" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -580,6 +580,13 @@ END;
             add_shortcode("embedplusvideo", "EmbedPlusOfficialPlugin::embedplusvideo_shortcode");
         }
         //end EmbedPlus fix
+
+        //linkwithin
+        try {
+            remove_filter( 'the_excerpt', 'linkwithin_display_excerpt' );
+            remove_filter( 'the_content', 'linkwithin_add_hook' );
+        } catch (Exception $e) { }
+        //end linkwithin
     }
 
     function atcontent_admin_head(){
