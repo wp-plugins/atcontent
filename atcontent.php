@@ -2,13 +2,13 @@
     /*
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 1.7.29
+    Description: Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
+    Version: 1.7.30
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.29" );
+    define( 'AC_VERSION', "1.7.30" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -518,7 +518,7 @@ END;
         exit;
     }
 
-    function atcontent_comment_post($comment_id, $status) {
+    function atcontent_comment_post($comment_id, $status = 1) {
         $comment = get_comment( $comment_id );
         if ( $comment != NULL ) {
             atcontent_process_comments( $comment->comment_post_ID );
