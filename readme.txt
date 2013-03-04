@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-The great artist is a slave to his ideals.
+I used to sell furniture for a living. The trouble was, it was my own.
 
-Christian Nestell Bovee
+Les Dawson 
 
 == Examples ==
 
