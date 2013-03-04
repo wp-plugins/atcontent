@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-I used to sell furniture for a living. The trouble was, it was my own.
+True friends stab you in the front.
 
-Les Dawson 
+Oscar Wilde 
 
 == Examples ==
 
