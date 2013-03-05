@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-True friends stab you in the front.
+Self-preservation is the first law of nature.
 
-Oscar Wilde 
+Samuel Butler
 
 == Examples ==
 
