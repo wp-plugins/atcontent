@@ -1,4 +1,4 @@
-﻿=== AtContent beta. It's free! ===
+=== AtContent beta. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: admin, administration, affiliate, analytics,anti-plagiarism, api, archive, AtContent, audio, authentication, author, automatic, backlinks, blog, bookmark, bookmarking, bookmarks, buddypress,  categories, category, code, comment, comments, community, contact, content, counter, CSS, custom, dashboard, database, e-commerce, ecommerce, edit, editor, email, embed, feed, feeds, feedback, form, free, gallery, google, html, image, images, integration, javascript, link, linkedin, links, list, login, mail, manage, media, monetization, monetize, mp3,multisite, music, network, News, notification, paid repost, paypal, photo, photos, picture, pictures, plagiarism,plugin, plugins, Post, posts, profile, profit, protection, publishing, redirect, register, registration, repost,  search, security, seo, Share, sharing, shop, social, social distribution, social repost, statistics, stats, style, tracking, tweet, twitter, url, user, users, video, widget, widgets,wordpress, wpmu, yahoo, youtube, bears, vodka, garmoshka, moscow, crazy russians
@@ -174,4 +174,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 Paid and donatable publications now available!
 Now we work with sociable correctly.
-  
+   
