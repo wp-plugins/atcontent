@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Self-preservation is the first law of nature.
+Love is an energy which exists of itself. It is its own value.
 
-Samuel Butler
+Thornton Wilder
 
 == Examples ==
 
