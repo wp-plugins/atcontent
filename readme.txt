@@ -1,4 +1,4 @@
-=== AtContent beta. It's free! ===
+﻿=== AtContent beta. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: admin, administration, affiliate, analytics,anti-plagiarism, api, archive, AtContent, audio, authentication, author, automatic, backlinks, blog, bookmark, bookmarking, bookmarks, buddypress,  categories, category, code, comment, comments, community, contact, content, counter, CSS, custom, dashboard, database, e-commerce, ecommerce, edit, editor, email, embed, feed, feeds, feedback, form, free, gallery, google, html, image, images, integration, javascript, link, linkedin, links, list, login, mail, manage, media, monetization, monetize, mp3,multisite, music, network, News, notification, paid repost, paypal, photo, photos, picture, pictures, plagiarism,plugin, plugins, Post, posts, profile, profit, protection, publishing, redirect, register, registration, repost,  search, security, seo, Share, sharing, shop, social, social distribution, social repost, statistics, stats, style, tracking, tweet, twitter, url, user, users, video, widget, widgets,wordpress, wpmu, yahoo, youtube, bears, vodka, garmoshka, moscow, crazy russians, AJAX, bookmarks menu, buffer, del.icio.us, Digg, Diigo,  facebook like, facebook, facebook recommend, facebook send, google, google +1, google analytics, google bookmarks, Google Gmail, Google Notebook, google plus, google translate, Hacker News, Hubspot, hyves, Identi.ca, instapaper, linkedin, linkwithin, mail, mister-wong, myspace, netlog, nrelate, orkut, outbrain, pinboard, pinterest, plurk, posting, print, PrintFriendly, readitlater, recommendations, Reddit, Related Content, related posts, saving, Share, share and enjoy, share and follow, share button, sharebar,  sharing, sharing is caring, sharing is sexy, social, social bookmarking, social media, social share, stats, stumbleupon, su.pr, Techmeme, thumbnails, tinyurl, translate, tumblr, tweet button, Twine, twitter, twitter button, url shortener, WeHeartIt, wish list, wpmu, yahoo, yahoo messenger, yammer, yandex, shortcode, sidebar,  page,  gallery, email, syndication
@@ -51,9 +51,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Love is an energy which exists of itself. It is its own value.
+A successful man is one who can lay a firm foundation with the bricks others have thrown at him.
 
-Thornton Wilder
+David Brinkley
 
 == Examples ==
 
