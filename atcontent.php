@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 1.7.32
+    Version: 1.7.33
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.32" );
+    define( 'AC_VERSION', "1.7.33" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -385,7 +385,7 @@ END;
 
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        if ( current_user_can( 'edit_posts' ) && strlen($ac_api_key) > 0 ) {
+        if ( current_user_can( 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
            
             atcontent_coexistense_fixes();
 
@@ -403,7 +403,7 @@ END;
             $ac_type = get_post_meta( $postID, "ac_type", true );
             $ac_paid_portion = get_post_meta( $postID, "ac_paid_portion", true );
 
-            if ($ac_type == "") {
+            if ( strlen( $ac_type ) == 0 ) {
                 if ($ac_is_paidrepost == "1") { 
                     $ac_type = "paidrepost";
                 } else {
@@ -419,7 +419,7 @@ END;
                 $ac_action = "skiped";
             } else {
                 $comments_json = "";
-                if ($ac_is_import_comments == "1") {
+                if ( $ac_is_import_comments == "1" ) {
                     $comments = get_comments( array(
                         'post_id' => $post->ID,
                         'order' => 'ASC',
@@ -430,7 +430,7 @@ END;
                         $comments_json .= json_encode($comments);
                     }
                 }
-	            if ( strlen($ac_postid) == 0 ) {
+	            if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion ), $ac_type,
                         get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
