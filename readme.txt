@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A successful man is one who can lay a firm foundation with the bricks others have thrown at him.
+We don't see things as they are, we see them as we are.
 
-David Brinkley
+Anais Nin
 
 == Examples ==
 
