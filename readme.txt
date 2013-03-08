@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-We don't see things as they are, we see them as we are.
+Love is the wisdom of the fool and the folly of the wise.
 
-Anais Nin
+Samuel Johnson
 
 == Examples ==
 
