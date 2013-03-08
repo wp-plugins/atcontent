@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Love is the wisdom of the fool and the folly of the wise.
+I did not have three thousand pairs of shoes, I had one thousand and sixty.
 
-Samuel Johnson
+Imelda Marcos
 
 == Examples ==
 
