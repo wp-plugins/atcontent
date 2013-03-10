@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-Faith is taking the first step even when you don't see the whole staircase.
+A photograph is usually looked at - seldom looked into.
 
-Martin Luther King, Jr.
+Ansel Adams
 
 == Examples ==
 
