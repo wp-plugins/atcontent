@@ -52,9 +52,9 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-A photograph is usually looked at - seldom looked into.
+In life, as in art, the beautiful moves in curves.
 
-Ansel Adams
+Edward G. Bulwer-Lytton
 
 == Examples ==
 
