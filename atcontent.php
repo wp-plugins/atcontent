@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 1.7.33
+    Version: 1.7.34
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "1.7.33" );
+    define( 'AC_VERSION', "1.7.34" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -72,8 +72,9 @@
                 }
                 if (strlen($ac_postid) == 0) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion), $ac_type,
-                        get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
+                            apply_filters( "the_content",  $post->post_content ) , 
+                            apply_filters( "the_content",  $ac_paid_portion ),  
+                            $ac_type, get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -83,7 +84,8 @@
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
+                        apply_filters( "the_content", $post->post_content  ) , 
+                        apply_filters( "the_content",  $ac_paid_portion ), 
                         $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json
                             );
@@ -432,8 +434,9 @@ END;
                 }
 	            if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ), apply_filters( "the_content", $ac_paid_portion ), $ac_type,
-                        get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
+                            apply_filters( "the_content", $post->post_content ), 
+                            apply_filters( "the_content", $ac_paid_portion ), 
+                            $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -450,7 +453,8 @@ END;
                     }
                 } else {
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ) , apply_filters( "the_content", $ac_paid_portion ) ,
+                        apply_filters( "the_content", $post->post_content ) , 
+                        apply_filters( "the_content", $ac_paid_portion ) , 
                         $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
@@ -580,6 +584,11 @@ END;
             add_shortcode("embedplusvideo", "EmbedPlusOfficialPlugin::embedplusvideo_shortcode");
         }
         //end EmbedPlus fix
+
+        if ( class_exists( 'TablePress' ) ) {
+            $GLOBALS['vadim_tablepress_frontend_controller'] = TablePress::load_controller('frontend');
+            $GLOBALS['vadim_tablepress_frontend_controller']->init_shortcodes();
+        }
 
         //linkwithin
         if ( function_exists( "linkwithin_add_hook" ) ) {
