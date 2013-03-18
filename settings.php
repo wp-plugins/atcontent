@@ -179,7 +179,7 @@ if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
 <div class="wrap" style="width: 640px; float: left;">
-<p>To brand existing posts, get backlinks and additional readership from AtContent — click Import. You also can choose additional options.</p>
+<p>To brand existing posts, get backlinks and additional readership from AtContent — click Import.<br>You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
@@ -220,10 +220,10 @@ if (strlen($ac_api_key) > 0) {
     <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
     </span>
-</div>
+</div><br><br><br>
 </div>
 <div style="float:left;">
-    <a target="_blank" href="http://atcontent.com/CopyLocator/Create"><img src="<?php echo plugins_url( 'assets/locator1.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
+    <a target="_blank" href="http://atcontent.com/CopyLocator/"><img src="<?php echo plugins_url( 'assets/locator1.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>
 <div style="clear:both;">&nbsp;</div>
 </form>
@@ -249,7 +249,7 @@ if (strlen($ac_api_key) > 0) {
     
 
 ?>
-<br><br><br>
+<br>
 <form action="" method="POST">
 <div class="wrap">
 <div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
