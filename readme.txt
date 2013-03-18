@@ -4,12 +4,12 @@ Donate link: https://atcontent.com/
 Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication
 
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Why 3000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking! Features and demos below.
+Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking! Features and demos below.
 
 == Description ==
 
@@ -89,6 +89,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 5. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
 == Changelog ==
+
+= 2.0.0 =
+
+* Meet CopyLocator
 
 = 1.7.27 =
 

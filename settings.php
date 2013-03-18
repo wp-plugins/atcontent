@@ -178,7 +178,7 @@ You can find more about AtContent on <a href="http://atcontent.com">www.atconten
 if (strlen($ac_api_key) > 0) {
 ?>
 <form action="" method="POST" name="import-form">
-<div class="wrap">
+<div class="wrap" style="width: 640px; float: left;">
 <p>To brand existing posts, get backlinks and additional readership from AtContent — click Import. You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
@@ -222,6 +222,10 @@ if (strlen($ac_api_key) > 0) {
     </span>
 </div>
 </div>
+<div style="float:left;">
+    <a target="_blank" href="http://atcontent.com/CopyLocator/Create"><img src="<?php echo plugins_url( 'assets/locator1.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
+</div>
+<div style="clear:both;">&nbsp;</div>
 </form>
 <?php
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
