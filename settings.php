@@ -137,7 +137,20 @@ END;
 ?>
 
 <div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Dashboard</h2>
+    <div style="float:right">
+<script type="text/javascript">(function() {
+ if (window.pluso && typeof window.pluso.start == "function") return;
+ var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+ s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+ s.src = d.location.protocol  + '//share.pluso.ru/pluso-like.js';
+ var h=d[g]('head')[0] || d[g]('body')[0];
+ h.appendChild(s);
+})();</script>
+      <div class="pluso" data-options="medium,square,line,horizontal,counter,theme=04" data-services="facebook,twitter,linkedin,google,digg,delicious,springpad,stumbleupon,email" data-background="transparent" data-url="http://wordpress.org/extend/plugins/atcontent/" data-image="http://atcontent.com/Images/atcontent-logo-90x90-transparent.png" data-title="WordPress AtContent Plugin"></div>
+        <br><b>Share with your friends!</b>
+    </div>
+<div style="white-space: nowrap;float: left;"><div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2></div>
+<div style="clear: both;"> </div>
 <div class="tool-box"> 
 <?php
          if ( strlen($ac_api_key) == 0 ) {
