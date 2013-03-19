@@ -55,14 +55,16 @@
 <div class="icon32" id="icon-tools"><br></div><h2>AtContent CopyLocator</h2>
 <div class="tool-box">
     <p class="b-big-text">Find all illegal copies of your content across the Internet</p>
-    <?php if ( $imported_count == 0 ) { ?>
+    <?php if ( $imported_count == 0 ) { 
+        $link = "http://atcontent.com/CopyLocator/"; ?>
         <?php if ( $posts_count == 0 ) {  ?>
             <p>You don't have publications yet. Write something first!</p>
         <?php } else { ?>
             <p>You have <?php echo $posts_count ?> publications, but you should import it first. 
                 Follow <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">AtContent Dashboard page</a> and click Import</p>
         <?php } ?>
-    <?php } else { ?>
+    <?php } else { 
+        $link = "http://atcontent.com/CopyLocator/Create/"; ?>
         <?php if ( $imported_count < $posts_count ) { ?>
             <p>You have <?php echo $imported_count ?> publications. 
                 And <?php echo $posts_count - $imported_count ?> more available for <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">import</a>.</p>
@@ -70,6 +72,6 @@
             <p>You have <?php echo $imported_count ?> publications.</p>
         <?php } ?>
     <?php }?>
-            <p><a href="http://atcontent.com/CopyLocator/Create/" class="likebutton b_big b_orange">Find illegal copies</a></p>
+            <p><a href="<?php echo $link; ?>" class="likebutton b_big b_orange">Find illegal copies</a></p>
 </div>
 </div>
