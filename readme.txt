@@ -90,6 +90,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.0.3 =
+
+* FeedWeb compatibility
+
 = 2.0.0 =
 
 * Meet CopyLocator

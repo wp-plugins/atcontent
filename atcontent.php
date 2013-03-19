@@ -587,10 +587,12 @@ END;
         }
         //end EmbedPlus fix
 
+        //TablePress fix
         if ( class_exists( 'TablePress' ) ) {
             $GLOBALS['vadim_tablepress_frontend_controller'] = TablePress::load_controller('frontend');
             $GLOBALS['vadim_tablepress_frontend_controller']->init_shortcodes();
         }
+        //End TablePress fix
 
         //linkwithin
         if ( function_exists( "linkwithin_add_hook" ) ) {
@@ -598,6 +600,12 @@ END;
             remove_filter( 'the_content', 'linkwithin_add_hook' );
         }
         //end linkwithin
+
+        //Feedweb
+        if ( function_exists( "GetFeedwebOptions" ) ) {
+            remove_filter( 'the_content', 'ContentFilter' );
+        }
+        //end Feedweb fix
     }
 
     function atcontent_admin_head(){
