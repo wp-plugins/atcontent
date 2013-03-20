@@ -1,4 +1,4 @@
-=== AtContent. It's free! ===
+﻿=== AtContent. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication
@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking! Features and demos below.
+Why over 10000 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! Features and demos below.
 
 == Description ==
 
@@ -21,6 +21,7 @@ Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach ne
 ###Brand your content and control it across the Internet! ###
 * [Demo example 1](http://test.ariser.ru/Stat/graph.html) [Demo example 2](http://test.ariser.ru/Stat/)
 * With AtContent plugin you brand content by your name. If somebody reposts your content to other site - it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
+* Find all illegal copies of your content across the web with new AtContent Copylocator! This optional, but useful feature allows you to check up to 180 posts for just $4.49
 
 With AtContent plugin you take a step in the future of the digital content world. With AtContent you can do more! Try it and share with friends.
 
@@ -58,7 +59,7 @@ Edward G. Bulwer-Lytton
 
 == Examples ==
 
-* **[Anti-plagiarism Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
+* **[Content Protection Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
 * **[Track & Statistics Demo example 1](http://test.ariser.ru/Stat/graph.html)**
 * **[Track & Statistics Demo example 2](http://test.ariser.ru/Stat/)**
 * **[Premium Content Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)**
