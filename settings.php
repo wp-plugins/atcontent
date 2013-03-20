@@ -236,7 +236,7 @@ if (strlen($ac_api_key) > 0) {
 </div><br><br><br>
 </div>
 <div style="float:left;">
-    <a target="_blank" href="http://atcontent.com/CopyLocator/"><img src="<?php echo plugins_url( 'assets/locator1.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
+    <a target="_blank" href="http://atcontent.com/CopyLocator/"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>
 <div style="clear:both;">&nbsp;</div>
 </form>
