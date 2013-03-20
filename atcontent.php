@@ -2,13 +2,13 @@
     /*
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: Why 5000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.0.5
+    Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
+    Version: 2.0.6
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.0.5" );
+    define( 'AC_VERSION', "2.0.6" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");

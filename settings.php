@@ -75,17 +75,34 @@
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= 'Import started.<div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importErrors"></div>';
+                $form_message .= '<div id="importStatus">Import started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importDetails"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
     var postTitles = ['{$postTitles}'];
     var retryIDs = [];
+    var postInfo = [];
+    for (var i in postIDs) {
+        postInfo[i] = {id: postIDs[i], title: postTitles[i], status: "queued"};
+    }
     var imported = 0;
     var errors = 0;
-    function doRetry(i) {
-        jQuery("#error" + i).remove();
-        doImport(retryIDs[i]); 
+    function getStatus() {
+        var r = {created:0, updated:0, skiped:0, error:0, queued:0};
+        for (var i in postInfo) {
+            if (isNaN(i)) continue;
+            if (postInfo[i].status == "created") r.created++;
+            else if (postInfo[i].status == "updated") r.updated++; 
+            else if (postInfo[i].status == "skiped") r.skiped++; 
+            else if (postInfo[i].status == "error") r.error++; 
+            else r.queued++; 
+        }
+        return r;
+    }
+    function doRetry() {
+        for (var i in postInfo) {
+            if (postInfo[i].status == "error") doImport(postInfo[i].id);
+        }
     }
     function doImport(i) {
         jQuery.ajax({url: '{$form_action}', 
@@ -98,26 +115,65 @@
                                 comments: {$importComments}},
                          dataType: "json",
                          success: function(d){
-                                        if (d.IsOK) {
-                                            imported++;
-                                            jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
-                                        } else {
-                                            errors++;
-                                            retryIDs[errors] = i;
-                                            jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + 
-                                                ");\">Retry</a>. WordPress hosting error for \"" + 
-                                                postTitles[i] + "\" (" + d + ")</p>")
-                                        }
-                                    },
+                                postInfo[i] = postInfo[i] || {};
+                                if (d.IsOK) {
+                                    postInfo[i].title = postTitles[i];
+                                    postInfo[i].status = d.AC_action;
+                                    imported++;
+                                    jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
+                                } else {
+                                    errors++;
+                                    retryIDs[errors] = i;
+                                    postInfo[i].status = "error";
+                                    postInfo[i].error =  "WordPress hosting error for \"" + postTitles[i] + "\" (" + d + ")";
+                                    //jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + 
+                                    //    ");\">Retry</a>. WordPress hosting error for \"" + 
+                                    //    postTitles[i] + "\" (" + d + ")</p>")
+                                }
+                                if (getStatus().queued == 0) doResult();
+                            },
                          error: function(d, s, e) {
-                                if (e == 'timeout') { doImport(i); return; }
-                                var err = "WordPress hosting error";
-                                if (e.length > 0) err += ": " + e;
-                                errors++;
-                                retryIDs[errors] = i;
-                                jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + err + " for \"" + postTitles[i] + "\"</p>");
+                                 postInfo[i] = postInfo[i] || {};
+                                 if (e == 'timeout') { doImport(i); return; }
+                                 var err = "WordPress hosting error";
+                                 if (e.length > 0) err += ": " + e;
+                                 errors++;
+                                 retryIDs[errors] = i;
+                                 postInfo[i].status = "error";
+                                 postInfo[i].error = err + " for \"" + postTitles[i] + "\"";
+                                 if (getStatus().queued == 0) doResult();
+                                 ///jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + err + " for \"" + postTitles[i] + "\"</p>");
                              },
                          });
+    }
+    function doResult(){
+        var j = jQuery,
+            s = getStatus(),
+            h = "";
+            h += (s.created > 0 ? s.created + " posts created<br>" : "");
+            h += (s.updated > 0 ? s.updated + " posts updated<br>" : "");
+            h += (s.skiped > 0 ? s.skiped + " posts skiped<br>" : "");
+            h += (s.error > 0 ? s.error + " posts processed with errors<br>" : "");
+            h += "You got " + (s.created + s.updated) + " backlinks<br>";
+            h += "<a href=\"javascript:getDetails();\">Get details</a>";
+        j("#importResult").html(h);
+        j("#importStatus").html("<b>Import completed.</b>");
+    }
+    function getDetails(){
+         var j = jQuery, h = "";         
+         for (var i in postInfo) {
+             if (isNaN(i)) continue;
+             h += "\"" + postInfo[i].title + "\" ";
+             if (postInfo[i].status == "created") h += "created";
+             if (postInfo[i].status == "updated") h += "updated";
+             if (postInfo[i].status == "skiped") h += "skiped";
+             if (postInfo[i].status == "error") h += "processed with error: " + postInfo[i].error;
+             h += "<br>";
+         }
+         if (getStatus().error > 0) {
+             h += "<a href=\"javascript:doRetry();\">Do retry for posts with errors</a>";
+         }
+         j("#importDetails").html(h);
     }
     jQuery(function(){
         for (var i in postIDs) {
@@ -132,8 +188,9 @@ END;
 <div class="updated settings-error" id="setting-error-settings_updated"> 
 <p><strong>{$form_message}</strong></p></div>
 END;
+            echo $form_message_block; 
          }
-         echo $form_message_block;
+         
 ?>
 
 <div class="wrap">
