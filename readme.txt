@@ -1,7 +1,7 @@
 === AtContent. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication
+Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication, web
 
 Requires at least: 3.3
 Tested up to: 3.5.1
@@ -53,9 +53,10 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-In life, as in art, the beautiful moves in curves.
 
-Edward G. Bulwer-Lytton
+Mastering others is strength. Mastering yourself is true power.
+
+Lao Tzu
 
 == Examples ==
 
