@@ -44,8 +44,9 @@
             plugins_url( 'assets/logo.png', __FILE__ ) );
         add_menu_page( 'CopyLocator', 'CopyLocator', 'publish_posts', 'atcontent/copylocator.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), 6 );
+        add_submenu_page( 'atcontent/settings.php', 'CopyLocator', 'CopyLocator', 'publish_posts', 'atcontent/copylocator.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
-        add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
+        add_submenu_page( 'atcontent/settings.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
         
     }

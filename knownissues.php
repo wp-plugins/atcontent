@@ -53,7 +53,7 @@ if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 
             $form_message .= "AtContent is turned off for pages.";
     }
 ?>
-<div class="icon32" id="icon-tools"><br></div><h2>Known Plugins List</h2>
+<div class="icon32" id="icon-tools"><br></div><h2>Geek Settings</h2>
 <?php 
  if (strlen($form_message) > 0) {
     $form_message_block .= <<<END
@@ -63,7 +63,10 @@ END;
 }
 echo $form_message_block;
   ?>
+
+    <p>Don't use this page if you not a geek.</p>
 <br><br>
+
 <h3>FancyBox for WordPress</h3>
 <p><a href="http://plugins.josepardilla.com/fancybox-for-wordpress/">Visit plugin site</a></p>
 <p>To integrate this plugin with AtContent copy code in textarea into "JavaScript Code for Plugin Init Script" field on AtContent Settings Page.
@@ -118,6 +121,8 @@ if (strlen($ac_api_key) > 0) {
 <div class="wrap">
 <div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
 <br>
+
+
 
 <div class="tool-box">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
