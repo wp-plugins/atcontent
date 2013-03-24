@@ -28,40 +28,7 @@
          }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
-
-    
-            $ac_reset = isset( $_POST['ac_reset'] ) && $_POST['ac_reset'] == "Y";
-            if ( $ac_reset ) $form_message .= "Reset done. ";
-
-            $posts_id = array();
-            $posts_title = array();
-
-            $posts = $wpdb->get_results( 
-	            "
-	            SELECT ID, post_title, post_author
-	            FROM {$wpdb->posts}
-	            WHERE post_status = 'publish' 
-		            AND post_author = {$userid} AND post_type = 'post'
-	            "
-            );
-
-            foreach ( $posts as $post ) 
-            {
-                if ($post->post_author == $userid) {
-                    array_push( $posts_id, $post->ID );
-                    array_push( $posts_title, addcslashes( $post->post_title, "'\\" ) );
-                    if ($ac_reset) {
-                        update_post_meta( $post->ID, "ac_is_process", "2" );
-                        update_post_meta( $post->ID, "ac_cost", "" );
-                        update_post_meta( $post->ID, "ac_paidrepostcost", "" );
-                        update_post_meta( $post->ID, "ac_is_paidrepost", "" );
-                        update_post_meta( $post->ID, "ac_is_copyprotect", "" );
-                        update_post_meta( $post->ID, "ac_is_import_comments", "" );
-                        update_post_meta( $post->ID, "ac_type", "" );
-                    }
-                }	
-            }
-
+            
             $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_copyprotect", $copyProtection);
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
@@ -70,6 +37,46 @@
             update_user_meta($userid, "ac_paidrepostcost", $paidRepostCost);
             $importComments = isset($_POST["ac_comments"]) && $_POST["ac_comments"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_is_import_comments", $importComments);
+
+            $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
+
+            if (!$ac_with_import) {
+                $form_message .= "Defaults saved.";
+            }
+
+            if ($ac_with_import) {
+
+                $ac_reset = isset( $_POST['ac_reset'] ) && $_POST['ac_reset'] == "Y";
+                if ( $ac_reset ) $form_message .= "Reset done. ";
+
+                $posts_id = array();
+                $posts_title = array();
+
+                $posts = $wpdb->get_results( 
+	                "
+	                SELECT ID, post_title, post_author
+	                FROM {$wpdb->posts}
+	                WHERE post_status = 'publish' 
+		                AND post_author = {$userid} AND post_type = 'post'
+	                "
+                );
+
+                foreach ( $posts as $post ) 
+                {
+                    if ($post->post_author == $userid) {
+                        array_push( $posts_id, $post->ID );
+                        array_push( $posts_title, addcslashes( $post->post_title, "'\\" ) );
+                        if ($ac_reset) {
+                            update_post_meta( $post->ID, "ac_is_process", "2" );
+                            update_post_meta( $post->ID, "ac_cost", "" );
+                            update_post_meta( $post->ID, "ac_paidrepostcost", "" );
+                            update_post_meta( $post->ID, "ac_is_paidrepost", "" );
+                            update_post_meta( $post->ID, "ac_is_copyprotect", "" );
+                            update_post_meta( $post->ID, "ac_is_import_comments", "" );
+                            update_post_meta( $post->ID, "ac_type", "" );
+                        }
+                    }	
+                }
 
             
                 $postIDs = join( "','" , $posts_id );
@@ -183,6 +190,7 @@
 </script>
 END;
             }
+         }
          if (strlen($form_message) > 0) {
              $form_message_block .= <<<END
 <div class="updated settings-error" id="setting-error-settings_updated"> 
@@ -193,61 +201,35 @@ END;
          
 ?>
 
+<div class="atcontent_wrap">
+
+<?php if ( strlen( $ac_api_key ) == 0 ) { ?>
+    <?php include("invite.php"); ?>
+    <hr />
+    <br>
+<?php } ?>
 <div class="wrap">
     <div style="float:right">
-<script type="text/javascript">(function() {
- if (window.pluso && typeof window.pluso.start == "function") return;
- var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
- s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
- s.src = d.location.protocol  + '//share.pluso.ru/pluso-like.js';
- var h=d[g]('head')[0] || d[g]('body')[0];
- h.appendChild(s);
-})();</script>
-      <div class="pluso" data-options="medium,square,line,horizontal,counter,theme=04" data-services="facebook,twitter,linkedin,google,digg,delicious,springpad,stumbleupon,email" data-background="transparent" data-url="http://wordpress.org/extend/plugins/atcontent/" data-image="http://atcontent.com/Images/atcontent-logo-90x90-transparent.png" data-title="WordPress AtContent Plugin"></div>
-        <br><b>Share with your friends!</b>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    <a class="addthis_button_facebook"></a>
+    <a class="addthis_button_twitter"></a>
+    <a class="addthis_button_linkedin"></a>
+    <a class="addthis_button_pinterest_share"></a>
+    <a class="addthis_button_google_plusone_share"></a>
+    <a class="addthis_button_stumbleupon"></a> 
+    <a class="addthis_button_digg"></a> 
+    <a class="addthis_button_compact"></a>
+
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
+<!-- AddThis Button END -->
+        <b>Share with your friends!</b>
     </div>
 <div style="white-space: nowrap;float: left;"><div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2></div>
 <div style="clear: both;"> </div>
-<div class="tool-box"> 
-<?php
-         if ( strlen($ac_api_key) == 0 ) {
-             $form_action = admin_url( 'admin-ajax.php' );
-             ?>
-<p style="width: 640px;">Over 5000 sites have chosen AtContent plugin, because it’s the easiest way to reach new readership & increase search ranking, protect, monetize and control your content across the Internet!</p>
-<p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
-<p id="ac_platform_description" style="display: none;width: 640px;">
-AtContent platform brands content by your name, provide new readership, backlinks for search ranking and many other valuable features. 
-AtContent plugin is a part of AtContent platform on your site.<br>
-You can find more about AtContent on <a href="http://atcontent.com">www.atcontent.com</a>
-</p>
-<script>
-    function AtContentPlatform() {
-        jQuery("#ac_platform_description").toggle();
-    }
-</script>
-<div id="ac_connect_result"></div>
-<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" frameborder="0" scrolling="no"></iframe>
-<script type="text/javascript">
-    (function ($) {
-        window.ac_connect_res = function (d) {
-            if (d) window.location.reload();
-            else $("#ac_connect_result").html( 
-                    'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-        }
-    })(jQuery);
-</script>
-    <br><br>
-<iframe width="640" height="360" src="http://www.youtube.com/embed/1U4zq5qhRmk?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-<?php
-         }
-?>
-</div>
 </div>
 
-<?php 
-if (strlen($ac_api_key) > 0) {
-?>
-<form action="" method="POST" name="import-form">
 <div class="wrap" style="width: 640px; float: left;">
 <p>To brand existing posts, get backlinks and additional readership from AtContent — click Import.<br>You also can choose additional options.</p>
     <?php 
@@ -270,11 +252,25 @@ if (strlen($ac_api_key) > 0) {
     function showCool() {
         jQuery("#whyCool").toggle();
     }
+    function importSubmit(withImport) {
+        var j = jQuery;
+        if (withImport == 1) {
+            j("#ac_with_import").val("Y");
+        } else {
+            j("#ac_with_import").val("N");
+        }
+        <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
+            alert('Please, connect with AtContent first');
+        <?php } else { ?>
+            j("#import-form").submit();
+        <?php } ?>
+    }
 </script>
 <div class="tool-box">
-    
+    <form action="" method="POST" name="import-form" id="import-form">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
+    <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
     <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for imported posts</p>
     <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for imported posts.
     Price is, $
@@ -286,17 +282,19 @@ if (strlen($ac_api_key) > 0) {
 
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
-
-    <span class="submit">
-        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Import') ?>" />
-    </span>
+    </form>
+        Do <button onclick="importSubmit(1);" class="button-color-orange"><?php esc_attr_e('Import') ?></button>
+        or just
+        <button onclick="importSubmit(0);" class="button-color-green"><?php esc_attr_e('Save Settings as Defaults') ?></button>
+   
 </div><br><br><br>
 </div>
-<div style="float:left;">
+<div style="float:right;">
+    <br>
     <a target="_blank" href="http://atcontent.com/CopyLocator/"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>
 <div style="clear:both;">&nbsp;</div>
-</form>
+
 <?php
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
     if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
@@ -320,12 +318,22 @@ if (strlen($ac_api_key) > 0) {
 
 ?>
 <br>
-<form action="" method="POST">
+    <script type="text/javascript">
+        function saveAdvanced(){
+            <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
+                alert('Please, connect with AtContent first');
+            <?php } else { ?>
+                jQuery("#form-advanced").submit();
+            <?php } ?>
+        }
+    </script>
+
 <div class="wrap">
-<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 7px;margin-bottom:0;">Advanced Settings</h3>
-<p style="color:#f00;background:#fff;padding:0;margin:0;">You could have displaying problems. Fix it easy by the options below</p>
+<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings</h3>
+<br>
 
 <div class="tool-box">
+    <form action="" method="POST" id="form-advanced">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_advanced_settings" value="Y">
     <!--<p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
@@ -336,19 +344,21 @@ if (strlen($ac_api_key) > 0) {
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
     Turn off line "Share  and repost and get $$$..."</p>
-     <span class="submit">
-        <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
-    </span>
+     </form>
+        <button onclick="saveAdvanced();" class="button-color-green"><?php esc_attr_e('Save Advanced Settings') ?></button>
+    
 </div>
 </div>
-</form>
+
 <br><br><br>
-<p>For feedback please <a href="http://atcontent.com/Support/">contact us</a>.</p>
-<p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+<p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
+    <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
+    <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
+    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
+    <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
+</p>
 
 <?php 
-}
-
 $form_action = admin_url( 'admin-ajax.php' );
 ?>
 <script type="text/javascript">
@@ -357,3 +367,5 @@ $form_action = admin_url( 'admin-ajax.php' );
         }, "json");
     });
 </script>
+
+</div>

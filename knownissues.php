@@ -1,3 +1,4 @@
+<div class="atcontent_wrap">
 <?php 
 $userid = wp_get_current_user()->ID;
 $hidden_field_name = 'ac_submit_hidden';
@@ -183,5 +184,5 @@ $form_action = admin_url( 'admin-ajax.php' );
         }, "json");
     });
 </script>
-
+</div>
 <?php

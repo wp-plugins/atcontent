@@ -3,16 +3,17 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.0.6
+    Version: 2.1.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.0.6" );
+    define( 'AC_VERSION', "2.1.0" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
     require_once("pingback.php"); 
+    add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_content', 'atcontent_the_content_after', 100);
@@ -33,6 +34,11 @@
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
+    function atcontent_admin_init(){
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url('assets/atcontent.css', __FILE__) );
+         wp_enqueue_style( 'atcontentAdminStylesheet' );
+    }
+
     function atcontent_add_tools_menu() {
         add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ) );
@@ -40,6 +46,12 @@
             plugins_url( 'assets/logo.png', __FILE__ ), 6 );
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Known Plugins Issues', 'Known Issues', 'publish_posts', 'atcontent/knownissues.php',  '');
+        add_action( 'admin_print_styles', 'atcontent_admin_styles' );
+        
+    }
+
+    function atcontent_admin_styles(){
+        wp_enqueue_style( 'atcontentAdminStylesheet' );
     }
 
     function atcontent_publish_publication( $post_id ){
@@ -229,6 +241,7 @@ END;
     function atcontent_inner_custom_box($post) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
+          $userid = wp_get_current_user()->ID;
           
           $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
           $ac_is_process_checked = "";
@@ -237,28 +250,40 @@ END;
           }
 
           $ac_postid = get_post_meta($post->ID, "ac_postid", true);
+          $ac_user_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
+          if (strlen($ac_user_copyprotect) == 0) $ac_user_copyprotect = "1";
+          $ac_user_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
+          if (strlen($ac_user_paidrepost) == 0) $ac_user_paidrepost = "0";
+          $ac_user_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
+          if (strlen($ac_user_paidrepostcost) == 0) $ac_user_paidrepostcost = "2.50";
+          $ac_user_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
+          if (strlen($ac_user_is_import_comments) == 0) $ac_user_is_import_comments = "1";
 
           $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
+          if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
           $ac_is_copyprotect_checked = "";
           if ($ac_is_copyprotect == "1") {
               $ac_is_copyprotect_checked = "checked=\"checked\"";
           }          
 
           $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
+          if ( strlen( $ac_is_paidrepost ) == 0 ) $ac_is_paidrepost = $ac_user_paidrepost;
           $ac_is_paidrepost_checked = "";
           if ($ac_is_paidrepost == "1") {
               $ac_is_paidrepost_checked = "checked=\"checked\"";
           }
 
           $ac_is_import_comments = get_post_meta( $post->ID, "ac_is_import_comments", true );
+          if ( strlen( $ac_is_import_comments ) == 0 ) $ac_is_import_comments = $ac_user_is_import_comments;
           $ac_is_import_comments_checked = "";
           if ($ac_is_import_comments == "1") {
               $ac_is_import_comments_checked = "checked=\"checked\"";
           }
 
           $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
+          if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = $ac_user_paidrepostcost; }
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
-          
+
           $ac_cost = get_post_meta($post->ID, "ac_cost", true);
           if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
 

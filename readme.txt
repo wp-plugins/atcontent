@@ -92,6 +92,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.1.0 =
+
+* New look!
+
 = 2.0.3 =
 
 * FeedWeb compatibility

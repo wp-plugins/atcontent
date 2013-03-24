@@ -19,48 +19,39 @@ if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 
 $ac_api_key = get_user_meta($userid, "ac_api_key", true );
 $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
 ?>
-<form action="" method="POST">
-<div class="wrap">
-<div class="icon32" id="icon-tools"><br></div><h2>AtContent Connect Settings</h2>
-<div class="tool-box">
+<div class="atcontent_wrap">
+<form action="" method="POST" id="disconnect-form">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">    
 <?php
          if ( strlen($ac_api_key) == 0 ) {
              $form_action = admin_url( 'admin-ajax.php' );
-             ?>
-<p style="width: 640px;">Over 5000 sites have chosen AtContent plugin, because it’s the easiest way to reach new readership & increase search ranking, protect, monetize and control your content across the Internet!</p>
-<p>To personalize your experience with AtContent plugin connect it to <a href="javascript:AtContentPlatform();">AtContent platform</a>.</p>
-<p id="ac_platform_description" style="display: none;width: 640px;">
-AtContent platform brands content by your name, provide new readership, backlinks for search ranking and many other valuable features. 
-AtContent plugin is a part of AtContent platform on your site.<br>
-You can find more about AtContent on <a href="http://atcontent.com">www.atcontent.com</a>
-</p>
-<script>
-    function AtContentPlatform() {
-        jQuery("#ac_platform_description").toggle();
-    }
-</script>
-<div id="ac_connect_result"></div>
-<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:75px;height:40px;" border="0" scrolling="no"></iframe>
+             include("invite.php");
+             ?> 
 <script type="text/javascript">
     (function ($) {
         window.ac_connect_res = function (d) {
-            if (d) window.location.reload();
-            else $("#ac_connect_result").html( 
+            if (d) window.location = '<?php echo admin_url( 'admin.php?page=atcontent/settings.php' ); ?>';
+            else $("#ac_connect_result").html(
                     'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
     })(jQuery);
 </script>
-    <br><br>
-<iframe width="640" height="360" src="http://www.youtube.com/embed/1U4zq5qhRmk?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
 <?php
          } else {
 ?>
+<div class="wrap">
+<div class="icon32" id="icon-tools"><br></div><h2>AtContent Connect Settings</h2>
+<div class="tool-box">
+    <script type="text/javascript">
+        function disconnect() {
+            jQuery("#disconnect-form").submit();
+        }
+    </script>
 <p>You have connected blog to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><?php echo $ac_pen_name; ?></a>.
 <input type="hidden" name="ac_api_key" value="">
-<span class="submit" style="padding-left: 2em;"><input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Disconnect') ?>" /></span>
+<button onclick="disconnect();" class="button-size-small button-color-green"><?php esc_attr_e('Disconnect') ?></button>
 </p>
-<?php           
+<?php
          }
 ?>
 </div>
@@ -75,3 +66,4 @@ $form_action = admin_url( 'admin-ajax.php' );
         }, "json");
     });
 </script>
+</div>

@@ -1,3 +1,4 @@
+<div class="atcontent_wrap">
 <?php
     $userid = wp_get_current_user()->ID;
     $posts = $wpdb->get_results( 
@@ -20,30 +21,6 @@
 ?>
 <style>
     
-.b-big-text {
-    font-size: 15px;
-}
-    button.button-size-big, .likebutton.b_big {
-    font-size: 25px;
-}
-    button.button-color-orange, .likebutton.b_orange {
-    background: none repeat scroll 0 0 #EE8900;
-    color: #FFFFFF !important;
-}
-    .likebutton {
-    -moz-box-sizing: border-box;
-    cursor: pointer;
-    display: inline-block;
-    font: 16px/2em 'Trebuchet MS',Arial,Helvetica,sans-serif;
-    padding: 0 1em;
-    position: relative;
-    text-decoration: none;
-    text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
-    vertical-align: middle;
-}
-    .likebutton:hover {
-    text-decoration: none;
-}
     button.button-color-orange:hover, .likebutton.b_orange:hover, .qq-upload-button-hover .likebutton.b_orange {
     background: none repeat scroll 0 0 #F5A200;
 }
@@ -73,5 +50,6 @@
         <?php } ?>
     <?php }?>
             <p><a href="<?php echo $link; ?>" class="likebutton b_big b_orange">Find illegal copies</a></p>
+</div>
 </div>
 </div>
