@@ -14,18 +14,6 @@
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
-         if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-              isset( $_POST[ "ac_advanced_settings" ] ) ) {
-             $ac_excerpt_image_remove = (isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y") ? "1" : "0";
-             update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
-             $ac_excerpt_no_process = (isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y") ? "1" : "0";
-             update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
-             $ac_comments_disable = (isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y") ? "1" : "0";
-             update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
-             $ac_hint_panel_disable = (isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y") ? "1" : "0";
-             update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
-             $form_message .= 'Settings saved.';
-         }
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             
@@ -40,9 +28,15 @@
 
             $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
 
-            if (!$ac_with_import) {
-                $form_message .= "Defaults saved.";
-            }
+            $ac_excerpt_image_remove = (isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y") ? "1" : "0";
+            update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
+            $ac_excerpt_no_process = (isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y") ? "1" : "0";
+            update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+            $ac_comments_disable = (isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y") ? "1" : "0";
+            update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
+            $ac_hint_panel_disable = (isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y") ? "1" : "0";
+            update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
+            $form_message .= 'Settings saved.';
 
             if ($ac_with_import) {
 
@@ -259,7 +253,7 @@ END;
     function showCool() {
         jQuery("#whyCool").toggle();
     }
-    function importSubmit(withImport) {
+    function saveForm(withImport) {
         var j = jQuery;
         if (withImport == 1) {
             j("#ac_with_import").val("Y");
@@ -273,8 +267,9 @@ END;
         <?php } ?>
     }
 </script>
+<form action="" method="POST" name="import-form" id="import-form">
 <div class="tool-box">
-    <form action="" method="POST" name="import-form" id="import-form">
+    
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
@@ -289,8 +284,8 @@ END;
 
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
-    </form>
-        <button onclick="importSubmit(1);" class="button-color-orange"><?php esc_attr_e('Import') ?></button>
+
+        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Import') ?></a>
    
 </div><br><br><br>
 </div>
@@ -298,7 +293,6 @@ END;
     <br>
 <?php
     $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : "http://atcontent.com/CopyLocator/\" target=\"_blank"; 
-    //$banner_url = "javascript:alert('Please, connect with AtContent first');";
 ?>
     <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>
@@ -327,38 +321,24 @@ END;
 
 ?>
 <br>
-    <script type="text/javascript">
-        function saveAdvanced(){
-            <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
-                alert('Please, connect with AtContent first');
-            <?php } else { ?>
-                jQuery("#form-advanced").submit();
-            <?php } ?>
-        }
-    </script>
 
 <div class="wrap">
 <div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings</h3>
 <br>
 
 <div class="tool-box">
-    <form action="" method="POST" id="form-advanced">
-    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
-    <input type="hidden" name="ac_advanced_settings" value="Y">
-    <!--<p><input type="checkbox" name="ac_excerpt_image_remove" value="Y" <?php echo $ac_excerpt_image_remove_checked ?>>
-    Hide images in excerpts for AtContent processed posts (if you still have problems — use the option below)</p>-->
     <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
     Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
     <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</p>
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
     Turn off line "Share  and repost and get $$$..."</p>
-     </form>
-        <button onclick="saveAdvanced();" class="button-color-green"><?php esc_attr_e('Save Advanced Settings') ?></button>
+     
+    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Save Settings') ?></a>
     
 </div>
 </div>
-
+</form>
 <br><br><br>
 <p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
