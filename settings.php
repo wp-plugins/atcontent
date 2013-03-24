@@ -76,7 +76,7 @@
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= '<div id="importStatus">Import started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importDetails"></div>';
+                $form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importDetails"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
@@ -158,7 +158,7 @@
             h += "You got " + (s.created + s.updated) + " backlinks<br>";
             h += "<a href=\"javascript:getDetails();\">Get details</a>";
         j("#importResult").html(h);
-        j("#importStatus").html("<b>Import completed.</b>");
+        j("#importStatus").html("<b>Sync completed.</b>");
     }
     function getDetails(){
          var j = jQuery, h = "";         
@@ -232,7 +232,7 @@ END;
 </div>
 
 <div class="wrap" style="width: 640px; float: left;">
-<p>To brand existing posts, get backlinks and additional readership from AtContent — click Import.<br>You also can choose additional options.</p>
+<p>To brand existing posts, get backlinks and additional readership from AtContent — click "Sync with AtContent".<br>You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
@@ -273,11 +273,11 @@ END;
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
-    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for imported posts</p>
-    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for imported posts.
+    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for synced posts</p>
+    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for synced posts.
     Price is, $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"></p>
-    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Import post comments into AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
+    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Sync post comments with AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
     <span id="whyCool" style="display: none;">* People will be able to see each other comments from different sites and<br> 
         even answer to each other from different sites!<br>
         This way you engage your users and get more comments!</span></p>
@@ -285,14 +285,14 @@ END;
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
 
-        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Import') ?></a>
+        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Sync with AtContent') ?></a>
    
 </div><br><br><br>
 </div>
 <div style="float:right;">
     <br>
 <?php
-    $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : "http://atcontent.com/CopyLocator/\" target=\"_blank"; 
+    $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : admin_url("admin.php?page=atcontent/copylocator.php"); 
 ?>
     <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>

@@ -45,7 +45,7 @@ With AtContent plugin you take a step in the future of the digital content world
 
 #### Free backup in AtContent cloud ####
 
-* After the installation click “Import” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
+* After the installation click “Sync with AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
 
 We are now in a new era of content! Joining AtContent costs you nothing – the plugin is free. You gain more traffic, brand your content and control it across the web! Get started today!
 
@@ -70,7 +70,7 @@ Lao Tzu
 
 1. After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings. [Screenshot](http://i.imgur.com/3euuvNn.png). 
 2. If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook". [Screenshot](http://i.imgur.com/Xnz3Ux8.png).  
-3. After account creation you can import all your posts to AtContent to get free backlinks and cloud backup. For this just click "Import" button on plugin settings page. [Screenshot](http://i.imgur.com/wmOFHgi.png).
+3. After account creation you can sync all your posts with AtContent to get free backlinks and cloud backup. For this just click "Sync with AtContent" button on plugin settings page. [Screenshot](http://i.imgur.com/wmOFHgi.png).
 
 **1, 2, 3: You're done!**
 
@@ -85,8 +85,8 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 == Screenshots ==
 
 1. AtContent settings page. The arrow shows the first step: connection with your AtContent account.
-2. Plugin panel example. The button importing posts to AtContent is highlighted.
-3. AtContent publication wrapped in a widget. After importing all your posts must have the highlighted panel at the bottom.
+2. Plugin panel example. The button syncing posts with AtContent is highlighted.
+3. AtContent publication wrapped in a widget. After syncing all your posts must have the highlighted panel at the bottom.
 4. Sample of a paid repost. It is needed to pay the article author for reposting his work.
 5. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
@@ -171,7 +171,7 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 = 1.1.1 =
 
-* Comment import is available!
+* Comment sync is available!
 
 = 1.0.10 =
 
@@ -179,7 +179,7 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 = 1.0.2 =
 
-* Blog posts import options
+* Blog posts sync options
 
 = 1.0.1 =
 

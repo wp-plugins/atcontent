@@ -37,14 +37,14 @@
         <?php if ( $posts_count == 0 ) {  ?>
             <p>You don't have publications yet. Write something first!</p>
         <?php } else { ?>
-            <p>You have <?php echo $posts_count ?> publications, but you should import it first. 
-                Follow <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">AtContent Dashboard page</a> and click Import</p>
+            <p>You have <?php echo $posts_count ?> publications, but you should sync it with AtContent first. 
+                Follow <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">AtContent Dashboard page</a> and click "Sync with AtContent"</p>
         <?php } ?>
     <?php } else { 
         $link = "http://atcontent.com/CopyLocator/Create/"; ?>
         <?php if ( $imported_count < $posts_count ) { ?>
             <p>You have <?php echo $imported_count ?> publications. 
-                And <?php echo $posts_count - $imported_count ?> more available for <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">import</a>.</p>
+                And <?php echo $posts_count - $imported_count ?> more available for <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">sync</a>.</p>
         <?php } else { ?>
             <p>You have <?php echo $imported_count ?> publications.</p>
         <?php } ?>
