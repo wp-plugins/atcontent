@@ -218,10 +218,17 @@ END;
     <a class="addthis_button_pinterest_share"></a>
     <a class="addthis_button_google_plusone_share"></a>
     <a class="addthis_button_stumbleupon"></a> 
-    <a class="addthis_button_digg"></a> 
+    <a class="addthis_button_digg"></a>
     <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
 
 </div>
+<script type="text/javascript">
+    var addthis_share =
+    {
+        url: 'http://wordpress.org/extend/plugins/atcontent/',
+    };
+</script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
 <!-- AddThis Button END -->
         <b>Share with your friends!</b>
@@ -283,15 +290,17 @@ END;
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
     </form>
-        Do <button onclick="importSubmit(1);" class="button-color-orange"><?php esc_attr_e('Import') ?></button>
-        or just
-        <button onclick="importSubmit(0);" class="button-color-green"><?php esc_attr_e('Save Settings as Defaults') ?></button>
+        <button onclick="importSubmit(1);" class="button-color-orange"><?php esc_attr_e('Import') ?></button>
    
 </div><br><br><br>
 </div>
 <div style="float:right;">
     <br>
-    <a target="_blank" href="http://atcontent.com/CopyLocator/"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
+<?php
+    $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : "http://atcontent.com/CopyLocator/\" target=\"_blank"; 
+    //$banner_url = "javascript:alert('Please, connect with AtContent first');";
+?>
+    <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
 </div>
 <div style="clear:both;">&nbsp;</div>
 
