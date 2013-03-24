@@ -15,11 +15,11 @@ Why over 10000 Sites Have Chosen AtContent? For the easiest way to Reach new rea
 
 ### Reach new readership and increase search ranking for your content! ###
 * Tip - after the installation connect the plugin to AtContent platform on plugin settings page.
-* [Diagram](http://i.imgur.com/CCIRdX4.png)
+* [Diagram](http://bit.ly/YB2B02)
 * With AtContent plugin you get an unique backlink from AtContent for every article on your site, increasing your site search ranking. You also get up to 20% - 70% new readers from AtContent, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and attract new readers. This boosts your search ranking and readership faster than ever, and it’s free!  
 
 ###Brand your content and control it across the Internet! ###
-* [Demo example 1](http://test.ariser.ru/Stat/graph.html) [Demo example 2](http://test.ariser.ru/Stat/)
+* [Demo example 1](http://bit.ly/X0Y8b5) [Demo example 2](http://bit.ly/WP9Mo1)
 * With AtContent plugin you brand content by your name. If somebody reposts your content to other site - it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
 * Find all illegal copies of your content across the web with new AtContent Copylocator! This optional, but useful feature allows you to check up to 180 posts for just $4.49
 
@@ -30,17 +30,17 @@ With AtContent plugin you take a step in the future of the digital content world
 #### Protect your content & Monetize reposts ####
 
 * Readers repost your copy-protected content legally, for free or for a fee.
-* [Demo example 1](http://alexeysemeney.blogspot.ru/2013/02/new-atcontent-plugin-for-wordpress.html) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
-* [Demo example 2](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
+* [Demo example 1](http://bit.ly/YO8aaw) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
+* [Demo example 2](http://bit.ly/ZlAVvb) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
 
 #### Boost reader’s engagement with AtContent comments ####
 
-* [Demo example](https://atcontent.com/EmbedTour/#Comments)
+* [Demo example](http://bit.ly/15IdhNN)
 * The comments people leave on your posts appear on every site where posts are copied. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that? 
 
 #### Sell your premium content ####
 
-* [Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)
+* [Demo example](http://bit.ly/WPa6my)
 * AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account anytime. 
 
 #### Free backup in AtContent cloud ####

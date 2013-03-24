@@ -4,8 +4,14 @@
     font-weight: normal;
     src: local("Segoe UI Light"), local("Segoe WP Light"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.eot?#iefix") format("embedded-opentype"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.woff") format("woff"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.ttf") format("truetype"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.svg#web") format("svg");
 }
+@font-face {
+    font-family: "wf_SegoeUI";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Segoe UI"), local("Segoe"), local("Segoe WP"), url("/fonts/Segoe-UI/West-European/Normal/latest.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe-UI/West-European/Normal/latest.woff") format("woff"), url("/fonts/Segoe-UI/West-European/Normal/latest.ttf") format("truetype"), url("/fonts/Segoe-UI/West-European/Normal/latest.svg#web") format("svg");
+}
 .atcontent_wrap {
-    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
     font-size: 10pt;
     margin-right: 20px;
 }
@@ -52,7 +58,7 @@ width: 100%;
 button {
     border: medium none;
     cursor: pointer;
-    font: 16px/2em "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font: 16px/2em "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
     padding: 0 1em;
     position: relative;
     text-align: left;
@@ -65,7 +71,7 @@ button:active, a.likebutton:active {
     -moz-box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
-    font: 16px/2em "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font: 16px/2em "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
     padding: 0 1em;
     position: relative;
     text-decoration: none;
