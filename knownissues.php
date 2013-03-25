@@ -129,7 +129,7 @@ if (strlen($ac_api_key) > 0) {
     <input type="hidden" name="ac_advanced_settings" value="Y">
     <p>JavaScript Code for Plugin Init Script<br>
         <textarea rows="5" cols="80" name="ac_script_init"><?php echo $ac_script_init ?></textarea><br>
-        * this code will run after AtContent widget load. If you have plugins that interact with your post content (like Lightbox, FancyBox, etc.) you should use this option.
+        * this code will run after AtContent widget loads. If you have plugins that interact with your post content (like Lightbox, FancyBox, etc.) you should use this option.
     </p>
      <span class="submit">
         <input type="submit" name="Submit" class="button button-primary" value="<?php esc_attr_e('Save changes') ?>" />
@@ -158,8 +158,8 @@ if (strlen($ac_api_key) > 0) {
 </div>
 </form>
 <br><br>
-<p>If you have some problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
-<p>If you interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+<p>If you have any problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
+<p> If you are interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
 
 <br><br>
 Diagnostic info<br>

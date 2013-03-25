@@ -1,6 +1,6 @@
 <?php $form_action = admin_url( 'admin-ajax.php' ); ?>
 <div class="atcontent_invite">
-    <h1>With AtContent plugin your site jumps up in search result!</h1>
+    <h1>With AtContent plugin your site jumps up in search results!</h1>
     <h1>You get new readership &amp; control your content</h1>
     <hr />
         <table>
@@ -9,7 +9,7 @@
                     <div class="discl">
                         We connect your site<br>
                         with AtContent.<br>
-                        So that we can provide<br> 
+                        This way we can provide<br> 
                         backlinks for all your posts,<br>
                         new readership, help<br>
                         you to control content<br>
@@ -18,7 +18,7 @@
                         and many more.</div>
                     <div class="addit">
                         Every minute<br>
-                        in the world activates<br>
+                        in the world is activated<br>
                         one more AtContent plugin.
                     </div>
                 </td>
