@@ -1,5 +1,6 @@
 <div class="atcontent_wrap">
 <?php
+    $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $userid = wp_get_current_user()->ID;
     $posts = $wpdb->get_results( 
 	            "
@@ -49,6 +50,16 @@
             <p>You have <?php echo $imported_count ?> publications.</p>
         <?php } ?>
     <?php }?>
+    <?php if ( strlen( $ac_api_key ) == 0 ) {
+     $link = "javascript:connectFirst();";
+      ?>
+        <script type="text/javascript">
+            function connectFirst() {
+                alert("Please, connect with AtContent first");
+                document.location = '<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>';
+            }
+        </script>
+    <?php } ?>
             <p><a href="<?php echo $link; ?>" class="likebutton b_big b_orange">Find illegal copies</a></p>
 </div>
 </div>
