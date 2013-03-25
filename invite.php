@@ -9,13 +9,14 @@
                     <div class="discl">
                         We connect your site<br>
                         with AtContent.<br>
-                        This way we can provide<br> 
-                        backlinks for all your posts,<br>
-                        new readership, help<br>
-                        you to control content<br>
+                        This way we provide<br>
+                        new readership and<br>
+                        backlinks for all your posts.<br>
+                        We help you<br>
+                        to control content<br>
                         across the Internet,<br>
                         prevent plagiarism<br>
-                        and many more.</div>
+                        and much more.</div>
                     <div class="addit">
                         Every minute<br>
                         in the world is activated<br>
