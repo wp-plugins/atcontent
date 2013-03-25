@@ -1,4 +1,4 @@
-=== AtContent. It's free! ===
+﻿=== AtContent. It's free! ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, buddypress, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication, web
@@ -68,9 +68,9 @@ Lao Tzu
 
 == Installation ==
 
-1. After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings. [Screenshot](http://i.imgur.com/3euuvNn.png). 
+1. After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings. [Screenshot](http://i.imgur.com/FTXC09k.png). 
 2. If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook". [Screenshot](http://i.imgur.com/Xnz3Ux8.png).  
-3. After account creation you can sync all your posts with AtContent to get free backlinks and cloud backup. For this just click "Sync with AtContent" button on plugin settings page. [Screenshot](http://i.imgur.com/wmOFHgi.png).
+3. After account creation you can sync all your posts with AtContent to get free backlinks and cloud backup. For this just click "Sync with AtContent" button on plugin settings page. [Screenshot](http://i.imgur.com/uzq88e2.png).
 
 **1, 2, 3: You're done!**
 
@@ -86,9 +86,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 1. AtContent settings page. The arrow shows the first step: connection with your AtContent account.
 2. Plugin panel example. The button syncing posts with AtContent is highlighted.
-3. AtContent publication wrapped in a widget. After syncing all your posts must have the highlighted panel at the bottom.
-4. Sample of a paid repost. It is needed to pay the article author for reposting his work.
-5. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
+3. Look of the CopyLocator page.
+4. AtContent publication wrapped in a widget. After syncing all your posts must have the highlighted panel at the bottom.
+5. Sample of a paid repost. It is needed to pay the article author for reposting his work.
+6. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
 == Changelog ==
 
