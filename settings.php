@@ -221,6 +221,7 @@ END;
     var addthis_share =
     {
         url: 'http://wordpress.org/extend/plugins/atcontent/',
+        title: 'WordPress with AtContent — even better. Check it!',
     };
 </script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
