@@ -14,6 +14,15 @@
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
+
+         // PingBack
+
+         if ( ! atcontent_pingback_inline() ) {
+             echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+         }
+
+         //End PingBack
+
          if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             
@@ -233,7 +242,7 @@ END;
 </div>
 
 <div class="wrap" style="width: 640px; float: left;">
-<p>To brand existing posts, get backlinks and additional readership from AtContent — click "Sync with AtContent".<br>You also can choose additional options.</p>
+<p>To brand existing posts, get backlinks and additional readership from AtContent click "Sync with AtContent".<br>You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
@@ -347,15 +356,5 @@ END;
     <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
     <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
 </p>
-
-<?php 
-$form_action = admin_url( 'admin-ajax.php' );
-?>
-<script type="text/javascript">
-    jQuery(function(){
-        jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
-        }, "json");
-    });
-</script>
 
 </div>

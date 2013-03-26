@@ -28,6 +28,23 @@ function atcontent_pingback() {
     exit;
 }
 
+function atcontent_pingback_inline(){
+    $userid = wp_get_current_user()->ID;
+    $email = wp_get_current_user()->user_email;
+    $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+    if ( current_user_can( 'edit_posts' ) || current_user_can( 'publish_posts' ) ) {
+        $status = 'Installed';
+        if (strlen($ac_api_key) > 0) { 
+            $status = 'Connected'; 
+        } else {
+            $status = 'Disconnected';
+        }
+        $res = atcontent_api_pingback( $email, $status, $ac_api_key );
+        if ( is_array( $res ) && $res["IsOK"] == TRUE ) return TRUE; 
+    }
+    return FALSE;
+}
+
 function atcontent_activate() {
     global $wpdb;
     $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");

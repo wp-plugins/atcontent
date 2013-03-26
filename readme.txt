@@ -91,7 +91,11 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 5. Sample of a paid repost. It is needed to pay the article author for reposting his work.
 6. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
-== Changelog ==
+== Changelog ===
+
+= 2.3.0 =
+
+* Additional ways to access AtContent API (Sockets, file_get_contents)
 
 = 2.1.0 =
 

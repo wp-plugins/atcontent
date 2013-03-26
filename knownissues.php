@@ -1,5 +1,12 @@
 <div class="atcontent_wrap">
 <?php 
+         // PingBack
+
+         if ( ! atcontent_pingback_inline() ) {
+             echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+         }
+
+         //End PingBack
 $userid = wp_get_current_user()->ID;
 $hidden_field_name = 'ac_submit_hidden';
 $form_message = '';
@@ -181,13 +188,5 @@ Diagnostic info<br>
 }
 $form_action = admin_url( 'admin-ajax.php' );
 ?>
-<script type="text/javascript">
-    jQuery(function(){
-        jQuery.post('<?php echo $form_action ?>', {action: 'atcontent_pingback'}, function(d){
-            if (d.IsOK) {
-            }
-        }, "json");
-    });
-</script>
 </div>
 <?php
