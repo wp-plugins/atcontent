@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Why over 10000 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! 
+Why over 5000 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! 
 
 == Description ==
 
