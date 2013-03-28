@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.3.2.10
+    Version: 2.3.3.11
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
@@ -209,6 +209,14 @@ $(".post-thumbnail:first").remove();
 END;
             }
             //Chameleon theme thumb fix end
+
+            //RefTagger
+            if ( function_exists ( 'lbsFooter' ) ) {
+                $ac_script_init .= <<<END
+Logos.ReferenceTagging.tag();
+END;
+            }
+            //End RefTagger
 
             if (strlen($ac_script_init) > 0) {
                 $content .= <<<END
@@ -639,6 +647,10 @@ END;
             remove_filter('the_excerpt', array('A3_PVC','excerpt_pvc_stats_show'), 8);
         }
         //end Page-views-count
+
+        //RefTagger
+
+        //End RefTagger
     }
 
     function atcontent_admin_head(){
