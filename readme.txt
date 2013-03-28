@@ -53,7 +53,6 @@ When you have several blogs and are interested in our multiple system solution, 
 
 #### Quote of the day ####
 
-
 Mastering others is strength. Mastering yourself is true power.
 
 Lao Tzu

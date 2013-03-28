@@ -27,7 +27,7 @@
                     <iframe width="425" height="313" src="http://www.youtube.com/embed/1U4zq5qhRmk?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                     <br><br>
                     <div id="ac_connect_result"></div>
-<iframe id="ac_connect" src="https://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:300px;height:50px;" frameborder="0" scrolling="no"></iframe>
+<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
 <script type="text/javascript">
     (function ($) {
         window.ac_connect_res = function (d) {
