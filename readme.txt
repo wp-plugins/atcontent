@@ -201,4 +201,3 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 Paid and donatable publications now available!
 Now we work with sociable correctly.
-                                                                                                
