@@ -34,7 +34,7 @@ function atcontent_pingback_inline(){
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     if ( current_user_can( 'edit_posts' ) || current_user_can( 'publish_posts' ) ) {
         $status = 'Installed';
-        if (strlen($ac_api_key) > 0) { 
+        if ( strlen( $ac_api_key ) > 0 ) { 
             $status = 'Connected'; 
         } else {
             $status = 'Disconnected';

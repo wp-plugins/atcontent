@@ -96,12 +96,6 @@ function atcontent_api_pingback( $email, $status, $api_key ) {
 
 function atcontent_do_post( $url, $data ) {
     $old_error_level = error_reporting(0);
-    if ( function_exists('fsockopen') ) {
-        $res = atcontent_socket_post_request( $url, $data );
-        if ($res["status"] == "ok") {
-            $out_array = json_decode( $res["content"], true );
-        }
-    } else
     if ( function_exists('curl_init') ) {
         $curl = curl_init();
         curl_setopt( $curl, CURLOPT_URL, $url );
@@ -117,7 +111,13 @@ function atcontent_do_post( $url, $data ) {
         }
         curl_close( $curl );
         $out_array = json_decode( $res, true );
-    } else {
+    } else if ( function_exists('fsockopen') ) {
+        $res = atcontent_socket_post_request( $url, $data );
+        if ($res["status"] == "ok") {
+            $out_array = json_decode( $res["content"], true );
+        }
+    } else
+     {
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',

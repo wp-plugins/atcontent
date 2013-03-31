@@ -303,8 +303,12 @@ END;
     <br>
 <?php
     $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : admin_url("admin.php?page=atcontent/copylocator.php"); 
+    $ref_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : 
+        "http://atcontent.com/RefUrl/" . $ac_pen_name . "/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/"); 
 ?>
-    <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a>
+    <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a><br><br>
+    <a href="<?php echo $ref_url; ?>">Ref url</a>
+
 </div>
 <div style="clear:both;">&nbsp;</div>
 
