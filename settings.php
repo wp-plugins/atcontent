@@ -279,7 +279,7 @@ END;
     <br>
 <?php
     $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : admin_url("admin.php?page=atcontent/copylocator.php"); 
-    $ref_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : 
+    $ref_url = strlen ( $ac_api_key ) == 0 || !is_string( $ac_pen_name ) ? "http://atcontent.com/RefUrl/CPlase/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/") : 
         "http://atcontent.com/RefUrl/" . $ac_pen_name . "/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/"); 
 ?>
     
