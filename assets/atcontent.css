@@ -113,3 +113,13 @@ button.button-color-orange:active, .likebutton.b_orange:active {
 button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     background: none repeat scroll 0 0 #F5A200 !important;
 }
+
+.atcontent_banner{
+    background: #b9f1fd; padding: 10px 20px;width: 400px;
+}
+.atcontent_banner textarea{
+    width: 100%;
+    height: 45px;
+    font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 10pt;
+}

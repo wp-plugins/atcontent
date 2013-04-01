@@ -13,6 +13,8 @@ Why over 5000 Sites Have Chosen AtContent? For the easiest way to Reach new read
 
 == Description ==
 
+Read about exciting **[use case](http://bit.ly/16rbpeo)** of AtContent plugin!
+
 ### Reach new readership and increase search ranking for your content! ###
 * Tip - after the installation connect the plugin to AtContent platform on plugin settings page.
 * [Diagram](http://bit.ly/YB2B02)

@@ -212,31 +212,7 @@ END;
     <br>
 <?php } ?>
 <div class="wrap">
-    <div style="float:right">
-<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-    <a class="addthis_button_facebook"></a>
-    <a class="addthis_button_twitter"></a>
-    <a class="addthis_button_linkedin"></a>
-    <a class="addthis_button_pinterest_share"></a>
-    <a class="addthis_button_google_plusone_share"></a>
-    <a class="addthis_button_stumbleupon"></a> 
-    <a class="addthis_button_digg"></a>
-    <a class="addthis_button_compact"></a>
-    <a class="addthis_counter addthis_bubble_style"></a>
-
-</div>
-<script type="text/javascript">
-    var addthis_share =
-    {
-        url: 'http://wordpress.org/extend/plugins/atcontent/',
-        title: 'WordPress with AtContent — even better. Check it!',
-    };
-</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
-<!-- AddThis Button END -->
-        <b>Share with your friends!</b>
-    </div>
+    
 <div style="white-space: nowrap;float: left;"><div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2></div>
 <div style="clear: both;"> </div>
 </div>
@@ -306,7 +282,56 @@ END;
     $ref_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : 
         "http://atcontent.com/RefUrl/" . $ac_pen_name . "/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/"); 
 ?>
-    <a href="<?php echo $banner_url; ?>"><img src="<?php echo plugins_url( 'assets/locator2.png', __FILE__ ); ?>" alt="AtContent CopyLocator"></a><br><br>
+    
+    <div class="atcontent_banner"">
+        <h2>Invite your friends to AtContent</h2>
+        <p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
+        <h3>Invite friends</h3>
+
+        <textarea id="inviteText" style="width: 100%;height: 45px;">Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog</textarea>
+
+        <p style="font-size: 1.2em;">&nbsp;&nbsp; <b>↓</b> Send by email or share anywhere!</p>
+        <div style="float:left" id="addthis_share">
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    <a class="addthis_button_email"></a>
+    <a class="addthis_button_facebook"></a>
+    <a class="addthis_button_twitter"></a>
+    <a class="addthis_button_linkedin"></a>
+    <a class="addthis_button_pinterest_share"></a>
+    <a class="addthis_button_google_plusone_share"></a>
+    <a class="addthis_button_stumbleupon"></a> 
+    <a class="addthis_button_digg"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+
+</div>
+<script type="text/javascript">
+    var addthis_share =
+    {
+        url: '<?php echo $ref_url; ?>',
+        title: 'WordPress with AtContent — even better. Check it!',
+        description: 'Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog'
+    };
+    var ac_j = jQuery;
+    ac_j(function(){
+        window.addthis_share.title = ac_j("#inviteText").val();
+        ac_j("#inviteText").bind('input propertychange', function() {
+            if(this.value.length){
+                window.addthis_share.title = this.value;
+                window.addthis_share.description = this.value;            
+                addthis.toolbox(".addthis_toolbox");
+                
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
+<!-- AddThis Button END -->
+        
+    </div>
+        <div style="clear:both;">&nbsp;</div>
+    </div>
     
 
 </div>
