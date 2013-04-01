@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ===
 
+= 2.3.7 =
+
+* FancyBox for Wordress interaction fixes.
+
 = 2.3.3 =
 
 * RefTagger plugin interaction fixes.

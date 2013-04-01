@@ -136,9 +136,6 @@
                                     retryIDs[errors] = i;
                                     postInfo[i].status = "error";
                                     postInfo[i].error =  "WordPress hosting error for \"" + postTitles[i] + "\" (" + d + ")";
-                                    //jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + 
-                                    //    ");\">Retry</a>. WordPress hosting error for \"" + 
-                                    //    postTitles[i] + "\" (" + d + ")</p>")
                                 }
                                 if (getStatus().queued == 0) doResult();
                             },
@@ -152,7 +149,6 @@
                                  postInfo[i].status = "error";
                                  postInfo[i].error = err + " for \"" + postTitles[i] + "\"";
                                  if (getStatus().queued == 0) doResult();
-                                 ///jQuery("#importErrors").append("<p id=\"error" + errors + "\"><a href=\"javascript:doRetry(" + errors + ");\">Retry</a>. " + err + " for \"" + postTitles[i] + "\"</p>");
                              },
                          });
     }
@@ -212,9 +208,7 @@ END;
     <br>
 <?php } ?>
 <div class="wrap">
-    
-<div style="white-space: nowrap;float: left;"><div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2></div>
-<div style="clear: both;"> </div>
+    <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2>
 </div>
 
 <div class="wrap" style="width: 640px; float: left;">

@@ -68,3 +68,4 @@ $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
 $form_action = admin_url( 'admin-ajax.php' );
 ?>
 </div>
+<div class="clear"></div>
