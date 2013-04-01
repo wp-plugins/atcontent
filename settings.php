@@ -311,7 +311,8 @@ END;
     {
         url: '<?php echo $ref_url; ?>',
         title: 'WordPress with AtContent — even better. Check it!',
-        description: 'Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog'
+        description: 'Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog',
+        email_template: 'plugin_invite',
     };
     var ac_j = jQuery;
     ac_j(function(){
