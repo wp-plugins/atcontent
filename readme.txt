@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ===
 
+= 2.3.9 =
+
+* Hupso Share Buttons for Twitter, Facebook & Google+ interaction fixes.
+
 = 2.3.8 =
 
 * Improve styles compatibility for native gallery.
@@ -211,4 +215,3 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 Paid and donatable publications now available!
 Now we work with sociable correctly.
-                              
