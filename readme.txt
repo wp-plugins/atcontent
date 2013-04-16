@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ===
 
+= 2.4.0 =
+
+* CopyLocator fixes. Now you can check it!
+
 = 2.3.9 =
 
 * Hupso Share Buttons for Twitter, Facebook & Google+ interaction fixes.
@@ -213,6 +217,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-Paid and donatable publications now available!
-Now we work with sociable correctly.
-                                                                                
+CopyLocator fixed!

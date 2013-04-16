@@ -1,7 +1,16 @@
+<?php 
+// PingBack
+
+         if ( ! atcontent_pingback_inline() ) {
+             echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+         }
+
+         //End PingBack
+?>
 <div class="atcontent_wrap">
 <?php
-    $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $userid = wp_get_current_user()->ID;
+    $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $posts = $wpdb->get_results( 
 	            "
 	            SELECT ID, post_title, post_author
