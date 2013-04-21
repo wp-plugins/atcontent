@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.0.24
+    Version: 2.4.1.25
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.0.24" );
+    define( 'AC_VERSION', "2.4.1.25" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -28,7 +28,7 @@
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
-    add_action( 'admin_head', 'atcontent_admin_head');
+    add_action( 'admin_head', 'atcontent_admin_head' );
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
@@ -730,6 +730,14 @@ $j().ready(function(){
 </script>
 <?php
         }
+         ?>
+<script type="text/javascript">
+$j = jQuery;
+$j().ready(function(){
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> Try new visual detailed distribution statistics of your publications. <a href="https://atcontent.com/Statistics/Distribution/">Check how it looks like</a>!</div>');
+});
+</script>
+<?php
     }
 
 ?>

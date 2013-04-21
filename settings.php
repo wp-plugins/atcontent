@@ -14,6 +14,10 @@
          }
          $ac_api_key = get_user_meta($userid, "ac_api_key", true );
          $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
+         $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+?>
+<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> Try new visual detailed distribution statistics of your publications. <a href="https://atcontent.com/Statistics/Distribution/">Check how it looks like</a>!</div>
+<?php
 
          // PingBack
 

@@ -17,15 +17,7 @@
                         across the Internet,<br>
                         prevent plagiarism<br>
                         and much more.</div>
-					
-					<div class="addit">
-						Over 215K people <br> 
-						read AtContent posts<br> 
-						during the week
-                    </div>
-
-						
-					<div class="addit">
+                    <div class="addit">
                         Every minute<br>
                         in the world is activated<br>
                         one more AtContent plugin.
