@@ -218,4 +218,3 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 == Upgrade notice ==
 
 CopyLocator fixed!
-              

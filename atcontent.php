@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.1.25
+    Version: 2.4.2.26
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.1.25" );
+    define( 'AC_VERSION', "2.4.2.26" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -734,7 +734,7 @@ $j().ready(function(){
 <script type="text/javascript">
 $j = jQuery;
 $j().ready(function(){
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> Try new visual detailed distribution statistics of your publications. <a href="https://atcontent.com/Statistics/Distribution/">Check how it looks like</a>!</div>');
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> <a href="https://atcontent.com/Statistics/Distribution/">Check new visual detailed distribution statistics</a> of your publications!</div>');
 });
 </script>
 <?php
