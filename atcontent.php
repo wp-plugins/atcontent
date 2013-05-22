@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.2.26
+    Version: 2.4.3.27
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.2.26" );
+    define( 'AC_VERSION', "2.4.3.27" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -510,9 +510,10 @@ END;
             if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
 
             $ac_action = "";
+            $additional = NULL;
             $post = get_post( $postID );
             if ( $post == null || $ac_is_process == "0" ) { 
-                $ac_action = "skiped";
+                $ac_action = "skipped";
             } else {
                 $comments_json = "";
                 if ( $ac_is_import_comments == "1" ) {
@@ -532,7 +533,7 @@ END;
                             apply_filters( "the_content", $ac_paid_portion ), 
                             $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
@@ -541,8 +542,12 @@ END;
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         update_post_meta($post->ID, "ac_is_process", "1");
                         $ac_action = "created";
+                    } else if ( is_array ( $api_answer ) ) {
+                        $ac_action = "error";
+                        $additional = $api_answer;
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     } else {
-                        $ac_action = "skiped";
+                        $ac_action = "skipped";
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 } else {
@@ -551,22 +556,31 @@ END;
                         apply_filters( "the_content", $ac_paid_portion ) , 
                         $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
                         update_post_meta($post->ID, "ac_type" , $ac_type );
                         update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
                         update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
                         $ac_action = "updated";
+                    } else if ( is_array ( $api_answer ) ) {
+                        $ac_action = "error";
+                        $additional = $api_answer;
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     } else {
-                        $ac_action = "skiped";
+                        $ac_action = "skipped";
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 }
             }
 
 	        // generate the response
-	        $response = json_encode( array( 'IsOK' => true, "AC_action" => $ac_action ) );
+            $res_array = array( 'IsOK' => true, "AC_action" => $ac_action );
+            if ( $ac_action == "error" ) {
+                $res_array["IsOK"] = FALSE;
+                $res_array["Info"] = $additional;
+            }
+	        $response = json_encode( $res_array );
  
 	        // response output
 	        header( "Content-Type: application/json" );

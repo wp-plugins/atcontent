@@ -16,7 +16,7 @@
          $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
          $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 ?>
-<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> <a href="https://atcontent.com/Statistics/Distribution/">Check new visual detailed distribution statistics</a> of your publications!</div>
+<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt="."> <a href="https://atcontent.com/Statistics/Distribution/">Check new visual detailed distribution statistics</a> of your publications!</div>
 <?php
 
          // PingBack
@@ -89,36 +89,39 @@
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
                 $form_action = admin_url( 'admin-ajax.php' );
-                $form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating posts takes few seconds, please be patient.<div id="importDetails"></div>';
+                $form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating a post takes few seconds, please be patient.<div id="importDetails"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
     var postIDs = ['{$postIDs}'];
     var postTitles = ['{$postTitles}'];
-    var retryIDs = [];
     var postInfo = [];
     for (var i in postIDs) {
-        postInfo[i] = {id: postIDs[i], title: postTitles[i], status: "queued"};
+        postInfo[i] = {id: postIDs[i], title: postTitles[i], status: "queued", retry: 0};
     }
     var imported = 0;
-    var errors = 0;
+
     function getStatus() {
-        var r = {created:0, updated:0, skiped:0, error:0, queued:0};
+        var r = {created:0, updated:0, skipped:0, error:0, queued:0, active:0};
         for (var i in postInfo) {
             if (isNaN(i)) continue;
             if (postInfo[i].status == "created") r.created++;
             else if (postInfo[i].status == "updated") r.updated++; 
-            else if (postInfo[i].status == "skiped") r.skiped++; 
+            else if (postInfo[i].status == "skipped") r.skipped++; 
             else if (postInfo[i].status == "error") r.error++; 
+            else if (postInfo[i].status == "active") r.active++; 
             else r.queued++; 
         }
         return r;
     }
     function doRetry() {
         for (var i in postInfo) {
-            if (postInfo[i].status == "error") doImport(postInfo[i].id);
+            if (postInfo[i].status == "error") { 
+                postInfo[i].status == "queued";
+            }
         }
     }
     function doImport(i) {
+        postInfo[i].status = "active";
         jQuery.ajax({url: '{$form_action}', 
                          type: 'post', 
                          data: {action: 'atcontent_import', 
@@ -133,26 +136,33 @@
                                 if (d.IsOK) {
                                     postInfo[i].title = postTitles[i];
                                     postInfo[i].status = d.AC_action;
-                                    imported++;
+                                    s = getStatus();
+                                    imported = s.created + s.updated + s.skipped;
                                     jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
                                 } else {
-                                    errors++;
-                                    retryIDs[errors] = i;
                                     postInfo[i].status = "error";
-                                    postInfo[i].error =  "WordPress hosting error for \"" + postTitles[i] + "\" (" + d + ")";
+                                    postInfo[i].error =  "Connection problem occured for \"" + postTitles[i] + "\". Post not synced (" + d + ")";
+                                    if (postInfo[i].retry < 3) {
+                                        postInfo[i].retry++;
+                                        postInfo[i].status = "queued";
+                                    }
                                 }
-                                if (getStatus().queued == 0) doResult();
+                                s = getStatus();
+                                if (s.queued == 0 && s.active == 0) doResult();
                             },
                          error: function(d, s, e) {
-                                 postInfo[i] = postInfo[i] || {};
-                                 if (e == 'timeout') { doImport(i); return; }
-                                 var err = "WordPress hosting error";
-                                 if (e.length > 0) err += ": " + e;
-                                 errors++;
-                                 retryIDs[errors] = i;
-                                 postInfo[i].status = "error";
-                                 postInfo[i].error = err + " for \"" + postTitles[i] + "\"";
-                                 if (getStatus().queued == 0) doResult();
+                                postInfo[i] = postInfo[i] || {};
+                                if (e == 'timeout') { postInfo[i].status = "queued"; return; }
+                                var err = "Connection problem occured";
+                                if (e.length > 0) err += ": " + e;                                
+                                postInfo[i].status = "error";
+                                postInfo[i].error = err + " for \"" + postTitles[i] + "\". Post not synced.";
+                                if (postInfo[i].retry < 3) {
+                                   postInfo[i].retry++;
+                                   postInfo[i].status = "queued";
+                                }
+                                s = getStatus();
+                                if (s.queued == 0 && s.active == 0) doResult();
                              },
                          });
     }
@@ -162,8 +172,8 @@
             h = "";
             h += (s.created > 0 ? s.created + " posts created<br>" : "");
             h += (s.updated > 0 ? s.updated + " posts updated<br>" : "");
-            h += (s.skiped > 0 ? s.skiped + " posts skiped<br>" : "");
-            h += (s.error > 0 ? s.error + " posts processed with errors<br>" : "");
+            h += (s.skipped > 0 ? s.skipped + " posts skipped<br>" : "");
+            h += (s.error > 0 ? s.error + " posts not synced<br>" : "");
             h += "You got " + (s.created + s.updated) + " backlinks<br>";
             h += "<a href=\"javascript:getDetails();\">Get details</a>";
         j("#importResult").html(h);
@@ -176,20 +186,28 @@
              h += "\"" + postInfo[i].title + "\" ";
              if (postInfo[i].status == "created") h += "created";
              if (postInfo[i].status == "updated") h += "updated";
-             if (postInfo[i].status == "skiped") h += "skiped";
-             if (postInfo[i].status == "error") h += "processed with error: " + postInfo[i].error;
+             if (postInfo[i].status == "skipped") h += "skipped";
+             if (postInfo[i].status == "error") h += "not synced: " + postInfo[i].error;
              h += "<br>";
          }
          if (getStatus().error > 0) {
-             h += "<a href=\"javascript:doRetry();\">Do retry for posts with errors</a>";
+             h += "<a href=\"javascript:doRetry();\">Retry sync for not synced posts</a>";
          }
          j("#importDetails").html(h);
     }
     jQuery(function(){
-        for (var i in postIDs) {
-            doImport(i);
-        }
+        setInterval(processQueue, 100);
     });
+    function processQueue(){
+        s = getStatus();
+        if (s.active > 2) return;
+        for (var i = postInfo.length - 1; i >= 0; i--) {
+            if (postInfo[i].status == "queued") {  
+                doImport(i);
+                return;
+            }
+        }
+    }
 </script>
 END;
             }
@@ -271,7 +289,7 @@ END;
 
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Sync with AtContent') ?></a>
    
-</div><br><br><br>
+</div></form><br><br><br>
 </div>
 <div style="float:right;">
     <br>
@@ -281,7 +299,7 @@ END;
         "http://atcontent.com/RefUrl/" . $ac_pen_name . "/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/"); 
 ?>
     
-    <div class="atcontent_banner"">
+    <div class="atcontent_banner">
         <h2>Invite your friends to AtContent</h2>
         <p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
         <h3>Invite friends</h3>

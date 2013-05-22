@@ -4,6 +4,7 @@ function atcontent_create_publication($ac_api_key,
 $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
 $cost, $is_copyprotect, $comments
 ) {
+    if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];

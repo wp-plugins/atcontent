@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ===
 
+= 2.4.3 =
+
+* Sync process reliability was improved!
+
 = 2.4.0 =
 
 * CopyLocator fixes. Now you can check it!
@@ -217,5 +221,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-CopyLocator fixed!
-                                                                                                                                                                                                                                                                                                                                                                                         
+Reliability of the plugin was improved!
