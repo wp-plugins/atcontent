@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.3.27
+    Version: 2.4.4.28
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.3.27" );
+    define( 'AC_VERSION', "2.4.4.28" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -275,6 +275,18 @@ END;
             }
 
             //End FancyBox for WordPress
+
+
+            //NextGEN Gallery
+            if ( is_array( get_option( 'ngg_options' ) ) ) {
+            $ac_script_init .= <<<END
+jQuery(".ngg-slideshow").each(function(){
+    var i = jQuery(this), id = i.attr("id"), galid = parseInt(id.substr(id.lastIndexOf("-") + 1));
+    jQuery("#" + id).nggSlideshow( {id: galid,fx:"fade",width:320,height:240,domain: "http://" + document.location.host + "/",timeout:10000});
+});
+END;
+            }
+            //End NextGEN Gallery
 
             if (strlen($ac_script_init) > 0) {
                 $content .= <<<END

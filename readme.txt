@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ===
 
+= 2.4.4 =
+
+* NextGEN compatibility: slideshow now works with AtContent!
+
 = 2.4.3 =
 
 * Sync process reliability was improved!
