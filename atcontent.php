@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.4.28
+    Version: 2.4.5.29
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.4.28" );
+    define( 'AC_VERSION', "2.4.5.29" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -739,6 +739,12 @@ END;
             remove_filter( 'the_excerpt', 'hupso_the_content', 100 );
         }
         //end Hupso
+
+        //Suffision Shortcodes
+        if ( class_exists( 'Suffusion_Shortcodes' ) ) {
+            init_suffusion_shortcodes();
+        }
+        //end Suffision Shortcodes
     }
 
     function atcontent_admin_head(){
