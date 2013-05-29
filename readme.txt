@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.4.6 =
+
+* All settings now work properly!
+
 = 2.4.5 =
 
 * SEO Smart Links+ Compatibility
@@ -231,4 +235,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-Reliability of the plugin was improved!       
+* All settings now work properly!

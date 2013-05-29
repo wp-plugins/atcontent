@@ -232,7 +232,7 @@ END;
 <div class="wrap">
     <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2>
 </div>
-
+<form action="" method="POST" name="import-form" id="import-form">
 <div class="wrap" style="width: 640px; float: left;">
 <p>To brand existing posts, get backlinks and additional readership from AtContent click "Sync with AtContent".<br>You also can choose additional options.</p>
     <?php 
@@ -269,7 +269,6 @@ END;
         <?php } ?>
     }
 </script>
-<form action="" method="POST" name="import-form" id="import-form">
 <div class="tool-box">
     
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
@@ -289,7 +288,7 @@ END;
 
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Sync with AtContent') ?></a>
    
-</div></form><br><br><br>
+</div><br><br><br>
 </div>
 <div style="float:right;">
     <br>
