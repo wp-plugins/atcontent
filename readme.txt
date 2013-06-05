@@ -247,4 +247,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* All settings now work properly!
+* All settings now work properly! 
