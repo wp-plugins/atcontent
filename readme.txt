@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.4.10 =
+
+* Simple Share For Chinese Social Sites compatibility!
+
 = 2.4.9 =
 
 * Backend improvements! Email Address Encoder compatibility!
