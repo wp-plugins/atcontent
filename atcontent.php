@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.11
+    Version: 2.4.12
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.11.35" );
+    define( 'AC_VERSION', "2.4.12.36" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -287,6 +287,14 @@ jQuery(".ngg-slideshow").each(function(){
 END;
             }
             //End NextGEN Gallery
+
+            //eBible
+            if ( function_exists('includeJSHeader') ) {
+                $ac_script_init .= <<<END
+CPlase.l('http://www.ebible.com/assets/verselink/ebible.verselink.js');
+END;
+            }
+            //End eBible
 
             if (strlen($ac_script_init) > 0) {
                 $content .= <<<END

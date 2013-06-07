@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.4.11 =
+
+* We work with eBible!
+
 = 2.4.10 =
 
 * Simple Share For Chinese Social Sites compatibility!
