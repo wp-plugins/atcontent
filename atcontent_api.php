@@ -97,7 +97,7 @@ function atcontent_api_pingback( $email, $status, $api_key ) {
 
 function atcontent_do_post( $url, $data ) {
     $old_error_level = error_reporting(0);
-    if ( function_exists('curl_init') ) {
+    if ( function_exists( 'curl_init' ) ) {
         $curl = curl_init();
         curl_setopt( $curl, CURLOPT_URL, $url );
         curl_setopt( $curl, CURLOPT_HEADER, 0 );
@@ -109,16 +109,29 @@ function atcontent_do_post( $url, $data ) {
         if ( !$res ) {
 	        $error = curl_error($curl).'('.curl_errno($curl).')';
 	        $out = $error;
+            $out_array = array( 'IsOK' => FALSE, 'error' =>  $error );
+        } else {
+            try {
+                $out_array = json_decode( $res, true );
+            } catch (Exception $e) { }
+            if ( !is_array( $out_array ) ) {
+                $out_array = array( 'IsOK' => FALSE, 'error' =>  $res );
+            }
         }
         curl_close( $curl );
-        $out_array = json_decode( $res, true );
     } else if ( function_exists('fsockopen') ) {
         $res = atcontent_socket_post_request( $url, $data );
-        if ($res["status"] == "ok") {
-            $out_array = json_decode( $res["content"], true );
+        if ( $res["status"] == "ok" ) {
+            try {
+                $out_array = json_decode( $res["content"], true );
+            } catch (Exception $e) { }
+            if ( !is_array( $out_array ) ) {
+                $out_array = array( 'IsOK' => FALSE, 'error' =>  $res["content"] );
+            }
+        } else {
+            $out_array = array( 'IsOK' => FALSE, 'error' =>  $res["error"] );
         }
-    } else
-     {
+    } else {
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',
@@ -133,8 +146,10 @@ function atcontent_do_post( $url, $data ) {
             $context);
         $out_array = FALSE;
         try {
-            $out_array = json_decode($res, true);
-        } catch (Exception $e) { }
+            $out_array = json_decode( $res, true );
+        } catch (Exception $e) { 
+            $out_array = array( 'IsOK' => FALSE, 'error' =>  $res );
+        }
     }
     error_reporting( $old_error_level );
     return $out_array;

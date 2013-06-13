@@ -12,8 +12,8 @@
              update_user_meta( $userid, "ac_pen_name", $ac_pen_name );
              $form_message .= 'Settings saved.';
          }
-         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-         $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
+         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+         $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
          $img_url = plugins_url( 'assets/logo.png', __FILE__ );
          if (is_string($ac_pen_name) && strlen($ac_pen_name) > 0) {
 ?>
@@ -29,7 +29,7 @@
 
          //End PingBack
 
-         if ( ( strlen($ac_api_key) > 0 ) && isset($_POST[ $hidden_field_name ]) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+         if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
             
             $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
@@ -53,7 +53,7 @@
             update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
             $form_message .= 'Settings saved.';
 
-            if ($ac_with_import) {
+            if ( $ac_with_import ) {
 
                 $ac_reset = isset( $_POST['ac_reset'] ) && $_POST['ac_reset'] == "Y";
                 if ( $ac_reset ) $form_message .= "Reset done. ";
@@ -143,7 +143,7 @@
                                     jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
                                 } else {
                                     postInfo[i].status = "error";
-                                    postInfo[i].error =  "Connection problem occured for \"" + postTitles[i] + "\". Post not synced (" + d + ")";
+                                    postInfo[i].error =  "Connection problem occured for \"" + postTitles[i] + "\". Post not synced (" + d.Info + ")";
                                     if (postInfo[i].retry < 3) {
                                         postInfo[i].retry++;
                                         postInfo[i].status = "queued";

@@ -2,13 +2,13 @@
     /*
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: Why 10 000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.12
+    Description: Why 3,000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
+    Version: 2.4.13
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.12.36" );
+    define( 'AC_VERSION', "2.4.13.37" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once("atcontent_api.php");
@@ -122,10 +122,10 @@
 		    return $content;
 	    }
         $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
-        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
+        if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
-        $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-        $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
@@ -138,7 +138,7 @@
             $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
 END;
-            if (is_single()) {
+            if ( is_single() ) {
                 $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
@@ -146,28 +146,26 @@ END;
             $code = str_replace( PHP_EOL, " ", $code );
             $inline_style = "";
             preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
-            foreach ($style_matches[0] as $style_item) {
+            foreach ( $style_matches[0] as $style_item ) {
                 $inline_style .= $style_item;
             }
             return $inline_style . $code;
         }
         return $content;
-    } 
+    }
 
     function atcontent_the_excerpt( $content = '' ) {
         global $post, $wp_current_filter;
-        $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-        $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
-        $ac_pen_name = get_user_meta(intval($post->post_author), "ac_pen_name", true);
+        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
+        $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        $ac_excerpt_image_remove = get_user_meta( intval($post->post_author), "ac_excerpt_image_remove", true );
-        if ( strlen($ac_excerpt_image_remove) == 0 ) $ac_excerpt_image_remove = "0";
-        $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
-        if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
-        if ($ac_excerpt_no_process == "1") {
-            return $content;
-        }
-        if ($ac_is_process == "1" && strlen($ac_postid) > 0 && $ac_excerpt_no_process == "0") {
+        $ac_excerpt_image_remove = get_user_meta( intval( $post->post_author ), "ac_excerpt_image_remove", true );
+        if ( strlen( $ac_excerpt_image_remove ) == 0 ) $ac_excerpt_image_remove = "0";
+        $ac_excerpt_no_process = get_user_meta( intval( $post->post_author ), "ac_excerpt_no_process", true );
+        if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
+        if ( $ac_excerpt_no_process == "1" ) return $content;
+        if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0 && $ac_excerpt_no_process == "0" ) {
             $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
             $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
             $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
@@ -175,14 +173,14 @@ END;
             if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
             if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
             $ac_excerpt_class = "atcontent_excerpt";
-            if ($ac_excerpt_image_remove == "1") $ac_excerpt_class = "atcontent_excerpt_no_image";
+            if ( $ac_excerpt_image_remove == "1" ) $ac_excerpt_class = "atcontent_excerpt_no_image";
             $code = <<<END
 <div class="{$ac_excerpt_class}{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
 END;
             $code = str_replace( PHP_EOL, " ", $code );
             $inline_style = "";
             preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
-            foreach ($style_matches[0] as $style_item) {
+            foreach ( $style_matches[0] as $style_item ) {
                 $inline_style .= $style_item;
             }
             return $inline_style . $code;
@@ -198,8 +196,8 @@ END;
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
 		    return $content;
 	    }
-        $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-        $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
@@ -208,9 +206,9 @@ END;
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( !is_string( $ac_pen_name ) || strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        if ($ac_is_process == "1" && strlen($ac_postid) > 0) {
+        if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0) {
              //Chameleon theme thumb fix
-            if (function_exists( 'get_thumbnail' ) && get_option('chameleon_thumbnails') == 'on' ){
+            if (function_exists( 'get_thumbnail' ) && get_option( 'chameleon_thumbnails' ) == 'on' ) {
                 $ac_script_init .= <<<END
 (function($) { 
 $(".CPlase_face").prepend($(".post-thumbnail").clone());
@@ -296,7 +294,7 @@ END;
             }
             //End eBible
 
-            if (strlen($ac_script_init) > 0) {
+            if ( strlen( $ac_script_init ) > 0 ) {
                 $content .= <<<END
 <script>
 CPlase.evt.add('load', function (event, p, w) {
@@ -309,7 +307,7 @@ END;
         return $content;
     } 
 
-    function atcontent_add_meta_boxes(){
+    function atcontent_add_meta_boxes() {
          add_meta_box( 
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
@@ -317,43 +315,49 @@ END;
             'post' 
         );
 
-        add_meta_box( 
-            'atcontent_secondeditor',
-            __( 'AtContent Paid Portion', 'atcontent_textdomain' ),
-            'atcontent_paid_portion',
-            'post'
-        );
+        $version = get_bloginfo('version');
+        if ( version_compare( $version, '3.3', '>=' ) ) {
+            add_meta_box( 
+                'atcontent_secondeditor',
+                __( 'AtContent Paid Portion', 'atcontent_textdomain' ),
+                'atcontent_paid_portion',
+                'post'
+            );
+        }
+        
+
+        
     }
 
-    function atcontent_inner_custom_box($post) {
+    function atcontent_inner_custom_box( $post ) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
           $userid = wp_get_current_user()->ID;
           
           $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
           $ac_is_process_checked = "";
-          if ($ac_is_process == "1" || $ac_is_process == "") {
+          if ( $ac_is_process == "1" || $ac_is_process == "" ) {
               $ac_is_process_checked = "checked=\"checked\"";
           }
 
-          $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-          $ac_user_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
-          if (strlen($ac_user_copyprotect) == 0) $ac_user_copyprotect = "1";
-          $ac_user_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
-          if (strlen($ac_user_paidrepost) == 0) $ac_user_paidrepost = "0";
-          $ac_user_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
-          if (strlen($ac_user_paidrepostcost) == 0) $ac_user_paidrepostcost = "2.50";
-          $ac_user_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
-          if (strlen($ac_user_is_import_comments) == 0) $ac_user_is_import_comments = "1";
+          $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+          $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
+          if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
+          $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
+          if ( strlen( $ac_user_paidrepost ) == 0 ) $ac_user_paidrepost = "0";
+          $ac_user_paidrepostcost = get_user_meta( $userid, "ac_paidrepostcost", true );
+          if ( strlen( $ac_user_paidrepostcost ) == 0 ) $ac_user_paidrepostcost = "2.50";
+          $ac_user_is_import_comments = get_user_meta( $userid, "ac_is_import_comments", true );
+          if ( strlen( $ac_user_is_import_comments ) == 0 ) $ac_user_is_import_comments = "1";
 
-          $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
+          $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
           if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
           $ac_is_copyprotect_checked = "";
-          if ($ac_is_copyprotect == "1") {
+          if ( $ac_is_copyprotect == "1" ) {
               $ac_is_copyprotect_checked = "checked=\"checked\"";
-          }          
+          }
 
-          $ac_is_paidrepost = get_post_meta($post->ID, "ac_is_paidrepost", true);
+          $ac_is_paidrepost = get_post_meta( $post->ID, "ac_is_paidrepost", true );
           if ( strlen( $ac_is_paidrepost ) == 0 ) $ac_is_paidrepost = $ac_user_paidrepost;
           $ac_is_paidrepost_checked = "";
           if ($ac_is_paidrepost == "1") {
@@ -564,7 +568,7 @@ END;
                         $ac_action = "created";
                     } else if ( is_array ( $api_answer ) ) {
                         $ac_action = "error";
-                        $additional = $api_answer;
+                        $additional = $api_answer["error"];
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     } else {
                         $ac_action = "skipped";
@@ -585,7 +589,7 @@ END;
                         $ac_action = "updated";
                     } else if ( is_array ( $api_answer ) ) {
                         $ac_action = "error";
-                        $additional = $api_answer;
+                        $additional = $api_answer["error"];
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     } else {
                         $ac_action = "skipped";
@@ -650,14 +654,14 @@ END;
         exit;
     }
 
-    function atcontent_comment_post($comment_id, $status = 1) {
+    function atcontent_comment_post( $comment_id, $status = 1 ) {
         $comment = get_comment( $comment_id );
         if ( $comment != NULL ) {
             atcontent_process_comments( $comment->comment_post_ID );
         }
     }
 
-    function atcontent_process_comments($post_id) {
+    function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );
         if ($post == null) return;
         $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
@@ -677,7 +681,7 @@ END;
                     $comments_json .= json_encode($comments);
                 }
                 
-                atcontent_api_update_publication_comments($ac_api_key, $ac_postid, $comments_json);
+                atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
             }
         }
     }

@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Why over 5000 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! 
+Why over 3,500 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! 
 
 == Description ==
 
@@ -93,6 +93,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 6. Sample of a paid publication. It is needed to pay the author before reading the full article or downloading a file.
 
 == Changelog ==
+
+= 2.4.12 =
+
+* Error reporting for sync was improved.
 
 = 2.4.11 =
 
