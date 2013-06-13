@@ -94,7 +94,7 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
-= 2.4.12 =
+= 2.4.13 =
 
 * Error reporting for sync was improved.
 
