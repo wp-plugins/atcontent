@@ -2,7 +2,7 @@
     /*
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: Why 3,000 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
+    Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
     Version: 2.4.13
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
