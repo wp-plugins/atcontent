@@ -3,16 +3,16 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.13
+    Version: 2.4.14
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.13.37" );
+    define( 'AC_VERSION', "2.4.14.38" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
-    require_once("atcontent_api.php");
-    require_once("pingback.php"); 
+    require_once( "atcontent_api.php" );
+    require_once( "pingback.php" ); 
     add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -35,7 +35,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url('assets/atcontent.css', __FILE__) );
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css', __FILE__ ) );
          wp_enqueue_style( 'atcontentAdminStylesheet' );
     }
 
@@ -59,37 +59,37 @@
 	    if ( !wp_is_post_revision( $post_id ) ) {
 		    $post_url = get_permalink( $post_id );
 		    $post = get_post( $post_id );
-            if ($post == null) return;
-            $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
-            if (strlen($ac_api_key) > 0) {
-                $ac_postid = get_post_meta($post->ID, "ac_postid", true);
-                $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
-                $ac_cost = get_post_meta($post->ID, "ac_cost", true);
-                $ac_is_copyprotect = get_post_meta($post->ID, "ac_is_copyprotect", true);
-                $ac_type = get_post_meta($post->ID, "ac_type", true);
-                $ac_paid_portion = get_post_meta($post->ID, "ac_paid_portion", true);
-                $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
-                if ($ac_is_process != "1") return;
+            if ( $post == null ) return;
+            $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
+            if ( strlen( $ac_api_key ) > 0 ) {
+                $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+                $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
+                $ac_cost = get_post_meta( $post->ID, "ac_cost", true );
+                $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
+                $ac_type = get_post_meta( $post->ID, "ac_type", true );
+                $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
+                $ac_is_import_comments = get_post_meta( $post->ID, "ac_is_import_comments", true );
+                if ( $ac_is_process != "1" ) return;
 
                 atcontent_coexistense_fixes();
 
                 $comments_json = "";
-                if ($ac_is_import_comments == "1") {
+                if ( $ac_is_import_comments == "1" ) {
                     $comments = get_comments( array(
                         'post_id' => $post->ID,
                         'order' => 'ASC',
                         'orderby' => 'comment_date_gmt',
                         'status' => 'approve',
                     ) );
-                    if(!empty($comments)){
-                        $comments_json .= json_encode($comments);
+                    if ( !empty( $comments ) ) {
+                        $comments_json .= json_encode( $comments );
                     }
                 }
-                if (strlen($ac_postid) == 0) {
+                if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                             apply_filters( "the_content",  $post->post_content ) , 
                             apply_filters( "the_content",  $ac_paid_portion ),  
-                            $ac_type, get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
+                            $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
@@ -101,12 +101,12 @@
                     $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
                         apply_filters( "the_content", $post->post_content  ) , 
                         apply_filters( "the_content",  $ac_paid_portion ), 
-                        $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
+                        $ac_type , get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json
                             );
-                    if (is_array($api_answer) && strlen($api_answer["PublicationID"]) > 0 ) {
+                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     } else {
-                        update_post_meta($post->ID, "ac_is_process", "2");
+                        update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 }
             }
@@ -121,7 +121,7 @@
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
 		    return $content;
 	    }
-        $ac_excerpt_no_process = get_user_meta( intval($post->post_author), "ac_excerpt_no_process", true );
+        $ac_excerpt_no_process = get_user_meta( intval( $post->post_author ), "ac_excerpt_no_process", true );
         if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
@@ -410,7 +410,7 @@ END;
         };
     })(jQuery)
 </script>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked ?> /> Process post through AtContent API</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked ?> /> Use AtContent for this post</div>
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked ?> /> Protect post from plagiarism</div>
 <div class="misc-pub-section">
     Post type: 
