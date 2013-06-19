@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.14
+    Version: 2.4.15
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.14.38" );
+    define( 'AC_VERSION', "2.4.15.39" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -296,7 +296,7 @@ END;
 
             if ( strlen( $ac_script_init ) > 0 ) {
                 $content .= <<<END
-<script>
+<script type="text/javascript">
 CPlase.evt.add('load', function (event, p, w) {
 {$ac_script_init}    
 });
@@ -766,9 +766,15 @@ END;
 
         //Simple Share For Chinese Social Sites
         if ( function_exists( "simple_share_init" ) ) {
-            remove_filter('the_content', 'share');
+            remove_filter( 'the_content', 'share' );
         }
         //end Simple Share For Chinese Social Sites
+
+        //Share This
+        if ( function_exists ( "jw_share_this_links" ) ) {
+            remove_filter( 'the_content', 'jw_share_this_links' );
+        }
+        //end Share This
     }
 
     function atcontent_admin_head(){
