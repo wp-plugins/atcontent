@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.4.15
+    Version: 2.4.16
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.4.15.39" );
+    define( 'AC_VERSION', "2.4.16.40" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -775,14 +775,22 @@ END;
             remove_filter( 'the_content', 'jw_share_this_links' );
         }
         //end Share This
+
+        //Shareaholic
+        if ( function_exists( "shr_upgrade_routine" ) ) {
+            remove_filter( 'the_content', 'shrsb_position_menu' );
+            remove_filter( 'the_content', 'shrsb_get_recommendations' );
+            remove_filter( 'the_content', 'shrsb_get_cb' );
+        }
+        //end Shareaholic
     }
 
-    function atcontent_admin_head(){
+    function atcontent_admin_head() {
         $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        $connect_url = admin_url("admin.php?page=atcontent/settings.php");
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
         $img_url = plugins_url( 'assets/logo.png', __FILE__ );
-        if (strlen($ac_api_key) == 0) {
+        if ( strlen( $ac_api_key ) == 0 ) {
         ?>
 <script type="text/javascript">
 $j = jQuery;
@@ -792,7 +800,7 @@ $j().ready(function(){
 </script>
 <?php
         }
-        if (strlen($ac_api_key) > 0) {
+        if ( strlen( $ac_api_key ) > 0 ) {
 ?>
 <script type="text/javascript">
 $j = jQuery;

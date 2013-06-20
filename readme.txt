@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.4.16 =
+
+* Shareaholic compatibility!
+
 = 2.4.15 =
 
 * Share This compatibility!
