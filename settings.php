@@ -234,8 +234,9 @@ END;
 <div class="wrap">
     <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2>
 </div>
-<form action="" method="POST" name="import-form" id="import-form">
+
 <div class="wrap" style="width: 640px; float: left;">
+    <form action="" method="POST" name="import-form" id="import-form">
 <p>To brand existing posts, get backlinks and additional readership from AtContent click "Sync with AtContent".<br>You also can choose additional options.</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
@@ -291,6 +292,47 @@ END;
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Sync with AtContent') ?></a>
    
 </div><br><br><br>
+    <?php
+    $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
+    if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
+    $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
+    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
+    $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
+    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
+    $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
+    if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
+    $ac_script_init = get_user_meta($userid, "ac_script_init", true );
+
+    $ac_excerpt_image_remove_checked = "";
+    if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
+    $ac_excerpt_no_process_checked = "";
+    if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
+    $ac_comments_disable_checked = "";
+    if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
+    $ac_hint_panel_disable_checked = "";
+    if ($ac_hint_panel_disable == "1") $ac_hint_panel_disable_checked = "checked=\"checked\"";
+    
+
+?>
+<br>
+
+<div class="wrap">
+<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings</h3>
+<br>
+
+<div class="tool-box">
+    <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
+    Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
+    <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
+    Turn off plugin comments</p>
+    <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
+    Turn off line "Share  and repost and get $$$..."</p>
+     
+    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Save Settings') ?></a>
+    
+</div>
+</div>
+</form>
 </div>
 <div style="float:right;">
     <br>
@@ -350,52 +392,14 @@ END;
     </div>
         <div style="clear:both;">&nbsp;</div>
     </div>
-    
+    <br />
+    <a href="http://bit.ly/acwprate" target="_blank"><img src="<?php echo content_url("plugins/atcontent/assets/for-wp_rate.png"); ?>" alt="wp-rate"/></a><a 
+    href="http://bit.ly/acsupport" target="_blank"><img style="margin-left: 20px;" src="<?php echo content_url("plugins/atcontent/assets/for-wp_support.png"); ?>" alt="wp-support"/></a>
 
 </div>
 <div style="clear:both;">&nbsp;</div>
 
-<?php
-    $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
-    if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
-    $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
-    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
-    $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
-    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
-    $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
-    if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
-    $ac_script_init = get_user_meta($userid, "ac_script_init", true );
 
-    $ac_excerpt_image_remove_checked = "";
-    if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
-    $ac_excerpt_no_process_checked = "";
-    if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
-    $ac_comments_disable_checked = "";
-    if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
-    $ac_hint_panel_disable_checked = "";
-    if ($ac_hint_panel_disable == "1") $ac_hint_panel_disable_checked = "checked=\"checked\"";
-    
-
-?>
-<br>
-
-<div class="wrap">
-<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings</h3>
-<br>
-
-<div class="tool-box">
-    <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-    Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
-    <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
-    Turn off plugin comments</p>
-    <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
-    Turn off line "Share  and repost and get $$$..."</p>
-     
-    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Save Settings') ?></a>
-    
-</div>
-</div>
-</form>
 <br><br><br>
 <p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 

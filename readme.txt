@@ -94,6 +94,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 2.5.0 =
+
+* We love our users!
+
 = 2.4.17 =
 
 * Skimlinks compatibility.
