@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.5.0
+    Version: 2.5.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
@@ -114,7 +114,10 @@
     }
 
     function atcontent_the_content( $content = '' ) {
-        global $post, $wp_current_filter;
+        global $post, $wp_current_filter, $currentNumPost_ac;
+        
+        (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
+        
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
             return $content;
         }
@@ -129,20 +132,50 @@
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
+        $ac_adtest = get_user_meta( intval( $post->post_author ), "ac_adtest", true );
         $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
         $ac_additional_classes = "";
+        $isSinlgePost = is_single();
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
+        
+        
+        $ac_adtest_messages = array();
+        $ac_adtest_messages[] = "<h3>How online retailers solve the problem of reaching new buyers in a new way.</h3><p>Hi folks.<br/>My friend is an online retailer and he says that one of the largest problem that retailers face is the lack of methods to reach new buyers. He checked out a couple services and found Happy Retailer.  <br/>I think this is a very interesting idea to allow retailers upload inventory in one place and sell them simultaneously on Amazon, EBay, Bonanza and more than 1001 websites! <br/>If you a retailer it might be interesting for you. <br/>You can get more details here <a href=\"http://happyretailer.com/?from=atcontent\" target=_blank>http://happyretailer.com</a></p>";
+
+		$ac_adtest_messages[] = "<h3>New types of services that make this world a better place.</h3><p>I recently learned of a new type of services. They allow to donate money to charity and in return you can get cool experiences, such as flights on a private plane, meetings with interesting personalities, ride in MR2 Spyder, advises & mentorships, try international cuisines, etc.</p><p>One of the services is SunnyKarma.com. They are based out of San Francisco & are having a huge fundraising networking mixer/party on July 17th where they will be raffling off a flight on a private plane, you can get more details here: <a href=\"http://bit.ly/169mChq\" target=_blank>http://sunnykarma.com</a></p>";
+        
+        //print_r($ac_adtest_messages);
+        
+        shuffle($ac_adtest_messages);
+        
+        //$ac_adtest_message_randkeys = array_rand($ac_adtest_messages, 1);
+
+        //print_r($ac_adtest_message_randkeys);
+        
+        //$ac_adtest_message = $ac_adtest_messages[$ac_adtest_message_randkeys[0]];
+        $ac_adtest_message = $ac_adtest_messages[0];
+        
+        //print_r($ac_adtest_message);
+        
+        $ac_adtest_numOfmsgApears = 2;
+        
         if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
             $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
 END;
-            if ( is_single() ) {
+
+            if ( $isSinlgePost ) {
                 $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
             }
+            
+            if ($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears)) {
+				$code .= $ac_adtest_message;
+            }
+            
             $code = str_replace( PHP_EOL, " ", $code );
             $inline_style = "";
             preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
@@ -151,7 +184,11 @@ END;
             }
             return $inline_style . $code;
         }
-        return $content;
+        
+        return $content.
+			(($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears))
+				?$ac_adtest_message
+				:"");
     }
 
     function atcontent_the_excerpt( $content = '' ) {

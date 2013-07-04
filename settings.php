@@ -34,6 +34,10 @@
             
             $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_copyprotect", $copyProtection);
+
+            $adTest = isset( $_POST["ac_adtest"] ) && $_POST["ac_adtest"] == "Y" ? 1 : 0;
+            update_user_meta($userid, "ac_adtest", $adTest);
+
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
             $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 2.5;
@@ -241,6 +245,10 @@ END;
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
+
+             $ac_adtest = get_user_meta($userid, "ac_adtest", true );
+             if (strlen($ac_adtest) == 0) $ac_adtest = "1";
+             
              $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
              if (strlen($ac_paidrepost) == 0) $ac_paidrepost = "0";
              $ac_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
@@ -249,6 +257,7 @@ END;
              if (strlen($ac_is_import_comments) == 0) $ac_is_import_comments = "1";
 
              $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
+             $ac_adtest_checked = $ac_adtest == "1" ? "checked=\"checked\"" : "";
              $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
              $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
 
@@ -278,6 +287,10 @@ END;
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
     <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for synced posts</p>
+
+<!-- ad-test -->
+    <p><input type="checkbox" name="ac_adtest" id="ac_adtest" value="Y" <?php echo $ac_adtest_checked ?>> <span style="color:red"><b>New!</b></span> Sponsored post (Help us to test new feature. You'll earn 50% of proceeds generated from this post to your AtContent account). <a href="<?php echo content_url("plugins/atcontent/assets/sponsored_post_demo.png"); ?>" target=_blank>See how it looks like - example</a></p>
+
     <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for synced posts.
     Price is, $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"></p>
