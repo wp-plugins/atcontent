@@ -1,7 +1,7 @@
 ﻿=== AtContent. Increase Readership and SEO ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: Anti-plagiarism, api, AtContent, author, automatic, blog, bookmarking, content, CSS, custom, custom post type, plagiarism prevention, repost, reposting, backlink, backlinks, link, back link, back links, embed, javascript, notification, plagiarism, plugin, plugins, Post, posts, seo, Share, sharing, statistics, stats, Style, syndication, tag, tags, tracking, widget, widgets, wordpress, wpmu, admin, analytics, andriod, apple, author, automatic seo, automation, brazilian plugin, indonesian plugin, us plugin, canonical, content, description, favicon, flickr, google, googleplus, image, images, iOS, keyword, keyword research, mobile, page, photos, russian plugin, search engine optimization, seo content, seo correction, seo meta, seo optimization, seo plugin, seo title, sitemap, title, webmaster, wordpress seo, xml, AJAX, comments
+Tags: Antiplagiarism, api, AtContent, author, automatic, blog, bookmarking, content, CSS, custom, custom post type, plagiarism prevention, repost, reposting, backlink, backlinks, link, back link, back links, embed, javascript, notification, plagiarism, plugin, plugins, Post, posts, seo, Share, sharing, statistics, stats, Style, syndication, tag, tags, tracking, widget, widgets, wordpress, wpmu, admin, analytics, andriod, apple, author, automatic seo, automation, brazilian plugin, indonesian plugin, us plugin, canonical, content, description, favicon, flickr, google, googleplus, image, images, iOS, keyword, keyword research, mobile, page, photos, russian plugin, search engine optimization, seo content, seo correction, seo meta, seo optimization, seo plugin, seo title, sitemap, title, webmaster, wordpress seo, xml, AJAX, comments
 
 Requires at least: 3.3
 Tested up to: 3.5.2
@@ -35,6 +35,8 @@ We are now in a new era of content! Joining AtContent costs you nothing – the 
 
 When you have several blogs and are interested in our multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
 
+#### Free backup in AtContent cloud ####
+After the installation click “Sync with AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
 
 == Examples ==
 
