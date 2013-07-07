@@ -1,7 +1,7 @@
-=== AtContent. Increase SEO and Readership! Free! ===
+﻿=== AtContent. Increase Readership and SEO ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: ad, admin, administration, ads, adsense, advertising, affiliate, AJAX, amazon, analytics, anti-spam, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, button, calendar, captcha, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, del.icio.us, Digg, e-commerce, ecommerce, edit, editor, email, embed, event, events, Facebook, feed, feeds, filter, flash, flickr, form, Formatting, free, gallery, google, html, image, images, integration, iphone, javascript, jquery, language, lightbox, Like, link, linkedin, links, list, login, mail, manage, map, maps, media, menu, meta, mobile, mp3, multisite, music, navigation, network, News, newsletter, notification, page, pages, password, paypal, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, random, Reddit, redirect, register, registration, related, rss, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, spam, statistics, stats, Style, tag, tags, Taxonomy, template, text, theme, themes, thumbnail, TinyMCE, title, tracking, tweet, twitter, upload, url, user, users, video, widget, widgets, wordpress, wpmu, xml, yahoo, youtube, plagiarism, anti-plagiarism, AtContent, syndication, web
+Tags: Anti-plagiarism, api, AtContent, author, automatic, blog, bookmarking, content, CSS, custom, custom post type, plagiarism prevention, repost, reposting, backlink, backlinks, link, back link, back links, embed, javascript, notification, plagiarism, plugin, plugins, Post, posts, seo, Share, sharing, statistics, stats, Style, syndication, tag, tags, tracking, widget, widgets, wordpress, wpmu, admin, analytics, andriod, apple, author, automatic seo, automation, brazilian plugin, indonesian plugin, us plugin, canonical, content, description, favicon, flickr, google, googleplus, image, images, iOS, keyword, keyword research, mobile, page, photos, russian plugin, search engine optimization, seo content, seo correction, seo meta, seo optimization, seo plugin, seo title, sitemap, title, webmaster, wordpress seo, xml, AJAX, comments
 
 Requires at least: 3.3
 Tested up to: 3.5.2
@@ -9,55 +9,34 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Why over 3,500 Sites Have Chosen AtContent? For the easiest way to Reach new readership, Increase search ranking, Control & Monetize content! 
+AtContent provides backlinks and new readership. It allows to display your posts on other sites, maintain control on it and interact with users who view it.
 
 == Description ==
 
-### Reach new readership and increase search ranking for your content! ###
-* Tip - after the installation connect the plugin to AtContent platform on plugin settings page.
-* [Diagram](http://bit.ly/YB2B02)
-* With AtContent plugin you get an unique backlink from AtContent for every article on your site, increasing your site search ranking. You also get up to 20% - 70% new readers from AtContent, depends on your blog subject. Other people can now legally repost your publications, provide backlinks to your site and attract new readers. This boosts your search ranking and readership faster than ever, and it’s free!  
+### AtContent provides you backlinks and additional readership ### 
+By using AtContent bloggers usually increase their readership outside of their blogs from 30% to 300%.
+After the installation of AtContent plugin, connect it with AtContent site and synchronize your blog — [screenshot](http://bit.ly/connection_AC) 
+Your content will be displayed on AtContent as well, but without content duplication!
+You will get backlinks from all your posts on AtContent to all posts on your site. This will increase your SEO. People will read your posts on AtContent as well, providing you more visibility. It's proven by thousands of blogs!
 
-**Read about exciting [use case](http://bit.ly/16rbpeo) of AtContent plugin!**
 
-###Brand your content and control it across the Internet! ###
-* [Demo example 1](http://bit.ly/X0Y8b5) [Demo example 2](http://bit.ly/WP9Mo1)
-* With AtContent plugin you brand content by your name. If somebody reposts your content to other site - it’s still signed with your brand. You are notified every time somebody shares or reposts your content. You see statistics showing who does it, when at where it happens. You can update your content and even block specific articles from being reposted on other sites. Now your content is branded and valuable, because you have power to control it across the Internet.
-* Find all illegal copies of your content across the web with new AtContent Copylocator! This optional, but useful feature allows you to check up to 180 posts for just $4.49
+### Display your content on other sites, maintain control on it and interact with users who view it. ###
+* Detailed statistics – [example](http://bit.ly/15lv0O2)
+* With AtContent others can legally repost your posts to other sites without content duplication, providing you additional readership and backlinks! 
+* You, as a content owner can track, update or block your posts on other sites and interact with users who view it. You see detailed statistics about your post views, reposting and sharing. 
 
-With AtContent plugin you take a step in the future of the digital content world. With AtContent you can do more! Try it and share with friends.
-
-[youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
-
-#### Protect your content & Monetize reposts ####
+#### Protect your posts from plagiarism & Monetize reposts ####
 
 * Readers repost your copy-protected content legally, for free or for a fee.
-* [Demo example 1](http://bit.ly/YO8aaw) – text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content and repost the whole article legally. This protects your content from plagiarism. 
-* [Demo example 2](http://bit.ly/ZlAVvb) — the same, as in Demo example 1, but to repost the publication user must pay. This protects your content from plagiarism and bring you money. 
+* [Demo example 1](http://bit.ly/YO8aaw) – text is not available for copying, but anyyone can click “share & repost” at the bottom of the post and repost it legally. This protects your blog from plagiarism. 
+* [Demo example 2](http://bit.ly/ZlAVvb) — the same as Demo example 1, but to repost the post user must pay. This protects your posts from plagiarism and brings you money. 
+* Here is the video:
+[youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
 
-#### Boost reader’s engagement with AtContent comments ####
-
-* [Demo example](http://bit.ly/15IdhNN)
-* The comments people leave on your posts appear on every site where posts are copied. Users on different sites will discuss your content in the comment section on their site and you will collaborate with them all by replying on your site! How cool is that? 
-
-#### Sell your premium content ####
-
-* [Demo example](http://bit.ly/WPa6my)
-* AtContent makes it easy to sell your premium articles and even files attached to your content. Most importantly, your users can resell your content and increase your earning even more! You can withdraw your money from your PayPal account anytime. 
-
-#### Free backup in AtContent cloud ####
-
-* After the installation click “Sync with AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
-
-We are now in a new era of content! Joining AtContent costs you nothing – the plugin is free. You gain more traffic, brand your content and control it across the web! Get started today!
+We are now in a new era of content! Joining AtContent costs you nothing – the plugin is free. You gain more traffic, mantain contron on your content and interact with users who view it! Get started today!
 
 When you have several blogs and are interested in our multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
 
-#### Quote of the day ####
-
-Mastering others is strength. Mastering yourself is true power.
-
-Lao Tzu
 
 == Examples ==
 
