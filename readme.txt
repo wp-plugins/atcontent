@@ -38,6 +38,12 @@ When you have several blogs and are interested in our multiple system solution, 
 #### Free backup in AtContent cloud ####
 After the installation click “Sync with AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
 
+#### Quote of the day ####
+
+When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity.
+
+Albert Einstein 
+
 == Examples ==
 
 * **[Content Protection Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
