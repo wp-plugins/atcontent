@@ -10,7 +10,7 @@
                 <td style="width: 275px;">
                     <div class="discl">
                         After connection to<br/>
-                        AtContent your posts<br>
+                        AtContent your posts<br/>
                         will be displayed on <br>
                         AtContent without any<br>
                         content duplication.<br>
