@@ -236,12 +236,12 @@ END;
     <br>
 <?php } ?>
 <div class="wrap">
-    <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Dashboard</h2>
+    <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Plugin&nbsp;Main&nbsp;Settings</h2>
 </div>
 
 <div class="wrap" style="width: 640px; float: left;">
     <form action="" method="POST" name="import-form" id="import-form">
-<p>To brand existing posts, get backlinks and additional readership from AtContent click "Sync with AtContent".<br>You also can choose additional options.</p>
+<p>To get backlinks and reach new readership, please choose options below and click "Apply Main Settings"</p>
     <?php 
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
@@ -302,7 +302,7 @@ END;
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
 
-        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Sync with AtContent') ?></a>
+        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Apply Main Settings') ?></a>
    
 </div><br><br><br>
     <?php
@@ -330,7 +330,7 @@ END;
 <br>
 
 <div class="wrap">
-<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings</h3>
+<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings are Optional</h3>
 <br>
 
 <div class="tool-box">
@@ -341,7 +341,7 @@ END;
     <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
     Turn off line "Share  and repost and get $$$..."</p>
      
-    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Save Settings') ?></a>
+    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Apply Advanced Settings') ?></a>
     
 </div>
 </div>
