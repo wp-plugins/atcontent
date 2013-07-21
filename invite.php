@@ -2,7 +2,7 @@
 <div class="atcontent_invite">
     <h1>AtContent is the easiest way to increase readership and SEO,</h1>
     <h1>Get backlinks and plagiarism prevention!</h1>
-	<h2>To start using the plugin, please connect it to AtContent:</h2>
+	<h2>To start using the plugin, please connect it to AtContent site:</h2>
 	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         <table>

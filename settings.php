@@ -286,14 +286,12 @@ END;
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
-    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism for synced posts</p>
-
+    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</p>
+	<p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
+    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</p>
 <!-- ad-test -->
-    <p><input type="checkbox" name="ac_adtest" id="ac_adtest" value="Y" <?php echo $ac_adtest_checked ?>> <span style="color:red"><b>New!</b></span> Sponsored post (Help us to test new feature. You'll earn 50% of proceeds generated from this post to your AtContent account). <a href="<?php echo content_url("plugins/atcontent/assets/sponsored_post_demo.png"); ?>" target=_blank>See how it looks like - example</a></p>
+    <p><input type="checkbox" name="ac_adtest" id="ac_adtest" value="Y" <?php echo $ac_adtest_checked ?>> <span style="color:red"><b>New!</b></span> Sponsored post (Help us to test this new feature. You'll earn 50% of proceeds generated from this post on your AtContent account). <a href="<?php echo content_url("plugins/atcontent/assets/sponsored_post_demo.png"); ?>" target=_blank>See how it looks like - example</a></p>
 
-    <p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Turn on paid repost for synced posts.
-    Price is, $
-    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"></p>
     <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Sync post comments with AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
     <span id="whyCool" style="display: none;">* People will be able to see each other comments from different sites and<br> 
         even answer to each other from different sites!<br>
