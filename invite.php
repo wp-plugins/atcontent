@@ -33,7 +33,7 @@
         window.ac_connect_res = function (d) {
             if (d) window.location.reload();
             else $("#ac_connect_result").html( 
-                    'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                    'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
     })(jQuery);
 </script>

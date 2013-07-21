@@ -39,7 +39,7 @@ $ac_pen_name = get_user_meta($userid, "ac_pen_name", true );
         window.ac_connect_res = function (d) {
             if (d) window.location = '<?php echo admin_url( 'admin.php?page=atcontent/settings.php' ); ?>';
             else $("#ac_connect_result").html(
-                    'Something get wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                    'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
     })(jQuery);
 </script>
