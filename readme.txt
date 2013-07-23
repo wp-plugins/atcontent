@@ -1,7 +1,8 @@
 ﻿=== AtContent. Increase Readership and SEO ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags: analytics, comments, content, embed, backlink, plugin, search, seo, share, statistics, tracking, plagiarism
+Tags:  statistics, tracking, plagiarism, widget, Post, plugin, admin, posts, sidebar, google, comments, page
+
 
 Requires at least: 3.3
 Tested up to: 3.5.2
