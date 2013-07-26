@@ -3,7 +3,6 @@ Contributors: vadnov
 Donate link: https://atcontent.com/
 Tags:  statistics, tracking, plagiarism, widget, Post, plugin, admin, posts, sidebar, google, comments, page
 
-
 Requires at least: 3.3
 Tested up to: 3.5.2
 Stable tag: trunk

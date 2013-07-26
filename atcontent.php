@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.5.2
+    Version: 2.5.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.5.2.46" );
+    define( 'AC_VERSION', "2.5.3.47" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -856,5 +856,52 @@ $j().ready(function(){
 <?php
         }
     }
+
+$atcontent_categories = array (
+    "Adult" => "Adult",
+    "Art" => "Art (Crafts, Visual Arts, Graphic Design)",
+    "Artists" => "Artists",
+    "Books" => "Books & Writing (Writers, Fiction, Poetry, Comics...)",
+    "Blogging" => "Blogging (Content market, Blogging)",
+    "Business" => "Business (Marketing, Small Business, Finance...)",
+    "Eats" => "Eats (Recipes, Home Cooking, Restaurants...)",
+    "eLearning" => "eLearning",
+    "Entertainment" => "Entertainment (Celebrity, Local Entertainment)",
+    "EyeCandy" => "Eye Candy",
+    "Family" => "Family (Family Matters, Parenting & Baby, Moms)",
+    "Fashion" => "Fashion",
+    "FoodAndDrinks" => "Food & Drinks (Delicious recipes and tips from top notch food bloggers!)",
+    "FNFunny" => "FN Funny (Observational Humor, Social Commentary)",
+    "Gaming" => "Gaming (Computer & Video Games, Gaming, Toys)",
+    "Geek" => "Geek",
+    "Good" => "Good (Environmental Activism, Political...)",
+    "Health" => "Health (General Health, Nutrition, Medicine...)",
+    "HigherPower" => "Higher Power (Philosophy, Religion, Metaphysical)",
+    "HowTo" => "Higher Power (Philosophy, Religion, Metaphysical)",
+    "iNews" => "iNews (Photo Journalism, Journalists, History...)",
+    "Journals" => "Journals (Photo Journals, Freakyish, Gratitude...)",
+    "KickAssBlogs" => "Kick Ass Blogs",
+    "Life" => "Life (Home and Garden, Nature, Luxury...)",
+    "MensStuff" => "Men's Stuff",
+    "Military" => "Military",
+    "MoviesAndTV" => "Movies & TV (Television, Horror Flicks, Must See Movies...)",
+    "Music" => "Music (Indie, Rock, Pop, Musicians and Bands...)",
+    "Opinionated" => "Opinionated",
+    "PetsAndAnimals" => "Pets & Animals (Dogs, Pet Care, Cats, Animal Facts, Wild...)",
+    "Photography" => "Photography",
+    "Politics" => "Politics (To the Left, Independent, To the Right...)",
+    "Relationships" => "Relationships (Weddings, Gay and Lesbian, Death...)",
+    "Rides" => "Rides (Cars, Car Reviews, Green Transportation...)",
+    "Science" => "Science (Engineering, Life Science, Supernatural...)",
+    "Self" => "Self (Self Improvement & Performance, Psychology...)",
+    "Society" => "Society (Shopping, Culture, Retro, Trends, Law...)",
+    "Sports" => "Sports (Football, Soccer, Baseball, Extreme...)",
+    "Tech" => "Tech (Cloud Computing, IT, Programming)",
+    "Travel" => "Travel (Travel, Vacation, Adventure, Destination...)",
+    "VideoCollections" => "Video Collections",
+    "Wanderlust" => "Wanderlust",
+    "Women" => "Wanderlust",
+    "Zombies" => "Zombies",
+);
 
 ?>

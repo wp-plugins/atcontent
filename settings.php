@@ -38,6 +38,11 @@
             $adTest = isset( $_POST["ac_adtest"] ) && $_POST["ac_adtest"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_adtest", $adTest);
 
+            $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
+            update_user_meta($userid, "ac_sitecategory", $siteCategory);
+
+            atcontent_api_sitecategory( site_url(), $siteCategory, $ac_api_key );
+
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
             $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 2.5;
@@ -246,6 +251,8 @@ END;
              $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
 
+             $ac_sitecategory = get_user_meta($userid, "ac_sitecategory", true );
+
              $ac_adtest = get_user_meta($userid, "ac_adtest", true );
              if (strlen($ac_adtest) == 0) $ac_adtest = "1";
              
@@ -286,6 +293,18 @@ END;
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
+    <p>Site Category: 
+        <select name="ac_sitecategory">
+            <?php
+                foreach ($atcontent_categories as $category => $description) {
+                    $category_selected = $ac_sitecategory == $category ? "selected=\"selected\"" : "";
+                    echo <<<END
+<option value="{$category}" {$category_selected}>{$description}</option>
+END;
+                }
+            ?>
+        </select>
+    </p>
     <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</p>
 	<p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</p>
