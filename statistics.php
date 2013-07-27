@@ -17,7 +17,7 @@
         {
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             if ($post->post_author == $userid && strlen( $ac_postid ) > 0 ) {
-                echo "<a href=\"" . atcontent_get_statistics_link( $post->ID ) . "\">{$post->post_title}</a>";
+                echo "<a href=\"" . atcontent_get_statistics_link( $post->ID ) . "\">{$post->post_title}</a><br/>";
             }
         }        
     } else {
