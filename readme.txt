@@ -79,6 +79,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 3.0.0 =
+
+* AtContent Statistics inside plugin!
+
 = 2.5.1 =
 
 * Sponsored post feature test
@@ -268,4 +272,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* All settings now work properly! 
+AtContent Statistics inside plugin!

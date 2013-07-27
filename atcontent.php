@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 2.5.3
+    Version: 3.0.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "2.5.3.47" );
+    define( 'AC_VERSION', "3.0.0.48" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -29,6 +29,8 @@
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'admin_head', 'atcontent_admin_head' );
+    add_filter( 'manage_posts_columns', 'atcontent_statistics_columns_head' );
+    add_action( 'manage_posts_custom_column', 'atcontent_statistics_columns_content', 10, 2 );
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
@@ -46,6 +48,7 @@
             plugins_url( 'assets/logo.png', __FILE__ ), 6 );
         add_submenu_page( 'atcontent/settings.php', 'CopyLocator', 'CopyLocator', 'publish_posts', 'atcontent/copylocator.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
+        add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
         
@@ -467,7 +470,7 @@ END;
         if ( strlen( $ac_postid ) > 0 ) {
         ?>
 <div class="misc-pub-section">
-<a href="https://www.atcontent.com/Studio/Publication/Stat/<?php echo $ac_postid ?>/" target="_blank">View statistics</a>
+<a href="<?php echo atcontent_get_statistics_link( $ac_postid ); ?>" target="_blank">View statistics</a>
 </div>
         <?php
         }
@@ -856,6 +859,33 @@ $j().ready(function(){
 <?php
         }
     }
+
+    function atcontent_get_statistics_link($postID) {
+        $ac_postid = get_post_meta( $postID, "ac_postid", true );
+        if ( strlen( $ac_postid ) > 0 ) {
+            return admin_url( 'admin.php?page=atcontent/statistics.php' ) . "&postid=" . $ac_postid;
+        }
+        return "";
+    }
+
+    
+    function atcontent_statistics_columns_head($defaults) {
+	    $defaults['atcontent_statistics'] = 'AtContent Statistics';
+	    return $defaults;
+    }
+
+
+    function atcontent_statistics_columns_content( $column_name, $post_ID ) {
+	    if ( $column_name == 'atcontent_statistics' ) {
+		    $stat_link = atcontent_get_statistics_link( $post_ID );
+		    if ( strlen( $stat_link) > 0 ) {
+			    echo "<a href=\"{$stat_link}\">View statistics</a>";
+		    } else {
+		        echo "N/A";
+		    }
+	    }
+    }
+
 
 $atcontent_categories = array (
     "Adult" => "Adult",
