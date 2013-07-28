@@ -933,6 +933,7 @@ $atcontent_categories = array (
     "Wanderlust" => "Wanderlust",
     "Women" => "Wanderlust",
     "Zombies" => "Zombies",
+    "Other" => "other",
 );
 
 ?>
