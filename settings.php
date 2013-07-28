@@ -374,12 +374,12 @@ END;
     
     <div class="atcontent_banner">
         <h2>Invite your friends to AtContent</h2>
-        <p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
-        <h3>Invite friends</h3>
+        <!--<p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
+        <h3>Invite friends</h3>-->
 
-        <textarea id="inviteText" style="width: 100%;height: 45px;">Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog</textarea>
+        <textarea id="inviteText" style="width: 100%;height: 45px;display: none;">Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog</textarea>
 
-        <p style="font-size: 1.2em;">&nbsp;&nbsp; <b>↓</b> Send by email or share anywhere!</p>
+        <!--<p style="font-size: 1.2em;">&nbsp;&nbsp; <b>↓</b> Send by email or share anywhere!</p>-->
         <div style="float:left" id="addthis_share">
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
