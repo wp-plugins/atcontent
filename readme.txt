@@ -15,6 +15,7 @@ AtContent provides backlinks and new readership. It allows to display your posts
 
 ### AtContent provides you backlinks and additional readership ### 
 * By using AtContent bloggers usually increase their readership outside of their blogs from 30% to 300%.
+* AtContent allows to display your posts on other sites, maintain control on it and interact with viewers!
 * After the installation of AtContent plugin, connect it with AtContent site and synchronize your blog — [screenshot](http://bit.ly/connection_AC). 
 * Your content will be displayed on AtContent as well, but without content duplication! You will get backlinks from all your posts on AtContent to all posts on your site. This increases your SEO. This also helps to build your web presence by allowing people to read your posts not only on your blog, but on AtContent too. It's proven by thousands of blogs!
 
