@@ -41,6 +41,9 @@
             $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
             update_user_meta($userid, "ac_sitecategory", $siteCategory);
 
+            $referral = $_POST["ac_referral"];
+            update_user_meta( $userid, "ac_referral", $referral );
+
             atcontent_api_sitecategory( site_url(), $siteCategory, $ac_api_key );
 
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
@@ -248,7 +251,7 @@ END;
     <form action="" method="POST" name="import-form" id="import-form">
 <p>To get backlinks and reach new readership, please choose options below and click "Apply Main Settings"</p>
     <?php 
-             $ac_copyprotect = get_user_meta($userid, "ac_copyprotect", true );
+             $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
 
              $ac_sitecategory = get_user_meta($userid, "ac_sitecategory", true );
@@ -262,6 +265,8 @@ END;
              if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "2.50";
              $ac_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
              if (strlen($ac_is_import_comments) == 0) $ac_is_import_comments = "1";
+
+             $ac_referral = get_user_meta( $userid, "ac_referral", true );
 
              $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
              $ac_adtest_checked = $ac_adtest == "1" ? "checked=\"checked\"" : "";
@@ -318,6 +323,8 @@ END;
 
     <p><input type="checkbox" name="ac_reset" value="Y">
         Reset all AtContent settings. Settings above will be applied to all publications.</p>
+
+    <p>Referral: <input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
 
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Apply Main Settings') ?></a>
    

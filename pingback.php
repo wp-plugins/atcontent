@@ -4,6 +4,7 @@ function atcontent_pingback() {
     $userid = wp_get_current_user()->ID;
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+    $ac_referral = get_user_meta($userid, "ac_referral", true );
     if ( current_user_can( 'edit_posts' ) ) {
 
         $status = 'Installed';
@@ -14,7 +15,7 @@ function atcontent_pingback() {
             $status = 'Disconnected';
         }
 
-        atcontent_api_pingback( $email, $status, $ac_api_key );
+        atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
 
 	    // generate the response
 	    $response = json_encode( array( 'IsOK' => true ) );
@@ -32,6 +33,7 @@ function atcontent_pingback_inline(){
     $userid = wp_get_current_user()->ID;
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+    $ac_referral = get_user_meta($userid, "ac_referral", true );
     if ( current_user_can( 'edit_posts' ) || current_user_can( 'publish_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
@@ -39,7 +41,7 @@ function atcontent_pingback_inline(){
         } else {
             $status = 'Disconnected';
         }
-        $res = atcontent_api_pingback( $email, $status, $ac_api_key );
+        $res = atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
         if ( is_array( $res ) && $res["IsOK"] == TRUE ) return TRUE; 
     }
     return FALSE;

@@ -86,11 +86,12 @@ function atcontent_api_get_key( $nounce, $grant ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/requestkey', $post_content );
 }
 
-function atcontent_api_pingback( $email, $status, $api_key ) {
+function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
     $post_content = 'Email='. urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
+        ( $referral != NULL ? '&Referral=' . urlencode( $referral ) : '' ) .
         ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/pingback', $post_content );
 }
