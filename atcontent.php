@@ -41,7 +41,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css', __FILE__ ) );
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=1', __FILE__ ) );
          wp_enqueue_style( 'atcontentAdminStylesheet' );
     }
 
