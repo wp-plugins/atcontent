@@ -132,10 +132,26 @@ button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     text-align:right;
 }
 .ac_table_readership th{
-    font-size:14pt;
+    font-size:10pt;
     line-height:15pt;
     padding: 0 15pt;
+    text-align: right;
 }
 .ac_table_readership tr{
-    font-size:72pt;line-height:70pt;
+    font-size:50pt;line-height:50pt;
+}
+.ac_readership {
+    float: left;
+}
+.ac_table_readership_inside {
+    width: 100%;   
+}
+.ac_table_readership_inside .caption {
+    font-size: 10pt;
+    text-align: left;
+}
+.ac_table_readership_inside .value {
+    font-size: 24pt;
+    line-height: 24pt;
+    text-align: right;
 }

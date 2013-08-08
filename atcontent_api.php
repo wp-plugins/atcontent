@@ -96,10 +96,12 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/pingback', $post_content );
 }
 
-function atcontent_api_sitecategory( $siteuri, $category, $api_key ) {
+function atcontent_api_sitecategory( $siteuri, $category, $country, $state, $api_key ) {
     $post_content = 'SiteUri='. urlencode( $siteuri ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
-        '&Category=' . urlencode( $category ) .
+        '&Category=' . urlencode( $category ) . 
+        '&Country=' . urlencode( $country ) . 
+        '&State=' . urlencode( $state ) . 
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
         ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/sitecategory', $post_content );

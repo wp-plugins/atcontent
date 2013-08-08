@@ -37,10 +37,16 @@
             $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
             update_user_meta($userid, "ac_sitecategory", $siteCategory);
 
+            $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
+            update_user_meta($userid, "ac_country", $country);
+
+            $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
+            update_user_meta($userid, "ac_state", $state);
+
             $referral = $_POST["ac_referral"];
             update_user_meta( $userid, "ac_referral", $referral );
 
-            atcontent_api_sitecategory( site_url(), $siteCategory, $ac_api_key );
+            atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
 
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
             update_user_meta($userid, "ac_paidrepost", $paidRepost);
@@ -238,40 +244,7 @@ END;
     <?php include("invite.php"); ?>
     <hr />
     <br>
-<?php } else { ?>
-    <div id="ac_readership">
-        <img src="http://atcontent.net/Images/loader2.gif" alt="loading" />
-    </div>
-    <script type="text/javascript">
-        jQuery.ajax({url: '<?php echo $form_action ?>', 
-                        type: 'post',
-                        data: {action: 'atcontent_readership'},
-                        dataType: "json",
-                        success: function(d){
-                            if (d == null || d.OriginalViews == null) {
-                                jQuery("#ac_readership").html("");
-                                return;
-                            }
-                            jQuery("#ac_readership").html(
-        '<table class="ac_table_readership"><tr>' +
-        (d.OriginalViews > 0 ? '<th>Original views</th>' : '') +
-        (d.RepostViews > 0 ? '<th>Repost views</th>' : '') +
-        (d.IncreaseRate > 0 ? '<th>Increase rate, %</th>' : '') +
-        (d.Days > 0 ? '<th>Days connected</th>' : '') + 
-        '</tr><tr>' +
-        (d.OriginalViews > 0 ? '<td>' + d.OriginalViews + '</td>' : '') +
-        (d.RepostViews > 0 ? '<td>' + d.RepostViews + '</td>' : '') +
-        (d.IncreaseRate > 0 ? '<td>' + d.IncreaseRate + '</td>' : '') +
-        (d.Days > 0 ? '<td>' + d.Days + '</td>' : '') +
-        '</tr></table>'
-        );
-                        },
-                        error: function(d, s, e) {
-            jQuery("#ac_readership").html("");
-                            },
-                        });
-    </script>
-<?php }?>
+<?php } ?>
 <div class="wrap">
     <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Plugin&nbsp;Main&nbsp;Settings</h2>
 </div>
@@ -283,9 +256,11 @@ END;
              $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
              if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
 
-             $ac_sitecategory = get_user_meta($userid, "ac_sitecategory", true );
+             $ac_sitecategory = get_user_meta( $userid, "ac_sitecategory", true );
+             $ac_country = get_user_meta( $userid, "ac_country", true );
+             $ac_state = get_user_meta( $userid, "ac_state", true );
 
-             $ac_adtest = get_user_meta($userid, "ac_adtest", true );
+             $ac_adtest = get_user_meta( $userid, "ac_adtest", true );
              if (strlen($ac_adtest) == 0) $ac_adtest = "1";
              
              $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
@@ -339,21 +314,46 @@ END;
             ?>
         </select>
     </p>
+    <p>Country:
+        <select id="ac_country" name="ac_country">
+            <?php
+                foreach ($atcontent_countries as $code => $description) {
+                    $item_selected = $ac_country == $code ? "selected=\"selected\"" : "";
+                    echo <<<END
+<option value="{$code}" {$item_selected}>{$description}</option>
+END;
+                }
+            ?>
+        </select>
+    </p>
+    <p id="ac_state" style="display:none">State:
+        <select name="ac_state">
+            <?php
+                foreach ($atcontent_states as $code => $description) {
+                    $item_selected = $ac_state == $code ? "selected=\"selected\"" : "";
+                    echo <<<END
+<option value="{$code}" {$item_selected}>{$description}</option>
+END;
+                }
+            ?>
+        </select>
+    </p>
+    <script type="text/javascript">
+        var ac_j = jQuery;
+        function ac_checkCountry() {
+            var c = ac_j("#ac_country").val();
+            if (c == "US") { ac_j("#ac_state").css("display", "block"); } else { ac_j("#ac_state").css("display", "none"); }
+        }
+        ac_j(function () {
+            ac_checkCountry();
+            ac_j("#ac_country").change(ac_checkCountry);
+        });
+    </script>
     <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</p>
 	<p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</p>
-<!-- ad-test -->
-    <p><input type="checkbox" name="ac_adtest" id="ac_adtest" value="Y" <?php echo $ac_adtest_checked ?>> <span style="color:red"><b>New!</b></span> Sponsored post (Help us to test this new feature. You'll earn 50% of proceeds generated from this post on your AtContent account). <a href="<?php echo content_url("plugins/atcontent/assets/sponsored_post_demo.png"); ?>" target=_blank>See how it looks like - example</a></p>
-
-    <p><input type="checkbox" name="ac_comments" id="ac_comments" value="Y" <?php echo $ac_is_import_comments_checked ?>> Sync post comments with AtContent plugin comments <a href="javascript:showCool();">(why it's cool)</a><br> 
-    <span id="whyCool" style="display: none;">* People will be able to see each other comments from different sites and<br> 
-        even answer to each other from different sites!<br>
-        This way you engage your users and get more comments!</span></p>
-
-    <p><input type="checkbox" name="ac_reset" value="Y">
-        Reset all AtContent settings. Settings above will be applied to all publications.</p>
-
-    <p>Referral: <input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
+    
+    <p>Referral (optional): <input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
 
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Apply Main Settings') ?></a>
    
@@ -391,8 +391,6 @@ END;
     Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
     <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</p>
-    <p><input type="checkbox" name="ac_hint_panel_disable" value="Y" <?php echo $ac_hint_panel_disable_checked ?>>
-    Turn off line "Share  and repost and get $$$..."</p>
      
     <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Apply Advanced Settings') ?></a>
     
@@ -409,6 +407,53 @@ END;
 ?>
     
     <div class="atcontent_banner">
+<?php
+    if ( strlen( $ac_api_key ) > 0 ) {
+        $posts = $wpdb->get_results( 
+	        "
+	        SELECT ID, post_title, post_author
+	        FROM {$wpdb->posts}
+	        WHERE post_status = 'publish' 
+		        AND post_author = {$userid} AND post_type = 'post'
+	        "
+        );
+
+        $posts_id = array();
+
+        foreach ( $posts as $post ) 
+        {
+            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+            if ( strlen( $ac_postid ) > 0 ) { 
+                array_push( $posts_id, $ac_postid );
+            }
+        }
+
+        $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
+
+        echo '<h2>Statistics of my blog</h2><table class="ac_table_readership_inside">';
+        if ( $response["IncreaseRate"] > 0 ) {
+            $num = number_format_i18n( $response["IncreaseRate"] );
+            echo '<tr><td class="caption">Increase in readership</td>' .
+                '<td class="value">' .$num . '%</td></tr>';
+        }
+        if ( $response["OriginalViews"] > 0 ) {
+            $num = number_format_i18n( $response["OriginalViews"] );
+            echo '<tr><td class="caption">Views on my blog</td>' .
+                '<td class="value">' .$num . '</td></tr>';
+        }
+        if ( $response["RepostViews"] > 0 ) {
+            $num = number_format_i18n( $response["RepostViews"] );
+            echo '<tr><td class="caption">Views outside of my blog</td>' .
+                '<td class="value">' .$num . '</td></tr>';
+        }
+        if ( $response["Days"] > 0 ) {
+            $num = number_format_i18n( $response["Days"] );
+            echo '<tr><td class="caption">Period (days)</td>' .
+                '<td class="value">' .$num . '</td></tr>';
+        }
+        echo '</table>';
+    }
+?>
         <h2>Invite your friends to AtContent</h2>
         <!--<p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
         <h3>Invite friends</h3>-->

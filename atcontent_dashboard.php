@@ -35,45 +35,52 @@ function atcontent_dashboard_widget_function() {
         }
 
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
-        ?>
-<table class="ac_table_readership"><tr>
-<?php
-
-        if ( $response["OriginalViews"] > 0 ) {
-            echo "<th>Original views</th>";
-        }
-        if ( $response["RepostViews"] > 0 ) {
-            echo "<th>Repost views</th>";
-        }
-        if ( $response["IncreaseRate"] > 0 ) {
-            echo "<th>Increase rate, %</th>";
-        }
-        if ( $response["Days"] > 0 ) {
-            echo "<th>Days</td>";
-        }
-        ?></tr><tr><?php
         if ( $response["OriginalViews"] > 0 ) {
             $num = number_format_i18n( $response["OriginalViews"] );
-            echo "<td>$num</td>";
+            ?>
+            <div class="ac_readership">
+                <table class="ac_table_readership">
+                    <tr><th>Original Views</th></tr>
+                    <tr><td><?php echo $num; ?></td></tr>
+                </table>
+            </div>
+            <?php
         }
         if ( $response["RepostViews"] > 0 ) {
             $num = number_format_i18n( $response["RepostViews"] );
-            echo "<td>$num</td>";
+            ?>
+            <div class="ac_readership">
+                <table class="ac_table_readership">
+                    <tr><th>Repost Views</th></tr>
+                    <tr><td><?php echo $num; ?></td></tr>
+                </table>
+            </div>
+            <?php
         }
         if ( $response["IncreaseRate"] > 0 ) {
             $num = number_format_i18n( $response["IncreaseRate"] );
-            echo "<td>$num</td>";
+            ?>
+            <div class="ac_readership">
+                <table class="ac_table_readership">
+                    <tr><th>Increase Rate, %</th></tr>
+                    <tr><td><?php echo $num; ?></td></tr>
+                </table>
+            </div>
+            <?php
         }
         if ( $response["Days"] > 0 ) {
             $num = number_format_i18n( $response["Days"] );
-            echo "<td>$num</td>";
+            ?>
+            <div class="ac_readership">
+                <table class="ac_table_readership">
+                    <tr><th>Days Connected</th></tr>
+                    <tr><td><?php echo $num; ?></td></tr>
+                </table>
+            </div>
+            <?php
         }
-
-        ?>
-</tr></table>
-<?php
     }
-    echo "</div>";
+    echo "<div class=\"clear\"></div></div>";
 }
 
 function atcontent_add_dashboard_widgets() {

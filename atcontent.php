@@ -3,18 +3,19 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.1.0
+    Version: 3.1.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.1.0.52" );
+    define( 'AC_VERSION', "3.1.1.53" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
-    require_once( "pingback.php" ); 
+    require_once( "atcontent_pingback.php" ); 
     require_once( "atcontent_ajax.php" );
     require_once( "atcontent_dashboard.php" );
+    require_once( "atcontent_lists.php" );
     add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -41,8 +42,10 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=1', __FILE__ ) );
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=2', __FILE__ ) );
          wp_enqueue_style( 'atcontentAdminStylesheet' );
+         wp_enqueue_style( 'wp-pointer' );
+         wp_enqueue_script( 'wp-pointer' );
     }
 
     function atcontent_add_tools_menu() {
@@ -55,7 +58,7 @@
         add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
-        
+        add_action( 'admin_print_footer_scripts', 'atcontent_footer_scripts' );
     }
 
     function atcontent_admin_styles(){
@@ -880,54 +883,49 @@ $j().ready(function(){
 	    }
     }
 
-
-$atcontent_categories = array (
-    "" => "Choose a category",
-    "Adult" => "Adult",
-    "Art" => "Art (Crafts, Visual Arts, Graphic Design)",
-    "Artists" => "Artists",
-    "Books" => "Books & Writing (Writers, Fiction, Poetry, Comics...)",
-    "Blogging" => "Blogging (Content market, Blogging)",
-    "Business" => "Business (Marketing, Small Business, Finance...)",
-    "Eats" => "Eats (Recipes, Home Cooking, Restaurants...)",
-    "eLearning" => "eLearning",
-    "Entertainment" => "Entertainment (Celebrity, Local Entertainment)",
-    "EyeCandy" => "Eye Candy",
-    "Family" => "Family (Family Matters, Parenting & Baby, Moms)",
-    "Fashion" => "Fashion",
-    "FoodAndDrinks" => "Food & Drinks (Delicious recipes and tips from top notch food bloggers!)",
-    "FNFunny" => "FN Funny (Observational Humor, Social Commentary)",
-    "Gaming" => "Gaming (Computer & Video Games, Gaming, Toys)",
-    "Geek" => "Geek",
-    "Good" => "Good (Environmental Activism, Political...)",
-    "Health" => "Health (General Health, Nutrition, Medicine...)",
-    "HigherPower" => "Higher Power (Philosophy, Religion, Metaphysical)",
-    "HowTo" => "Higher Power (Philosophy, Religion, Metaphysical)",
-    "iNews" => "iNews (Photo Journalism, Journalists, History...)",
-    "Journals" => "Journals (Photo Journals, Freakyish, Gratitude...)",
-    "KickAssBlogs" => "Kick Ass Blogs",
-    "Life" => "Life (Home and Garden, Nature, Luxury...)",
-    "MensStuff" => "Men's Stuff",
-    "Military" => "Military",
-    "MoviesAndTV" => "Movies & TV (Television, Horror Flicks, Must See Movies...)",
-    "Music" => "Music (Indie, Rock, Pop, Musicians and Bands...)",
-    "Opinionated" => "Opinionated",
-    "PetsAndAnimals" => "Pets & Animals (Dogs, Pet Care, Cats, Animal Facts, Wild...)",
-    "Photography" => "Photography",
-    "Politics" => "Politics (To the Left, Independent, To the Right...)",
-    "Relationships" => "Relationships (Weddings, Gay and Lesbian, Death...)",
-    "Rides" => "Rides (Cars, Car Reviews, Green Transportation...)",
-    "Science" => "Science (Engineering, Life Science, Supernatural...)",
-    "Self" => "Self (Self Improvement & Performance, Psychology...)",
-    "Society" => "Society (Shopping, Culture, Retro, Trends, Law...)",
-    "Sports" => "Sports (Football, Soccer, Baseball, Extreme...)",
-    "Tech" => "Tech (Cloud Computing, IT, Programming)",
-    "Travel" => "Travel (Travel, Vacation, Adventure, Destination...)",
-    "VideoCollections" => "Video Collections",
-    "Wanderlust" => "Wanderlust",
-    "Women" => "Wanderlust",
-    "Zombies" => "Zombies",
-    "Other" => "other",
-);
+    function atcontent_footer_scripts() {
+        $userid = wp_get_current_user()->ID;
+        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        if ( strlen( $ac_api_key ) == 0 ) {
+            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+            $pointer_content = '<h3>Connect to AtContent</h3>';
+            $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url . 
+                '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent</p>';
+?>
+<script type="text/javascript">
+jQuery(document).ready( function($) {
+    $('#toplevel_page_atcontent-settings').pointer({
+        content: '<?php echo $pointer_content; ?>',
+        position: 'top',
+        close: function() {
+            // This function is fired when you click the close button
+        }
+      }).pointer('open');
+   });
+</script>
+<?php
+        } else {
+            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $ac_country = get_user_meta($userid, "ac_country", true );
+            if ( strlen( $ac_country ) == 0 ) {
+                $pointer_content = '<h3>Better Interaction with AtContent</h3>';
+                $pointer_content .= '<p>Please, <a href="' . $connect_url . '">select location</a> of your blog</p>';
+?>
+<script type="text/javascript">
+jQuery(document).ready( function($) {
+    jQuery('#toplevel_page_atcontent-settings').pointer({
+        content: '<?php echo $pointer_content; ?>',
+        position: 'top',
+        close: function() {
+            // This function is fired when you click the close button
+        }
+      }).pointer('open');
+   });
+</script>
+<?php
+            }
+        }
+    }
 
 ?>
