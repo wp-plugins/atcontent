@@ -3,6 +3,7 @@
          $hidden_field_name = 'ac_submit_hidden';
          $form_message = '';
          $form_script = '';
+         $form_action = admin_url( 'admin-ajax.php' );
          $form_message_block = '';
          if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
               isset( $_POST[ "ac_api_key" ] ) ) {
@@ -15,11 +16,6 @@
          $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
          $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
          $img_url = plugins_url( 'assets/logo.png', __FILE__ );
-         if (is_string($ac_pen_name) && strlen($ac_pen_name) > 0) {
-?>
-<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt="."> <a href="https://atcontent.com/Statistics/Distribution/">Check new visual detailed distribution statistics</a> of your publications!</div>
-<?php
-         }
 
          // PingBack
 
@@ -102,7 +98,6 @@
             
                 $postIDs = join( "','" , $posts_id );
                 $postTitles = join( "','" , $posts_title );
-                $form_action = admin_url( 'admin-ajax.php' );
                 $form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating a post takes few seconds, please be patient<div id="importDetails"></div>';
                 $form_script = <<<END
 <script type="text/javascript">
@@ -238,11 +233,45 @@ END;
 
 <div class="atcontent_wrap">
 
+
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
     <?php include("invite.php"); ?>
     <hr />
     <br>
-<?php } ?>
+<?php } else { ?>
+    <div id="ac_readership">
+        <img src="http://atcontent.net/Images/loader2.gif" alt="loading" />
+    </div>
+    <script type="text/javascript">
+        jQuery.ajax({url: '<?php echo $form_action ?>', 
+                        type: 'post',
+                        data: {action: 'atcontent_readership'},
+                        dataType: "json",
+                        success: function(d){
+                            if (d == null || d.OriginalViews == null) {
+                                jQuery("#ac_readership").html("");
+                                return;
+                            }
+                            jQuery("#ac_readership").html(
+        '<table class="ac_table_readership"><tr>' +
+        (d.OriginalViews > 0 ? '<th>Original views</th>' : '') +
+        (d.RepostViews > 0 ? '<th>Repost views</th>' : '') +
+        (d.IncreaseRate > 0 ? '<th>Increase rate, %</th>' : '') +
+        (d.Days > 0 ? '<th>Days connected</th>' : '') + 
+        '</tr><tr>' +
+        (d.OriginalViews > 0 ? '<td>' + d.OriginalViews + '</td>' : '') +
+        (d.RepostViews > 0 ? '<td>' + d.RepostViews + '</td>' : '') +
+        (d.IncreaseRate > 0 ? '<td>' + d.IncreaseRate + '</td>' : '') +
+        (d.Days > 0 ? '<td>' + d.Days + '</td>' : '') +
+        '</tr></table>'
+        );
+                        },
+                        error: function(d, s, e) {
+            jQuery("#ac_readership").html("");
+                            },
+                        });
+    </script>
+<?php }?>
 <div class="wrap">
     <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Plugin&nbsp;Main&nbsp;Settings</h2>
 </div>

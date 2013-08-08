@@ -105,6 +105,15 @@ function atcontent_api_sitecategory( $siteuri, $category, $api_key ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/sitecategory', $post_content );
 }
 
+function atcontent_api_readership( $siteuri, $postids, $api_key ) {
+    $post_content = 'SiteUri='. urlencode( $siteuri ) . 
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&PostIDs=' . urlencode( $postids ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
+}
+
 function atcontent_do_post( $url, $data ) {
     $old_error_level = error_reporting(0);
     if ( function_exists( 'curl_init' ) ) {

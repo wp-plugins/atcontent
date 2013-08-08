@@ -3,16 +3,18 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.0.3
+    Version: 3.1.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.0.3.51" );
+    define( 'AC_VERSION', "3.1.0.52" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
     require_once( "pingback.php" ); 
+    require_once( "atcontent_ajax.php" );
+    require_once( "atcontent_dashboard.php" );
     add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -28,9 +30,11 @@
     add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
+    add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
     add_action( 'admin_head', 'atcontent_admin_head' );
     add_filter( 'manage_posts_columns', 'atcontent_statistics_columns_head' );
     add_action( 'manage_posts_custom_column', 'atcontent_statistics_columns_content', 10, 2 );
+    add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
@@ -844,16 +848,6 @@ END;
 $j = jQuery;
 $j().ready(function(){
 	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> To activate AtContent features, please, <a href="<?php echo $connect_url; ?>">connect</a> your blog to AtContent</div>');
-});
-</script>
-<?php
-        }
-        if ( strlen( $ac_api_key ) > 0 ) {
-?>
-<script type="text/javascript">
-$j = jQuery;
-$j().ready(function(){
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> <a href="https://atcontent.com/Statistics/Distribution/">Check new visual detailed distribution statistics</a> of your publications!</div>');
 });
 </script>
 <?php

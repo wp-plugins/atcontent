@@ -80,6 +80,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 3.1.0 =
+
+* AtContent Dashboard!
+
 = 3.0.0 =
 
 * AtContent Statistics inside plugin!

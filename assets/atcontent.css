@@ -123,3 +123,19 @@ button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
     font-size: 10pt;
 }
+
+.ac_table_readership {
+    
+}
+.ac_table_readership td{
+    padding: 0 15pt;
+    text-align:right;
+}
+.ac_table_readership th{
+    font-size:14pt;
+    line-height:15pt;
+    padding: 0 15pt;
+}
+.ac_table_readership tr{
+    font-size:72pt;line-height:70pt;
+}
