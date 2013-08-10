@@ -8,7 +8,7 @@
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.2.0.54" );
+    define( 'AC_VERSION', "3.2.0.55" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -126,9 +126,11 @@ END;
 END;
             }
             
+            /*
             if ($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears)) {
 				$code .= $ac_adtest_message;
             }
+            //*/
             
             $code = str_replace( PHP_EOL, " ", $code );
             $inline_style = "";

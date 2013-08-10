@@ -508,8 +508,10 @@ END;
         <div style="clear:both;">&nbsp;</div>
     </div>
     <br />
+    <!--
     <a href="http://bit.ly/acwprate" target="_blank"><img src="<?php echo content_url("plugins/atcontent/assets/for-wp_rate.png"); ?>" alt="wp-rate"/></a><a 
     href="http://bit.ly/acsupport" target="_blank"><img style="margin-left: 20px;" src="<?php echo content_url("plugins/atcontent/assets/for-wp_support.png"); ?>" alt="wp-support"/></a>
+    -->
 
 </div>
 <div style="clear:both;">&nbsp;</div>
