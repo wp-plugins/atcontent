@@ -46,6 +46,10 @@
             $referral = $_POST["ac_referral"];
             update_user_meta( $userid, "ac_referral", $referral );
 
+            if ( ! atcontent_pingback_inline() ) {
+                echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+            }
+
             atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
 
             $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
