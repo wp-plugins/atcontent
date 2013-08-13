@@ -80,6 +80,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 3.3.0 =
+
+* Increase speed of site loading.
+
 = 3.1.0 =
 
 * AtContent Dashboard!
