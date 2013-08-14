@@ -8,7 +8,7 @@
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.3.1.57" );
+    define( 'AC_VERSION', "3.4.0.58" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -286,6 +286,20 @@ CPlase.l('http://www.ebible.com/assets/verselink/ebible.verselink.js');
 END;
             }
             //End eBible
+
+            //Lightbox Plus ColorBox
+            if (class_exists('wp_lightboxplus')) {
+                global $wp_lightboxplus;
+                if ( ob_start() ) {
+                    $wp_lightboxplus->lightboxPlusColorbox();
+                    $lbp_script = ob_get_contents();
+                    ob_end_clean();
+                    if (preg_match_all("/<script[^>]+>([^<]*)<\/script>/mi", $lbp_script, $output_array)) {
+                        $ac_script_init .= $output_array[1][0];
+                    }
+                }
+            }
+            //End Lightbox Plus ColorBox
 
             if ( strlen( $ac_script_init ) > 0 ) {
                 $content .= <<<END

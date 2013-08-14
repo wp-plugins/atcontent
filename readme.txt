@@ -80,6 +80,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 3.4.0 =
+
+* Lightbox Plus ColorBox compatibility.
+
 = 3.3.0 =
 
 * Increase speed of site loading.
@@ -282,3 +286,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 == Upgrade notice ==
 
 AtContent Statistics inside plugin!
+Posts become faster!
