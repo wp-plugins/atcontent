@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.3.0
+    Version: 3.3.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.3.0.56" );
+    define( 'AC_VERSION', "3.3.1.57" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -290,8 +290,10 @@ END;
             if ( strlen( $ac_script_init ) > 0 ) {
                 $content .= <<<END
 <script type="text/javascript">
-CPlase.evt.add('load', function (event, p, w) {
-{$ac_script_init}    
+CPlase = window.CPlase || {};
+CPlase.evt = CPlase.evt || [];
+CPlase.evt.push(function (event, p, w) {
+    {$ac_script_init}    
 });
 </script>
 END;

@@ -65,7 +65,7 @@ function atcontent_save_post( $post_id ){
 
 function atcontent_save_meta( $post_id ) {
 
-    if ( $_POST['atcontent_is_process'] == null ) 
+    if ( $_POST['atcontent_type'] == null ) 
         return;
 
     if ( !current_user_can( 'edit_post', $post_id ) )
