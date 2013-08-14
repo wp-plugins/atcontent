@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.3.1
+    Version: 3.4.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
