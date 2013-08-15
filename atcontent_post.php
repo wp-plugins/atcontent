@@ -7,14 +7,62 @@ function atcontent_publish_publication( $post_id ){
 		$post = get_post( $post_id );
         if ( $post == null ) return;
         $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
+        $userid = $post->post_author;
         if ( strlen( $ac_api_key ) > 0 ) {
+
+            $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
+            if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
+            $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
+            if ( strlen( $ac_user_paidrepost ) == 0 ) $ac_user_paidrepost = "0";
+            $ac_user_paidrepostcost = get_user_meta( $userid, "ac_paidrepostcost", true );
+            if ( strlen( $ac_user_paidrepostcost ) == 0 ) $ac_user_paidrepostcost = "2.50";
+            $ac_user_is_import_comments = get_user_meta( $userid, "ac_is_import_comments", true );
+            if ( strlen( $ac_user_is_import_comments ) == 0 ) $ac_user_is_import_comments = "1";
+
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
-            $ac_cost = get_post_meta( $post->ID, "ac_cost", true );
+            if ( strlen( $ac_is_process ) == 0 ) { 
+                $ac_is_process = "1";
+                update_post_meta($post_id, "ac_is_process", $ac_is_process);
+            }
+            
             $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
-            $ac_type = get_post_meta( $post->ID, "ac_type", true );
-            $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
+            if ( strlen( $ac_is_copyprotect ) == 0 ) { 
+                $ac_is_copyprotect = $ac_user_copyprotect;
+                update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
+            }
+
+            $ac_is_paidrepost = get_post_meta( $post->ID, "ac_is_paidrepost", true );
+            if ( strlen( $ac_is_paidrepost ) == 0 ) { 
+                $ac_is_paidrepost = $ac_user_paidrepost;
+                update_post_meta($post_id, "ac_is_paidrepost", $ac_is_paidrepost);
+            }
+
             $ac_is_import_comments = get_post_meta( $post->ID, "ac_is_import_comments", true );
+            if ( strlen( $ac_is_import_comments ) == 0 ) {
+                $ac_is_import_comments = $ac_user_is_import_comments;
+                update_post_meta($post_id, "ac_is_import_comments", $ac_is_import_comments);
+            }
+
+            $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
+            if ( strlen( $ac_paidrepost_cost ) == 0 ) { 
+                $ac_paidrepost_cost = $ac_user_paidrepostcost; 
+                update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
+            }
+
+            $ac_cost = get_post_meta($post->ID, "ac_cost", true);
+            if ( strlen( $ac_cost ) == 0 ) { 
+                $ac_cost = $ac_user_paidrepostcost;
+                update_post_meta($post_id, "ac_cost", $ac_cost);
+            }
+
+            $ac_type = get_post_meta( $post->ID, "ac_type", true );
+            if ( strlen( $ac_type ) == 0 ) {
+                if ($ac_is_paidrepost == "1") $ac_type = "paidrepost";
+                else $ac_type = "free";
+                update_post_meta($post_id, "ac_type", $ac_type);
+            }
+
             if ( $ac_is_process != "1" ) return;
 
             atcontent_coexistense_fixes();
