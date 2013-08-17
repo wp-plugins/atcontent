@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.5.1
+    Version: 3.5.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.5.1.60" );
+    define( 'AC_VERSION', "3.5.2.61" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -17,6 +17,7 @@
     require_once( "atcontent_dashboard.php" );
     require_once( "atcontent_lists.php" );
     require_once( "atcontent_post.php" );
+    require_once( "atcontent_shortcodes.php" );
     add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -68,10 +69,6 @@
 
     function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter, $currentNumPost_ac;
-
-        //$ac_modified = get_post_meta( $post->ID, "ac_modified", true );
-
-        //if ( $ac_modified != $post->post_modified ) atcontent_publish_publication( $post->ID );
         
         (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
         

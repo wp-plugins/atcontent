@@ -65,6 +65,14 @@ function atcontent_publish_publication( $post_id ){
 
             if ( $ac_is_process != "1" ) return;
 
+            $testcontent = apply_filters( "the_content",  $post->post_content );
+            $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+
+            if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
+                update_post_meta( $post_id, "ac_is_process", "2" );
+                return;
+            }
+
             atcontent_coexistense_fixes();
 
             $comments_json = "";
@@ -121,6 +129,9 @@ function atcontent_save_meta( $post_id ) {
 
     // OK, we're authenticated: we need to find and save the data
 
+    $post = get_post( $post_id );
+    if ( $post == null ) return;
+
     $ac_is_process = $_POST['atcontent_is_process'];
     $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
     $ac_is_paidrepost = $_POST['atcontent_is_paidrepost'];
@@ -148,6 +159,14 @@ function atcontent_save_meta( $post_id ) {
     if ($ac_paid_portion != NULL) {
         update_post_meta( $post_id, "ac_paid_portion", $ac_paid_portion );
     }
+
+    $testcontent = apply_filters( "the_content",  $post->post_content );
+    $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+
+    if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
+        update_post_meta( $post_id, "ac_is_process", "2" );
+    }
+
 }
 
 ?>
