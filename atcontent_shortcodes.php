@@ -25,5 +25,4 @@ END;
 
 add_shortcode( 'atcontent', 'atcontent_shortcode' );    
 
-
 ?>

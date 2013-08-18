@@ -306,7 +306,7 @@ END;
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_import" value="Y">
     <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
-    <p>Site Category: 
+    <p>Site Category<br/>
         <select name="ac_sitecategory">
             <?php
                 foreach ($atcontent_categories as $category => $description) {
@@ -318,7 +318,7 @@ END;
             ?>
         </select>
     </p>
-    <p>Country:
+    <p>Country<br/>
         <select id="ac_country" name="ac_country">
             <?php
                 foreach ($atcontent_countries as $code => $description) {
@@ -330,7 +330,7 @@ END;
             ?>
         </select>
     </p>
-    <p id="ac_state" style="display:none">State:
+    <p id="ac_state" style="display:none">State<br/>
         <select name="ac_state">
             <?php
                 foreach ($atcontent_states as $code => $description) {
@@ -357,7 +357,7 @@ END;
 	<p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</p>
     
-    <p>Referral (optional): <input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
+    <p>Referral (optional)<br/><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
 
         <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Apply Main Settings') ?></a>
    
