@@ -6,8 +6,8 @@ function atcontent_publish_publication( $post_id ){
 		$post_url = get_permalink( $post_id );
 		$post = get_post( $post_id );
         if ( $post == null ) return;
-        $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
-        $userid = $post->post_author;
+        $userid =  intval( $post->post_author );
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         if ( strlen( $ac_api_key ) > 0 ) {
 
             $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
@@ -21,6 +21,7 @@ function atcontent_publish_publication( $post_id ){
 
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
+
             if ( strlen( $ac_is_process ) == 0 ) { 
                 $ac_is_process = "1";
                 update_post_meta($post_id, "ac_is_process", $ac_is_process);
@@ -95,7 +96,6 @@ function atcontent_publish_publication( $post_id ){
                     $ac_cost, $ac_is_copyprotect, $comments_json );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
-                    update_post_meta( $post->ID, "ac_is_process", "1" );
                     update_post_meta( $post->ID, "ac_postid", $ac_postid );
                 } else {
                     update_post_meta( $post->ID, "ac_is_process", "2" );
@@ -108,7 +108,6 @@ function atcontent_publish_publication( $post_id ){
                     $ac_cost, $ac_is_copyprotect, $comments_json
                         );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
-                    update_post_meta( $post->ID, "ac_is_process", "1" );
                 } else {
                     update_post_meta( $post->ID, "ac_is_process", "2" );
                 }
@@ -162,8 +161,12 @@ function atcontent_save_meta( $post_id ) {
         update_post_meta( $post_id, "ac_paid_portion", $ac_paid_portion );
     }
 
+    remove_filter( 'the_content', 'atcontent_the_content', 1 );
+    
     $testcontent = apply_filters( "the_content",  $post->post_content );
     $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+
+    add_filter( 'the_content', 'atcontent_the_content', 1 );
 
     if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
         update_post_meta( $post_id, "ac_is_process", "2" );
