@@ -17,7 +17,7 @@ function atcontent_publish_publication( $post_id ){
             $ac_user_paidrepostcost = get_user_meta( $userid, "ac_paidrepostcost", true );
             if ( strlen( $ac_user_paidrepostcost ) == 0 ) $ac_user_paidrepostcost = "2.50";
             $ac_user_is_import_comments = get_user_meta( $userid, "ac_is_import_comments", true );
-            if ( strlen( $ac_user_is_import_comments ) == 0 ) $ac_user_is_import_comments = "1";
+            if ( strlen( $ac_user_is_import_comments ) == 0 ) $ac_user_is_import_comments = "0";
 
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
@@ -95,6 +95,7 @@ function atcontent_publish_publication( $post_id ){
                     $ac_cost, $ac_is_copyprotect, $comments_json );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
+                    update_post_meta( $post->ID, "ac_is_process", "1" );
                     update_post_meta( $post->ID, "ac_postid", $ac_postid );
                 } else {
                     update_post_meta( $post->ID, "ac_is_process", "2" );
@@ -107,6 +108,7 @@ function atcontent_publish_publication( $post_id ){
                     $ac_cost, $ac_is_copyprotect, $comments_json
                         );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
+                    update_post_meta( $post->ID, "ac_is_process", "1" );
                 } else {
                     update_post_meta( $post->ID, "ac_is_process", "2" );
                 }
