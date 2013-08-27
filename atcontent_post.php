@@ -65,6 +65,8 @@ function atcontent_publish_publication( $post_id ){
             }
 
             if ( $ac_is_process != "1" ) return;
+            
+            atcontent_coexistense_fixes();
 
             $testcontent = apply_filters( "the_content",  $post->post_content );
             $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
@@ -73,8 +75,6 @@ function atcontent_publish_publication( $post_id ){
                 update_post_meta( $post_id, "ac_is_process", "2" );
                 return;
             }
-
-            atcontent_coexistense_fixes();
 
             $comments_json = "";
             if ( $ac_is_import_comments == "1" ) {
