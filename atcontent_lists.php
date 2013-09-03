@@ -354,4 +354,18 @@ $atcontent_states = array(
 'MP' => 'Northern Mariana Islands'
 );
 
+$atcontent_reposts = array(
+'128h1FtlLP9.text' => 'Top 5 Tips For a High Converting Landing Page',
+'79p5DfAWAKq.text' => 'Scott Dudelson of Swagbucks.com Explains Loyalty & Rewards Program',
+'2RJll3fO2xk.text' => 'Ben Huxley of Fuse Powered Explains Mobile Publishing Platform',
+'7E1h1JD_ZjS.text' => 'Appier\'s Da Hsia Talks Mobile Marketing in Asia',
+'4kYMusQWMK7.text' => 'Swrve CEO Hugh Reynolds Details In-App Direct Marketing Platform',
+'2sAZW5zTBiR.text' => 'Tanisha Gupta Discusses Distimo\'s Mobile Conversion Tracking Technology',
+'69_eoppYIdV.text' => 'Andrea Flores of PaeDae Talks In-Game Reward Platform',
+'7E1h1JD_ZjS.text' => 'Appier\'s Da Hsia Talks Mobile Marketing in Asia',
+'29fcwo0uajb.text' => 'Eileen Wang of SponsorPay Discusses Mobile User LTV',
+'2IFi4xS64T9.text' => 'Chris Collins of Flying Monkey Interactive Talks Mobile User Acquisition',
+'1OQ7V5LMmJT.text' => 'Affiliate.com Is Hiring Helpers to Print Money—Are You Good Enough?',
+);
+
 ?>
