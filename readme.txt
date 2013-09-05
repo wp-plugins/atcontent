@@ -41,9 +41,9 @@ After the installation click “Sync with AtContent” and all your content will
 
 #### Quote of the day ####
 
-When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity.
+When the people fear the government, there is tyranny. When the government fears the people, there is liberty.
 
-Albert Einstein 
+Thomas Jefferson 
 
 == Examples ==
 
