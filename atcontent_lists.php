@@ -35,6 +35,7 @@ $atcontent_categories = array (
     "Photography" => "Photography",
     "Politics" => "Politics (To the Left, Independent, To the Right...)",
     "Relationships" => "Relationships (Weddings, Gay and Lesbian, Death...)",
+	"Religion and Spirituality" => "Religion and Spirituality",
     "Rides" => "Rides (Cars, Car Reviews, Green Transportation...)",
     "Science" => "Science (Engineering, Life Science, Supernatural...)",
     "Self" => "Self (Self Improvement & Performance, Psychology...)",
@@ -44,7 +45,7 @@ $atcontent_categories = array (
     "Travel" => "Travel (Travel, Vacation, Adventure, Destination...)",
     "VideoCollections" => "Video Collections",
     "Wanderlust" => "Wanderlust",
-    "Women" => "Wanderlust",
+    "Women" => "Women",
     "Zombies" => "Zombies",
     "Other" => "other",
 );
