@@ -3,16 +3,16 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 3.5.8
+    Version: 4.0.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "3.5.8.69" );
+    define( 'AC_VERSION', "4.0.0.70" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
-    require_once( "atcontent_pingback.php" ); 
+    require_once( "atcontent_pingback.php" );
     require_once( "atcontent_ajax.php" );
     require_once( "atcontent_dashboard.php" );
     require_once( "atcontent_lists.php" );
@@ -51,8 +51,13 @@
     }
 
     function atcontent_add_tools_menu() {
-        add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '', 
+        add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ) );
+        
+        add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
+            plugins_url( 'assets/logo.png', __FILE__ ), 6 );
+        add_submenu_page( 'atcontent/settings.php', 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php',  '');
+
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Content for repost', 'Content for repost', 'publish_posts', 'atcontent/repost.php',  '');
@@ -67,9 +72,9 @@
 
     function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter, $currentNumPost_ac;
-        
+
         (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
-        
+
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
             return $content;
         }
@@ -91,28 +96,28 @@
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        
-        
+
+
         $ac_adtest_messages = array();
         $ac_adtest_messages[] = "<h3>How online retailers solve the problem of reaching new buyers in a new way.</h3><p>Hi folks.<br/>My friend is an online retailer and he says that one of the largest problem that retailers face is the lack of methods to reach new buyers. He checked out a couple services and found Happy Retailer.  <br/>I think this is a very interesting idea to allow retailers upload inventory in one place and sell them simultaneously on Amazon, EBay, Bonanza and more than 1001 websites! <br/>If you a retailer it might be interesting for you. <br/>You can get more details here <a href=\"http://happyretailer.com/?from=atcontent\" target=_blank>http://happyretailer.com</a></p>";
 
 		$ac_adtest_messages[] = "<h3>New types of services that make this world a better place.</h3><p>I recently learned of a new type of services. They allow to donate money to charity and in return you can get cool experiences, such as flights on a private plane, meetings with interesting personalities, ride in MR2 Spyder, advises & mentorships, try international cuisines, etc.</p><p>One of the services is SunnyKarma.com. They are based out of San Francisco & are having a huge fundraising networking mixer/party on July 17th where they will be raffling off a flight on a private plane, you can get more details here: <a href=\"http://bit.ly/169mChq\" target=_blank>http://sunnykarma.com</a></p>";
-        
+
         //print_r($ac_adtest_messages);
-        
+
         shuffle($ac_adtest_messages);
-        
+
         //$ac_adtest_message_randkeys = array_rand($ac_adtest_messages, 1);
 
         //print_r($ac_adtest_message_randkeys);
-        
+
         //$ac_adtest_message = $ac_adtest_messages[$ac_adtest_message_randkeys[0]];
         $ac_adtest_message = $ac_adtest_messages[0];
-        
+
         //print_r($ac_adtest_message);
-        
+
         $ac_adtest_numOfmsgApears = 2;
-        
+
         if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
             $code = <<<END
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script async src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
@@ -123,13 +128,13 @@ END;
 <div class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script async src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
             }
-            
+
             /*
             if ($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears)) {
 				$code .= $ac_adtest_message;
             }
             //*/
-            
+
             $code = str_replace( PHP_EOL, " ", $code );
             $inline_style = "";
             preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
@@ -138,7 +143,7 @@ END;
             }
             return $inline_style . $code;
         }
-        
+
         return $content.
 			(($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears))
 				?$ac_adtest_message
@@ -201,7 +206,7 @@ END;
              //Chameleon theme thumb fix
             if (function_exists( 'get_thumbnail' ) && get_option( 'chameleon_thumbnails' ) == 'on' ) {
                 $ac_script_init .= <<<END
-(function($) { 
+(function($) {
 $(".CPlase_face").prepend($(".post-thumbnail").clone());
 $(".post-thumbnail:first").remove();
 })(jQuery)
@@ -305,42 +310,51 @@ END;
 CPlase = window.CPlase || {};
 CPlase.evt = CPlase.evt || [];
 CPlase.evt.push(function (event, p, w) {
-    {$ac_script_init}    
+    {$ac_script_init}
 });
 </script>
 END;
             }
         }
         return $content;
-    } 
+    }
 
     function atcontent_add_meta_boxes() {
-         add_meta_box( 
+         add_meta_box(
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
             'atcontent_inner_custom_box',
-            'post' 
+            'post'
         );
 
         $version = get_bloginfo('version');
         if ( version_compare( $version, '3.3', '>=' ) ) {
-            add_meta_box( 
+            add_meta_box(
                 'atcontent_secondeditor',
                 __( 'AtContent Paid Portion', 'atcontent_textdomain' ),
                 'atcontent_paid_portion',
                 'post'
             );
         }
-        
 
-        
+
+
     }
 
     function atcontent_inner_custom_box( $post ) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
           $userid = wp_get_current_user()->ID;
-          
+
+          $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+
+          $ac_is_pro_answer = atcontent_api_is_pro( $ac_api_key );
+          $ac_is_pro = false;
+          if ( $ac_is_pro_answer["IsOK"] == true &&
+               $ac_is_pro_answer["IsPro"] == true) {
+                   $ac_is_pro = true;
+               }
+
           $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
           $ac_is_process_checked = "";
           if ( $ac_is_process == "1" || $ac_is_process == "" ) {
@@ -360,7 +374,7 @@ END;
           $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
           if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
           $ac_is_copyprotect_checked = "";
-          if ( $ac_is_copyprotect == "1" ) {
+          if ( $ac_is_copyprotect == "1" && $ac_is_pro ) {
               $ac_is_copyprotect_checked = "checked=\"checked\"";
           }
 
@@ -412,15 +426,18 @@ END;
                 $("#atcontent_cost").show();
             }
             if (val == 'paid') {
-                $("#atcontent_secondeditor").show();    
+                $("#atcontent_secondeditor").show();
             }
         };
     })(jQuery)
 </script>
 <div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked ?> /> Use AtContent for this post</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked ?> /> Protect post from plagiarism</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked ?> <?php echo $ac_is_pro ? '' : 'disabled="disabled"'; ?> /> Protect post from plagiarism<?php if ($ac_is_pro == false) { ?> 
+<a href="https://atcontent.com/Subscribe">Upgrade to Pro to enable this feature</a>
+<?php
+ } ?></div>
 <div class="misc-pub-section">
-    Post type: 
+    Post type:
 <select name="atcontent_type" id="atcontent_type">
     <option value="free" <?php echo $ac_type_free_selected; ?>>Free</option>
     <option value="paidrepost" <?php echo $ac_type_paidrepost_selected; ?>>Paid repost</option>
@@ -445,18 +462,18 @@ END;
 
     function atcontent_paid_portion($post) {
         // Use nonce for verification
-        $args = array( 
-            'wpautop' => 1  
-            ,'media_buttons' => 1  
+        $args = array(
+            'wpautop' => 1
+            ,'media_buttons' => 1
             ,'textarea_name' => 'ac_paid_portion'
-            ,'textarea_rows' => 20  
-            ,'tabindex' => null  
-            ,'editor_css' => ''  
-            ,'editor_class' => ''  
-            ,'teeny' => 0  
-            ,'dfw' => 0  
-            ,'tinymce' => 1  
-            ,'quicktags' => 1  
+            ,'textarea_rows' => 20
+            ,'tabindex' => null
+            ,'editor_css' => ''
+            ,'editor_class' => ''
+            ,'teeny' => 0
+            ,'dfw' => 0
+            ,'tinymce' => 1
+            ,'quicktags' => 1
         );
         $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
         wp_editor( $ac_paid_portion, "atcontentpaidportion", $args);
@@ -466,7 +483,7 @@ END;
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( current_user_can( 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
-           
+
             atcontent_coexistense_fixes();
 
 	        // get the submitted parameters
@@ -484,7 +501,7 @@ END;
             $ac_paid_portion = get_post_meta( $postID, "ac_paid_portion", true );
 
             if ( strlen( $ac_type ) == 0 ) {
-                if ($ac_is_paidrepost == "1") { 
+                if ($ac_is_paidrepost == "1") {
                     $ac_type = "paidrepost";
                 } else {
                     $ac_type = "free";
@@ -496,7 +513,7 @@ END;
             $ac_action = "";
             $additional = NULL;
             $post = get_post( $postID );
-            if ( $post == null || $ac_is_process == "0" ) { 
+            if ( $post == null || $ac_is_process == "0" ) {
                 $ac_action = "skipped";
             } else {
                 $comments_json = "";
@@ -512,9 +529,9 @@ END;
                     }
                 }
 	            if ( strlen( $ac_postid ) == 0 ) {
-                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
-                            apply_filters( "the_content", $post->post_content ), 
-                            apply_filters( "the_content", $ac_paid_portion ), 
+                    $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title,
+                            apply_filters( "the_content", $post->post_content ),
+                            apply_filters( "the_content", $ac_paid_portion ),
                             $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
@@ -535,9 +552,9 @@ END;
                         update_post_meta( $post->ID, "ac_is_process", "2" );
                     }
                 } else {
-                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                        apply_filters( "the_content", $post->post_content ) , 
-                        apply_filters( "the_content", $ac_paid_portion ) , 
+                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title,
+                        apply_filters( "the_content", $post->post_content ) ,
+                        apply_filters( "the_content", $ac_paid_portion ) ,
                         $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
                         $ac_cost, $ac_is_copyprotect, $comments_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
@@ -565,12 +582,12 @@ END;
                 $res_array["Info"] = $additional;
             }
 	        $response = json_encode( $res_array );
- 
+
 	        // response output
 	        header( "Content-Type: application/json" );
 	        echo $response;
         }
- 
+
         // IMPORTANT: don't forget to "exit"
         exit;
     }
@@ -609,7 +626,7 @@ END;
 END;
 
         }
- 
+
         // IMPORTANT: don't forget to "exit"
         exit;
     }
@@ -640,7 +657,7 @@ END;
                 if(!empty($comments)){
                     $comments_json .= json_encode($comments);
                 }
-                
+
                 atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
             }
         }
@@ -778,7 +795,7 @@ $j().ready(function(){
         return "";
     }
 
-    
+
     function atcontent_column_head($defaults) {
 	    $defaults['atcontent_column'] = 'AtContent';
 	    return $defaults;
@@ -803,7 +820,7 @@ $j().ready(function(){
             $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
             $img_url = plugins_url( 'assets/logo.png', __FILE__ );
             $pointer_content = '<h3>Connect to AtContent</h3>';
-            $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url . 
+            $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url .
                 '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent</p>';
 ?>
 <script type="text/javascript">

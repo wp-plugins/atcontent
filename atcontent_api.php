@@ -108,12 +108,121 @@ function atcontent_api_sitecategory( $siteuri, $category, $country, $state, $api
 }
 
 function atcontent_api_readership( $siteuri, $postids, $api_key ) {
-    $post_content = 'SiteUri='. urlencode( $siteuri ) . 
+    $post_content = 'SiteUri=' . urlencode( $siteuri ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         '&PostIDs=' . urlencode( $postids ) .
         ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
         ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
+}
+
+function atcontent_api_is_pro( $api_key ) {
+    $post_content = 
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/ispro', $post_content );
+}
+
+function atcontent_api_guestposts_incoming( $siteuri, $api_key ) {
+    $post_content = 'Uri=' . urlencode( $siteuri ) . 
+        '&AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/list', $post_content );
+}
+
+function atcontent_api_guestposts_outgoing( $api_key ) {
+    $post_content = 
+        'AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/list', $post_content );
+}
+
+function atcontent_api_guestposts_create( $api_key, $siteuri, $targeturi, $title, $content, $status ) {
+    $post_splited_content = split("<!--more-->", $content);
+    $post_face = $post_splited_content[0];
+    $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
+    $post_content = 
+        'uri=' . urlencode( $siteuri ) .
+        '&targeturi=' . urlencode( $targeturi ) .
+        '&title=' . urlencode( $title ) .
+        '&face=' . urlencode( $post_face ) .
+        '&body=' . urlencode( $post_body ) .
+        '&status=' . urlencode( $status ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/create', $post_content );
+}
+
+function atcontent_api_guestposts_update( $api_key, $id, $siteuri, $targeturi, $title, $content, $status ) {
+    $post_splited_content = split("<!--more-->", $content);
+    $post_face = $post_splited_content[0];
+    $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
+    $post_content = 
+        'id=' . urlencode( $id ) .
+        '&uri=' . urlencode( $siteuri ) .
+        '&targeturi=' . urlencode( $targeturi ) .
+        '&title=' . urlencode( $title ) .
+        '&face=' . urlencode( $post_face ) .
+        '&body=' . urlencode( $post_body ) .
+        '&status=' . urlencode( $status ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/update', $post_content );
+}
+
+function atcontent_api_guestposts_get( $api_key, $id ) {
+    $post_content = 
+        'Id=' . urlencode( $id ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/get', $post_content );
+}
+
+function atcontent_api_guestposts_status_update( $api_key, $id, $status ) {
+    $post_content = 
+        'id=' . urlencode( $id ) .
+        '&status=' . urlencode( $status ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        ( $api_key != NULL ? '&Key=' . urlencode( $api_key ) : '' ) .
+        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/status', $post_content );
+}
+
+function atcontent_api_guestposts_preview( $api_key, $id, $siteuri ) {
+    $post_content = 
+        'Id=' . urlencode( $id ) .
+        '&Uri=' . urlencode( $siteuri ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/preview', $post_content );
+}
+
+function atcontent_api_guestposts_accept( $api_key, $id, $siteuri, $original_url ) {
+    $post_content = 
+        'Id=' . urlencode( $id ) .
+        '&Uri=' . urlencode( $siteuri ) .
+        '&OriginalUri=' . urlencode( $original_url ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/approve', $post_content );
+}
+
+function atcontent_api_guestposts_decline( $api_key, $id, $siteuri ) {
+    $post_content = 
+        'Id=' . urlencode( $id ) .
+        '&Uri=' . urlencode( $siteuri ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/approve', $post_content );
 }
 
 function atcontent_do_post( $url, $data ) {

@@ -75,7 +75,7 @@ function atcontent_publish_publication( $post_id ){
                 update_post_meta( $post_id, "ac_is_process", "2" );
                 return;
             }
-
+            
             $comments_json = "";
             if ( $ac_is_import_comments == "1" ) {
                 $comments = get_comments( array(
@@ -173,6 +173,77 @@ function atcontent_save_meta( $post_id ) {
     }
 
 }
+
+function atcontent_guest_post_preview( $posts ) {
+	global $wp_query;
+    global $wp;
+
+    $userid = wp_get_current_user()->ID;
+    $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+
+  	if ( $_GET['ac_guest_post'] != null ) {
+        $gp_request = atcontent_api_guestposts_preview( $ac_api_key, $_GET['ac_guest_post'], site_url() );
+        if ( $gp_request["IsOK"] != true ) { 
+            return $posts;
+        }
+        global $wp_filter;
+        remove_filter( 'the_content', 'atcontent_the_content', 1 );
+        remove_filter( 'the_content', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+        $accept_uri = admin_url("admin.php?page=atcontent/guestpost.php&postid=" . $_GET['ac_guest_post'] . "&action=accept");
+        $decline_uri = admin_url("admin.php?page=atcontent/guestpost.php&postid=" . $_GET['ac_guest_post'] . "&action=decline");
+        $post = new stdClass;
+        $post->post_author = 1;
+        $post->post_name = "ac_guest_post";
+        $post->guid = get_bloginfo('wpurl/ac_guest_post');
+        $post->post_title = 'Preview ' . $gp_request["Title"];
+        $post->post_content = '[atcontent id="' . $gp_request["Post4gId"] . '"]' .
+        <<<END
+<script type="text/javascript">
+var processed = false;
+function accept_guest_post(){
+    if (processed) return;
+    processed = true;
+    window.location = decodeuri('{$accept_uri}');
+}
+function decline_guest_post(){
+    if (processed) return;
+    processed = true;
+    window.location = decodeuri('{$decline_uri}');
+}
+function decodeuri(uri) {
+    var div = document.createElement('div');
+    div.innerHTML = uri;
+    return div.firstChild.nodeValue;
+}
+</script>
+<p><input type="button" onClick="accept_guest_post()" value="Accept"> or <input type="button"  onClick="decline_guest_post()" value="Decline"></p>
+END;
+        $post->ID = -42;
+        $post->post_status = 'static';
+        $post->comment_status = 'closed';
+        $post->ping_status = 'closed';
+        $post->comment_count = 0;
+        $post->post_date = current_time('mysql');
+        $post->post_date_gmt = current_time('mysql',1);
+
+        $posts = NULL;
+        $posts[] = $post;
+
+        $wp_query->is_page = true;
+        $wp_query->is_singular = true;
+        $wp_query->is_home = false;
+        $wp_query->is_archive = false;
+        $wp_query->is_category = false;
+        unset($wp_query->query["error"]);
+        $wp_query->query_vars["error"]="";
+        $wp_query->is_404 = false;
+    }
+
+    return $posts;
+}
+add_filter('the_posts', 'atcontent_guest_post_preview' );
 
 function atcontent_repost_preview( $posts ) {
 	global $wp_query;

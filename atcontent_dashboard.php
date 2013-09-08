@@ -34,6 +34,14 @@ function atcontent_dashboard_widget_function() {
             }
         }
 
+        $gp_result = atcontent_api_guestposts_incoming( site_url(), $ac_api_key );
+        if ( $gp_result["IsOK"] == true ) {
+            foreach ( $gp_result["List"] as $gp_item ) {
+                if ( $gp_item["Status"] != "Accepted") continue;
+                array_push( $posts_id, $gp_item["Post4gId"] );
+            }
+        }
+
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
         if ( $response["OriginalViews"] > 0 ) {
             $num = number_format_i18n( $response["OriginalViews"] );
