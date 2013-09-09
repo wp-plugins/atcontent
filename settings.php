@@ -23,6 +23,20 @@
              echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
          }
 
+         $ac_is_pro = atcontent_api_is_pro( $ac_api_key );
+
+         if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
+            $ac_pro_end_date = date("F d, Y", strtotime( $ac_is_pro["Ended"] ) );
+            echo <<<END
+<script type="text/javascript">
+$$j = jQuery;
+$$j(function(){
+	$$j('#wpbody-content').prepend('<div class="update-nag">Congradulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>');
+});
+</script>
+END;
+         }
+
          //End PingBack
 
          if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&

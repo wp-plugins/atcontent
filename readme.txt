@@ -289,4 +289,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* Easy Guest Posting is here!
+* Easy Guest Posting is here! 

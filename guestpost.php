@@ -30,6 +30,21 @@
         if ( strlen( $ac_api_key ) == 0 ) {
             include("invite.php");
         } else {
+
+            $ac_is_pro = atcontent_api_is_pro( $ac_api_key );
+
+             if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
+                $ac_pro_end_date = date("F d, Y", strtotime( $ac_is_pro["Ended"] ) );
+                echo <<<END
+<script type="text/javascript">
+$$j = jQuery;
+$$j(function(){
+	$$j('#wpbody-content').prepend('<div class="update-nag">Congradulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>');
+});
+</script>
+END;
+             }
+
             $guestpostid = $_GET["postid"];
             if ( strlen( $guestpostid ) == 0 ) {
                 $incoming_request = atcontent_api_guestposts_incoming( site_url(), $ac_api_key );
@@ -188,7 +203,6 @@
                                     } else {
                                         echo "<div class=\"error\">" . 'Could not update status. ' . $create_result["Reason"] .  "</div>";
                                     }
-                                    
                                 } else {
                                     die( '<h2>Post was submited!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
@@ -221,7 +235,7 @@
                                         }
                                         
                                     } else {
-                                        die( '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                        die( '<h2>Post was accepted and published</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                     }
                                 }
                             } else if ( $action == "decline") {
@@ -236,7 +250,7 @@
                                         echo "<div class=\"error\">" . 'Could not decline guest post. ' . $create_result["Reason"] .  "</div>";
                                     }
                                 } else {
-                                    die( '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                    die( '<h2>Post was declined</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                             } else {
                                 $gp_result = atcontent_api_guestposts_get( $ac_api_key, $guestpostid );
