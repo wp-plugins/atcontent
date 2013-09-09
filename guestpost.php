@@ -139,7 +139,7 @@
                                 if ( $_POST["targetaction"] == "save" ) $draft_status = "Created";
                                 if ( $_POST["targetaction"] == "submit" ) $draft_status = "Submitted";
                                 $create_result = atcontent_api_guestposts_create( $ac_api_key, site_url(), $_POST["targeturi"], $_POST["title"], $_POST["post_content"], $draft_status );
-                                if ( $create_result["IsOK"] == true ) {
+                                if ( $create_result["IsOK"] != true ) {
                                      if ($create_result["ErrorCode"] == 102) {
                                         echo "<div class=\"error\">" . 'Could not save draft to atcontent.com. ' . 
                                             'To submit guest post you should have Pro account.<br>' .
@@ -148,9 +148,8 @@
                                     } else {
                                         echo "<div class=\"error\">" . 'Could not save draft to atcontent.com. ' . $create_result["Reason"] .  "</div>";
                                     }
-                                    die( '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 } else {
-                                    echo "<div class=\"error\">" . 'Could not save draft to atcontent.com. ' . $create_result["Reason"] .  "</div>";
+                                    die(  '<h2>Post was saved!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                                 $gp_title = $_POST["title"];
                                 $gp_content = $_POST["post_content"];

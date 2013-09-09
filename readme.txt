@@ -80,6 +80,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 4.0.0 =
+
+* Easy Guest Posting is here!
+
 = 3.4.0 =
 
 * Lightbox Plus ColorBox compatibility.
@@ -285,5 +289,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-AtContent Statistics inside plugin!
-Posts become faster!
+* Easy Guest Posting is here!
