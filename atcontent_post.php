@@ -254,7 +254,12 @@ function atcontent_repost_preview( $posts ) {
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
 
   	if ( $_GET['ac_repost_post'] != null ) {
-        $repost_title = $atcontent_reposts[$_GET['ac_repost_post']];
+        $repost_title_answer = atcontent_api_get_title( $_GET['ac_repost_post'] );
+        $repost_title = "Not found";
+        if ( $repost_title_answer["IsOK"] == true ) {
+            $repost_title = $repost_title_answer["Title"];
+        }
+        
         global $wp_filter;
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100);
@@ -267,7 +272,8 @@ function atcontent_repost_preview( $posts ) {
         $post->post_name = "ac_guest_post";
         $post->guid = get_bloginfo('wpurl/ac_guest_post');
         $post->post_title = 'Preview ' . $repost_title;
-        $post->post_content = '[atcontent id="' . $_GET['ac_repost_post'] . '"]' .
+        $post->post_content = '<p><input type="button" onClick="accept_guest_post()" value="Accept"> or <input type="button" onClick="decline_guest_post()" value="Decline"></p>' .
+        '[atcontent id="' . $_GET['ac_repost_post'] . '"]' .
         <<<END
 <script type="text/javascript">
 var processed = false;

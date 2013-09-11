@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.0.2
+    Version: 4.1.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.0.2.72" );
+    define( 'AC_VERSION', "4.1.0.73" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -60,7 +60,10 @@
 
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
-        add_submenu_page( 'atcontent/settings.php', 'Content for repost', 'Content for repost', 'publish_posts', 'atcontent/repost.php',  '');
+        
+        add_menu_page( 'Reposting', 'Reposting', 'publish_posts', 'atcontent/repost.php', '', 
+            plugins_url( 'assets/logo.png', __FILE__ ), 7 );
+        add_submenu_page( 'atcontent/settings.php', 'Content for reposting', 'Content for reposting', 'publish_posts', 'atcontent/repost.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
         add_action( 'admin_print_footer_scripts', 'atcontent_footer_scripts' );

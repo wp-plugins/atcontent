@@ -225,6 +225,24 @@ function atcontent_api_guestposts_decline( $api_key, $id, $siteuri ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/approve', $post_content );
 }
 
+function atcontent_api_reposts( $category, $page ) {
+    $post_content = 
+        'Category=' . urlencode( $category ) .
+        '&Page=' . urlencode( $page ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/general/repost', $post_content );
+}
+
+function atcontent_api_get_title( $postid ) {
+    $post_content = 
+        'PostId=' . urlencode( $postid ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/general/title', $post_content );
+}
+
+
 function atcontent_do_post( $url, $data ) {
     $old_error_level = error_reporting(0);
     if ( function_exists( 'curl_init' ) ) {
