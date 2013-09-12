@@ -116,14 +116,14 @@
                     <strong>Business & Marketing</strong><br>
                 <?php }?>
                 <?php if ($currentcategory !== "2") { ?>
-                    <a href="<?php echo $category2url; ?>">Fashion</a><br>
+                    <a href="<?php echo $category2url; ?>">Fashion & Style</a><br>
                 <?php } else { ?>
-                    <strong>Fashion</strong><br>
+                    <strong>Fashion & Style</strong><br>
                 <?php }?>
                 <?php if ($currentcategory !== "3") { ?>
-                    <a href="<?php echo $category3url; ?>">Enterpreneurship</a><br>
+                    <a href="<?php echo $category3url; ?>">Social Enterpreneurship</a><br>
                 <?php } else { ?>
-                    <strong>Enterpreneurship</strong><br>
+                    <strong>Social Enterpreneurship</strong><br>
                 <?php }?>
             </p>
         </div>
