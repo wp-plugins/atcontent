@@ -148,10 +148,10 @@
     function toggleDetails(domain) {
         var link = document.getElementById("details-link-" + domain), jq = jQuery;
         if (jq(link).html() == "Show details") {
-            jq(".child-" + domain.replace(".", "\\.")).show();
+            jq(".child-" + domain.split(".").join("\\.")).show();
             jq(link).html("Hide details");
         } else {
-            jq(".child-" + domain.replace(".", "\\.")).hide();
+            jq(".child-" + domain.split(".").join("\\.")).hide();
             jq(link).html("Show details");
         }
     }
