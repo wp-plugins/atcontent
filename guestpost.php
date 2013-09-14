@@ -322,6 +322,37 @@ jQuery(function(){
     file_frame.open();
   });
 });
+var checkUrlInProcess = false;
+function checkUrl(){
+    if (checkUrlInProcess) return;
+    checkUrlInProcess = true;
+    var jq = jQuery, url = jq("#targeturi").val();
+    jq("#check-url-out").html("Loading...");
+    jq.ajax({
+        url: '<?php echo admin_url("admin-ajax.php"); ?>',
+        type: 'post',
+        data: {
+            action: 'atcontent_guestpost_check_url',
+            url: url},
+        dataType: "json",
+        success: function(d){
+            checkUrlInProcess = false;
+            if (d.IsOK) {
+                if (d.IsActive) {
+                    jq("#check-url-out").html('Found URL: ' + d.Url + ' <a href="javascript:setUrl(\'' + d.Url + '\');">Set correct URL</a>');
+                } else {
+                    jq("#check-url-out").html("Found inactive URL: " + d.Url + ' <a href="javascript:setUrl(\'' + d.Url + '\');">Set anyway</a>' );
+                }
+            } else {
+                jq("#check-url-out").html("Incorrect URL");
+            }
+
+        }
+        });
+}
+function setUrl(url) {
+    jQuery("#targeturi").val(url);
+}
     </script>
     <?php
                         wp_enqueue_media();
@@ -331,8 +362,12 @@ jQuery(function(){
                         '<a href="javascript:savedraft();" class="button">Save Draft</a> or ' .
                         '<a href="javascript:submit();" class="button">Submit for Consideration</a><br><br>';
                         echo 
-                        'Blog\'s URL<br><input type="text" name="targeturi" style="width:100%" value="' . $gp_targeturi . '">'  .
-                        '<br><br>';
+                        'Blog\'s URL<br><input type="text" id="targeturi" name="targeturi" style="width:100%" value="' . $gp_targeturi . '">';
+?>
+<a id="check-url-link" class="button" href="javascript:checkUrl();">Check URL</a>
+<span id="check-url-out"></span>
+                        <br><br>
+<?php
                         echo 
                         'Title<br><input type="text" name="title" style="width:100%" value="' . $gp_title . '"><br><br>';
                         echo 

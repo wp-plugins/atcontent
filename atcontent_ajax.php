@@ -34,4 +34,47 @@ function atcontent_readership() {
     // IMPORTANT: don't forget to "exit"
     exit;
 }
+
+function atcontent_ajax_guestpost(){
+    $blogusers = get_users();
+    $ac_is_active = false;
+    $blogurl = "";
+    foreach ($blogusers as $user) {
+        $ac_api_key = get_user_meta( $user->ID, "ac_api_key", true );
+        if ( strlen( $ac_api_key ) > 0 ) {
+            $ac_is_active = true;
+            $blogurl = site_url();
+            break;
+        }
+    }
+    echo json_encode( array ( "IsOK" => true, "IsActive" => $ac_is_active, "Url" => $blogurl ) );
+    exit;
+}
+
+function atcontent_ajax_guestpost_check_url(){
+    $testurl = $_POST["url"];
+    if ( strpos( $testurl, "http://" ) !== 0 &&
+         strpos( $testurl, "https://" ) !== 0 ) {
+             $testurl = "http://" . $testurl;
+    }
+    $urlparts = explode ( "/", $testurl );
+    $requests = array();
+    $answers = array();
+    do {
+        $post_content = 'action=atcontent_guestpost';
+        $requesturl = implode ( "/", $urlparts ) . "/wp-admin/admin-ajax.php";
+        $requests[] = $requesturl;
+        try {
+            $answer = atcontent_do_post( $requesturl , $post_content );
+            $answers[] = $answer;
+            if ( $answer["IsOK"] == true ) {
+                echo json_encode( $answer );
+                exit;
+            }
+        } catch (Exception $ex) { }
+    } while ( ( $toppart = array_pop ( $urlparts ) ) != null );
+    echo json_encode ( array ( "IsOK" => false, "Tests" => $requests, "Answers" => $answers ) );
+    exit;
+}
+
 ?>
