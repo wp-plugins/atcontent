@@ -102,6 +102,8 @@ END;
 	                "
                 );
 
+                wp_cache_flush();
+
                 foreach ( $posts as $post ) 
                 {
                     if ($post->post_author == $userid) {
@@ -116,7 +118,8 @@ END;
                             update_post_meta( $post->ID, "ac_is_import_comments", "" );
                             update_post_meta( $post->ID, "ac_type", "" );
                         }
-                    }	
+                    }
+                    wp_cache_flush();
                 }
 
             
@@ -438,12 +441,15 @@ END;
 
         $posts_id = array();
 
+        wp_cache_flush();
+
         foreach ( $posts as $post ) 
         {
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             if ( strlen( $ac_postid ) > 0 ) { 
                 array_push( $posts_id, $ac_postid );
             }
+            wp_cache_flush();
         }
 
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );

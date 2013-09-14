@@ -155,3 +155,12 @@ button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     line-height: 24pt;
     text-align: right;
 }
+
+.ac-url-entry {
+    background: #fff;
+    display: none;
+}
+.ac-url-entry .url-caption {
+    padding-left: 10pt;
+    
+}

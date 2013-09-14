@@ -116,6 +116,16 @@ function atcontent_api_readership( $siteuri, $postids, $api_key ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
 }
 
+function atcontent_api_extended_readership( $api_key, $siteuri, $postids, $detailed ) {
+    $post_content = 'SiteUri=' . urlencode( $siteuri ) . 
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&PostIDs=' . urlencode( $postids ) .
+        '&Details=' . urlencode( $detailed ) .
+        '&Key=' . urlencode( $api_key )  .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/extendedreadership', $post_content );
+}
+
 function atcontent_api_is_pro( $api_key ) {
     $post_content = 
         '&AppID=' . urlencode( 'WordPress' ) .
