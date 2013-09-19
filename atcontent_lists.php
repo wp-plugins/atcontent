@@ -367,6 +367,7 @@ $atcontent_reposts = array(
 '29fcwo0uajb.text' => 'Eileen Wang of SponsorPay Discusses Mobile User LTV',
 '2IFi4xS64T9.text' => 'Chris Collins of Flying Monkey Interactive Talks Mobile User Acquisition',
 '1OQ7V5LMmJT.text' => 'Affiliate.com Is Hiring Helpers to Print Money—Are You Good Enough?',
+'3byaK1Gtzml.text' => 'Guide to Twitter - Social networking tips for beginners',
 );
 
 ?>

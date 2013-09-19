@@ -1,5 +1,6 @@
 <?php
 
+
 function atcontent_publish_publication( $post_id ){
     atcontent_save_meta( $post_id );
 	if ( !wp_is_post_revision( $post_id ) ) {

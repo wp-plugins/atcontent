@@ -42,6 +42,7 @@
     add_action( 'manage_posts_custom_column', 'atcontent_column_content', 10, 2 );
     add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
 
+
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
