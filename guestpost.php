@@ -339,14 +339,19 @@ function checkUrl(){
             checkUrlInProcess = false;
             if (d.IsOK) {
                 if (d.IsActive) {
-                    jq("#check-url-out").html('Found URL: ' + d.Url + ' <a href="javascript:setUrl(\'' + d.Url + '\');">Set correct URL</a>');
+                    jq("#check-url-out").html('Found URL: ' + d.Url);
+                    setUrl(d.Url);
                 } else {
-                    jq("#check-url-out").html("Found inactive URL: " + d.Url + ' <a href="javascript:setUrl(\'' + d.Url + '\');">Set anyway</a>' );
+                    jq("#check-url-out").html("Found inactive URL: " + d.Url + ' <a href="javascript:setUrl(\'' + d.Url + '\');">Use anyway</a>' );
                 }
             } else {
                 jq("#check-url-out").html("Incorrect URL");
             }
 
+        },
+        error: function(d, s, e) {
+            checkUrlInProcess = false;
+            jq("#check-url-out").html("Error. Please try again.");
         }
         });
 }
