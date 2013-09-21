@@ -80,6 +80,18 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 4.2.5 =
+
+* WP-insert compatibility
+
+= 4.2.0 =
+
+* Repost content marketplace
+
+= 4.1.0 = 
+
+* Guest Posting improvement
+
 = 4.0.0 =
 
 * Easy Guest Posting is here!
