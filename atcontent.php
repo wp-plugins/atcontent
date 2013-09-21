@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.2.3
+    Version: 4.2.4
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.2.3.78" );
+    define( 'AC_VERSION', "4.2.4.79" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -823,6 +823,25 @@ $j().ready(function(){
     function atcontent_footer_scripts() {
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+?>
+<script type="text/javascript">
+function ACsetCookie (name, value, expires, path, domain, secure) {
+      document.cookie = name + "=" + escape(value) +
+        ((expires) ? "; expires=" + expires : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? "; secure" : "");
+}
+function ACgetCookie(name) {
+	var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+ 
+  if ( results )
+    return ( unescape ( results[2] ) );
+  else
+    return null;
+}
+</script>
+<?php
         if ( strlen( $ac_api_key ) == 0 ) {
             $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
             $img_url = plugins_url( 'assets/logo.png', __FILE__ );
@@ -832,14 +851,16 @@ $j().ready(function(){
 ?>
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-    $('#toplevel_page_atcontent-settings').pointer({
-        content: '<?php echo $pointer_content; ?>',
-        position: 'top',
-        close: function() {
-            // This function is fired when you click the close button
-        }
-      }).pointer('open');
-   });
+    if (ACgetCookie("ac-connect-dismiss") != "1") {
+        $('#toplevel_page_atcontent-settings').pointer({
+            content: '<?php echo $pointer_content; ?>',
+            position: 'top',
+            close: function() {
+                ACsetCookie("ac-connect-dismiss", "1", null, "/");
+            }
+        }).pointer('open');
+    }
+});
 </script>
 <?php
         } else {
@@ -851,13 +872,15 @@ jQuery(document).ready( function($) {
 ?>
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-    jQuery('#toplevel_page_atcontent-settings').pointer({
-        content: '<?php echo $pointer_content; ?>',
-        position: 'top',
-        close: function() {
-            // This function is fired when you click the close button
-        }
-      }).pointer('open');
+    if (ACgetCookie("ac-location-dismiss") != "1") {
+        jQuery('#toplevel_page_atcontent-settings').pointer({
+            content: '<?php echo $pointer_content; ?>',
+            position: 'top',
+            close: function() {
+                ACsetCookie("ac-location-dismiss", "1", null, "/");
+            }
+        }).pointer('open');
+    }
    });
 </script>
 <?php
