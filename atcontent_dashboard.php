@@ -18,7 +18,7 @@ function atcontent_dashboard_widget_function() {
     if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
         $ac_pro_end_date = date("F d, Y", strtotime( $ac_is_pro["Ended"] ) );
         echo <<<END
-<div style="text-align: center; font-weight:bold;">Congradulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. 
+<div style="text-align: center; font-weight:bold;">Congratulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. 
 <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>
 <div class="clear"></div>
 END;

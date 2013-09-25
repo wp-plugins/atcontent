@@ -31,7 +31,7 @@
 <script type="text/javascript">
 $$j = jQuery;
 $$j(function(){
-	$$j('#wpbody-content').prepend('<div class="update-nag">Congradulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>');
+	$$j('#wpbody-content').prepend('<div class="update-nag">Congratulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>');
 });
 </script>
 END;
