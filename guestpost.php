@@ -175,7 +175,7 @@ END;
                             if ( $action == "save" ) {
                                 if ( $_POST["targetaction"] == "save" ) $status = "Created";
                                 if ( $_POST["targetaction"] == "submit" ) $status = "Submitted";
-                                $post_content = apply_filters( "the_content", $_POST["post_content"] );
+                                $post_content = $_POST["post_content"];
                                 $update_result = atcontent_api_guestposts_update( $ac_api_key, $guestpostid, site_url(), $_POST["targeturi"], $_POST["title"], $post_content, $status );
                                 if ( $update_result["IsOK"] != true ) {
                                     if ($update_result["ErrorCode"] == 102) {
@@ -225,6 +225,7 @@ END;
                                     $original_uri = get_permalink ( $new_post_id );
                                     $update_result = atcontent_api_guestposts_accept( $ac_api_key, $guestpostid, site_url(), $original_uri );
                                     if ( $update_result["IsOK"] != true ) {
+                                        wp_delete_post( $new_post_id, TRUE );
                                         if ($update_result["Code"] == 102) {
                                             echo "<div class=\"error\">" . 'Could not accept guest post.<br>' . 
                                             'You must have a Pro account to accept guest posts.<br>' .
