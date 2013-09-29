@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.2.7
+    Version: 4.2.8
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.2.7.82" );
+    define( 'AC_VERSION', "4.2.8.83" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -861,7 +861,6 @@ function ACgetCookie(name) {
 ?>
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-    return;
     if (ACgetCookie("ac-connect-dismiss") != "1") {
         $('#toplevel_page_atcontent-settings').pointer({
             content: '<?php echo $pointer_content; ?>',
@@ -883,7 +882,6 @@ jQuery(document).ready( function($) {
 ?>
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-    return;
     if (ACgetCookie("ac-location-dismiss") != "1") {
         jQuery('#toplevel_page_atcontent-settings').pointer({
             content: '<?php echo $pointer_content; ?>',
