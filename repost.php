@@ -113,12 +113,12 @@
                 <?php if ($currentcategory !== "1") { ?>
                     <a href="<?php echo $category1url; ?>">Business & Marketing</a><br>
                 <?php } else { ?>
-                    <strong>Business & Marketing</strong><br>
+                    <strong>Business &amp; Marketing</strong><br>
                 <?php }?>
                 <?php if ($currentcategory !== "2") { ?>
                     <a href="<?php echo $category2url; ?>">Fashion & Style</a><br>
                 <?php } else { ?>
-                    <strong>Fashion & Style</strong><br>
+                    <strong>Fashion &amp; Style</strong><br>
                 <?php }?>
                 <?php if ($currentcategory !== "3") { ?>
                     <a href="<?php echo $category3url; ?>">Social Enterpreneurship</a><br>
@@ -126,6 +126,35 @@
                     <strong>Social Enterpreneurship</strong><br>
                 <?php }?>
             </p>
+            
+            <br>
+<p style="line-height: 12px">
+
+<?php
+
+$email_subject = $_SERVER['HTTP_HOST'] . " would like to be featured";
+
+$email_body = "Hey AtContent team, \n" .
+	"I would like to submit my posts from " . $_SERVER['HTTP_HOST'] . " to be Featured page.\n\n" .
+	"%% You also can share your feedback right here - so, we'll be able to improve AtContent for you\n\n".
+	"Thanks,\n".
+	$_SERVER['HTTP_HOST'];
+
+?>
+
+<a href="mailto:mail@atcontent.com?subject=<?php
+	echo str_replace('+', '%20', urlencode($email_subject)); ?>&body=<?php
+	echo str_replace('+', '%20', urlencode($email_body)); ?>" class="likebutton b_green">Submit my Posts</a><br>
+<br>
+<small>
+
+
+<span style="padding-left:13px">* Submit your posts to be</span><br>
+<span style="padding-left:20px">feautered on this page</span>
+
+</small></p>
+
+
         </div>
 
     <div class="mainCol">
