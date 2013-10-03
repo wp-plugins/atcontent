@@ -135,8 +135,8 @@
 $email_subject = $_SERVER['HTTP_HOST'] . " would like to be featured";
 
 $email_body = "Hey AtContent team, \n" .
-	"I would like to submit my posts from " . $_SERVER['HTTP_HOST'] . " to be Featured page.\n\n" .
-	"%% You also can share your feedback right here - so, we'll be able to improve AtContent for you\n\n".
+	"I would like to submit my posts from " . $_SERVER['HTTP_HOST'] . " to be on the Featured page.\n\n\n\n" .
+	"%% You also can share your feedback right here - so, we'll be able to improve AtContent for you".
 	"Thanks,\n".
 	$_SERVER['HTTP_HOST'];
 
@@ -150,7 +150,7 @@ $email_body = "Hey AtContent team, \n" .
 
 
 <span style="padding-left:13px">* Submit your posts to be</span><br>
-<span style="padding-left:20px">feautered on this page</span>
+<span style="padding-left:20px">featured on this page</span>
 
 </small></p>
 
