@@ -8,7 +8,7 @@
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.2.9.84" );
+    define( 'AC_VERSION', "4.2.9.85" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -78,6 +78,7 @@
     }
 
     function atcontent_the_content( $content = '' ) {
+    
         global $post, $wp_current_filter, $currentNumPost_ac;
 
         (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
@@ -106,7 +107,7 @@
 
 
         $ac_adtest_messages = array();
-        $ac_adtest_messages[] = "<h3>How online retailers solve the problem of reaching new buyers in a new way.</h3><p>Hi folks.<br/>My friend is an online retailer and he says that one of the largest problem that retailers face is the lack of methods to reach new buyers. He checked out a couple services and found Happy Retailer.  <br/>I think this is a very interesting idea to allow retailers upload inventory in one place and sell them simultaneously on Amazon, EBay, Bonanza and more than 1001 websites! <br/>If you a retailer it might be interesting for you. <br/>You can get more details here <a href=\"http://happyretailer.com/?from=atcontent\" target=_blank>http://happyretailer.com</a></p>";
+        $ac_adtest_messages[] = "<h3>How online retailers solve the problem of reaching new buyers in a new way.</h3><p>Hi folks.<br/>My friend is an online retailer and he says that one of the largest problem that retailers face is the lack of methods to reach new buyers. He checked out a couple services and found Happy Retailer.  <br/>I think this is a very interesting idea to allow retailers upload inventory in one place and sell them simultaneously on Amazon, EBay, Bonanza and more than 1001 websites! <br />If you a retailer it might be interesting for you. <br/>You can get more details here <a href=\"http://happyretailer.com/?from=atcontent\" target=_blank>http://happyretailer.com</a></p>";
 
 		$ac_adtest_messages[] = "<h3>New types of services that make this world a better place.</h3><p>I recently learned of a new type of services. They allow to donate money to charity and in return you can get cool experiences, such as flights on a private plane, meetings with interesting personalities, ride in MR2 Spyder, advises & mentorships, try international cuisines, etc.</p><p>One of the services is SunnyKarma.com. They are based out of San Francisco & are having a huge fundraising networking mixer/party on July 17th where they will be raffling off a flight on a private plane, you can get more details here: <a href=\"http://bit.ly/169mChq\" target=_blank>http://sunnykarma.com</a></p>";
 
