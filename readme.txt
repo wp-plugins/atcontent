@@ -55,9 +55,10 @@ Thomas Jefferson
 
 == Installation ==
 
-1. After the plugin downloading and activation it's needed to connect your blog to AtContent. For this, click the highlighted button in AtContent plugin settings. [Screenshot](http://i.imgur.com/FTXC09k.png). 
-2. If you still do not have an AtContent account you will be asked to create one. Fill in the fields or simply click "Connect with Facebook". [Screenshot](http://i.imgur.com/Xnz3Ux8.png).  
-3. After account creation you can sync all your posts with AtContent to get free backlinks and cloud backup. For this just click "Sync with AtContent" button on plugin settings page. [Screenshot](http://i.imgur.com/uzq88e2.png).
+1. Install AtContent plugin on your blog and activate it,
+2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://i.imgur.com/yiLocp8.png),
+3. Choose options and click “Apply Main Settings” - [Screenshot](http://i.imgur.com/sYOfSGI.png).
+
 
 **1, 2, 3: You're done!**
 
