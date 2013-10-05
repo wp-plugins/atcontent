@@ -22,14 +22,14 @@ Provides backlinks, posts distribution, guest posting and analytics. Usually blo
 
 #### Plagiarism Prevention with AtContent ####
 
-* Nobody can steal your content! Here is the example: [thefabuloustimes.com] (http:\\thefabuloustimes.com) — as you can see, nobody can copy-paste this article, but everyone can legally repost it via AtContent by clicking "repost" at the bottom of the article.
+* Nobody can steal your content! Here is the example: [thefabuloustimes.com](http://thefabuloustimes.com) — as you can see, nobody can copy-paste this article, but everyone can legally repost it via AtContent by clicking "repost" at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites! ####
 * You, as a content owner can track, update or block your posts on other sites and interact with viewers. You see detailed statistics about your post views, reposting and sharing. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
 
 #### Monetize Content Reposting ####
 
-* Others pay to you for the ability to repost your posts. [Example] (http://atcontenttest.bestcheapwebhosting.com/how-to-blog-like-chuck/) — click "repost" at the bottom of the article and see that anyone is charged before making a repost. This protects your posts from plagiarism and brings you money.
+* Others pay to you for the ability to repost your posts. [Example](http://atcontenttest.bestcheapwebhosting.com/how-to-blog-like-chuck/) — click "repost" at the bottom of the article and see that anyone is charged before making a repost. This protects your posts from plagiarism and brings you money.
 
 #### Joining AtContent costs you nothing – the plugin is free. ####
 
