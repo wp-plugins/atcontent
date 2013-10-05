@@ -15,7 +15,7 @@
 
 ?>
 
-<div class="atcontent_wrap">
+<div  class="atcontent_wrap">
     <div class="wrap">
         <div class="icon32" id="icon-link"><br></div><h2>AtContent&nbsp;Guest&nbsp;Posts <?php 
                 if ( strlen ( $ac_api_key ) > 0 ) { ?><a class="add-new-h2" href="<?php echo admin_url("admin.php?page=atcontent/guestpost.php&postid=new")?>">Add New</a><?php } ?> </h2>
@@ -157,7 +157,7 @@ END;
                                 if ( $create_result["IsOK"] != true ) {
                                      if ($create_result["ErrorCode"] == 102) {
                                         echo "<div class=\"error\">" . 'Could not save draft to atcontent.com. ' . 
-                                            'To submit guest post you should have Pro account.<br>' .
+                                            'To submit guest post you should have Pro account.<br/>' .
                                             '<a href="https://atcontent.com/Subscribe">Upgrade for Pro account here</a>' .
                                             "</div>";
                                     } else {

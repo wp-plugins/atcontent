@@ -8,7 +8,7 @@
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.2.10.85" );
+    define( 'AC_VERSION', "4.2.10.86" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -344,7 +344,6 @@ END;
                 'post'
             );
         }
-
 
 
     }
