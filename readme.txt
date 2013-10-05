@@ -9,35 +9,32 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-AtContent provides backlinks and new readership. It allows to display your posts on other sites, maintain control on it and interact with viewers!
+Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent! 
 
 == Description ==
+**Let's face it - growing audience is tough.** How does AtContent make it easier?
+#### AtContent provides you valuable backlinks and the ability for content distribution. #### 
+* Others can repost your posts/articles on any site a as simple as a retweet on Twitter. Every site provides you additional audience and backlinks. Usually bloggers increase audience from 30% to 300% in 90 days by using AtContent. SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
+* Repost relevant posts of other authors on your blog to increase audience engagement and get more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
-### AtContent provides you backlinks and additional readership ### 
-* By using AtContent bloggers usually increase their readership outside of their blogs from 30% to 300%.
-* AtContent allows to display your posts on other sites, maintain control on it and interact with viewers!
-* After the installation of AtContent plugin, connect it with AtContent site and synchronize your blog — [screenshot](http://bit.ly/connection_AC). 
-* Your content will be displayed on AtContent as well, but without content duplication! You will get backlinks from all your posts on AtContent to all posts on your site. This increases your SEO. This also helps to build your web presence by allowing people to read your posts not only on your blog, but on AtContent too. It's proven by thousands of blogs!
+#### Guest Posting with AtContent – Easy as Never Before! ####
+* Guest blogging with AtContent is just like writing a post for your own site, with the one exception that you specify the site you wish the post to be published on. AtContent then sends your guest post to the chosen website for reviewing and publishing. [Read more here!](http://atcontent.com/Blog/3WWXEDY3SJh.text)
 
-### Display your content on other sites, maintain control on it and interact with users who view it. ###
-* Detailed statistics – [example](http://bit.ly/15lv0O2).
-* With AtContent others can legally repost your posts to other sites without content duplication, providing you additional readership and backlinks! 
-* You, as a content owner can track, update or block your posts on other sites and interact with users who view it. You see detailed statistics about your post views, reposting and sharing. 
+#### Plagiarism Prevention with AtContent ####
 
-#### Protect your posts from plagiarism & Monetize reposts ####
+* Nobody can steal your content! Here is the example: [thefabuloustimes.com] (http:\\thefabuloustimes.com) — as you can see, nobody can copy-paste this article, but everyone can legally repost it via AtContent by clicking "repost" at the bottom of the article.
 
-* Readers repost your copy-protected content legally, for free or for a fee.
-* [Demo example 1](http://bit.ly/YO8aaw) – text is not available for copying, but anyyone can click “share & repost” at the bottom of the post and repost it legally. This protects your blog from plagiarism. 
-* [Demo example 2](http://bit.ly/ZlAVvb) — the same as Demo example 1, but to repost the post user must pay. This protects your posts from plagiarism and brings you money. 
-* Here is the video:
-[youtube http://www.youtube.com/watch?v=_HXcJVjjg7g]
+#### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites! ####
+* You, as a content owner can track, update or block your posts on other sites and interact with viewers. You see detailed statistics about your post views, reposting and sharing. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
 
-We are now in a new era of content! Joining AtContent costs you nothing – the plugin is free. You gain more traffic, mantain contron on your content and interact with users who view it! Get started today!
+#### Monetize Content Reposting ####
 
-When you have several blogs and are interested in our multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
+* Others pay to you for the ability to repost your posts. [Example] (http://atcontenttest.bestcheapwebhosting.com/how-to-blog-like-chuck/) — click "repost" at the bottom of the article and see that anyone is charged before making a repost. This protects your posts from plagiarism and brings you money.
 
-#### Free backup in AtContent cloud ####
-After the installation click “Sync with AtContent” and all your content will be also placed in AtContent cloud under your secure account. Even if your site/hosting will go down, your content will be saved!
+#### Joining AtContent costs you nothing – the plugin is free. ####
+
+* With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
+* If you have several blogs and need a multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
 
 #### Quote of the day ####
 
@@ -64,6 +61,14 @@ Thomas Jefferson
 
 
 == Frequently asked questions ==
+
+= Why wouldn't Google penalize my site for content duplication?  =
+
+We repost your publications on AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag and "rel=canonical" link to your site. While indexing reposted content,
+search engines will get your site up in their rankings, but not AtContent.
+
+All reposted content has author's name and the link to the original source.
+If anyone of your readers wants to get your article on his own site, he/she needs to repost the article, because AtContent disables browser Copy-Paste functions. Each repost gives you a backlink from the site where article is reposted, with "rel=canonical" tag pointing on your website.
 
 = I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
 
