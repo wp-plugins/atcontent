@@ -14,7 +14,7 @@ Provides backlinks, posts distribution, guest posting and analytics. Usually blo
 == Description ==
 **Let's face it - growing audience is tough.** How does AtContent make it easier?
 #### AtContent provides you valuable backlinks and the ability for content distribution. #### 
-* Others can repost your posts/articles on any site a as simple as a retweet on Twitter. Every site provides you additional audience and backlinks. Usually bloggers increase audience from 30% to 300% in 90 days by using AtContent [SCREENSHOT](http://i.imgur.com/fXNgtC0.png). SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
+* Others can repost your posts/articles on any site a as simple as a retweet on Twitter. Every site provides you additional audience and backlinks. Usually bloggers increase audience from 30% to 300% in 90 days by using AtContent. [SCREENSHOT](http://i.imgur.com/fXNgtC0.png). SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
 * Repost relevant posts of other authors on your blog to increase audience engagement and get more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
 #### Guest Posting with AtContent – Easy as Never Before! ####
