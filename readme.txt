@@ -52,7 +52,7 @@ Thomas Jefferson
 
 == Installation ==
 
-1. Install AtContent plugin on your blog and activate it,
+1. Install the plugin on your blog and activate it,
 2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://i.imgur.com/yiLocp8.png),
 3. Choose options and click “Apply Main Settings” - [Screenshot](http://i.imgur.com/sYOfSGI.png).
 
