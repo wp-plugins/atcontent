@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.2.11
+    Version: 4.3.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.2.11.87" );
+    define( 'AC_VERSION', "4.3.0.88" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -64,6 +64,7 @@
 
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
+        add_submenu_page( 'atcontent/settings.php', 'Credits', 'Credits', 'publish_posts', 'atcontent/quotas.php',  '');
         
         add_menu_page( 'Reposting', 'Reposting', 'publish_posts', 'atcontent/repost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), 7 );
@@ -381,8 +382,15 @@ END;
           $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
           if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
           $ac_is_copyprotect_checked = "";
-          if ( $ac_is_copyprotect == "1" && $ac_is_pro ) {
+          if ( $ac_is_copyprotect == "1" ) {
               $ac_is_copyprotect_checked = "checked=\"checked\"";
+          }
+
+          $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
+          if ( strlen( $ac_is_advanced_tracking ) == 0 ) $ac_is_advanced_tracking = "1";
+          $ac_is_advanced_tracking_checked = "";
+          if ( $ac_is_advanced_tracking == "1" ) {
+              $ac_is_advanced_tracking_checked = "checked=\"checked\"";
           }
 
           $ac_is_paidrepost = get_post_meta( $post->ID, "ac_is_paidrepost", true );
@@ -416,6 +424,19 @@ END;
           $ac_type_paidrepost_selected = ($ac_type == "paidrepost") ? "selected=\"selected\"" : "";
           $ac_type_donate_selected = ($ac_type == "donate") ? "selected=\"selected\"" : "";
           $ac_type_paid_selected = ($ac_type == "paid") ? "selected=\"selected\"" : "";
+          
+          $plagiarism_quota = 0;
+          $advanced_tracking_quota = 0;
+          $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+          $subscriptions_count = 0;
+          if ( $quotas_result["IsOK"] == TRUE ) {
+              $subscriptions_count = count ( $quotas_result["Subscriptions"] );
+              $plagiarism_quota = intval( $quotas_result["Quotas"]["PlagiarismProtection"]["Count"] );
+              $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
+          }
+
+          $ac_is_copyprotect_enabled = $ac_is_pro || ( $plagiarism_quota > 0 );
+          $ac_is_advanced_tracking_enabled = $ac_is_pro || ( $advanced_tracking_quota > 0 );
 
           ?>
 <script type="text/javascript">
@@ -438,11 +459,27 @@ END;
         };
     })(jQuery)
 </script>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked ?> /> Use AtContent for this post</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked ?> <?php echo $ac_is_pro ? '' : 'disabled="disabled"'; ?> /> Protect post from plagiarism<?php if ($ac_is_pro == false) { ?> 
-<a href="https://atcontent.com/Subscribe">Upgrade to Pro to enable this feature</a>
-<?php
- } ?></div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> > Protect post from plagiarism<br>Available credits: <?php echo $plagiarism_quota; ?>.
+<?php if ($ac_is_copyprotect_enabled == false) { ?> 
+<?php if ( $subscriptions_count == 0 ) { ?>
+<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose the appropriate plan</a>
+    <?php } else { ?>
+<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
+    <?php } ?>
+<?php } ?>
+<input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>">
+</div>
+<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> > Enable advanced statistics<br>Available credits: <?php echo $advanced_tracking_quota; ?>.
+<?php if ( $ac_is_advanced_tracking_enabled == false ) { ?> 
+    <?php if ( $subscriptions_count == 0 ) { ?>
+<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose the appropriate plan</a>
+    <?php } else { ?>
+<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
+    <?php } ?>
+<?php } ?>
+<input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
+</div>
 <div class="misc-pub-section">
     Post type:
 <select name="atcontent_type" id="atcontent_type">

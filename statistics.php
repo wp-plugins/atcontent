@@ -143,6 +143,7 @@
     Original views: <strong><?php echo  $stat_info["OriginalViews"] > 0 ? $stat_info["OriginalViews"] : "N/A"; ?></strong><br>
     Repost views: <strong><?php echo $stat_info["RepostViews"] > 0 ? $stat_info["RepostViews"] : "N/A"; ?></strong><br>
     Increate rate: <strong><?php echo $stat_info["IncreaseRate"] > 0 ? number_format_i18n ( $stat_info["IncreaseRate"] ) . '%' : "N/A"; ?></strong><br>
+<?php if ( $stat_info["IsAdvancedTracking"] == true ) { ?>
     <h3>Details</h3>
 <script type="text/javascript">
     function toggleDetails(domain) {
@@ -202,7 +203,9 @@
 ?>
     </tbody>
 </table>
-<?php    
+<?php } else {
+     ?><h3>Details are not available<br>Turn on Advanced Tracking for this post to view details</h3><?php
+ }
         }
     } else if ( $outsidelist == "1" ) {
         $posts_id = array();

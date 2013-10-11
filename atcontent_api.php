@@ -2,7 +2,7 @@
 
 function atcontent_create_publication($ac_api_key, 
 $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $comments
+$cost, $is_copyprotect, $is_advanced_tracking, $comments
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -23,6 +23,7 @@ $cost, $is_copyprotect, $comments
         '&PaidFace='.urlencode($paid_face).
         '&PaidContent='.urlencode($paid_content).
         '&IsCopyProtected='.urlencode($is_copyprotect).
+        '&IsAdvancedTracking='.urlencode($is_advanced_tracking).
         '&IsPaidRepost='.urlencode($is_paidrepost).
         '&Published='.urlencode($post_published).
         '&Comments='.urlencode($comments).
@@ -34,7 +35,7 @@ $cost, $is_copyprotect, $comments
 
 function atcontent_api_update_publication($ac_api_key, 
 $post_id, $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $comments
+$cost, $is_copyprotect, $is_advanced_tracking, $comments
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -56,6 +57,7 @@ $cost, $is_copyprotect, $comments
         '&PaidFace='.urlencode($paid_face).
         '&PaidContent='.urlencode($paid_content).
         '&IsCopyProtected='.urlencode($is_copyprotect).
+        '&IsAdvancedTracking='.urlencode($is_advanced_tracking).
         '&Published='.urlencode($post_published).
         '&Comments='.urlencode($comments).
         '&IsPaidRepost='.urlencode($is_paidrepost).
@@ -250,6 +252,14 @@ function atcontent_api_get_title( $postid ) {
         '&AppID=' . urlencode( 'WordPress' ) .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/general/title', $post_content );
+}
+
+function atcontent_api_get_quotas( $api_key ) {
+    $post_content = 
+        'AppID=' . urlencode( 'WordPress' ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/quotas', $post_content );
 }
 
 

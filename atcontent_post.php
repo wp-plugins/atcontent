@@ -33,6 +33,12 @@ function atcontent_publish_publication( $post_id ){
                 $ac_is_copyprotect = $ac_user_copyprotect;
                 update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
             }
+            
+            $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
+            if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
+                $ac_is_advanced_tracking = "1";// should be $ac_user_advanced_tracking
+                update_post_meta($post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking);
+            }
 
             $ac_is_paidrepost = get_post_meta( $post->ID, "ac_is_paidrepost", true );
             if ( strlen( $ac_is_paidrepost ) == 0 ) { 
@@ -51,6 +57,8 @@ function atcontent_publish_publication( $post_id ){
                 $ac_paidrepost_cost = $ac_user_paidrepostcost; 
                 update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
             }
+
+
 
             $ac_cost = get_post_meta($post->ID, "ac_cost", true);
             if ( strlen( $ac_cost ) == 0 ) { 
@@ -94,7 +102,7 @@ function atcontent_publish_publication( $post_id ){
                         apply_filters( "the_content",  $post->post_content ) , 
                         apply_filters( "the_content",  $ac_paid_portion ),  
                         $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $comments_json );
+                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
                     update_post_meta( $post->ID, "ac_postid", $ac_postid );
@@ -106,7 +114,7 @@ function atcontent_publish_publication( $post_id ){
                     apply_filters( "the_content", $post->post_content  ) , 
                     apply_filters( "the_content",  $ac_paid_portion ), 
                     $ac_type , get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $comments_json
+                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json
                         );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                 } else {
@@ -136,6 +144,7 @@ function atcontent_save_meta( $post_id ) {
 
     $ac_is_process = $_POST['atcontent_is_process'];
     $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
+    $ac_is_advanced_tracking = $_POST["atcontent_is_advanced_tracking"];
     $ac_is_paidrepost = $_POST['atcontent_is_paidrepost'];
     $ac_cost = $_POST['atcontent_cost'];
     $ac_is_import_comments = $_POST['atcontent_is_import_comments'];
@@ -146,7 +155,14 @@ function atcontent_save_meta( $post_id ) {
     update_post_meta($post_id, "ac_is_process", $ac_is_process);
         
     if ($ac_is_copyprotect != "1") $ac_is_copyprotect = "0";
-    update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
+    if ( $_POST["atcontent_is_copyprotect_enabled"] == "1" ) {
+        update_post_meta( $post_id, "ac_is_copyprotect", $ac_is_copyprotect );
+    }
+
+    if ( $ac_is_advanced_tracking != "1" ) $ac_is_advanced_tracking = "0";
+    if ( $_POST["atcontent_is_advanced_tracking_enabled"] == "1" ) {
+        update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
+    }
 
     if ($ac_is_paidrepost != "1") $ac_is_paidrepost = "0";
     update_post_meta($post_id, "ac_is_paidrepost", $ac_is_paidrepost);
@@ -188,6 +204,24 @@ function atcontent_guest_post_preview( $posts ) {
             return $posts;
         }
         global $wp_filter;
+
+        $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+        $guest_quota = 0;
+        if ( $quotas_result["IsOK"] == true ) {
+            $guest_quota = intval( $quotas_result["Quotas"]["GuestPost"]["Count"] );
+        }
+
+        $guest_enabled = $guest_quota > 0;
+
+        $guest_accept_button_disabled = "";
+
+        if ( $guest_enabled ) {
+            $guest_enabled_js = "true";
+        } else {
+            $guest_enabled_js = "false";
+            $guest_accept_button_disabled = "disabled=\"disabled\"";
+        }
+
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
@@ -206,6 +240,10 @@ var processed = false;
 function accept_guest_post(){
     if (processed) return;
     processed = true;
+    if ( !{$guest_enabled_js} ) {
+        alert('Not enough credits for guest posts');
+        return;
+    }
     window.location = decodeuri('{$accept_uri}');
 }
 function decline_guest_post(){
@@ -219,8 +257,21 @@ function decodeuri(uri) {
     return div.firstChild.nodeValue;
 }
 </script>
-<p><input type="button" onClick="accept_guest_post()" value="Accept"> or <input type="button"  onClick="decline_guest_post()" value="Decline"></p>
+<p>
 END;
+        if ( $guest_quota > 0 ) {
+            $post->post_content .= <<<END
+<input type="button" onClick="accept_guest_post()" value="Accept"> or 
+END;
+        } 
+        $post->post_content .= <<<END
+<input type="button"  onClick="decline_guest_post()" value="Decline"></p>
+END;
+        if ( $guest_quota < 1 ) { 
+            $post->post_content .= <<<END
+<p>To accept guest posts you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</p>
+END;
+        }
         $post->ID = -42;
         $post->post_status = 'static';
         $post->comment_status = 'closed';

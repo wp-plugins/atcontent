@@ -11,10 +11,7 @@
     $_GET = stripslashes_array($_GET);
     $_POST = stripslashes_array($_POST);
     $_COOKIE = stripslashes_array($_COOKIE);
-
-
 ?>
-
 <div  class="atcontent_wrap">
     <div class="wrap">
         <div class="icon32" id="icon-link"><br></div><h2>AtContent&nbsp;Guest&nbsp;Posts <?php 
@@ -33,7 +30,7 @@
 
             $ac_is_pro = atcontent_api_is_pro( $ac_api_key );
 
-             if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
+            if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
                 $ac_pro_end_date = date("F d, Y", strtotime( $ac_is_pro["Ended"] ) );
                 echo <<<END
 <script type="text/javascript">
@@ -43,10 +40,33 @@ $$j(function(){
 });
 </script>
 END;
-             }
+            }
 
             $guestpostid = $_GET["postid"];
             if ( strlen( $guestpostid ) == 0 ) {
+
+                $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+                if ( $quotas_result["IsOK"] == true ) {
+                    if ( count( $quotas_result["Subscriptions"] ) == 0 ) {
+                        echo <<<END
+<h3> To enable guest posting, please <a href="https://atcontent.com/Subscribe" target="_blank">choose the appropriate plan</a>.</h3>
+END;
+                    } else {
+                        $guest_post_quota = intval( $quotas_result["Quotas"]["GuestPost"]["Count"] );
+                        if ( $guest_post_quota > 0 ) {
+                            echo <<<END
+<h3>Availabe guest posts: {$quotas_result["Quotas"]["GuestPost"]["Count"]}</h3>
+<p>This month you can send or accept {$quotas_result["Quotas"]["GuestPost"]["Count"]} guest posts without <a href="https://atcontent.com/Subscribe" target="_blank">upgrading to a bigger plan</a>.</p>
+END;
+                        } else {
+                            echo <<<END
+<h3>You don't have guest post credits</h3>
+<p>To send or accept guest posts you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</p>
+END;
+                        }
+                    }
+                }
+
                 $incoming_request = atcontent_api_guestposts_incoming( site_url(), $ac_api_key );
                 if ( $incoming_request["IsOK"] == true && count($incoming_request["List"]) > 0 ) {
     ?>
@@ -77,9 +97,10 @@ END;
 			<td class="post-title page-title column-title"><strong><a title="Preview “<?php echo $gp_item["Title"]; ?>”" href="<?php echo site_url( "?ac_guest_post=" . $gp_item["Id"] ); ?>" class="row-title"><?php echo $gp_item["Title"]; ?></a></strong>
 
 <div class="row-actions">
+    <?php if ( $gp_item["Status"] != "Accepted" ) { ?>
     <span class="edit"><a title="Preview this item" href="<?php echo site_url( "?ac_guest_post=" . $gp_item["Id"] ); ?>">Preview</a></span>
-    <?php if ( $gp_item["Status"] == "Accepted" ) { ?>
-    | <span class="stat"><a title="Statistics" href="<?php echo admin_url( 'admin.php?page=atcontent/statistics.php' ) . "&postid=" . $gp_item["Post4gId"]; ?>">Statistics</a></span>
+    <?php } else if ( $gp_item["Status"] == "Accepted" )  { ?>
+    <span class="stat"><a title="Statistics" href="<?php echo admin_url( 'admin.php?page=atcontent/statistics.php' ) . "&postid=" . $gp_item["Post4gId"]; ?>">Statistics</a></span>    
     <?php } ?>
 </div>
 
@@ -124,7 +145,7 @@ END;
 
 <div class="row-actions">
     <span class="edit"><a title="Edit this item" href="<?php echo $gp_item["edit_url"]; ?>">Edit</a></span>
-    <?php if ( $gp_item["Status"] != "Accepted" && strlen( $gp_item["TargetUri"] ) > 0 ) { ?>
+    <?php if ( $gp_item["Status"] != "Accepted" && strlen( $gp_item["TargetUri"] ) > 0 && $guest_post_quota > 0 ) { ?>
     | <span class="submit"><a title="Submit this item" href="<?php echo $gp_item["submit_url"]; ?>">Submit</a></span>
     <?php }?>
     <?php if ( $gp_item["Status"] == "Accepted" ) { ?>
@@ -141,6 +162,12 @@ END;
     <?php                        }
 
                     } else { //Create, view and edit guest post
+
+                        $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+                        $guest_post_quota = 0;
+                        if ( $quotas_result["IsOK"] == true ) {
+                            $guest_post_quota = intval( $quotas_result["Quotas"]["GuestPost"]["Count"] );
+                        }
 
                         $editor_title = '';
                         $gp_content = '';
@@ -164,7 +191,7 @@ END;
                                         echo "<div class=\"error\">" . 'Could not save draft to atcontent.com. ' . $create_result["Reason"] .  "</div>";
                                     }
                                 } else {
-                                    die(  '<h2>Post was saved!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                    die(  '<h2>Post saved!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                                 $gp_title = $_POST["title"];
                                 $gp_content = $_POST["post_content"];
@@ -190,7 +217,7 @@ END;
                                     $gp_content = $_POST["post_content"];
                                     $gp_targeturi = $_POST["targeturi"];
                                 } else {
-                                    die( '<h2>Post was saved!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                    die( '<h2>Post saved!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                             } else if ( $action == "submit" ) {
                                 $update_result = atcontent_api_guestposts_status_update( $ac_api_key, $guestpostid, "Submitted" );
@@ -200,11 +227,16 @@ END;
                                             'You must have a Pro account to submit guest posts.<br>' .
                                             "</div>";
                                             die( '<p><b><a href="https://atcontent.com/Subscribe">Upgrade for Pro account here</a></b></p>' );
+                                    } else if ( $update_result["Code"] == 103 ) {
+                                            echo "<div class=\"error\">" . 'Could not update status. ' . 
+                                            'You must have guest post quota to submit guest posts.<br>' .
+                                            "</div>";
+                                            die( '<b><a href="https://atcontent.com/Subscribe" target="_blank">Chose the suitable plan.</a></b>' );
                                     } else {
                                         echo "<div class=\"error\">" . 'Could not update status. ' . $create_result["Reason"] .  "</div>";
                                     }
                                 } else {
-                                    die( '<h2>Post was submited!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                    die( '<h2>Post submitted!</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                             } else if ( $action == "accept") {
                                 $preview_result = atcontent_api_guestposts_preview( $ac_api_key, $guestpostid, site_url() );
@@ -231,12 +263,17 @@ END;
                                             'You must have a Pro account to accept guest posts.<br>' .
                                             "</div>";
                                             die( '<p><b><a href="https://atcontent.com/Subscribe">Subscribe for Pro account here</a></b></p>' );
+                                        } else if ( $update_result["Code"] == 103 ) {
+                                            echo "<div class=\"error\">" . 'Could not accept guest post. ' . 
+                                            'You must have guest post quota to accept guest posts.<br>' .
+                                            "</div>";
+                                            die( '<b><a href="https://atcontent.com/Subscribe" target="_blank">Chose the suitable plan.</a></b>' );
                                         } else {
                                             echo "<div class=\"error\">" . 'Could not accept guest post. ' . $create_result["Reason"] .  "</div>";
                                         }
                                         
                                     } else {
-                                        die( '<h2>Post was accepted and published</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                        die( '<h2>Post accepted and published</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                     }
                                 }
                             } else if ( $action == "decline") {
@@ -251,7 +288,7 @@ END;
                                         echo "<div class=\"error\">" . 'Could not decline guest post. ' . $create_result["Reason"] .  "</div>";
                                     }
                                 } else {
-                                    die( '<h2>Post was declined</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
+                                    die( '<h2>Post declined</h2>' . '<script type="text/javascript">window.location="'. admin_url("admin.php?page=atcontent/guestpost.php") . '";</script>' );
                                 }
                             } else {
                                 $gp_result = atcontent_api_guestposts_get( $ac_api_key, $guestpostid );
@@ -365,10 +402,14 @@ function setUrl(url) {
                         echo '<h3>' . $editor_title . '</h3>';
                         echo '<form id="gp_form" action="' . admin_url("admin.php?page=atcontent/guestpost.php&action=save&postid=" . $guestpostid) . '" method="post">';
                         echo 
-                        '<a href="javascript:savedraft();" class="button">Save Draft</a> or ' .
-                        '<a href="javascript:submit();" class="button">Submit for Consideration</a><br><br>';
+                        '<a href="javascript:savedraft();" class="button">Save Draft</a> ';
+                        if ( $guest_post_quota > 0 ) {
+                            echo ' or <a href="javascript:submit();" class="button">Submit for Consideration</a>';
+                        } else {
+                            echo '<span>To submit a guest post you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</span>';
+                        }
                         echo 
-                        'Blog\'s URL<br><input type="text" id="targeturi" name="targeturi" style="width:100%" value="' . $gp_targeturi . '">';
+                        '<br><br>Blog\'s URL<br><input type="text" id="targeturi" name="targeturi" style="width:100%" value="' . $gp_targeturi . '">';
 ?>
 <a id="check-url-link" class="button" href="javascript:checkUrl();">Check URL</a>
 <span id="check-url-out"></span>
@@ -405,9 +446,14 @@ tinymce.init({
 </script>
 END;
                         //wp_editor( $gp_content, 'listingeditor', $settings = array('textarea_name' => post_content) ); 
-                        echo '<input type="hidden" id="targetaction" value="save" name="targetaction"><br><br>'. 
-                        '<a href="javascript:savedraft();" class="button">Save Draft</a> or ' .
-                        '<a href="javascript:submit();" class="button">Submit for Consideration</a>';
+                        echo '<input type="hidden" id="targetaction" value="save" name="targetaction"><br><br>';
+                        echo 
+                        '<a href="javascript:savedraft();" class="button">Save Draft</a> ';
+                        if ( $guest_post_quota > 0 ) {
+                            echo ' or <a href="javascript:submit();" class="button">Submit for Consideration</a>';
+                        } else {
+                            echo '<span>To submit a guest post you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</span>';
+                        }
                         echo "</form>";
                     }
 

@@ -86,6 +86,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 4.3.0 =
+
+* Credits, guest posts and advanced analytics
+
 = 4.2.5 =
 
 * WP-insert compatibility
@@ -307,4 +311,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* Easy Guest Posting is here! 
+* Credits, subscriptions, guest posts and other cool things can't work without this update.
