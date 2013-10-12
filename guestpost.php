@@ -28,20 +28,6 @@
             include("invite.php");
         } else {
 
-            $ac_is_pro = atcontent_api_is_pro( $ac_api_key );
-
-            if ( $ac_is_pro["IsOK"] == true && $ac_is_pro["IsPro"] == true ) {
-                $ac_pro_end_date = date("F d, Y", strtotime( $ac_is_pro["Ended"] ) );
-                echo <<<END
-<script type="text/javascript">
-$$j = jQuery;
-$$j(function(){
-	$$j('#wpbody-content').prepend('<div class="update-nag">Congratulations!!! You can use AtContent Pro Account features for free till {$ac_pro_end_date}. <a href="https://atcontent.com/Blog/41Za4W4VL0s.text">Read more</a></div>');
-});
-</script>
-END;
-            }
-
             $guestpostid = $_GET["postid"];
             if ( strlen( $guestpostid ) == 0 ) {
 

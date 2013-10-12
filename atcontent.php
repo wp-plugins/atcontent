@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.3.0
+    Version: 4.3.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.3.0.88" );
+    define( 'AC_VERSION', "4.3.1.89" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -356,13 +356,6 @@ END;
 
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
 
-          $ac_is_pro_answer = atcontent_api_is_pro( $ac_api_key );
-          $ac_is_pro = false;
-          if ( $ac_is_pro_answer["IsOK"] == true &&
-               $ac_is_pro_answer["IsPro"] == true) {
-                   $ac_is_pro = true;
-               }
-
           $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
           $ac_is_process_checked = "";
           if ( $ac_is_process == "1" || $ac_is_process == "" ) {
@@ -435,8 +428,8 @@ END;
               $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
           }
 
-          $ac_is_copyprotect_enabled = $ac_is_pro || ( $plagiarism_quota > 0 );
-          $ac_is_advanced_tracking_enabled = $ac_is_pro || ( $advanced_tracking_quota > 0 );
+          $ac_is_copyprotect_enabled = $plagiarism_quota > 0;
+          $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
 
           ?>
 <script type="text/javascript">

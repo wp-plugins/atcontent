@@ -128,14 +128,6 @@ function atcontent_api_extended_readership( $api_key, $siteuri, $postids, $detai
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/extendedreadership', $post_content );
 }
 
-function atcontent_api_is_pro( $api_key ) {
-    $post_content = 
-        '&AppID=' . urlencode( 'WordPress' ) .
-        '&Key=' . urlencode( $api_key ) .
-        '&ExternalVersion=' . urlencode( AC_VERSION );
-    return atcontent_do_post( 'http://api.atcontent.com/v1/native/ispro', $post_content );
-}
-
 function atcontent_api_guestposts_incoming( $siteuri, $api_key ) {
     $post_content = 'Uri=' . urlencode( $siteuri ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
