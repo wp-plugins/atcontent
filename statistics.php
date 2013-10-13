@@ -24,7 +24,7 @@
         {
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             if ( strlen( $ac_postid ) > 0 ) { 
-                array_push( $posts_id, $ac_postid );
+                array_unshift( $posts_id, $ac_postid );
             }
             wp_cache_flush();
         }
