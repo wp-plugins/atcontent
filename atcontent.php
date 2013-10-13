@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.3.1
+    Version: 4.3.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.3.1.89" );
+    define( 'AC_VERSION', "4.3.2.90" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -54,20 +54,34 @@
          wp_enqueue_script( 'wp-pointer' );
     }
 
+    function atcontent_get_menu_key( $desired ) {
+        global $menu;
+		$menukey = $desired;
+		while ( array_key_exists((string) $menukey,$menu) ) {
+			$menukey += 0.0000000001;
+		}
+		$menukey = (string) $menukey;  //If it's not a string it gets rounded to an int!
+        return $menukey;
+    }
+
     function atcontent_add_tools_menu() {
-        add_utility_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '',
-            plugins_url( 'assets/logo.png', __FILE__ ) );
-        
+
+        $atcontent_settings_key = atcontent_get_menu_key( 65.0 );
+        add_menu_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '',
+            plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_settings_key );
+
+        $guest_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
-            plugins_url( 'assets/logo.png', __FILE__ ), 6 );
+            plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
         add_submenu_page( 'atcontent/settings.php', 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php',  '');
 
         add_submenu_page( 'atcontent/settings.php', 'Connect Settings', 'Connection', 'publish_posts', 'atcontent/connect.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Credits', 'Credits', 'publish_posts', 'atcontent/quotas.php',  '');
         
+        $repost_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Reposting', 'Reposting', 'publish_posts', 'atcontent/repost.php', '', 
-            plugins_url( 'assets/logo.png', __FILE__ ), 7 );
+            plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
         add_submenu_page( 'atcontent/settings.php', 'Content for reposting', 'Content for reposting', 'publish_posts', 'atcontent/repost.php',  '');
         add_submenu_page( 'atcontent/settings.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
