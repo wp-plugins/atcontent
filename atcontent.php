@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 4.3.2
+    Version: 4.3.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "4.3.2.90" );
+    define( 'AC_VERSION', "4.3.3.91" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
 
     require_once( "atcontent_api.php" );
@@ -66,7 +66,7 @@
 
     function atcontent_add_tools_menu() {
 
-        $atcontent_settings_key = atcontent_get_menu_key( 65.0 );
+        $atcontent_settings_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/settings.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_settings_key );
 
