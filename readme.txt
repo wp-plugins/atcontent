@@ -311,4 +311,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* Credits, subscriptions, guest posts and other cool things can't work without this update.
+* Credits, subscriptions, guest posts and other cool things can't work without this update!
