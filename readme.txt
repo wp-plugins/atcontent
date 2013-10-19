@@ -1,7 +1,7 @@
 ﻿=== WordPress Plugin by AtContent  ===
 Contributors: vadnov
 Donate link: https://atcontent.com/
-Tags:  statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
+Tags: statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
 
 Requires at least: 3.3
 Tested up to: 3.6.1
