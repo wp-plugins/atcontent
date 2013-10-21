@@ -47,7 +47,7 @@ $atcontent_categories = array (
     "Wanderlust" => "Wanderlust",
     "Women" => "Women",
     "Zombies" => "Zombies",
-    "Other" => "other",
+    "Other" => "Other",
 );
 
 $atcontent_countries = array(
