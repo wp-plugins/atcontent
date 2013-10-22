@@ -233,8 +233,24 @@ function atcontent_guest_post_preview( $posts ) {
         $post->post_name = "ac_guest_post";
         $post->guid = get_bloginfo('wpurl/ac_guest_post');
         $post->post_title = 'Preview ' . $gp_request["Title"];
-        $post->post_content = <<<END
+        if ( $_GET['ac_guest_post_mode'] != "view" ) {
+            $view_url =  site_url( "?ac_guest_post=" . $_GET['ac_guest_post'] . "&ac_guest_post_mode=view" );
+            $post->post_content = <<<END
 <script src='https://atcontent.com/Ajax/Service/SetAccessSharingCookie.ashx?Id={$gp_request["Key"]}' type='text/javascript'></script>
+<p>Getting access...</p>
+<script type="text/javascript">
+function decodeuri(uri) {
+    var div = document.createElement('div');
+    div.innerHTML = uri;
+    return div.firstChild.nodeValue;
+}
+jQuery(function(){
+    document.location = decodeuri('{$view_url}');
+});
+</script>
+END;
+        } else {
+            $post->post_content = <<<END
 [atcontent id="{$gp_request["Post4gId"]}"]
 <script type="text/javascript">
 var processed = false;
@@ -260,18 +276,19 @@ function decodeuri(uri) {
 </script>
 <p>
 END;
-        if ( $guest_quota > 0 ) {
-            $post->post_content .= <<<END
+            if ( $guest_quota > 0 ) {
+                $post->post_content .= <<<END
 <input type="button" onClick="accept_guest_post()" value="Accept"> or 
 END;
-        } 
-        $post->post_content .= <<<END
+            } 
+            $post->post_content .= <<<END
 <input type="button"  onClick="decline_guest_post()" value="Decline"></p>
 END;
-        if ( $guest_quota < 1 ) { 
-            $post->post_content .= <<<END
+            if ( $guest_quota < 1 ) { 
+                $post->post_content .= <<<END
 <p>To accept guest posts you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</p>
 END;
+            }
         }
         $post->ID = -42;
         $post->post_status = 'static';
