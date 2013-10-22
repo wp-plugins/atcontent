@@ -233,8 +233,9 @@ function atcontent_guest_post_preview( $posts ) {
         $post->post_name = "ac_guest_post";
         $post->guid = get_bloginfo('wpurl/ac_guest_post');
         $post->post_title = 'Preview ' . $gp_request["Title"];
-        $post->post_content = '[atcontent id="' . $gp_request["Post4gId"] . '"]' .
-        <<<END
+        $post->post_content = <<<END
+<script src='https://atcontent.com/Ajax/Service/SetAccessSharingCookie.ashx?Id={$gp_request["Key"]}' type='text/javascript'></script>
+[atcontent id="{$gp_request["Post4gId"]}"]
 <script type="text/javascript">
 var processed = false;
 function accept_guest_post(){
