@@ -48,27 +48,29 @@ function atcontent_pingback_inline(){
 }
 
 function atcontent_activate() {
-    global $wpdb;
-    $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");
-    foreach ( $wp_user_search as $user ) {
-        $userid = $user->ID;
-        $email = $user->user_email;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        if ( user_can( $userid, 'edit_posts' ) ) {
-            $status = 'Activated';
+    try {
+        global $wpdb;
+        $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");
+        foreach ( $wp_user_search as $user ) {
+            $userid = $user->ID;
+            $email = $user->user_email;
+            $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+            if ( user_can( $userid, 'edit_posts' ) ) {
+                $status = 'Activated';
 
-            if (strlen($ac_api_key) > 0) {
-                $status = 'Connected'; 
-            } else {
-                $ac_pen_name = get_user_meta( intval($userid), "ac_pen_name", true );
-                if ( strlen( $ac_pen_name ) > 0) { 
-                    $status = 'Disconnected';
+                if ( strlen($ac_api_key) > 0) {
+                    $status = 'Connected'; 
+                } else {
+                    $ac_pen_name = get_user_meta( intval( $userid ), "ac_pen_name", true );
+                    if ( strlen( $ac_pen_name ) > 0) { 
+                        $status = 'Disconnected';
+                    }
                 }
-            }
 
-            atcontent_api_pingback( $email, $status, $ac_api_key );
+                atcontent_api_pingback( $email, $status, $ac_api_key );
+            }
         }
-    }
+    } catch (Exception $ex) { }
 }
 
 function atcontent_deactivate() {
