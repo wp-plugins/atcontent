@@ -86,6 +86,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.0.0 =
+
+* Meet new UI!
+
 = 4.3.0 =
 
 * Credits, guest posts and advanced analytics
@@ -311,4 +315,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* Credits, subscriptions, guest posts and other cool things can't work without this update!
+* Meet new UI!

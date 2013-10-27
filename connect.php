@@ -44,7 +44,7 @@
 <script type="text/javascript">
     (function ($) {
         window.ac_connect_res = function (d) {
-            if (d) window.location = '<?php echo admin_url( 'admin.php?page=atcontent/settings.php' ); ?>';
+            if (d) window.location = '<?php echo admin_url( 'admin.php?page=atcontent/subscription.php' ); ?>';
             else $("#ac_connect_result").html(
                     'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }

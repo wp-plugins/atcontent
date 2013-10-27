@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 5.0.1
+    Version: 5.0.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.0.1.98" );
+    define( 'AC_VERSION', "5.0.2.99" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -74,9 +74,9 @@
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
 
         add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'publish_posts', 'atcontent/connect.php',  '');
+        add_submenu_page( 'atcontent/dashboard.php', 'Subscription', 'Subscription', 'publish_posts', 'atcontent/subscription.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'publish_posts', 'atcontent/settings.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'publish_posts', 'atcontent/sync.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Subscription', 'Subscription', 'publish_posts', 'atcontent/subscription.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
 
         $guest_key = atcontent_get_menu_key( 5.0 );
