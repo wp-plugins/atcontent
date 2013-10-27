@@ -238,10 +238,6 @@
     <div class="b-dashboard-table">
         <table>
             <tr><th>Prevent plagiarism of my posts</th><td><?php echo ( $ac_copyprotect == "1" ) ? "Yes" : "No"; ?></td></tr>
-            <tr><th>Paid repost</th><td><?php echo ( $ac_paidrepost == "1" ) ? "Yes" : "No"; ?></td></tr>
-            <?php if ( $ac_paidrepost == "1" ) { ?>
-            <tr><th>Paid repost cost</th><td>$<?php echo $ac_paidrepostcost; ?></td></tr>
-            <?php } ?>
         </table>
         <p style="text-align: right;padding-right:10px;">You can change this at <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">Settings section</a></p>
     </div>
