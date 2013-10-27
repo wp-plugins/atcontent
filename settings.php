@@ -170,7 +170,7 @@ END;
         <div class="b-dashboard-table">
             <table>
                 <tr><th><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</th></tr>
-                <tr><th><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
+                <tr style="display: none;"><th><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
     <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</th></tr>
             </table>
         </div>
@@ -202,7 +202,7 @@ END;
             <table>
                 <tr><th><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
     Turn off plugin features for the main page (should be marked for sites with not standard themes)</th></tr>
-                <tr><th><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
+                <tr style="display: none;"><th><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
     Turn off plugin comments</th></tr>
             </table>
         </div>
