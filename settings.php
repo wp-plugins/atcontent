@@ -1,377 +1,187 @@
 <?php
-         $userid = wp_get_current_user()->ID;
-         $hidden_field_name = 'ac_submit_hidden';
-         $form_message = '';
-         $form_script = '';
-         $form_action = admin_url( 'admin-ajax.php' );
-         $form_message_block = '';
-         if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-              isset( $_POST[ "ac_api_key" ] ) ) {
-             $ac_api_key = trim( $_POST[ "ac_api_key" ] );
-             update_user_meta( $userid, "ac_api_key", $ac_api_key );
-             $ac_pen_name = atcontent_api_get_nickname( $_POST[ "ac_api_key" ] );
-             update_user_meta( $userid, "ac_pen_name", $ac_pen_name );
-             $form_message .= 'Settings saved.';
-         }
-         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-         $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
-         $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+    $atcontent_menu_section = "settings";
+    
+    require( "atcontent_userinit.php" );
 
-         // PingBack
+    $hidden_field_name = 'ac_submit_hidden';
+    $form_message = '';
+    $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 
-         if ( ! atcontent_pingback_inline() ) {
-             echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
-         }
+    if ( strlen( $ac_api_key ) == 0 ) {
+        $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+        ?>
+<script>window.location = '<?php echo $connect_url; ?>';</script>
+        <?php
+    }
 
-         //End PingBack
+    // PingBack
+    if ( ! atcontent_pingback_inline() ) {
+        echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+    }
+    //End PingBack
 
-         if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-              isset( $_POST[ "ac_import" ] ) && ( $_POST[ "ac_import" ] == 'Y' ) ) {
+    if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
+        isset( $_POST[ "ac_settings" ] ) && ( $_POST[ "ac_settings" ] == 'Y' ) ) {
             
-            $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
-            update_user_meta($userid, "ac_copyprotect", $copyProtection);
+        $copyProtection = isset( $_POST["ac_copyprotect"] ) && $_POST["ac_copyprotect"] == "Y" ? 1 : 0;
+        update_user_meta($userid, "ac_copyprotect", $copyProtection);
 
-            $adTest = isset( $_POST["ac_adtest"] ) && $_POST["ac_adtest"] == "Y" ? 1 : 0;
-            update_user_meta($userid, "ac_adtest", $adTest);
+        $adTest = isset( $_POST["ac_adtest"] ) && $_POST["ac_adtest"] == "Y" ? 1 : 0;
+        update_user_meta($userid, "ac_adtest", $adTest);
 
-            $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
-            update_user_meta($userid, "ac_sitecategory", $siteCategory);
+        $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
+        update_user_meta($userid, "ac_sitecategory", $siteCategory);
 
-            $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
-            update_user_meta($userid, "ac_country", $country);
+        $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
+        update_user_meta($userid, "ac_country", $country);
 
-            $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
-            update_user_meta($userid, "ac_state", $state);
+        $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
+        update_user_meta($userid, "ac_state", $state);
 
-            $referral = $_POST["ac_referral"];
-            update_user_meta( $userid, "ac_referral", $referral );
+        $referral = $_POST["ac_referral"];
+        update_user_meta( $userid, "ac_referral", $referral );
 
-            if ( ! atcontent_pingback_inline() ) {
-                echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
-            }
+        atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
 
-            atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
+        $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
+        update_user_meta( $userid, "ac_paidrepost", $paidRepost );
+        $paidRepostCost = isset( $_POST["ac_paidrepostcost"] ) && is_numeric( $_POST["ac_paidrepostcost"] ) ? doubleval( $_POST["ac_paidrepostcost"] ) : 2.5;
+        update_user_meta( $userid, "ac_paidrepostcost", $paidRepostCost );
+        $importComments = isset( $_POST["ac_comments"] ) && $_POST["ac_comments"] == "Y" ? 1 : 0;
+        update_user_meta( $userid, "ac_is_import_comments", $importComments );
 
-            $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
-            update_user_meta($userid, "ac_paidrepost", $paidRepost);
-            $paidRepostCost = isset($_POST["ac_paidrepostcost"]) && is_numeric($_POST["ac_paidrepostcost"]) ? doubleval($_POST["ac_paidrepostcost"]) : 2.5;
-            update_user_meta($userid, "ac_paidrepostcost", $paidRepostCost);
-            $importComments = isset($_POST["ac_comments"]) && $_POST["ac_comments"] == "Y" ? 1 : 0;
-            update_user_meta($userid, "ac_is_import_comments", $importComments);
+        $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
 
-            $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
-
-            $ac_excerpt_image_remove = (isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y") ? "1" : "0";
-            update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
-            $ac_excerpt_no_process = (isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y") ? "1" : "0";
-            update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
-            $ac_comments_disable = (isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y") ? "1" : "0";
-            update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
-            $ac_hint_panel_disable = (isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y") ? "1" : "0";
-            update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
-            $form_message .= 'Settings saved.';
-
-            if ( $ac_with_import ) {
-
-                $ac_reset = isset( $_POST['ac_reset'] ) && $_POST['ac_reset'] == "Y";
-                if ( $ac_reset ) $form_message .= "Reset done. ";
-
-                $posts_id = array();
-                $posts_title = array();
-
-                $posts = $wpdb->get_results( 
-	                "
-	                SELECT ID, post_title, post_author
-	                FROM {$wpdb->posts}
-	                WHERE post_status = 'publish' 
-		                AND post_author = {$userid} AND post_type = 'post'
-	                "
-                );
-
-                wp_cache_flush();
-
-                foreach ( $posts as $post ) 
-                {
-                    if ($post->post_author == $userid) {
-                        array_push( $posts_id, $post->ID );
-                        array_push( $posts_title, addcslashes( $post->post_title, "'\\" ) );
-                        if ($ac_reset) {
-                            update_post_meta( $post->ID, "ac_is_process", "2" );
-                            update_post_meta( $post->ID, "ac_cost", "" );
-                            update_post_meta( $post->ID, "ac_paidrepostcost", "" );
-                            update_post_meta( $post->ID, "ac_is_paidrepost", "" );
-                            update_post_meta( $post->ID, "ac_is_copyprotect", "" );
-                            update_post_meta( $post->ID, "ac_is_import_comments", "" );
-                            update_post_meta( $post->ID, "ac_type", "" );
-                        }
-                    }
-                    wp_cache_flush();
-                }
-
-            
-                $postIDs = join( "','" , $posts_id );
-                $postTitles = join( "','" , $posts_title );
-                $form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ...</div>Note: Updating a post takes few seconds, please be patient<div id="importDetails"></div>';
-                $form_script = <<<END
-<script type="text/javascript">
-    var postIDs = ['{$postIDs}'];
-    var postTitles = ['{$postTitles}'];
-    var postInfo = [];
-    for (var i in postIDs) {
-        postInfo[i] = {id: postIDs[i], title: postTitles[i], status: "queued", retry: 0};
+        $ac_excerpt_image_remove = ( isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y" ) ? "1" : "0";
+        update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
+        $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "1" : "0";
+        update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+        $ac_comments_disable = ( isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y" ) ? "1" : "0";
+        update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
+        $ac_hint_panel_disable = ( isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y" ) ? "1" : "0";
+        update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
+        $form_message .= '<div class="updated"><p><strong>Settings saved.</strond></p>' . 
+        '<p><a href="' . admin_url("admin.php?page=atcontent/sync.php") . '">Follow Sync section</a></p>' .
+        '</div>';
     }
-    var imported = 0;
 
-    function getStatus() {
-        var r = {created:0, updated:0, skipped:0, error:0, queued:0, active:0};
-        for (var i in postInfo) {
-            if (isNaN(i)) continue;
-            if (postInfo[i].status == "created") r.created++;
-            else if (postInfo[i].status == "updated") r.updated++; 
-            else if (postInfo[i].status == "skipped") r.skipped++; 
-            else if (postInfo[i].status == "error") r.error++; 
-            else if (postInfo[i].status == "active") r.active++; 
-            else r.queued++; 
-        }
-        return r;
-    }
-    function doRetry() {
-        for (var i in postInfo) {
-            if (postInfo[i].status == "error") { 
-                postInfo[i].status == "queued";
-            }
-        }
-    }
-    function doImport(i) {
-        postInfo[i].status = "active";
-        jQuery.ajax({url: '{$form_action}', 
-                         type: 'post', 
-                         data: {action: 'atcontent_import', 
-                                postID: postIDs[i], 
-                                copyProtection: {$copyProtection}, 
-                                paidRepost: {$paidRepost}, 
-                                cost: {$paidRepostCost}, 
-                                comments: {$importComments}},
-                         dataType: "json",
-                         success: function(d){
-                                postInfo[i] = postInfo[i] || {};
-                                if (d.IsOK) {
-                                    postInfo[i].title = postTitles[i];
-                                    postInfo[i].status = d.AC_action;
-                                    s = getStatus();
-                                    imported = s.created + s.updated + s.skipped;
-                                    jQuery("#importResult").html("Processed " + imported + " of " + postIDs.length);
-                                } else {
-                                    postInfo[i].status = "error";
-                                    postInfo[i].error =  "Connection problem occured for \"" + postTitles[i] + "\". Post not synced (" + d.Info + ")";
-                                    if (postInfo[i].retry < 3) {
-                                        postInfo[i].retry++;
-                                        postInfo[i].status = "queued";
-                                    }
-                                }
-                                s = getStatus();
-                                if (s.queued == 0 && s.active == 0) doResult();
-                            },
-                         error: function(d, s, e) {
-                                postInfo[i] = postInfo[i] || {};
-                                if (e == 'timeout') { postInfo[i].status = "queued"; return; }
-                                var err = "Connection problem occured";
-                                if (e.length > 0) err += ": " + e;                                
-                                postInfo[i].status = "error";
-                                postInfo[i].error = err + " for \"" + postTitles[i] + "\". Post not synced.";
-                                if (postInfo[i].retry < 3) {
-                                   postInfo[i].retry++;
-                                   postInfo[i].status = "queued";
-                                }
-                                s = getStatus();
-                                if (s.queued == 0 && s.active == 0) doResult();
-                             },
-                         });
-    }
-    function doResult(){
-        var j = jQuery,
-            s = getStatus(),
-            h = "";
-            h += (s.created > 0 ? s.created + " posts created<br>" : "");
-            h += (s.updated > 0 ? s.updated + " posts updated<br>" : "");
-            h += (s.skipped > 0 ? s.skipped + " posts skipped<br>" : "");
-            h += (s.error > 0 ? s.error + " posts not synced<br>" : "");
-            h += "You got " + (s.created + s.updated) + " backlinks<br>";
-            h += "<a href=\"javascript:getDetails();\">Get details</a>";
-        j("#importResult").html(h);
-        j("#importStatus").html("<b>Sync completed.</b>");
-    }
-    function getDetails(){
-         var j = jQuery, h = "";         
-         for (var i in postInfo) {
-             if (isNaN(i)) continue;
-             h += "\"" + postInfo[i].title + "\" ";
-             if (postInfo[i].status == "created") h += "created";
-             if (postInfo[i].status == "updated") h += "updated";
-             if (postInfo[i].status == "skipped") h += "skipped";
-             if (postInfo[i].status == "error") h += "not synced: " + postInfo[i].error;
-             h += "<br>";
-         }
-         if (getStatus().error > 0) {
-             h += "<a href=\"javascript:doRetry();\">Retry sync for not synced posts</a>";
-         }
-         j("#importDetails").html(h);
-    }
-    jQuery(function(){
-        setInterval(processQueue, 100);
-    });
-    function processQueue(){
-        s = getStatus();
-        if (s.active > 2) return;
-        for (var i = postInfo.length - 1; i >= 0; i--) {
-            if (postInfo[i].status == "queued") {  
-                doImport(i);
-                return;
-            }
-        }
-    }
-</script>
-END;
-            }
-         }
-         if (strlen($form_message) > 0) {
-             $form_message_block .= <<<END
-<div class="updated settings-error" id="setting-error-settings_updated"> 
-<p><strong>{$form_message}</strong></p></div>
-END;
-            echo $form_message_block; 
-         }
-         
 ?>
 
 <div class="atcontent_wrap">
 
+<?php include("settings_menu.php"); ?>
 
-<?php if ( strlen( $ac_api_key ) == 0 ) { ?>
-    <?php include("invite.php"); ?>
-    <hr />
-    <br>
-<?php } ?>
+<?php if ( strlen ( $form_message ) > 0 ) { echo $form_message; } ?>
+
 <div class="wrap">
-    <div class="icon32" id="icon-tools"><br></div><h2>AtContent&nbsp;Plugin&nbsp;Main&nbsp;Settings</h2>
-</div>
+    <form action="" method="POST" name="settings-form" id="settings-form">
+    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+    <input type="hidden" name="ac_settings" value="Y">
+    <div class="b-dashboard">
+        
+    
+<?php 
+    $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
+    if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
 
-<div class="wrap" style="width: 640px; float: left;">
-    <form action="" method="POST" name="import-form" id="import-form">
-<p>To get backlinks and reach new readership, please choose options below and click "Apply Main Settings"</p>
-    <?php 
-             $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
-             if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
+    $ac_sitecategory = get_user_meta( $userid, "ac_sitecategory", true );
+    $ac_country = get_user_meta( $userid, "ac_country", true );
+    $ac_state = get_user_meta( $userid, "ac_state", true );
 
-             $ac_sitecategory = get_user_meta( $userid, "ac_sitecategory", true );
-             $ac_country = get_user_meta( $userid, "ac_country", true );
-             $ac_state = get_user_meta( $userid, "ac_state", true );
-
-             $ac_adtest = get_user_meta( $userid, "ac_adtest", true );
-             if (strlen($ac_adtest) == 0) $ac_adtest = "1";
+    $ac_adtest = get_user_meta( $userid, "ac_adtest", true );
+    if (strlen($ac_adtest) == 0) $ac_adtest = "1";
              
-             $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
-             if (strlen($ac_paidrepost) == 0) $ac_paidrepost = "0";
-             $ac_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
-             if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "2.50";
-             $ac_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
-             if (strlen($ac_is_import_comments) == 0) $ac_is_import_comments = "1";
+    $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
+    if (strlen($ac_paidrepost) == 0) $ac_paidrepost = "0";
+    $ac_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
+    if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "2.50";
+    $ac_is_import_comments = get_user_meta($userid, "ac_is_import_comments", true );
+    if (strlen($ac_is_import_comments) == 0) $ac_is_import_comments = "1";
 
-             $ac_referral = get_user_meta( $userid, "ac_referral", true );
+    $ac_referral = get_user_meta( $userid, "ac_referral", true );
 
-             $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
-             $ac_adtest_checked = $ac_adtest == "1" ? "checked=\"checked\"" : "";
-             $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
-             $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
+    $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
+    $ac_adtest_checked = $ac_adtest == "1" ? "checked=\"checked\"" : "";
+    $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
+    $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
 
-             echo $form_script;
 ?>
 <script>
-    function showCool() {
-        jQuery("#whyCool").toggle();
-    }
-    function saveForm(withImport) {
-        var j = jQuery;
-        if (withImport == 1) {
-            j("#ac_with_import").val("Y");
-        } else {
-            j("#ac_with_import").val("N");
-        }
-        <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
-            alert('Please, connect with AtContent first');
-        <?php } else { ?>
-            j("#import-form").submit();
-        <?php } ?>
+    function saveForm() {
+        jQuery("#settings-form").submit();
     }
 </script>
-<div class="tool-box">
     
-    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
-    <input type="hidden" name="ac_import" value="Y">
-    <input type="hidden" name="ac_with_import" id="ac_with_import" value="Y">
-    <p>Site Category<br/>
-        <select name="ac_sitecategory">
-            <?php
-                foreach ($atcontent_categories as $category => $description) {
-                    $category_selected = $ac_sitecategory == $category ? "selected=\"selected\"" : "";
-                    echo <<<END
+    <h2>Site Settings</h2>
+        <div class="b-dashboard-table">
+            <table>
+                <tr><th>Category</th><td>
+                     <select name="ac_sitecategory">
+<?php
+    foreach ($atcontent_categories as $category => $description) {
+        $category_selected = $ac_sitecategory == $category ? "selected=\"selected\"" : "";
+        echo <<<END
 <option value="{$category}" {$category_selected}>{$description}</option>
 END;
-                }
-            ?>
-        </select>
-    </p>
-    <p>Country<br/>
-        <select id="ac_country" name="ac_country">
-            <?php
-                foreach ($atcontent_countries as $code => $description) {
-                    $item_selected = $ac_country == $code ? "selected=\"selected\"" : "";
-                    echo <<<END
+    }
+?>
+                    </select>
+                </td></tr>
+                <tr><th>Country</th><td>
+                    <select id="ac_country" name="ac_country">
+<?php
+    foreach ($atcontent_countries as $code => $description) {
+        $item_selected = $ac_country == $code ? "selected=\"selected\"" : "";
+        echo <<<END
 <option value="{$code}" {$item_selected}>{$description}</option>
 END;
-                }
-            ?>
-        </select>
-    </p>
-    <p id="ac_state" style="display:none">State<br/>
-        <select name="ac_state">
-            <?php
-                foreach ($atcontent_states as $code => $description) {
-                    $item_selected = $ac_state == $code ? "selected=\"selected\"" : "";
-                    echo <<<END
+    }
+?>
+                    </select>
+                </td></tr>
+                <tr id="ac_state" style="display: none;"><th>State</th><td>
+                    <select name="ac_state">
+<?php
+    foreach ($atcontent_states as $code => $description) {
+        $item_selected = $ac_state == $code ? "selected=\"selected\"" : "";
+        echo <<<END
 <option value="{$code}" {$item_selected}>{$description}</option>
 END;
-                }
-            ?>
+    }
+?>
         </select>
-    </p>
-    <script type="text/javascript">
-        var ac_j = jQuery;
-        function ac_checkCountry() {
-            var c = ac_j("#ac_country").val();
-            if (c == "US") { ac_j("#ac_state").css("display", "block"); } else { ac_j("#ac_state").css("display", "none"); }
-        }
-        ac_j(function () {
-            ac_checkCountry();
-            ac_j("#ac_country").change(ac_checkCountry);
-        });
-    </script>
-    <p><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</p>
-	<p><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
-    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</p>
-    
-    <p>Referral (optional)<br/><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></p>
+                </td>
+                </tr>
+                <tr><th>Referral (optional)</th><td><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></td></tr>
+            </table>
+        </div>
+<script type="text/javascript">
+    var ac_j = jQuery;
+    function ac_checkCountry() {
+        var c = ac_j("#ac_country").val();
+        if (c == "US") { ac_j("#ac_state").show(); } else { ac_j("#ac_state").hide(); }
+    }
+    ac_j(function () {
+        ac_checkCountry();
+        ac_j("#ac_country").change(ac_checkCountry);
+    });
+</script>
+        <h2>Posts Settings</h2>
+        <div class="b-dashboard-table">
+            <table>
+                <tr><th><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</th></tr>
+                <tr><th><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
+    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</th></tr>
+            </table>
+        </div>
 
-        <a href="javascript:saveForm(1);" class="likebutton b_orange"><?php esc_attr_e('Apply Main Settings') ?></a>
-   
-</div><br><br><br>
-    <?php
+<?php
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
     if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
     $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
     if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
     $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
-    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = "0";
+    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
     $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
     if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
     $ac_script_init = get_user_meta($userid, "ac_script_init", true );
@@ -384,143 +194,25 @@ END;
     if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
     $ac_hint_panel_disable_checked = "";
     if ($ac_hint_panel_disable == "1") $ac_hint_panel_disable_checked = "checked=\"checked\"";
-    
 
 ?>
-<br>
 
-<div class="wrap">
-<div class="icon32" id="icon-options-general"><br></div><h3 style="padding-top: 14px;margin-bottom:0;">Advanced Settings are Optional</h3>
-<br>
-
-<div class="tool-box">
-    <p><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-    Turn off plugin features for a main page (should be marked for sites with not standard themes)</p>
-    <p><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
-    Turn off plugin comments</p>
-     
-    <a href="javascript:saveForm(0);" class="likebutton b_green"><?php esc_attr_e('Apply Advanced Settings') ?></a>
+        <h2>Advanced Settings (optional)</h2>
+        <div class="b-dashboard-table">
+            <table>
+                <tr><th><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
+    Turn off plugin features for the main page (should be marked for sites with not standard themes)</th></tr>
+                <tr><th><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
+    Turn off plugin comments</th></tr>
+            </table>
+        </div>
+        <br class="nowrap">
     
-</div>
-</div>
+        <a href="javascript:saveForm();" class="likebutton b_orange b_big"><?php esc_attr_e('Apply Settings') ?></a>
+
+    </div>
 </form>
 </div>
-<div style="float:right;">
-    <br>
-<?php
-    $banner_url = strlen ( $ac_api_key ) == 0 ? "javascript:alert('Please, connect with AtContent first');" : admin_url("admin.php?page=atcontent/copylocator.php"); 
-    $ref_url = strlen ( $ac_api_key ) == 0 || !is_string( $ac_pen_name ) ? "http://atcontent.com/RefUrl/CPlase/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/") : 
-        "http://atcontent.com/RefUrl/" . $ac_pen_name . "/" . base64_encode("http://wordpress.org/extend/plugins/atcontent/"); 
-?>
-    
-    <div class="atcontent_banner">
-<?php
-    if ( strlen( $ac_api_key ) > 0 ) {
-        $posts = $wpdb->get_results( 
-	        "
-	        SELECT ID, post_title, post_author
-	        FROM {$wpdb->posts}
-	        WHERE post_status = 'publish' 
-		        AND post_author = {$userid} AND post_type = 'post'
-	        "
-        );
-
-        $posts_id = array();
-
-        wp_cache_flush();
-
-        foreach ( $posts as $post ) 
-        {
-            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-            if ( strlen( $ac_postid ) > 0 ) { 
-                array_push( $posts_id, $ac_postid );
-            }
-            wp_cache_flush();
-        }
-
-        $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
-
-        echo '<h2>Statistics of my blog</h2><table class="ac_table_readership_inside">';
-        if ( $response["IncreaseRate"] > 0 ) {
-            $num = number_format_i18n( $response["IncreaseRate"] );
-            echo '<tr><td class="caption">Increase in readership</td>' .
-                '<td class="value">' .$num . '%</td></tr>';
-        }
-        if ( $response["OriginalViews"] > 0 ) {
-            $num = number_format_i18n( $response["OriginalViews"] );
-            echo '<tr><td class="caption">Views on my blog</td>' .
-                '<td class="value">' .$num . '</td></tr>';
-        }
-        if ( $response["RepostViews"] > 0 ) {
-            $num = number_format_i18n( $response["RepostViews"] );
-            echo '<tr><td class="caption">Views outside of my blog</td>' .
-                '<td class="value">' .$num . '</td></tr>';
-        }
-        if ( $response["Days"] > 0 ) {
-            $num = number_format_i18n( $response["Days"] );
-            echo '<tr><td class="caption">Period (days)</td>' .
-                '<td class="value">' .$num . '</td></tr>';
-        }
-        echo '</table>';
-    }
-?>
-        <h2>Invite your friends to AtContent</h2>
-        <!--<p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
-        <h3>Invite friends</h3>-->
-
-        <textarea id="inviteText" style="width: 100%;height: 45px;display: none;">Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog</textarea>
-
-        <!--<p style="font-size: 1.2em;">&nbsp;&nbsp; <b>↓</b> Send by email or share anywhere!</p>-->
-        <div style="float:left" id="addthis_share">
-<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-    <a class="addthis_button_email"></a>
-    <a class="addthis_button_facebook"></a>
-    <a class="addthis_button_twitter"></a>
-    <a class="addthis_button_linkedin"></a>
-    <a class="addthis_button_pinterest_share"></a>
-    <a class="addthis_button_google_plusone_share"></a>
-    <a class="addthis_button_stumbleupon"></a> 
-    <a class="addthis_button_digg"></a>
-    <a class="addthis_button_compact"></a>
-    <a class="addthis_counter addthis_bubble_style"></a>
-
-</div>
-<script type="text/javascript">
-    var addthis_share =
-    {
-        url: '<?php echo $ref_url; ?>',
-        title: 'WordPress with AtContent — even better. Check it!',
-        description: 'Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog',
-        email_template: 'plugin_invite',
-    };
-    var ac_j = jQuery;
-    ac_j(function(){
-        window.addthis_share.title = ac_j("#inviteText").val();
-        ac_j("#inviteText").bind('input propertychange', function() {
-            if(this.value.length){
-                window.addthis_share.title = this.value;
-                window.addthis_share.description = this.value;            
-                addthis.toolbox(".addthis_toolbox");
-                
-            }
-        });
-    });
-</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514ee41e167a87dc"></script>
-<!-- AddThis Button END -->
-        
-    </div>
-        <div style="clear:both;">&nbsp;</div>
-    </div>
-    <br />
-    <!--
-    <a href="http://bit.ly/acwprate" target="_blank"><img src="<?php echo content_url("plugins/atcontent/assets/for-wp_rate.png"); ?>" alt="wp-rate"/></a><a 
-    href="http://bit.ly/acsupport" target="_blank"><img style="margin-left: 20px;" src="<?php echo content_url("plugins/atcontent/assets/for-wp_support.png"); ?>" alt="wp-support"/></a>
-    -->
-
-</div>
-<div style="clear:both;">&nbsp;</div>
 
 
 <br><br><br>

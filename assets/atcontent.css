@@ -76,7 +76,8 @@ button:active, a.likebutton:active {
     position: relative;
     text-decoration: none;
     text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
-    vertical-align: middle;
+    -webkit-transition: background-color .2s;
+            transition: background-color .2s;
 }
 button.button-size-small, .likebutton.b_small {
     font-size: 12px;
@@ -112,6 +113,22 @@ button.button-color-orange:active, .likebutton.b_orange:active {
 }
 button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     background: none repeat scroll 0 0 #F5A200 !important;
+}
+button.button-color-white,
+.likebutton.b_white {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    color: #555 !important;
+    text-shadow: none !important;
+}
+
+button.button-color-white:hover,
+.likebutton.b_white:hover, .qq-upload-button-hover .likebutton.b_white {background: #f5f5f5}
+
+button.button-color-white[disabled],
+.likebutton.b_white.disabled {
+    background: #fff !important;
+    border-color: #ccc !important;
 }
 
 .atcontent_banner{
@@ -164,3 +181,108 @@ button.button-color-orange[disabled], .likebutton.b_orange.disabled {
     padding-left: 10pt;
     
 }
+
+    .b-dashboard {
+        *zoom: 1;
+    }
+    .b-dashboard:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+        .b-dashboard-col {
+            float: left;
+            margin-right: 100px;
+        }
+        .b-dashboard-table {
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin-bottom: 1.5em;
+            padding: 10px;
+            position: relative;
+        }
+            .b-dashboard-table table {
+                border-collapse: collapse;
+            }
+                .b-dashboard-table th, .b-dashboard-table td {
+                    border-top: 1px solid #EEEEEE;
+                }
+                .b-dashboard-table tr:first-child th, .b-dashboard-table tr:first-child td {
+                    border: medium none;
+                }
+                .b-dashboard-table th {
+                    font-weight: normal;
+                    padding: 10px 100px 10px 10px;
+                    text-align: left;
+                }
+                .b-dashboard-table td {
+                    font-size: 18px;
+                    padding: 10px;
+                    text-align: right;
+                }
+                    .b-dashboard-table .likebutton.b_white.b_small {
+                        /*left: 100%;
+                        margin: -4px 0 0 10px;
+                        position: absolute;
+                        white-space: nowrap;*/
+                       
+                    }
+                .b-dashboard-list {
+                    font-size: 17px;
+                    line-height: 1.2em;
+                    margin-bottom: 1.8em;
+                }
+                    .b-dashboard-list li {
+                        padding-left: 1em;
+                    }
+                        .b-dashboard-list li:before {
+                            content: '\2013\00a0';
+                        }
+
+
+.b-settings-tabs {
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 50px 0 20px;
+}
+    .b-settings-tabs ul {
+        margin: 0;
+        overflow: hidden;
+        padding: 8px 0 0 1px;
+        *zoom: 1;
+    }
+        .b-settings-tabs  ul:after {
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .b-settings-tabs li {
+            float: left;
+            margin: 0;
+        }
+            .b-settings-tabs a, .b-settings-tabs span {
+                background: #f9f9f9;
+                border: 1px solid #ccc;
+                float: left;
+                margin: 0 0 -1px -1px;
+                padding: 10px 20px 10px 45px;
+                position: relative;
+            }
+            .b-settings-tabs span {
+                background: #fff;
+                margin-top: -8px;
+                padding: 14px 20px 14px 45px;
+            }
+                .b-settings-tabs i {
+                    color: #eee;
+                    font-size: 3em;
+                    font-style: normal;
+                    height: 100%;
+                    left: 10px;
+                    line-height: 1em;
+                    position: absolute;
+                    text-shadow: 0 -1px 0 #ccc;
+                    top: 0;
+                }

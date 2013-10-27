@@ -54,7 +54,8 @@ function atcontent_activate() {
         foreach ( $wp_user_search as $user ) {
             $userid = $user->ID;
             $email = $user->user_email;
-            $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $ac_referral = get_user_meta( $userid, "ac_referral", true );
             if ( user_can( $userid, 'edit_posts' ) ) {
                 $status = 'Activated';
 
@@ -67,7 +68,7 @@ function atcontent_activate() {
                     }
                 }
 
-                atcontent_api_pingback( $email, $status, $ac_api_key );
+                atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
             }
         }
     } catch (Exception $ex) { }
@@ -82,7 +83,7 @@ function atcontent_deactivate() {
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( user_can( $userid, 'edit_posts' ) ) {
             $status = 'Deactivated';
-            atcontent_api_pingback( $email, $status, $ac_api_key );
+            atcontent_api_pingback( $email, $status, $ac_api_key, "" );
         }
     }
 }
@@ -96,7 +97,7 @@ function atcontent_uninstall() {
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
         if ( user_can( $userid, 'edit_posts' ) ) {
             $status = 'Uninstalled';
-            atcontent_api_pingback( $email, $status, $ac_api_key );
+            atcontent_api_pingback( $email, $status, $ac_api_key, "" );
         }
     }
 }

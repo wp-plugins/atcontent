@@ -81,6 +81,12 @@ function atcontent_api_get_nickname( $ac_api_key ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/nickname', $post_content );
 }
 
+function atcontent_api_get_userinfo( $ac_api_key ) {
+    $post_content = 'Key='.
+        urlencode( $ac_api_key ) . '&AppID=' . urlencode( 'WordPress' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/userinfo', $post_content );
+}
+
 function atcontent_api_get_key( $nounce, $grant ) {
     $post_content = 'Nounce='. urlencode( $nounce ) . 
         '&Grant='. urlencode( $grant ) . 

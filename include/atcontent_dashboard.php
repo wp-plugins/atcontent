@@ -8,7 +8,7 @@ function atcontent_dashboard_widget_function() {
 
     if ( strlen($ac_api_key) == 0 ) {
         $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
-        $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+        $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         echo '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent</div>';
         return;
     }
@@ -93,7 +93,7 @@ function atcontent_dashboard_widget_function() {
 
 function atcontent_add_dashboard_widgets() {
 
-    $img_url = plugins_url( 'assets/logo.png', __FILE__ );
+    $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
 	wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
 
     global $wp_meta_boxes;

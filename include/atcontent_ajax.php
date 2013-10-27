@@ -77,4 +77,36 @@ function atcontent_ajax_guestpost_check_url(){
     exit;
 }
 
+
+function atcontent_api_key()
+{
+    $userid = wp_get_current_user()->ID;
+    if ( current_user_can( 'edit_posts' ) ) {
+        $result = "";
+        $api_key_result = atcontent_api_get_key($_GET["nounce"], $_GET["grant"]);
+        if (!$api_key_result["IsOK"]) {
+            $result .= "false";
+        } else {
+            update_user_meta( $userid, "ac_api_key", $api_key_result["APIKey"] );
+            update_user_meta( $userid, "ac_pen_name", $api_key_result["Nickname"] );
+            update_user_meta( $userid, "ac_showname", $api_key_result["Showname"] );
+            update_user_meta( $userid, "ac_avatar_20", $api_key_result["Avatar20"] );
+            update_user_meta( $userid, "ac_avatar_80", $api_key_result["Avatar80"] );
+            $result .= "true";
+        }
+	    header( "Content-Type: text/html" );
+	    echo <<<END
+<html>
+<body>
+<script type="text/javascript">
+window.parent.parent.ac_connect_res({$result});
+</script>
+</body>
+</html>
+END;
+    }
+    // IMPORTANT: don't forget to "exit"
+    exit;
+}
+
 ?>
