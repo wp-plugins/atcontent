@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 5.0.2
+    Version: 5.1.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.0.2.99" );
+    define( 'AC_VERSION', "5.1.0.100" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -77,12 +77,12 @@
         add_submenu_page( 'atcontent/dashboard.php', 'Subscription', 'Subscription', 'publish_posts', 'atcontent/subscription.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'publish_posts', 'atcontent/settings.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'publish_posts', 'atcontent/sync.php',  '');
+        add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
 
         $guest_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
-        add_submenu_page( 'atcontent/settings.php', 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php',  '');
 
         $repost_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Reposting', 'Reposting', 'publish_posts', 'atcontent/repost.php', '', 
