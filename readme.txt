@@ -1,5 +1,5 @@
 ﻿=== WordPress Plugin by AtContent  ===
-Contributors: vadnov
+Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
 Tags: statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
 
