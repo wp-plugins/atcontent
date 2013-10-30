@@ -1,7 +1,10 @@
 <?php
-         $userid = wp_get_current_user()->ID;
-         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-         $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
+         require_once( "atcontent_userinit.php" );
+
+         if ( strlen( $ac_pen_name ) == 0 ) {
+             $ac_pen_name = "AtContent";
+         }
+
          $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 
          $category1url = admin_url("admin.php?page=atcontent/repost.php&category=1");
@@ -38,10 +41,13 @@
             } else {
                 wp_die( "Something gets wrong. Please try again" );
             }
+
+            $ac_postid = $_GET["postid"];
+
             // Create post object
             $new_post = array(
                 'post_title'    => $repost_title,
-                'post_content'  => '[atcontent id="' . $_GET["postid"] . '"]',
+                'post_content'  => "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>",
                 'post_status'   => 'publish',
                 'post_author'   => $userid,
                 'post_category' => array()

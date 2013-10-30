@@ -342,12 +342,12 @@ function atcontent_repost_preview( $posts ) {
         $post->post_name = "ac_guest_post";
         $post->guid = get_bloginfo('wpurl/ac_guest_post');
         $post->post_title = 'Preview ' . $repost_title;
-        $post->post_content = '<p><input type="button" onClick="accept_guest_post()" value="Accept"> or <input type="button" onClick="decline_guest_post()" value="Decline"></p>' .
+        $post->post_content = '<p><input type="button" onClick="accept_post()" value="Accept"> or <input type="button" onClick="decline_post()" value="Decline"></p>' .
         '[atcontent id="' . $_GET['ac_repost_post'] . '"]' .
         <<<END
 <script type="text/javascript">
 var processed = false;
-function accept_guest_post(){
+function accept_post(){
     if (processed) return;
     processed = true;
     window.location = decodeuri('{$accept_uri}');
@@ -363,7 +363,7 @@ function decodeuri(uri) {
     return div.firstChild.nodeValue;
 }
 </script>
-<p><input type="button" onClick="accept_guest_post()" value="Accept"> or <input type="button" onClick="decline_guest_post()" value="Decline"></p>
+<p><input type="button" onClick="accept_post()" value="Accept"> or <input type="button" onClick="decline_post()" value="Decline"></p>
 END;
         $post->ID = -42;
         $post->post_status = 'static';
