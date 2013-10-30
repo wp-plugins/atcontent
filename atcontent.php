@@ -199,7 +199,7 @@ jQuery(document).ready( function($) {
 </script>
 <?php
         } else {
-            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $connect_url = admin_url("admin.php?page=atcontent/settings.php");
             $ac_country = get_user_meta($userid, "ac_country", true );
             if ( strlen( $ac_country ) == 0 ) {
                 $pointer_content = '<h3>Better Interaction with AtContent</h3>';
