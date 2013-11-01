@@ -55,19 +55,18 @@
 ?>
 <div class="wrap">
     
-
-    <script type="text/javascript">
-        function disconnect() {
-            jQuery("#disconnect-form").submit();
-        }
-    </script>
-<p>You have connected blog to AtContent as<br>
-<a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img src="<?php echo $ac_avatar_80; ?>" 
-    alt="" width="50" height="50" style="vertical-align: middle"></a>
-<a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><span style="font-size: 1.5em;"><?php echo $ac_show_name; ?></span></a><br><br>
-<input type="hidden" name="ac_api_key" value="">
-<button onclick="disconnect();" class="button-size-small button-color-green"><?php esc_attr_e('Change account') ?></button>
-</p>
+    <p>You have connected blog to AtContent as</p>
+    <p>
+        <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
+            <img src="<?php echo $ac_avatar_80; ?>" alt="" width="50" height="50" style="vertical-align: middle; margin-right: .2em;"><span style="font-size: 1.5em;"><?php echo $ac_show_name; ?></span>
+        </a>
+        <input type="hidden" name="ac_api_key" value="">
+    </p>
+    <p>
+        <button type="submit" class="button-size-small button-color-green" name="disconnect" id="disconnect">
+            <?php esc_attr_e('Change account') ?>
+        </button>
+    </p>
 </div>
 <?php
          }

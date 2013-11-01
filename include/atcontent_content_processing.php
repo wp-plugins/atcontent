@@ -275,6 +275,9 @@ END;
             if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
                 $ac_is_advanced_tracking = "1";
             }
+            if ( strlen( $ac_is_copyprotect ) == 0 ) {
+                $ac_is_copyprotect = "1";
+            }
 
             if ( strlen( $ac_type ) == 0 ) {
                 if ($ac_is_paidrepost == "1") {

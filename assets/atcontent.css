@@ -202,8 +202,15 @@ button.button-color-white[disabled],
             padding: 10px;
             position: relative;
         }
+        .b-dashboard-table-status {
+            display: none;
+            width: 100%;
+        }
             .b-dashboard-table table {
                 border-collapse: collapse;
+            }
+            .b-dashboard-table-status table  {
+                width: 100%;
             }
                 .b-dashboard-table th, .b-dashboard-table td {
                     border-top: 1px solid #EEEEEE;
@@ -245,11 +252,10 @@ button.button-color-white[disabled],
     border-bottom: 1px solid #CCCCCC;
     font-size: 18px;
     line-height: 18px;
-    margin: 50px 0 20px;
+    margin: 20px 0;
 }
     .b-settings-tabs ul {
         margin: 0;
-        overflow: hidden;
         padding: 8px 0 0 1px;
         *zoom: 1;
     }
@@ -266,12 +272,14 @@ button.button-color-white[disabled],
                 background: #f9f9f9;
                 border: 1px solid #ccc;
                 float: left;
+                overflow: hidden;
                 margin: 0 0 -1px -1px;
                 padding: 10px 20px 10px 45px;
                 position: relative;
             }
             .b-settings-tabs span {
                 background: #fff;
+                border-bottom-color: #fff;
                 margin-top: -8px;
                 padding: 14px 20px 14px 45px;
             }
@@ -286,3 +294,70 @@ button.button-color-white[disabled],
                     text-shadow: 0 -1px 0 #ccc;
                     top: 0;
                 }
+                .b-settings-tabs span i {
+                    margin-top: -0.1em;
+                }
+
+.b-cols {
+    max-width: 1200px;
+    *zoom: 1;
+}
+.b-cols:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+    .b-column {
+        float: left;
+        margin-right: 2.5%;
+        padding-right: 2.5%;
+        width: 45%;
+    }
+    .b-column:first-child {
+        border-right: 1px dotted #ccc;
+        margin-left: -1px;
+    }
+
+.b-cols fieldset {margin: 2em 0 10px}
+.b-cols fieldset:first-child {margin-top: 10px}
+    .b-cols legend {
+        font: 23px "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+        margin-bottom: .2em;
+        padding: 0;
+    }
+
+.b-settings-table {
+    margin: 0 0 1.5em;
+    width: 100%;
+}
+    .b-settings-table th {
+        font-weight: normal;
+        padding: 4px 0;
+        text-align: left;
+        width: 30%;
+    }
+    .b-settings-table td {
+        padding: 4px 0;
+        width: 70%;
+    }
+        .b-settings-table td input[type=text],
+        .b-settings-table td input[type=password],
+        .b-settings-table td textarea,
+        .b-settings-table td select {
+            -moz-box-sizing: border-box;
+                 box-sizing: border-box;
+             width: 100%;
+        }
+.b-checkbox-row {padding: 4px 0 4px 1.4em}
+    .b-checkbox-row label {cursor: default}
+    .b-settings-table .b-checkbox-row label {padding: 0}
+        .b-checkbox-row label input[type=checkbox],
+        .b-checkbox-row label input[type=radio]{
+            float: left;
+            margin: 5px 0 0 -1.4em;
+            padding: 0;
+        }
+
+input[disabled] {background: #eee}
+
+.b-column-single {width: 500px}

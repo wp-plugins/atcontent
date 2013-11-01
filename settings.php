@@ -77,7 +77,7 @@
     <form action="" method="POST" name="settings-form" id="settings-form">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
     <input type="hidden" name="ac_settings" value="Y">
-    <div class="b-dashboard">
+    <div class="b-cols">
         
     
 <?php 
@@ -100,35 +100,35 @@
 
     $ac_referral = get_user_meta( $userid, "ac_referral", true );
 
-    $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked=\"checked\"" : "";
-    $ac_adtest_checked = $ac_adtest == "1" ? "checked=\"checked\"" : "";
-    $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked=\"checked\"" : "";
-    $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked=\"checked\"" : "";
+    $ac_copyprotect_checked = $ac_copyprotect == "1" ? "checked" : "";
+    $ac_adtest_checked = $ac_adtest == "1" ? "checked" : "";
+    $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked" : "";
+    $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked" : "";
 
 ?>
-<script>
-    function saveForm() {
-        jQuery("#settings-form").submit();
-    }
-</script>
-    
-    <h2>Site Settings</h2>
-        <div class="b-dashboard-table">
-            <table>
-                <tr><th>Category</th><td>
-                     <select name="ac_sitecategory">
+    <div class="b-column">
+        <fieldset>
+            <legend>Site Settings</legend>
+            <table class="b-settings-table">
+                <tr>
+                    <th>Category</th>
+                    <td>
+                        <select name="ac_sitecategory">
 <?php
     foreach ($atcontent_categories as $category => $description) {
-        $category_selected = $ac_sitecategory == $category ? "selected=\"selected\"" : "";
+        $category_selected = $ac_sitecategory == $category ? "selected" : "";
         echo <<<END
 <option value="{$category}" {$category_selected}>{$description}</option>
 END;
     }
 ?>
-                    </select>
-                </td></tr>
-                <tr><th>Country</th><td>
-                    <select id="ac_country" name="ac_country">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>
+                        <select id="ac_country" name="ac_country">
 <?php
     foreach ($atcontent_countries as $code => $description) {
         $item_selected = $ac_country == $code ? "selected=\"selected\"" : "";
@@ -137,10 +137,13 @@ END;
 END;
     }
 ?>
-                    </select>
-                </td></tr>
-                <tr id="ac_state" style="display: none;"><th>State</th><td>
-                    <select name="ac_state">
+                        </select>
+                    </td>
+                </tr>
+                <tr id="ac_state">
+                    <th>State</th>
+                    <td>
+                        <select name="ac_state">
 <?php
     foreach ($atcontent_states as $code => $description) {
         $item_selected = $ac_state == $code ? "selected=\"selected\"" : "";
@@ -149,32 +152,48 @@ END;
 END;
     }
 ?>
-        </select>
-                </td>
+                        </select>
+                    </td>
                 </tr>
-                <tr><th>Referral (optional)</th><td><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></td></tr>
+                <tr>
+                    <th>Referral (optional)</th>
+                    <td><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></td>
+                </tr>
             </table>
-        </div>
-<script type="text/javascript">
-    var ac_j = jQuery;
-    function ac_checkCountry() {
-        var c = ac_j("#ac_country").val();
-        if (c == "US") { ac_j("#ac_state").show(); } else { ac_j("#ac_state").hide(); }
-    }
-    ac_j(function () {
-        ac_checkCountry();
-        ac_j("#ac_country").change(ac_checkCountry);
-    });
-</script>
-        <h2>Posts Settings</h2>
-        <div class="b-dashboard-table">
-            <table>
-                <tr><th><input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>> Prevent plagiarism of my posts</th></tr>
-                <tr style="display: none;"><th><input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>> Paid repost. People will pay $
-    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>"> for reposting my posts to other sites.</th></tr>
-            </table>
-        </div>
-
+            <script type="text/javascript">
+                var ac_j = jQuery;
+                function ac_checkCountry() {
+                    var c = ac_j("#ac_country").val();
+                    if (c == "US") { ac_j("#ac_state").show(); } else { ac_j("#ac_state").hide(); }
+                }
+                ac_j(function () {
+                    ac_checkCountry();
+                    ac_j("#ac_country").change(ac_checkCountry);
+                });
+            </script>
+        </fieldset>
+    </div>
+    <div class="b-column">
+        <fieldset>
+            <legend>Posts Settings</legend>
+            <div class="b-checkbox-row">
+                <label>
+                    <input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>>
+                    Prevent plagiarism of my posts
+                </label>
+            </div>
+            <div class="b-checkbox-row" style="display: none;">
+                <label>
+                    <input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>>
+                    Paid repost
+                </label>
+                <div class="b-checkbox-extra">
+                    People will pay $
+                    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>">
+                    for reposting my posts to other sites.
+                </div>
+            </div>
+        </fieldset>
 <?php
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
     if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
@@ -197,26 +216,31 @@ END;
 
 ?>
 
-        <h2>Advanced Settings (optional)</h2>
-        <div class="b-dashboard-table">
-            <table>
-                <tr><th><input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-    Turn off plugin features for the main page (should be marked for sites with not standard themes)</th></tr>
-                <tr style="display: none;"><th><input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
-    Turn off plugin comments</th></tr>
-            </table>
-        </div>
-        <br class="nowrap">
-    
-        <a href="javascript:saveForm();" class="likebutton b_orange b_big"><?php esc_attr_e('Apply Settings') ?></a>
-
+        <fieldset>
+            <legend>Advanced Settings</legend>
+            <div class="b-checkbox-row">
+                <label>
+                    <input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
+                    Turn off plugin features for the main page (should be marked for sites with not standard themes)
+                </label>
+            </div>
+            <div class="b-checkbox-row" style="display: none;">
+                <label>
+                        <input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
+                        Turn off plugin comments
+                </label>
+            </div>
+        </fieldset>
+    </div>        
     </div>
+
+    <p>
+        <button type="submit" class="button-color-orange" name="settingsSubmit" id="settingsSubmit"><?php esc_attr_e('Apply Settings') ?></button>
+    </p>
 </form>
 </div>
 
-
-<br><br><br>
-<p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
+<p style="margin-top: 80px;"><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
     <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
     <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
@@ -224,3 +248,18 @@ END;
 </p>
 
 </div>
+
+<script>
+    (function($){
+        $('label input[type!=checkbox][type!=radio]').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        var ac_paidrepostcost = $('#ac_paidrepostcost')[0],
+            ac_paidrepost = $('#ac_paidrepost');
+        ac_paidrepostcost.disabled = !ac_paidrepost[0].checked;     
+        $('#ac_paidrepost').on('click change', function () {
+            ac_paidrepostcost.disabled = !this.checked;
+        });
+    })(jQuery);
+</script>
