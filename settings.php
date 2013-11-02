@@ -57,6 +57,7 @@
         $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
         $ac_comments_disable = ( isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y" ) ? "1" : "0";
+        $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
         update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
         $ac_hint_panel_disable = ( isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
@@ -196,11 +197,12 @@ END;
         </fieldset>
 <?php
     $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
-    if (strlen($ac_excerpt_image_remove) == 0) $ac_excerpt_image_remove = "0";
-    $ac_excerpt_no_process = get_user_meta($userid, "ac_excerpt_no_process", true );
-    if (strlen($ac_excerpt_no_process) == 0) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
-    $ac_comments_disable = get_user_meta($userid, "ac_comments_disable", true );
-    if (strlen($ac_comments_disable) == 0) $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
+    if ( strlen( $ac_excerpt_image_remove ) == 0 ) $ac_excerpt_image_remove = "0";
+    $ac_excerpt_no_process = get_user_meta( $userid, "ac_excerpt_no_process", true );
+    if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
+    $ac_comments_disable = get_user_meta( $userid, "ac_comments_disable", true );
+    if ( strlen( $ac_comments_disable ) == 0 ) $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
+    $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
     $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
     if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
     $ac_script_init = get_user_meta($userid, "ac_script_init", true );

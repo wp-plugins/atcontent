@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Why 3,500 Sites Have Chosen AtContent? Because it’s the easiest way to Reach new readership & Increase search ranking!
-    Version: 5.2.1
+    Version: 5.2.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.2.1.103" );
+    define( 'AC_VERSION', "5.2.2.104" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -51,7 +51,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=4', __FILE__ ) );
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=5', __FILE__ ) );
          wp_enqueue_style( 'atcontentAdminStylesheet' );
          wp_enqueue_style( 'wp-pointer' );
          wp_enqueue_script( 'wp-pointer' );
