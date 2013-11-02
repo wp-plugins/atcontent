@@ -10,6 +10,7 @@
          $category1url = admin_url("admin.php?page=atcontent/repost.php&category=1");
          $category2url = admin_url("admin.php?page=atcontent/repost.php&category=2");
          $category3url = admin_url("admin.php?page=atcontent/repost.php&category=3");
+         $category4url = admin_url("admin.php?page=atcontent/repost.php&category=4");
 
          $currentcategory = $_GET["category"];
          if ( strlen( $currentcategory ) == 0 ) $currentcategory = "1";
@@ -130,6 +131,11 @@
                     <a href="<?php echo $category3url; ?>">Social Enterpreneurship</a><br>
                 <?php } else { ?>
                     <strong>Social Enterpreneurship</strong><br>
+                <?php }?>
+                <?php if ($currentcategory !== "4") { ?>
+                    <a href="<?php echo $category4url; ?>">Tech</a><br>
+                <?php } else { ?>
+                    <strong>Tech</strong><br>
                 <?php }?>
             </p>
             

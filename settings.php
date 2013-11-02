@@ -60,7 +60,7 @@
         update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
         $ac_hint_panel_disable = ( isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
-        $form_message .= '<div class="updated"><p><strong>Settings saved.</strond></p>' . 
+        $form_message .= '<div class="updated"><p><b>Settings saved.</b></p>' . 
         '<p><a href="' . admin_url("admin.php?page=atcontent/sync.php") . '">Follow Sync section</a></p>' .
         '</div>';
     }
