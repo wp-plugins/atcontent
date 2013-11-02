@@ -2,14 +2,14 @@
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
 Tags: statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
-
 Requires at least: 3.3
 Tested up to: 3.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent! 
+Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
+
 
 == Description ==
 **Let's face it - growing an audience is tough.** How does AtContent make it easier?
