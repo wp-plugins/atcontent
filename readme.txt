@@ -82,10 +82,7 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 3. Subscription panel with the option to upgrade a plan.
 4. Plugin settings panel example. Category and location data are needed for the better targeting of a featured content.
 5. Synchronization screen. Clicking the button syndicates a blog to AtContent.
-6. Synchronization end. The number of synchonized posts and obtained backlinks is shown.
-7. AtContent publication wrapped in a widget. After synchronization all your posts will have the repost panel at the bottom.
-8. Sample of a paid repost. Any reader is charged by the author for reposting his work.
-9. Sample of a paid publication. Any reader is charged by the author before reading the full article or downloading a file.
+6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
 
