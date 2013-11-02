@@ -29,6 +29,7 @@
         update_user_meta( $userid, "ac_showname", $ac_userinfo["Showname"] );
         update_user_meta( $userid, "ac_avatar_20", $ac_userinfo["Avatar20"] );
         update_user_meta( $userid, "ac_avatar_80", $ac_userinfo["Avatar80"] );
+        update_user_meta( $userid, "ac_avatar_200", $ac_userinfo["Avatar200"] );
     }
     require( "atcontent_userinit.php" );
 ?>
@@ -53,17 +54,18 @@
 <?php
          } else {
 ?>
-<div class="wrap">
+<div class="b-column-single">
     
-    <p>You have connected blog to AtContent as</p>
-    <p>
+    <p style="text-align: center;">You have connected blog to AtContent as</p>
+    <p style="text-align: center">
         <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
-            <img src="<?php echo $ac_avatar_80; ?>" alt="" width="50" height="50" style="vertical-align: middle; margin-right: .2em;"><span style="font-size: 1.5em;"><?php echo $ac_show_name; ?></span>
+            <img src="<?php echo $ac_avatar_200; ?>" alt="" width="200" height="200">
+            <span style="font-size: 1.6em; display: block; margin-top: 10px;"><?php echo $ac_show_name; ?></span>
         </a>
         <input type="hidden" name="ac_api_key" value="">
     </p>
-    <p>
-        <button type="submit" class="button-size-small button-color-green" name="disconnect" id="disconnect">
+    <p style="text-align: center">
+        <button type="submit" class="button-size-small button-color-white" name="disconnect" id="disconnect">
             <?php esc_attr_e('Change account') ?>
         </button>
     </p>

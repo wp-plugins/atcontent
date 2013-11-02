@@ -263,5 +263,46 @@ END;
         $('#ac_paidrepost').on('click change', function () {
             ac_paidrepostcost.disabled = !this.checked;
         });
+        var changed = false,
+            fields = {},
+            type, val;
+        $('#settings-form').find('input, textarea').each(function () {
+            type = this.type;
+            switch (this.type) {
+                case 'checkbox':
+                case 'radio':
+                    val = this.checked;
+                    break;
+                default:
+                    val = this.value;
+                    break;
+            }
+            fields[this.name] = {
+                def: val,
+                field: this
+            }
+            $(this).on('change', watchChanges);
+        });
+        $(window).on('beforeunload', function () {
+            if (changed) return 'You have changed data in some fields. Do you really want to leave without saving?';
+        });
+        function watchChanges() {
+            changed = false;
+            var field;
+            for (var i in fields) {
+                field = fields[i].field;
+                if (field.type == 'checkbox' || field.type == 'radio') {
+                    if (fields[i].def != field.checked) {
+                    changed = true;
+                    break;
+                    }
+                } else {
+                    if (fields[i].def != fields[i].field.value) {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+        }
     })(jQuery);
 </script>
