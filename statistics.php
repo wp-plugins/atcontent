@@ -38,7 +38,7 @@
         $stat_result = atcontent_api_extended_readership( $ac_api_key, site_url(), json_encode( $posts_id ), 0 );
 
         if ( $stat_result["IsOK"] != true ) {
-            if ($stat_result["ErrorCode"] == 102) {
+            if ( $stat_result["ErrorCode"] == 102 ) {
                 echo  "<div class=\"error\">" . 'Could not get statistics from atcontent.com. ' . 
                 'You should have Pro account.<br>' .
                 '<a href="https://atcontent.com/Subscribe">Upgrade for Pro account here</a>' .
@@ -49,26 +49,34 @@
         }
 
         if ( $stat_result["IsOK"] == true ) {
-
         ?>
 <table cellspacing="0" class="wp-list-table widefat fixed posts">
 	<thead>
-	<tr>
-		<th style="" class="manage-column" scope="col">Title</th>
-        <th style="" class="manage-column" scope="col">Original Views</th>
-        <th style="" class="manage-column" scope="col">Repost Views</th>
-        <th style="" class="manage-column" scope="col">Increase Rate</th>
+    <tr>
+      <th style="" class="manage-column" scope="col">Title</th>
+      <th style="width:100px;" class="manage-column" scope="col">On My Blog Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Repost Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Increase Rate</th>
+      <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
+      <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
+      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
 	<tfoot>
-	<tr>
-		<th style="" class="manage-column" scope="col">Title</th>
-        <th style="" class="manage-column" scope="col">Original Views</th>
-        <th style="" class="manage-column" scope="col">Repost Views</th>
-        <th style="" class="manage-column" scope="col">Increase Rate</th>
-	</tfoot>
-    <tbody id="the-list">
+    <tr>
+      <th style="" class="manage-column" scope="col">Title</th>
+      <th style="" class="manage-column" scope="col">On My Blog Views</th>
+      <th style="" class="manage-column" scope="col">Repost Views</th>
+      <th style="" class="manage-column" scope="col">Increase Rate</th>
+      <th style="" class="manage-column" scope="col">Facebook</th>
+      <th style="" class="manage-column" scope="col">Twitter</th>
+      <th style="" class="manage-column" scope="col">LinkedIn</th>
+      <th style="" class="manage-column" scope="col">Direct</th>
+     </tr>
+  </tfoot>
+  <tbody id="the-list">
 <?php
             foreach ( $stat_result["PostsStats"] as $poststat ) {
                 $poststat["StatUrl"] = admin_url( "admin.php?page=atcontent/statistics.php" ) . '&postid=' . $poststat["PostID"] ; 
@@ -81,9 +89,13 @@
     <span class="detailsoutside"><a title="Outside reposts for this item" href="<?php echo $poststat["StatUrl"] . "&outside=1"; ?>">Outside reposts</a></span>
 </div>
 
-						<td ><?php echo $poststat["OriginalViews"] > 0 ? $poststat["OriginalViews"] : "N/A";?></td>
-                        <td ><?php echo $poststat["RepostViews"] > 0 ? $poststat["RepostViews"] : "N/A"; ?></td>
-                        <td ><?php echo  $poststat["IncreaseRate"] > 0 ? number_format_i18n ( $poststat["IncreaseRate"] ) . '%' : "N/A"; ?></td>
+						<td><?php echo $poststat["OriginalViews"] > 0 ? $poststat["OriginalViews"] : "—";?></td>
+            <td ><?php echo $poststat["RepostViews"] > 0 ? $poststat["RepostViews"] : "—"; ?></td>
+            <td ><?php echo  $poststat["IncreaseRate"] > 0 ? number_format_i18n ( $poststat["IncreaseRate"] ) . '%' : "—"; ?></td>
+            <td ><?php echo  $poststat["FacebookHits"] >= 0 ? number_format_i18n ( $poststat["FacebookHits"] ) : "—"; ?></td>
+            <td ><?php echo  $poststat["TwitterHits"] >= 0 ? number_format_i18n ( $poststat["TwitterHits"] ) : "—"; ?></td>
+            <td ><?php echo  $poststat["LinkedInHits"] >= 0 ? number_format_i18n ( $poststat["LinkedInHits"] ) : "—"; ?></td>
+            <td ><?php echo  $poststat["DirectHits"] >= 0 ? number_format_i18n ( $poststat["DirectHits"] ) : "—"; ?></td>
 					</tr>
 <?php
             }
@@ -159,16 +171,25 @@
 </script>
 <table cellspacing="0" class="wp-list-table widefat fixed posts">
 	<thead>
-	<tr>
-		<th style="" class="manage-column" scope="col">Url</th>
-        <th style="" class="manage-column" scope="col">Views</th>
+    <tr>
+      <th style="" class="manage-column" scope="col">Url</th>
+      <th style="width:100px;" class="manage-column" scope="col">Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
+      <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
+      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
 	<tfoot>
-	<tr>
-		<th style="" class="manage-column" scope="col">Url</th>
-        <th style="" class="manage-column" scope="col">Views</th>
+    <tr>
+      <th style="" class="manage-column" scope="col">Url</th>
+      <th style="width:100px;" class="manage-column" scope="col">Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
+      <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
+      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
+    </tr>
 	</tfoot>
     <tbody id="the-list">
 <?php
@@ -178,24 +199,32 @@
         $stat_domain_info["DetailsUrl"] = "javascript:toggleDetails('" . $stat_domain . "');";
         ?>
         <tr valign="top" class="domain-<?php echo $stat_domain; ?> type-post hentry" id="domain-<?php echo $stat_domain; ?>">
-			<td class="domain-title column-title"><strong>“<?php echo $stat_domain; ?>”</strong>
+          <td class="domain-title column-title"><strong>“<?php echo $stat_domain; ?>”</strong>
 
 <div class="row-actions">
     <span class="details"><a title="Details for this item" id="details-link-<?php echo $stat_domain; ?>" href="<?php echo $stat_domain_info["DetailsUrl"]; ?>">Show details</a></span>
     <span class="view"><a title="Visit this site" href="<?php echo 'http://' . $stat_domain; ?>">Visit site</a></span>
 </div>
 
-			<td><strong><?php echo $stat_domain_info["Views"]; ?></strong></td>
-		</tr>
+          <td><strong><?php echo $stat_domain_info["Views"]; ?></strong></td>
+          <td><strong><?php echo $stat_domain_info["Facebook"] >= 0 ? $stat_domain_info["Facebook"] : "—" ; ?></strong></td>
+          <td><strong><?php echo $stat_domain_info["Twitter"] >= 0 ? $stat_domain_info["Twitter"] : "—" ; ?></strong></td>
+          <td><strong><?php echo $stat_domain_info["LinkedIn"] >= 0 ? $stat_domain_info["LinkedIn"] : "—" ; ?></strong></td>
+          <td><strong><?php echo $stat_domain_info["DirectLink"] >= 0 ? $stat_domain_info["DirectLink"] : "—" ; ?></strong></td>
+        </tr>
         <?php
             foreach ( $stat_domain_info["Items"] as $details_pair ) {
                 $details_url = $details_pair["Key"];
                 $details_info = $details_pair["Value"];
                 ?>
         <tr valign="top" class="url-entry ac-url-entry type-post hentry child-<?php echo $stat_domain ?>">
-			<td class="url-caption"><a href="<?php echo $details_url; ?>"><?php echo $details_url; ?></a></td>
-			<td><?php echo $details_info["Views"]; ?></td>
-		</tr>
+          <td class="url-caption"><a href="<?php echo $details_url; ?>"><?php echo $details_url; ?></a></td>
+          <td><?php echo $details_info["Views"]; ?></td>
+          <td><?php echo $details_info["Facebook"] >= 0 ? $details_info["Facebook"] : "—" ; ?></td>
+          <td><?php echo $details_info["Twitter"] >= 0 ? $details_info["Twitter"] : "—" ; ?></td>
+          <td><?php echo $details_info["LinkedIn"] >= 0 ? $details_info["LinkedIn"] : "—" ; ?></td>
+          <td><?php echo $details_info["DirectLink"] >= 0 ? $details_info["DirectLink"] : "—" ; ?></td>
+        </tr>
         <?php
             }
     } 
@@ -263,24 +292,37 @@
 </script>
 <table cellspacing="0" class="wp-list-table widefat fixed posts">
 	<thead>
-	<tr>
-        <th style="" class="manage-column" scope="col">Url</th>
-        <th style="" class="manage-column" scope="col">Repost Views</th>
+    <tr>
+      <th style="" class="manage-column" scope="col">Url</th>
+      <th style="width:100px;" class="manage-column" scope="col">Reposts Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
+      <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
+      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
 	<tfoot>
-	<tr>
-        <th style="" class="manage-column" scope="col">Url</th>
-        <th style="" class="manage-column" scope="col">Repost Views</th>
+    <tr>
+      <th style="" class="manage-column" scope="col">Url</th>
+      <th style="width:100px;" class="manage-column" scope="col">Reposts Views</th>
+      <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
+      <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
+      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
+    </tr>
 	</tfoot>
-    <tbody id="the-list">
+  <tbody id="the-list">
 <?php
 foreach ( $stat_result["PostsStats"] as $stat_info ) {
 ?>
         <tr>
             <td>Post <strong style="font-size:12pt;">“<?php echo $stat_info["Title"]; ?>”</strong></td>
-            <td><strong><?php echo $stat_info["RepostViews"] > 0 ? $stat_info["RepostViews"] : "N/A" ; ?></strong></td>
+            <td><strong><?php echo $stat_info["RepostViews"] > 0 ? $stat_info["RepostViews"] : "—" ; ?></strong></td>
+            <td><strong><?php echo $stat_info["FacebookHits"] >= 0 ? $stat_info["FacebookHits"] : "—" ; ?></strong></td>
+            <td><strong><?php echo $stat_info["TwitterHits"] >= 0 ? $stat_info["TwitterHits"] : "—" ; ?></strong></td>
+            <td><strong><?php echo $stat_info["LinkedInHits"] >= 0 ? $stat_info["LinkedInHits"] : "—" ; ?></strong></td>
+            <td><strong><?php echo $stat_info["DirectHits"] >= 0 ? $stat_info["DirectHits"] : "—" ; ?></strong></td>
         </tr>
 <?php
     foreach ( $stat_info["Details"] as $stat_domain_pair ) {
@@ -298,6 +340,10 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
 </div>
 
 			<td><strong><?php echo $stat_domain_info["Views"]; ?></strong></td>
+			<td><strong><?php echo $stat_domain_info["Facebook"] >= 0 ? $stat_domain_info["Facebook"] : "—" ; ?></strong></td>
+      <td><strong><?php echo $stat_domain_info["Twitter"] >= 0 ? $stat_domain_info["Twitter"] : "—" ; ?></strong></td>
+      <td><strong><?php echo $stat_domain_info["LinkedIn"] >= 0 ? $stat_domain_info["LinkedIn"] : "—" ; ?></strong></td>
+      <td><strong><?php echo $stat_domain_info["DirectLink"] >= 0 ? $stat_domain_info["DirectLink"] : "—" ; ?></strong></td>
 		</tr>
         <?php
             foreach ( $stat_domain_info["Items"] as $details_pair ) {
@@ -307,6 +353,10 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
         <tr valign="top" class="url-entry ac-url-entry type-post hentry child-<?php echo $stat_row_id ?>">
 			<td class="url-caption"><a href="<?php echo $details_url; ?>"><?php echo $details_url; ?></a></td>
 			<td><?php echo $details_info["Views"]; ?></td>
+      <td><?php echo $details_info["Facebook"] >= 0 ? $details_info["Facebook"] : "—" ; ?></td>
+      <td><?php echo $details_info["Twitter"] >= 0 ? $details_info["Twitter"] : "—" ; ?></td>
+      <td><?php echo $details_info["LinkedIn"] >= 0 ? $details_info["LinkedIn"] : "—" ; ?></td>
+      <td><?php echo $details_info["DirectLink"] >= 0 ? $details_info["DirectLink"] : "—" ; ?></td>
 		</tr>
         <?php
             }
@@ -317,7 +367,6 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
 </table>
 <?php
         }
-
     }
 ?>
 </div>

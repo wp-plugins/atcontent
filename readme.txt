@@ -86,6 +86,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.3.0 =
+
+* Dashboard and statistics improvements
+
 = 5.1.1 =
 
 * Repost without shortcodes now.

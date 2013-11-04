@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 5.2.2
+    Version: 5.3.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.2.2.104" );
+    define( 'AC_VERSION', "5.3.0.105" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -105,9 +105,9 @@
 
     function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );
-        if ( $post == null ) return;
-        $ac_api_key = get_user_meta( intval($post->post_author), "ac_api_key", true );
-        if (strlen( $ac_api_key ) > 0) {
+        if ($post == null) return;
+        $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
+        if (strlen($ac_api_key) > 0) {
             $ac_postid = get_post_meta($post->ID, "ac_postid", true);
             $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
             $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
