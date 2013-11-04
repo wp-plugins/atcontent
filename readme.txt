@@ -16,7 +16,7 @@ Make your posts available for reposting to other sites and increase an audience 
 #### AtContent increases your audience by 30% - 300% in just 3 months by making your posts available for reposting! #### 
 * With AtContent others can repost your posts on any site as simple as retweet on Twitter. Every reposter provides you additional audience and backlinks. It increases your audience by 30% to 300% in just 3 months by using AtContent. [USE CASE](http://i.imgur.com/fXNgtC0.png). 
 * SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
-* You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google.[SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
+* You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
 #### Guest Posting with AtContent – Easy as Never Before! ####
 * Guest blogging with AtContent is just like writing a post for your own site, with the one exception that you specify the site you wish the post to be published on. AtContent then sends your guest post to the chosen website for reviewing and publishing. [Read more here!](http://atcontent.com/Blog/3WWXEDY3SJh.text)
@@ -24,10 +24,10 @@ Make your posts available for reposting to other sites and increase an audience 
 #### Plagiarism Prevention with AtContent ####
 
 * You can be sure you will not get penalties from Google for your plagiarized posts, because with AtContent nobody can plagiarize your posts! 
-Here is an[EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-pastes this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
+Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-pastes this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
-* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks.  [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
+* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
 
 #### Joining AtContent costs you nothing – the plugin is free. ####
 
