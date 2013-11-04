@@ -1,4 +1,4 @@
-﻿=== AtContent  ===
+﻿=== AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
 Tags: statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
@@ -8,39 +8,34 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
+Make your posts available for reposting to other sites and increase an audience by 30% - 300% in just 3 months! Backlinks included, SEO friendly.
 
 
 == Description ==
 **Let's face it - growing an audience is tough.** How does AtContent make it easier?
-#### AtContent provides you valuable backlinks and the ability for content distribution. #### 
-* Others can repost your posts/articles on any site a as simple as a retweet on Twitter. Every site provides you additional audience and backlinks. Usually bloggers increase audience by 30% to 300% in 90 days by using AtContent. [SCREENSHOT](http://i.imgur.com/fXNgtC0.png). SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
-* Repost relevant posts of other authors on your blog to increase audience engagement and get more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
+#### AtContent increases your audience by 30% - 300% in just 3 months by making your posts available for reposting! #### 
+* With AtContent others can repost your posts on any site as simple as retweet on Twitter. Every reposter provides you additional audience and backlinks. It increases your audience by 30% to 300% in just 3 months by using AtContent. [USE CASE](http://i.imgur.com/fXNgtC0.png). 
+
+SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
+
+* You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google.[SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
 #### Guest Posting with AtContent – Easy as Never Before! ####
 * Guest blogging with AtContent is just like writing a post for your own site, with the one exception that you specify the site you wish the post to be published on. AtContent then sends your guest post to the chosen website for reviewing and publishing. [Read more here!](http://atcontent.com/Blog/3WWXEDY3SJh.text)
 
 #### Plagiarism Prevention with AtContent ####
 
-* Nobody can steal your content! Here is the example: [thefabuloustimes.com](http://thefabuloustimes.com) — as you can see, nobody can copy-paste this article, but everyone can legally repost it via AtContent by clicking "repost" at the bottom of the article.
+* You can be sure you will not get penalties from Google for your plagiarized posts, because with AtContent nobody can plagiarize your posts! 
+Here is an[EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-pastes this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
 
-#### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites! ####
-* You, as a content owner can track, update or block your posts on other sites and interact with viewers. You see detailed statistics about your post views, reposting and sharing. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
-
-#### Monetize Content Reposting ####
-
-* Others pay to you for the ability to repost your posts. [Example](http://atcontenttest.bestcheapwebhosting.com/how-to-blog-like-chuck/) — click "repost" at the bottom of the article and see that anyone is charged before making a repost. This protects your posts from plagiarism and brings you money.
+#### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
+* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks.  [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
 
 #### Joining AtContent costs you nothing – the plugin is free. ####
 
 * With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
 * If you have several blogs and need a multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
 
-#### Quote of the day ####
-
-When the people fear the government, there is tyranny. When the government fears the people, there is liberty.
-
-Thomas Jefferson 
 
 == Examples ==
 
