@@ -24,7 +24,7 @@ Make your posts available for reposting to other sites and increase an audience 
 #### Plagiarism Prevention with AtContent ####
 
 * You can be sure you will not get penalties from Google for your plagiarized posts, because with AtContent nobody can plagiarize your posts! 
-Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-pastes this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
+Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-paste this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
 * You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
