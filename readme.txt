@@ -86,6 +86,14 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.5.0 =
+
+* Blog ratings
+
+= 5.4.0 =
+
+* Share panel settings
+
 = 5.3.0 =
 
 * Dashboard and statistics improvements

@@ -279,7 +279,9 @@ END;
         var changed = false,
             fields = {},
             type, val;
-        $('#settings-form').find('input, textarea').each(function () {
+         $('#settings-form').on('submit', function () {
+            changed = false;
+        }).find('select, input, textarea').each(function () {
             type = this.type;
             switch (this.type) {
                 case 'checkbox':

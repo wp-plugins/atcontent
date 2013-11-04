@@ -89,7 +89,9 @@ function atcontent_dashboard_widget_function() {
         }
     }
     $statisticslink = admin_url("admin.php?page=atcontent/statistics.php");
-    echo "<div class=\"clear\"></div><div style=\"text-align:center;margin-top:15px;\"><a href=\"{$statisticslink}\">Get details</a></div></div>";
+    $ratinglink = admin_url("admin.php?page=atcontent/rating.php");
+    echo "<div class=\"clear\"></div><div style=\"text-align:center;margin-top:15px;\">" . 
+    "<a href=\"{$ratinglink}\">See blogs rating</a> | <a href=\"{$statisticslink}\">Get details</a></div></div>";
 }
 
 function atcontent_add_dashboard_widgets() {

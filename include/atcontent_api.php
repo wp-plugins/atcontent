@@ -252,6 +252,15 @@ function atcontent_api_get_title( $postid ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/general/title', $post_content );
 }
 
+function atcontent_api_category_sites_rating( $category ) {
+    $post_content = 
+        'category=' . urlencode( $category ) .
+        '&month=' . urlencode( "1" ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/general/categorysitesrating', $post_content );
+}
+
 function atcontent_api_get_quotas( $api_key ) {
     $post_content = 
         'AppID=' . urlencode( 'WordPress' ) .

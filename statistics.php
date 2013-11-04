@@ -33,7 +33,7 @@
 
 ?>
        <h2>AtContent Statistics</h2>
-<p><a href="<?php echo $onlyoutsidelink; ?>">Show outside reposts</a></p>
+<p><a href="<?php echo $onlyoutsidelink; ?>">Show outside reposts</a> <a href="<?php echo admin_url("admin.php?page=atcontent/rating.php") ?>">See blogs rating</a> </p>
 <?php
         $stat_result = atcontent_api_extended_readership( $ac_api_key, site_url(), json_encode( $posts_id ), 0 );
 
