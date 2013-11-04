@@ -12,10 +12,10 @@ Make your posts available for reposting to other sites and increase an audience 
 
 
 == Description ==
-**Let's face it - growing an audience is tough.** How does AtContent make it easier?
+Let's face it - growing an audience is tough. How does AtContent make it easier?
 #### AtContent increases your audience by 30% - 300% in just 3 months by making your posts available for reposting! #### 
 * With AtContent others can repost your posts on any site as simple as retweet on Twitter. Every reposter provides you additional audience and backlinks. It increases your audience by 30% to 300% in just 3 months by using AtContent. [USE CASE](http://i.imgur.com/fXNgtC0.png). 
-* SEO friendly - **NO CONTENT DUPLICATION, NO GOOGLE PENALTIES**. 
+* SEO friendly - **NO CONTENT PLAGIARISM, NO GOOGLE PENALTIES**. 
 * You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
 #### Guest Posting with AtContent – Easy as Never Before! ####
