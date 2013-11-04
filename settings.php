@@ -52,6 +52,9 @@
 
         $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
 
+        $ac_share_panel_disable = isset( $_POST["ac_share_panel_disable"] ) && $_POST["ac_share_panel_disable"] == "Y" ? 1 : 0;
+        update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
+
         $ac_excerpt_image_remove = ( isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
         $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "1" : "0";
@@ -206,6 +209,8 @@ END;
     $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
     if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
     $ac_script_init = get_user_meta($userid, "ac_script_init", true );
+    $ac_share_panel_disable = get_user_meta($userid, "ac_share_panel_disable", true );
+    if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "0";
 
     $ac_excerpt_image_remove_checked = "";
     if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
@@ -215,6 +220,8 @@ END;
     if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
     $ac_hint_panel_disable_checked = "";
     if ($ac_hint_panel_disable == "1") $ac_hint_panel_disable_checked = "checked=\"checked\"";
+    $ac_share_panel_disable_checked = "";
+    if ( $ac_share_panel_disable == "1" ) $ac_share_panel_disable_checked = "checked=\"checked\"";
 
 ?>
 
@@ -230,6 +237,12 @@ END;
                 <label>
                         <input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
                         Turn off plugin comments
+                </label>
+            </div>
+            <div class="b-checkbox-row">
+                <label>
+                        <input type="checkbox" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
+                        Turn off share panel
                 </label>
             </div>
         </fieldset>
