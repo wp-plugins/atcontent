@@ -217,9 +217,9 @@ END;
     $ac_excerpt_no_process_checked = "";
     if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
     $ac_comments_disable_checked = "";
-    if ($ac_comments_disable == "1") $ac_comments_disable_checked = "checked=\"checked\"";
+    if ( $ac_comments_disable == "1" ) $ac_comments_disable_checked = "checked=\"checked\"";
     $ac_hint_panel_disable_checked = "";
-    if ($ac_hint_panel_disable == "1") $ac_hint_panel_disable_checked = "checked=\"checked\"";
+    if ( $ac_hint_panel_disable == "1" ) $ac_hint_panel_disable_checked = "checked=\"checked\"";
     $ac_share_panel_disable_checked = "";
     if ( $ac_share_panel_disable == "1" ) $ac_share_panel_disable_checked = "checked=\"checked\"";
 
