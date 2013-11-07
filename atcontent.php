@@ -107,8 +107,8 @@
     function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );
         if ($post == null) return;
-        $ac_api_key = get_user_meta(intval($post->post_author), "ac_api_key", true);
-        if (strlen($ac_api_key) > 0) {
+        $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
+        if ( strlen( $ac_api_key ) > 0 ) {
             $ac_postid = get_post_meta($post->ID, "ac_postid", true);
             $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
             $ac_is_import_comments = get_post_meta($post->ID, "ac_is_import_comments", true);
