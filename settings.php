@@ -27,7 +27,7 @@
         update_user_meta($userid, "ac_copyprotect", $copyProtection);
 
         $adTest = isset( $_POST["ac_adtest"] ) && $_POST["ac_adtest"] == "Y" ? 1 : 0;
-        update_user_meta($userid, "ac_adtest", $adTest);
+        update_user_meta( $userid, "ac_adtest", $adTest);
 
         $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
         update_user_meta($userid, "ac_sitecategory", $siteCategory);
@@ -49,6 +49,18 @@
         update_user_meta( $userid, "ac_paidrepostcost", $paidRepostCost );
         $importComments = isset( $_POST["ac_comments"] ) && $_POST["ac_comments"] == "Y" ? 1 : 0;
         update_user_meta( $userid, "ac_is_import_comments", $importComments );
+
+        $ac_oneclick_repost_saved = get_user_meta( $userid, "ac_oneclick_repost", true );
+        $ac_oneclick_repost = isset( $_POST["ac_oneclick_repost"] ) && $_POST["ac_oneclick_repost"] == "Y" ? "1" : "0";
+        if ( $ac_oneclick_repost == "1" && $ac_oneclick_repost_saved != $ac_oneclick_repost ) {
+            $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+            if ( $connect_result["IsOK"] == TRUE ) {
+                update_user_meta( $userid, "ac_oneclick_repost", $ac_oneclick_repost );
+            }
+        } else if ( $ac_oneclick_repost == "0"  && $ac_oneclick_repost_saved != $ac_oneclick_repost ) {
+            $connect_result = atcontent_api_disconnectgate( $ac_api_key, get_site_url() );
+            update_user_meta( $userid, "ac_oneclick_repost", $ac_oneclick_repost );
+        }
 
         $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
 
@@ -108,6 +120,10 @@
     $ac_adtest_checked = $ac_adtest == "1" ? "checked" : "";
     $ac_paidrepost_checked = $ac_paidrepost == "1" ? "checked" : "";
     $ac_is_import_comments_checked = $ac_is_import_comments == "1" ? "checked" : "";
+
+    $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
+    if ( strlen( $ac_oneclick_repost ) == 0 ) $ac_oneclick_repost = "1";
+    $ac_oneclick_repost_checked = $ac_oneclick_repost == "1" ? "checked" : "";
 
 ?>
     <div class="b-column">
@@ -243,6 +259,12 @@ END;
                 <label>
                         <input type="checkbox" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
                         Turn off share panel
+                </label>
+            </div>
+            <div class="b-checkbox-row">
+                <label>
+                        <input type="checkbox" name="ac_oneclick_repost" value="Y" <?php echo $ac_oneclick_repost_checked ?>>
+                        Allow one-click repost to my blog
                 </label>
             </div>
         </fieldset>

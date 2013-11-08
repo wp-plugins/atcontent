@@ -79,6 +79,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.6.0 =
+
+* One-click repost ability
+
 = 5.5.0 =
 
 * Blog ratings

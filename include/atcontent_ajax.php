@@ -51,6 +51,38 @@ function atcontent_ajax_guestpost(){
     exit;
 }
 
+function atcontent_ajax_gate() {
+    $command = $_POST["command"];
+    switch ( $command ) {
+        case "repost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
+            if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
+            $ac_postid = $_POST["postid"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                $repost_title = $_POST["title"];
+                $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                //$ac_content = "[atcontent id=\"{$ac_postid}\"]";
+                kses_remove_filters();
+                $new_post = array(
+                    'post_title'    => $repost_title,
+                    'post_content'  => $ac_content,
+                    'post_status'   => 'publish',
+                    'post_author'   => $userid,
+                    'post_category' => array()
+                );
+                $new_post_id = wp_insert_post( $new_post );
+                update_post_meta( $new_post_id, "ac_is_process", "0" );
+                kses_init_filters();
+                $original_uri = get_permalink ( $new_post_id );
+                echo json_encode( array ( "IsOK" => true, "Url" => $original_uri ) );
+            }
+            break;
+    }
+    exit;
+}
+
 function atcontent_ajax_guestpost_check_url(){
     $testurl = $_POST["url"];
     if ( strpos( $testurl, "http://" ) !== 0 &&
@@ -87,11 +119,19 @@ function atcontent_api_key()
         if (!$api_key_result["IsOK"]) {
             $result .= "false";
         } else {
+            $ac_api_key = $api_key_result["APIKey"];
             update_user_meta( $userid, "ac_api_key", $api_key_result["APIKey"] );
             update_user_meta( $userid, "ac_pen_name", $api_key_result["Nickname"] );
             update_user_meta( $userid, "ac_showname", $api_key_result["Showname"] );
             update_user_meta( $userid, "ac_avatar_20", $api_key_result["Avatar20"] );
             update_user_meta( $userid, "ac_avatar_80", $api_key_result["Avatar80"] );
+            $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
+            if ( $ac_oneclick_repost != "0" ) {
+                $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+                if ( $connect_result["IsOK"] == TRUE ) {
+                    update_user_meta( $userid, "ac_oneclick_repost", "1" );
+                }
+            }
             $result .= "true";
         }
 	    header( "Content-Type: text/html" );

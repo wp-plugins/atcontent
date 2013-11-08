@@ -44,11 +44,11 @@
             }
 
             $ac_postid = $_GET["postid"];
-
+            $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
             // Create post object
             $new_post = array(
                 'post_title'    => $repost_title,
-                'post_content'  => "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>",
+                'post_content'  => $ac_content,
                 'post_status'   => 'publish',
                 'post_author'   => $userid,
                 'post_category' => array()

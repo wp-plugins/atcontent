@@ -134,6 +134,25 @@ function atcontent_api_extended_readership( $api_key, $siteuri, $postids, $detai
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/extendedreadership', $post_content );
 }
 
+function atcontent_api_connectgate( $apikey, $userid, $siteuri, $gateuri ) {
+    $post_content = 'AppID=' . urlencode( 'WordPress' ) . 
+        '&site=' . urlencode( $siteuri ) .
+        '&authid=' . urlencode( $userid ) .
+        '&gate=' . urlencode( $gateuri ) .
+        '&APIKey=' . urlencode( $apikey ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/connectgate', $post_content );
+}
+
+function atcontent_api_disconnectgate( $apikey, $siteuri ) {
+    $post_content = 'AppID=' . urlencode( 'WordPress' ) . 
+        '&site=' . urlencode( $siteuri ) .
+        '&APIKey=' . urlencode( $apikey ) .
+        '&Disconnect=1' .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/connectgate', $post_content );
+}
+
 function atcontent_api_guestposts_incoming( $siteuri, $api_key ) {
     $post_content = 'Uri=' . urlencode( $siteuri ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
