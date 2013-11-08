@@ -37,7 +37,14 @@ function atcontent_pingback_inline(){
     if ( current_user_can( 'edit_posts' ) || current_user_can( 'publish_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
-            $status = 'Connected'; 
+            $status = 'Connected';
+            $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
+            if ( $ac_oneclick_repost == "1" ) {
+                $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+                if ( $connect_result["IsOK"] == TRUE ) {
+                    update_user_meta( $userid, "ac_oneclick_repost", "1" );
+                }
+            }
         } else {
             $status = 'Disconnected';
         }

@@ -13,6 +13,14 @@ function atcontent_dashboard_widget_function() {
         return;
     }
 
+    $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
+    if ( $ac_oneclick_repost == "1" ) {
+        $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+        if ( $connect_result["IsOK"] == TRUE ) {
+            update_user_meta( $userid, "ac_oneclick_repost", "1" );
+        }
+    }
+
     if ( current_user_can( 'edit_posts' ) ) {
         global $wpdb;
         $posts = $wpdb->get_results( 
@@ -90,6 +98,7 @@ function atcontent_dashboard_widget_function() {
     }
     $statisticslink = admin_url("admin.php?page=atcontent/statistics.php");
     $ratinglink = admin_url("admin.php?page=atcontent/rating.php");
+
     echo "<div class=\"clear\"></div><div style=\"text-align:center;margin-top:15px;\">" . 
     "<a href=\"{$statisticslink}\">Get details</a></div></div>";
 }
