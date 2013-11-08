@@ -46,8 +46,8 @@ Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-paste thi
 == Installation ==
 
 1. Install the plugin on your blog and activate it,
-2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://i.imgur.com/yiLocp8.png),
-3. Choose options and click “Apply Main Settings” - [Screenshot](http://i.imgur.com/sYOfSGI.png).
+2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://i.imgur.com/7lpI36f.png),
+3. Choose options and click “Apply Main Settings” - [Screenshot](http://i.imgur.com/Av8sNnu.png).
 
 
 **1, 2, 3: You're done!**

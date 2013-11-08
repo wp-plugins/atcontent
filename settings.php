@@ -20,6 +20,14 @@
     }
     //End PingBack
 
+    $ac_oneclick_repost_saved = get_user_meta( $userid, "ac_oneclick_repost", true );
+    if ( strlen ( $ac_oneclick_repost_saved ) == 0 ) {
+        $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+        if ( $connect_result["IsOK"] == TRUE ) {
+            update_user_meta( $userid, "ac_oneclick_repost", "1" );
+        }
+    }
+
     if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
         isset( $_POST[ "ac_settings" ] ) && ( $_POST[ "ac_settings" ] == 'Y' ) ) {
             
