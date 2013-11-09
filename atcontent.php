@@ -122,8 +122,8 @@
                     'orderby' => 'comment_date_gmt',
                     'status' => 'approve',
                 ) );
-                if(!empty($comments)){
-                    $comments_json .= json_encode($comments);
+                if( !empty( $comments ) ){
+                    $comments_json .= json_encode( $comments );
                 }
 
                 atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
