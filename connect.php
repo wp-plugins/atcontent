@@ -33,9 +33,14 @@
     }
     require( "atcontent_userinit.php" );
 ?>
+<script>
+    function beforechangeaccount() {
+        return confirm("Are you sure you want to change account?");
+    }
+</script>
 <div class="atcontent_wrap">
 <?php include("settings_menu.php"); ?>
-<form action="" method="POST" id="disconnect-form">
+<form action="" method="POST" id="disconnect-form" onsubmit="return beforechangeaccount();">
     <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">    
 <?php
          if ( strlen($ac_api_key) == 0 ) {
