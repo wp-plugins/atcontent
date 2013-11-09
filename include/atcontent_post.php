@@ -7,10 +7,9 @@ function atcontent_publish_publication( $post_id ){
 		$post_url = get_permalink( $post_id );
 		$post = get_post( $post_id );
         if ( $post == null ) return;
-        $userid =  intval( $post->post_author );
+        $userid = intval( $post->post_author );
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         if ( strlen( $ac_api_key ) > 0 ) {
-
             $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
             if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
             $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
@@ -57,8 +56,6 @@ function atcontent_publish_publication( $post_id ){
                 $ac_paidrepost_cost = $ac_user_paidrepostcost; 
                 update_post_meta($post_id, "ac_paidrepost_cost", $ac_paidrepost_cost);
             }
-
-
 
             $ac_cost = get_post_meta($post->ID, "ac_cost", true);
             if ( strlen( $ac_cost ) == 0 ) { 

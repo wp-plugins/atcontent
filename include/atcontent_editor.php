@@ -1,7 +1,14 @@
 <?php
 
     function atcontent_add_meta_boxes() {
-         add_meta_box(
+
+        $userid = wp_get_current_user()->ID;
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        if ( strlen( $ac_api_key ) == 0 ) {
+            return;
+        }
+
+        add_meta_box(
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
             'atcontent_inner_custom_box',
