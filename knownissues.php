@@ -143,4 +143,13 @@ Diagnostic info<br>
 $form_action = admin_url( 'admin-ajax.php' );
 ?>
 </div>
+<!-- 
+<?php echo <<<END
+UserID: {$userid}
+AtContent API Key: {$ac_api_key}
+AC Pen Name: {$ac_pen_name}
+END;
+?>
+-->
 <?php
+

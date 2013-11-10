@@ -130,8 +130,8 @@
         };
     })(jQuery)
 </script>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> > Protect post from plagiarism<br>Available credits: <?php echo $plagiarism_quota; ?>.
+<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</label></div>
+<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> > Protect post from plagiarism</label><br>Available credits: <?php echo $plagiarism_quota; ?>.
 <?php if ($ac_is_copyprotect_enabled == false) { ?> 
 <?php if ( $subscriptions_count == 0 ) { ?>
 <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose the appropriate plan</a>
@@ -141,7 +141,7 @@
 <?php } ?>
 <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>">
 </div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> > Enable advanced statistics<br>Available credits: <?php echo $advanced_tracking_quota; ?>.
+<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> > Enable advanced statistics</label><br>Available credits: <?php echo $advanced_tracking_quota; ?>.
 <?php if ( $ac_is_advanced_tracking_enabled == false ) { ?> 
     <?php if ( $subscriptions_count == 0 ) { ?>
 <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose the appropriate plan</a>
@@ -164,7 +164,7 @@
 <label for="atcontent_paidrepost_cost">Cost, $</label> <input type="text" name="atcontent_cost" value="<?php echo $ac_cost ?>" size="10" /><br>
 * If you have professional, popular blog, we recommend you to set $20 price for repost.
 </div>
-<div class="misc-pub-section"><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" <?php echo $ac_is_import_comments_checked?> /> Import post comments into AtContent</div>
+<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" <?php echo $ac_is_import_comments_checked?> /> Import post comments into AtContent</label></div>
 <?php
         if ( strlen( $ac_postid ) > 0 ) {
         ?>

@@ -105,6 +105,9 @@ function atcontent_dashboard_widget_function() {
 
 function atcontent_add_dashboard_widgets() {
 
+    $userid = wp_get_current_user()->ID;
+    if ( !user_can( $userid, "publish_posts" ) ) return;
+
     $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
 	wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
 

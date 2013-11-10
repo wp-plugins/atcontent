@@ -5,12 +5,12 @@ function atcontent_pingback() {
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_referral = get_user_meta($userid, "ac_referral", true );
-    if ( current_user_can( 'edit_posts' ) ) {
+    if ( current_user_can( 'publish_posts' ) ) {
 
         $status = 'Installed';
 
-        if (strlen($ac_api_key) > 0) { 
-            $status = 'Connected'; 
+        if ( strlen( $ac_api_key ) > 0 ) { 
+            $status = 'Connected';
         } else {
             $status = 'Disconnected';
         }
@@ -32,9 +32,9 @@ function atcontent_pingback() {
 function atcontent_pingback_inline(){
     $userid = wp_get_current_user()->ID;
     $email = wp_get_current_user()->user_email;
-    $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-    $ac_referral = get_user_meta($userid, "ac_referral", true );
-    if ( current_user_can( 'edit_posts' ) || current_user_can( 'publish_posts' ) ) {
+    $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+    $ac_referral = get_user_meta( $userid, "ac_referral", true );
+    if ( current_user_can( 'publish_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
             $status = 'Connected';
@@ -63,7 +63,7 @@ function atcontent_activate() {
             $email = $user->user_email;
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             $ac_referral = get_user_meta( $userid, "ac_referral", true );
-            if ( user_can( $userid, 'edit_posts' ) ) {
+            if ( user_can( $userid, 'publish_posts' ) ) {
                 $status = 'Activated';
 
                 if ( strlen($ac_api_key) > 0) {
@@ -87,8 +87,8 @@ function atcontent_deactivate() {
     foreach ( $wp_user_search as $user ) {
         $userid = $user->ID;
         $email = $user->user_email;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        if ( user_can( $userid, 'edit_posts' ) ) {
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        if ( user_can( $userid, 'publish_posts' ) ) {
             $status = 'Deactivated';
             atcontent_api_pingback( $email, $status, $ac_api_key, "" );
         }
@@ -101,8 +101,8 @@ function atcontent_uninstall() {
     foreach ( $wp_user_search as $user ) {
         $userid = $user->ID;
         $email = $user->user_email;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        if ( user_can( $userid, 'edit_posts' ) ) {
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        if ( user_can( $userid, 'publish_posts' ) ) {
             $status = 'Uninstalled';
             atcontent_api_pingback( $email, $status, $ac_api_key, "" );
         }

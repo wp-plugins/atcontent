@@ -24,7 +24,7 @@ function atcontent_publish_publication( $post_id ){
 
             if ( strlen( $ac_is_process ) == 0 ) { 
                 $ac_is_process = "1";
-                update_post_meta($post_id, "ac_is_process", $ac_is_process);
+                update_post_meta( $post_id, "ac_is_process", $ac_is_process );
             }
             
             $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
