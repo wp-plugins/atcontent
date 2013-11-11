@@ -254,8 +254,9 @@ END;
             <div class="b-checkbox-row">
                 <label>
                     <input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-                    Turn off plugin features for the main page (should be marked for sites with not standard themes)
+                    Turn off plugin features for the main page
                 </label>
+                <div class="ac-small">Should be marked for sites with not standard themes</div>
             </div>
             <div class="b-checkbox-row" style="display: none;">
                 <label>
@@ -274,6 +275,7 @@ END;
                         <input type="checkbox" name="ac_oneclick_repost" value="Y" <?php echo $ac_oneclick_repost_checked ?>>
                         Allow one-click repost to my blog
                 </label>
+                <div class="ac-small">When you see <img style="vertical-align: bottom" src="http://i.imgur.com/LAmq8On.png" alt="repost"> you can copy content to your site in one click</div>
             </div>
         </fieldset>
     </div>        

@@ -130,6 +130,7 @@ END;
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
 		    return $content;
 	    }
+
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
@@ -229,7 +230,7 @@ END;
             //End eBible
 
             //Lightbox Plus ColorBox
-            if (class_exists('wp_lightboxplus')) {
+            if ( class_exists( 'wp_lightboxplus' ) ) {
                 global $wp_lightboxplus;
                 if ( ob_start() ) {
                     $wp_lightboxplus->lightboxPlusColorbox();
@@ -241,7 +242,7 @@ END;
                 }
             }
             //End Lightbox Plus ColorBox
-
+            
             if ( strlen( $ac_script_init ) > 0 ) {
                 $content .= <<<END
 <script type="text/javascript">
