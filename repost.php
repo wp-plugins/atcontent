@@ -11,6 +11,7 @@
          $category2url = admin_url("admin.php?page=atcontent/repost.php&category=2");
          $category3url = admin_url("admin.php?page=atcontent/repost.php&category=3");
          $category4url = admin_url("admin.php?page=atcontent/repost.php&category=4");
+         $category5url = admin_url("admin.php?page=atcontent/repost.php&category=5");
 
          $currentcategory = $_GET["category"];
          if ( strlen( $currentcategory ) == 0 ) $currentcategory = "1";
@@ -136,6 +137,11 @@
                     <a href="<?php echo $category4url; ?>">Tech</a><br>
                 <?php } else { ?>
                     <strong>Tech</strong><br>
+                <?php }?>
+                <?php if ($currentcategory !== "5") { ?>
+                    <a href="<?php echo $category5url; ?>">Politics</a><br>
+                <?php } else { ?>
+                    <strong>Politics</strong><br>
                 <?php }?>
             </p>
             
