@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 5.6.8
+    Version: 5.6.9
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.6.8.118" );
+    define( 'AC_VERSION', "5.6.9.119" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -202,7 +202,7 @@ jQuery(document).ready( function($) {
 </script>
 <?php
         } else {
-            $connect_url = admin_url("admin.php?page=atcontent/settings.php");
+            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
             $ac_country = get_user_meta($userid, "ac_country", true );
             if ( strlen( $ac_country ) == 0 ) {
                 $pointer_content = '<h3>Better Interaction with AtContent</h3>';

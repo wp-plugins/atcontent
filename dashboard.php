@@ -142,10 +142,10 @@ END;
     
             <h2>What can I do?</h2>
             <ul class="b-dashboard-list">
-                <li><a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">Adjust plugin settings</a></li>
-                <li><a href="<?php echo admin_url("admin.php?page=atcontent/sync.php"); ?>">Sync my blog posts</a></li>
-                <li><a href="<?php echo admin_url("admin.php?page=atcontent/subscription.php"); ?>">Choose a subscription plan</a></li>
-                <li><a href="<?php echo admin_url("admin.php?page=atcontent/statistics.php"); ?>">Know my statistics</a></li>
+                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/settings.php" ); ?>">Adjust plugin settings</a></li>
+                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/sync.php" ); ?>">Sync my blog posts</a></li>
+                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/subscription.php" ); ?>">Choose a subscription plan</a></li>
+                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/statistics.php" ); ?>">Know my statistics</a></li>
             </ul>
     
             <h2>Invite your friends to AtContent</h2>
