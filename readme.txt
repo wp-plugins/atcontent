@@ -79,6 +79,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.6.8 =
+
+* Easy Media Gallery support
+
 = 5.6.0 =
 
 * One-click repost ability
