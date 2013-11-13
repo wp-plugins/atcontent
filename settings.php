@@ -287,7 +287,7 @@ END;
 </form>
 </div>
 
-<p style="margin-top: 80px;"><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a> &nbsp; 
+<p style="margin-top: 80px;"><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
     <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
     <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 

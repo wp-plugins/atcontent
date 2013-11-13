@@ -120,7 +120,7 @@ if (strlen($ac_api_key) > 0) {
 </form>
 <br><br>
 <p>If you have any problems, ideas, feedback, questions — please <a href="http://atcontent.com/Support/">contact us</a>. We will use your help to make plugin better! :)</p>
-<p> If you are interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtCotnent plugin page</a></p>
+<p> If you are interested in plugin features description, please read it on <a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtContent plugin page</a></p>
 
 <br><br>
 Diagnostic info<br>
