@@ -49,7 +49,7 @@ END;
     }
 ?>                    
                 </table>
-<?php if ( $quotas_result["IsOK"] == true && count( $quotas_result["Subscriptions"] ) > 0 ) { ?>
+<?php if ( $quotas_result["IsOK"] == true && $subscription["Title"] != "Professional" ) { ?>
                 <p style="text-align: right;padding-right:10px;"><a href="https://atcontent.com/Subscribe/" target="_blank">Upgrade to a bigger plan here</a></p>
 <?php } ?>
             </div>
