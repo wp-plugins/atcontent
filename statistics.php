@@ -60,7 +60,6 @@
       <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
       <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
       <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
-      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
@@ -73,7 +72,6 @@
       <th style="" class="manage-column" scope="col">Facebook</th>
       <th style="" class="manage-column" scope="col">Twitter</th>
       <th style="" class="manage-column" scope="col">LinkedIn</th>
-      <th style="" class="manage-column" scope="col">Direct</th>
      </tr>
   </tfoot>
   <tbody id="the-list">
@@ -95,7 +93,6 @@
             <td ><?php echo  $poststat["FacebookHits"] >= 0 ? number_format_i18n ( $poststat["FacebookHits"] ) : "—"; ?></td>
             <td ><?php echo  $poststat["TwitterHits"] >= 0 ? number_format_i18n ( $poststat["TwitterHits"] ) : "—"; ?></td>
             <td ><?php echo  $poststat["LinkedInHits"] >= 0 ? number_format_i18n ( $poststat["LinkedInHits"] ) : "—"; ?></td>
-            <td ><?php echo  $poststat["DirectHits"] >= 0 ? number_format_i18n ( $poststat["DirectHits"] ) : "—"; ?></td>
 					</tr>
 <?php
             }
@@ -177,7 +174,6 @@
       <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
       <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
       <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
-      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
@@ -187,8 +183,7 @@
       <th style="width:100px;" class="manage-column" scope="col">Views</th>
       <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
       <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
-      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
-      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
+      <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th> 
     </tr>
 	</tfoot>
     <tbody id="the-list">
@@ -210,7 +205,6 @@
           <td><strong><?php echo $stat_domain_info["Facebook"] >= 0 ? $stat_domain_info["Facebook"] : "—" ; ?></strong></td>
           <td><strong><?php echo $stat_domain_info["Twitter"] >= 0 ? $stat_domain_info["Twitter"] : "—" ; ?></strong></td>
           <td><strong><?php echo $stat_domain_info["LinkedIn"] >= 0 ? $stat_domain_info["LinkedIn"] : "—" ; ?></strong></td>
-          <td><strong><?php echo $stat_domain_info["DirectLink"] >= 0 ? $stat_domain_info["DirectLink"] : "—" ; ?></strong></td>
         </tr>
         <?php
             foreach ( $stat_domain_info["Items"] as $details_pair ) {
@@ -223,7 +217,6 @@
           <td><?php echo $details_info["Facebook"] >= 0 ? $details_info["Facebook"] : "—" ; ?></td>
           <td><?php echo $details_info["Twitter"] >= 0 ? $details_info["Twitter"] : "—" ; ?></td>
           <td><?php echo $details_info["LinkedIn"] >= 0 ? $details_info["LinkedIn"] : "—" ; ?></td>
-          <td><?php echo $details_info["DirectLink"] >= 0 ? $details_info["DirectLink"] : "—" ; ?></td>
         </tr>
         <?php
             }
@@ -298,7 +291,6 @@
       <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
       <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
       <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
-      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</thead>
 
@@ -309,7 +301,6 @@
       <th style="width:100px;" class="manage-column" scope="col">Facebook</th>
       <th style="width:100px;" class="manage-column" scope="col">Twitter</th>
       <th style="width:100px;" class="manage-column" scope="col">LinkedIn</th>
-      <th style="width:100px;" class="manage-column" scope="col">Direct</th>
     </tr>
 	</tfoot>
   <tbody id="the-list">
@@ -322,7 +313,6 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
             <td><strong><?php echo $stat_info["FacebookHits"] >= 0 ? $stat_info["FacebookHits"] : "—" ; ?></strong></td>
             <td><strong><?php echo $stat_info["TwitterHits"] >= 0 ? $stat_info["TwitterHits"] : "—" ; ?></strong></td>
             <td><strong><?php echo $stat_info["LinkedInHits"] >= 0 ? $stat_info["LinkedInHits"] : "—" ; ?></strong></td>
-            <td><strong><?php echo $stat_info["DirectHits"] >= 0 ? $stat_info["DirectHits"] : "—" ; ?></strong></td>
         </tr>
 <?php
     foreach ( $stat_info["Details"] as $stat_domain_pair ) {
@@ -343,7 +333,6 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
 			<td><strong><?php echo $stat_domain_info["Facebook"] >= 0 ? $stat_domain_info["Facebook"] : "—" ; ?></strong></td>
       <td><strong><?php echo $stat_domain_info["Twitter"] >= 0 ? $stat_domain_info["Twitter"] : "—" ; ?></strong></td>
       <td><strong><?php echo $stat_domain_info["LinkedIn"] >= 0 ? $stat_domain_info["LinkedIn"] : "—" ; ?></strong></td>
-      <td><strong><?php echo $stat_domain_info["DirectLink"] >= 0 ? $stat_domain_info["DirectLink"] : "—" ; ?></strong></td>
 		</tr>
         <?php
             foreach ( $stat_domain_info["Items"] as $details_pair ) {
@@ -356,7 +345,6 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
       <td><?php echo $details_info["Facebook"] >= 0 ? $details_info["Facebook"] : "—" ; ?></td>
       <td><?php echo $details_info["Twitter"] >= 0 ? $details_info["Twitter"] : "—" ; ?></td>
       <td><?php echo $details_info["LinkedIn"] >= 0 ? $details_info["LinkedIn"] : "—" ; ?></td>
-      <td><?php echo $details_info["DirectLink"] >= 0 ? $details_info["DirectLink"] : "—" ; ?></td>
 		</tr>
         <?php
             }

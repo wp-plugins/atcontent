@@ -429,6 +429,22 @@ END;
         }
         //End TablePress fix
 
+        //Grand Flagallery
+        if ( class_exists( 'flagLoad' ) ) {
+            global $flag;
+	        $flag = new flagLoad();
+            //ini_set('display_errors', 1);
+            //error_reporting(E_ALL ^ E_NOTICE);
+            $flag_dir = dirname(dirname(dirname (__FILE__))) . '/flash-album-gallery';
+            require_once ($flag_dir . '/lib/core.php');
+            require_once ($flag_dir . '/lib/flag-db.php');
+            require_once ($flag_dir . '/lib/image.php');
+            require_once ($flag_dir . '/widgets/widgets.php');
+            require_once ($flag_dir . '/lib/swfobject.php');
+            require_once ($flag_dir . '/lib/shortcodes.php');
+        }
+        //End Grand Flagallery
+
         //linkwithin
         if ( function_exists( "linkwithin_add_hook" ) ) {
             remove_filter( 'the_excerpt', 'linkwithin_display_excerpt' );
