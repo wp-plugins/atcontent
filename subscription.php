@@ -59,7 +59,7 @@ END;
             <div class="b-dashboard-table">
                 <table>
 <?php
-    if ( $quotas_result["IsOK"] == true ) {
+    if ( $quotas_result[ "IsOK" ] == true ) {
         foreach ( $quotas_result["Quotas"] as $quota ) {
             echo <<<END
 <tr><th>{$quota["Title"]}</th><td>{$quota["Count"]}</td></tr>

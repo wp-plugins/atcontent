@@ -7,11 +7,11 @@
 
          $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 
-         $category1url = admin_url("admin.php?page=atcontent/repost.php&category=1");
-         $category2url = admin_url("admin.php?page=atcontent/repost.php&category=2");
-         $category3url = admin_url("admin.php?page=atcontent/repost.php&category=3");
-         $category4url = admin_url("admin.php?page=atcontent/repost.php&category=4");
-         $category5url = admin_url("admin.php?page=atcontent/repost.php&category=5");
+         $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1");
+         $category2url = admin_url( "admin.php?page=atcontent/repost.php&category=2");
+         $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=3");
+         $category4url = admin_url( "admin.php?page=atcontent/repost.php&category=4");
+         $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5");
 
          $currentcategory = $_GET["category"];
          if ( strlen( $currentcategory ) == 0 ) $currentcategory = "1";
