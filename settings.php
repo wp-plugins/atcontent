@@ -267,8 +267,9 @@ END;
             <div class="b-checkbox-row">
                 <label>
                         <input type="checkbox" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
-                        Turn off share panel
+                        Turn off share buttons
                 </label>
+                <div class="ac-small">If you have a social share plugin on your blog you can turn off our share buttons to prevent duplication</div>
             </div>
             <div class="b-checkbox-row">
                 <label>
