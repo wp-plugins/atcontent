@@ -207,7 +207,7 @@ END;
             <div class="b-checkbox-row">
                 <label>
                     <input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo $ac_copyprotect_checked ?>>
-                    Prevent plagiarism of my posts
+                    Prevent copy-paste of my posts
                 </label>
             </div>
             <div class="b-checkbox-row" style="display: none;">
