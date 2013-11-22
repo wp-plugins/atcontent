@@ -522,6 +522,12 @@ END;
             } catch (Exception $e) { }
         }
         //end WP-insert
+
+        //Hover Pin-It
+        if ( function_exists( 'pin_it_buttons_add' ) ) {
+            add_filter( 'the_content', 'atcontent_coexistense_pin_it_buttons_add' );
+        }
+        //end Hover Pin-It
     }
 
     function atcontent_admin_head() {

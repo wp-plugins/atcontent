@@ -79,6 +79,10 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Changelog ==
 
+= 5.6.16 =
+
+* Hover Pin It compatibility
+
 = 5.6.8 =
 
 * Easy Media Gallery support
@@ -332,4 +336,4 @@ If you have "guest" publications on your blog, you can not use AtContent plugin 
 
 == Upgrade notice ==
 
-* Meet the new UI!
+* Hover Pin It compatibility
