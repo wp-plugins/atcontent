@@ -1,5 +1,6 @@
 <?php
     $userid = intval( wp_get_current_user()->ID );
+    $ref_url = "http://wordpress.org/plugins/atcontent/";
     require( "atcontent_userinit.php" );
     if ( strlen( $ac_api_key ) == 0 ) {
         $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
@@ -157,7 +158,11 @@ END;
             <!--<p style="font-size: 1.2em;">&nbsp;&nbsp; <b>↓</b> Send by email or share anywhere!</p>-->
             <div id="addthis_share">
             <!-- AddThis Button BEGIN -->
-                <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                <div addthis:url="<?php echo $ref_url; ?>" 
+                     addthis:title="WordPress with AtContent — even better. Check it!"
+                     addthis:description="Jump up in search, reach new readership, brand and control your content with #AtContent. Free WP plugin for your blog"
+
+                    class="addthis_toolbox addthis_default_style addthis_32x32_style">
                     <a class="addthis_button_email"></a>
                     <a class="addthis_button_facebook"></a>
                     <a class="addthis_button_twitter"></a>
