@@ -92,9 +92,10 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
             return r;
         }
         function doRetry() {
+            $("#sync-status").html("Processing");
             for (var i in postInfo) {
                 if (postInfo[i].status == "error") { 
-                    postInfo[i].status == "queued";
+                    postInfo[i].status = "queued";
                 }
             }
         }
@@ -214,7 +215,12 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
                  h += "<br>";
              }
              if (getStatus().error > 0) {
-                 h += "<a href=\"javascript:doRetry();\">Retry sync for not synced posts</a>";
+                 h += "<a id=\"retry-link\" href=\"javascript:\">Retry sync for not synced posts</a>";
+                 setTimeout(function(){
+                     $("#retry-link").on("click", function(){
+                        doRetry(); 
+                     });
+                 }, 200);
              }
              $("#importDetails").html(h);
         }
