@@ -271,7 +271,7 @@ END;
     
     function atcontent_import_handler(){
         $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         if ( current_user_can( 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
 
             atcontent_coexistense_fixes();
@@ -376,7 +376,7 @@ END;
 	        // generate the response
             $res_array = array( 'IsOK' => true, "AC_action" => $ac_action );
             if ( $ac_action == "error" ) {
-                $res_array["IsOK"] = FALSE;
+                $res_array["IsOK"] = false;
                 $res_array["Info"] = $additional;
             }
 	        $response = json_encode( $res_array );
@@ -528,6 +528,7 @@ END;
             add_filter( 'the_content', 'atcontent_coexistense_pin_it_buttons_add' );
         }
         //end Hover Pin-It
+
     }
 
     function atcontent_admin_head() {
