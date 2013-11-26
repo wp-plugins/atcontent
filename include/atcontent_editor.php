@@ -2,12 +2,6 @@
 
     function atcontent_add_meta_boxes() {
 
-        $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        if ( strlen( $ac_api_key ) == 0 ) {
-            return;
-        }
-
         add_meta_box(
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
@@ -30,11 +24,27 @@
     function atcontent_inner_custom_box( $post ) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
-          $userid = wp_get_current_user()->ID;
 
+          $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+          if ( strlen( $ac_api_key ) == 0 ) return;
 
-          $ac_is_process = get_post_meta($post->ID, "ac_is_process", true);
+          $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
+          $ac_show_name = get_user_meta( $userid, "ac_showname", true );
+          $ac_avatar_20 = get_user_meta( $userid, "ac_avatar_20", true );
+          $ac_avatar_80 = get_user_meta( $userid, "ac_avatar_80", true );
+          $ac_avatar_200 = get_user_meta( $userid, "ac_avatar_200", true );
+          if ( strlen( $ac_avatar_20 ) == 0 ) {
+              $ac_avatar_20 = "https://atcontent.blob.core.windows.net/avatar/{$ac_pen_name}/20-0.jpg";
+          }
+          if ( strlen( $ac_avatar_80 ) == 0 ) {
+              $ac_avatar_80 = "https://atcontent.blob.core.windows.net/avatar/{$ac_pen_name}/80-0.jpg";
+          }
+          if ( strlen( $ac_avatar_200 ) == 0 ) {
+              $ac_avatar_200 = "https://atcontent.blob.core.windows.net/avatar/{$ac_pen_name}/200-0.jpg";
+          }
+
+          $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
           $ac_is_process_checked = "";
           if ( $ac_is_process == "1" || $ac_is_process == "" ) {
               $ac_is_process_checked = "checked=\"checked\"";
@@ -78,7 +88,7 @@
               $ac_is_import_comments_checked = "checked=\"checked\"";
           }
 
-          $ac_paidrepost_cost = get_post_meta($post->ID, "ac_paidrepost_cost", true);
+          $ac_paidrepost_cost = get_post_meta( $post->ID, "ac_paidrepost_cost", true );
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = $ac_user_paidrepostcost; }
           if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
 
@@ -130,7 +140,10 @@
         };
     })(jQuery)
 </script>
-<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</label></div>
+<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</label>
+<br>as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img style="vertical-align: middle; margin-right: .3em" 
+            src="<?php echo $ac_avatar_20; ?>" alt=""><?php echo $ac_show_name; ?></a>
+</div>
 <div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> > Protect post from plagiarism</label><br>Available credits: <?php echo $plagiarism_quota; ?>.
 <?php if ($ac_is_copyprotect_enabled == false) { ?> 
 <?php if ( $subscriptions_count == 0 ) { ?>
@@ -175,7 +188,12 @@
         }
     }
 
-    function atcontent_paid_portion($post) {
+    function atcontent_paid_portion( $post ) {
+
+        $userid = $post->post_author;
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        if ( strlen( $ac_api_key ) == 0 ) return;
+
         // Use nonce for verification
         $args = array(
             'wpautop' => 1
@@ -191,7 +209,7 @@
             ,'quicktags' => 1
         );
         $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
-        wp_editor( $ac_paid_portion, "atcontentpaidportion", $args);
+        wp_editor( $ac_paid_portion, "atcontentpaidportion", $args );
     }
 
 ?>
