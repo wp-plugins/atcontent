@@ -46,7 +46,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     {
         if ($post->post_author == $userid) {
             array_push( $posts_id, $post->ID );
-            array_push( $posts_title, addcslashes( $post->post_title, "'\\" ) );
+            array_push( $posts_title, $post->post_title );
         }
         wp_cache_flush();
     }
@@ -70,7 +70,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
 <script>
     (function ($) {
         var postIDs = ['<?php echo $postIDs; ?>'],
-            postTitles = ['<?php echo $postTitles; ?>'],
+            postTitles = <?php echo json_encode($postTitles); ?>,
             postInfo = [],
             imported = 0;
         
