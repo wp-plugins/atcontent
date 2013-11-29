@@ -298,6 +298,7 @@ function atcontent_do_post( $url, $data ) {
         curl_setopt( $curl, CURLOPT_POST, 1 );
         curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
         curl_setopt( $curl, CURLOPT_POSTFIELDS, $data );
+        curl_setopt( $curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );
         curl_setopt( $curl, CURLOPT_USERAGENT, 'IE 10.00' );
         $res = curl_exec( $curl );
         if ( !$res ) {
