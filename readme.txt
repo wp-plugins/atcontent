@@ -15,16 +15,16 @@ Make your posts available for reposting to other sites and increase an audience 
 Let's face it - growing an audience is tough. How does AtContent make it easier?
 #### AtContent increases your audience by 30% - 300% in just 3 months by making your posts available for reposting! #### 
 * With AtContent others can repost your posts on any site as simple as retweet on Twitter. Every reposter provides you additional audience and backlinks. It increases your audience by 30% to 300% in just 3 months by using AtContent. [USE CASE](http://i.imgur.com/fXNgtC0.png). 
-* SEO friendly - **NO CONTENT PLAGIARISM, NO GOOGLE PENALTIES**. 
+* SEO friendly - **COPY-PASTE PROTECTION, NO GOOGLE PENALTIES**. 
 * You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
 
 #### Guest Posting with AtContent – Easy as Never Before! ####
 * Guest blogging with AtContent is just like writing a post for your own site, with the one exception that you specify the site you wish the post to be published on. AtContent then sends your guest post to the chosen website for reviewing and publishing. [Read more here!](http://atcontent.com/Blog/3WWXEDY3SJh.text)
 
-#### Plagiarism Prevention with AtContent ####
+#### Copy-paste protection with AtContent ####
 
-* You can be sure you will not get penalties from Google for your plagiarized posts, because with AtContent nobody can plagiarize your posts! 
-Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-paste this post, but can legally reposts it via AtContent by clicking “Repost” at the bottom of the article.
+* You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
+Here are [EXAMPLE 1](http://www.thefabuloustimes.com/5-fabulous-ways-make-room-feel-bigger/) and [EXAMPLE 2](http://vadnov.net/2013/11/i_want_google_to_love_me/) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
 * You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
@@ -37,7 +37,7 @@ Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-paste thi
 
 == Examples ==
 
-* **[Content Protection Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click on “share & repost” at the bottom of the published content. This protects your content from plagiarism.
+* **[Content Protection Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click “Repost” at the bottom of the published content. This protects your content from copy-pasting.
 * **[Track & Statistics Demo example 1](http://test.ariser.ru/Stat/graph.html)**
 * **[Track & Statistics Demo example 2](http://test.ariser.ru/Stat/)**
 * **[Premium Content Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)**
@@ -57,7 +57,7 @@ Here is an [EXAMPLE](http://thefabuloustimes.com) —  nobody can copy-paste thi
 
 = Why wouldn't Google penalize my site for content duplication?  =
 
-We repost your publications on AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag and "rel=canonical" link to your site. While indexing reposted content,
+We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag and "rel=canonical" link to your site. While indexing reposted content,
 search engines will get your site up in their rankings, but not AtContent.
 
 All reposted content has author's name and the link to the original source.
@@ -66,7 +66,7 @@ If anyone of your readers wants to get your article on his own site, he/she need
 = I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
 
 AtContent settings are different for each user in WordPress blog. If you have two different users in your blog you should setup API Key for each user separately. And posts from each author will be in different AtContent accounts.
-If you have "guest" publications on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
+If you have "guest" posts on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
 
 == Screenshots ==
 

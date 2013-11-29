@@ -39,8 +39,8 @@ END;
         if ( count( $quotas_result["Subscriptions"] ) == 0 ) {
 ?>
                     <tr><th>
-                        To use all features of AtContent you should choose a subscription plan.<br>
-                        Different plans provide different amounts of guest posts,<br>advanced tracking and plagiarism protection.<br>
+                        To use all features of AtContent you need to choose a subscription plan.<br>
+                        Different plans provide different amounts of guest posts,<br>advanced tracking and copy-paste protection.<br>
                         <a href="https://atcontent.com/Subscribe/" target="_blank">Choose the suitable plan here</a></th><td></td></tr>
 <?php
         }

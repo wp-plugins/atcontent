@@ -45,9 +45,9 @@
     <?php if ( $imported_count == 0 ) { 
         $link = "http://atcontent.com/CopyLocator/"; ?>
         <?php if ( $posts_count == 0 ) {  ?>
-            <p>You don't have publications yet. Write something first!</p>
+            <p>You don't have any posts yet. Write something first!</p>
         <?php } else { ?>
-            <p>You have <?php echo $posts_count ?> publications, but you should sync it with AtContent first. 
+            <p>You have <?php echo $posts_count ?> posts, but you should sync them with AtContent first. 
                 Follow <a href="<?php echo admin_url("admin.php?page=atcontent/settings.php"); ?>">AtContent Dashboard page</a> and click "Sync with AtContent"</p>
         <?php } ?>
     <?php } else { 

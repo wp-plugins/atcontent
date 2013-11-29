@@ -49,7 +49,7 @@ END;
 ?>
                     <tr><th>
                         To use all features of AtContent you should choose a subscription plan.<br>
-                        Different plans provide different amounts of guest posts,<br>advanced tracking and plagiarism protection.<br>
+                        Different plans provide different amounts of guest posts,<br>advanced tracking and copy protection.<br>
                         <a href="https://atcontent.com/Subscribe/" target="_blank">Choose the suitable plan here</a></th><td></td></tr>
 <?php
         }

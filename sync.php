@@ -259,7 +259,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     <div class="b-checkbox-row">
         <label>
             <input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo ( $ac_copyprotect == "1" ) ? "checked" : "No"; ?>>
-            Prevent plagiarism of my posts
+            Protect my posts from copy-paste
         </label>
     </div>
     <p style="text-align: center; margin: 40px 0;">
