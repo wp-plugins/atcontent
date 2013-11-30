@@ -24,7 +24,7 @@ Let's face it - growing an audience is tough. How does AtContent make it easier?
 #### Copy-paste protection with AtContent ####
 
 * You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
-Here are [EXAMPLE 1](http://www.thefabuloustimes.com/5-fabulous-ways-make-room-feel-bigger/) and [EXAMPLE 2](http://vadnov.net/2013/11/i_want_google_to_love_me/) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
+Here are [EXAMPLE 1](http://bit.ly/1cSdcvs) and [EXAMPLE 2](http://bit.ly/1eII8jW) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
 * You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
