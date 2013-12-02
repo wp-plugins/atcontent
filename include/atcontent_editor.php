@@ -27,7 +27,18 @@
 
           $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-          if ( strlen( $ac_api_key ) == 0 ) return;
+          if ( strlen( $ac_api_key ) == 0 ) {
+              $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+              $author_user = get_userdata( intval( $userid ) );
+              $author_username = "";
+              if ( $author_user != false ) {
+                  $author_username = $author_user->user_login;
+              }
+              ?>
+<div class="misc-pub-section">To enjoy all AtContent advantages for this post, please <a href="<?php echo $connect_url; ?>">connect</a> <?php echo $author_username; ?> with AtContent.</div>
+<?php
+                return;
+          }
 
           $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
           $ac_show_name = get_user_meta( $userid, "ac_showname", true );

@@ -1,8 +1,7 @@
 <?php $form_action = admin_url( 'admin-ajax.php' ); ?>
 <div class="atcontent_invite">
-    <h1>AtContent is the easiest way to increase readership and SEO,</h1>
-    <h1>Get backlinks and copy-paste protection!</h1>
-	<h2>To start using the plugin, please connect it to AtContent site:</h2>
+    <h1>AtContent is the easiest way to increase readership and SEO, get backlinks and copy-paste protection!</h1>
+	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">To start using the plugin, please</p>
 	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $form_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         
@@ -22,5 +21,5 @@
                     'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
     })(jQuery);
-</script>                  
+</script>
     </div>
