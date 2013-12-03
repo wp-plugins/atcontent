@@ -15,6 +15,8 @@ function atcontent_publish_publication( $post_id ){
             
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
+            $ac_type = "free";
+            $ac_cost = "2.50";
 
             if ( strlen( $ac_is_process ) == 0 ) { 
                 $ac_is_process = "1";
