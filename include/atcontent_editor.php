@@ -9,6 +9,7 @@
             'post', 'side', 'high'
         );
 
+        /*
         $version = get_bloginfo('version');
         if ( version_compare( $version, '3.3', '>=' ) ) {
             add_meta_box(
@@ -18,7 +19,7 @@
                 'post'
             );
         }
-        
+        // */
     }
 
     function atcontent_inner_custom_box( $post ) {
@@ -66,10 +67,6 @@
           if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
           $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
           if ( strlen( $ac_user_paidrepost ) == 0 ) $ac_user_paidrepost = "0";
-          $ac_user_paidrepostcost = get_user_meta( $userid, "ac_paidrepostcost", true );
-          if ( strlen( $ac_user_paidrepostcost ) == 0 ) $ac_user_paidrepostcost = "2.50";
-          $ac_user_is_import_comments = get_user_meta( $userid, "ac_is_import_comments", true );
-          if ( strlen( $ac_user_is_import_comments ) == 0 ) $ac_user_is_import_comments = "1";
 
           $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
           if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
@@ -84,38 +81,6 @@
           if ( $ac_is_advanced_tracking == "1" ) {
               $ac_is_advanced_tracking_checked = "checked=\"checked\"";
           }
-
-          $ac_is_paidrepost = get_post_meta( $post->ID, "ac_is_paidrepost", true );
-          if ( strlen( $ac_is_paidrepost ) == 0 ) $ac_is_paidrepost = $ac_user_paidrepost;
-          $ac_is_paidrepost_checked = "";
-          if ($ac_is_paidrepost == "1") {
-              $ac_is_paidrepost_checked = "checked=\"checked\"";
-          }
-
-          $ac_is_import_comments = get_post_meta( $post->ID, "ac_is_import_comments", true );
-          if ( strlen( $ac_is_import_comments ) == 0 ) $ac_is_import_comments = $ac_user_is_import_comments;
-          $ac_is_import_comments_checked = "";
-          if ($ac_is_import_comments == "1") {
-              $ac_is_import_comments_checked = "checked=\"checked\"";
-          }
-
-          $ac_paidrepost_cost = get_post_meta( $post->ID, "ac_paidrepost_cost", true );
-          if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = $ac_user_paidrepostcost; }
-          if ($ac_paidrepost_cost == "") { $ac_paidrepost_cost = "2.50"; }
-
-          $ac_cost = get_post_meta($post->ID, "ac_cost", true);
-          if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
-
-          $ac_type = get_post_meta( $post->ID, "ac_type", true );
-          if ($ac_type == "") {
-              if ($ac_is_paidrepost == "1") $ac_type = "paidrepost";
-              else $ac_type = "free";
-          }
-
-          $ac_type_free_selected = ($ac_type == "free") ? "selected=\"selected\"" : "";
-          $ac_type_paidrepost_selected = ($ac_type == "paidrepost") ? "selected=\"selected\"" : "";
-          $ac_type_donate_selected = ($ac_type == "donate") ? "selected=\"selected\"" : "";
-          $ac_type_paid_selected = ($ac_type == "paid") ? "selected=\"selected\"" : "";
           
           $plagiarism_quota = 0;
           $advanced_tracking_quota = 0;
@@ -131,26 +96,6 @@
           $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
 
           ?>
-<script type="text/javascript">
-    (function ($) {
-        $(function () {
-            $("#atcontent_type").change(function () {
-                ac_type_init($(this).val());
-            });
-            ac_type_init('<?php echo $ac_type ?>');
-        });
-        window.ac_type_init = function (val) {
-            $("#atcontent_cost").hide();
-            $("#atcontent_secondeditor").hide();
-            if (val == 'paid' || val == 'paidrepost') {
-                $("#atcontent_cost").show();
-            }
-            if (val == 'paid') {
-                $("#atcontent_secondeditor").show();
-            }
-        };
-    })(jQuery)
-</script>
 <div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</label>
 <br>as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img style="vertical-align: middle; margin-right: .3em" 
             src="<?php echo $ac_avatar_20; ?>" alt=""><?php echo $ac_show_name; ?></a>
@@ -175,19 +120,6 @@
 <?php } ?>
 <input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
 </div>
-<div class="misc-pub-section">
-    Post type:
-<select name="atcontent_type" id="atcontent_type">
-    <option value="free" <?php echo $ac_type_free_selected; ?>>Free</option>
-    <option value="paidrepost" <?php echo $ac_type_paidrepost_selected; ?>>Paid repost</option>
-    <option value="donate" <?php echo $ac_type_donate_selected; ?>>Donate</option>
-    <option value="paid" <?php echo $ac_type_paid_selected; ?>>Paid</option>
-</select>
-</div>
-<div class="misc-pub-section" id="atcontent_cost">
-<label for="atcontent_paidrepost_cost">Cost, $</label> <input type="text" name="atcontent_cost" value="<?php echo $ac_cost ?>" size="10" /><br>
-</div>
-<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_import_comments" name="atcontent_is_import_comments" value="1" <?php echo $ac_is_import_comments_checked?> /> Import post comments into AtContent</label></div>
 <?php
         if ( strlen( $ac_postid ) > 0 ) {
         ?>
