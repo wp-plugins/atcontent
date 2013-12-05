@@ -70,7 +70,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
 <script>
     (function ($) {
         var postIDs = ['<?php echo $postIDs; ?>'],
-            postTitles = <?php echo json_encode($postTitles); ?>,
+            postTitles = <?php echo json_encode($posts_title); ?>,
             postInfo = [],
             imported = 0;
         
@@ -102,12 +102,11 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
         function doImport(i) {
             postInfo[i].status = "active";
             postInfo[i].started = Date.now();
-            var copyProtection = $("#ac_copyprotect")[0].checked ? "1" : "0";
             $.ajax({url: '<?php echo $form_action; ?>', 
                              type: 'post', 
                              data: {action: 'atcontent_import', 
                                     postID: postIDs[i], 
-                                    copyProtection: copyProtection, 
+                                    copyProtection: <?php echo $ac_copyprotect; ?>, 
                                     paidRepost: <?php echo $ac_paidrepost; ?>, 
                                     cost: <?php echo $ac_paidrepostcost; ?>, 
                                     comments: <?php echo $ac_is_import_comments; ?>},
@@ -202,6 +201,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
             $("#sync-button")[0].disabled = false;
             $("#sync-note").hide();
             $("#sync-estimated").hide();
+            $("#sync-whatisnext").show();
         }
         function getDetails(){
              var h = "";         
@@ -255,13 +255,15 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
 </script>
 <?php ?>
 <div class="b-column-single">
-    <h2>Current Posts Sync Settings</h2>
-    <div class="b-checkbox-row">
-        <label>
-            <input type="checkbox" name="ac_copyprotect" id="ac_copyprotect" value="Y" <?php echo ( $ac_copyprotect == "1" ) ? "checked" : "No"; ?>>
-            Protect my posts from copy-paste
-        </label>
-    </div>
+<?php 
+if ( $_GET["afterconnect"] == "1" ) {
+    ?>
+<div class="b-note success">
+Great! Settings applied. The final step is to synchronize your blog!
+</div>
+    <?php
+}
+?>
     <p style="text-align: center; margin: 40px 0;">
         <button type="button" class="button-color-orange button-size-large" id="sync-button">Sync me!</button>
     </p>
@@ -284,6 +286,32 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
             <tr id="sync-details" style="display: none;"><th></th><td><a href="#" id="link-details">Get details</a></td></tr>
         </table>
         <p id="sync-note">Note: Updating a post takes few seconds, please be patient</p>
+        <div id="sync-whatisnext" style="display: none;">
+        <h4>What's next?</h4>
+        <p>
+            — Check your blog traffic next 7 days and see how it grows.<br>
+<?php
+
+$email_subject = $_SERVER['HTTP_HOST'] . " would like to be featured";
+
+$email_body = "Hey AtContent team, \n" .
+	"I would like to submit my posts from " . $_SERVER['HTTP_HOST'] . " to be on the Featured page.\n\n\n\n" .
+	"%% You also can share your feedback right here - so, we'll be able to improve AtContent for you\n\n".
+	"Thanks,\n".
+	$_SERVER['HTTP_HOST'];
+
+?>
+            — <a href="mailto:mail@atcontent.com?subject=<?php
+	echo str_replace('+', '%20', urlencode($email_subject)); ?>&body=<?php
+	echo str_replace('+', '%20', urlencode($email_body)); ?>">Submit your posts to be featured</a> and increase your readership.<br>
+            — <a href="<?php echo admin_url("admin.php?page=atcontent/repost.php"); ?>">Repost relevant posts to your blog</a> to increase readers engagement.
+        </p>
+ 
+        <p>Thank you for using AContent!</p>
+        <p>In 7 days we'll share with you insights on getting better results in your blog promotion.</p>
+
+        <p>If you have any issues or questions, please <a href="http://atcontent.com/support" target="_blank">contact our support</a>.</p>
+        </div>
     </div>
 
     <div id="importDetails"></div>

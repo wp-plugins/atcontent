@@ -84,7 +84,7 @@ function atcontent_api_get_nickname( $ac_api_key ) {
 function atcontent_api_get_userinfo( $ac_api_key ) {
     $post_content = 'Key='.
         urlencode( $ac_api_key ) . '&AppID=' . urlencode( 'WordPress' );
-    return atcontent_do_post( 'http://api.atcontent.com/v1/native/userinfo', $post_content );
+    return atcontent_do_post( 'http://atcontent.com/api/v1/native/userinfo.ashx', $post_content );
 }
 
 function atcontent_api_get_key( $nounce, $grant ) {

@@ -3,15 +3,16 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 5.13.0
+    Version: 6.0.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "5.13.0.135" );
+    define( 'AC_VERSION', "6.0.0.136" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
+    require_once( "include/atcontent_service.php" );
     require_once( "include/atcontent_api.php" );
     require_once( "include/atcontent_pingback.php" );
     require_once( "include/atcontent_ajax.php" );
@@ -55,7 +56,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=7', __FILE__ ) );
+         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=8', __FILE__ ) );
          wp_enqueue_style( 'atcontentAdminStylesheet' );
          wp_enqueue_style( 'wp-pointer' );
          wp_enqueue_script( 'wp-pointer' );
@@ -78,12 +79,9 @@
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
 
         add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'publish_posts', 'atcontent/connect.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Subscription', 'Subscription', 'publish_posts', 'atcontent/subscription.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'publish_posts', 'atcontent/settings.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'publish_posts', 'atcontent/sync.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
-        //add_submenu_page( 'atcontent/dashboard.php', 'Blogs Rating', 'Blogs Rating', 'publish_posts', 'atcontent/rating.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Geek Page', 'Geek Page', 'publish_posts', 'atcontent/knownissues.php',  '');
 
         $guest_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
@@ -147,14 +145,13 @@
 	    return $defaults;
     }
 
-
     function atcontent_column_content( $column_name, $post_ID ) {
 	    if ( $column_name == 'atcontent_column' ) {
 		    $stat_link = atcontent_get_statistics_link( $post_ID );
 		    if ( strlen( $stat_link) > 0 ) {
 			    echo "<a href=\"{$stat_link}\">Statistics</a>";
 		    } else {
-		        echo "N/A";
+		        echo "—";
 		    }
 	    }
     }

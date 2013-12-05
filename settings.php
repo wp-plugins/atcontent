@@ -20,14 +20,6 @@
     }
     //End PingBack
 
-    $ac_oneclick_repost_saved = get_user_meta( $userid, "ac_oneclick_repost", true );
-    if ( strlen ( $ac_oneclick_repost_saved ) == 0 ) {
-        $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-        if ( $connect_result["IsOK"] == TRUE ) {
-            update_user_meta( $userid, "ac_oneclick_repost", "1" );
-        }
-    }
-
     if ( ( strlen($ac_api_key) > 0 ) && isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
         isset( $_POST[ "ac_settings" ] ) && ( $_POST[ "ac_settings" ] == 'Y' ) ) {
             
@@ -51,32 +43,9 @@
 
         atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
 
-        $paidRepost = isset($_POST["ac_paidrepost"]) && $_POST["ac_paidrepost"] == "Y" ? 1 : 0;
-        update_user_meta( $userid, "ac_paidrepost", $paidRepost );
-        $paidRepostCost = isset( $_POST["ac_paidrepostcost"] ) && is_numeric( $_POST["ac_paidrepostcost"] ) ? doubleval( $_POST["ac_paidrepostcost"] ) : 2.5;
-        update_user_meta( $userid, "ac_paidrepostcost", $paidRepostCost );
-        $importComments = isset( $_POST["ac_comments"] ) && $_POST["ac_comments"] == "Y" ? 1 : 0;
-        update_user_meta( $userid, "ac_is_import_comments", $importComments );
-
-        $ac_oneclick_repost_saved = get_user_meta( $userid, "ac_oneclick_repost", true );
-        $ac_oneclick_repost = isset( $_POST["ac_oneclick_repost"] ) && $_POST["ac_oneclick_repost"] == "Y" ? "1" : "0";
-        if ( $ac_oneclick_repost == "1" && $ac_oneclick_repost_saved != $ac_oneclick_repost ) {
-            $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-            if ( $connect_result["IsOK"] == TRUE ) {
-                update_user_meta( $userid, "ac_oneclick_repost", $ac_oneclick_repost );
-            }
-        } else if ( $ac_oneclick_repost == "0"  && $ac_oneclick_repost_saved != $ac_oneclick_repost ) {
-            $connect_result = atcontent_api_disconnectgate( $ac_api_key, get_site_url() );
-            update_user_meta( $userid, "ac_oneclick_repost", $ac_oneclick_repost );
-        }
-
-        $ac_with_import = isset( $_POST['ac_with_import'] ) && $_POST['ac_with_import'] == "Y";
-
         $ac_share_panel_disable = isset( $_POST["ac_share_panel_disable"] ) && $_POST["ac_share_panel_disable"] == "Y" ? 1 : 0;
         update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
 
-        $ac_excerpt_image_remove = ( isset( $_POST[ "ac_excerpt_image_remove" ] ) && $_POST[ "ac_excerpt_image_remove" ] == "Y" ) ? "1" : "0";
-        update_user_meta( $userid, "ac_excerpt_image_remove", $ac_excerpt_image_remove );
         $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
         $ac_comments_disable = ( isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y" ) ? "1" : "0";
@@ -84,9 +53,14 @@
         update_user_meta( $userid, "ac_comments_disable", $ac_comments_disable );
         $ac_hint_panel_disable = ( isset( $_POST[ "ac_hint_panel_disable" ] ) && $_POST[ "ac_hint_panel_disable" ] == "Y" ) ? "1" : "0";
         update_user_meta( $userid, "ac_hint_panel_disable", $ac_hint_panel_disable );
-        $form_message .= '<div class="updated"><p><b>Settings saved.</b></p>' . 
-        '<p><a href="' . admin_url("admin.php?page=atcontent/sync.php") . '">Follow Sync section</a></p>' .
-        '</div>';
+        if ( $_GET["afterconnect"] == "1" )
+            $form_message .= '<div class="updated"><p><b>Settings saved.</b></p>' . 
+            '<script type="text/javascript">window.location = \'' . admin_url("admin.php?page=atcontent/sync.php") . '&afterconnect=1\';</script>' .
+            '</div>';
+        else
+            $form_message .= '<div class="updated"><p><b>Settings saved.</b></p>' . 
+            '<p><a href="' . admin_url("admin.php?page=atcontent/sync.php") . '">Follow Sync section</a></p>' .
+            '</div>';
     }
 
 ?>
@@ -135,6 +109,16 @@
 
 ?>
     <div class="b-column">
+<?php 
+if ( $_GET["afterconnect"] == "1" ) {
+    ?>
+<div class="b-note success">
+    Well done, now you have connected your blog with AtContent<br>
+    Adjust site settings to get better results in promotion of your posts.
+</div>
+    <?php
+}
+?>
         <fieldset>
             <legend>Site Settings</legend>
             <table class="b-settings-table">
@@ -210,34 +194,19 @@ END;
                     Prevent copy-paste of my posts
                 </label>
             </div>
-            <div class="b-checkbox-row" style="display: none;">
-                <label>
-                    <input type="checkbox" name="ac_paidrepost" id="ac_paidrepost" value="Y" <?php echo $ac_paidrepost_checked ?>>
-                    Paid repost
-                </label>
-                <div class="b-checkbox-extra">
-                    People will pay $
-                    <input type="text" name="ac_paidrepostcost" id="ac_paidrepostcost" value="<?php echo $ac_paidrepostcost ?>">
-                    for reposting my posts to other sites.
-                </div>
-            </div>
         </fieldset>
 <?php
-    $ac_excerpt_image_remove = get_user_meta($userid, "ac_excerpt_image_remove", true );
-    if ( strlen( $ac_excerpt_image_remove ) == 0 ) $ac_excerpt_image_remove = "0";
     $ac_excerpt_no_process = get_user_meta( $userid, "ac_excerpt_no_process", true );
     if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
     $ac_comments_disable = get_user_meta( $userid, "ac_comments_disable", true );
     if ( strlen( $ac_comments_disable ) == 0 ) $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
     $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
-    $ac_hint_panel_disable = get_user_meta($userid, "ac_hint_panel_disable", true );
-    if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "0";
+    $ac_hint_panel_disable = get_user_meta( $userid, "ac_hint_panel_disable", true );
+    if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "1";
     $ac_script_init = get_user_meta($userid, "ac_script_init", true );
     $ac_share_panel_disable = get_user_meta($userid, "ac_share_panel_disable", true );
     if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "0";
 
-    $ac_excerpt_image_remove_checked = "";
-    if ($ac_excerpt_image_remove == "1") $ac_excerpt_image_remove_checked = "checked=\"checked\"";
     $ac_excerpt_no_process_checked = "";
     if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
     $ac_comments_disable_checked = "";
@@ -258,25 +227,12 @@ END;
                 </label>
                 <div class="ac-small">Should be marked for sites with not standard themes</div>
             </div>
-            <div class="b-checkbox-row" style="display: none;">
-                <label>
-                        <input type="checkbox" name="ac_comments_disable" value="Y" <?php echo $ac_comments_disable_checked ?>>
-                        Turn off plugin comments
-                </label>
-            </div>
             <div class="b-checkbox-row">
                 <label>
                         <input type="checkbox" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
                         Turn off share buttons
                 </label>
                 <div class="ac-small">If you have a social share plugin on your blog you can turn off our share buttons to prevent duplication</div>
-            </div>
-            <div class="b-checkbox-row">
-                <label>
-                        <input type="checkbox" name="ac_oneclick_repost" value="Y" <?php echo $ac_oneclick_repost_checked ?>>
-                        Allow one-click repost to my blog
-                </label>
-                <div class="ac-small">When you see <img style="vertical-align: bottom" src="http://i.imgur.com/LAmq8On.png" alt="repost"> you can copy content to your site in one click</div>
             </div>
         </fieldset>
     </div>        
@@ -302,12 +258,6 @@ END;
         $('label input[type!=checkbox][type!=radio]').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-        });
-        var ac_paidrepostcost = $('#ac_paidrepostcost')[0],
-            ac_paidrepost = $('#ac_paidrepost');
-        ac_paidrepostcost.disabled = !ac_paidrepost[0].checked;     
-        $('#ac_paidrepost').on('click change', function () {
-            ac_paidrepostcost.disabled = !this.checked;
         });
         var changed = false,
             fields = {},

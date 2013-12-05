@@ -16,9 +16,42 @@
     margin-right: 20px;
 }
 .atcontent_invite{
-    width: 700px;
+    width: 800px;
     margin:0px auto;
+    /*text-align:center;*/
+}
+.atcontent_invite.footer {
+    width: 800px;
+    margin: 0 auto;
     text-align:center;
+}
+.invite_left {
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    width: 490px;
+    *zoom: 1;
+}
+.invite_right {
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    width: 302px;
+    *zoom: 1;
+}
+.connect_left {
+    display: inline-block;
+    *display: inline;
+    vertical-align: top;
+    width: 490px;
+    *zoom: 1;
+}
+.connect_right {
+    display: inline-block;
+    *display: inline;
+    vertical-align: top;
+    width: 302px;
+    *zoom: 1;
 }
 .atcontent_invite h1{
     font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
@@ -41,16 +74,16 @@ margin: 0;
 float: left; 
 width: 100%; 
 }
-.atcontent_wrap hr:after{
+/*.atcontent_wrap hr:after{
     content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility: hidden;
-}
+}*/
 .atcontent_invite hr{
-    width: 640px;
-    margin: 20px;
+    /*width: 640px;*/
+    margin: 20px 0;
 }
 .atcontent_invite table {text-align: left; border: 0;}
 .atcontent_invite table td {vertical-align: top;}
@@ -363,3 +396,48 @@ input[disabled] {background: #eee}
 
 .b-column-single {width: 500px}
 .ac-small{font-size: 0.8em;}
+
+.checkbox_group {
+    margin: 1em 0;
+    overflow: hidden;
+    *zoom: 1;
+}
+    .checkbox_group label {
+        clear: both;
+        float: left;
+    }
+    .checkbox_group input,
+    .checkbox_group img,
+    .checkbox_group span { vertical-align: middle; }
+.dashed {
+    border-bottom: 1px dashed;
+    text-decoration: none;
+}
+    .dashed:hover {
+        border-color: transparent;
+        text-decoration: none;
+    }
+.small_text { font-size: .8em; }
+    .checkbox_manage a { margin-left: .4em; }
+
+.b-note {
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+.b-note:after {
+    bottom: 10px;
+    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 2em;
+    position: absolute;
+    right: 10px;
+}
+.b-note.success {
+    background: none repeat scroll 0 0 #E4FFD6;
+    border: 1px solid #BFDFBC;
+}
+.b-note.success:after {
+    color: #B0CCA2;
+    content: ":-)";
+}

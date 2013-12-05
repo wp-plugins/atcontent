@@ -115,7 +115,7 @@ function atcontent_api_key()
     $userid = wp_get_current_user()->ID;
     if ( current_user_can( 'edit_posts' ) ) {
         $result = "";
-        $api_key_result = atcontent_api_get_key($_GET["nounce"], $_GET["grant"]);
+        $api_key_result = atcontent_api_get_key( $_GET["nounce"], $_GET["grant"] );
         if (!$api_key_result["IsOK"]) {
             $result .= "false";
         } else {
@@ -125,12 +125,9 @@ function atcontent_api_key()
             update_user_meta( $userid, "ac_showname", $api_key_result["Showname"] );
             update_user_meta( $userid, "ac_avatar_20", $api_key_result["Avatar20"] );
             update_user_meta( $userid, "ac_avatar_80", $api_key_result["Avatar80"] );
-            $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
-            if ( $ac_oneclick_repost != "0" ) {
-                $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-                if ( $connect_result["IsOK"] == TRUE ) {
-                    update_user_meta( $userid, "ac_oneclick_repost", "1" );
-                }
+            $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+            if ( $connect_result["IsOK"] == TRUE ) {
+                update_user_meta( $userid, "ac_oneclick_repost", "1" );
             }
             $result .= "true";
         }

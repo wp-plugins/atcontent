@@ -145,7 +145,7 @@ END;
             <ul class="b-dashboard-list">
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/settings.php" ); ?>">Adjust plugin settings</a></li>
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/sync.php" ); ?>">Sync my blog posts</a></li>
-                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/subscription.php" ); ?>">Choose a subscription plan</a></li>
+                <li><a href="https://atcontent.com/Subscribe/" target="_blank">Choose a subscription plan</a></li>
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/statistics.php" ); ?>">Know my statistics</a></li>
             </ul>
     
