@@ -78,6 +78,10 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.0.0 =
+
+* UI improvements!
+
 = 5.6.16 =
 
 * Hover Pin It compatibility
@@ -335,4 +339,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Hover Pin It compatibility
+* UI improvements!

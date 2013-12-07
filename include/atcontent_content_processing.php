@@ -279,9 +279,10 @@ END;
 	        // get the submitted parameters
 	        $postID = $_POST['postID'];
             $ac_is_copyprotect = $_POST['copyProtection'];
-            $ac_is_paidrepost = $_POST['paidRepost'];
             $ac_paidrepost_cost = $_POST['cost'];
-            $ac_is_import_comments = $_POST['comments'];
+
+            $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
+            if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
 
             $ac_postid = get_post_meta( $postID, "ac_postid", true );
             $ac_is_process = get_post_meta( $postID, "ac_is_process", true );
@@ -315,16 +316,14 @@ END;
                 $ac_action = "skipped";
             } else {
                 $comments_json = "";
-                if ( $ac_is_import_comments == "1" ) {
-                    $comments = get_comments( array(
+                $comments = get_comments( array(
                         'post_id' => $post->ID,
                         'order' => 'ASC',
                         'orderby' => 'comment_date_gmt',
                         'status' => 'approve',
-                    ) );
-                    if( !empty($comments) ) {
-                        $comments_json .= json_encode($comments);
-                    }
+                ) );
+                if( !empty($comments) ) {
+                    $comments_json .= json_encode($comments);
                 }
 	            if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title,
