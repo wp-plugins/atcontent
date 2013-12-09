@@ -91,7 +91,7 @@
         $users = get_users("orderby=ID");
         $additionalUsersCount = 0;
         foreach ( $users as $user ) {
-            if ( $user->ID != $currentuser->ID && user_can( $user, "publish_posts" ) ) $additionalUsersCount += 1;
+            if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) $additionalUsersCount += 1;
         }
         if ( $additionalUsersCount > 1 && user_can( $currentuser->ID, "manage_options" ) ) {
 ?>
@@ -101,7 +101,7 @@
         <div class="checkbox_group" id="usersList">
 <?php
         foreach ( $users as $user ) {
-            if ( $user->ID != $currentuser->ID && user_can( $user, "publish_posts" ) ) {
+            if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) {
                 $user_ac_api_key = get_user_meta( intval( $user->ID ), "ac_api_key", true );
                 $checked = ( $user_ac_api_key == $ac_api_key ) ? "checked=\"checked\"" : "";
                 echo "<label><input type=\"checkbox\" {$checked} name=\"connectuser[]\" value=\"{$user->ID}\"> " . get_avatar( $user->ID, 16 ) . " <span class=\"checkbox_group_text\">" . $user->display_name . "</span></label>";

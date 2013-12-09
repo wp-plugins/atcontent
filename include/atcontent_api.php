@@ -2,7 +2,7 @@
 
 function atcontent_create_publication($ac_api_key, 
 $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $is_advanced_tracking, $comments
+$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -27,6 +27,8 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments
         '&IsPaidRepost='.urlencode($is_paidrepost).
         '&Published='.urlencode($post_published).
         '&Comments='.urlencode($comments).
+        '&Tags='.urlencode($tags).
+        '&WPCategories='.urlencode($categories).
         '&AddToIndex=true'.
         ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
         '';
@@ -35,7 +37,7 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments
 
 function atcontent_api_update_publication($ac_api_key, 
 $post_id, $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $is_advanced_tracking, $comments
+$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -61,6 +63,8 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments
         '&Published='.urlencode($post_published).
         '&Comments='.urlencode($comments).
         '&IsPaidRepost='.urlencode($is_paidrepost).
+        '&Tags='.urldecode($tags).
+        '&WPCategories='.urlencode($categories).
         '&AddToIndex=true'.
         ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
         '';

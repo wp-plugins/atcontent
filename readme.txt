@@ -78,6 +78,10 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.0.3 =
+
+* Administrator can connect blog contributors with his AtContent account!
+
 = 6.0.2 =
 
 * Social Media Feather compatibility!
@@ -343,4 +347,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* UI improvements!
+* Administrator can connect blog contributors with his AtContent account!

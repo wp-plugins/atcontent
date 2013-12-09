@@ -57,13 +57,16 @@ function atcontent_publish_publication( $post_id ){
             if ( !empty( $comments ) ) {
                 $comments_json .= json_encode( $comments );
             }
+
+            $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
+            $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
             
             if ( strlen( $ac_postid ) == 0 ) {
                 $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
                         apply_filters( "the_content",  $post->post_content ) , 
                         apply_filters( "the_content",  $ac_paid_portion ),  
                         $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json );
+                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
                     update_post_meta( $post->ID, "ac_postid", $ac_postid );
@@ -75,8 +78,7 @@ function atcontent_publish_publication( $post_id ){
                     apply_filters( "the_content", $post->post_content  ) , 
                     apply_filters( "the_content",  $ac_paid_portion ), 
                     $ac_type , get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json
-                        );
+                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                 } else {
                     update_post_meta( $post->ID, "ac_is_process", "2" );
@@ -92,7 +94,7 @@ function atcontent_save_post( $post_id ){
 
 function atcontent_save_meta( $post_id ) {
 
-    if ( $_POST['atcontent_type'] == null ) 
+    if ( $_POST['atcontent_save_meta'] == null ) 
         return;
 
     if ( !current_user_can( 'edit_post', $post_id ) )
@@ -107,8 +109,8 @@ function atcontent_save_meta( $post_id ) {
     $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
     $ac_is_advanced_tracking = $_POST["atcontent_is_advanced_tracking"];
 
-    if ($ac_is_process != "1") $ac_is_process = "0";
-    update_post_meta($post_id, "ac_is_process", $ac_is_process);
+    if ( $ac_is_process != "1" ) $ac_is_process = "0";
+    update_post_meta( $post_id, "ac_is_process", $ac_is_process );
         
     if ($ac_is_copyprotect != "1") $ac_is_copyprotect = "0";
     if ( $_POST["atcontent_is_copyprotect_enabled"] == "1" ) {

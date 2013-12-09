@@ -325,12 +325,15 @@ END;
                 if( !empty($comments) ) {
                     $comments_json .= json_encode($comments);
                 }
+                $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
+                $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
+
 	            if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title,
                             apply_filters( "the_content", $post->post_content ),
                             apply_filters( "the_content", $ac_paid_portion ),
                             $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json );
+                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         $ac_postid = $api_answer["PublicationID"];
                         update_post_meta($post->ID, "ac_postid", $ac_postid);
@@ -353,7 +356,7 @@ END;
                         apply_filters( "the_content", $post->post_content ) ,
                         apply_filters( "the_content", $ac_paid_portion ) ,
                         $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
-                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json );
+                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
                     if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                         update_post_meta($post->ID, "ac_is_process", "1");
                         update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );

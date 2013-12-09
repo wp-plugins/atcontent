@@ -126,6 +126,7 @@
 <div class="misc-pub-section">
 <a href="<?php echo atcontent_get_statistics_link( $post->ID ); ?>" target="_blank">View statistics</a>
 </div>
+<input type="hidden" name="atcontent_save_meta" value="1">
         <?php
         }
     }
