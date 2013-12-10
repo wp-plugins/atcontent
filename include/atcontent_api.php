@@ -1,35 +1,37 @@
 <?php
 
-function atcontent_create_publication($ac_api_key, 
+function atcontent_api_create_publication($ac_api_key, 
 $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
 $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
+    $post_content = str_replace( "http://youtube.com", "https://youtube.com", $post_content );
+    $post_content = str_replace( "http://youtu.be", "https://youtu.be", $post_content );
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
-    $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
+    $post_body = count( $post_splited_content ) > 0 ? $post_splited_content[1] : "";
     $post_paid_splited_content = split("<!--more-->", $paid_portion);
     $paid_face = $post_paid_splited_content[0];
-    $paid_content = count($post_paid_splited_content) > 0 ? $post_paid_splited_content[1] : "";
+    $paid_content = count( $post_paid_splited_content ) > 0 ? $post_paid_splited_content[1] : "";
     $post_content = 'Key='.
-        urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
-        '&Title='.urlencode($post_title).
-        '&CommercialType='.urlencode($commercial_type).
-        '&Language='.urlencode('en').
-        '&Price='.urlencode($cost).
-        '&FreeFace='.urlencode($post_face).
-        '&FreeContent='.urlencode($post_body).
-        '&PaidFace='.urlencode($paid_face).
-        '&PaidContent='.urlencode($paid_content).
-        '&IsCopyProtected='.urlencode($is_copyprotect).
-        '&IsAdvancedTracking='.urlencode($is_advanced_tracking).
-        '&IsPaidRepost='.urlencode($is_paidrepost).
-        '&Published='.urlencode($post_published).
-        '&Comments='.urlencode($comments).
-        '&Tags='.urlencode($tags).
-        '&WPCategories='.urlencode($categories).
-        '&AddToIndex=true'.
+        urlencode( $ac_api_key ) . '&AppID=' . urlencode( 'WordPress' ) .
+        '&Title=' . urlencode( $post_title ) .
+        '&CommercialType=' . urlencode( $commercial_type ) .
+        '&Language=' . urlencode( 'en' ) .
+        '&Price=' . urlencode( $cost ).
+        '&FreeFace=' . urlencode( $post_face ) .
+        '&FreeContent=' . urlencode( $post_body ) .
+        '&PaidFace=' . urlencode( $paid_face ) .
+        '&PaidContent=' . urlencode( $paid_content ) .
+        '&IsCopyProtected=' . urlencode( $is_copyprotect ) .
+        '&IsAdvancedTracking=' . urlencode( $is_advanced_tracking ) .
+        '&IsPaidRepost=' . urlencode( $is_paidrepost ) .
+        '&Published=' . urlencode( $post_published ) .
+        '&Comments=' . urlencode( $comments ) .
+        '&Tags=' . urlencode( $tags ) .
+        '&WPCategories=' . urlencode( $categories ) .
+        '&AddToIndex=true' .
         ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
         '';
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/create', $post_content );
@@ -41,6 +43,8 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
+    $post_content = str_replace( "http://youtube.com", "https://youtube.com", $post_content );
+    $post_content = str_replace( "http://youtu.be", "https://youtu.be", $post_content );
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";

@@ -63,7 +63,7 @@ function atcontent_publish_publication( $post_id ){
             $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
             
             if ( strlen( $ac_postid ) == 0 ) {
-                $api_answer = atcontent_create_publication( $ac_api_key, $post->post_title, 
+                $api_answer = atcontent_api_create_publication( $ac_api_key, $post->post_title, 
                         apply_filters( "the_content",  $post->post_content ) , 
                         apply_filters( "the_content",  $ac_paid_portion ),  
                         $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),

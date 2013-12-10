@@ -1,12 +1,9 @@
 <?php
-    
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require_once( "include/atcontent_userinit.php" );
-
     if ( strlen( $ac_pen_name ) == 0 ) {
         $ac_pen_name = "AtContent";
     }
-
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 
     $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1");
