@@ -120,13 +120,13 @@
 <?php } ?>
 <input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
 </div>
+<input type="hidden" name="atcontent_save_meta" value="1">
 <?php
         if ( strlen( $ac_postid ) > 0 ) {
         ?>
 <div class="misc-pub-section">
 <a href="<?php echo atcontent_get_statistics_link( $post->ID ); ?>" target="_blank">View statistics</a>
 </div>
-<input type="hidden" name="atcontent_save_meta" value="1">
         <?php
         }
     }

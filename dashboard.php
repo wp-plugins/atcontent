@@ -28,7 +28,7 @@
             <div class="b-dashboard-table">
                 <table>
 <?php 
-    $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+    $quotas_result = atcontent_api_get_quotas( $ac_api_key );
     if ( $quotas_result["IsOK"] == true ) {
         foreach ( $quotas_result["Subscriptions"] as $subscription ) {
             $enddate = strtotime( $subscription["EndTime"] );

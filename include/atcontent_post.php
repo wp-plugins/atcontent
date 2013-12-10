@@ -7,6 +7,7 @@ function atcontent_publish_publication( $post_id ){
 		$post_url = get_permalink( $post_id );
 		$post = get_post( $post_id );
         if ( $post == null ) return;
+
         $userid = intval( $post->post_author );
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         if ( strlen( $ac_api_key ) > 0 ) {
@@ -102,9 +103,6 @@ function atcontent_save_meta( $post_id ) {
 
     // OK, we're authenticated: we need to find and save the data
 
-    $post = get_post( $post_id );
-    if ( $post == null ) return;
-
     $ac_is_process = $_POST['atcontent_is_process'];
     $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
     $ac_is_advanced_tracking = $_POST["atcontent_is_advanced_tracking"];
@@ -124,8 +122,12 @@ function atcontent_save_meta( $post_id ) {
 
     remove_filter( 'the_content', 'atcontent_the_content', 1 );
     
-    $testcontent = apply_filters( "the_content",  $post->post_content );
-    $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+    $post = get_post( $post_id );
+    $testcontent = "";
+    if ( $post != null ) {
+        $testcontent = apply_filters( "the_content",  $post->post_content );
+        $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+    }
 
     add_filter( 'the_content', 'atcontent_the_content', 1 );
 
