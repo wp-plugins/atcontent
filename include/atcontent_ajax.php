@@ -146,4 +146,31 @@ END;
     exit;
 }
 
+function atcontent_ajax_repost(){
+        include("atcontent_userinit.php");
+        $ac_postid = $_POST['ac_post'];
+        $repost_title_answer = atcontent_api_get_title( $ac_postid );
+        $repost_title = "Not found";
+        if ( $repost_title_answer["IsOK"] == true ) {
+            $repost_title = $repost_title_answer["Title"];
+        }
+        remove_filter( 'the_content', 'atcontent_the_content', 1 );
+        remove_filter( 'the_content', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script async src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+        // Create post object
+        $new_post = array(
+            'post_title'    => $repost_title,
+            'post_content'  => $ac_content,
+            'post_status'   => 'publish',
+            'post_author'   => $userid,
+            'post_category' => array()
+        );
+        // Insert the post into the database
+        $new_post_id = wp_insert_post( $new_post );
+        echo json_encode ( array ( "IsOK" => true ) );
+        exit;
+    }
+
 ?>

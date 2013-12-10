@@ -54,7 +54,7 @@
     if ( $ac_userinfo["IsOK"] == true ) {
         atcontent_update_user_meta( $userid, $ac_userinfo );
     }
-    require( "atcontent_userinit.php" );
+    require( "include/atcontent_userinit.php" );
 ?>
 <script>
     function beforechangeaccount() {

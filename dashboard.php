@@ -1,7 +1,7 @@
 <?php
     $userid = intval( wp_get_current_user()->ID );
     $ref_url = "http://wordpress.org/plugins/atcontent/";
-    require( "atcontent_userinit.php" );
+    require( "include/atcontent_userinit.php" );
     if ( strlen( $ac_api_key ) == 0 ) {
         $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
         ?>

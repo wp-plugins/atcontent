@@ -2,7 +2,7 @@
 <?php
     
     $atcontent_menu_section = "subscription";
-    require( "atcontent_userinit.php" );
+    require( "include/atcontent_userinit.php" );
 
     if ( strlen( $ac_api_key ) == 0 ) {
         $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );

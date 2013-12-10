@@ -6,7 +6,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     
     $atcontent_menu_section = "sync";
     
-    require( "atcontent_userinit.php" );
+    require( "include/atcontent_userinit.php" );
 
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
     $hidden_field_name = 'ac_submit_hidden';
@@ -65,7 +65,6 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
   
     $postIDs = join( "','" , $posts_id );
     $postTitles = join( "','" , $posts_title );
-    //$form_message .= '<div id="importStatus">Sync started.</div><div id="importResult">Processed 0 of ' . count( $posts_id ) . '</div><div id="importDetails"></div>';
 ?>
 <script>
     (function ($) {

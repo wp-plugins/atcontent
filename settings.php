@@ -1,7 +1,7 @@
 <?php
     $atcontent_menu_section = "settings";
     
-    require( "atcontent_userinit.php" );
+    require( "include/atcontent_userinit.php" );
 
     $hidden_field_name = 'ac_submit_hidden';
     $form_message = '';
