@@ -19,7 +19,7 @@ On average, bloggers increase their audinece by 146% <br>in 3 months of using At
     $users = get_users("orderby=ID");
     $additionalUsersCount = 0;
     foreach ( $users as $user ) {
-        if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) $additionalUsersCount += 1;
+        if ( $user->ID != $currentuser->ID && user_can( $user->ID, "edit_posts" ) ) $additionalUsersCount += 1;
     }
     if ( $additionalUsersCount > 1 && user_can( $currentuser->ID, "manage_options" ) ) {
 ?>
@@ -27,7 +27,7 @@ On average, bloggers increase their audinece by 146% <br>in 3 months of using At
         <div class="checkbox_group" id="usersList">
 <?php
         foreach ( $users as $user ) {
-            if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) {
+            if ( $user->ID != $currentuser->ID && user_can( $user->ID, "edit_posts" ) ) {
                 echo "<label><input type=\"checkbox\" name=\"connectuser[]\" value=\"{$user->ID}\"> " . get_avatar( $user->ID, 16 ) . " <span class=\"checkbox_group_text\">" . $user->display_name . "</span></label>";
             }
         }
