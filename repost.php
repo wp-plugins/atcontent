@@ -1,4 +1,5 @@
 <?php
+
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require_once( "include/atcontent_userinit.php" );
     if ( strlen( $ac_pen_name ) == 0 ) {
@@ -145,6 +146,7 @@ $email_body = "Hey AtContent team, \n" .
     </style>
 
     <div class="mainCol">
+        <h3>Posts below can be published on your blog. Click "Repost to my blog" to try it.</h3>
         <div class="postList b-publications-columns">
             <?php foreach ( $atcontent_reposts as $postid ) { ?>
                 <div class="article-inline" data-options="hide_shares" >
@@ -219,3 +221,4 @@ $email_body = "Hey AtContent team, \n" .
 </p>
 
 </div>
+<?php atcontent_ga("RepostTab", "Repost page"); ?>

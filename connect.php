@@ -122,3 +122,4 @@ $form_action = admin_url( 'admin-ajax.php' );
 ?>
 </div>
 <div class="clear"></div>
+<?php atcontent_ga("ConnectTab", "Connect"); ?>

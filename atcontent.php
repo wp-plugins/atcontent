@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 6.1.2
+    Version: 6.1.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "6.1.2" );
+    define( 'AC_VERSION', "6.1.3" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -45,12 +45,12 @@
     add_action( 'wp_ajax_atcontent_guestpost', 'atcontent_ajax_guestpost' );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
+    add_action( "wp_ajax_atcontent_ga", "atcontent_ajax_ga" );
     add_action( 'wp_ajax_atcontent_guestpost_check_url', 'atcontent_ajax_guestpost_check_url' );
     add_action( 'admin_head', 'atcontent_admin_head' );
     add_filter( 'manage_posts_columns', 'atcontent_column_head' );
     add_action( 'manage_posts_custom_column', 'atcontent_column_content', 10, 2 );
     add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
-
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
@@ -91,7 +91,7 @@
             plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
 
         $repost_key = atcontent_get_menu_key( 5.0 );
-        add_menu_page( 'Reposting', 'Reposting', 'publish_posts', 'atcontent/repost.php', '', 
+        add_menu_page( 'Get Content', 'Get Content', 'publish_posts', 'atcontent/repost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
         
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
@@ -107,6 +107,10 @@
         if ( $comment != NULL ) {
             atcontent_process_comments( $comment->comment_post_ID );
         }
+    }
+
+    function atcontent_ga( $page, $title ) {
+        ?><img src="<?php echo plugins_url( 'ga.php?page=' . $page . '&title=' . $title . '&r=' . rand(), __FILE__ ) ?>" alt="" width="1" height="1" /><?php
     }
 
     function atcontent_process_comments( $post_id ) {

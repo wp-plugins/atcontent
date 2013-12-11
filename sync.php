@@ -316,3 +316,4 @@ $email_body = "Hey AtContent team, \n" .
     <div id="importDetails"></div>
 </div>
 </div>
+<?php atcontent_ga("SyncTab", "Sync page"); ?>

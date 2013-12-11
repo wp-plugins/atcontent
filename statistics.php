@@ -358,3 +358,4 @@ foreach ( $stat_result["PostsStats"] as $stat_info ) {
     }
 ?>
 </div>
+<?php atcontent_ga("StatisticsTab", "Statistics page"); ?>

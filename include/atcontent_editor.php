@@ -129,6 +129,7 @@
 </div>
         <?php
         }
+        atcontent_ga("PostEditor", "Post editor");
     }
 
     function atcontent_paid_portion( $post ) {

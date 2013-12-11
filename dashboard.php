@@ -203,3 +203,4 @@ END;
         </div>
     </div>
 </div>
+<?php atcontent_ga("DashboardTab", "Dashboard"); ?>

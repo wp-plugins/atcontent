@@ -10,17 +10,16 @@ function atcontent_dashboard_widget_function() {
         $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         echo '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent<div class="clear"></div></div>';
+        atcontent_ga("Dashboard", "WordPress Dashboard");
         return;
     }
 
-    $ac_oneclick_repost = get_user_meta( $userid, "ac_oneclick_repost", true );
-    if ( $ac_oneclick_repost == "1" ) {
-        $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-        if ( $connect_result["IsOK"] == TRUE ) {
-            update_user_meta( $userid, "ac_oneclick_repost", "1" );
-        }
+    
+    $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
+    if ( $connect_result["IsOK"] == TRUE ) {
+        update_user_meta( $userid, "ac_oneclick_repost", "1" );
     }
-
+    
     if ( current_user_can( 'edit_posts' ) ) {
         global $wpdb;
         $posts = $wpdb->get_results( 
@@ -101,6 +100,7 @@ function atcontent_dashboard_widget_function() {
 
     echo "<div class=\"clear\"></div><div style=\"text-align:center;margin-top:15px;\">" . 
     "<a href=\"{$statisticslink}\">Get details</a></div></div>";
+    atcontent_ga("Dashboard", "WordPress Dashboard");
 }
 
 function atcontent_add_dashboard_widgets() {

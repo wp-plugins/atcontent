@@ -304,3 +304,4 @@ END;
         }
     })(jQuery);
 </script>
+<?php atcontent_ga("SettingsTab", "Settings page"); ?>
