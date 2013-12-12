@@ -325,8 +325,10 @@ END;
                 if( !empty($comments) ) {
                     $comments_json .= json_encode($comments);
                 }
+                
                 $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
                 $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
+                
 
 	            if ( strlen( $ac_postid ) == 0 ) {
                     $api_answer = atcontent_api_create_publication( $ac_api_key, $post->post_title,
