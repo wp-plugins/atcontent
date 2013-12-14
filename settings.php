@@ -3,6 +3,7 @@
     
     require( "include/atcontent_userinit.php" );
 
+
     $hidden_field_name = 'ac_submit_hidden';
     $form_message = '';
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
@@ -67,7 +68,7 @@
 
 <div class="atcontent_wrap">
 
-<?php include("settings_menu.php"); ?>
+<?php include( "settings_menu.php" ); ?>
 
 <?php if ( strlen ( $form_message ) > 0 ) { echo $form_message; } ?>
 

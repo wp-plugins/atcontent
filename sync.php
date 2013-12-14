@@ -52,10 +52,10 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     }
 
     $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
-    if (strlen($ac_copyprotect) == 0) $ac_copyprotect = "1";
+    if ( strlen( $ac_copyprotect ) == 0 ) $ac_copyprotect = "1";
 
-    $ac_paidrepost = get_user_meta($userid, "ac_paidrepost", true );
-    if (strlen($ac_paidrepost) == 0) $ac_paidrepost = "0";
+    $ac_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
+    if ( strlen($ac_paidrepost) == 0 ) $ac_paidrepost = "0";
 
     $ac_paidrepostcost = get_user_meta($userid, "ac_paidrepostcost", true );
     if (strlen($ac_paidrepostcost) == 0) $ac_paidrepostcost = "2.50";
