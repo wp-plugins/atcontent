@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 6.1.4
+    Version: 6.1.5
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "6.1.4" );
+    define( 'AC_VERSION', "6.1.5" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -57,10 +57,17 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-         wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=8', __FILE__ ) );
-         wp_enqueue_style( 'atcontentAdminStylesheet' );
-         wp_enqueue_style( 'wp-pointer' );
-         wp_enqueue_script( 'wp-pointer' );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=8', __FILE__ ) );
+        wp_enqueue_style( 'atcontentAdminStylesheet' );
+        wp_enqueue_style( 'wp-pointer' );
+        wp_enqueue_script( 'wp-pointer' );
+        global $wp_version;
+        if ( version_compare ( $wp_version, "3.8" ) >= 0 ) {
+            wp_register_style( 'atcontentAdminStylesheet38', plugins_url( 'assets/atcontent38.css?v=8', __FILE__ ) );
+            wp_enqueue_style( 'atcontentAdminStylesheet38' );
+            wp_register_script( 'atcontentAdminScript38',  plugins_url( 'assets/atcontent38.js?v=1', __FILE__ ), array(), true );
+            wp_enqueue_script( 'atcontentAdminScript38' );
+        }
     }
 
     function atcontent_get_menu_key( $desired ) {
@@ -73,10 +80,7 @@
         return $menukey;
     }
 
-    
-
     function atcontent_add_tools_menu() {
-
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'publish_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );

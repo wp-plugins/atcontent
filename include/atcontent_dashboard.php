@@ -109,7 +109,7 @@ function atcontent_add_dashboard_widgets() {
     if ( !user_can( $userid, "publish_posts" ) ) return;
 
     $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
-	wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
+	wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:middle;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
 
     global $wp_meta_boxes;
 	

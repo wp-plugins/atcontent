@@ -206,7 +206,7 @@ END;
     if (strlen($ac_hint_panel_disable) == 0) $ac_hint_panel_disable = "1";
     $ac_script_init = get_user_meta($userid, "ac_script_init", true );
     $ac_share_panel_disable = get_user_meta($userid, "ac_share_panel_disable", true );
-    if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "0";
+    if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "1";
 
     $ac_excerpt_no_process_checked = "";
     if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
