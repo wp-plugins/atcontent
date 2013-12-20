@@ -9,6 +9,13 @@
             'post', 'side', 'high'
         );
 
+        add_meta_box(
+            'atcontent_repost_metabox',
+            __( 'AtContent Repost', 'atcontent_textdomain' ),
+            'atcontent_inner_repost_box',
+            'post'
+        );
+
         /*
         $version = get_bloginfo('version');
         if ( version_compare( $version, '3.3', '>=' ) ) {
@@ -123,7 +130,7 @@
 <script type="text/javascript">
     (function ($) {
         $(function () {
-            $("#submitpost #delete-action").before('<p class="update-nag" style="margin:5px 5px 15px 5px;">Set post <a id="atcontent-tags-link" href="javascript:">tags</a> and <a id="atcontent-categories-link" href="javascript:">categories</a> to get <b>free&nbsp;promotion</b> with AtContent!</p>');
+            $("#submitpost #delete-action").before('<p id="atcontent-tags-announce" class="update-nag" style="margin:5px 5px 15px 5px;">Set post <a id="atcontent-tags-link" href="javascript:">tags</a> and <a id="atcontent-categories-link" href="javascript:">categories</a> to get <b>free&nbsp;promotion</b> with AtContent!</p>');
             $("#atcontent-tags-link").click(function () { 
                 $('html, body').animate({
                     scrollTop: $("#new-tag-post_tag").offset().top - 250
@@ -147,6 +154,46 @@
         <?php
         }
         atcontent_ga("PostEditor", "Post editor");
+    }
+
+    function atcontent_inner_repost_box( $post ) {
+        atcontent_coexistense_fixes();
+
+        $testcontent = apply_filters( "the_content",  $post->post_content );
+        $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+
+        $ac_is_repost = ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 );
+        if ($ac_is_repost) {
+
+            $ac_share_panel_data_option = "";
+            $ac_additional_classes = "";
+            
+            $ac_additional_classes .= " atcontent_excerpt";
+
+            ?>
+<script type="text/javascript">
+    (function ($) {
+        $(function () {
+            $("#atcontent_sectionid").hide();
+            $("#atcontent-tags-announce").remove();
+            var repostbox = $("#atcontent_repost_metabox").detach();
+            $("#postdivrich").hide().before(repostbox);
+        });
+    })(jQuery);
+</script>
+<p <?php echo $ac_share_panel_data_option ?> class="atcontent_widget<?php echo $ac_additional_classes ?>"><?php echo $post->post_content; ?></p>
+            <?php
+        } else {
+            ?>
+<script type="text/javascript">
+    (function ($) {
+        $(function () {
+            $("#atcontent_repost_metabox").hide();
+        });
+    })(jQuery);
+</script>
+            <?php
+        }
     }
 
     function atcontent_paid_portion( $post ) {
