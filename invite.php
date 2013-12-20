@@ -6,17 +6,22 @@
 <form id="connect_form" method="post" action="<?php echo $form_action; ?>">
     <input type="hidden" name="atcontent_invite" value="Y">
 <div class="atcontent_invite">
-    <h1>AtContent is the easiest way to increase readership and SEO, get backlinks and copy-paste protection!</h1>
+    <h1>AtContent is the easiest way to increase readership by 146% in just 3 month, improve SEO and get links back!</h1>
 	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">To start using the plugin, please</p>
 	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         
                     <div class="discl">
-                        The connection creates an account on AtContent.com. The account will be used to prevent copy-paste, expand your audience, gather readership stats and do other great things.
+                        The connection creates an account on AtContent.com. The account will be used to expand your audience, gather readership stats and improve SEO.
 					</div>
                     <div class="addit">
-                        1,250,000 posts processed by AtContent to date.
+                        What bloggers tweet about us
                     </div>
+
+    <div style="width: 400px;margin: 0 auto;">
+        <blockquote class="twitter-tweet" lang="en"><p>860% increase in readership in 3 weeks WordPress with AtContent — even better. Check it! <a href="http://t.co/STLK6S5xK1">http://t.co/STLK6S5xK1</a></p>&mdash; Christine Cope (@christine_cope) <a href="https://twitter.com/christine_cope/statuses/412073834557100032">December 15, 2013</a></blockquote>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
                 
                     <div id="ac_connect_result"></div>
 <script type="text/javascript">
