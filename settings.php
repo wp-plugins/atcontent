@@ -168,10 +168,12 @@ END;
                         </select>
                     </td>
                 </tr>
+                <!--
                 <tr>
                     <th>Referral (optional)</th>
                     <td><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></td>
                 </tr>
+                -->
             </table>
             <script type="text/javascript">
                 var ac_j = jQuery;
