@@ -7,7 +7,9 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
     $post_content = str_replace( "http://youtube.com", "https://youtube.com", $post_content );
+    $post_content = str_replace( "http://www.youtube.com", "https://youtube.com", $post_content );
     $post_content = str_replace( "http://youtu.be", "https://youtu.be", $post_content );
+    $post_content = str_replace( "http://www.youtu.be", "https://youtu.be", $post_content );
     $post_splited_content = split("<!--more-->", $post_content);
     $post_face = $post_splited_content[0];
     $post_body = count( $post_splited_content ) > 0 ? $post_splited_content[1] : "";
