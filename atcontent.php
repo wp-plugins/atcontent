@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Usually bloggers increase audience for 30% to 300% in 90 days by using AtContent!
-    Version: 6.2.3
+    Version: 6.2.4
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "6.2.3" );
+    define( 'AC_VERSION', "6.2.4" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -90,9 +90,9 @@
         add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'publish_posts', 'atcontent/sync.php',  '');
         add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
 
-        $guest_key = atcontent_get_menu_key( 5.0 );
-        add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
-            plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
+        //$guest_key = atcontent_get_menu_key( 5.0 );
+        //add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
+        //    plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
 
         $repost_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Get Content', 'Get Content', 'publish_posts', 'atcontent/repost.php', '', 

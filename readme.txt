@@ -25,9 +25,6 @@ Here are [EXAMPLE 1](http://bit.ly/1cSdcvs) and [EXAMPLE 2](http://bit.ly/1eII8j
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
 * You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
 
-#### Guest Posting with AtContent – Easy as Never Before! ####
-* Guest blogging with AtContent is just like writing a post for your own site, with the one exception that you specify the site you wish the post to be published on. AtContent then sends your guest post to the chosen website for reviewing and publishing. [Read more here!](http://atcontent.com/Blog/3WWXEDY3SJh.text)
-
 #### Joining AtContent costs you nothing – the plugin is free. ####
 
 * With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
