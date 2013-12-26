@@ -9,7 +9,7 @@
 
     $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1");
     $category2url = admin_url( "admin.php?page=atcontent/repost.php&category=2");
-    $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=3");
+    $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=7");
     $category4url = admin_url( "admin.php?page=atcontent/repost.php&category=4");
     $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5");
     $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6");
@@ -90,10 +90,10 @@
                 <?php } else { ?>
                     <strong>Fashion &amp; Style</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "3") { ?>
-                    <a href="<?php echo $category3url; ?>">Social Enterpreneurship</a><br>
+                <?php if ($currentcategory !== "7") { ?>
+                    <a href="<?php echo $category3url; ?>">Self Improvement</a><br>
                 <?php } else { ?>
-                    <strong>Social Enterpreneurship</strong><br>
+                    <strong>Self Improvement</strong><br>
                 <?php }?>
                 <?php if ($currentcategory !== "4") { ?>
                     <a href="<?php echo $category4url; ?>">Tech</a><br>
