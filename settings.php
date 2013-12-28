@@ -31,13 +31,13 @@
         update_user_meta( $userid, "ac_adtest", $adTest);
 
         $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
-        update_user_meta($userid, "ac_sitecategory", $siteCategory);
+        update_user_meta( $userid, "ac_sitecategory", $siteCategory );
 
         $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
-        update_user_meta($userid, "ac_country", $country);
+        update_user_meta( $userid, "ac_country", $country );
 
         $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
-        update_user_meta($userid, "ac_state", $state);
+        update_user_meta( $userid, "ac_state", $state );
 
         $referral = $_POST["ac_referral"];
         update_user_meta( $userid, "ac_referral", $referral );
