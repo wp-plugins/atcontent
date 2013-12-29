@@ -41,65 +41,79 @@ function atcontent_dashboard_widget_function() {
             }
         }
 
-        $gp_result = atcontent_api_guestposts_incoming( site_url(), $ac_api_key );
-        if ( $gp_result["IsOK"] == true ) {
-            foreach ( $gp_result["List"] as $gp_item ) {
-                if ( $gp_item["Status"] != "Accepted") continue;
-                array_push( $posts_id, $gp_item["Post4gId"] );
-            }
-        }
-
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
-        if ( $response["OriginalViews"] > 0 ) {
-            $num = number_format_i18n( $response["OriginalViews"] );
-            ?>
-            <div class="ac_readership">
-                <table class="ac_table_readership">
-                    <tr><th>Original Views</th></tr>
-                    <tr><td><?php echo $num; ?></td></tr>
-                </table>
+        ?>
+<div class="b-dashboard-brief">
+            <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
+                <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
+                    <span class="b-dashboard-brief__plus">+</span>
+                    <?php echo $response["repostViews"]; ?>
+                </div>
+                <div class="b-dashboard-brief__description">
+                    view<span data-role="plural">s</span> via AtContent
+                    <br>
+                    for the last 12 hours
+                </div>
+                <div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">
+                    <?php echo $response["originalViews"]; ?>
+                </div>
+                <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
+                    views on your blog
+                </div>
+                <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
             </div>
-            <?php
-        }
-        if ( $response["RepostViews"] > 0 ) {
-            $num = number_format_i18n( $response["RepostViews"] );
-            ?>
-            <div class="ac_readership">
-                <table class="ac_table_readership">
-                    <tr><th>Repost Views</th></tr>
-                    <tr><td><?php echo $num; ?></td></tr>
-                </table>
+            <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
+                <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
             </div>
-            <?php
-        }
-        if ( $response["IncreaseRate"] > 0 ) {
-            $num = number_format_i18n( $response["IncreaseRate"] );
-            ?>
-            <div class="ac_readership">
-                <table class="ac_table_readership">
-                    <tr><th>Increase Rate, %</th></tr>
-                    <tr><td><?php echo $num; ?></td></tr>
-                </table>
-            </div>
-            <?php
-        }
-        if ( $response["Days"] > 0 ) {
-            $num = number_format_i18n( $response["Days"] );
-            ?>
-            <div class="ac_readership">
-                <table class="ac_table_readership">
-                    <tr><th>Days Connected</th></tr>
-                    <tr><td><?php echo $num; ?></td></tr>
-                </table>
-            </div>
-            <?php
-        }
-    }
-    $statisticslink = admin_url("admin.php?page=atcontent/statistics.php");
-    $ratinglink = admin_url("admin.php?page=atcontent/rating.php");
+        </div>
+        <script src="//www.google.com/jsapi"></script>
+        <script>
+            google.load('visualization', '1.0', {
+                'packages': ['corechart', 'table']
+            });
+            google.setOnLoadCallback(function () {
+                var options, data, chart, element, rows;
+                
+                element = document.getElementById('atcontent_chart');
 
-    echo "<div class=\"clear\"></div><div style=\"text-align:center;margin-top:15px;\">" . 
-    "<a href=\"{$statisticslink}\">Get details</a></div></div>";
+                options = {
+                    colors: ['#13669d', '#ee8900'],
+                    chartArea: {
+                        width: '90%',
+                        height: '90%'
+                    },
+                    title: '',
+                    titleTextStyle: {
+                        bold: false
+                    },
+                    fontName: 'Segoe UI',
+                    legend: {
+                        position: 'none'
+                    },
+                    pieSliceTextStyle: {
+                        fontSize: 15
+                    }
+                };
+
+                data = new google.visualization.DataTable ();
+                data.addColumn('string', 'Type');
+                data.addColumn('number', 'Views');
+                
+                rows = [
+                    ['Views on your blog', <?php echo $response["originalViews"]; ?>],
+                    ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
+                ];
+                
+                data.addRows(rows);
+
+                chart = new google.visualization.PieChart (element);
+                chart.draw(data, options);
+            });
+        </script>
+<div class="clear"></div>
+<?php
+    }
+    echo "</div>";
     atcontent_ga("Dashboard", "WordPress Dashboard");
 }
 
