@@ -235,6 +235,7 @@ button.button-color-white[disabled],
             margin-bottom: 1.5em;
             padding: 10px;
             position: relative;
+            background: #fff;
         }
         .b-dashboard-table-status {
             display: none;

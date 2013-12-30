@@ -85,7 +85,7 @@ END;
         <div class="b-dashboard-col">
             <h2>Statistics of my blog</h2>
             <div class="b-dashboard-table">
-                <table>
+                <div style="width:416px;">
 <?php
     if ( strlen( $ac_api_key ) > 0 ) {
         $posts = $wpdb->get_results( 
@@ -113,32 +113,82 @@ END;
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 
         if ( $response["IsOK"] == true ) {
-            if ( $response["IncreaseRate"] > 0 ) {
-                $num = number_format_i18n( $response["IncreaseRate"] );
-                echo '<tr><th>Increase in readership</th>' .
-                    '<td>' .$num . '%</td></tr>';
-            }
-            if ( $response["OriginalViews"] > 0 ) {
-                $num = number_format_i18n( $response["OriginalViews"] );
-                echo '<tr><th>Views on my blog</th>' .
-                    '<td>' .$num . '</td></tr>';
-            }
-            if ( $response["RepostViews"] > 0 ) {
-                $num = number_format_i18n( $response["RepostViews"] );
-                echo '<tr><th>Views outside of my blog</th>' .
-                    '<td>' .$num . '</td></tr>';
-            }
-            if ( $response["Days"] > 0 ) {
-                $num = number_format_i18n( $response["Days"] );
-                echo '<tr><th>Period of using AtContent</th>' .
-                     '<td>' . $num . ' day' . ($num != 1 ? 's' : '') . '</td></tr>';
-            }
+?>
+        <div class="b-dashboard-brief">
+            <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
+                <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
+                    <span class="b-dashboard-brief__plus">+</span>
+                    <?php echo $response["repostViews"]; ?>
+                </div>
+                <div class="b-dashboard-brief__description">
+                    view<span data-role="plural">s</span> via AtContent
+                    <br>
+                    for the last 12 hours
+                </div>
+                <div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">
+                    <?php echo $response["originalViews"]; ?>
+                </div>
+                <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
+                    views on your blog
+                </div>
+                <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
+            </div>
+            <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
+                <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
+            </div>
+        </div>
+        <script src="//www.google.com/jsapi"></script>
+        <script>
+            google.load('visualization', '1.0', {
+                'packages': ['corechart', 'table']
+            });
+            google.setOnLoadCallback(function () {
+                var options, data, chart, element, rows;
+                
+                element = document.getElementById('atcontent_chart');
+
+                options = {
+                    colors: ['#13669d', '#ee8900'],
+                    chartArea: {
+                        width: '90%',
+                        height: '90%'
+                    },
+                    title: '',
+                    titleTextStyle: {
+                        bold: false
+                    },
+                    fontName: 'Segoe UI',
+                    legend: {
+                        position: 'none'
+                    },
+                    pieSliceTextStyle: {
+                        fontSize: 15
+                    }
+                };
+
+                data = new google.visualization.DataTable ();
+                data.addColumn('string', 'Type');
+                data.addColumn('number', 'Views');
+                
+                rows = [
+                    ['Views on your blog', <?php echo $response["originalViews"]; ?>],
+                    ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
+                ];
+                
+                data.addRows(rows);
+
+                chart = new google.visualization.PieChart (element);
+                chart.draw(data, options);
+            });
+        </script>
+<div class="clear"></div>
+<?php
         } else {
             echo '<tr><th>Error getting data</th></tr>';
         }
     }
 ?>
-                </table>
+                </div>
             </div>
     
             <h2>What can I do?</h2>
