@@ -150,8 +150,8 @@ $email_body = "Hey AtContent team, \n" .
         <div class="postList b-publications-columns">
             <?php foreach ( $atcontent_reposts as $postid ) { ?>
                 <div class="article-inline" data-options="hide_shares" >
-<script async src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
-<script async src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
+<script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
+<script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
 
                 </div>
             <?php } ?>

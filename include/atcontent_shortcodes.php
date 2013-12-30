@@ -28,7 +28,7 @@ function atcontent_shortcode( $atts ) {
     }
 
 	return <<<END
-<div class="atcontent_widget{$ac_additional_classes}"><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script async src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><script async src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
+<div class="atcontent_widget{$ac_additional_classes}"><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
 }
 
