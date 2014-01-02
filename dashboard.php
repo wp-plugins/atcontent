@@ -134,7 +134,11 @@ END;
                 <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
             </div>
             <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
+                <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
+                <div class="b-dashboard-brief__empty-chart"></div>
+                <?php } else { ?>
                 <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
+                <?php } ?>
             </div>
         </div>
         <script src="//www.google.com/jsapi"></script>
@@ -196,7 +200,6 @@ END;
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/settings.php" ); ?>">Adjust plugin settings</a></li>
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/sync.php" ); ?>">Sync my blog posts</a></li>
                 <li><a href="https://atcontent.com/Subscribe/" target="_blank">Choose a subscription plan</a></li>
-                <li><a href="<?php echo admin_url( "admin.php?page=atcontent/statistics.php" ); ?>">Know my statistics</a></li>
             </ul>
     
             <h2>Invite your friends to AtContent</h2>

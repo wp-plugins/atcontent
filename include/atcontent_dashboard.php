@@ -63,7 +63,11 @@ function atcontent_dashboard_widget_function() {
                 <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
             </div>
             <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
+                <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
+                <div class="b-dashboard-brief__empty-chart"></div>
+                <?php } else { ?>
                 <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
+                <?php } ?>
             </div>
         </div>
         <script src="//www.google.com/jsapi"></script>
