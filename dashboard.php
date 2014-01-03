@@ -21,13 +21,14 @@
  ?></a>!
         <br>Your blog is connected to AtContent.
     </p>
-
+<?php if ( user_can( $userid, "publish_posts" ) ) { ?>
     <div class="b-dashboard">
         <div class="b-dashboard-col">
             <h2>Credits</h2>
             <div class="b-dashboard-table">
                 <table>
-<?php 
+<?php
+    
     $quotas_result = atcontent_api_get_quotas( $ac_api_key );
     if ( $quotas_result["IsOK"] == true ) {
         foreach ( $quotas_result["Subscriptions"] as $subscription ) {
@@ -194,15 +195,17 @@ END;
 ?>
                 </div>
             </div>
-    
+    <?php    } //end if admin-dashboard ?>
             <h2>What can I do?</h2>
             <ul class="b-dashboard-list">
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/settings.php" ); ?>">Adjust plugin settings</a></li>
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/sync.php" ); ?>">Sync my blog posts</a></li>
+                <?php if ( user_can( $userid, "publish_posts" ) ) { ?>
                 <li><a href="https://atcontent.com/Subscribe/" target="_blank">Choose a subscription plan</a></li>
+                <?php } ?>
             </ul>
     
-            <h2>Invite your friends to AtContent</h2>
+            <h2>Invite friends to AtContent</h2>
             <!--<p>For every friend who installs AtContent plugin on their blog,<br> we'll give you <b>free</b> check for plagiarism for up to 100 of your posts!</p>
             <h3>Invite friends</h3>-->
         

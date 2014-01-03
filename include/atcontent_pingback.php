@@ -34,7 +34,7 @@ function atcontent_pingback_inline(){
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_referral = get_user_meta( $userid, "ac_referral", true );
-    if ( current_user_can( 'publish_posts' ) ) {
+    if ( current_user_can( 'edit_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
             $status = 'Connected';

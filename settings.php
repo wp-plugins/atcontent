@@ -121,7 +121,13 @@ if ( $_GET["afterconnect"] == "1" ) {
 }
 ?>
         <fieldset>
-            <legend>Site Settings</legend>
+            <?php if ( user_can( $userid, "manage_options" ) ) { ?>
+                <legend>Site Settings</legend>
+            <?php } else if ( user_can( $userid, "publish_posts" ) ) { ?>
+                <legend>Profile Settings</legend>
+            <?php } else { ?>
+                <legend>Profile Settings</legend>
+            <?php } ?>
             <table class="b-settings-table">
                 <tr>
                     <th>Category</th>
