@@ -265,6 +265,14 @@ function atcontent_api_guestposts_decline( $api_key, $id, $siteuri ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/guestpost/approve', $post_content );
 }
 
+function atcontent_api_reposts_count( $since ) {
+    $post_content = 
+        'since=' . urlencode( $since ) .
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/general/repostscount', $post_content );
+}
+
 function atcontent_api_reposts( $category, $page ) {
     $post_content = 
         'Category=' . urlencode( $category ) .

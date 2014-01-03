@@ -51,6 +51,8 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
         wp_cache_flush();
     }
 
+   
+
     $ac_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
     if ( strlen( $ac_copyprotect ) == 0 ) $ac_copyprotect = "1";
 

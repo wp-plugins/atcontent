@@ -14,6 +14,8 @@
     $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5");
     $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6");
 
+    update_user_meta( $userid, "ac_last_repost_visit", date("Y-m-d H:i:s") );
+
     $currentcategory = $_GET["category"];
     if ( strlen( $currentcategory ) == 0 ) $currentcategory = "1";
 
