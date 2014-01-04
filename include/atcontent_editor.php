@@ -9,12 +9,16 @@
             'post', 'side', 'high'
         );
 
+        /*
+
         add_meta_box(
             'atcontent_repost_metabox',
             __( 'AtContent Repost', 'atcontent_textdomain' ),
             'atcontent_inner_repost_box',
             'post'
         );
+
+        // */
 
         /*
         $version = get_bloginfo('version');
