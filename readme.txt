@@ -1,7 +1,7 @@
 ﻿=== AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
-Tags: statistics, tracking, post, widget, Post, plugin, admin, posts, sidebar, google, comments, page
+Tags: Post, posts, text, admin, widget, seo, repost, activity, community, multisite, notifications, profile
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: trunk
