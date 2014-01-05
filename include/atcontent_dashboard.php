@@ -43,6 +43,7 @@ function atcontent_dashboard_widget_function() {
 
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
         ?>
+<div style="position: relative">
 <div class="b-dashboard-brief">
             <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
                 <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
@@ -115,9 +116,13 @@ function atcontent_dashboard_widget_function() {
             });
         </script>
 <div class="clear"></div>
+<?php } ?>
+</div>
+<a href="https://atcontent.com/Studio/Statistics" target="_blank">
+<div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 100;">&nbsp;</div>
+</a>
+</div>
 <?php
-    }
-    echo "</div>";
     atcontent_ga("Dashboard", "WordPress Dashboard");
 }
 
