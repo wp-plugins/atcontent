@@ -6,8 +6,8 @@
 <form id="connect_form" method="post" action="<?php echo $form_action; ?>">
     <input type="hidden" name="atcontent_invite" value="Y">
 <div class="atcontent_invite">
-    <h1>AtContent is the easiest way to increase readership by 146% in just 3 month, improve SEO and get links back!</h1>
-	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">To start using the plugin, please</p>
+    <h1>AtContent is the easiest way to make your blog available for reposting and increase your audience by 152%!</h1>
+	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">Start using AtContent in a few clicks</p>
 	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         
