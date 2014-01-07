@@ -8,15 +8,22 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Make your posts available for promoting on other sites and double readership in just 3 months! Backlinks included, SEO & Google friendly.
+Make your blog posts available for reposting and increase your audience by 152%.
 
 
 == Description ==
-Let's face it - growing an audience is tough. How does AtContent make it easier?
-#### AtContent double readership in just 3 months by making your posts available for promoting! #### 
-* With AtContent others can repost your posts on any site as simple as retweet on Twitter. Every reposter provides you additional audience and backlinks. It increases your audience by 30% to 300% in just 3 months by using AtContent. [USE CASE](http://i.imgur.com/fXNgtC0.png). 
-* SEO & Google friendly - **COPY-PASTE PROTECTION, NO GOOGLE PENALTIES**. 
-* You also can repost relevant posts of other AtContent users on your blog. It increases your audience engagement and brings more traffic from Google. [SCREENSHOT](http://i.imgur.com/7qdsNQD.png). 
+#### Repost others' blog posts on your site and let others repost yours. Increase your audience by 152% in just 30 days! #### 
+* Get links back to your site from reposts. 
+* Repost content of other bloggers and increase user engagement on your site. 
+* Track how your audience grows. 
+
+#### With AtConetent everybody wins: #### 
+* Authors reach people on other sites and increase audiences by [860% in just 3 weeks.] (https://twitter.com/christine_cope/statuses/412073834557100032) 
+* Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
+* Readers get content they like on sites they already hang out.
+ 
+#### SEO & Google friendly ####
+* Copy-paste protection, **NO GOOGLE PENALTIES**
 
 #### Copy-paste protection with AtContent ####
 * You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
