@@ -18,7 +18,7 @@ Make your blog posts available for reposting and increase your audience by 152%.
 * Track how your audience grows. 
 
 #### With AtConetent everybody wins: #### 
-* Authors reach people on other sites and increase audiences by [860% in just 3 weeks.] (https://twitter.com/christine_cope/statuses/412073834557100032) 
+* Authors reach people on other sites and increase audiences by [860% in just 3 weeks.](https://twitter.com/christine_cope/statuses/412073834557100032) 
 * Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
 * Readers get content they like on sites they already hang out.
  
