@@ -12,7 +12,7 @@ Boost your audience 2.5x in 30 days by making your blog posts available for repo
 
 
 == Description ==
-AtContent is a cross-blogging and content distribution platform.
+[AtContent](https://atcontent.com) is a cross-blogging and content distribution platform.
 Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
 
 #### Repost others' blog posts on your site and let others repost yours. Increase your audience by 250% in just 30 days! #### 
