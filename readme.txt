@@ -8,11 +8,14 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Make your blog posts available for reposting and increase your audience by 152%.
+Boost your audience 2.5x in 30 days by making your blog posts available for reposting!
 
 
 == Description ==
-#### Repost others' blog posts on your site and let others repost yours. Increase your audience by 152% in just 30 days! #### 
+AtContent is a cross-blogging and content distribution platform.
+Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
+
+#### Repost others' blog posts on your site and let others repost yours. Increase your audience by 250% in just 30 days! #### 
 * Get links back to your site from reposts. 
 * Repost content of other bloggers and increase user engagement on your site. 
 * Track how your audience grows. 
