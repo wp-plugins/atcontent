@@ -3,6 +3,15 @@
     $currentuser = wp_get_current_user();
     $form_action = admin_url( 'admin.php?page=atcontent/connect.php' );
 ?>
+<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script>
+    window.CPlase_ga = window.CPlase_ga || [];
+                CPlase_ga.push({
+                    category: 'connectTab',
+                    action: 'opened',
+                    label: 'some one open connect tab'
+                });
+</script>
 <form id="connect_form" method="post" action="<?php echo $form_action; ?>">
     <input type="hidden" name="atcontent_invite" value="Y">
 <div class="atcontent_invite">

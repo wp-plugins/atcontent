@@ -93,31 +93,6 @@ var CPlase_ga;
         return f.contentWindow;
     };
 
-    CPlase_ga = (function () {
-        var iframeLoaded = false,
-            beforeLoadQueryStack = [],
-            origin = 'https://atcontent.com',
-            src = 'https://atcontent.com/Ajax/WordPress/Gateway.cshtml',
-            postMsg = new postMessage(createGateway({
-                src: src,
-                onload: function () {
-                    iframeLoaded = true;
-                    for (var i in beforeLoadQueryStack) postMsg.send(beforeLoadQueryStack[i], origin);
-                    beforeLoadQueryStack = [];
-                }
-            }), src);
-    
-        return function (params) {
-            try {
-                var _str_params = JSON.stringify(params);
-            } catch (e) {
-                return;
-            }
-            if (iframeLoaded) postMsg.send(_str_params, origin);
-            else beforeLoadQueryStack.push(_str_params);
-        };
-    })();
-
     if (typeof JSON === 'undefined') {
         window.JSON = {
             parse: function (text) {
@@ -212,4 +187,38 @@ var CPlase_ga;
             return this;
         }
     };
+    
+    var requests;
+    events.add(window, 'load', function () {
+        requests = CPlase_ga || [];
+        CPlase_ga = (function () {
+            var iframeLoaded = false,
+                beforeLoadQueryStack = [],
+                origin = 'https://atcontent.com',
+                src = 'https://atcontent.com/Ajax/WordPress/Gateway.cshtml',
+                postMsg = new postMessage(createGateway({
+                    src: src,
+                    onload: function () {
+                        iframeLoaded = true;
+                        for (var i in beforeLoadQueryStack) postMsg.send(beforeLoadQueryStack[i], origin);
+                        beforeLoadQueryStack = [];
+                    }
+                }), src);
+        
+            return {
+                push: function (params) {
+                    try {
+                        var _str_params = JSON.stringify(params);
+                    } catch (e) {
+                        return;
+                    }
+                    if (iframeLoaded) postMsg.send(_str_params, origin);
+                    else beforeLoadQueryStack.push(_str_params);
+                }
+            };
+        })();
+        for (var i in requests) {
+            CPlase_ga.push(requests[i]);
+        }
+    });
 })();
