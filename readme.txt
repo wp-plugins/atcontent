@@ -12,7 +12,7 @@ Boost your audience 2.5x in 30 days by making your blog posts available for repo
 
 
 == Description ==
-[AtContent](https://atcontent.com) is a cross-blogging and content distribution platform.
+[AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform.
 Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
 
 #### Repost others' blog posts on your site and let others repost yours. Increase your audience by 250% in just 30 days! #### 
@@ -21,7 +21,7 @@ Once you started using AtContent you are able to repost blog posts of others on 
 * Track how your audience grows. 
 
 #### With AtConetent everybody wins: #### 
-* Authors reach people on other sites and increase audiences by [860% in just 3 weeks](https://twitter.com/christine_cope/statuses/412073834557100032) 
+* Authors reach people on other sites and increase audiences by [860% in just 3 weeks](http://bit.ly/1didxf4) 
 * Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
 * Readers get content they like on sites they already hang out.
  
@@ -33,27 +33,27 @@ Once you started using AtContent you are able to repost blog posts of others on 
 Here are [EXAMPLE 1](http://bit.ly/1cSdcvs) and [EXAMPLE 2](http://bit.ly/1eII8jW) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
 
 #### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
-* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://i.imgur.com/4thlw5W.png)
+* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://bit.ly/1didyzB)
 
 #### Joining AtContent costs you nothing – the plugin is free. ####
 
 * With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
-* If you have several blogs and need a multiple system solution, please [contact us](https://atcontent.com/Landing/Bloggers#ContactForm).
+* If you have several blogs and need a multiple system solution, please [contact us](http://bit.ly/K8krqg).
 
 
 == Examples ==
 
-* **[Content Protection Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829694354F6.text)** — text is not available for copying, but everyone can click “Repost” at the bottom of the published content. This protects your content from copy-pasting.
-* **[Track & Statistics Demo example 1](http://test.ariser.ru/Stat/graph.html)**
-* **[Track & Statistics Demo example 2](http://test.ariser.ru/Stat/)**
-* **[Premium Content Demo example](http://smpl1.azurewebsites.net/TechCrunch/Default.cshtml?id=879168829469878VP.text)**
-* **[Comments Demo example](https://atcontent.com/EmbedTour/#Comments)**
+* **[Content Protection Demo example](http://bit.ly/KJ819r)** — text is not available for copying, but everyone can click “Repost” at the bottom of the published content. This protects your content from copy-pasting.
+* **[Track & Statistics Demo example 1](http://bit.ly/1aJWgpb)**
+* **[Track & Statistics Demo example 2](http://bit.ly/1aJWjkZ)**
+* **[Premium Content Demo example](http://bit.ly/1ks54Ki)**
+* **[Comments Demo example](http://bit.ly/1hzlqPg)**
 
 == Installation ==
 
 1. Install the plugin on your blog and activate it,
-2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://i.imgur.com/7lpI36f.png),
-3. Choose options and click “Apply Main Settings” - [Screenshot](http://i.imgur.com/Av8sNnu.png).
+2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://bit.ly/1abFMGq),
+3. Choose options and click “Apply Main Settings” - [Screenshot](http://bit.ly/1eurZNA).
 
 
 **1, 2, 3: You're done!**
@@ -72,7 +72,7 @@ If anyone of your readers wants to get your article on his own site, he/she need
 = I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
 
 AtContent settings are different for each user in WordPress blog. If you have two different users in your blog you should setup API Key for each user separately. And posts from each author will be in different AtContent accounts.
-If you have "guest" posts on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://i.imgur.com/ZFzZc.png)
+If you have "guest" posts on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://bit.ly/1bV0GZT)
 
 == Screenshots ==
 
