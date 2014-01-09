@@ -1,15 +1,20 @@
 <?php 
     $ajax_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
+    $userinfo = get_userdata($currentuser -> ID);
     $form_action = admin_url( 'admin.php?page=atcontent/connect.php' );
+    $email = $userinfo -> user_email;
+    $site = $_SERVER['HTTP_HOST'];
 ?>
 <script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
 <script>
+    var email = '<?php echo $email?>';    
+    var site = '<?php echo $site?>';
     window.CPlase_ga = window.CPlase_ga || [];
                 CPlase_ga.push({
                     category: 'connectTab',
                     action: 'opened',
-                    label: 'some one open connect tab'
+                    label: site + '      ' + email
                 });
 </script>
 <form id="connect_form" method="post" action="<?php echo $form_action; ?>">
@@ -17,7 +22,7 @@
 <div class="atcontent_invite">
     <h1>AtContent is the easiest way to make your blog available for reposting and increase your audience by 152%!</h1>
 	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">Start using AtContent in a few clicks</p>
-	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
+	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>&email=<?php echo $email?>&site=<?php echo $site?>>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         
                     <div class="discl">
