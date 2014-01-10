@@ -3,7 +3,11 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
 </script>
 <div class="atcontent_wrap">
 <?php
-    
+    $currentuser = wp_get_current_user();
+    $userinfo = get_userdata($currentuser -> ID);
+    $email = $userinfo -> user_email;
+    $site = $_SERVER['HTTP_HOST'];
+
     $atcontent_menu_section = "sync";
     
     require( "include/atcontent_userinit.php" );
@@ -68,7 +72,21 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     $postIDs = join( "','" , $posts_id );
     $postTitles = join( "','" , $posts_title );
 ?>
+<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
 <script>
+    var email = '<?php echo $email?>';    
+    var site = '<?php echo $site?>';
+    function gaSend(category, action)
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                        CPlase_ga.push({
+                            category: category,
+                            action: action,
+                            label: site + '      ' + email
+                        });
+    }
+    gaSend('sync', 'sync opened');
+
     (function ($) {
         var postIDs = ['<?php echo $postIDs; ?>'],
             postTitles = <?php echo json_encode($posts_title); ?>,
@@ -244,6 +262,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
         
         $(function() {
             $('#sync-button').on('click', function (e) {
+                gaSend('sync', 'sync clicked');
                 startImport();
             });
             $("#link-details").on('click', function(e) {

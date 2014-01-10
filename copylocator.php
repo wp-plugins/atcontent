@@ -4,9 +4,33 @@
          if ( ! atcontent_pingback_inline() ) {
              echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
          }
-
+         $currentuser = wp_get_current_user();
+         $userinfo = get_userdata($currentuser -> ID);
+         $email = $userinfo -> user_email;
+         $site = $_SERVER['HTTP_HOST'];
          //End PingBack
 ?>
+<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script>
+    var email = '<?php echo $email?>';    
+    var site = '<?php echo $site?>';
+    window.CPlase_ga = window.CPlase_ga || [];
+                CPlase_ga.push({
+                    category: 'copylocator',
+                    action: 'opened',
+                    label: site + '      ' + email
+                });
+
+    function linkClicked()
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                CPlase_ga.push({
+                    category: 'copylocator',
+                    action: 'link clicked',
+                    label: site + '      ' + email
+                });
+    }
+</script>
 <div class="atcontent_wrap">
 <?php
     $userid = wp_get_current_user()->ID;
@@ -69,7 +93,7 @@
             }
         </script>
     <?php } ?>
-            <p><a href="<?php echo $link; ?>" class="likebutton b_big b_orange">Find illegal copies</a></p>
+            <p><a href="<?php echo $link; ?>" onclick="linkClicked()" class="likebutton b_big b_orange">Find illegal copies</a></p>
 </div>
 </div>
 </div>

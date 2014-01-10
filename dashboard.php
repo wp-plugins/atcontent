@@ -8,7 +8,37 @@
 <script>window.location = '<?php echo $connect_url; ?>';</script>
         <?php
     }
+    $currentuser = wp_get_current_user();
+    $userinfo = get_userdata($currentuser -> ID);
+    $email = $userinfo -> user_email;
+    $site = $_SERVER['HTTP_HOST'];
 ?>
+<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script>
+    var email = '<?php echo $email?>';    
+    var site = '<?php echo $site?>';
+    gaSend('dashboard', 'opened');
+
+    function gaSend(category, action)
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                        CPlase_ga.push({
+                            category: category,
+                            action: action,
+                            label: site + '      ' + email
+                        });
+    }
+
+    function upgradePlanClick()
+    {
+        gaSend('dashboard', 'upgrade plan clicked');
+    }
+
+    function getDetailsClick()
+    {
+        gaSend('dashboard', 'get details clicked');
+    }
+</script>
 <div class="atcontent_wrap">
     <div class="wrap">
         <div class="icon32" id="icon-index"><br></div><h2>AtContent Dashboard</h2>
@@ -60,7 +90,7 @@ END;
 ?>                    
                 </table>
 <?php if ( $quotas_result["IsOK"] == true && count( $quotas_result["Subscriptions"] ) > 0 ) { ?>
-                <p style="text-align: right;padding-right:10px;"><a href="https://atcontent.com/Subscribe/" target="_blank">Upgrade to a bigger plan here</a></p>
+                <p style="text-align: right;padding-right:10px;"><a href="https://atcontent.com/Subscribe/" target="_blank" onclick="upgradePlanClick()">Upgrade to a bigger plan here</a></p>
 <?php } ?>
             </div>
 <?php if ( $quotas_result["IsOK"] == true && count( $quotas_result["Quotas"] ) > 0 ) {  ?>
@@ -132,7 +162,7 @@ END;
                 <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                     views on your blog
                 </div>
-                <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
+                <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank" onclick="getDetailsClick()">Get details</a></p>
             </div>
             <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                 <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
@@ -201,7 +231,7 @@ END;
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/settings.php" ); ?>">Adjust plugin settings</a></li>
                 <li><a href="<?php echo admin_url( "admin.php?page=atcontent/sync.php" ); ?>">Sync my blog posts</a></li>
                 <?php if ( user_can( $userid, "publish_posts" ) ) { ?>
-                <li><a href="https://atcontent.com/Subscribe/" target="_blank">Choose a subscription plan</a></li>
+                <li><a href="https://atcontent.com/Subscribe/" target="_blank" onclick="upgradePlanClick()">Choose a subscription plan</a></li>
                 <?php } ?>
             </ul>
     

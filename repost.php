@@ -35,7 +35,37 @@
     }
     //End PingBack
 
-?>         
+    $currentuser = wp_get_current_user();
+    $userinfo = get_userdata($currentuser -> ID);
+    $email = $userinfo -> user_email;
+    $site = $_SERVER['HTTP_HOST'];
+?>
+<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script>
+    var email = '<?php echo $email?>';    
+    var site = '<?php echo $site?>';
+    gaSend('repost', 'opened','');
+
+    function gaSend(category, action, p)
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                        CPlase_ga.push({
+                            category: category,
+                            action: action,
+                            label: site + '      ' + email + '      ' + p
+                        });
+    }
+
+    function submitClick()
+    {
+        gaSend('repost', 'submit my posts clicked', '');
+    }
+
+    function repostClick(p)
+    {
+        gaSend('repost', 'repost clicked', p);
+    }
+</script>      
 <div class="atcontent_wrap">
 
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
@@ -131,7 +161,7 @@ $email_body = "Hey AtContent team, \n" .
 
 <a href="mailto:mail@atcontent.com?subject=<?php
 	echo str_replace('+', '%20', urlencode($email_subject)); ?>&body=<?php
-	echo str_replace('+', '%20', urlencode($email_body)); ?>" class="likebutton b_green">Submit my Posts</a><br>
+	echo str_replace('+', '%20', urlencode($email_body)); ?>" onclick="submitClick()" class="likebutton b_green">Submit my Posts</a><br>
 <br>
 <small>
 
@@ -176,6 +206,7 @@ $email_body = "Hey AtContent team, \n" .
         });
 
         window.repost_post = function(p) {
+            repostClick(p);
             var btn = document.getElementById('acRepostBtn' + p);
             btn.href = "javascript:";
             btn.innerHTML = "Reposting...";
