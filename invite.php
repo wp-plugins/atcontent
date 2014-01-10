@@ -12,7 +12,7 @@
     var site = '<?php echo $site?>';
     window.CPlase_ga = window.CPlase_ga || [];
                 CPlase_ga.push({
-                    category: 'connectTab',
+                    category: 'connectTab <?php echo AC_VERSION?>',
                     action: 'opened',
                     label: site + '      ' + email
                 });
@@ -22,7 +22,7 @@
 <div class="atcontent_invite">
     <h1>AtContent is the easiest way to make your blog available for reposting and increase your audience by 152%!</h1>
 	<p style="font-size: 1.6em; margin: 1em 0px 0.5em;">Start using AtContent in a few clicks</p>
-	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>&email=<?php echo $email?>&site=<?php echo $site?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
+	<iframe id="ac_connect" src="http://atcontent.com/Auth/WordPressConnect/?ping_back=<?php echo $ajax_action ?>&email=<?php echo $email?>&site=<?php echo $site?>&version=<?php echo AC_VERSION?>" style="width:302px;height:50px;" frameborder="0" scrolling="no"></iframe>
    <hr />
         
                     <div class="discl">

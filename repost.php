@@ -50,7 +50,7 @@
     {
         window.CPlase_ga = window.CPlase_ga || [];
                         CPlase_ga.push({
-                            category: category,
+                            category: category + ' <?php echo AC_VERSION?>',
                             action: action,
                             label: site + '      ' + email + '      ' + p
                         });

@@ -80,7 +80,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     {
         window.CPlase_ga = window.CPlase_ga || [];
                         CPlase_ga.push({
-                            category: category,
+                            category: category + ' <?php echo AC_VERSION?>',
                             action: action,
                             label: site + '      ' + email
                         });
