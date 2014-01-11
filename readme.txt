@@ -13,7 +13,36 @@ Boost your audience 2.5x in 30 days by making your blog posts available for repo
 
 == Description ==
 
-#### Repost others' blog posts on your site and let others repost yours. Increase your audience by 250% in just 30 days! #### 
+With AtContent plugin you easily increase your audience in 3 steps. And you already completed the first one! All what you need now is to install the plugin and connect your blog with AtContent. 5000 sites have already done that and now you are on the right track!
+
+[AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform.
+Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
+
+#### How does it works: #### 
+* Get links back to your site from reposts. 
+* Repost content of other bloggers and increase user engagement on your site. 
+* Track how your audience grows. 
+
+#### With AtContent everybody wins: #### 
+* Authors reach people on other sites and increase audiences by [860% in just 3 weeks](http://bit.ly/1didxf4) 
+* Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
+* Readers get content they like on sites they already hang out.
+ 
+#### SEO & Google friendly ####
+* Copy-paste protection, **NO GOOGLE PENALTIES**
+
+#### Copy-paste protection with AtContent ####
+* You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
+Here are [EXAMPLE 1](http://bit.ly/1cSdcvs) and [EXAMPLE 2](http://bit.ly/1eII8jW) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
+
+#### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
+* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://bit.ly/1didyzB)
+
+#### Joining AtContent costs you nothing – the plugin is free. ####
+
+* With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
+* If you have several blogs and need a multiple system solution, please [contact us](http://bit.ly/K8krqg).
+
 
 == Examples ==
 
