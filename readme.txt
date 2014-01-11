@@ -59,6 +59,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.3.9 =
+* Social poll by opinion stage compatibility resolved
+
 = 6.0.3 =
 
 * Administrator can connect blog contributors with his AtContent account!
