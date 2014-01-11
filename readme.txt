@@ -13,7 +13,7 @@ Boost your audience 2.5x in 30 days by making your blog posts available for repo
 
 == Description ==
 
-With AtContent plugin you easily increase your audience in 3 steps. And you already completed the first one! All what you need now is to install the plugin and connect your blog with AtContent. 5000 sites have already done that and now you are on the right track!
+With AtContent plugin you easily increase your audience in 3 steps. And you already completed the first one! All what you need now is to install the plugin and connect your blog with AtContent. 5,000 sites have already increased their audiences by 2.5x via AtContent and now you can join them!
 
 [AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform.
 Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
