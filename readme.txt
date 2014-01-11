@@ -21,7 +21,7 @@ Once you started using AtContent you are able to repost blog posts of others on 
 #### How does it works: #### 
 * Get links back to your site from reposts. 
 * Repost content of other bloggers and increase user engagement on your site. 
-* Track how your audience grows. 
+* Track how your audience [grows](http://bit.ly/Kcvui4)
 
 #### With AtContent everybody wins: #### 
 * Authors reach people on other sites and increase audiences by [860% in just 3 weeks](http://bit.ly/1didxf4) 
