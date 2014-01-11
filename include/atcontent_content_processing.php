@@ -1,4 +1,4 @@
-<?php
+﻿<?php
      function atcontent_the_content( $content = '' ) {
     
         global $post, $wp_current_filter, $currentNumPost_ac;
@@ -228,6 +228,22 @@ CPlase.l('http://www.ebible.com/assets/verselink/ebible.verselink.js');
 END;
             }
             //End eBible
+
+            //opinion stage
+            if (defined('OPINIONSTAGE_SERVER_BASE'))
+            {
+                $ac_script_init .= <<<END
+
+                var divs = document.querySelectorAll('div[id *= debate]');
+                if (divs.length != 0)
+                {
+                    id = '';
+                    divs.forEach(function (div) { var divId = div.id.split('_')[2]; if (divId != null && divId.length > 6) {id = divId; }})
+                    CPlase.l('http://www.opinionstage.com/polls/'+ id +'/embed.js');
+                }
+END;
+            }
+            //end opinion stage
 
             //Lightbox Plus ColorBox
             if ( class_exists( 'wp_lightboxplus' ) ) {
