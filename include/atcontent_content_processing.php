@@ -244,7 +244,20 @@ END;
 END;
             }
             //end opinion stage
-
+			
+			//poll daddy
+			if (defined('WP_POLLDADDY__CLASS'))
+            {
+                $ac_script_init .= <<<END
+                var div = document.querySelector('div[id ^= PDI_container][class = PDS_Poll]');
+                if (div != null){
+                    var id = div.id.replace('PDI_container','');
+                    CPlase.l('http://static.polldaddy.com/p/' + id + '.js');
+                }
+END;
+            }
+			//poll daddy end
+			
             //Lightbox Plus ColorBox
             if ( class_exists( 'wp_lightboxplus' ) ) {
                 global $wp_lightboxplus;

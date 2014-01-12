@@ -10,26 +10,28 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Boost your audience 2.5x in 30 days by making your blog posts available for reposting!
 
-
 == Description ==
 
 With AtContent plugin you easily increase your audience in 3 steps. And you already completed the first one! All what you need now is to install the plugin and connect your blog with AtContent. 5,000 sites have already increased their audiences by 2.5x via AtContent and now you can join them!
 
+#### What is AtContent #### 
+
 [AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform.
 Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
 
-#### How does it works: #### 
-* Get links back to your site from reposts. 
+#### What are benefits of AtContent: #### 
+* You get links back to your site from reposts. 
 * Repost content of other bloggers and increase user engagement on your site. 
 * Track how your audience [grows](http://bit.ly/Kcvui4)
 
 #### With AtContent everybody wins: #### 
-* Authors reach people on other sites and increase audiences by [860% in just 3 weeks](http://bit.ly/1didxf4) 
+* You reach people on other sites and increase audiences. Sometimes by [860% in just 3 weeks](http://bit.ly/1didxf4) !
 * Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
 * Readers get content they like on sites they already hang out.
  
 #### SEO & Google friendly ####
 * Copy-paste protection, **NO GOOGLE PENALTIES**
+* Increase SEO because of links back to an original source.
 
 #### Copy-paste protection with AtContent ####
 * You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
@@ -87,6 +89,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
+
+= 6.3.10 =
+* Polldaddy Polls & Ratings compatibility resolved
 
 = 6.3.9 =
 * Social poll by opinion stage compatibility resolved
