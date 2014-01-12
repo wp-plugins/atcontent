@@ -1,4 +1,4 @@
-﻿<?php
+<?php
      function atcontent_the_content( $content = '' ) {
     
         global $post, $wp_current_filter, $currentNumPost_ac;
