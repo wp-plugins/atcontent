@@ -1,4 +1,4 @@
-﻿=== AtContent Plugin ===
+=== AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
 Tags: Post,posts,text,admin,widget,seo,repost,activity,community,multisite,notifications,profile,statistics,stats,views,monitor,page,popular posts,related posts,shortcode,shortcodes,api,google,search engine optimization,wordpress seo,plugin 
