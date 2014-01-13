@@ -45,7 +45,8 @@
     var email = '<?php echo $email?>';    
     var site = '<?php echo $site?>';
     gaSend('repost', 'opened','');
-
+	var connected = true;
+	
     function gaSend(category, action, p)
     {
         window.CPlase_ga = window.CPlase_ga || [];
@@ -71,6 +72,9 @@
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
     <?php include("invite.php"); ?>
     <hr />
+	<script>
+		connected = false;
+	</script>
     <br>
 <?php } ?>
 <div class="wrap">
@@ -200,35 +204,48 @@ $email_body = "Hey AtContent team, \n" .
                 hdl.html('<a href="http://p.atcontent.com/' + p + '/">' + hdl.html() + '</a>');
                 var o = $(document.getElementById('CPlase_' + p + '_' + w + '_panel'));
                 if (!o.prev('.CPlase_publicationLink').size()) {
-                    o.before('<div style="margin: 1em 0 0" class="CPlase_publicationLink"><a id="acRepostBtn' + p + '" class="likebutton b_orange" href="javascript:repost_post(\'' + p + '\');">Repost to my blog</a></div>');
-                }
+					o.before('<div style="margin: 1em 0 0" class="CPlase_publicationLink"><a id="acRepostBtn' + p + '" class="likebutton b_orange" href="javascript:repost_post(\'' + p + '\');">Repost to my blog</a></div>');
+				}
             });
         });
 
+		function connect_error(p) {
+			var btn = document.getElementById('acRepostBtn' + p);
+			$(btn).parent().html('<div class="update-nag">Please connect your blog with AtContent</div>');
+			gaSend('repost', 'not connected repost clicked', '');
+		}
+		
         window.repost_post = function(p) {
-            repostClick(p);
-            var btn = document.getElementById('acRepostBtn' + p);
-            btn.href = "javascript:";
-            btn.innerHTML = "Reposting...";
-            $(btn).removeClass("b_orange").addClass("b_white");
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
-                type: 'post',
-                data: {
-                        action: 'atcontent_repost',
-                        ac_post: p
-                      },
-                dataType: "json",
-                success: function(d){
-                    if (d.IsOK) {
-                        $(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
-                    }
-                },
-                error: function(d, s, e) {
-                    btn.innerHTML = "Repost to my blog";
-                    btn.href = "javascript:repost_post('" + p + "');";
-                    $(btn).addClass("b_orange").removeClass("b_white");
-                }
-            });
+			if (connected)
+			{
+				repostClick(p);
+				var btn = document.getElementById('acRepostBtn' + p);
+				btn.href = "javascript:";
+				btn.innerHTML = "Reposting...";
+				$(btn).removeClass("b_orange").addClass("b_white");
+				$.ajax({url: '<?php echo $ajax_form_action; ?>',
+					type: 'post',
+					data: {
+							action: 'atcontent_repost',
+							ac_post: p
+						  },
+					dataType: "json",
+					success: function(d){
+						if (d.IsOK) {
+							$(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
+						}
+					},
+					error: function(d, s, e) {
+						btn.innerHTML = "Repost to my blog";
+						btn.href = "javascript:repost_post('" + p + "');";
+						$(btn).addClass("b_orange").removeClass("b_white");
+					}
+				});
+			}
+			else
+			{
+				connect_error(p);
+			}
         }
     })(jQuery);
 </script>
@@ -254,4 +271,5 @@ $email_body = "Hey AtContent team, \n" .
 </p>
 
 </div>
+
 <?php atcontent_ga("RepostTab", "Repost page"); ?>

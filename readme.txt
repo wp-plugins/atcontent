@@ -33,19 +33,6 @@ Once you started using AtContent you are able to repost blog posts of others on 
 * Copy-paste protection, **NO GOOGLE PENALTIES**
 * Increase SEO because of links back to an original source.
 
-#### Copy-paste protection with AtContent ####
-* You can be sure you will not get penalties from Google if anyone copies your posts, because with AtContent nobody can do it! 
-Here are [EXAMPLE 1](http://bit.ly/1cSdcvs) and [EXAMPLE 2](http://bit.ly/1eII8jW) —  nobody can copy-paste this post, but anyone can legally repost it by clicking “Repost” at the bottom of the article.
-
-#### AtContent analytics – imagine you have Google analytics for all your posts distributed across tens and hundreds of sites!  ####
-* You can see detailed statistics, such as sites your posts were reposted on, amount of views and traffic from social networks. [SCREENSHOT](http://bit.ly/1didyzB)
-
-#### Joining AtContent costs you nothing – the plugin is free. ####
-
-* With AtContent you don't just become a better blogger, you start to use a new digital content standard and enter into a new era of the Internet where content is distributed across hundreds of sites and still managed by the owner. And you are a part of this future – unbelievable!
-* If you have several blogs and need a multiple system solution, please [contact us](http://bit.ly/K8krqg).
-
-
 == Examples ==
 
 * **[Content Protection Demo example](http://bit.ly/KJ819r)** — text is not available for copying, but everyone can click “Repost” at the bottom of the published content. This protects your content from copy-pasting.
@@ -89,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
+
+= 6.3.11 =
+* Repost and connect page update
 
 = 6.3.10 =
 * Polldaddy Polls & Ratings compatibility resolved
