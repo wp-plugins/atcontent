@@ -1,7 +1,7 @@
 === AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
-Tags: Post,posts,text,admin,widget,seo,repost,activity,community,multisite,notifications,profile,statistics,stats,views,monitor,page,popular posts,related posts,shortcode,shortcodes,api,google,search engine optimization,wordpress seo,plugin 
+Tags: Post,posts,text,admin,administration,widget,widgets,seo,repost,activity,community,multisite,notifications,profile,statistics,stats,views,monitor,page,popular posts,related posts,shortcode,shortcodes,api,google,search engine optimization,wordpress seo,plugin,premium support 
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: trunk
