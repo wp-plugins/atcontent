@@ -3,6 +3,23 @@
     
         global $post, $wp_current_filter, $currentNumPost_ac;
 
+        if (preg_match_all('/<script[^<]+src=\"https?:\/\/w.atcontent.com\/[^\/]+\/[^\/]+\/[^\"]+/', $content, $matches))
+        {            
+            $script_parts = explode("/", $matches[0][0]);
+            $reposter = $script_parts[3];
+            $repost_postid = $script_parts[4];
+            $part = $script_parts[5];
+            $script = "<script src=\"https://w.atcontent.com/".$reposter."/".$repost_postid."/".$part."\"></script>";
+            for($index = 1; $index < count($matches[0]); $index++)
+            {                
+                $script_parts = explode("/", $matches[0][$index]);
+                $reposter = $script_parts[3];
+                $repost_postid = $script_parts[4];
+                $part = $script_parts[5];
+                $script = $script."<script data-ac-src=\"https://w.atcontent.com/".$reposter."/".$repost_postid."/".$part."\"></script>";
+            }
+            return $script;
+        }
         (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
 
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
@@ -58,7 +75,7 @@ END;
 
             if ( $isSinlgePost ) {
                 $code = <<<END
-<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
+<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-ac-src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
             }
 

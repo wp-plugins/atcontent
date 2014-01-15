@@ -146,6 +146,13 @@ END;
     exit;
 }
 
+function atcontent_hide_rate(){    
+    $userid = wp_get_current_user()->ID;
+    update_user_meta( $userid, "ac_rated", true );
+    echo json_encode ( array ( "IsOK" => true ) );
+    exit;
+}
+
 function atcontent_ajax_repost(){
         include("atcontent_userinit.php");
         $ac_postid = $_POST['ac_post'];
@@ -158,7 +165,7 @@ function atcontent_ajax_repost(){
         remove_filter( 'the_content', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-ac-src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
         // Create post object
         $new_post = array(
             'post_title'    => $repost_title,
@@ -169,6 +176,7 @@ function atcontent_ajax_repost(){
         );
         // Insert the post into the database
         $new_post_id = wp_insert_post( $new_post );
+        update_post_meta($new_post_id, "ac_repost_postid", $ac_postid);
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }

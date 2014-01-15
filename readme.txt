@@ -77,6 +77,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.3.12 =
+* Widget speed increased
+
 = 6.3.11 =
 * Repost and connect page update
 

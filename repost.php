@@ -66,9 +66,26 @@
     {
         gaSend('repost', 'repost clicked', p);
     }
+
+    (function ($) {
+        $(function () {
+            $(".hide").click(function() { hide(); });
+        });
+
+        function hide()
+        {
+            document.getElementById('rate-block').style.visibility = 'hidden';
+            $.ajax({url: '<?php echo $ajax_form_action; ?>',
+			    type: 'post',
+			    data: {
+					    action: 'atcontent_hide_rate',
+					    },
+			    dataType: "json"
+		    });  
+        }      
+    })(jQuery);
 </script>      
 <div class="atcontent_wrap">
-
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
     <?php include("invite.php"); ?>
     <hr />
@@ -76,12 +93,44 @@
 		connected = false;
 	</script>
     <br>
-<?php } ?>
+<?php } else
+ {
+    $rated = get_user_meta($userid, "ac_rated", true );
+    $hide_form_action = "include/rate-hide.php";
+    $usermeta = atcontent_api_get_userinfo($ac_api_key); 
+    $unix_user_created = strtotime ($usermeta["UserCreated"]);
+    $unix_now = strtotime("now");
+    $days_diff = ($unix_now-$unix_user_created)/(60*60*24);    
+    if (false && $unix_user_created>0 && $days_diff > 30 && $rated != 1)
+    {
+        ?>
+        
+            <div id="rate-block" class="rate-hidden b-note success">
+                If you like AtContent plugin, then please take a minute and rate it. Thanks for your support! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="hide" href="http://wordpress.org/support/view/plugin-reviews/atcontent#postform" target="_blank">Rate now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="hide" href="#">No, thanks</a> 
+            </div>
+        <?php        
+    }    
+ }
+ 
+ ?>
 <div class="wrap">
     <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
 </div>
     <br><br>
     <style>
+    .rate-hidden {
+        width: 60%;
+        margin-left: 20%;
+        font-size: larger;
+        padding-left: 30px;
+    }
+
+        .rate-hidden:after {
+            content: ''!important;
+        }
+        
     .contentColumns:after {
         clear: both;
         content: "";
@@ -209,7 +258,7 @@ $email_body = "Hey AtContent team, \n" .
             });
         });
 
-		function connect_error(p) {
+        function connect_error(p) {
 			var btn = document.getElementById('acRepostBtn' + p);
 			$(btn).parent().html('<div class="update-nag">Please connect your blog with AtContent</div>');
 			gaSend('repost', 'not connected repost clicked', '');
