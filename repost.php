@@ -75,6 +75,7 @@
         function hide()
         {
             document.getElementById('rate-block').style.visibility = 'hidden';
+            document.getElementById('popup-bg').style.visibility = 'hidden';
             $.ajax({url: '<?php echo $ajax_form_action; ?>',
 			    type: 'post',
 			    data: {
@@ -101,15 +102,21 @@
     $unix_user_created = strtotime ($usermeta["UserCreated"]);
     $unix_now = strtotime("now");
     $days_diff = ($unix_now-$unix_user_created)/(60*60*24);    
-    if (false && $unix_user_created>0 && $days_diff > 30 && $rated != 1)
+    if ($unix_user_created > 0 && $days_diff > 30 && $rated != 1)
     {
         ?>
-        
-            <div id="rate-block" class="rate-hidden b-note success">
-                If you like AtContent plugin, then please take a minute and rate it. Thanks for your support! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="hide" href="http://wordpress.org/support/view/plugin-reviews/atcontent#postform" target="_blank">Rate now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="hide" href="#">No, thanks</a> 
-            </div>
+        <div id="popup-bg" class="popup-bg">
+        </div>
+        <div id="rate-block" class="rate-hidden">
+            <p class="hide close-ico">&times;</p>
+            <h1>Like AtContent plugin?</h1>
+            <p>Please take a minute and rate it. Thanks for your support!</p>
+            <img class="stars" src="/wp-content/plugins/atcontent/assets/stars.png" />
+            <p>                
+                <a class="hide likebutton b_green b_big" style="margin-bottom:15px;" href="http://wordpress.org/support/view/plugin-reviews/atcontent#postform" target="_blank">Rate now</a><br>
+                <a class="hide dashed" style="font-size: 18px;" href="#">No, thanks</a>
+            </p>
+        </div>
         <?php        
     }    
  }
@@ -120,17 +127,49 @@
 </div>
     <br><br>
     <style>
-    .rate-hidden {
-        width: 60%;
-        margin-left: 20%;
-        font-size: larger;
-        padding-left: 30px;
+    .popup-bg {
+        background-color: #000;
+        opacity: 0.7;
+        position: fixed;
+        z-index: 200;
+        top: 0;
+        left: -20px;
+        right: 0;
+        bottom: 0;
     }
-
-        .rate-hidden:after {
-            content: ''!important;
+        
+        .close-ico{
+            position: absolute;
+            top: -20px;
+            right: 0px;
+            font-size: 44px!important;
+            margin: 15px;
+            font-weight: 900;
+            
         }
         
+        .close-ico:hover{
+            cursor: pointer;
+        }
+        
+    .rate-hidden {
+        background: #fff;
+        width: 40%;
+        margin-left: 30%;
+        font-size: larger;
+        text-align: center;
+        position: absolute;
+        top: 300px;
+        z-index: 201;
+    }
+        .rate-hidden > p {
+            font-size: large;
+        }
+        
+        .stars{
+            width: 30%;
+        }
+    
     .contentColumns:after {
         clear: both;
         content: "";
