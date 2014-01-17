@@ -1,7 +1,7 @@
 === AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
-Tags: Post,posts,text,admin,administration,widget,widgets,seo,repost,activity,community,multisite,notifications,profile,statistics,stats,views,monitor,page,popular posts,related posts,shortcode,shortcodes,api,google,search engine optimization,wordpress seo,plugin,premium support 
+Tags: ad, admin, administration, ads, advertising, affiliate, AJAX, analytics, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, button, calendar, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, e-commerce, ecommerce, edit, editor, email, embed, event, events,  feed, feeds, filter, form, Formatting, free, gallery, google, html, image, images, integration, language, Like, link, links, list, login, mail, manage, media, menu, meta, mobile, multisite, navigation, network, News, newsletter, notification, page, pages, password, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, register, registration, related, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, statistics, stats, Style, tag, tags, template, text, theme, themes, thumbnail, title, tracking, upload, url, user, users, video, widget, widgets, wordpress, plagiarism, anti-plagiarism, AtContent, syndication, web
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: trunk
@@ -76,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
+
+= 6.3.14 =
+* Repost bug fixed
 
 = 6.3.13 =
 * Repost and connect page update

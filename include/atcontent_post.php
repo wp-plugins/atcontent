@@ -42,6 +42,7 @@ function atcontent_publish_publication( $post_id ){
 
             $testcontent = apply_filters( "the_content",  $post->post_content );
             $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
+            $testcontent .= $post -> post_content;
 
             if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
                 update_post_meta( $post_id, "ac_is_process", "2" );

@@ -105,6 +105,9 @@
     if ($unix_user_created > 0 && $days_diff > 30 && $rated != 1)
     {
         ?>
+        <script>
+            gaSend('repost', 'rate us showed', '');
+        </script>
         <div id="popup-bg" class="popup-bg">
         </div>
         <div id="rate-block" class="rate-hidden">
