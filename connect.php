@@ -93,7 +93,7 @@
         foreach ( $users as $user ) {
             if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) $additionalUsersCount += 1;
         }
-        if ( $additionalUsersCount > 1 && user_can( $currentuser->ID, "manage_options" ) ) {
+        if ( $additionalUsersCount > 0 && user_can( $currentuser->ID, "manage_options" ) ) {
 ?>
     <div class="connect_right">
         <form action="" method="post" name="updateconnect-form" id="updateconnect-form">
