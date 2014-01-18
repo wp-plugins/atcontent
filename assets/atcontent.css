@@ -1,0 +1,529 @@
+@font-face {
+    font-family: "wf_SegoeUILight";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Segoe UI Light"), local("Segoe WP Light"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.eot?#iefix") format("embedded-opentype"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.woff") format("woff"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.ttf") format("truetype"), url("http://microsoft.com/fonts/Segoe-UI/West-European/Light/latest.svg#web") format("svg");
+}
+@font-face {
+    font-family: "wf_SegoeUI";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Segoe UI"), local("Segoe"), local("Segoe WP"), url("/fonts/Segoe-UI/West-European/Normal/latest.eot?#iefix") format("embedded-opentype"), url("/fonts/Segoe-UI/West-European/Normal/latest.woff") format("woff"), url("/fonts/Segoe-UI/West-European/Normal/latest.ttf") format("truetype"), url("/fonts/Segoe-UI/West-European/Normal/latest.svg#web") format("svg");
+}
+.atcontent_wrap {
+    font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 10pt;
+    margin-right: 20px;
+}
+.atcontent_invite{
+    width: 860px;
+    margin:0px auto;
+    text-align:center;
+}
+.atcontent_invite.footer {
+    width: 860px;
+    margin: 0 auto;
+    text-align:center;
+}
+.invite_left {
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    width: 490px;
+    *zoom: 1;
+}
+.invite_right {
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    width: 302px;
+    *zoom: 1;
+}
+.connect_left {
+    display: inline-block;
+    *display: inline;
+    vertical-align: top;
+    width: 490px;
+    *zoom: 1;
+}
+.connect_right {
+    display: inline-block;
+    *display: inline;
+    vertical-align: top;
+    width: 302px;
+    *zoom: 1;
+}
+.atcontent_invite h1{
+    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-weight: normal;
+    line-height: 1.4em;
+}
+.atcontent_wrap h2{
+    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-weight: normal;
+}
+.atcontent_wrap h3{
+    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";    
+}
+.atcontent_wrap hr{
+height: 1px;
+border: none;
+color: #c9c9c9;
+background: #c9c9c9;
+margin: 0;
+float: left; 
+width: 100%; 
+}
+/*.atcontent_wrap hr:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}*/
+.atcontent_invite hr{
+    /*width: 640px;*/
+    margin: 20px 0;
+}
+.atcontent_invite table {text-align: left; border: 0;}
+.atcontent_invite table td {vertical-align: top;}
+.atcontent_invite .discl {font-size: 1.3em; line-height: normal; color: #7d7d7d;margin-bottom: 40px;}
+
+button {
+    border: medium none;
+    cursor: pointer;
+    font: 16px/2em "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    padding: 0 1em;
+    position: relative;
+    text-align: left;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
+}
+button:active, a.likebutton:active {
+    top: 1px;
+}
+.likebutton {
+    -moz-box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font: 16px/2em "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    padding: 0 1em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
+    -webkit-transition: background-color .2s;
+            transition: background-color .2s;
+}
+button.button-size-small, .likebutton.b_small {
+    font-size: 12px;
+}
+button.button-size-big, .likebutton.b_big {
+    font-size: 25px;
+}
+button.button-size-large, .likebutton.b_large {
+    font-size: 48px;
+}
+button.button-color-green, .likebutton.b_green {
+    background: none repeat scroll 0 0 #36AE1E;
+    color: #FFFFFF !important;
+}
+button.button-color-green:hover, .likebutton.b_green:hover, .qq-upload-button-hover .likebutton.b_green {
+    background: none repeat scroll 0 0 #4CCA33;
+}
+button.button-color-green:active, .likebutton.b_green:active {
+    background: none repeat scroll 0 0 #24960E;
+}
+button.button-color-green[disabled], .likebutton.b_green.disabled {
+    background: none repeat scroll 0 0 #4CCA33 !important;
+}
+button.button-color-orange, .likebutton.b_orange {
+    background: none repeat scroll 0 0 #EE8900;
+    color: #FFFFFF !important;
+}
+button.button-color-orange:hover, .likebutton.b_orange:hover, .qq-upload-button-hover .likebutton.b_orange {
+    background: none repeat scroll 0 0 #F5A200;
+}
+button.button-color-orange:active, .likebutton.b_orange:active {
+    background: none repeat scroll 0 0 #E76D00;
+}
+button.button-color-orange[disabled], .likebutton.b_orange.disabled {
+    background: none repeat scroll 0 0 #F5A200 !important;
+}
+button.button-color-white,
+.likebutton.b_white {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    color: #555 !important;
+    text-shadow: none !important;
+}
+
+button.button-color-white:hover,
+.likebutton.b_white:hover, .qq-upload-button-hover .likebutton.b_white {background: #f5f5f5}
+
+button.button-color-white[disabled],
+.likebutton.b_white.disabled {
+    background: #fff !important;
+    border-color: #ccc !important;
+}
+
+.atcontent_banner{
+    background: #b9f1fd; padding: 10px 20px;width: 400px;
+}
+.atcontent_banner textarea{
+    width: 100%;
+    height: 45px;
+    font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 10pt;
+}
+
+.ac_table_readership {
+    
+}
+.ac_table_readership td{
+    padding: 0 15pt;
+    text-align:right;
+}
+.ac_table_readership th{
+    font-size:10pt;
+    line-height:15pt;
+    padding: 0 15pt;
+    text-align: right;
+}
+.ac_table_readership tr{
+    font-size:50pt;line-height:50pt;
+}
+.ac_readership {
+    float: left;
+}
+.ac_table_readership_inside {
+    width: 100%;   
+}
+.ac_table_readership_inside .caption {
+    font-size: 10pt;
+    text-align: left;
+}
+.ac_table_readership_inside .value {
+    font-size: 24pt;
+    line-height: 24pt;
+    text-align: right;
+}
+
+.ac-url-entry {
+    background: #fff;
+    display: none;
+}
+.ac-url-entry .url-caption {
+    padding-left: 10pt;
+    
+}
+
+    .b-dashboard {
+        *zoom: 1;
+    }
+    .b-dashboard:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+        .b-dashboard-col {
+            float: left;
+            margin-right: 100px;
+        }
+        .b-dashboard-table {
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin-bottom: 1.5em;
+            padding: 10px;
+            position: relative;
+            background: #fff;
+        }
+        .b-dashboard-table-status {
+            display: none;
+            width: 100%;
+        }
+            .b-dashboard-table table {
+                border-collapse: collapse;
+            }
+            .b-dashboard-table-status table  {
+                width: 100%;
+            }
+                .b-dashboard-table th, .b-dashboard-table td {
+                    border-top: 1px solid #EEEEEE;
+                }
+                .b-dashboard-table tr:first-child th, .b-dashboard-table tr:first-child td {
+                    border: medium none;
+                }
+                .b-dashboard-table th {
+                    font-weight: normal;
+                    padding: 10px 100px 10px 10px;
+                    text-align: left;
+                }
+                .b-dashboard-table td {
+                    font-size: 18px;
+                    padding: 10px;
+                    text-align: right;
+                }
+                    .b-dashboard-table .likebutton.b_white.b_small {
+                        /*left: 100%;
+                        margin: -4px 0 0 10px;
+                        position: absolute;
+                        white-space: nowrap;*/
+                       
+                    }
+                .b-dashboard-list {
+                    font-size: 17px;
+                    line-height: 1.2em;
+                    margin-bottom: 1.8em;
+                }
+                    .b-dashboard-list li {
+                        padding-left: 1em;
+                    }
+                        .b-dashboard-list li:before {
+                            content: '\2013\00a0';
+                        }
+
+
+.b-settings-tabs {
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 20px 0;
+}
+    .b-settings-tabs ul {
+        margin: 0;
+        padding: 8px 0 0 1px;
+        *zoom: 1;
+    }
+        .b-settings-tabs  ul:after {
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .b-settings-tabs li {
+            float: left;
+            margin: 0;
+        }
+            .b-settings-tabs a, .b-settings-tabs span {
+                background: #f9f9f9;
+                border: 1px solid #ccc;
+                float: left;
+                overflow: hidden;
+                margin: 0 0 -1px -1px;
+                padding: 10px 20px 10px 45px;
+                position: relative;
+            }
+            .b-settings-tabs span {
+                background: #fff;
+                border-bottom-color: #fff;
+                margin-top: -8px;
+                padding: 14px 20px 14px 45px;
+            }
+                .b-settings-tabs i {
+                    color: #eee;
+                    font-size: 3em;
+                    font-style: normal;
+                    height: 100%;
+                    left: 10px;
+                    line-height: 1em;
+                    position: absolute;
+                    text-shadow: 0 -1px 0 #ccc;
+                    top: 0;
+                }
+                .b-settings-tabs span i {
+                    margin-top: -0.1em;
+                }
+
+.b-cols {
+    max-width: 1200px;
+    *zoom: 1;
+}
+.b-cols:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+    .b-column {
+        float: left;
+        margin-right: 2.5%;
+        padding-right: 2.5%;
+        width: 45%;
+    }
+    .b-column:first-child {
+        border-right: 1px dotted #ccc;
+        margin-left: -1px;
+    }
+
+.b-cols fieldset {margin: 2em 0 10px}
+.b-cols fieldset:first-child {margin-top: 10px}
+    .b-cols legend {
+        font: 23px "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+        margin-bottom: .2em;
+        padding: 0;
+    }
+
+.b-settings-table {
+    margin: 0 0 1.5em;
+    width: 100%;
+}
+    .b-settings-table th {
+        font-weight: normal;
+        padding: 4px 0;
+        text-align: left;
+        width: 30%;
+    }
+    .b-settings-table td {
+        padding: 4px 0;
+        width: 70%;
+    }
+        .b-settings-table td input[type=text],
+        .b-settings-table td input[type=password],
+        .b-settings-table td textarea,
+        .b-settings-table td select {
+            -moz-box-sizing: border-box;
+                 box-sizing: border-box;
+             width: 100%;
+        }
+.b-checkbox-row {padding: 4px 0 4px 1.4em}
+    .b-checkbox-row label {cursor: default}
+    .b-settings-table .b-checkbox-row label {padding: 0}
+        .b-checkbox-row label input[type=checkbox],
+        .b-checkbox-row label input[type=radio]{
+            float: left;
+            margin: 5px 0 0 -1.4em;
+            padding: 0;
+        }
+
+input[disabled] {background: #eee}
+
+.b-column-single {width: 500px}
+.ac-small{font-size: 0.8em;}
+
+.checkbox_group {
+    margin: 1em 0;
+    overflow: hidden;
+    *zoom: 1;
+}
+    .checkbox_group label {
+        clear: both;
+        float: left;
+    }
+    .checkbox_group input,
+    .checkbox_group img,
+    .checkbox_group span { vertical-align: middle; }
+.dashed {
+    border-bottom: 1px dashed;
+    text-decoration: none;
+}
+    .dashed:hover {
+        border-color: transparent;
+        text-decoration: none;
+    }
+.small_text { font-size: .8em; }
+    .checkbox_manage a { margin-left: .4em; }
+
+.b-note {
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+.b-note:after {
+    bottom: 10px;
+    font-family: "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 2em;
+    position: absolute;
+    right: 10px;
+}
+.b-note.success {
+    background: none repeat scroll 0 0 #E4FFD6;
+    border: 1px solid #BFDFBC;
+}
+.b-note.success:after {
+    color: #B0CCA2;
+    content: ":-)";
+}
+
+.b-dashboard-brief {
+    height: 235px;
+    position: relative;
+}
+    .b-dashboard-brief__left,
+    .b-dashboard-brief__right {
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+        height: 100%;
+        position: absolute;
+        top: 0;
+    }
+    .b-dashboard-brief__right {
+        background: #fff;
+        overflow: hidden;
+        right: 0;
+    }
+
+    .b-dashboard-brief__left {
+        background: #fff;
+        left: 0;
+        z-index: 1;
+    }
+
+    .b-dashboard-brief__left_front { 
+        padding-left: 30px;
+        width: 200px;
+    }
+    .b-dashboard-brief__right_front { width: calc(100% - 200px); }
+
+        .b-dashboard-brief__chart {
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             top: 0;
+             left: 0;
+         }
+        
+        .b-dashboard-brief__plus {
+            float: left;
+            font-size: .8em;
+            line-height: 1.55;
+            margin-left: -.6em;
+        }
+        .b-dashboard-brief__value_small .b-dashboard-brief__plus {
+            font-size: 1em;
+            line-height: 1.3;
+        }
+        
+        .b-dashboard-brief__value {
+            font: bold 42px Calibri, 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            margin-top: .9em;
+        }
+        .b-dashboard-brief__value_orange { color: #ee8900; }
+        .b-dashboard-brief__value_blue { color: #13669d; }
+        .b-dashboard-brief__value_small {
+	        font-size: 18px;
+	        margin-top: .6em;
+        }
+
+        .b-dashboard-brief__description {
+            line-height: 1.4;
+            margin-top: -.5em;
+        }
+        .b-dashboard-brief__description_small { font-size: 11px; }
+
+
+        .b-dashboard-brief__flip-panel {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+        }
+
+        .b-dashboard-brief__empty-chart {
+            background: #f9f9f9;
+            border-radius: 50%;
+            height: 0;
+            margin: -45% auto 0;
+            padding-top: 90%;
+            position: relative;
+            top: 50%;
+            width: 90%;
+        }
