@@ -3,6 +3,7 @@
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
     $userinfo = get_userdata($currentuser -> ID);
+    $userid =  $currentuser -> ID;
     $form_action = admin_url( 'admin.php?page=atcontent/connect.php' );
     $email = $userinfo -> user_email;
     $username = $userinfo -> display_name;
@@ -23,8 +24,12 @@
 </style>
 <script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
 <script>
-    var email = '<?php echo $email?>';    
-    var site = '<?php echo $site?>';
+    var gate = '<?php admin_url('admin-ajax.php'); ?>';
+    var email = '<?php echo $email; ?>';    
+    var site = '<?php echo $site; ?>';
+    var title = '<?php bloginfo('name'); ?>';
+    var userid = '<?php echo $userid; ?>';
+    
     window.CPlase_ga = window.CPlase_ga || [];
                 CPlase_ga.push({
                     category: 'connectTab <?php echo AC_VERSION?>',
@@ -60,14 +65,60 @@
                 
                     
 <script type="text/javascript">
-    (function ($) {
+    (function ($) {    
+        var apikey = '';  
         window.ac_connect_res = function (d) {
             if (d) document.getElementById("connect_form").submit();
             else $("#ac_connect_result").html(
                     'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
         
-        function doAutoSignIn()
+        function ConnectBlog()    
+        {
+            var email = $("#email").val();
+            $.ajax({
+                url: 'http://www.atcontent.com/api/v1/native/connectblog.ashx',
+                data : {
+                    email : email,
+                    bloguserid : userid,
+                    apikey : apikey,
+                    sitetitle : title,
+                    gate : gate
+                },
+                success: function(d){
+                    if (d.IsOK)
+                    {
+                    }
+                    else
+                    {
+                    }
+                },
+                error: function() {					
+					$("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+				},
+			    dataType: "json"    
+		    });  
+        }
+  
+
+        function SaveCredentials(d)
+        {
+            apikey = d.APIKey;
+            $.ajax({url: '<?php echo $ajax_form_action; ?>',
+			    type: 'post',
+			    data: {
+					    action: 'atcontent_save_credentials',
+                        apikey : d.APIKey,
+                        nickname : d.Nickname,
+                        showname: d.Showname,
+                        Avatar20 : d.Avatar20,
+                        Avatar80 : d.Avatar80
+					},                
+			    dataType: "json"
+		    });  
+        }
+
+        function AutoSignIn()
         {
             var email = $("#email").val();
             $.ajax({
@@ -79,7 +130,8 @@
                 success: function(d){
                     if (d.IsOK)
                     {
-                        alert(JSON.stringify(d));        
+                        SaveCredentials(d);
+                        ConnectBlog();
                     }
                     else
                     {
@@ -102,17 +154,18 @@
 					    action: 'atcontent_connect',
                         email : email,
                         username : username,
-                        title : '<?php bloginfo('name'); ?>'
+                        title : title
 					},
                 success: function(d){
 					if (d.IsOK)
                     {
-                        
+                        SaveCredentials(d);
+                        ConnectBlog();
                     }else
                     {
                         if (d.Error.indexOf("exist")!=-1) 
                         {
-                            doAutoSignIn();
+                            AutoSignIn();
                         }
                         $("#ac_connect_result").html(d.Error);
                     }

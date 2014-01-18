@@ -248,6 +248,17 @@ function atcontent_hide_rate(){
     exit;
 }
 
+function atcontent_save_credentials()
+{
+    update_user_meta( $userid, "ac_api_key", $_POST["APIKey"] );
+    update_user_meta( $userid, "ac_pen_name", $_POST["Nickname"] );
+    update_user_meta( $userid, "ac_showname", $_POST["Showname"] );
+    update_user_meta( $userid, "ac_avatar_20", $_POST["Avatar20"] );
+    update_user_meta( $userid, "ac_avatar_80", $_POST["Avatar80"] );
+    echo json_encode ( array ( "IsOK" => true ) ); 
+    exit;
+}
+
 function atcontent_connect()
 {
     $email = $_POST['email'];

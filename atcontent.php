@@ -41,6 +41,7 @@
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
     add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
+    add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
     add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
     add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
     add_action( 'wp_ajax_nopriv_atcontent_guestpost', 'atcontent_ajax_guestpost' );
