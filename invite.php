@@ -24,7 +24,7 @@
 </style>
 <script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
 <script>
-    var gate = '<?php admin_url('admin-ajax.php'); ?>';
+    var gate = '<?php echo admin_url('admin-ajax.php'); ?>';
     var email = '<?php echo $email; ?>';    
     var site = '<?php echo $site; ?>';
     var title = '<?php bloginfo('name'); ?>';
@@ -88,6 +88,16 @@
                 success: function(d){
                     if (d.IsOK)
                     {
+                        $.ajax({url: '<?php echo $ajax_form_action; ?>',
+			                type: 'post',
+			                data: {
+					                action: 'atcontent_save_blog_credentials',
+                                    blogid : d.BlogId,
+                                    blogtitle : d.BlogTitle,
+                                    syncid: d.SyncID
+					            },                
+			                dataType: "json"
+		                });  
                     }
                     else
                     {
