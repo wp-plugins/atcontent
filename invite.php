@@ -65,7 +65,8 @@
                 
                     
 <script type="text/javascript">
-    (function ($) {    
+    (function ($) {  
+      
         var apikey = '';  
         window.ac_connect_res = function (d) {
             if (d) document.getElementById("connect_form").submit();
@@ -75,37 +76,19 @@
         
         function ConnectBlog()    
         {
+
             var email = $("#email").val();
             $.ajax({
-                url: 'http://www.atcontent.com/api/v1/native/connectblog.ashx',
+                url: '<?php echo $ajax_form_action; ?>',
+			    type: 'post',
                 data : {
+                    action: 'atcontent_connect_blog',
                     email : email,
                     bloguserid : userid,
                     apikey : apikey,
                     sitetitle : title,
                     gate : gate
                 },
-                success: function(d){
-                    if (d.IsOK)
-                    {
-                        $.ajax({url: '<?php echo $ajax_form_action; ?>',
-			                type: 'post',
-			                data: {
-					                action: 'atcontent_save_blog_credentials',
-                                    blogid : d.BlogId,
-                                    blogtitle : d.BlogTitle,
-                                    syncid: d.SyncID
-					            },                
-			                dataType: "json"
-		                });  
-                    }
-                    else
-                    {
-                    }
-                },
-                error: function() {					
-					$("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-				},
 			    dataType: "json"    
 		    });  
         }

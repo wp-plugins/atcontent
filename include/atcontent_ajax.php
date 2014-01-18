@@ -248,11 +248,18 @@ function atcontent_hide_rate(){
     exit;
 }
 
-function atcontent_save_blog_credentials(){
+function atcontent_connect_blog(){
+    $email = $_POST['email'];
+    $bloguserid = $_POST['bloguserid'];
+    $apikey = $_POST['apikey'];
+    $sitetitle = $_POST['sitetitle'];
+    $gate = $_POST['gate'];
+    $connect_data = "email=".urlencode($email)."&bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate);
+    $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
     $userid = wp_get_current_user()->ID;
-    update_user_meta( $userid, "ac_blogid", $_POST["blogid"] );
-    update_user_meta( $userid, "ac_blog_title", $_POST["blogtitle"] );
-    update_user_meta( $userid, "ac_syncid", $_POST["syncid"] );
+    update_user_meta( $userid, "ac_blogid", $connect_answer["blogid"] );
+    update_user_meta( $userid, "ac_blog_title", $connect_answer["blogtitle"] );
+    update_user_meta( $userid, "ac_syncid", $connect_answer["syncid"] );
     echo json_encode ( array ( "IsOK" => true ) ); 
     exit;
 }
