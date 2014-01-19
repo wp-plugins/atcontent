@@ -254,13 +254,28 @@ function atcontent_connect_blog(){
     $apikey = $_POST['apikey'];
     $sitetitle = $_POST['sitetitle'];
     $gate = $_POST['gate'];
-    $connect_data = "email=".urlencode($email)."&bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate);
+    $blog = $_POST['blog'];
+    $connect_data = "email=".urlencode($email)."&bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog);
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
-    $userid = wp_get_current_user()->ID;
-    update_user_meta( $userid, "ac_blogid", $connect_answer["blogid"] );
-    update_user_meta( $userid, "ac_blog_title", $connect_answer["blogtitle"] );
-    update_user_meta( $userid, "ac_syncid", $connect_answer["syncid"] );
-    echo json_encode ( array ( "IsOK" => true ) ); 
+    if ($connect_answer["IsOK"] == TRUE)
+    {
+        $userid = wp_get_current_user()->ID;
+        update_user_meta( $userid, "ac_blogid", $connect_answer["blogid"] );
+        update_user_meta( $userid, "ac_blog_title", $connect_answer["blogtitle"] );
+        update_user_meta( $userid, "ac_syncid", $connect_answer["syncid"] );
+        echo json_encode ( array ( "IsOK" => true ) ); 
+    }
+    else
+    {
+        if ($connect_answer["Error"] == "select")
+        {
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", blogs => $connect_answer["blogs"] ) ); 
+        }
+        else
+        {
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => $connect_answer["Error"]) ); 
+        }
+    }
     exit;
 }
 
@@ -280,14 +295,11 @@ function atcontent_connect()
 {
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $key = md5(microtime().rand());
-    update_user_meta($userid, "ac_temporary_key", $key);
-    $site_title = $_POST['title'];
-    $auth_data = "email=".urlencode($email)."&username=".urlencode($username)."&key=".$key."&sitetitle=".$site_title;
+    $auth_data = "email=".urlencode($email)."&username=".urlencode($username);
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connect', $auth_data );
     if($connect_answer["IsOK"] == TRUE)
     {
-        echo json_encode ( array ( "IsOK" => true ) ); 
+        echo json_encode ( array ( "IsOK" => true , "APIKey" => $connect_answer["APIKey"], "Nickname" => $connect_answer["Nickname"], "Showname" => $connect_answer["Showname"], "Avatar20" => $connect_answer["Avatar20"], "Avatar80" => $connect_answer["Avatar80"]) ); 
     } 
     else 
     {

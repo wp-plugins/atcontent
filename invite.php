@@ -18,7 +18,7 @@
         height: 1.7em;
         width: 300px;
         outline: 0;
-        margin: 0 0 20px 0;3
+        margin: 0 0 20px 0;
         
     }
 </style>
@@ -65,18 +65,20 @@
                 
                     
 <script type="text/javascript">
+    var ConnectBlog;
     (function ($) {  
       
         var apikey = '';  
+        var selectedBlog = '';
         window.ac_connect_res = function (d) {
             if (d) document.getElementById("connect_form").submit();
             else $("#ac_connect_result").html(
                     'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
         }
         
-        function ConnectBlog()    
+        ConnectBlog = function (selectedBlog)    
         {
-
+            selectedBlog = selectedBlog || "";
             var email = $("#email").val();
             $.ajax({
                 url: '<?php echo $ajax_form_action; ?>',
@@ -87,7 +89,31 @@
                     bloguserid : userid,
                     apikey : apikey,
                     sitetitle : title,
-                    gate : gate
+                    gate : gate,
+                    blog: selectedBlog
+                },
+                success: function(d){
+                    if (d.IsOK)
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        if(d.Error == "select")
+                        {
+                            var blogs = d.blogs;
+                            var blogsHtml = '<a href="javascript:ConnectBlog(\'-1\');">Create new blog</a>';
+                            for (var i in blogs) {
+                                blogsHtml += '<a href="javascript:ConnectBlog(\'' + blogs[i].BlogId + '\');">' + blogs[i].Title + '</a>';
+                            }
+                            $("#ac_connect_result").html(blogsHtml);
+                        }
+                        else
+                        {
+                            $("#ac_connect_result").html(
+                                        'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                        }
+                    }
                 },
 			    dataType: "json"    
 		    });  
@@ -128,7 +154,7 @@
                     }
                     else
                     {
-                        alert('none');
+                        $("#ac_connect_result").html('We already have user with this email, if you already have AtContent account, please sign in <a href="http://atcontent.com/SignIn" target="_blank">here</a>');
                     }
                 },
                 error: function() {					
@@ -146,8 +172,7 @@
 			    data: {
 					    action: 'atcontent_connect',
                         email : email,
-                        username : username,
-                        title : title
+                        username : username
 					},
                 success: function(d){
 					if (d.IsOK)
@@ -156,11 +181,14 @@
                         ConnectBlog();
                     }else
                     {
-                        if (d.Error.indexOf("exist")!=-1) 
+                        if (d.Error.indexOf("email already exist")!=-1) 
                         {
                             AutoSignIn();
                         }
-                        $("#ac_connect_result").html(d.Error);
+                        else
+                        {
+                            $("#ac_connect_result").html(d.Error);
+                        }
                     }
 				},
 				error: function() {					
