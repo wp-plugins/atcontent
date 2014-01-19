@@ -260,9 +260,9 @@ function atcontent_connect_blog(){
     if ($connect_answer["IsOK"] == TRUE)
     {
         $userid = wp_get_current_user()->ID;
-        update_user_meta( $userid, "ac_blogid", $connect_answer["blogid"] );
-        update_user_meta( $userid, "ac_blog_title", $connect_answer["blogtitle"] );
-        update_user_meta( $userid, "ac_syncid", $connect_answer["syncid"] );
+        update_user_meta( $userid, "ac_blogid", $connect_answer["BlogId"] );
+        update_user_meta( $userid, "ac_blog_title", $connect_answer["BlogTitle"] );
+        update_user_meta( $userid, "ac_syncid", $connect_answer["SyncId"] );
         echo json_encode ( array ( "IsOK" => true ) ); 
     }
     else
