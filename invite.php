@@ -151,7 +151,7 @@
                     action: 'atcontent_connect_blog',
                     email : email,
                     bloguserid : userid,
-                    apikey : apikey,
+                    apikey : credentials.APIKey,
                     sitetitle : title,
                     gate : gate,
                     blog: selectedBlog
