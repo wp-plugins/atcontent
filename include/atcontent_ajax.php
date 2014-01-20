@@ -177,6 +177,7 @@ function atcontent_ajax_repost(){
         // Insert the post into the database
         $new_post_id = wp_insert_post( $new_post );
         update_post_meta($new_post_id, "ac_repost_postid", $ac_postid);
+        update_post_meta($new_post_id, "ac_is_process", "0");
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }

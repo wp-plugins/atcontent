@@ -77,6 +77,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.3.16 =
+* Repost process update
+
 = 6.3.15 =
 * CloudFlare Rocket Loader compatibility added
 
