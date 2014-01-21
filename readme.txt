@@ -19,9 +19,9 @@ With AtContent's plugin, you can easily increase your audience by following 3 si
 [AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform. Once you start using AtContent, not only will you be able to repost other people's blog posts on your site, they will also be able to repost yours without content duplication.
 
 #### What are the benefits of AtContent? #### 
-* Reposts provide backlinks to your site 
+* Reposts provide backlinks to your site. 
 * Other bloggers' reposted content will increase your site reader engagement.
-* You will be able to track your audience [grows](http://bit.ly/Kcvui4)
+* You will be able to track your audience [growth](http://bit.ly/Kcvui4).
 
 #### With AtContent everybody wins because: #### 
 * You will reach out to people on other sites, which will therefore increase your audience by up to 860% in as little as [3 weeks](http://bit.ly/1didxf4) !
@@ -75,6 +75,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
+
+= 6.3.17 =
+* Repost compatibility improve
 
 = 6.3.16 =
 * Repost process update
