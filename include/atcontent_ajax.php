@@ -140,7 +140,7 @@ function atcontent_ajax_gate() {
             $ac_embedid = $_POST["embedid"];
             $embedid = '';
             if ( strlen( $ac_embedid ) > 0 ) {
-                $embedid .= "-/" . $embedid . "/"; 
+                $embedid .= "-/" . $ac_embedid . "/"; 
             }
             $title = $_POST["title"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
