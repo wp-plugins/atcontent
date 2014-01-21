@@ -137,7 +137,11 @@ function atcontent_ajax_gate() {
             $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
             if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
             $ac_postid = $_POST["postid"];
-            $embedid = $_POST["embedid"];
+            $ac_embedid = $_POST["embedid"];
+            $embedid = '';
+            if ( strlen( $ac_embedid ) > 0 ) {
+                $embedid .= "-/" . $embedid . "/"; 
+            }
             $title = $_POST["title"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
                 remove_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -146,18 +150,23 @@ function atcontent_ajax_gate() {
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                 $ac_content = 
                 "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-                "<script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                "<script data-ac-src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+                "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
                 // Create post object
                 $new_post = array(
-                    'post_title'    => $repost_title,
+                    'post_title'    => $title,
                     'post_content'  => $ac_content,
                     'post_status'   => 'publish',
                     'post_author'   => $userid,
                     'post_category' => array()
                 );
+                kses_remove_filters();
                 // Insert the post into the database
                 $new_post_id = wp_insert_post( $new_post );
+                update_post_meta( $new_post_id, "ac_is_process", "0" );
+                update_post_meta( $new_post_id, "ac_embedid", $embedid );
+                update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
+                kses_init_filters();
                 echo json_encode ( array ( "IsOK" => true, "PostId" => $new_post_id ) );
             }
             break;
@@ -340,6 +349,7 @@ function atcontent_ajax_syncqueue(){
     global $wpdb;
     include("atcontent_userinit.php");
     $posts_id = array();
+    $syncid = get_user_meta( $userid, "ac_syncid", true ); 
     $posts = $wpdb->get_results( 
 	    "
 	    SELECT ID, post_author
@@ -356,7 +366,7 @@ function atcontent_ajax_syncqueue(){
         }
         wp_cache_flush();
     }
-    atcontent_api_syncqueue( $ac_api_key, admin_url( 'admin-ajax.php' ), $userid, $posts_id );
+    atcontent_api_syncqueue( $ac_api_key, $syncid, $userid, $posts_id );
     exit;
 }
 

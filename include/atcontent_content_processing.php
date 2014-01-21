@@ -32,17 +32,20 @@
         if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        $ac_embedid = get_post_meta( $post->ID, "ac_embedid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
         $ac_adtest = get_user_meta( intval( $post->post_author ), "ac_adtest", true );
         $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
+        
         $ac_additional_classes = "";
         $isSinlgePost = is_single();
         if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
         if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
-        if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
+        if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
+
 
         $ac_share_panel_disable = get_user_meta( intval( $post->post_author ), "ac_share_panel_disable", true );
         $ac_share_panel_data_option = "";
@@ -69,13 +72,19 @@
         $ac_adtest_numOfmsgApears = 2;
 
         if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
+            
+            $embedid = "";
+            if ( strlen( $ac_embedid ) > 0 ) {
+                $embedid .= "-/" . $ac_embedid . "/";
+            }
+
             $code = <<<END
-<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
+<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
 END;
 
             if ( $isSinlgePost ) {
                 $code = <<<END
-<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-ac-src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body"></script></div>
+<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-ac-src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body"></script></div>
 END;
             }
 

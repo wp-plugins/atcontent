@@ -2,7 +2,7 @@
 
 function atcontent_api_create_publication($ac_api_key, 
 $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
+$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories, $blogId, $syncId, $postIdInApp
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -33,6 +33,9 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
         '&Comments=' . urlencode( $comments ) .
         '&Tags=' . urlencode( $tags ) .
         '&WPCategories=' . urlencode( $categories ) .
+        '&BlogId='.urlencode($blogId).
+        '&SyncId='.urlencode($syncId).
+        '&PostId='.urlencode($postIdInApp).
         '&AddToIndex=true' .
         ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
         '';
@@ -41,7 +44,7 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
 
 function atcontent_api_update_publication($ac_api_key, 
 $post_id, $post_title, $post_content, $paid_portion, $commercial_type, $post_published, $original_url,
-$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
+$cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories, $blogId, $syncId, $postIdInApp
 ) {
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $post_content) == 1) return NULL;
     if (preg_match('/<script[^>]*src="https?:\/\/w.atcontent.com/', $paid_portion) == 1) return NULL;
@@ -71,6 +74,9 @@ $cost, $is_copyprotect, $is_advanced_tracking, $comments, $tags, $categories
         '&IsPaidRepost='.urlencode($is_paidrepost).
         '&Tags='.urldecode($tags).
         '&WPCategories='.urlencode($categories).
+        '&BlogId='.urlencode($blogId).
+        '&SyncId='.urlencode($syncId).
+        '&PostId='.urlencode($postIdInApp).
         '&AddToIndex=true'.
         ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
         '';
@@ -307,12 +313,11 @@ function atcontent_api_get_quotas( $api_key ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/quotas', $post_content );
 }
 
-function atcontent_api_syncqueue( $api_key, $gate, $userid, $postids ) {
+function atcontent_api_syncqueue( $api_key, $syncid, $userid, $postids ) {
     $post_content = 
         'AppID=' . urlencode( 'WordPress' ) .
         '&Key=' . urlencode( $api_key ) .
-        '&Gate=' . urlencode( $gate ) . 
-        '&UserId=' . urlencode( $userid ) .
+        '&SyncId=' . urlencode( $syncid ) .
         '&PostIds=' . urlencode( json_encode( $postids ) ) .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/syncqueue', $post_content );
