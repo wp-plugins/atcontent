@@ -92,6 +92,22 @@
                     
 <script type="text/javascript">
     var ConnectBlog;
+    var AutoSignIn;
+
+    function signInWindow()
+    {
+        email = document.getElementById("email").value;
+        _window = window.open("http://www.atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460,height=420,resizable=no,scrollbars=no,status=yes,menubar=no,toolbar=no,location=yes,directories=no")
+        _window.opener = window;
+        setTimeout(function () {
+            if (_window.closed)
+                AutoSignIn();
+            else
+                setTimeout(arguments.callee, 10);
+        }, 10);
+
+    }
+
     (function ($) {  
         var buttonDisabled = false;
         var credentials;
@@ -202,8 +218,9 @@
 		    });
         }
 
-        function AutoSignIn()
+        AutoSignIn = function()
         {
+            DisableButton();
             var email = $("#email").val();
             $.ajax({
                 url: 'http://www.atcontent.com/api/v1/native/checkauth.ashx',
@@ -220,8 +237,8 @@
                     }
                     else
                     {
-                        $("#ac_connect_result").html('<h2>We already have user with this email, if you have AtContent account, please <a href="http://atcontent.com/SignIn" target="_blank">sign in</a></h2>');
                         EnableButton();
+                        signInWindow();
                     }
                 },
                 error: function() {					
