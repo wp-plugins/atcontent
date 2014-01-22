@@ -3,7 +3,7 @@
 
         global $post, $wp_current_filter, $currentNumPost_ac;
 
-        if (preg_match_all('/<script[^<]+src=\"https?:\/\/w.atcontent.com\/[^\/]+\/[^\/]+\/[^\"]+/', $content, $matches))
+        if (preg_match_all('/<script[^<]+src=\"https?:\/\/w\.atcontent\.com\/[^\/^\-]+\/[^\/]+\/[^\"]+/', $content, $matches))
         {            
             $script_parts = explode("/", $matches[0][0]);
             $reposter = $script_parts[3];

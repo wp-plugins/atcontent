@@ -138,6 +138,7 @@ function atcontent_ajax_gate() {
             if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
             $ac_postid = $_POST["postid"];
             $ac_embedid = $_POST["embedid"];
+            $ac_published = $_POST["published"];
             $embedid = '';
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid .= "-/" . $ac_embedid . "/"; 
@@ -158,6 +159,7 @@ function atcontent_ajax_gate() {
                     'post_content'  => $ac_content,
                     'post_status'   => 'publish',
                     'post_author'   => $userid,
+                    'post_date'     => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
                     'post_category' => array()
                 );
                 kses_remove_filters();
@@ -180,8 +182,12 @@ function atcontent_ajax_gate() {
                 update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
                 update_post_meta( intval( $postid ), "ac_is_process", "1" );
                 update_post_meta( intval( $postid ), "ac_embedid", $embedid );
+                wp_update_post( array(
+                    'ID' => intval( $postid ),
+                    'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) )
+                ) );
+                echo json_encode ( array ( "IsOK" => true ) );
             }
-            echo json_encode ( array ( "IsOK" => true ) );
             break;
     }
     exit;
