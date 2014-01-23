@@ -76,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 6.3.18 =
+* Settings page update
+
 = 6.3.17 =
 * Repost compatibility improve
 

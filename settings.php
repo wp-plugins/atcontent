@@ -44,10 +44,10 @@
 
         atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
 
-        $ac_share_panel_disable = isset( $_POST["ac_share_panel_disable"] ) && $_POST["ac_share_panel_disable"] == "Y" ? 1 : 0;
+        $ac_share_panel_disable = isset( $_POST["ac_share_panel_disable"] ) && $_POST["ac_share_panel_disable"] == "Y" ? 0 : 1;
         update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
 
-        $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "1" : "0";
+        $ac_excerpt_no_process = ( isset( $_POST[ "ac_excerpt_no_process" ] ) && $_POST[ "ac_excerpt_no_process" ] == "Y" ) ? "0" : "1";
         update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
         $ac_comments_disable = ( isset( $_POST[ "ac_comments_disable" ] ) && $_POST[ "ac_comments_disable" ] == "Y" ) ? "1" : "0";
         $ac_comments_disable = AC_NO_COMMENTS_DEFAULT;
@@ -217,13 +217,13 @@ END;
     if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "1";
 
     $ac_excerpt_no_process_checked = "";
-    if ($ac_excerpt_no_process == "1") $ac_excerpt_no_process_checked = "checked=\"checked\"";
+    if ($ac_excerpt_no_process == "0") $ac_excerpt_no_process_checked = "checked=\"checked\"";
     $ac_comments_disable_checked = "";
     if ( $ac_comments_disable == "1" ) $ac_comments_disable_checked = "checked=\"checked\"";
     $ac_hint_panel_disable_checked = "";
     if ( $ac_hint_panel_disable == "1" ) $ac_hint_panel_disable_checked = "checked=\"checked\"";
     $ac_share_panel_disable_checked = "";
-    if ( $ac_share_panel_disable == "1" ) $ac_share_panel_disable_checked = "checked=\"checked\"";
+    if ( $ac_share_panel_disable == "0" ) $ac_share_panel_disable_checked = "checked=\"checked\"";
 
 ?>
 
@@ -232,16 +232,16 @@ END;
             <div class="b-checkbox-row">
                 <label>
                     <input type="checkbox" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-                    Turn off plugin features for the main page
+                    Turn on plugin features for the main page
                 </label>
-                <div class="ac-small">Should be marked for sites with not standard themes</div>
+                <div class="ac-small">Should be un-marked for sites with not standard themes</div>
             </div>
             <div class="b-checkbox-row">
                 <label>
                         <input type="checkbox" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
-                        Turn off share buttons
+                        Turn on share buttons
                 </label>
-                <div class="ac-small">If you have a social share plugin on your blog you can turn off our share buttons to prevent duplication</div>
+                <div class="ac-small">Enable Facebook, Twitter, Linkedin and Google+ buttons under each post</div>
             </div>
         </fieldset>
     </div>        
