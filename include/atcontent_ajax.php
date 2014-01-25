@@ -264,13 +264,12 @@ function atcontent_hide_rate(){
 }
 
 function atcontent_connect_blog(){
-    $email = $_POST['email'];
     $bloguserid = $_POST['bloguserid'];
     $apikey = $_POST['apikey'];
     $sitetitle = $_POST['sitetitle'];
     $gate = $_POST['gate'];
     $blog = $_POST['blog'];
-    $connect_data = "email=".urlencode($email)."&bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog);
+    $connect_data = "bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog);
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
     if ($connect_answer["IsOK"] == TRUE)
     {
@@ -292,6 +291,38 @@ function atcontent_connect_blog(){
         }
     }
     exit;
+}
+
+function atcontent_disconnect()
+{    
+    $userid = wp_get_current_user()->ID;
+    update_user_meta( $userid, "ac_api_key", "");
+    update_user_meta( $userid, "ac_syncid", "");
+    echo json_encode ( array ( "IsOK" => true )); 
+    exit;
+}
+
+function atcontent_save_settings()
+{
+        $userid = wp_get_current_user()->ID;
+        $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
+        update_user_meta( $userid, "ac_sitecategory", $siteCategory );
+
+        $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
+        update_user_meta( $userid, "ac_country", $country );
+
+        $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
+        update_user_meta( $userid, "ac_state", $state );
+
+        atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
+
+        $ac_share_panel_disable = $_POST["ac_share_panel_disable"] == 'y' ? 0 : 1;
+        update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
+
+        $ac_excerpt_no_process = $_POST[ "ac_excerpt_no_process" ] == 'y'  ? "0" : "1";
+        update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+        echo json_encode ( array ( "IsOK" => true )); 
+        exit;
 }
 
 function atcontent_save_credentials()

@@ -130,16 +130,6 @@
 </div>
     <br><br>
     <style>
-    .popup-bg {
-        background-color: #000;
-        opacity: 0.7;
-        position: fixed;
-        z-index: 200;
-        top: 0;
-        left: -20px;
-        right: 0;
-        bottom: 0;
-    }
         
         .close-ico{
             position: absolute;

@@ -5,7 +5,7 @@
     require( "include/atcontent_userinit.php" );
 
     if ( strlen( $ac_api_key ) == 0 ) {
-        $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         ?>
 <script>window.location = '<?php echo $connect_url; ?>';</script>
         <?php

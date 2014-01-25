@@ -43,9 +43,22 @@
     display: inline-block;
     *display: inline;
     vertical-align: top;
-    width: 490px;
+    width: auto;
     *zoom: 1;
 }
+
+.ac_welcome_show_visible {
+    background-color: white;
+    position: relative;
+    border-radius: 5px;
+    z-index: 300; 
+}
+
+.b_enable {
+    background: none repeat scroll 0 0 #808080;
+    color: #FFFFFF !important;
+}
+
 .connect_right {
     display: inline-block;
     *display: inline;
@@ -337,23 +350,33 @@ button.button-color-white[disabled],
     max-width: 1200px;
     *zoom: 1;
 }
+
+.popup-bg {
+    background-color: #000;
+    opacity: 0.7;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: -20px;
+    right: 0;
+    bottom: 0;
+}
+
 .b-cols:after {
     clear: both;
     content: '';
     display: block;
 }
     .b-column {
-        float: left;
         margin-right: 2.5%;
         padding-right: 2.5%;
-        width: 45%;
     }
     .b-column:first-child {
         border-right: 1px dotted #ccc;
         margin-left: -1px;
     }
 
-.b-cols fieldset {margin: 2em 0 10px}
+/*.b-cols fieldset {margin: 2em 0 10px}*/
 .b-cols fieldset:first-child {margin-top: 10px}
     .b-cols legend {
         font: 23px "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";

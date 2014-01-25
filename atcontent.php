@@ -43,6 +43,8 @@
     add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
     add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
     add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
+    add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
+    add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
     add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
     add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
     add_action( 'wp_ajax_nopriv_atcontent_guestpost', 'atcontent_ajax_guestpost' );
@@ -90,9 +92,9 @@
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
 
-        add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'edit_posts', 'atcontent/connect.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'edit_posts', 'atcontent/settings.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'edit_posts', 'atcontent/sync.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'edit_posts', 'atcontent/connect.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'edit_posts', 'atcontent/settings.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'edit_posts', 'atcontent/sync.php',  '');
         //add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
 
         //$guest_key = atcontent_get_menu_key( 5.0 );
@@ -205,7 +207,7 @@ function ACgetCookie(name) {
 </script>
 <?php
         if ( strlen( $ac_api_key ) == 0 ) {
-            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
             $img_url = plugins_url( 'assets/logo.png', __FILE__ );
             $pointer_content = '<h3>Connect to AtContent</h3>';
             $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url .
@@ -227,7 +229,7 @@ jQuery(document).ready( function($) {
 </script>
 <?php
         } else {
-            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
             $ac_country = get_user_meta($userid, "ac_country", true );
             if ( strlen( $ac_country ) == 0 ) {
                 $pointer_content = '<h3>Better Interaction with AtContent</h3>';

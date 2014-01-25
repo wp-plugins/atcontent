@@ -598,7 +598,7 @@ END;
     function atcontent_admin_head() {
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         if ( strlen( $ac_api_key ) == 0 && user_can( $userid, "publish_posts" ) ) {
         ?>

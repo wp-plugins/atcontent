@@ -18,7 +18,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     $form_message = '';
 
     if ( strlen( $ac_api_key ) == 0 ) {
-        $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         ?>
 <script>window.location = '<?php echo $connect_url; ?>';</script>
         <?php
