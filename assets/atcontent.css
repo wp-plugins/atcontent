@@ -47,11 +47,43 @@
     *zoom: 1;
 }
 
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-right: 25px solid white;
+    border-bottom: 40px solid transparent;
+    position: relative;
+    z-index: 300;
+    float: left;
+    margin-left: -15px;
+}
+
+.inline-block {
+    display: inline;
+}
+
+.triangle-top {
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 28px solid white;
+    position: relative;
+    z-index: 300;
+    float: left;
+    margin-left: 20px;
+    margin-right: -45px;
+    margin-top: -20px;
+}
+
 .ac_welcome_show_visible {
     background-color: white;
     position: relative;
     border-radius: 5px;
     z-index: 300; 
+    padding: 10px;
+    margin-left: -10px;
 }
 
 .b_enable {

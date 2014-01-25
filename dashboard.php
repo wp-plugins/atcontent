@@ -7,26 +7,14 @@
     $userid = intval( $currentuser->ID );
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
-    if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {
-     
-    if ($_GET["step"] == "2") 
-    {
-        ?>
-            <h2 class="atcontent_wrap" style="font-size: 20px;">This is your AtContent usage statistic</h2>
-            <p>As you can see now you do not have AtContent views. You will get extra AtContent views anyway, but if you want to get fast and good growth, you need to <a href="https://www.atcontent.com/sameurl">improve your blog</a></p>            
-        <?php
-        include("stat_block.php");
-        ?>
-            <br/><a href="admin.php?page=atcontent/dashboard.php">No, thanks</a>            
-        <?php
-    }
+    if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {    
     $currentuser = wp_get_current_user();
     $userinfo = get_userdata($currentuser -> ID);
     $email = $userinfo -> user_email;
     $site = $_SERVER['HTTP_HOST'];
 ?>
 
-
+<div style="width: 100%; height: 40px;"></div>
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
 
 
@@ -83,13 +71,13 @@
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
-    <div id="settings_step" style="float: left;padding: 10px;margin-left: -10px;">        
+    <div id="settings_step" style="float: left;">        
         <div id="first_time_header" style="display: none">
             <h2 style="font-size: 20px;">Congratulations you are just connected your blog to AtContent! </h2>
-            <p>Adjust site settings to get better results in promotion of your posts.</p>
         </div>
         <?php include("settings.php"); ?>
     </div>
+    
      <?php include("stat_block.php");
     }
     else
@@ -106,21 +94,29 @@
         isFirstTime = true;
         jQuery("#popup-bg").show();      
         jQuery("#first_time_header").show();      
-        jQuery("#settings_step").addClass('ac_welcome_show_visible');
-        
+        jQuery("#settings_step").addClass('ac_welcome_show_visible');  
+        jQuery("#tip_one_step").show();
+        jQuery("#triangle_one").show();
+        jQuery("#tip_one_step").addClass('ac_welcome_show_visible'); 
         function hide_welcome()
         {
             jQuery("#popup-bg").hide();   
             jQuery("#stat_text_step").removeClass('ac_welcome_show_visible');
+            jQuery("#triangle_two").hide();
+            jQuery("#tip_two_step").hide();
+            jQuery("#first_time_header").hide();
         }
 
         function third_welcome_step()
-        {
+        {     
+            jQuery("#tip_one_step").hide();
+            jQuery("#triangle_one").hide(); 
+            jQuery("#tip_two_step").show();
+            jQuery("#tip_two_step").addClass('ac_welcome_show_visible').addClass('inline-block');
+            jQuery("#triangle_two").show();
             jQuery("#settings_step").removeClass('ac_welcome_show_visible');   
             jQuery("#first_step_vis").removeClass('ac_welcome_show_visible');     
             jQuery("#stat_text_step").addClass('ac_welcome_show_visible');
-            jQuery("#stat-fieldset").before('<h2 class="atcontent_wrap" style="font-size: 20px;">This is your AtContent stats.</h2><a style="font-size:18px" target="_blank" onclick="hide_welcome()" href="https://www.atcontent.com/sameloopcoolimprove">Wanna get better?</a>');
-            jQuery("#dashboard-table").after('<br><a href="#" style="font-size:10px" onclick="hide_welcome()">No, thanks. This is not for me</a>');
         } 
         <?php } ?>
     </script>

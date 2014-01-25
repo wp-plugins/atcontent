@@ -29,6 +29,11 @@
     
     .blocked {
         background-color: darkgrey;
+        padding-left: 10px;
+        width: 40%;
+        margin-left: 20%;
+        position: absolute;
+        opacity: 0.5;
     }
     
     .blogs {
@@ -40,7 +45,7 @@
     }
 
     #blog_data_form {
-        margin-bottom: -20px;
+        margin-bottom: 20px;
     }
 
     #credential_show_block {
@@ -175,7 +180,7 @@
         {
             $("#connection_rules_title").hide();
             $("#site").val(title);
-            var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + username + '" target="_blank"><img src="' + avatar_20 + '" alt="" width="16" height="16"> ' + showname + '</a>, please choose a blog.</h2><div class="blogs">';
+            var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + username + '" target="_blank"><img src="' + avatar_20 + '" alt="" width="16" height="16"> ' + showname + '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';
             
             for (var i in blogs) {
                 blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').hide();" name="blog" class="blog_radio" id="blog_' + blogs[i].BlogId + '" value="' + blogs[i].BlogId + '"/><label for="blog_' + blogs[i].BlogId + '">' + blogs[i].BlogTitle + '</label><br>';
@@ -189,7 +194,9 @@
                 if (blog!=null)
                 {
                     DisableButton();
-                    $(".blogs").addClass('blocked');
+                    $("#blocker").addClass('blocked');
+                    var h = jQuery(".blogs").height();
+                    $("#blocker").height(h);
                     ConnectBlog(blog);
                 } 
             });
