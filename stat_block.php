@@ -111,14 +111,13 @@
             ?>
             </div>
         </div>
-        <div id="triangle_one" style="display: none;" class="triangle-left"></div>
-        <div id="tip_one_step" style="display: none;">
+        <div id="tip_one_step" class="ac_tip_show" style="display: none;">
+            <p>Congratulations you are just connected your blog to AtContent!</p>
             <p>Adjust site settings to get better results in promotion of your posts.</p>
         </div>
             
     </div>    
-    <div id="triangle_two" style="display: none;" class="triangle-top"></div>
-    <div id="tip_two_step" style="display: none;">
+    <div id="tip_two_step" class="ac_tip_show" style="display: none;">
         <p class="inline-block">This is your AtContent stats.  <a target="_blank" href="http://atcontent.com/" onclick="hide_welcome()">Want to get better?</a></p>
         <a href="javascript:hide_welcome()" style="margin-left: 50px;font-size: 10px;">No thanks.</a>
     </div>

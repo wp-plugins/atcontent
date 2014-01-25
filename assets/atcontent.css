@@ -61,6 +61,7 @@
 
 .inline-block {
     display: inline;
+    margin-left: 15px!important;
 }
 
 .triangle-top {
@@ -77,6 +78,14 @@
     margin-top: -20px;
 }
 
+.ac_tip_show {
+    background: #fff9d7;
+    border: 1px solid #e2c822;
+    border-radius: 0!important;
+    font-family: SegoeUI, Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
 .ac_welcome_show_visible {
     background-color: white;
     position: relative;
@@ -84,6 +93,10 @@
     z-index: 300; 
     padding: 10px;
     margin-left: -10px;
+}
+
+.ac_welcome_left {    
+    margin-left: 15px;
 }
 
 .b_enable {

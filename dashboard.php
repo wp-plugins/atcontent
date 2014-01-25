@@ -73,7 +73,7 @@
 <div class="atcontent_wrap">
     <div id="settings_step" style="float: left;">        
         <div id="first_time_header" style="display: none">
-            <h2 style="font-size: 20px;">Congratulations you are just connected your blog to AtContent! </h2>
+            
         </div>
         <?php include("settings.php"); ?>
     </div>
@@ -100,6 +100,20 @@
         function show_sync_stat()
         {
             jQuery("#sync_stat_block").show();
+            jQuery("#show_sync_link").html('Hide');
+            jQuery("#show_sync_link").unbind('click').onclick(function()
+            {
+                hide_sync_stat();
+            });
+        }
+
+        function hide_sync_stat()
+        {
+            jQuery("#sync_stat_block").hide();
+            jQuery("#show_sync_link").html('Show latest sync stat');
+            jQuery("#show_sync_link").unbind('click').onclick(function(){
+                show_sync_stat();
+            });
         }
 
          function Resync()
