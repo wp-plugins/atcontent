@@ -177,6 +177,7 @@ function atcontent_ajax_gate() {
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             $postid = $_POST["blogpostid"];
             $embedid = $_POST["embedid"];
+            $ac_published = $_POST["published"];
             $ac_postid = $_POST["postid"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
                 update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
