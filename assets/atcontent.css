@@ -79,7 +79,7 @@
 }
 
 .ac_tip_show {
-    background: #fff9d7;
+    background: #fff9d7!important;
     border: 1px solid #e2c822;
     border-radius: 0!important;
     font-family: SegoeUI, Tahoma, Arial, Helvetica, sans-serif;
@@ -92,7 +92,6 @@
     border-radius: 5px;
     z-index: 300; 
     padding: 10px;
-    margin-left: -10px;
 }
 
 .ac_welcome_left {    
