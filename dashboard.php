@@ -67,7 +67,7 @@
     }
 </script>
 <div style="position: absolute;right: 10px;top: 5px;">
-    You are connected to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img style="margin-right: 2px" src="<?php echo $ac_avatar_20; ?>" alt="" width="16" height="16"><?php echo $ac_show_name; ?></a></br>
+    You are connected to AtContent as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img style="margin-right: 2px; vertical-align: middle" src="<?php echo $ac_avatar_20; ?>" alt="" width="18" height="18"><?php echo $ac_show_name; ?></a></br>
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
@@ -155,7 +155,7 @@
             jQuery("#tip_one_step").hide();
             jQuery("#triangle_one").hide(); 
             jQuery("#tip_two_step").show();
-            jQuery("#tip_two_step").addClass('ac_welcome_show_visible').addClass('inline-block');
+            jQuery("#tip_two_step").addClass('ac_welcome_show_visible');
             jQuery("#triangle_two").show();
             jQuery("#settings_step").removeClass('ac_welcome_show_visible');   
             jQuery("#first_step_vis").removeClass('ac_welcome_show_visible');     

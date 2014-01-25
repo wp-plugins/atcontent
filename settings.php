@@ -27,7 +27,7 @@
     $ac_country = get_user_meta( $userid, "ac_country", true );
     $ac_state = get_user_meta( $userid, "ac_state", true );
 ?>
-    <div class="b-column">
+    <div>
 <?php 
 if ( $_GET["afterconnect"] == "1" ) {
     ?>

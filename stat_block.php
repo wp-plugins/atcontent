@@ -1,5 +1,10 @@
 <div class="b-cols" style="float:left">
-        <div class="b-column" id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
+    
+        <div id="tip_two_step" class="ac_tip_show" style="margin-left: 15px; display: none;">
+            <p>This is your AtContent stats.  Wanna get better? <a target="_blank" href="http://atcontent.com/" onclick="hide_welcome()">Improve your blog!</a></p>
+            <a href="javascript:hide_welcome()" style="font-size: 10px;">No thanks.</a>
+        </div>
+        <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset"><legend>Statistics for my blog</legend></fieldset> 
         <div id="dashboard-table" class="b-dashboard-table" style="margin-bottom: 0px;">
                         <div style="width:416px;">
@@ -117,8 +122,4 @@
         </div>
             
     </div>    
-    <div id="tip_two_step" class="ac_tip_show" style="display: none;">
-        <p class="inline-block">This is your AtContent stats.  <a target="_blank" href="http://atcontent.com/" onclick="hide_welcome()">Want to get better?</a></p>
-        <a href="javascript:hide_welcome()" style="margin-left: 50px;font-size: 10px;">No thanks.</a>
-    </div>
 </div>
