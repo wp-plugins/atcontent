@@ -78,7 +78,15 @@
         <?php include("settings.php"); ?>
     </div>
     
-     <?php include("stat_block.php");
+    <?php include("stat_block.php");
+    ?>
+    <div class="clear">
+    <a href="#" id="show_sync_link" onclick="show_sync_stat()">Show latest sync stat</a>    
+    <div id="sync_stat_block" style="display: none">
+        <div id="sync_message"></div>
+        <a href="#" class="likebutton b_orange" onclick="Resync()">Resync</a>
+    </div>
+    <?php
     }
     else
     {
@@ -89,6 +97,27 @@
     
 </div>
  <script>
+        function show_sync_stat()
+        {
+            jQuery("#sync_stat_block").show();
+        }
+
+         function Resync()
+         {
+            jQuery.ajax({url: '<?php echo $ajax_form_action; ?>', 
+                type: 'post', 
+                data: {action: 'atcontent_syncqueue'},
+                dataType: "json",
+                success: function(d){         
+                    jQuery("#sync_message").show();                       
+                    jQuery("#sync_message").html('Resync started');                    
+                    setTimeout('jQuery("#sync_message").hide()', 5000); 
+                },
+                error: function(d, s, e) {
+                }
+            });    
+         }
+        
         var isFirstTime = false;
         <?php if ($_GET["step"] == "1"){ ?>
         isFirstTime = true;

@@ -225,7 +225,7 @@
                 success: function(d){
                     if (d.IsOK)
                     {
-                        location.href = 'admin.php?page=atcontent/dashboard.php&step=1';                     
+                        SyncQueue();                     
                     }
                     else
                     {
@@ -245,8 +245,20 @@
 			    dataType: "json"    
 		    });  
         }
-  
-   
+
+        function SyncQueue()
+        {
+            $.ajax({url: '<?php echo $ajax_form_action; ?>', 
+                type: 'post', 
+                data: {action: 'atcontent_syncqueue'},
+                dataType: "json",
+                success: function(d){                                
+                    location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                },
+                error: function(d, s, e) {
+                }
+            });            
+        }
         <?php 
 
             $currentuser = wp_get_current_user();
@@ -264,7 +276,7 @@
 
         function SaveCredentials()
         {
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
+            $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
 			    data: {
 					    action: 'atcontent_save_credentials',
