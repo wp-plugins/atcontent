@@ -7,7 +7,8 @@
     $userid = intval( $currentuser->ID );
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
-    if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {    
+    if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {   
+    $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
     $currentuser = wp_get_current_user();
     $userinfo = get_userdata($currentuser -> ID);
     $email = $userinfo -> user_email;
@@ -79,14 +80,34 @@
     </div>
     
     <?php include("stat_block.php");
+    $stats = atcontent_api_get_sync_stat($ac_syncid, $ac_blogid);
     ?>
     <div class="clear">
-    <a href="#" id="show_sync_link" onclick="show_sync_stat()">Show latest sync stat</a>    
-    <div id="sync_stat_block" style="display: none">
-        <div id="sync_message"></div>
+    
+    <?php if ($_GET["step"] != "1"){ ?>
+    <div id="sync_message"></div>
+    <div class="b-dashboard-table b-dashboard-table-status" id="sync-process">
+        <table>
+            <tr><th>Sync status</th><td id="sync-status"><?php 
+                    if ($stats["IsSyncNow"]) {
+                        echo ('In work'); 
+                    } 
+                    elseif ($stats["IsActive"]) {
+                        echo ('Active'); 
+                    }
+                    else {
+                        echo ('Inactive'); 
+                    }?></td></tr>
+            <tr><th>Synchronized posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
+            <?php if($stats["ErrorsCount"]!=0){ ?>  
+                <tr><th>Errors count</th><td id="sync-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
+            <?php }?>
+        </table>
         <a href="#" class="likebutton b_orange" onclick="Resync()">Resync</a>
     </div>
+      
     <?php
+        }
     }
     else
     {

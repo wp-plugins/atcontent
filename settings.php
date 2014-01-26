@@ -140,7 +140,7 @@ END;
                         <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
                         Turn on share buttons
                     </label>
-                    <div class="ac-small">Enabme Facebook, Twitter, Linkedin and Google+ buttons under each post </div>
+                    <div class="ac-small">Enable Facebook, Twitter, Linkedin and Google+ buttons under each post </div>
                 </div>
             </fieldset>
         </div>        

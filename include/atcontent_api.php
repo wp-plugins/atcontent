@@ -323,6 +323,13 @@ function atcontent_api_syncqueue( $api_key, $syncid, $userid, $postids ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/syncqueue', $post_content );
 }
 
+function atcontent_api_get_sync_stat($syncId, $blogId  ) {
+    $post_content = 
+        'syncid=' . urlencode( $syncId ) .
+        '&blogid=' . urlencode( $blogId );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/syncstat', $post_content );
+}
+
 function atcontent_do_post( $url, $data ) {
     $old_error_level = error_reporting(0);
     if ( function_exists( 'curl_init' ) ) {

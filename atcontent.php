@@ -187,6 +187,7 @@
     function atcontent_footer_scripts() {
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
 ?>
 <script type="text/javascript">
 function ACsetCookie (name, value, expires, path, domain, secure) {
@@ -206,7 +207,7 @@ function ACgetCookie(name) {
 }
 </script>
 <?php
-        if ( strlen( $ac_api_key ) == 0 ) {
+        if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0) {
             $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
             $img_url = plugins_url( 'assets/logo.png', __FILE__ );
             $pointer_content = '<h3>Connect to AtContent</h3>';

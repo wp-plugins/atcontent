@@ -350,8 +350,7 @@ button.button-color-white[disabled],
             background: #fff;
         }
         .b-dashboard-table-status {
-            display: none;
-            width: 100%;
+            width: 40%;
         }
             .b-dashboard-table table {
                 border-collapse: collapse;

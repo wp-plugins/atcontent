@@ -1,8 +1,7 @@
 <div class="b-cols" style="float:left">
     
         <div id="tip_two_step" class="ac_tip_show" style="margin-left: 15px; display: none;">
-            <p>Follow 3 steps to imrove your results of using AtContent <br/> and reach new audience already today!</p>
-            <a href="javascript:hide_welcome()" style="font-size: 10px;">No thanks.</a>
+            <p>Follow 3 steps to improve your results of using AtContent <br/> and reach new audience already today!</p>
         </div>
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset"><legend>Results of using AtContent</legend></fieldset>             
@@ -11,13 +10,13 @@
                 We bet you can do it and even better</p>
                 <ul>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Set tags for your profile</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics">Set tags for your profile</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Follow relevant bloggers</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics">Follow relevant bloggers</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Invite others to repost</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics">Invite others to repost</a>
                     </li>
                 </ul>
             </div>
@@ -68,7 +67,7 @@
                         <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                             views on your blog
                         </div>
-                        <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank" onclick="getDetailsClick()">Get details</a></p>
+                        <p><a class="button" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics" target="_blank" onclick="getDetailsClick()">Get details</a></p>
                     </div>
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>

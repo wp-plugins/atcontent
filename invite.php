@@ -325,7 +325,7 @@
                     else
                     {
                         EnableButton();                        
-				        $("#ac_connect_result").html('<h2>Please <a onclick="signInWindow();" href="#">sign in</a> your AtContent account</h2>'); 
+				        $("#ac_connect_result").html('<h2>We have found an AtContent account associated with '+email+'. Please <a onclick="signInWindow();" href="#">sign in</a> to your AtContent account</h2>'); 
                     }
                 },
                 error: function() {					
