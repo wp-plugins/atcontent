@@ -127,18 +127,18 @@ END;
 ?>
 
             <fieldset>
-                <legend>Widget settings</legend>
+                <legend>Display settings</legend>
                 <div class="b-checkbox-row">
                     <label>
                         <input type="checkbox" id="ac_excerpt_no_process" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
-                        Turn on plugin features for the main page
+                        Enable plugin features for the home page
                     </label>
-                    <div class="ac-small">Should be un-marked for sites with not standard themes</div>
+                    <div class="ac-small">Should be unmarked for sites with custom themes</div>
                 </div>
                 <div class="b-checkbox-row">
                     <label>
                         <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
-                        Turn on share buttons
+                        Enable share buttons
                     </label>
                     <div class="ac-small">Enable Facebook, Twitter, Linkedin and Google+ buttons under each post </div>
                 </div>

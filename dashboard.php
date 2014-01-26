@@ -153,7 +153,8 @@
          }
         
         var isFirstTime = false;
-        <?php if ($_GET["step"] == "1"){ ?>
+        <?php if ($_GET["step"] == "1"){ 
+            setcookie("ac_plugin_after_connect", TRUE); ?>
         isFirstTime = true;
         jQuery("#popup-bg").show();      
         jQuery("#first_time_header").show();      

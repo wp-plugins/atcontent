@@ -1,13 +1,13 @@
 <div class="b-cols" style="float:left">
     
         <div id="tip_two_step" class="ac_tip_show" style="margin-left: 15px; display: none;">
-            <p>Follow 3 steps to improve your results of using AtContent <br/> and reach new audience already today!</p>
+            <p>Follow 3 steps to improve your results of using AtContent <br/> and reach new audience today!</p>
         </div>
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset"><legend>Results of using AtContent</legend></fieldset>             
             <div id="follow_steps_block" style="display: none">
                 <p>On average, bloggers increase audience by 2.5x in just 30 days.<br/>
-                We bet you can do it and even better</p>
+                We bet you can do even better</p>
                 <ul>
                     <li>
                         &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics">Set tags for your profile</a>
@@ -131,7 +131,7 @@
             </div>
         </div>
         <div id="tip_one_step" class="ac_tip_show" style="display: none;">
-            <p>Congratulations you are just connected your blog to AtContent!</p>
+            <p>Congratulations! You have connected your blog to AtContent!</p>
             <p>Adjust site settings to get better results in promotion of your posts.</p>
         </div>
             
