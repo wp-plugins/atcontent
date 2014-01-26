@@ -85,7 +85,6 @@
     <div class="clear">
     
     <?php if ($_GET["step"] != "1"){ ?>
-    <div id="sync_message"></div>
     <div class="b-dashboard-table b-dashboard-table-status" id="sync-process">
         <table>
             <tr><th>Sync status</th><td id="sync-status"><?php 
@@ -103,7 +102,7 @@
                 <tr><th>Errors count</th><td id="sync-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
             <?php }?>
         </table>
-        <a href="#" class="likebutton b_orange" onclick="Resync()">Resync</a>
+        <a href="#" id="resync_button" class="likebutton b_orange" onclick="Resync()">Resync</a>
     </div>
       
     <?php
@@ -139,14 +138,14 @@
 
          function Resync()
          {
+            jQuery("#resync_button").removeClass('b_orange').addClass('b_enable');
             jQuery.ajax({url: '<?php echo $ajax_form_action; ?>', 
                 type: 'post', 
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
-                success: function(d){         
-                    jQuery("#sync_message").show();                       
-                    jQuery("#sync_message").html('Resync started');                    
-                    setTimeout('jQuery("#sync_message").hide()', 5000); 
+                success: function(d){                             
+                    jQuery("#sync-status").html('In process');     
+                    jQuery("#resync_button").removeClass('b_enable').addClass('b_orange');   
                 },
                 error: function(d, s, e) {
                 }
