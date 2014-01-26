@@ -16,7 +16,7 @@
 ?>
 
 <div style="width: 100%; height: 40px;"></div>
-<div id="popup-bg" class="popup-bg" style="display: none"></div>
+<div id="popup-bg" class="welcome-popup-bg" style="display: none"></div>
 
 
 <script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
@@ -93,10 +93,10 @@
                         echo ('In process'); 
                     } 
                     elseif ($stats["IsActive"]) {
-                        echo ('Active'); 
+                        echo ('Ready'); 
                     }
                     else {
-                        echo ('Inactive'); 
+                        echo ('Error'); 
                     }?></td></tr>
             <tr><th>Synchronized posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
             <?php if($stats["ErrorsCount"]!=0){ ?>  

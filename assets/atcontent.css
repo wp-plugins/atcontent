@@ -449,6 +449,17 @@ button.button-color-white[disabled],
     *zoom: 1;
 }
 
+.welcome-popup-bg {
+    background-color: #000;
+    opacity: 0.7;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 160px;;
+    right: 0;
+    bottom: 0;
+}
+
 .popup-bg {
     background-color: #000;
     opacity: 0.7;
