@@ -289,7 +289,8 @@ function atcontent_connect_blog(){
     $sitetitle = $_POST['sitetitle'];
     $gate = $_POST['gate'];
     $blog = $_POST['blog'];
-    $connect_data = "bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog);
+    $blog_url = get_site_url();
+    $connect_data = "bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog)."&appurl=".$blog_url;
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
     if ($connect_answer["IsOK"] == TRUE)
     {
