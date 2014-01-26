@@ -59,14 +59,24 @@
     }
     
 </style>
-<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
     var gate = '<?php echo admin_url('admin-ajax.php'); ?>';
     var email = '<?php echo $email; ?>';    
     var site = '<?php echo $site; ?>';
     var title = '<?php bloginfo('name'); ?>';
     var userid = '<?php echo $userid; ?>';
-    
+
+    function gaSend(category, action)
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                        CPlase_ga.push({
+                            category: category + ' <?php echo AC_VERSION?>',
+                            action: action,
+                            label: site + '      ' + email
+                        });
+    }
+
     window.CPlase_ga = window.CPlase_ga || [];
                 CPlase_ga.push({
                     category: 'connectTab <?php echo AC_VERSION?>',
@@ -336,6 +346,7 @@
         }
         
         $("#b_connect").click(function () {
+            gaSend('connect', 'clicked');
             $(".discl").html('');
 		    $("#ac_connect_result").html('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
             if (buttonDisabled) {return;}

@@ -40,7 +40,7 @@
     $email = $userinfo -> user_email;
     $site = $_SERVER['HTTP_HOST'];
 ?>
-<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
     var email = '<?php echo $email?>';    
     var site = '<?php echo $site?>';

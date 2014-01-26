@@ -19,7 +19,7 @@
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
 
 
-<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
     var email = '<?php echo $email?>';    
     var site = '<?php echo $site?>';
@@ -64,6 +64,7 @@
 
     function getDetailsClick()
     {
+        hide_welcome();
         gaSend('dashboard', 'get details clicked');
     }
 </script>
