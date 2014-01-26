@@ -448,8 +448,30 @@ button.button-color-white[disabled],
     max-width: 1200px;
     *zoom: 1;
 }
+.hint {
+    position: relative;
+    vertical-align: middle;
+    margin-left: 2px;
+}
 
+.hint >img{
+    width: 14px;
+    height: 14px;
+}
 
+.hint:hover::after {
+    content: attr(data-title); 
+    position: absolute; 
+    left: 20%; top: 30%; 
+    z-index: 1; 
+    width: 300px;
+    background: rgba(255,255,230,0.9);
+    font-family: Arial, sans-serif; 
+    font-size: 11px; 
+    color: black;
+    padding: 5px 10px;
+    border: 1px solid #333;
+   }
 
 .popup-bg {
     background-color: #000;

@@ -83,11 +83,11 @@
     $stats = atcontent_api_get_sync_stat($ac_syncid, $ac_blogid);
     ?>
     <div class="clear">
-    
     <?php if ($_GET["step"] != "1"){ ?>
     <div class="b-dashboard-table b-dashboard-table-status" id="sync-process">
         <table>
-            <tr><th>Sync status</th><td id="sync-status"><?php 
+            <tr><th>Sync status
+    <a data-title="Synchronization gets your posts signed with your name and presents your blog to the AtContent audience. It backups your posts in the AtContent cloud and provides you one backlink per each synchronized post." class="hint"><img src="/wp-content/plugins/atcontent/assets/help.png"></img></a></th><td id="sync-status"><?php 
                     if ($stats["IsSyncNow"]) {
                         echo ('In process'); 
                     } 
@@ -153,8 +153,7 @@
          }
         
         var isFirstTime = false;
-        <?php if ($_GET["step"] == "1"){ 
-            setcookie("ac_plugin_after_connect", TRUE); ?>
+        <?php if ($_GET["step"] == "1"){ ?>
         isFirstTime = true;
         jQuery("#popup-bg").show();      
         jQuery("#first_time_header").show();      
