@@ -194,6 +194,21 @@ function atcontent_ajax_gate() {
                 echo json_encode ( array ( "IsOK" => true ) );
             }
             break;
+        case "deletepost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $postid = $_POST["blogpostid"];
+            $ac_postid = $_POST["postid"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                $ac_postid_meta = get_post_meta( intval( $postid ), "ac_repost_postid", true );
+                if ( $ac_postid_meta == $ac_postid ) {
+                    wp_delete_post( intval( $postid ) );
+                    echo json_encode ( array ( "IsOK" => true ) );
+                } else {
+                    echo json_encode ( array ( "IsOK" => false ) );
+                }
+            }
+            break;
     }
     exit;
 }
