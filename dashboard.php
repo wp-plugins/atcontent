@@ -16,7 +16,7 @@
 ?>
 
 <div style="width: 100%; height: 40px;"></div>
-<div id="popup-bg" class="welcome-popup-bg" style="display: none"></div>
+<div id="popup-bg" class="popup-bg" style="display: none"></div>
 
 
 <script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>

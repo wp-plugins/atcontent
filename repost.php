@@ -152,7 +152,7 @@
         font-size: larger;
         text-align: center;
         position: absolute;
-        top: 300px;
+        top: 200px;
         z-index: 201;
     }
         .rate-hidden > p {
