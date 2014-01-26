@@ -97,7 +97,7 @@
                     else {
                         echo ('Error'); 
                     }?></td></tr>
-            <tr><th>Synchronized posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
+            <tr><th>Synced posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
             <?php if($stats["ErrorsCount"]!=0){ ?>  
                 <tr><th>Errors count</th><td id="sync-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
             <?php }?>

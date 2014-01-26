@@ -327,6 +327,9 @@ button.button-color-white[disabled],
     padding-left: 10pt;
     
 }
+#sync-process {
+    margin-top: 20px;
+}
 
     .b-dashboard {
         *zoom: 1;
