@@ -10,13 +10,13 @@
                 We bet you can do even better</p>
                 <ul>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?fromplugin=1">Set tags for your profile</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Set tags for your profile</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?fromplugin=1">Follow relevant bloggers</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Follow relevant bloggers</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?fromplugin=1">Invite others to repost</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Invite others to repost</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +67,7 @@
                         <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                             views on your blog
                         </div>
-                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?fromplugin=1" target="_blank" onclick="getDetailsClick()">Get details</a></p>
+                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?wp" target="_blank" onclick="getDetailsClick()">Get details</a></p>
                     </div>
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
