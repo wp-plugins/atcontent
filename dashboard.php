@@ -90,7 +90,7 @@
         <table>
             <tr><th>Sync status</th><td id="sync-status"><?php 
                     if ($stats["IsSyncNow"]) {
-                        echo ('In work'); 
+                        echo ('In process'); 
                     } 
                     elseif ($stats["IsActive"]) {
                         echo ('Active'); 
