@@ -40,7 +40,6 @@ if ( $_GET["afterconnect"] == "1" ) {
         <fieldset>
             <?php if ( user_can( $userid, "manage_options" ) ) { ?>
                 <legend style="float: left">Site Settings</legend>
-                <div style="display: none;margin-top: 0px;height: 14px;margin-left: 20px;" class="update-nag" id="settings_saved"></div>
             <?php } else if ( user_can( $userid, "publish_posts" ) ) { ?>
                 <legend>Profile Settings</legend>
             <?php } else { ?>
@@ -146,8 +145,9 @@ END;
             </fieldset>
         </div>        
     <p>
-        <a id="b_save" class="likebutton b_orange" onclick="submit_settings()">Apply Settings</a>
-    </p>      
+        <a id="b_save" class="likebutton b_orange" style="float: left" onclick="submit_settings()">Apply Settings</a>        
+    </p>
+        <div style="display: none;margin-top: 0px;height: 14px;margin-left: 20px;margin-top: -3px;" class="update-nag" id="settings_saved"></div>
     </div>
 
 </form>

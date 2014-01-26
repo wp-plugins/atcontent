@@ -1,11 +1,26 @@
 <div class="b-cols" style="float:left">
     
         <div id="tip_two_step" class="ac_tip_show" style="margin-left: 15px; display: none;">
-            <p>This is your AtContent stats.  Wanna get better? <a target="_blank" href="http://atcontent.com/" onclick="hide_welcome()">Improve your blog!</a></p>
+            <p>Follow 3 steps to imrove your results of using AtContent <br/> and reach new audience already today!</p>
             <a href="javascript:hide_welcome()" style="font-size: 10px;">No thanks.</a>
         </div>
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
-            <fieldset id="stat-fieldset"><legend>Statistics for my blog</legend></fieldset> 
+            <fieldset id="stat-fieldset"><legend>Results of using AtContent</legend></fieldset>             
+            <div id="follow_steps_block" style="display: none">
+                <p>On average, bloggers increase audience by 2.5x in just 30 days.<br/>
+                We bet you can do it and even better</p>
+                <ul>
+                    <li>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Set tags for your profile</a>
+                    </li>
+                    <li>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Follow relevant bloggers</a>
+                    </li>
+                    <li>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics">Invite others to repost</a>
+                    </li>
+                </ul>
+            </div>
         <div id="dashboard-table" class="b-dashboard-table" style="margin-bottom: 0px;">
                         <div style="width:416px;">
         <?php

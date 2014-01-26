@@ -151,8 +151,9 @@
         }
 
         function third_welcome_step()
-        {     
+        {          
             jQuery("#tip_one_step").hide();
+            jQuery("#follow_steps_block").show();
             jQuery("#triangle_one").hide(); 
             jQuery("#tip_two_step").show();
             jQuery("#tip_two_step").addClass('ac_welcome_show_visible');
