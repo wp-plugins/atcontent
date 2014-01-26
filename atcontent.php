@@ -64,7 +64,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=e', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=f', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );

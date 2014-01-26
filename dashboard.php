@@ -118,6 +118,10 @@
     
 </div>
  <script>
+     
+        var setings_w = jQuery("#settings_step").width();
+        jQuery("#sync-process").width(setings_w-20);
+        
         function show_sync_stat()
         {
             jQuery("#sync_stat_block").show();

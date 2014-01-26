@@ -474,6 +474,7 @@ button.button-color-white[disabled],
     color: black;
     padding: 5px 10px;
     border: 1px solid #333;
+    margin-left: 10px;
    }
 
 .popup-bg {
