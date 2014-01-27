@@ -362,7 +362,7 @@ button.button-color-white[disabled],
                 width: 100%;
             }
                 .b-dashboard-table th, .b-dashboard-table td {
-                    border-top: 1px solid #EEEEEE;
+                    /*border-top: 1px solid #EEEEEE;*/
                 }
                 .b-dashboard-table tr:first-child th, .b-dashboard-table tr:first-child td {
                     border: medium none;

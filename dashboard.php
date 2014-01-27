@@ -35,6 +35,7 @@
                         });
     }
 
+    jQuery("#contextual-help-link").hide();
 
     function beforechangeaccount() {
         if (confirm("Are you sure you want to change account?"))
