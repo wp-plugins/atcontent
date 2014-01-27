@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 6.3.18
+    Version: 7.0.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "6.3.18" );
+    define( 'AC_VERSION', "7.0.0" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -41,6 +41,11 @@
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
     add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
+    add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
+    add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
+    add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
+    add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
+    add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
     add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
     add_action( 'wp_ajax_nopriv_atcontent_guestpost', 'atcontent_ajax_guestpost' );
     add_action( 'wp_ajax_atcontent_guestpost', 'atcontent_ajax_guestpost' );
@@ -48,6 +53,7 @@
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( "wp_ajax_atcontent_ga", "atcontent_ajax_ga" );
     add_action( 'wp_ajax_atcontent_guestpost_check_url', 'atcontent_ajax_guestpost_check_url' );
+    add_action( 'wp_ajax_atcontent_syncqueue', 'atcontent_ajax_syncqueue' );
     add_action( 'admin_head', 'atcontent_admin_head' );
     //add_filter( 'manage_posts_columns', 'atcontent_column_head' );
     //add_action( 'manage_posts_custom_column', 'atcontent_column_content', 10, 2 );
@@ -58,7 +64,7 @@
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=e', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=f', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
@@ -86,9 +92,9 @@
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
 
-        add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'edit_posts', 'atcontent/connect.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'edit_posts', 'atcontent/settings.php',  '');
-        add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'edit_posts', 'atcontent/sync.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'edit_posts', 'atcontent/connect.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'edit_posts', 'atcontent/settings.php',  '');
+        //add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'edit_posts', 'atcontent/sync.php',  '');
         //add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
 
         //$guest_key = atcontent_get_menu_key( 5.0 );
@@ -181,6 +187,7 @@
     function atcontent_footer_scripts() {
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
 ?>
 <script type="text/javascript">
 function ACsetCookie (name, value, expires, path, domain, secure) {
@@ -200,8 +207,8 @@ function ACgetCookie(name) {
 }
 </script>
 <?php
-        if ( strlen( $ac_api_key ) == 0 ) {
-            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+        if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0) {
+            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
             $img_url = plugins_url( 'assets/logo.png', __FILE__ );
             $pointer_content = '<h3>Connect to AtContent</h3>';
             $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url .
@@ -223,7 +230,7 @@ jQuery(document).ready( function($) {
 </script>
 <?php
         } else {
-            $connect_url = admin_url( "admin.php?page=atcontent/settings.php" );
+            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
             $ac_country = get_user_meta($userid, "ac_country", true );
             if ( strlen( $ac_country ) == 0 ) {
                 $pointer_content = '<h3>Better Interaction with AtContent</h3>';

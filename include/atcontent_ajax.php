@@ -79,6 +79,136 @@ function atcontent_ajax_gate() {
                 echo json_encode( array ( "IsOK" => true, "Url" => $original_uri ) );
             }
             break;
+        case "getpost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $postid = $_POST["postid"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                $post = get_post( $postid );
+                if ($post == null) exit;
+                $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
+                if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
+                $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
+                if ( strlen( $ac_is_copyprotect ) == 0 ) { 
+                    $ac_is_copyprotect = $ac_user_copyprotect;
+                    update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
+                }
+                $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
+                if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
+                    $ac_is_advanced_tracking = "1";
+                    update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
+                }
+                $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+                atcontent_coexistense_fixes();
+                $post_title = $post->post_title;
+                $post_content = apply_filters( "the_content",  $post->post_content );
+                $comments_json = "";
+                $comments = get_comments( array(
+                    'post_id' => $post->ID,
+                    'order' => 'ASC',
+                    'orderby' => 'comment_date_gmt',
+                    'status' => 'approve',
+                ) );
+                if ( !empty( $comments ) ) {
+                    $comments_json .= json_encode( $comments );
+                }
+                $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
+                $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
+                $post_published = get_gmt_from_date( $post->post_date );
+                $post_original_url = get_permalink( $post->ID );
+                echo json_encode( array( 
+                    "IsOK" => true,
+                    "Title" => $post_title,
+                    "Content" => $post_content,
+                    "CopyProtection" => $ac_is_copyprotect,
+                    "AdvancedTracking" => $ac_is_advanced_tracking,
+                    "Published" => $post_published,
+                    "OriginalUrl" => $post_original_url,
+                    "Comments" => $comments_json,
+                    "Tags" => $tags_json,
+                    "Categories" => $cats_json,
+                    "PostId" => $ac_postid,
+                    ) );
+            }
+            break;
+        case "newpost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
+            if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
+            $ac_postid = $_POST["postid"];
+            $ac_embedid = $_POST["embedid"];
+            $ac_published = $_POST["published"];
+            $embedid = '';
+            if ( strlen( $ac_embedid ) > 0 ) {
+                $embedid .= "-/" . $ac_embedid . "/"; 
+            }
+            $title = $_POST["title"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                remove_filter( 'the_content', 'atcontent_the_content', 1 );
+                remove_filter( 'the_content', 'atcontent_the_content_after', 100);
+                remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+                remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+                $ac_content = 
+                "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+                "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+                "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                // Create post object
+                $new_post = array(
+                    'post_title'    => $title,
+                    'post_content'  => $ac_content,
+                    'post_status'   => 'publish',
+                    'post_author'   => $userid,
+                    'post_date'     => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
+                    'post_category' => array()
+                );
+                kses_remove_filters();
+                // Insert the post into the database
+                remove_action( 'publish_post', 'atcontent_publish_publication' );
+                $new_post_id = wp_insert_post( $new_post );
+                update_post_meta( $new_post_id, "ac_is_process", "0" );
+                update_post_meta( $new_post_id, "ac_embedid", $embedid );
+                update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
+                add_action( 'publish_post', 'atcontent_publish_publication' );
+                kses_init_filters();
+                echo json_encode ( array ( "IsOK" => true, "PostId" => $new_post_id ) );
+            }
+            break;
+        case "updatepost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $postid = $_POST["blogpostid"];
+            $embedid = $_POST["embedid"];
+            $ac_published = $_POST["published"];
+            $ac_postid = $_POST["postid"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
+                update_post_meta( intval( $postid ), "ac_is_process", "1" );
+                update_post_meta( intval( $postid ), "ac_embedid", $embedid );
+                remove_action( 'publish_post', 'atcontent_publish_publication' );
+                wp_update_post( array(
+                    'ID' => intval( $postid ),
+                    'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) )
+                ) );
+                add_action( 'publish_post', 'atcontent_publish_publication' );
+                echo json_encode ( array ( "IsOK" => true ) );
+            }
+            break;
+        case "deletepost":
+            $userid = $_POST["userid"];
+            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+            $postid = $_POST["blogpostid"];
+            $ac_postid = $_POST["postid"];
+            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+                $ac_postid_meta = get_post_meta( intval( $postid ), "ac_repost_postid", true );
+                if ( $ac_postid_meta == $ac_postid ) {
+                    wp_delete_post( intval( $postid ) );
+                    echo json_encode ( array ( "IsOK" => true ) );
+                } else {
+                    echo json_encode ( array ( "IsOK" => false ) );
+                }
+            }
+            break;
     }
     exit;
 }
@@ -153,6 +283,98 @@ function atcontent_hide_rate(){
     exit;
 }
 
+function atcontent_connect_blog(){
+    $bloguserid = $_POST['bloguserid'];
+    $apikey = $_POST['apikey'];
+    $sitetitle = $_POST['sitetitle'];
+    $gate = $_POST['gate'];
+    $blog = $_POST['blog'];
+    $blog_url = get_site_url();
+    $connect_data = "bloguserid=".urlencode($bloguserid)."&apikey=".urlencode($apikey)."&sitetitle=".urlencode($sitetitle)."&gate=".urlencode($gate)."&blog=".urlencode($blog)."&appurl=".$blog_url;
+    $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
+    if ($connect_answer["IsOK"] == TRUE)
+    {
+        $userid = wp_get_current_user()->ID;
+        update_user_meta( $userid, "ac_blogid", $connect_answer["BlogId"] );
+        update_user_meta( $userid, "ac_blog_title", $connect_answer["BlogTitle"] );
+        update_user_meta( $userid, "ac_syncid", $connect_answer["SyncId"] );
+        echo json_encode ( array ( "IsOK" => true ) ); 
+    }
+    else
+    {
+        if ($connect_answer["Error"] == "select")
+        {
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", blogs => $connect_answer["blogs"] ) ); 
+        }
+        else
+        {
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => $connect_answer["Error"]) ); 
+        }
+    }
+    exit;
+}
+
+function atcontent_disconnect()
+{    
+    $userid = wp_get_current_user()->ID;
+    update_user_meta( $userid, "ac_api_key", "");
+    update_user_meta( $userid, "ac_syncid", "");
+    echo json_encode ( array ( "IsOK" => true )); 
+    exit;
+}
+
+function atcontent_save_settings()
+{
+        $userid = wp_get_current_user()->ID;
+        $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
+        update_user_meta( $userid, "ac_sitecategory", $siteCategory );
+
+        $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
+        update_user_meta( $userid, "ac_country", $country );
+
+        $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
+        update_user_meta( $userid, "ac_state", $state );
+
+        atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
+
+        $ac_share_panel_disable = $_POST["ac_share_panel_disable"] == 'y' ? 0 : 1;
+        update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
+
+        $ac_excerpt_no_process = $_POST[ "ac_excerpt_no_process" ] == 'y'  ? "0" : "1";
+        update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
+        echo json_encode ( array ( "IsOK" => true )); 
+        exit;
+}
+
+function atcontent_save_credentials()
+{
+    $userid = wp_get_current_user()->ID;
+    update_user_meta( $userid, "ac_api_key", $_POST["apikey"] );
+    update_user_meta( $userid, "ac_pen_name", $_POST["nickname"] );
+    update_user_meta( $userid, "ac_showname", $_POST["showname"] );
+    update_user_meta( $userid, "ac_avatar_20", $_POST["Avatar20"] );
+    update_user_meta( $userid, "ac_avatar_80", $_POST["Avatar80"] );
+    echo json_encode ( array ( "IsOK" => true )); 
+    exit;
+}
+
+function atcontent_connect()
+{
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $auth_data = "email=".urlencode($email)."&username=".urlencode($username);
+    $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connect', $auth_data );
+    if($connect_answer["IsOK"] == TRUE)
+    {
+        echo json_encode ( array ( "IsOK" => true , "APIKey" => $connect_answer["APIKey"], "Nickname" => $connect_answer["Nickname"], "Showname" => $connect_answer["Showname"], "Avatar20" => $connect_answer["Avatar20"], "Avatar80" => $connect_answer["Avatar80"]) ); 
+    } 
+    else 
+    {
+        echo json_encode ( array ( "IsOK" => false , "Error" => $connect_answer["Error"])); 
+    }
+    exit;
+}
+
 function atcontent_ajax_repost(){
         include("atcontent_userinit.php");
         $ac_postid = $_POST['ac_post'];
@@ -183,5 +405,30 @@ function atcontent_ajax_repost(){
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }
+
+function atcontent_ajax_syncqueue(){
+    global $wpdb;
+    include("atcontent_userinit.php");
+    $posts_id = array();
+    $syncid = get_user_meta( $userid, "ac_syncid", true ); 
+    $posts = $wpdb->get_results( 
+	    "
+	    SELECT ID, post_author
+	    FROM {$wpdb->posts}
+	    WHERE post_status = 'publish' 
+		    AND post_author = {$userid} AND post_type = 'post'
+	    "
+    );
+    wp_cache_flush();
+    foreach ( $posts as $post ) 
+    {
+        if ($post->post_author == $userid) {
+            array_push( $posts_id, $post->ID );
+        }
+        wp_cache_flush();
+    }
+    atcontent_api_syncqueue( $ac_api_key, $syncid, $userid, $posts_id );
+    exit;
+}
 
 ?>

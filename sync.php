@@ -18,7 +18,7 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
     $form_message = '';
 
     if ( strlen( $ac_api_key ) == 0 ) {
-        $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         ?>
 <script>window.location = '<?php echo $connect_url; ?>';</script>
         <?php
@@ -269,6 +269,18 @@ window.qbaka || (function(a,c){a.__qbaka_eh=a.onerror;a.__qbaka_reports=[];a.one
                 e.preventDefault();
                 getDetails();
             } );
+            $('#sync-queue-button').on('click', function(e){
+                e.preventDefault();
+                $.ajax({url: '<?php echo $form_action; ?>', 
+                        type: 'post', 
+                        data: {action: 'atcontent_syncqueue'},
+                        dataType: "json",
+                        success: function(d){
+                        },
+                        error: function(d, s, e) {
+                        }
+                });
+            });
         });
     })(jQuery);
     
@@ -336,5 +348,7 @@ $email_body = "Hey AtContent team, \n" .
 
     <div id="importDetails"></div>
 </div>
+
+    <button type="button" class="button-color-orange button-size-large" id="sync-queue-button">Sync me!</button>
 </div>
 <?php atcontent_ga("SyncTab", "Sync page"); ?>

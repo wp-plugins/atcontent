@@ -76,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.0.0 =
+* New synchronization process. Interface upgrades and simplification.
+
 = 6.3.18 =
 * Settings page update
 

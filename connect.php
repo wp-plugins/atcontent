@@ -11,18 +11,9 @@
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+    $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
     $hidden_field_name = 'ac_submit_hidden';
     $form_message = '';
-    if ( isset( $_POST[ $hidden_field_name ] ) && ( $_POST[ $hidden_field_name ] == 'Y' ) &&
-        isset( $_POST[ "ac_api_key" ] ) ) {
-        $ac_api_key = trim( $_POST[ "ac_api_key" ] );
-        update_user_meta( $userid, "ac_api_key", $ac_api_key );
-        $admin_url_main = admin_url("admin.php?page=atcontent/connect.php");
-    ?>
-<script>window.location = '<?php echo $admin_url_main ?>';</script>
-<?php
-        $form_message .= 'Settings saved.';
-    }
     if ( isset( $_POST[ "connectuser" ] ) && strlen( $ac_api_key ) > 0 ) {
         $ac_userinfo = atcontent_api_get_userinfo( $ac_api_key );
         if ( user_can( $userid, "manage_options" ) ) {
@@ -36,7 +27,11 @@
             foreach ( $users as $user ) {
                 if ( $user->ID != $currentuser->ID && user_can( $user, "publish_posts" ) && !in_array( $user->ID . "", $_POST["connectuser"] ) ) {
                     $user_ac_api_key = get_user_meta( intval( $user->ID ), "ac_api_key", true );
-                    if ( $user_ac_api_key == $ac_api_key ) update_user_meta( intval( $user->ID ), "ac_api_key", "" );
+                    if ( $user_ac_api_key == $ac_api_key ) 
+                    {
+                        update_user_meta( intval( $user->ID ), "ac_api_key", "" );
+                        update_user_meta( $userid, "ac_syncid", "" );
+                    }
                 }
             }
         }
@@ -58,20 +53,42 @@
 ?>
 <script>
     function beforechangeaccount() {
-        return confirm("Are you sure you want to change account?");
+        if (confirm("Are you sure you want to change account?"))
+            jQuery.ajax({url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+			    type: 'post',
+			    data: {
+					    action: 'atcontent_disconnect'
+					}, 
+                success: function(d)
+                {  
+                    if (d.IsOK)
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                    }
+                },                   
+			    dataType: "json"
+		    });
     }
 </script>
-<div class="atcontent_wrap">
 <?php 
-    include("settings_menu.php");
-    if ( strlen($ac_api_key) == 0 ) {
+    if ( strlen($ac_api_key) == 0 || strlen($ac_syncid) == 0 ) {
         $form_action = admin_url( 'admin-ajax.php' );
         include( "invite.php" );
     } else {
-?>
+        ?>
+<style>
+    .connect_left > h2 {
+        font-family: wf_SegoeUILight, 'Segoe UI Light', 'Segoe WP Light', 'Segoe UI', Segoe, 'Segoe WP', Tahoma, Verdana, Arial, sans-serif;
+        font-size: 23px;
+    }
+</style>
+<div class="b-dashboard-col" style="margin-right: 60px;">
 <div class="connect_left">
-<form action="" method="POST" id="disconnect-form" onsubmit="return beforechangeaccount();">
-    <input type="hidden" name="<?php echo $hidden_field_name ?>" value="Y">
+   
+</div>
     <p style="text-align: center;"><?php echo get_avatar( $currentuser->ID, 16 ) . " " . $currentuser->display_name; ?> is connected with AtContent as</p>
     <p style="text-align: center">
         <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
@@ -81,11 +98,10 @@
         <input type="hidden" name="ac_api_key" value="" >
     </p>
     <p style="text-align: center">
-        <button type="submit" class="button-size-small button-color-white" name="disconnect" id="disconnect">
+        <a href="#" class="b_button b_color_white" id="disconnect" onclick="beforechangeaccount();">
             <?php esc_attr_e('Change account') ?>
-        </button>
+        </a>
     </p>
-</form>
 </div>
 <?php
         $users = get_users("orderby=ID");
@@ -93,7 +109,7 @@
         foreach ( $users as $user ) {
             if ( $user->ID != $currentuser->ID && user_can( $user, "edit_posts" ) ) $additionalUsersCount += 1;
         }
-        if ( $additionalUsersCount > 0 && user_can( $currentuser->ID, "manage_options" ) ) {
+        if ( $additionalUsersCount > 1 && user_can( $currentuser->ID, "manage_options" ) ) {
 ?>
     <div class="connect_right">
         <form action="" method="post" name="updateconnect-form" id="updateconnect-form">
@@ -120,6 +136,4 @@
     }
 $form_action = admin_url( 'admin-ajax.php' );
 ?>
-</div>
-<div class="clear"></div>
 <?php atcontent_ga("ConnectTab", "Connect"); ?>

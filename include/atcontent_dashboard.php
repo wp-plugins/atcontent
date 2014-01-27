@@ -3,11 +3,12 @@
 function atcontent_dashboard_widget_function() {
 	$userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
+    $ac_syncid = get_user_meta($userid, "ac_syncid", true );
     
     echo '<div class="atcontent_wrap">';
 
-    if ( strlen( $ac_api_key ) == 0 ) {
-        $connect_url = admin_url( "admin.php?page=atcontent/connect.php" );
+    if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0  ) {
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         echo '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent<div class="clear"></div></div>';
         atcontent_ga("Dashboard", "WordPress Dashboard");

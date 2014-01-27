@@ -40,7 +40,7 @@
     $email = $userinfo -> user_email;
     $site = $_SERVER['HTTP_HOST'];
 ?>
-<script src="/wp-content/plugins/atcontent/interface.js" type="text/javascript"></script>
+<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
     var email = '<?php echo $email?>';    
     var site = '<?php echo $site?>';
@@ -130,16 +130,6 @@
 </div>
     <br><br>
     <style>
-    .popup-bg {
-        background-color: #000;
-        opacity: 0.7;
-        position: fixed;
-        z-index: 200;
-        top: 0;
-        left: -20px;
-        right: 0;
-        bottom: 0;
-    }
         
         .close-ico{
             position: absolute;
@@ -162,7 +152,7 @@
         font-size: larger;
         text-align: center;
         position: absolute;
-        top: 300px;
+        top: 200px;
         z-index: 201;
     }
         .rate-hidden > p {
