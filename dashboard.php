@@ -73,10 +73,7 @@
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
-    <div id="settings_step" style="float: left;">        
-        <div id="first_time_header" style="display: none">
-            
-        </div>
+    <div id="settings_step" style="float: left; width: 450px;">    
         <?php include("settings.php"); ?>
     </div>
     
@@ -85,25 +82,25 @@
     ?>
     <div class="clear">
     <?php if ($_GET["step"] != "1"){ ?>
-    <div class="b-dashboard-table b-dashboard-table-status" id="sync-process">
+    <div class="b-dashboard-table b-dashboard-table-status" id="sync-process" style="width: 420px">
         <table>
             <tr><th>Sync status
-    <a data-title="Synchronization gets your posts signed with your name and presents your blog to the AtContent audience. It backups your posts in the AtContent cloud and provides you one backlink per each synchronized post." class="hint"><img src="/wp-content/plugins/atcontent/assets/help.png"></img></a></th><td id="sync-status"><?php 
+    <a data-title="Synchronization shows how many posts are available to repost for other AtContent user." class="hint"><img src="/wp-content/plugins/atcontent/assets/help.png"></img></a></th><td id="sync-status"><?php 
                     if ($stats["IsSyncNow"]) {
                         echo ('In process'); 
                     } 
                     elseif ($stats["IsActive"]) {
-                        echo ('Ready'); 
+                        echo ('Completed'); 
                     }
                     else {
                         echo ('Error'); 
                     }?></td></tr>
-            <tr><th>Synced posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
+            <tr><th>Amount of synced posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
             <?php if($stats["ErrorsCount"]!=0){ ?>  
                 <tr><th>Errors count</th><td id="sync-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
             <?php }?>
         </table>
-        <a href="#" id="resync_button" class="likebutton b_orange" onclick="Resync()">Resync</a>
+        <a href="#" id="resync_button" style="margin-left: 10px" class="likebutton b_orange" onclick="Resync()">Resync</a>
     </div>
       
     <?php
@@ -118,9 +115,6 @@
     
 </div>
  <script>
-     
-        var setings_w = jQuery("#settings_step").width();
-        jQuery("#sync-process").width(setings_w-20);
         
         function show_sync_stat()
         {
@@ -160,6 +154,7 @@
         var isFirstTime = false;
         <?php if ($_GET["step"] == "1"){ ?>
         isFirstTime = true;
+        jQuery("#follow_steps_block").hide();
         jQuery("#popup-bg").show();      
         jQuery("#first_time_header").show();      
         jQuery("#settings_step").addClass('ac_welcome_show_visible');  

@@ -16,9 +16,9 @@
     }
     //End PingBack
 ?>
+<div id="settings-block" class="b-cols b-dashboard-table" style="width:420px">
 
-
-    <form action="" method="POST" name="settings-form" id="settings-form" style="clear: both">
+    <form action="" method="POST" name="settings-form" id="settings-form" style="margin-left: 10px; clear: both">
     <div class="b-cols">
         
     
@@ -103,7 +103,14 @@ END;
                 var ac_j = jQuery;
                 function ac_checkCountry() {
                     var c = ac_j("#ac_country").val();
-                    if (c == "US") { ac_j("#ac_state").show(); } else { ac_j("#ac_state").hide(); }
+                    if (c == "US") { 
+                        ac_j("#ac_state").show();  
+                        ac_j("#sync-process").css("margin-top", "-50px"); 
+                    } 
+                    else { 
+                        ac_j("#ac_state").hide();                         
+                        ac_j("#sync-process").css("margin-top", "-100px"); 
+                    }
                 }
                 ac_j(function () {
                     ac_checkCountry();
@@ -242,3 +249,4 @@ END;
     })(jQuery);
 </script>
 <?php atcontent_ga("SettingsTab", "Settings page"); ?>
+</div>

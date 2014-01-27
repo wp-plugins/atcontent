@@ -1,14 +1,15 @@
-<div class="b-cols" style="float:left">
+<div class="b-cols" style="float:left; margin-left: 30px">
     
+        <div id="dashboard-table" class="b-dashboard-table" style="margin-bottom: 0px;">
         <div id="tip_two_step" class="ac_tip_show" style="margin-left: 15px; display: none;">
             <p>Follow 3 steps to improve your results of using AtContent <br/> and reach new audience today!</p>
         </div>
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset"><legend>Results of using AtContent</legend></fieldset>             
-            <div id="follow_steps_block" style="display: none">
-                <p>On average, bloggers increase audience by 2.5x in just 30 days.<br/>
-                We bet you can do even better</p>
-                <ul>
+            <div id="follow_steps_block" >
+                <p>On average, bloggers increase audience by 2.5x in just 30 days.</p>
+                <h3 style="font-weight: bold"></h3>Steps to improve your results</h3>
+                <ul style="margin-left: 30px;">
                     <li>
                         &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Set tags for your profile</a>
                     </li>
@@ -16,11 +17,10 @@
                         &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Follow relevant bloggers</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Invite others to repost</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="hide_welcome()" href="https://atcontent.com/Studio/Statistics?wp">Invite others to repost your posts</a>
                     </li>
                 </ul>
             </div>
-        <div id="dashboard-table" class="b-dashboard-table" style="margin-bottom: 0px;">
                         <div style="width:416px;">
         <?php
             if ( strlen( $ac_api_key ) > 0 ) {
@@ -130,10 +130,11 @@
             ?>
             </div>
         </div>
-        <div id="tip_one_step" class="ac_tip_show" style="display: none;">
+        
+            
+    </div>  
+    <div id="tip_one_step" class="ac_tip_show" style="display: none;margin-left: -15px;">
             <p>Congratulations! You have connected your blog to AtContent!</p>
             <p>Adjust site settings to get better results in promotion of your posts.</p>
-        </div>
-            
-    </div>    
+        </div>  
 </div>
