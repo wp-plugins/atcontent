@@ -1,7 +1,7 @@
 === AtContent Plugin ===
 Contributors: atcontent, vadnov
 Donate link: https://atcontent.com/
-Tags: ad, admin, administration, ads, advertising, affiliate, AJAX, analytics, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, button, calendar, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, e-commerce, ecommerce, edit, editor, email, embed, event, events,  feed, feeds, filter, form, Formatting, free, gallery, google, html, image, images, integration, language, Like, link, links, list, login, mail, manage, media, menu, meta, mobile, multisite, navigation, network, News, newsletter, notification, page, pages, password, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, register, registration, related, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, statistics, stats, Style, tag, tags, template, text, theme, themes, thumbnail, title, tracking, upload, url, user, users, video, widget, widgets, wordpress, plagiarism, anti-plagiarism, AtContent, syndication, web
+Tags: ad, admin, administration, ads, advertising, affiliate, AJAX, analytics, api, archive, audio, authentication, author, automatic, blog, bookmark, bookmarking, bookmarks, button, calendar, categories, category, cms, code, comment, comments, community, contact, contact form, content, counter, CSS, custom, custom post type, dashboard, database, date, e-commerce, ecommerce, edit, editor, email, embed, event, events,  feed, feeds, filter, form, Formatting, free, gallery, google, html, image, images, integration, language, Like, link, links, list, login, mail, manage, media, menu, meta, mobile, multisite, navigation, network, News, newsletter, notification, page, pages, password, performance, permalink, photo, photos, php, picture, pictures, plugin, plugins, Post, posts, profile, register, registration, related, scroll, search, security, seo, Share, sharing, shop, shortcode, sidebar, simple, slider, slideshow, social, social media, statistics, stats, tag, tags, template, text, theme, themes, thumbnail, title, tracking, upload, url, user, users, video, widget, widgets, wordpress, plagiarism, anti-plagiarism, AtContent, syndication, premium support, web
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: trunk
@@ -12,26 +12,25 @@ Boost your audience 2.5x in 30 days by making your blog posts available for repo
 
 == Description ==
 
-With AtContent plugin you easily increase your audience in 3 steps. And you already completed the first one! All what you need now is to install the plugin and connect your blog with AtContent. 5,000 sites have already increased their audiences by 2.5x via AtContent and now you can join them!
+With AtContent's plugin, you can easily increase your audience by following 3 simple steps, and you have already completed the first one! All you need to do now is to install the plugin and connect your blog with AtContent. It is worth noting that 5,000 sites have already increased their audiences by approximately 2.5x via AtContent and now is your chance to join them!
 
-#### What is AtContent #### 
+#### What is AtContent? #### 
 
-[AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform.
-Once you started using AtContent you are able to repost blog posts of others on your site and they can repost yours without content duplication.
+[AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform. Once you start using AtContent, not only will you be able to repost other people's blog posts on your site, they will also be able to repost yours without content duplication.
 
-#### What are benefits of AtContent: #### 
-* You get links back to your site from reposts. 
-* Repost content of other bloggers and increase user engagement on your site. 
-* Track how your audience [grows](http://bit.ly/Kcvui4)
+#### What are the benefits of AtContent? #### 
+* Reposts provide backlinks to your site. 
+* Other bloggers' reposted content will increase your site reader engagement.
+* You will be able to track your audience [growth](http://bit.ly/Kcvui4).
 
-#### With AtContent everybody wins: #### 
-* You reach people on other sites and increase audiences. Sometimes by [860% in just 3 weeks](http://bit.ly/1didxf4) !
-* Bloggers who make reposts get quality content, increase user engagement and traffic to their sites. 
-* Readers get content they like on sites they already hang out.
+#### With AtContent everybody wins because: #### 
+* You will reach out to people on other sites, which will therefore increase your audience by up to 860% in as little as [3 weeks](http://bit.ly/1didxf4) !
+* Bloggers who make reposts will not only get quality content and increase their sites reader engagement, they will also increase incoming traffic to their sites. 
+* Readers get content they are seeking on sites which they regularly view.
+* All the content is SEO & Google friendly, **NO GOOGLE PENALTIES**
+* There is copy-paste protection on all of the content
+* Backlinks to original sources increase their SEO 
  
-#### SEO & Google friendly ####
-* Copy-paste protection, **NO GOOGLE PENALTIES**
-* Increase SEO because of links back to an original source.
 
 == Examples ==
 
@@ -76,6 +75,18 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
 
 == Changelog ==
+
+= 6.3.18 =
+* Settings page update
+
+= 6.3.17 =
+* Repost compatibility improve
+
+= 6.3.16 =
+* Repost process update
+
+= 6.3.15 =
+* CloudFlare Rocket Loader compatibility added
 
 = 6.3.14 =
 * Repost bug fixed

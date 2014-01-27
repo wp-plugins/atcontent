@@ -62,7 +62,7 @@ function atcontent_ajax_gate() {
             $ac_postid = $_POST["postid"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
                 $repost_title = $_POST["title"];
-                $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
                 //$ac_content = "[atcontent id=\"{$ac_postid}\"]";
                 kses_remove_filters();
                 $new_post = array(
@@ -387,8 +387,9 @@ function atcontent_ajax_repost(){
         remove_filter( 'the_content', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-ac-src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-cfasync=\"false\" data-ac-src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
         // Create post object
+        kses_remove_filters();
         $new_post = array(
             'post_title'    => $repost_title,
             'post_content'  => $ac_content,
@@ -399,6 +400,8 @@ function atcontent_ajax_repost(){
         // Insert the post into the database
         $new_post_id = wp_insert_post( $new_post );
         update_post_meta($new_post_id, "ac_repost_postid", $ac_postid);
+        update_post_meta($new_post_id, "ac_is_process", "0");
+        kses_init_filters();
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }
