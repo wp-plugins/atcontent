@@ -103,12 +103,16 @@
 
    <hr />
         
-                    
+        <script>
+            gaSend('connectTab', 'new user');
+        </script>      
                     
     <?php 
     } else {  
     ?>     
-        
+        <script>
+            gaSend('connectTab', 'old user');
+        </script>  
         <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
 	
         <div id="ac_connect_result">
@@ -346,7 +350,7 @@
         }
         
         $("#b_connect").click(function () {
-            gaSend('connect', 'clicked');
+            gaSend('connectTab', 'clicked');
             $(".discl").html('');
 		    $("#ac_connect_result").html('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
             if (buttonDisabled) {return;}

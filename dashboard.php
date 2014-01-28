@@ -96,9 +96,9 @@
                     else {
                         echo ('Error'); 
                     }?></td></tr>
-            <tr><th>Amount of synced posts</th><td id="sync-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
+            <tr><th>Amount of synced posts</th><td id="post-counter"> <?php echo $stats["PostCount"]; ?></td></tr>
             <?php if($stats["ErrorsCount"]!=0){ ?>  
-                <tr><th>Errors count</th><td id="sync-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
+                <tr><th>Errors count</th><td id="error-counter"> <?php echo $stats["ErrorsCount"]; ?></td></tr>
             <?php }?>
         </table>
         <a href="#" id="resync_button" style="margin-left: 10px" class="likebutton b_orange" onclick="Resync()">Resync</a>
@@ -116,35 +116,45 @@
     
 </div>
  <script>
-        
-        function show_sync_stat()
+        function UpdateSyncStat()
         {
-            jQuery("#sync_stat_block").show();
-            jQuery("#show_sync_link").html('Hide');
-            jQuery("#show_sync_link").unbind('click').onclick(function()
-            {
-                hide_sync_stat();
-            });
-        }
-
-        function hide_sync_stat()
-        {
-            jQuery("#sync_stat_block").hide();
-            jQuery("#show_sync_link").html('Show latest sync stat');
-            jQuery("#show_sync_link").unbind('click').onclick(function(){
-                show_sync_stat();
-            });
+            jQuery.ajax({url: '<?php echo $ajax_form_action; ?>', 
+                type: 'post', 
+                data: {action: 'atcontent_get_sync_stat'},
+                dataType: "json",
+                success: function(d){    
+                    jQuery("#post-counter").html(d.stats.PostCount);    
+                    if (d.stats.IsSyncNow)   
+                     {
+                        jQuery("#sync-status").html('In process');    
+                     }
+                     else
+                     {
+                        if (d.stats.IsActive)
+                        {
+                            jQuery("#sync-status").html('Completed'); 
+                        }
+                        else
+                        {
+                            jQuery("#sync-status").html('Error');
+                        }
+                     }                
+                },
+                error: function(d, s, e) {
+                }
+            });   
+            setTimeout('UpdateSyncStat()', 5000);
         }
 
          function Resync()
          {
             jQuery("#resync_button").removeClass('b_orange').addClass('b_enable');
+            jQuery("#sync-status").html('In process'); 
             jQuery.ajax({url: '<?php echo $ajax_form_action; ?>', 
                 type: 'post', 
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
-                success: function(d){                             
-                    jQuery("#sync-status").html('In process');     
+                success: function(d){
                     jQuery("#resync_button").removeClass('b_enable').addClass('b_orange');   
                 },
                 error: function(d, s, e) {
@@ -153,6 +163,7 @@
          }
         
         var isFirstTime = false;
+        UpdateSyncStat();
         <?php if ($_GET["step"] == "1"){ ?>
         isFirstTime = true;
         jQuery("#follow_steps_block").hide();

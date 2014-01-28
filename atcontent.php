@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.0.0
+    Version: 7.0.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.0.0" );
+    define( 'AC_VERSION', "7.0.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -41,6 +41,7 @@
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
     add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
+    add_action( 'wp_ajax_atcontent_get_sync_stat', 'atcontent_ajax_get_sync_stat' );
     add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
     add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
     add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );

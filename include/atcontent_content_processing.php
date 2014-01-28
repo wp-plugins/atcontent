@@ -3,20 +3,12 @@
 
         global $post, $wp_current_filter, $currentNumPost_ac;
 
-        if (preg_match_all('/<script[^<]+src=\"https?:\/\/w\.atcontent\.com\/[^\/^\-]+\/[^\/]+\/[^\"]+/', $content, $matches))
-        {            
-            $script_parts = explode("/", $matches[0][0]);
-            $reposter = $script_parts[3];
-            $repost_postid = $script_parts[4];
-            $part = $script_parts[5];
-            $script = "<script data-cfasync=\"false\" src=\"https://w.atcontent.com/".$reposter."/".$repost_postid."/".$part."\"></script>";
-            for($index = 1; $index < count($matches[0]); $index++)
-            {                
-                $script_parts = explode("/", $matches[0][$index]);
-                $reposter = $script_parts[3];
-                $repost_postid = $script_parts[4];
-                $part = $script_parts[5];
-                $script = $script."<script data-cfasync=\"false\" data-ac-src=\"https://w.atcontent.com/".$reposter."/".$repost_postid."/".$part."\"></script>";
+        if (preg_match_all('/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\/]+\/[^\/]+\/[^\"]+)/', $content, $matches))
+        {
+            $script = "<script data-cfasync=\"false\" src=\"" . $matches[1][0] . "\"></script>";
+            for($index = 1; $index < count($matches[1]); $index++)
+            {
+                $script = $script."<script data-cfasync=\"false\" data-ac-src=\"" . $matches[1][$index] . "\"></script>";
             }
             return $script;
         }

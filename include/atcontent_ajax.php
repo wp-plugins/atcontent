@@ -375,6 +375,15 @@ function atcontent_connect()
     exit;
 }
 
+function atcontent_ajax_get_sync_stat(){    
+        $userid = wp_get_current_user()->ID;
+        $syncid = get_user_meta($userid, "ac_syncid", TRUE);        
+        $blogid = get_user_meta($userid, "ac_blogid", TRUE);
+        $stats = atcontent_api_get_sync_stat($syncid, $blogid);
+        echo json_encode( array ( "stats" => $stats));
+        exit;
+}
+
 function atcontent_ajax_repost(){
         include("atcontent_userinit.php");
         $ac_postid = $_POST['ac_post'];
