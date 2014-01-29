@@ -76,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.0.2 =
+* Select blog process update.
+
 = 7.0.1 =
 * Repost process update. Connect page update.
 

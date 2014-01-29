@@ -89,7 +89,7 @@
     <?php if (strlen($ac_api_key) == 0)
             {     
           ?>  
-    <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
+    <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
 	<p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
         <div id="user_data_form">
             <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
@@ -208,9 +208,6 @@
                 if (blog!=null)
                 {
                     DisableButton();
-                    $("#blocker").addClass('blocked');
-                    var h = jQuery(".blogs").height();
-                    $("#blocker").height(h);
                     ConnectBlog(blog);
                 } 
             });
@@ -222,8 +219,10 @@
         {
             selectedBlog = selectedBlog || "";
             if (selectedBlog!="") 
+            {
 		        $(".blogs").after('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
-            
+                $('[name = blog]').attr('disabled', 'disabled');
+            }
             var email = $("#email").val();
             $.ajax({
                 url: '<?php echo $ajax_form_action; ?>',
