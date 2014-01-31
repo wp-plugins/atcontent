@@ -89,7 +89,7 @@
     <?php if (strlen($ac_api_key) == 0)
             {     
           ?>  
-    <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
+    <h1>Boost your audience 2.5x in 30 days by sharing blog posts with others!</h1>
 	<p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
         <div id="user_data_form">
             <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
