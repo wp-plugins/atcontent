@@ -268,7 +268,7 @@ $email_body = "Hey AtContent team, \n" .
             <?php foreach ( $atcontent_reposts as $postid ) { ?>
                 <div class="article-inline" data-options="hide_shares" >
 <script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
-<script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
+<script data-ac-src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
 
                 </div>
             <?php } ?>
