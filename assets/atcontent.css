@@ -625,7 +625,6 @@ input[disabled] {background: #eee}
         top: 0;
     }
     .b-dashboard-brief__right {
-        background: #fff;
         overflow: hidden;
         right: 0;
     }
@@ -685,7 +684,7 @@ input[disabled] {background: #eee}
         }
 
         .b-dashboard-brief__empty-chart {
-            background: #f9f9f9;
+            background: #ddd;
             border-radius: 50%;
             height: 0;
             margin: -45% auto 0;
