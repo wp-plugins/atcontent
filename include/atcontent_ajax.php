@@ -116,6 +116,18 @@ function atcontent_ajax_gate() {
                 $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
                 $post_published = get_gmt_from_date( $post->post_date );
                 $post_original_url = get_permalink( $post->ID );
+                $repost_post_id = '';
+                $embedid = '';
+                if (preg_match_all('/<script[^<]+src="https?:\/\/w\.atcontent\.com\/(\-\/[^\/]+\/)?([^\/]+)\/([^\/]+)\/([^\"]+)/', $post->post_content, $matches))
+                {
+                    if (strpos($matches[1][0],'-') !== false) {
+                        $embedid = $matches[1][0];
+                        $embedid = str_replace('/', '', $embedid);
+                        $embedid = str_replace('-', '', $embedid);
+                    }
+                    $repost_post_id = $matches[3][0];
+                    update_post_meta($postid, "ac_repost_postid", $repost_post_id );                    
+                }
                 echo json_encode( array( 
                     "IsOK" => true,
                     "Title" => $post_title,
@@ -128,6 +140,8 @@ function atcontent_ajax_gate() {
                     "Tags" => $tags_json,
                     "Categories" => $cats_json,
                     "PostId" => $ac_postid,
+                    "RepostPostId" => $repost_post_id,
+                    "EmbedId" => $embedid,
                     ) );
             }
             break;
@@ -180,16 +194,44 @@ function atcontent_ajax_gate() {
             $postid = $_POST["blogpostid"];
             $embedid = $_POST["embedid"];
             $ac_published = $_POST["published"];
+            
             $ac_postid = $_POST["postid"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
-                update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
-                update_post_meta( intval( $postid ), "ac_is_process", "1" );
+                $repost_post_id = get_post_meta(intval( $postid ), "ac_repost_postid", true );
+                if (strlen($repost_post_id) ==0)
+                {
+                    update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
+                    update_post_meta( intval( $postid ), "ac_is_process", "1" );
+                }
+                else
+                {
+                    update_post_meta( intval( $postid ), "ac_postid", '');
+                }
                 update_post_meta( intval( $postid ), "ac_embedid", $embedid );
+                $post = get_post( $postid );
+                $post_content = $post -> post_content;
+                $repost_post_id = get_post_meta(intval( $postid ), "ac_repost_postid", true );
+                if (strlen($repost_post_id) > 0 )
+                {         
+                    remove_filter( 'the_content', 'atcontent_the_content', 1 );
+                    remove_filter( 'the_content', 'atcontent_the_content_after', 100);
+                    remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+                    remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+                    $ac_pen_name = get_user_meta(intval($userid), "ac_pen_name", true);
+                    $embedid = '-/'.$embedid.'/';
+                    $post_content = 
+                    "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+                    "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                }
+                kses_remove_filters();
                 remove_action( 'publish_post', 'atcontent_publish_publication' );
                 wp_update_post( array(
-                    'ID' => intval( $postid ),
-                    'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) )
-                ) );
+                        'ID' => intval( $postid ),
+                        'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published )),
+                        'post_content' => $post_content
+                    ) );
+                kses_init_filters();
                 add_action( 'publish_post', 'atcontent_publish_publication' );
                 echo json_encode ( array ( "IsOK" => true ) );
             }
@@ -392,25 +434,44 @@ function atcontent_ajax_repost(){
         if ( $repost_title_answer["IsOK"] == true ) {
             $repost_title = $repost_title_answer["Title"];
         }
+        $new_post = array(
+            'post_title'    => $repost_title,
+            'post_content'  => '',
+            );
+        $new_post_id = wp_insert_post( $new_post );
+        $repost_result = atcontent_api_repost_publication($ac_postid, $new_post_id);
+        $embedid = '';
+        if ( $repost_result["IsOK"] == TRUE ) {
+            $embedid = "-/".$repost_result["EmbedId"]."/"; 
+        }
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-cfasync=\"false\" data-ac-src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+        $ac_content = 
+        "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+        "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+        "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
         // Create post object
-        kses_remove_filters();
         $new_post = array(
+            'ID'            => $new_post_id,
             'post_title'    => $repost_title,
             'post_content'  => $ac_content,
             'post_status'   => 'publish',
             'post_author'   => $userid,
+            'post_date'     => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
             'post_category' => array()
         );
+        kses_remove_filters();
         // Insert the post into the database
-        $new_post_id = wp_insert_post( $new_post );
-        update_post_meta($new_post_id, "ac_repost_postid", $ac_postid);
-        update_post_meta($new_post_id, "ac_is_process", "0");
+        remove_action( 'publish_post', 'atcontent_publish_publication' );
+        wp_update_post($new_post);
+        update_post_meta( $new_post_id, "ac_is_process", "0" );
+        update_post_meta( $new_post_id, "ac_embedid", $embedid );
+        update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
+        add_action( 'publish_post', 'atcontent_publish_publication' );
         kses_init_filters();
+       
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }
@@ -426,6 +487,7 @@ function atcontent_ajax_syncqueue(){
 	    FROM {$wpdb->posts}
 	    WHERE post_status = 'publish' 
 		    AND post_author = {$userid} AND post_type = 'post'
+        ORDER BY post_date desc
 	    "
     );
     wp_cache_flush();

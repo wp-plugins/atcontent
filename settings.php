@@ -16,7 +16,11 @@
     }
     //End PingBack
 ?>
-<div id="settings-block" class="b-cols b-dashboard-table" style="width:420px">
+<div id="tip_one_step" class="ac_tip_show" style="display: none; padding: 10px;">
+        <p>Congratulations! You have connected your blog to AtContent!</p>
+        <p>Our plugin will change your site appearance a bit. Please adjust the display settings:</p>
+</div>  
+<div id="settings-block" class="b-cols b-dashboard-table b-dashboard-table_bigshadow" style="width:420px">
 
     <form action="" method="POST" name="settings-form" id="settings-form" style="margin-left: 10px; clear: both">
     <div class="b-cols">
@@ -37,7 +41,8 @@ if ( $_GET["afterconnect"] == "1" ) {
     <?php
 }
 ?>
-        <fieldset>
+        
+        <fieldset id="b-settings-block__site_settings">
             <?php if ( user_can( $userid, "manage_options" ) ) { ?>
                 <legend style="float: left">Site Settings</legend>
             <?php } else if ( user_can( $userid, "publish_posts" ) ) { ?>
@@ -140,14 +145,14 @@ END;
                         <input type="checkbox" id="ac_excerpt_no_process" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
                         Enable plugin features for the home page
                     </label>
-                    <div class="ac-small">Should be unmarked for sites with custom themes</div>
+                    <div class="ac-small">Do not mark if your site has custom theme.</div>
                 </div>
                 <div class="b-checkbox-row">
                     <label>
                         <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
                         Enable share buttons
                     </label>
-                    <div class="ac-small">Enable Facebook, Twitter, Linkedin and Google+ buttons under each post </div>
+                    <div class="ac-small">Enables Facebook, Twitter, Linkedin and Google+ buttons under each post.<br>If you have another sharing plugin leave this unmarked.</div>
                 </div>
             </fieldset>
         </div>        
@@ -187,9 +192,18 @@ END;
                     jQuery("#settings_saved").html('Saved!');
                     setTimeout('jQuery("#settings_saved").hide()', 5000); 
                     if (isFirstTime)
-                    {
-                        third_welcome_step();
-                    }                   
+                    {   
+                        jQuery("#dashboard-table").css('visibility', '');  
+                        jQuery("#tip_two_step").show();
+                        jQuery('.one_page_link').show(); 
+                        jQuery("#settings_step").css('top','40px');                         
+                        jQuery("#settings_step").css('left','0px');                     
+                        jQuery("#settings_step").css('margin','0px'); 
+                        jQuery('#tip_one_step').hide();   
+                        jQuery("#b-settings-block__site_settings").show();
+                        hideSettings();  
+                        isFirstTime=false; 
+                    }         
                 }
                 else {
                     jQuery("#ac_connect_result").html(

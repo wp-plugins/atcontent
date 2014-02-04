@@ -287,6 +287,20 @@ function atcontent_api_reposts( $category, $page ) {
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/general/repost', $post_content );
 }
+/////////////////////////////////////////////////////////////////////
+function atcontent_api_repost_publication($postid, $post_id_in_app){    
+    $userid = wp_get_current_user()->ID;
+    $ac_api_key = get_user_meta( $userid, "ac_api_key", true ); 
+    $syncid = get_user_meta( $userid, "ac_syncid", true ); 
+    $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
+    $post_content =
+        'PostId=' . urlencode( $postid ) .
+        '&ApiKey=' . urlencode( $ac_api_key ) .
+        '&PostIdInApp=' . urlencode( $post_id_in_app ) .
+        '&SyncId=' . urlencode( $syncid ) .
+        '&BlogId=' . urlencode( $ac_blogid );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/repost', $post_content );
+}
 
 function atcontent_api_get_title( $postid ) {
     $post_content = 

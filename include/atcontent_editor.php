@@ -153,7 +153,6 @@
         if ( strlen( $ac_postid ) > 0 ) {
         ?>
 <div class="misc-pub-section">
-<a href="<?php echo atcontent_get_statistics_link( $post->ID ); ?>" target="_blank">View statistics</a>
 </div>
         <?php
         }

@@ -76,6 +76,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.1.0 =
+* Repost process update. AtContent dashboard interface and user simplification update.
+
 = 7.0.3 =
 * Repost page update.
 

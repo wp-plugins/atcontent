@@ -184,6 +184,16 @@
             buttonDisabled = true;
         }
 
+
+        $(document).keypress(function (e)
+        {
+            if (e.which == 13)
+            {
+                console.log(e.which);
+                jQuery("#b_connect").click.call(jQuery("#b_connect"));  
+            }
+        });
+        
         function EnableButton()
         {    
             $("#b_connect").addClass('b_green').removeClass('b_enable');
@@ -266,7 +276,7 @@
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
                 success: function(d){                                
-                    location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                    location.href = 'admin.php?page=atcontent/dashboard.php';
                 },
                 error: function(d, s, e) {
                 }
