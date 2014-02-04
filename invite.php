@@ -276,7 +276,7 @@
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
                 success: function(d){                                
-                    location.href = 'admin.php?page=atcontent/dashboard.php';
+                    location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
                 },
                 error: function(d, s, e) {
                 }
