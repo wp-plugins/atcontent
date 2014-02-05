@@ -336,7 +336,7 @@ function atcontent_connect_blog(){
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
     if ($connect_answer["IsOK"] == TRUE)
     {
-        $userid = wp_get_current_user()->ID;
+        $userid = $bloguserid;
         update_user_meta( $userid, "ac_blogid", $connect_answer["BlogId"] );
         update_user_meta( $userid, "ac_blog_title", $connect_answer["BlogTitle"] );
         update_user_meta( $userid, "ac_syncid", $connect_answer["SyncId"] );
@@ -390,7 +390,7 @@ function atcontent_save_settings()
 
 function atcontent_save_credentials()
 {
-    $userid = wp_get_current_user()->ID;
+    $userid = intval($_POST["userid"]);
     update_user_meta( $userid, "ac_api_key", $_POST["apikey"] );
     update_user_meta( $userid, "ac_pen_name", $_POST["nickname"] );
     update_user_meta( $userid, "ac_showname", $_POST["showname"] );

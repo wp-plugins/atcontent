@@ -68,13 +68,15 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 == Screenshots ==
 
 1. AtContent connection page. Clicking the button connects your blog to AtContent if you have an account or creates a new one if you haven't.
-2. Example of a connected account.
-3. Subscription panel with the option to upgrade a plan.
-4. Plugin settings panel example. Category and location data are needed for the better targeting of a featured content.
-5. Synchronization screen. Clicking the button syndicates a blog to AtContent.
-6. Synchronization end. The number of synchonized posts and obtained backlinks is shown in the table.
+2. If you already have AtContent blogs you can choose which one you want to connect.
+3. Results of using AtContent and 3 steps to improve them.
+4. Plugin settings popup.
+5. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.1.1 =
+* Connect as other users for admin
 
 = 7.1.0 =
 * Repost process update. AtContent dashboard interface and user simplification update.

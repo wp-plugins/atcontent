@@ -1,25 +1,29 @@
 <?php
-    $userid = intval( wp_get_current_user()->ID );
     $ref_url = "http://wordpress.org/plugins/atcontent/";
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require( "include/atcontent_userinit.php" );
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
+    if (strlen($_GET['connectas']) > 0)
+    {
+        $userid = intval($_GET['connectas']);
+    }
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
     if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {   
-    $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
-    $currentuser = wp_get_current_user();
-    $userinfo = get_userdata($currentuser -> ID);
-    $email = $userinfo -> user_email;
-    $site = $_SERVER['HTTP_HOST'];
-    $stats = atcontent_api_get_sync_stat($ac_syncid, $ac_blogid);
+        $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
+    
+        $currentuser = wp_get_current_user();
+        $userinfo = get_userdata($currentuser -> ID);
+        $email = $userinfo -> user_email;
+        $site = $_SERVER['HTTP_HOST'];
+        $stats = atcontent_api_get_sync_stat($ac_syncid, $ac_blogid);
 ?>
 
 <div style="width: 100%; height: 40px;"></div>
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
 <div class="b-dashboard-info">
-<a class="one_page_link" onclick="settings()">Show settings</a>
+    <a class="one_page_link" onclick="settings()">Show settings</a>
 </div>
 
 <script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>

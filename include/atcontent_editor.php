@@ -37,10 +37,15 @@
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
 
+          
           $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
           if ( strlen( $ac_api_key ) == 0 ) {
               $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
+              if ( current_user_can( 'manage_options' ))
+              {
+                    $connect_url .= '&connectas='.$userid;
+              }
               $author_user = get_userdata( intval( $userid ) );
               $author_username = "";
               if ( $author_user != false ) {

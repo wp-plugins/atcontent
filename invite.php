@@ -2,8 +2,12 @@
     $ajax_action = admin_url( 'admin-ajax.php' );
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
-    $userinfo = get_userdata($currentuser -> ID);
-    $userid =  $currentuser -> ID;
+    $userid = $currentuser -> ID;
+    if (strlen($_GET['connectas']) > 0)
+    {
+        $userid = intval($_GET['connectas']);
+    }
+    $userinfo = get_userdata($userid);
     $email = $userinfo -> user_email;
     $username = $userinfo -> display_name;
     $site = $_SERVER['HTTP_HOST']; 
@@ -284,8 +288,6 @@
         }
         <?php 
 
-            $currentuser = wp_get_current_user();
-            $userid = intval( $currentuser->ID );
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             if (strlen($ac_api_key) != 0)
             {
@@ -302,6 +304,7 @@
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
 			    data: {
+                        userid : userid,
 					    action: 'atcontent_save_credentials',
                         apikey : credentials.APIKey,
                         nickname : credentials.Nickname,
