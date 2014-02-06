@@ -75,6 +75,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.1.2 =
+* Dashboards interface, settings and connect page update.
+
 = 7.1.1 =
 * Connect as other users for admin
 

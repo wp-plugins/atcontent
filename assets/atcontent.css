@@ -527,6 +527,7 @@ button.button-color-white[disabled],
         font: 23px "wf_SegoeUILight","Segoe UI Light","Segoe WP Light","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
         margin-bottom: .2em;
         padding: 0;
+        color: #000;
     }
 
 .b-settings-table {

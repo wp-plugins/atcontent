@@ -46,9 +46,24 @@ function atcontent_dashboard_widget_function() {
         ?>
 <div style="position: relative">
 <div class="b-dashboard-brief">
+    
+<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
+    <script>
+    function gaSend(category, action)
+    {
+        window.CPlase_ga = window.CPlase_ga || [];
+                        CPlase_ga.push({
+                            category: category + ' <?php echo AC_VERSION?>',
+                            action: action,
+                            label:  '<?php echo  $_SERVER['HTTP_HOST'];?>'
+                        });
+    }
+    </script>
             <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
                 <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
-                    <span class="b-dashboard-brief__plus">+</span>
+                        <?php if ( intval( $response["repostViews"] ) != 0 ) { ?>
+                        <span class="b-dashboard-brief__plus">+</span>
+                        <?php } ?>
                     <?php echo $response["repostViews"]; ?>
                 </div>
                 <div class="b-dashboard-brief__description">
@@ -119,7 +134,7 @@ function atcontent_dashboard_widget_function() {
 <div class="clear"></div>
 <?php } ?>
 </div>
-<a href="https://atcontent.com/Studio/Statistics" target="_blank">
+<a href="https://atcontent.com/Studio/Statistics" target="_blank" onclick="gaSend('wp dashboard', 'get details clicked')" >
 <div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 100;">&nbsp;</div>
 </a>
 </div>

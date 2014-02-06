@@ -28,8 +28,9 @@
         <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
             <p> Well done!<br>
+                Now you can repost others' blog posts and other bloggers can respot yours.
                 <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
-                We just started to collect statistics for you. Don't be puzzled of zeros.<br>
+                Don't be puzzled of zeros.<br>
                             <?php } ?>
                 
                 
@@ -77,7 +78,8 @@
                         <?php } ?>
                     </div>
                     
-                </div>To do list:
+                </div>
+            <fieldset id="stat-fieldset"><legend>Tips to improve results:</legend></fieldset>
                             <ul style="margin-left: 30px;">
                     <li>
                         &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp">Set tags for your profile</a>

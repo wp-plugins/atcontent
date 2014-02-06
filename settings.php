@@ -42,7 +42,7 @@ if ( $_GET["afterconnect"] == "1" ) {
 }
 ?>
         
-        <fieldset id="b-settings-block__site_settings">
+        <fieldset id="b-settings-block__site_settings" style="display: none;">
             <?php if ( user_can( $userid, "manage_options" ) ) { ?>
                 <legend style="float: left">Site Settings</legend>
             <?php } else if ( user_can( $userid, "publish_posts" ) ) { ?>
@@ -200,7 +200,6 @@ END;
                         jQuery("#settings_step").css('left','0px');                     
                         jQuery("#settings_step").css('margin','0px'); 
                         jQuery('#tip_one_step').hide();   
-                        jQuery("#b-settings-block__site_settings").show();
                         hideSettings();  
                         isFirstTime=false; 
                     }         
