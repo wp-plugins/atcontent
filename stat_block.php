@@ -27,14 +27,14 @@
     
         <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
-            <p> Well done!<br>
-                Now you can repost others' blog posts and other bloggers can respot yours.
+            <p> Well done!</p>
+             <p>   Now you can repost others' blog posts and other bloggers can respot yours.
                 <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
                 Don't be puzzled of zeros.<br>
                             <?php } ?>
+                </p>
                 
-                
-                Check this page in a few days and see how AtContent affects your readership! Follow the hints below to get even better results.</p>
+               <p> Check this page in a few days and see how AtContent affects your readership! Follow the hints below to get even better results.</p>
             
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
@@ -68,7 +68,7 @@
                         <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                             views on your blog
                         </div>
-                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?wp" target="_blank" onclick="getDetailsClick()">Get details</a></p>
+                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank" onclick="getDetailsClick()">Get details</a></p>
                     </div>
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
@@ -82,13 +82,13 @@
             <fieldset id="stat-fieldset"><legend>Tips to improve results:</legend></fieldset>
                             <ul style="margin-left: 30px;">
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp">Set tags for your profile</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Set tags for your profile</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp">Follow relevant bloggers</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Follow relevant bloggers</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp">Invite others to repost your posts</a>
+                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Invite others to repost your posts</a>
                     </li>
                 </ul>
                 <script src="//www.google.com/jsapi"></script>
