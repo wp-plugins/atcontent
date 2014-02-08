@@ -34,7 +34,7 @@
                             <?php } ?>
                 </p>
                 
-               <p> Check this page in a few days and see how AtContent affects your readership! Follow the hints below to get even better results.</p>
+               <p> Check this page in a few days and see how AtContent affects your readership! Follow the tips below to get even better results.</p>
             
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">

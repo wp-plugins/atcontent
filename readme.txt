@@ -75,6 +75,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.1.4 =
+* Atcontent ping back improve and dashboard page update
+
 = 7.1.3 =
 * Interfaces update, dashboard links update.
 

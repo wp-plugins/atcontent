@@ -392,6 +392,7 @@ function atcontent_save_credentials()
 {
     $userid = intval($_POST["userid"]);
     update_user_meta( $userid, "ac_api_key", $_POST["apikey"] );
+    update_user_meta( $userid, "ac_non_delete_api_key", $_POST["apikey"] );
     update_user_meta( $userid, "ac_pen_name", $_POST["nickname"] );
     update_user_meta( $userid, "ac_showname", $_POST["showname"] );
     update_user_meta( $userid, "ac_avatar_20", $_POST["Avatar20"] );

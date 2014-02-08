@@ -110,7 +110,12 @@ function atcontent_api_get_key( $nounce, $grant ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/requestkey', $post_content );
 }
 
-function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
+function atcontent_api_pingback( $email, $status, $api_key, $referral ) {    
+    if (strlen($api_key) == 0)
+    {
+        $userid = wp_get_current_user() -> ID;
+        $api_key = get_user_meta($userid, "ac_non_delete_api_key", true);        
+    }
     $post_content = 'Email='. urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
