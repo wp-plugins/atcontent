@@ -18,7 +18,7 @@
 ?>
 <div id="tip_one_step" class="ac_tip_show" style="display: none; padding: 10px;">
         <p>Congratulations! You have connected your blog to AtContent!</p>
-        <p>Our plugin will change your site appearance a bit. Please adjust the display settings:</p>
+        <p style="font-size: 1.4em">Please apply the display settings and continue:</p>
 </div>  
 <div id="settings-block" class="b-cols b-dashboard-table b-dashboard-table_bigshadow" style="width:420px">
 

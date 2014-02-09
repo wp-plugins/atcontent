@@ -28,13 +28,16 @@
         <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
             <p> Well done!</p>
-             <p>   Now you can repost others' blog posts and other bloggers can respot yours.
-                <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
-                Don't be puzzled of zeros.<br>
-                            <?php } ?>
-                </p>
+             <p>   Now you can repost others' blog posts on "Get Content" page and other bloggers can repost yours.
+                 <p style="font-size: 1.4em">Follow the tips below to increase your audience.</p>
                 
-               <p> Check this page in a few days and see how AtContent affects your readership! Follow the tips below to get even better results.</p>
+                
+               <p>
+                   <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
+                Don't be puzzled of zeros.
+                            <?php } ?>
+                
+                    Check this page in a few days and see how AtContent affects your readership! </p>
             
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
@@ -79,7 +82,7 @@
                     </div>
                     
                 </div>
-            <fieldset id="stat-fieldset"><legend>Tips to improve results:</legend></fieldset>
+            <fieldset id="stat-fieldset"><legend>Tips to increase audience:</legend></fieldset>
                             <ul style="margin-left: 30px;">
                     <li>
                         &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Set tags for your profile</a>
