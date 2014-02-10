@@ -1,5 +1,5 @@
 === AtContent Plugin ===
-Contributors: atcontent, vadnov
+Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
 Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,wordpress seo,plugin
 Requires at least: 3.3
