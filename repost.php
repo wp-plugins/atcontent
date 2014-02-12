@@ -37,43 +37,17 @@
 
     $currentuser = wp_get_current_user();
     $userinfo = get_userdata($currentuser -> ID);
-    $email = $userinfo -> user_email;
-    $site = $_SERVER['HTTP_HOST'];
 ?>
-<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
-    var email = '<?php echo $email?>';    
-    var site = '<?php echo $site?>';
-    gaSend('repost', 'opened','');
 	var connected = true;
 	
-    function gaSend(category, action, p)
-    {
-        window.CPlase_ga = window.CPlase_ga || [];
-                        CPlase_ga.push({
-                            category: category + ' <?php echo AC_VERSION?>',
-                            action: action,
-                            label: site + '      ' + email + '      ' + p
-                        });
-    }
-
-    function submitClick()
-    {
-        gaSend('repost', 'submit my posts clicked', '');
-    }
-
-    function repostClick(p)
-    {
-        gaSend('repost', 'repost clicked', p);
-    }
 
     (function ($) {
         $(function () {
             $(".hide").click(function() { hide(); });
         });
 
-        function hide()
-        {
+        function hide() {
             document.getElementById('rate-block').style.visibility = 'hidden';
             document.getElementById('popup-bg').style.visibility = 'hidden';
             $.ajax({url: '<?php echo $ajax_form_action; ?>',
@@ -102,19 +76,15 @@
     $unix_user_created = strtotime ($usermeta["UserCreated"]);
     $unix_now = strtotime("now");
     $days_diff = ($unix_now-$unix_user_created)/(60*60*24);    
-    if ($unix_user_created > 0 && $days_diff > 30 && $rated != 1)
-    {
+    if ($unix_user_created > 0 && $days_diff > 30 && $rated != 1) {
         ?>
-        <script>
-            gaSend('repost', 'rate us showed', '');
-        </script>
         <div id="popup-bg" class="popup-bg">
         </div>
         <div id="rate-block" class="rate-hidden">
             <p class="hide close-ico">&times;</p>
             <h1>Like AtContent plugin?</h1>
             <p>Please take a minute and rate it. Thanks for your support!</p>
-            <img class="stars" src="/wp-content/plugins/atcontent/assets/stars.png" />
+            <img class="stars" alt="*****" src="<?php echo(plugins_url( 'assets/stars.png', __FILE__ )); ?>" />
             <p>                
                 <a class="hide likebutton b_green b_big" style="margin-bottom:15px;" href="http://wordpress.org/support/view/plugin-reviews/atcontent#postform" target="_blank">Rate now</a><br>
                 <a class="hide dashed" style="font-size: 18px;" href="#">No, thanks</a>
@@ -244,9 +214,7 @@ $email_body = "Hey AtContent team, \n" .
 
 ?>
 
-<a href="mailto:mail@atcontent.com?subject=<?php
-	echo str_replace('+', '%20', urlencode($email_subject)); ?>&body=<?php
-	echo str_replace('+', '%20', urlencode($email_body)); ?>" onclick="submitClick()" class="likebutton b_green">Submit my Posts</a><br>
+<a href="http://atcontent.com/Landing/featureposts/<?php echo(urldecode($_SERVER['HTTP_HOST']))?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
 <br>
 <small>
 
@@ -293,13 +261,11 @@ $email_body = "Hey AtContent team, \n" .
         function connect_error(p) {
 			var btn = document.getElementById('acRepostBtn' + p);
 			$(btn).parent().html('<div class="update-nag">Please connect your blog with AtContent</div>');
-			gaSend('repost', 'not connected repost clicked', '');
 		}
 		
         window.repost_post = function(p) {
 			if (connected)
 			{
-				repostClick(p);
 				var btn = document.getElementById('acRepostBtn' + p);
 				btn.href = "javascript:";
 				btn.innerHTML = "Reposting...";
@@ -311,7 +277,7 @@ $email_body = "Hey AtContent team, \n" .
 							ac_post: p
 						  },
 					dataType: "json",
-					success: function(d){
+					success: function(d) {
 						if (d.IsOK) {
 							$(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
 						}
@@ -352,5 +318,3 @@ $email_body = "Hey AtContent team, \n" .
 </p>
 
 </div>
-
-<?php atcontent_ga("RepostTab", "Repost page"); ?>

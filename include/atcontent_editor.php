@@ -52,9 +52,13 @@
                   $author_username = $author_user->user_login;
               }
               ?>
-<div class="misc-pub-section">To enjoy all AtContent advantages for this post, please <a href="<?php echo $connect_url; ?>">connect</a> <?php echo $author_username; ?> with AtContent.</div>
-<?php
-                return;
+                <div class="misc-pub-section">
+                    To enjoy all AtContent advantages for this post, please 
+                    <a href="<?php echo $connect_url; ?>">connect</a> 
+                    <?php echo $author_username; ?> with AtContent.
+                </div>
+              <?php
+              return;
           }
 
           $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
@@ -112,56 +116,74 @@
           $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
 
           ?>
-<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post</label>
-<br>as <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank"><img style="vertical-align: middle; margin-right: .3em" 
-            src="<?php echo $ac_avatar_20; ?>" alt=""><?php echo $ac_show_name; ?></a>
-</div>
-<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> > Protect post from copy-paste</label><br>Available posts: <?php echo $plagiarism_quota; ?>.
-<?php if ($ac_is_copyprotect_enabled == false) { ?> 
-<?php if ( $subscriptions_count == 0 ) { ?>
-<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
-    <?php } else { ?>
-<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
-    <?php } ?>
-<?php } ?>
-<input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>">
-</div>
-<div class="misc-pub-section"><label><input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> > Enable advanced statistics</label><br>Available posts: <?php echo $advanced_tracking_quota; ?>.
-<?php if ( $ac_is_advanced_tracking_enabled == false ) { ?> 
-    <?php if ( $subscriptions_count == 0 ) { ?>
-<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
-    <?php } else { ?>
-<br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
-    <?php } ?>
-<?php } ?>
-<input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
-</div>
-<script type="text/javascript">
-    (function ($) {
-        $(function () {
-            $("#submitpost #delete-action").before('<p id="atcontent-tags-announce" class="update-nag" style="margin:5px 5px 15px 5px;">Set post <a id="atcontent-tags-link" href="javascript:">tags</a> and <a id="atcontent-categories-link" href="javascript:">categories</a> to get <b>free&nbsp;promotion</b> with AtContent!</p>');
-            $("#atcontent-tags-link").click(function () { 
-                $('html, body').animate({
-                    scrollTop: $("#new-tag-post_tag").offset().top - 250
-                }, 300);
+    <div class="misc-pub-section">
+        <label>
+            <input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post
+        </label><br>
+        as 
+        <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
+            <img style="vertical-align: middle; margin-right: .3em" src="<?php echo $ac_avatar_20; ?>" alt="">
+            <?php echo $ac_show_name; ?>
+        </a>
+    </div>
+
+    <div class="misc-pub-section">
+        <label>
+            <input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> /> 
+                Protect post from copy-paste
+        </label><br>
+        Available posts: <?php echo $plagiarism_quota; ?>.
+        <?php if ($ac_is_copyprotect_enabled == false) { 
+            if ( $subscriptions_count == 0 ) { ?>
+                <br />To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
+            <?php } else { ?>
+                <br />To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
+            <?php } 
+        } ?>
+        <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
+    </div>
+
+    <div class="misc-pub-section">
+        <label>
+            <input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> /> 
+            Enable advanced statistics
+        </label><br />
+        Available posts: <?php echo $advanced_tracking_quota; ?>.
+        <?php if ( $ac_is_advanced_tracking_enabled == false ) { 
+            if ( $subscriptions_count == 0 ) { ?>
+                <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
+            <?php } else { ?>
+                <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
+            <?php } 
+        } ?>
+        <input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
+    </div>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(function () {
+                $("#submitpost #delete-action").before('<p id="atcontent-tags-announce" class="update-nag" style="margin:5px 5px 15px 5px;">Set post <a id="atcontent-tags-link" href="javascript:">tags</a> and <a id="atcontent-categories-link" href="javascript:">categories</a> to get <b>free&nbsp;promotion</b> with AtContent!</p>');
+                $("#atcontent-tags-link").click(function () { 
+                    $('html, body').animate({
+                        scrollTop: $("#new-tag-post_tag").offset().top - 250
+                    }, 300);
+                });
+                $("#atcontent-categories-link").click(function () { 
+                    $('html, body').animate({
+                        scrollTop: $("#category-all input[type=checkbox]:first").offset().top - 250
+                    }, 300);
+                });
             });
-            $("#atcontent-categories-link").click(function () { 
-                $('html, body').animate({
-                    scrollTop: $("#category-all input[type=checkbox]:first").offset().top - 250
-                }, 300);
-            });
-        });
-    })(jQuery);
-</script>
-<input type="hidden" name="atcontent_save_meta" value="1">
-<?php
+        })(jQuery);
+    </script>
+    <input type="hidden" name="atcontent_save_meta" value="1">
+    <?php
         if ( strlen( $ac_postid ) > 0 ) {
-        ?>
-<div class="misc-pub-section">
-</div>
-        <?php
+    ?>
+            <div class="misc-pub-section">
+            </div>
+    <?php
         }
-        atcontent_ga("PostEditor", "Post editor");
     }
 
     function atcontent_inner_repost_box( $post ) {
@@ -227,5 +249,4 @@
         $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
         wp_editor( $ac_paid_portion, "atcontentpaidportion", $args );
     }
-
 ?>

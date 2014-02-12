@@ -75,6 +75,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.1.6 =
+* Wordpress coding standarts
+
 = 7.1.5 =
 * Interface update
 

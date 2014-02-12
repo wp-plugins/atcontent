@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.1.5
+    Version: 7.1.6
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.1.5" );
+    define( 'AC_VERSION', "7.1.6" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -52,7 +52,6 @@
     add_action( 'wp_ajax_atcontent_guestpost', 'atcontent_ajax_guestpost' );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
-    add_action( "wp_ajax_atcontent_ga", "atcontent_ajax_ga" );
     add_action( 'wp_ajax_atcontent_guestpost_check_url', 'atcontent_ajax_guestpost_check_url' );
     add_action( 'wp_ajax_atcontent_syncqueue', 'atcontent_ajax_syncqueue' );
     add_action( 'admin_head', 'atcontent_admin_head' );
@@ -132,9 +131,6 @@
         }
     }
 
-    function atcontent_ga( $page, $title ) {
-        ?><img src="<?php echo plugins_url( 'ga.php?page=' . $page . '&title=' . $title . '&r=' . rand(), __FILE__ ) ?>" alt="" width="1" height="1" /><?php
-    }
 
     function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );

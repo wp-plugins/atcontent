@@ -11,7 +11,6 @@ function atcontent_dashboard_widget_function() {
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         echo '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent<div class="clear"></div></div>';
-        atcontent_ga("Dashboard", "WordPress Dashboard");
         return;
     }
 
@@ -44,49 +43,36 @@ function atcontent_dashboard_widget_function() {
 
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
         ?>
-<div style="position: relative">
-<div class="b-dashboard-brief">
-    
-<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
-    <script>
-    function gaSend(category, action)
-    {
-        window.CPlase_ga = window.CPlase_ga || [];
-                        CPlase_ga.push({
-                            category: category + ' <?php echo AC_VERSION?>',
-                            action: action,
-                            label:  '<?php echo  $_SERVER['HTTP_HOST'];?>'
-                        });
-    }
-    </script>
-            <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
-                <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
+        <div style="position: relative">
+            <div class="b-dashboard-brief">     
+                <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
+                    <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
                         <?php if ( intval( $response["repostViews"] ) != 0 ) { ?>
                         <span class="b-dashboard-brief__plus">+</span>
                         <?php } ?>
-                    <?php echo $response["repostViews"]; ?>
+                        <?php echo $response["repostViews"]; ?>
+                    </div>
+                    <div class="b-dashboard-brief__description">
+                        view<span data-role="plural">s</span> via AtContent
+                        <br>
+                        for the last 12 hours
+                    </div>
+                    <div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">
+                        <?php echo $response["originalViews"]; ?>
+                    </div>
+                    <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
+                        views on your blog
+                    </div>
+                    <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
                 </div>
-                <div class="b-dashboard-brief__description">
-                    view<span data-role="plural">s</span> via AtContent
-                    <br>
-                    for the last 12 hours
+                <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
+                    <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
+                    <div class="b-dashboard-brief__empty-chart"></div>
+                    <?php } else { ?>
+                    <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
+                    <?php } ?>
                 </div>
-                <div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">
-                    <?php echo $response["originalViews"]; ?>
-                </div>
-                <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
-                    views on your blog
-                </div>
-                <p><a class="button" href="https://atcontent.com/Studio/Statistics" target="_blank">Get details</a></p>
             </div>
-            <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
-                <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
-                <div class="b-dashboard-brief__empty-chart"></div>
-                <?php } else { ?>
-                <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
-                <?php } ?>
-            </div>
-        </div>
         <script src="//www.google.com/jsapi"></script>
         <script>
             google.load('visualization', '1.0', {
@@ -131,15 +117,14 @@ function atcontent_dashboard_widget_function() {
                 chart.draw(data, options);
             });
         </script>
-<div class="clear"></div>
-<?php } ?>
-</div>
-<a href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank" onclick="gaSend('wp dashboard', 'get details clicked')" >
-<div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 100;">&nbsp;</div>
-</a>
+        <div class="clear"></div>
+    <?php } ?>
+    </div>
+    <a href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank">
+        <div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 100;">&nbsp;</div>
+    </a>
 </div>
 <?php
-    atcontent_ga("Dashboard", "WordPress Dashboard");
 }
 
 function atcontent_add_dashboard_widgets() {

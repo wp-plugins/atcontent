@@ -23,38 +23,33 @@
 
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 ?>
-<div class="b-cols">
-    
-        <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
+<div class="b-cols">    
+    <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
             <p> Well done!</p>
-             <p>   Now you can repost others' blog posts on "Get Content" page and other bloggers can repost yours.
-                 <p style="font-size: 1.4em">Follow the tips below to increase your audience.</p>
-                
-                
-               <p>
-                   <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
-                Don't be puzzled of zeros.
-                            <?php } ?>
-                
-                    Check this page in a few days and see how AtContent affects your readership! </p>
-            
+            <p> Now you can repost others' blog posts on "Get Content" page and other bloggers can repost yours.
+            <p style="font-size: 1.4em">Follow the tips below to increase your audience.</p>
+            <p>
+                <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
+                    Don't be puzzled of zeros.
+                <?php } ?>
+                Check this page in a few days and see how AtContent affects your readership! 
+            </p>
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
-            <fieldset id="stat-fieldset"><legend>Results of using AtContent</legend></fieldset>             
+            <fieldset id="stat-fieldset">
+                <legend>Results of using AtContent</legend>
+            </fieldset>             
             <div id="follow_steps_block" >
-                <p>On average, bloggers increase audience by 2.5x in just 30 days.</p>               
-                
+                <p>On average, bloggers increase audience by 2.5x in just 30 days.</p>      
             </div>
-                        <div style="width:416px;">
-        <?php
-            
-
-                if ( $response["IsOK"] == true ) {
-        ?>
-                <div class="b-dashboard-brief">
-                    <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
-                        <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
+            <div style="width:416px;">
+                <?php
+                    if ( $response["IsOK"] == true ) {
+                ?>
+                    <div class="b-dashboard-brief">
+                        <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
+                            <div class="b-dashboard-brief__value b-dashboard-brief__value_orange">
                             <?php if ( intval( $response["repostViews"] ) != 0 ) { ?>
                             <span class="b-dashboard-brief__plus">+</span>
                             <?php } ?>
@@ -71,7 +66,7 @@
                         <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                             views on your blog
                         </div>
-                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank" onclick="getDetailsClick()">Get details</a></p>
+                        <p><a class="button" href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank" >Get details</a></p>
                     </div>
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
@@ -82,16 +77,16 @@
                     </div>
                     
                 </div>
-            <fieldset id="stat-fieldset"><legend>Tips to increase audience:</legend></fieldset>
-                            <ul style="margin-left: 30px;">
+                <fieldset id="stat-fieldset"><legend>Tips to increase audience:</legend></fieldset>
+                <ul style="margin-left: 30px;">
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Set tags for your profile</a>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Set tags for your profile</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Follow relevant bloggers</a>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Follow relevant bloggers</a>
                     </li>
                     <li>
-                        &ndash;&nbsp;<a target="_blank" onclick="getDetailsClick()" href="https://atcontent.com/Studio/Statistics?wp=1">Invite others to repost your posts</a>
+                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Invite others to repost your posts</a>
                     </li>
                 </ul>
                 <script src="//www.google.com/jsapi"></script>
@@ -100,10 +95,8 @@
                         'packages': ['corechart']
                     });
                     google.setOnLoadCallback(function () {
-                        var options, data, chart, element, rows;
-                
+                        var options, data, chart, element, rows;                
                         element = document.getElementById('atcontent_chart');
-
                         options = {
                             colors: ['#13669d', '#ee8900'],
                             chartArea: {
@@ -123,34 +116,26 @@
                                 fontSize: 15
                             }
                         };
-
                         data = new google.visualization.DataTable ();
                         data.addColumn('string', 'Type');
-                        data.addColumn('number', 'Views');
-                
+                        data.addColumn('number', 'Views');                
                         rows = [
                             ['Views on your blog', <?php echo $response["originalViews"]; ?>],
                             ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
-                        ];
-                
+                        ];                
                         data.addRows(rows);
-
                         chart = new google.visualization.PieChart (element);
                         chart.draw(data, options);
-                        jQuery('rect').attr('fill', '#f1f1f1');
-
-                        
+                        jQuery('rect').attr('fill', '#f1f1f1');                        
                     });
                 </script>
             <div class="clear"></div>
             <?php
-                    } else {
-                        echo '<tr><th>Error getting data</th></tr>';
-                    }                
+                } else {
+                    echo '<tr><th>Error getting data</th></tr>';
+                }                
             ?>
             </div>
         </div>
-        
-            
     </div>  
 </div>

@@ -21,26 +21,23 @@
         <p style="font-size: 1.4em">Please apply the display settings and continue:</p>
 </div>  
 <div id="settings-block" class="b-cols b-dashboard-table b-dashboard-table_bigshadow" style="width:420px">
-
     <form action="" method="POST" name="settings-form" id="settings-form" style="margin-left: 10px; clear: both">
     <div class="b-cols">
-        
-    
-<?php 
-    $ac_sitecategory = get_user_meta( $userid, "ac_sitecategory", true );
-    $ac_country = get_user_meta( $userid, "ac_country", true );
-    $ac_state = get_user_meta( $userid, "ac_state", true );
-?>
-    <div>
-<?php 
-if ( $_GET["afterconnect"] == "1" ) {
-    ?>
-<div class="b-note success">
-    Well done, now you have connected your blog with AtContent<br>
-</div>
-    <?php
-}
-?>
+        <?php 
+            $ac_sitecategory = get_user_meta( $userid, "ac_sitecategory", true );
+            $ac_country = get_user_meta( $userid, "ac_country", true );
+            $ac_state = get_user_meta( $userid, "ac_state", true );
+        ?>
+            <div>
+                <?php 
+                    if ( $_GET["afterconnect"] == "1" ) {
+                ?>
+                <div class="b-note success">
+                    Well done, now you have connected your blog with AtContent<br>
+                </div>
+            <?php
+                }
+            ?>
         
         <fieldset id="b-settings-block__site_settings" style="display: none;">
             <?php if ( user_can( $userid, "manage_options" ) ) { ?>
@@ -186,13 +183,11 @@ END;
             },
             success: function (d) {
                 jQuery("#b_save").addClass('b_orange').removeClass('b_enable');
-                if (d.IsOK) 
-                {
+                if (d.IsOK) {
                     jQuery("#settings_saved").show();
                     jQuery("#settings_saved").html('Saved!');
                     setTimeout('jQuery("#settings_saved").hide()', 5000); 
-                    if (isFirstTime)
-                    {   
+                    if (isFirstTime) {   
                         jQuery("#dashboard-table").css('visibility', '');  
                         jQuery("#tip_two_step").show();
                         jQuery('.one_page_link').show(); 
@@ -203,11 +198,9 @@ END;
                         hideSettings();  
                         isFirstTime=false; 
                     }         
-                }
-                else {
+                } else {
                     jQuery("#ac_connect_result").html(
                                 'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-
                 }
             },
             dataType: "json"
@@ -261,5 +254,4 @@ END;
         }
     })(jQuery);
 </script>
-<?php atcontent_ga("SettingsTab", "Settings page"); ?>
 </div>

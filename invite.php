@@ -11,6 +11,7 @@
     $email = $userinfo -> user_email;
     $username = $userinfo -> display_name;
     $site = $_SERVER['HTTP_HOST']; 
+    $loader_url = plugins_url( 'assets/loader.gif', __FILE__ );
        
 ?>
 
@@ -63,164 +64,137 @@
     }
     
 </style>
-<script src="/wp-content/plugins/atcontent/assets/interface.js" type="text/javascript"></script>
 <script>
     var gate = '<?php echo admin_url('admin-ajax.php'); ?>';
     var email = '<?php echo $email; ?>';    
     var site = '<?php echo $site; ?>';
     var title = '<?php bloginfo('name'); ?>';
     var userid = '<?php echo $userid; ?>';
-
-    function gaSend(category, action)
-    {
-        window.CPlase_ga = window.CPlase_ga || [];
-                        CPlase_ga.push({
-                            category: category + ' <?php echo AC_VERSION?>',
-                            action: action,
-                            label: site + '      ' + email
-                        });
-    }
-
-    window.CPlase_ga = window.CPlase_ga || [];
-                CPlase_ga.push({
-                    category: 'connectTab <?php echo AC_VERSION?>',
-                    action: 'opened',
-                    label: site + '      ' + email
-                });
 </script>
 <form id="connect_form" method="post" action="">
 <div class="atcontent_invite">
-    <?php if (strlen($ac_api_key) == 0)
-            {     
-          ?>  
-    <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
-	<p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
-        <div id="user_data_form">
-            <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
-            <p class="caption">email</p>
-            <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
-            <p class="caption">username</p>
-        </div>
+    <?php if (strlen($ac_api_key) == 0) {     
+    ?>  
+        <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
+	    <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
+            <div id="user_data_form">
+                <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
+                <p class="caption">email</p>
+                <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
+                <p class="caption">username</p>
+            </div>
      
-    <div id="ac_connect_result"></div>       
-	<a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
+        <div id="ac_connect_result"></div>       
+	    <a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
 
-   <hr />
-        
-        <script>
-            gaSend('connectTab', 'new user');
-        </script>      
-                    
+       <hr />           
     <?php 
     } else {  
     ?>     
-        <script>
-            gaSend('connectTab', 'old user');
-        </script>  
         <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
 	
         <div id="ac_connect_result">
-            <img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30"/>  
+            <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />  
         </div>     
 	    <a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
-        <?php
+    <?php
     }
-        ?>
+    ?>
 <script type="text/javascript">
     var ConnectBlog;
-    var AutoSignIn;
-
-        
+    var AutoSignIn;        
 
     function beforechangeaccount() {
-        if (confirm("Are you sure you want to change account?"))
+        if (confirm("Are you sure you want to change account?")) {
             jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
 			    type: 'post',
 			    data: {
 					    action: 'atcontent_disconnect'
-					}, 
-                success: function(d)
-                {  
-                    if (d.IsOK)
-                    {
+				}, 
+                success: function(d) {  
+                    if (d.IsOK) {
                         location.reload();
-                    }
-                    else
-                    {
                     }
                 },                   
 			    dataType: "json"
 		    });
+        }
     }
 
-    function signInWindow()
-    {
+    function signInWindow() {
         email = document.getElementById("email").value;
-        _window = window.open("http://www.atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460,height=420,resizable=no,scrollbars=no,status=yes,menubar=no,toolbar=no,location=yes,directories=no");
+        _window = window.open("http://www.atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
         _window.opener = window;
         setTimeout(function () {
-            if (_window.closed)
+            if (_window.closed) {
                 AutoSignIn();
-            else
+            } else {
                 setTimeout(arguments.callee, 10);
+            }
         }, 10);
-
     }
 
     (function ($) {  
         var buttonDisabled = false;
         var credentials;
-
         var apikey = '';  
         var avatar_20 = '<?php echo $ac_avatar_20; ?>';
         var username = '<?php echo $ac_pen_name; ?>';
         var showname = '<?php echo $ac_show_name; ?>'
         var selectedBlog = '';
         window.ac_connect_res = function (d) {
-            if (d) document.getElementById("connect_form").submit();
-            else $("#ac_connect_result").html(
+            if (d) {   
+                document.getElementById("connect_form").submit();
+            } else {
+                $("#ac_connect_result").html(
                     'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+            }    
         }
 
-        function DisableButton()
-        {    
+
+        function DisableButton() {    
             $("#b_connect").removeClass('b_green').addClass('b_enable');
             buttonDisabled = true;
         }
 
 
-        $(document).keypress(function (e)
-        {
-            if (e.which == 13)
-            {
-                console.log(e.which);
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
                 jQuery("#b_connect").click.call(jQuery("#b_connect"));  
             }
         });
         
-        function EnableButton()
-        {    
+        function EnableButton() {    
             $("#b_connect").addClass('b_green').removeClass('b_enable');
             buttonDisabled = false;
         }
 
-        function CreateBlogsPanel(blogs)
-        {
+        function CreateBlogsPanel(blogs) {
             $("#connection_rules_title").hide();
             $("#site").val(title);
-            var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + username + '" target="_blank"><img src="' + avatar_20 + '" alt="" width="16" height="16"> ' + showname + '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';
-            
+            var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + 
+                username + 
+                '" target="_blank"><img src="' + 
+                avatar_20 + 
+                '" alt="" width="16" height="16"> ' + 
+                showname + 
+                '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';            
             for (var i in blogs) {
-                blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').hide();" name="blog" class="blog_radio" id="blog_' + blogs[i].BlogId + '" value="' + blogs[i].BlogId + '"/><label for="blog_' + blogs[i].BlogId + '">' + blogs[i].BlogTitle + '</label><br>';
+                blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').hide();" name="blog" class="blog_radio" id="blog_' + 
+                    blogs[i].BlogId + 
+                    '" value="' + 
+                    blogs[i].BlogId + 
+                    '" /><label for="blog_' + 
+                    blogs[i].BlogId + '">' + 
+                    blogs[i].BlogTitle + 
+                    '</label><br>';
             }
-            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1"/><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="email">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
+            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="email">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
             $("#user_data_form").hide();
-            $("#b_connect").unbind('click').click(function()
-            {
+            $("#b_connect").unbind('click').click(function() {
                 title  = $("#site").val();
                 var blog = $('input:radio[name=blog]:checked').val();
-                if (blog!=null)
-                {
+                if (blog!=null) {
                     DisableButton();
                     ConnectBlog(blog);
                 } 
@@ -229,12 +203,10 @@
             $("#ac_connect_result").html(blogsHtml);
         }
         
-        ConnectBlog = function (selectedBlog)    
-        {
+        ConnectBlog = function (selectedBlog) {
             selectedBlog = selectedBlog || "";
-            if (selectedBlog!="") 
-            {
-		        $(".blogs").after('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
+            if (selectedBlog!="") {
+		        $(".blogs").after('<img src="<?php echo($loader_url);?>" width="30">');
                 $('[name = blog]').attr('disabled', 'disabled');
             }
             var email = $("#email").val();
@@ -250,19 +222,13 @@
                     blog: selectedBlog
                 },
                 success: function(d){
-                    if (d.IsOK)
-                    {
+                    if (d.IsOK) {
                         SyncQueue();                     
-                    }
-                    else
-                    {
-                        if(d.Error == "select")
-                        {
+                    } else {
+                        if(d.Error == "select") {
                             CreateBlogsPanel(d.blogs);     
                             EnableButton();                       
-                        }
-                        else
-                        {
+                        } else {
                             $("#ac_connect_result").html(
                                         'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
                             EnableButton();  
@@ -273,13 +239,12 @@
 		    });  
         }
 
-        function SyncQueue()
-        {
+        function SyncQueue() {
             $.ajax({url: '<?php echo $ajax_form_action; ?>', 
                 type: 'post', 
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
-                success: function(d){                                
+                success: function(d) {                                
                     location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
                 },
                 error: function(d, s, e) {
@@ -287,20 +252,17 @@
             });            
         }
         <?php 
-
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-            if (strlen($ac_api_key) != 0)
-            {
-                ?>
-                    apikey = '<?php echo($ac_api_key); ?>';
-                    ConnectBlog();
-                <?php
+            if (strlen($ac_api_key) != 0) {
+        ?>
+            apikey = '<?php echo($ac_api_key); ?>';
+            ConnectBlog();
+        <?php  
             }
         ?>
 
 
-        function SaveCredentials()
-        {
+        function SaveCredentials() {
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
 			    data: {
@@ -312,18 +274,14 @@
                         Avatar20 : credentials.Avatar20,
                         Avatar80 : credentials.Avatar80
 					}, 
-                success: function(d)
-                {  
-                    if (d.IsOK)
-                    {
+                success: function(d) {  
+                    if (d.IsOK) {
                         apikey =  credentials.APIKey;   
                         showname = credentials.Showname;
                         username = credentials.Nickname;
                         avatar_20 = credentials.Avatar20;
                         ConnectBlog();
-                    }
-                    else
-                    {
+                    } else {
                         $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
                     }
                 },                   
@@ -331,9 +289,8 @@
 		    });
         }
 
-        AutoSignIn = function()
-        {
-		    $("#ac_connect_result").html('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
+        AutoSignIn = function() {
+		    $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
             DisableButton();
             var email = $("#email").val();
             $.ajax({
@@ -343,15 +300,14 @@
                     email : email
                 },
                 success: function(d){
-                    if (d.IsOK)
-                    {
+                    if (d.IsOK) {
                         credentials = d;
                         SaveCredentials();
-                    }
-                    else
-                    {
+                    } else {
                         EnableButton();                        
-				        $("#ac_connect_result").html('<h2>We have found an AtContent account associated with '+email+'. Please <a onclick="signInWindow();" href="#">sign in</a> to your AtContent account</h2>'); 
+				        $("#ac_connect_result").html('<h2>We have found an AtContent account associated with ' +
+                            email +
+                            '. Please <a onclick="signInWindow();" href="#">sign in</a> to your AtContent account</h2>'); 
                     }
                 },
                 error: function() {					
@@ -362,37 +318,32 @@
         }
         
         $("#b_connect").click(function () {
-            gaSend('connectTab', 'clicked');
             $(".discl").html('');
-		    $("#ac_connect_result").html('<img src="/wp-content/plugins/atcontent/assets/loader.gif" width="30">');
-            if (buttonDisabled) {return;}
+		    $("#ac_connect_result").html('<img src="<?php echo($loader_url);?>" width="30">');
+            if (buttonDisabled) {
+                return;
+            }
             DisableButton();
             var email = $("#email").val();
             var username = $("#username").val();
             $.ajax({url: '<?php echo $ajax_form_action; ?>',
 			type: 'post',
 			data: {
-					action: 'atcontent_connect',
-                    email : email,
-                    username : username
-				},
+				action: 'atcontent_connect',
+                email : email,
+                username : username
+			},
             success: function(d){
-				if (d.IsOK)
-                {
+				if (d.IsOK) {
                     credentials = d;
                     SaveCredentials();
-                }else
-                {
+                } else {
                     if (d.Error == null){
                         $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-                    }else
-                    {
-                        if (d.Error.indexOf("email already exist")!=-1) 
-                        {
+                    } else {
+                        if (d.Error.indexOf("email already exist")!=-1) {
                             AutoSignIn();
-                        }
-                        else
-                        {
+                        } else {
                             $("#ac_connect_result").html(d.Error);
                             EnableButton();
                         }
