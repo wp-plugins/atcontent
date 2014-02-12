@@ -122,7 +122,7 @@
         </label><br>
         as 
         <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
-            <img style="vertical-align: middle; margin-right: .3em" src="<?php echo $ac_avatar_20; ?>" alt="">
+            <img style="vertical-align: middle;  margin-right: .3em" src="<?php echo $ac_avatar_20; ?>"  onerror="this.parentNode.removeChild(this)" alt="">
             <?php echo $ac_show_name; ?>
         </a>
     </div>
