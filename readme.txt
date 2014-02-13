@@ -1,7 +1,7 @@
 === AtContent Plugin ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
-Tags: Post, posts, text, admin, widget, seo, repost, api, google, search engine optimization, wordpress seo, plugin
+Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,wordpress seo,plugin
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: trunk
@@ -34,10 +34,6 @@ With AtContent's plugin, you can easily increase your audience by following 3 si
 
 == Examples ==
 
-* **[Content Protection Demo example](http://bit.ly/KJ819r)** — text is not available for copying, but everyone can click “Repost” at the bottom of the published content. This protects your content from copy-pasting.
-* **[Track & Statistics Demo example 1](http://bit.ly/1aJWgpb)**
-* **[Track & Statistics Demo example 2](http://bit.ly/1aJWjkZ)**
-* **[Premium Content Demo example](http://bit.ly/1ks54Ki)**
 * **[Comments Demo example](http://bit.ly/1hzlqPg)**
 
 == Installation ==
