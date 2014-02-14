@@ -118,7 +118,7 @@
 
         $date_ad_campaign_end = strtotime("2014-02-18, 0:00");
         if (time() < $date_ad_campaign_end) {
-            add_menu_page( 'Get Paid', "Get paid", 'publish_posts', 'atcontent/getpaid.php', '', 
+            add_menu_page( 'Get Paid', "Monetize blog", 'publish_posts', 'atcontent/getpaid.php', '', 
                 plugins_url( 'assets/logo.png', __FILE__ ), atcontent_get_menu_key( 6.0 ));
         }
 
