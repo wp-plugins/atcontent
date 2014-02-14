@@ -28,8 +28,10 @@
 
     .caption {
         font-size: 12px;
-        margin-top: 0px;
-        
+        width: 300px;
+        margin: auto;
+        margin-top: 15px;        
+        text-align: left;    
     }
     
     .blocked {
@@ -78,12 +80,16 @@
         <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
 	    <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
             <div id="user_data_form">
+                <p class="caption">Email</p>
                 <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
-                <p class="caption">email</p>
+                <p id="username_caption" class="caption">Username</p>
                 <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
-                <p class="caption">username</p>
+                <p id="password_caption" class="caption">Password</p>
+                <input id="password" type="password" name="password" value=""></input></br>
+                <p id="confirm_caption" class="caption">Confirm password</p>
+                <input id="confirm" type="password" name="confirm" value=""></input></br>                
             </div>
-     
+        <div id="sign_changer"><a href="#" onclick="signIn()">I already have an AtContent account</a></div>
         <div id="ac_connect_result"></div>       
 	    <a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
 
@@ -103,6 +109,36 @@
 <script type="text/javascript">
     var ConnectBlog;
     var AutoSignIn;        
+
+    function signIn()
+    { 
+        jQuery('#user_data_form').css('height', '40px'); 
+        jQuery("#password").hide();
+        jQuery("#password_caption").hide();
+        jQuery("#confirm").hide();
+        jQuery("#confirm_caption").hide();
+        jQuery("#username").hide();
+        jQuery("#username_caption").hide();
+        jQuery("#sign_changer").html('<a href="#" onclick="signUp()">I want to sign up</a>');
+        jQuery("#b_connect").unbind('click').click(function() {
+            AutoSignIn();        
+        });
+    }
+
+    function signUp()
+    { 
+        jQuery('#user_data_form').css('height', '260px');
+        jQuery("#password").show();
+        jQuery("#password_caption").show();
+        jQuery("#confirm").show();
+        jQuery("#confirm_caption").show();
+        jQuery("#username").show();
+        jQuery("#username_caption").show();
+        jQuery("#sign_changer").html('<a href="#" onclick="signIn()">I already have an AtContent account</a>');
+        jQuery("#b_connect").unbind('click').click(function() {
+            Connect();        
+        });
+    }
 
     function beforechangeaccount() {
         if (confirm("Are you sure you want to change account?")) {
@@ -294,7 +330,7 @@
             DisableButton();
             var email = $("#email").val();
             $.ajax({
-                url: 'http://www.atcontent.com/api/v1/native/checkauth.ashx',
+                url: 'http://api.atcontent.com/v1/native/checkauth',
                 jsonp: 'jsonp_callback',
                 data : {
                     email : email
@@ -303,6 +339,7 @@
                     if (d.IsOK) {
                         credentials = d;
                         SaveCredentials();
+                        $("#sign_changer").hide();
                     } else {
                         EnableButton();                        
 				        $("#ac_connect_result").html('<h2>We have found an AtContent account associated with ' +
@@ -317,46 +354,61 @@
 		    });  
         }
         
-        $("#b_connect").click(function () {
+        $("#b_connect").click(function(){
+            Connect()
+        });
+    
+        function Connect() {
             $(".discl").html('');
 		    $("#ac_connect_result").html('<img src="<?php echo($loader_url);?>" width="30">');
             if (buttonDisabled) {
                 return;
-            }
+            }    
             DisableButton();
-            var email = $("#email").val();
-            var username = $("#username").val();
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
-			type: 'post',
-			data: {
-				action: 'atcontent_connect',
-                email : email,
-                username : username
-			},
-            success: function(d){
-				if (d.IsOK) {
-                    credentials = d;
-                    SaveCredentials();
-                } else {
-                    if (d.Error == null){
-                        $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-                    } else {
-                        if (d.Error.indexOf("email already exist")!=-1) {
-                            AutoSignIn();
+            var password = $("#password").val();
+            var confirm = $("#confirm").val(); 
+            if (password != confirm) {         
+                $("#ac_connect_result").html('Passwords does not match');
+                EnableButton(); 
+            } else{
+                var email = $("#email").val();
+                var username = $("#username").val();
+                $.ajax({
+                    url: 'http://api.atcontent.com/v1/native/connect.jsonp',
+                    jsonp: 'jsonp_callback',
+			        data: {
+				        action: 'atcontent_connect',
+                        email : email,
+                        username : username,
+                        password : password
+			        },
+                    success: function(d){
+				        if (d.IsOK) {
+                            credentials = d;
+                            SaveCredentials();    
+                            $("#sign_changer").hide();
                         } else {
-                            $("#ac_connect_result").html(d.Error);
-                            EnableButton();
+                            if (d.Error == null){
+                                $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                            } else {
+                                if (d.Error.indexOf("email already exist")!=-1) {
+                                    AutoSignIn();
+                                } else {
+                                    $("#ac_connect_result").html(d.Error);
+                                    EnableButton();
+                                }
+
+                            }
                         }
-                    }
-                }
-			},
-			error: function() {
-				$("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-			},
-			dataType: "json"
-		});
-    });
-})(jQuery);
+			        },
+			        error: function() {
+				        $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+			        },
+			        dataType: "jsonp"
+		        });
+            }
+        }
+    })(jQuery);
 </script>
 </div>
 </form>

@@ -71,6 +71,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.2.0 =
+* Connect process improve, "get paid" page
+
 = 7.1.6 =
 * Wordpress coding standarts
 

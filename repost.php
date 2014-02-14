@@ -240,7 +240,6 @@ $email_body = "Hey AtContent team, \n" .
 
                 </div>
             <?php } ?>
-                
         </div>
 
 <script>
