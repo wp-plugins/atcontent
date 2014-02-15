@@ -71,6 +71,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.2.1 =
+* Connect page update and monetize blog link 
+
 = 7.2.0 =
 * Connect process improve, "get paid" page
 
