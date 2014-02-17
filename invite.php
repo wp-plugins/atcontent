@@ -77,7 +77,7 @@
 <div class="atcontent_invite">
     <?php if (strlen($ac_api_key) == 0) {     
     ?>  
-        <h1>AtContent is the easiest way to boost your audience 2.5x in 30 days by making your blog posts available to repost!</h1>
+        <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
 	    <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
             <div id="user_data_form">
                 <p class="caption">Email</p>
