@@ -71,6 +71,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.2.3 =
+* Connect page fix 
+
 = 7.2.2 =
 * Monetize blog menu fix 
 

@@ -77,7 +77,7 @@
 <div class="atcontent_invite">
     <?php if (strlen($ac_api_key) == 0) {     
     ?>  
-        <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
+        <h1>Boost your audience 2.5x in 30 days by sharing blog posts with others!</h1>
 	    <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
             <div id="user_data_form">
                 <p class="caption">Email</p>
@@ -172,7 +172,6 @@
 
     (function ($) {  
         var buttonDisabled = false;
-        var credentials;
         var apikey = '';  
         var avatar_20 = '<?php echo $ac_avatar_20; ?>';
         var username = '<?php echo $ac_pen_name; ?>';
@@ -298,7 +297,7 @@
         ?>
 
 
-        function SaveCredentials() {
+        function SaveCredentials(credentials) {
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
 			    data: {
@@ -337,8 +336,7 @@
                 },
                 success: function(d){
                     if (d.IsOK) {
-                        credentials = d;
-                        SaveCredentials();
+                        SaveCredentials(d);
                         $("#sign_changer").hide();
                     } else {
                         EnableButton();                        
@@ -384,8 +382,7 @@
 			        },
                     success: function(d){
 				        if (d.IsOK) {
-                            credentials = d;
-                            SaveCredentials();    
+                            SaveCredentials(d);    
                             $("#sign_changer").hide();
                         } else {
                             if (d.Error == null){
@@ -397,7 +394,6 @@
                                     $("#ac_connect_result").html(d.Error);
                                     EnableButton();
                                 }
-
                             }
                         }
 			        },
