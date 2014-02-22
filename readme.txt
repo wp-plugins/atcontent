@@ -71,7 +71,7 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
-= 7.2.3 =
+= 7.2.4 =
 * After connect proccess and settings menu update
 
 = 7.2.3 =
