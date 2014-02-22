@@ -24,7 +24,7 @@
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 ?>
 <div class="b-cols">    
-    <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px;<?php if ($_GET["step"] == "1") { ?> visibility:hidden;<?php } ?>">
+    <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
             <p> Well done!</p>
             <p> Now you can repost others' blog posts on "Get Content" page and other bloggers can repost yours.

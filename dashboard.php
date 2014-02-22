@@ -25,7 +25,6 @@
 </div>
 
 <script>
-    var isFirstTime = false;
 
     jQuery("#contextual-help-link").hide();
 
@@ -90,20 +89,7 @@
 <div class="atcontent_wrap">
     <div id="settings_step">    
         <?php include("settings.php"); ?>        
-        <?php if ($_GET["step"] == "1"){ ?>
-            <script>
-                isFirstTime = true;
-                settings();
-                jQuery("#b-settings-block__site_settings").hide();
-                jQuery("#settings_step").css('top', '95px');
-                jQuery("#settings_step").css('left', '50%');
-                jQuery("#settings_step").css('margin-left', '-220px');
-                jQuery("#b_save").html("Apply &amp; Continue");
-                jQuery("#dashboard-table").css('visibility', 'hidden');
-                jQuery('.one_page_link').hide();
-                jQuery('#tip_one_step').show();   
-            </script>
-        <?php } ?>  
+        
     </div>   
     <div class="b-dashboard-table b-dashboard-table-status" id="sync-process" style="width: 420px;">
         <table>
@@ -140,7 +126,13 @@
     
     
     <?php
-        include("stat_block.php");
+        include("stat_block.php"); ?>
+      <?php  if ($_GET["step"] == "1"){ ?>
+            <script>
+                jQuery("#tip_two_step").show();
+                jQuery('.one_page_link').show();  
+            </script>
+        <?php } 
     }
     else
     {

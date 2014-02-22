@@ -144,7 +144,7 @@ END;
                     </label>
                     <div class="ac-small">Do not mark if your site has custom theme.</div>
                 </div>
-                <div class="b-checkbox-row">
+                <div class="b-checkbox-row" style="display: none">
                     <label>
                         <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
                         Enable share buttons
@@ -187,17 +187,6 @@ END;
                     jQuery("#settings_saved").show();
                     jQuery("#settings_saved").html('Saved!');
                     setTimeout('jQuery("#settings_saved").hide()', 5000); 
-                    if (isFirstTime) {   
-                        jQuery("#dashboard-table").css('visibility', '');  
-                        jQuery("#tip_two_step").show();
-                        jQuery('.one_page_link').show(); 
-                        jQuery("#settings_step").css('top','40px');                         
-                        jQuery("#settings_step").css('left','0px');                     
-                        jQuery("#settings_step").css('margin','0px'); 
-                        jQuery('#tip_one_step').hide();   
-                        hideSettings();  
-                        isFirstTime=false; 
-                    }         
                 } else {
                     jQuery("#ac_connect_result").html(
                                 'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
