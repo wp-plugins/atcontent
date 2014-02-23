@@ -70,7 +70,6 @@
     var gate = '<?php echo admin_url('admin-ajax.php'); ?>';
     var email = '<?php echo $email; ?>';    
     var site = '<?php echo $site; ?>';
-    var title = '<?php bloginfo('name'); ?>';
     var userid = '<?php echo $userid; ?>';
 </script>
 <form id="connect_form" method="post" action="">
@@ -159,7 +158,7 @@
 
     function signInWindow() {
         email = document.getElementById("email").value;
-        _window = window.open("http://www.atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
+        _window = window.open("http://atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
         _window.opener = window;
         setTimeout(function () {
             if (_window.closed) {
@@ -206,7 +205,7 @@
 
         function CreateBlogsPanel(blogs) {
             $("#connection_rules_title").hide();
-            $("#site").val(title);
+            $("#site").val('<?php echo bloginfo('name'); ?>');
             var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + 
                 username + 
                 '" target="_blank"><img src="' + 
@@ -227,7 +226,6 @@
             blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="email">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function() {
-                title  = $("#site").val();
                 var blog = $('input:radio[name=blog]:checked').val();
                 if (blog!=null) {
                     DisableButton();
@@ -252,7 +250,7 @@
                     action: 'atcontent_connect_blog',
                     bloguserid : userid,
                     apikey : apikey,
-                    sitetitle : title,
+                    sitetitle : '<?php echo bloginfo('name'); ?>',
                     gate : gate,
                     blog: selectedBlog
                 },

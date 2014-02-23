@@ -13,12 +13,6 @@ function atcontent_dashboard_widget_function() {
         echo '<img style="vertical-align:bottom;" src="' . $img_url . '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent<div class="clear"></div></div>';
         return;
     }
-
-    
-    $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-    if ( $connect_result["IsOK"] == TRUE ) {
-        update_user_meta( $userid, "ac_oneclick_repost", "1" );
-    }
     
     if ( current_user_can( 'edit_posts' ) ) {
         global $wpdb;

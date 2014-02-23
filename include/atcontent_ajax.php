@@ -281,10 +281,6 @@ function atcontent_api_key()
             update_user_meta( $userid, "ac_showname", $api_key_result["Showname"] );
             update_user_meta( $userid, "ac_avatar_20", $api_key_result["Avatar20"] );
             update_user_meta( $userid, "ac_avatar_80", $api_key_result["Avatar80"] );
-            $connect_result = atcontent_api_connectgate( $ac_api_key, $userid, get_site_url(), admin_url("admin-ajax.php") );
-            if ( $connect_result["IsOK"] == TRUE ) {
-                update_user_meta( $userid, "ac_oneclick_repost", "1" );
-            }
             $result .= "true";
         }
 	    header( "Content-Type: text/html" );
