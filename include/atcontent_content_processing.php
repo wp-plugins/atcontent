@@ -27,7 +27,7 @@
         $ac_embedid = get_post_meta( $post->ID, "ac_embedid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
-        $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+        $ac_comments_disable = "1";
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
         $ac_adtest = get_user_meta( intval( $post->post_author ), "ac_adtest", true );
         $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
@@ -113,7 +113,7 @@ END;
         if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
         if ( $ac_excerpt_no_process == "1" ) return $content;
         if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0 && $ac_excerpt_no_process == "0" ) {
-            $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+            $ac_comments_disable = "1";
             $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
             $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
 
@@ -152,7 +152,7 @@ END;
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
-        $ac_comments_disable = get_user_meta( intval( $post->post_author ), "ac_comments_disable", true );
+        $ac_comments_disable = "1";
         $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
         $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
         $ac_additional_classes = "";
@@ -313,132 +313,6 @@ END;
             }
         }
         return $content;
-    }
-
-    
-    function atcontent_import_handler(){
-        $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        if ( current_user_can( 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
-
-            atcontent_coexistense_fixes();
-
-	        // get the submitted parameters
-	        $postID = $_POST['postID'];
-            $ac_is_copyprotect = $_POST['copyProtection'];
-            $ac_paidrepost_cost = $_POST['cost'];
-
-            $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
-            if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
-
-            $ac_postid = get_post_meta( $postID, "ac_postid", true );
-            $ac_is_process = get_post_meta( $postID, "ac_is_process", true );
-
-            $ac_cost = get_post_meta( $postID, "ac_cost", true );
-            $ac_type = get_post_meta( $postID, "ac_type", true );
-            $ac_paid_portion = get_post_meta( $postID, "ac_paid_portion", true );
-
-            $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
-            if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
-                $ac_is_advanced_tracking = "1";
-            }
-            if ( strlen( $ac_is_copyprotect ) == 0 ) {
-                $ac_is_copyprotect = "1";
-            }
-
-            if ( strlen( $ac_type ) == 0 ) {
-                if ($ac_is_paidrepost == "1") {
-                    $ac_type = "paidrepost";
-                } else {
-                    $ac_type = "free";
-                }
-            }
-
-            if ($ac_cost == "") $ac_cost = $ac_paidrepost_cost;
-
-            $ac_action = "";
-            $additional = NULL;
-            $post = get_post( $postID );
-            if ( $post == null || $ac_is_process == "0" ) {
-                $ac_action = "skipped";
-            } else {
-                $comments_json = "";
-                $comments = get_comments( array(
-                        'post_id' => $post->ID,
-                        'order' => 'ASC',
-                        'orderby' => 'comment_date_gmt',
-                        'status' => 'approve',
-                ) );
-                if( !empty($comments) ) {
-                    $comments_json .= json_encode($comments);
-                }
-                
-                $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
-                $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
-                
-
-	            if ( strlen( $ac_postid ) == 0 ) {
-                    $api_answer = atcontent_api_create_publication( $ac_api_key, $post->post_title,
-                            apply_filters( "the_content", $post->post_content ),
-                            apply_filters( "the_content", $ac_paid_portion ),
-                            $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
-                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
-                        $ac_postid = $api_answer["PublicationID"];
-                        update_post_meta($post->ID, "ac_postid", $ac_postid);
-                        update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                        update_post_meta($post->ID, "ac_type" , $ac_type );
-                        update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
-                        update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
-                        update_post_meta($post->ID, "ac_is_process", "1");
-                        $ac_action = "created";
-                    } else if ( is_array ( $api_answer ) ) {
-                        $ac_action = "error";
-                        $additional = $api_answer["error"];
-                        update_post_meta( $post->ID, "ac_is_process", "2" );
-                    } else {
-                        $ac_action = "skipped";
-                        update_post_meta( $post->ID, "ac_is_process", "2" );
-                    }
-                } else {
-                    $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title,
-                        apply_filters( "the_content", $post->post_content ) ,
-                        apply_filters( "the_content", $ac_paid_portion ) ,
-                        $ac_type , get_gmt_from_date( $post->post_date ), get_permalink($post->ID),
-                        $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json );
-                    if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
-                        update_post_meta($post->ID, "ac_is_process", "1");
-                        update_post_meta($post->ID, "ac_is_copyprotect" , $ac_is_copyprotect );
-                        update_post_meta($post->ID, "ac_type" , $ac_type );
-                        update_post_meta($post->ID, "ac_paidrepost_cost" , $ac_paidrepost_cost );
-                        update_post_meta($post->ID, "ac_is_import_comments" , $ac_is_import_comments );
-                        $ac_action = "updated";
-                    } else if ( is_array ( $api_answer ) ) {
-                        $ac_action = "error";
-                        $additional = $api_answer["error"];
-                        update_post_meta( $post->ID, "ac_is_process", "2" );
-                    } else {
-                        $ac_action = "skipped";
-                        update_post_meta( $post->ID, "ac_is_process", "2" );
-                    }
-                }
-            }
-
-	        // generate the response
-            $res_array = array( 'IsOK' => true, "AC_action" => $ac_action );
-            if ( $ac_action == "error" ) {
-                $res_array["IsOK"] = false;
-                $res_array["Info"] = $additional;
-            }
-	        $response = json_encode( $res_array );
-
-	        // response output
-	        header( "Content-Type: application/json" );
-	        echo $response;
-        }
-
-        // IMPORTANT: don't forget to "exit"
-        exit;
     }
 
 

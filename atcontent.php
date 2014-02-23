@@ -36,7 +36,8 @@
     add_action( 'deleted_comment', 'atcontent_comment_post' );
     add_action( 'trashed_comment', 'atcontent_comment_post' );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
-    add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
+    //TODO: Check existense
+    //add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );

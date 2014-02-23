@@ -71,7 +71,7 @@ function atcontent_publish_publication( $post_id ){
                         apply_filters( "the_content",  $ac_paid_portion ),  
                         $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                     $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json, 
-                    $ac_blogid, $ac_syncid, $post->ID );
+                    $ac_blogid, $ac_syncid, $post->ID, $post->post_author );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_postid = $api_answer["PublicationID"];
                     $ac_embedid = $api_answer["EmbedId"];
@@ -86,7 +86,7 @@ function atcontent_publish_publication( $post_id ){
                     apply_filters( "the_content",  $ac_paid_portion ), 
                     $ac_type , get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
                     $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json,
-                    $ac_blogid, $ac_syncid, $post->ID );
+                    $ac_blogid, $ac_syncid, $post->ID, $post->post_author );
                 if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
                     $ac_embedid = $api_answer["EmbedId"];
                     update_post_meta( $post->ID, "ac_embedid", $ac_embedid );
