@@ -35,22 +35,6 @@ function atcontent_readership() {
     exit;
 }
 
-function atcontent_ajax_guestpost(){
-    $blogusers = get_users();
-    $ac_is_active = false;
-    $blogurl = "";
-    foreach ($blogusers as $user) {
-        $ac_api_key = get_user_meta( $user->ID, "ac_api_key", true );
-        if ( strlen( $ac_api_key ) > 0 ) {
-            $ac_is_active = true;
-            $blogurl = site_url();
-            break;
-        }
-    }
-    echo json_encode( array ( "IsOK" => true, "IsActive" => $ac_is_active, "Url" => $blogurl ) );
-    exit;
-}
-
 function atcontent_ajax_gate() {
     $command = $_POST["command"];
     switch ( $command ) {

@@ -19,18 +19,6 @@
         );
 
         // */
-
-        /*
-        $version = get_bloginfo('version');
-        if ( version_compare( $version, '3.3', '>=' ) ) {
-            add_meta_box(
-                'atcontent_secondeditor',
-                __( 'AtContent Paid Portion', 'atcontent_textdomain' ),
-                'atcontent_paid_portion',
-                'post'
-            );
-        }
-        // */
     }
 
     function atcontent_inner_custom_box( $post ) {
@@ -178,12 +166,6 @@
     </script>
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
-        if ( strlen( $ac_postid ) > 0 ) {
-    ?>
-            <div class="misc-pub-section">
-            </div>
-    <?php
-        }
     }
 
     function atcontent_inner_repost_box( $post ) {
@@ -226,27 +208,4 @@
         }
     }
 
-    function atcontent_paid_portion( $post ) {
-
-        $userid = $post->post_author;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        if ( strlen( $ac_api_key ) == 0 ) return;
-
-        // Use nonce for verification
-        $args = array(
-            'wpautop' => 1
-            ,'media_buttons' => 1
-            ,'textarea_name' => 'ac_paid_portion'
-            ,'textarea_rows' => 20
-            ,'tabindex' => null
-            ,'editor_css' => ''
-            ,'editor_class' => ''
-            ,'teeny' => 0
-            ,'dfw' => 0
-            ,'tinymce' => 1
-            ,'quicktags' => 1
-        );
-        $ac_paid_portion = get_post_meta( $post->ID, "ac_paid_portion", true );
-        wp_editor( $ac_paid_portion, "atcontentpaidportion", $args );
-    }
 ?>

@@ -36,8 +36,6 @@
     add_action( 'deleted_comment', 'atcontent_comment_post' );
     add_action( 'trashed_comment', 'atcontent_comment_post' );
     add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
-    //TODO: Check existense
-    //add_action( 'wp_ajax_atcontent_import', 'atcontent_import_handler' );
     add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
     add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
     add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
@@ -49,15 +47,11 @@
     add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
     add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
     add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
-    add_action( 'wp_ajax_nopriv_atcontent_guestpost', 'atcontent_ajax_guestpost' );
-    add_action( 'wp_ajax_atcontent_guestpost', 'atcontent_ajax_guestpost' );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_guestpost_check_url', 'atcontent_ajax_guestpost_check_url' );
     add_action( 'wp_ajax_atcontent_syncqueue', 'atcontent_ajax_syncqueue' );
     add_action( 'admin_head', 'atcontent_admin_head' );
-    //add_filter( 'manage_posts_columns', 'atcontent_column_head' );
-    //add_action( 'manage_posts_custom_column', 'atcontent_column_content', 10, 2 );
     add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
 
     register_activation_hook( __FILE__, 'atcontent_activate' );
@@ -92,15 +86,6 @@
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
-
-        //add_submenu_page( 'atcontent/dashboard.php', 'Connect', 'Connect', 'edit_posts', 'atcontent/connect.php',  '');
-        //add_submenu_page( 'atcontent/dashboard.php', 'Settings', 'Settings', 'edit_posts', 'atcontent/settings.php',  '');
-        //add_submenu_page( 'atcontent/dashboard.php', 'Sync', 'Sync', 'edit_posts', 'atcontent/sync.php',  '');
-        //add_submenu_page( 'atcontent/dashboard.php', 'Statistics', 'Statistics', 'publish_posts', 'atcontent/statistics.php',  '');
-
-        //$guest_key = atcontent_get_menu_key( 5.0 );
-        //add_menu_page( 'Guest Posts', 'Guest Posts', 'publish_posts', 'atcontent/guestpost.php', '', 
-        //    plugins_url( 'assets/logo.png', __FILE__ ), $guest_key );
 
         $since = get_user_meta( wp_get_current_user()->ID, "ac_last_repost_visit", true );
         if ( strlen( $since ) == 0 ) $since = "2013-12-31";
@@ -138,7 +123,6 @@
         }
     }
 
-
     function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );
         if ($post == null) return;
@@ -161,31 +145,6 @@
                 atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
             }
         }
-    }
-
-    function atcontent_get_statistics_link($postID) {
-        $ac_postid = get_post_meta( $postID, "ac_postid", true );
-        if ( strlen( $ac_postid ) > 0 ) {
-            return admin_url( 'admin.php?page=atcontent/statistics.php' ) . "&postid=" . $ac_postid;
-        }
-        return "";
-    }
-
-
-    function atcontent_column_head($defaults) {
-	    $defaults['atcontent_column'] = 'AtContent';
-	    return $defaults;
-    }
-
-    function atcontent_column_content( $column_name, $post_ID ) {
-	    if ( $column_name == 'atcontent_column' ) {
-		    $stat_link = atcontent_get_statistics_link( $post_ID );
-		    if ( strlen( $stat_link) > 0 ) {
-			    echo "<a href=\"{$stat_link}\">Statistics</a>";
-		    } else {
-		        echo "—";
-		    }
-	    }
     }
 
     function atcontent_footer_scripts() {
