@@ -4,7 +4,7 @@ Donate link: https://atcontent.com/
 Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,wordpress seo,plugin
 Requires at least: 3.3
 Stable tag: trunk
-Tested up to: 3.8
+Tested up to: 3.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,12 +24,12 @@ With AtContent's plugin, you can easily increase your audience by following 3 si
 * You will be able to track your audience [growth](http://bit.ly/Kcvui4).
 
 #### With AtContent everybody wins because: #### 
-* You will reach out to people on other sites, which will therefore increase your audience by up to 860% in as little as [3 weeks](http://bit.ly/1didxf4) !
+* You will reach out to people on other sites, which will therefore increase your audience by up to 860% in as little as [3 weeks](http://bit.ly/1didxf4)!
 * Bloggers who make reposts will not only get quality content and increase their sites reader engagement, they will also increase incoming traffic to their sites. 
 * Readers get content they are seeking on sites which they regularly view.
-* All the content is SEO & Google friendly, **NO GOOGLE PENALTIES**
-* There is copy-paste protection on all of the content
-* Backlinks to original sources increase their SEO 
+* All the content is SEO & Google friendly, **NO GOOGLE PENALTIES**.
+* There is copy-paste protection on all of the content.
+* Backlinks to original sources increase their SEO.
  
 
 == Examples ==
