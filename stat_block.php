@@ -26,7 +26,7 @@
 ?>
 <div class="b-cols">    
     <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px">
-        <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
+        <div id="tip_two_step" class="ac_tip_show" style="padding: 10px;">
             <p> Well done, <?php echo $ac_show_name; ?>!</p>
             <ol style="font-size: 1.2em;">
                 <li>Repost relevant posts from “<a href="<?php echo admin_url( "admin.php?page=atcontent/repost.php" ); ?>">Get Content</a>” page.<br>
@@ -37,9 +37,8 @@
             
             <p>
                 <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
-                    Don't be puzzled of zeros.
+                    Don't be puzzled of zeros. Check this page in a 7 days. 
                 <?php } ?>
-                Check this page in a 7 days. 
             </p>
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
