@@ -131,22 +131,6 @@
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
 
-    <div class="misc-pub-section">
-        <label>
-            <input type="checkbox" id="atcontent_is_advanced_tracking" name="atcontent_is_advanced_tracking" value="1" <?php echo $ac_is_advanced_tracking_checked; ?> <?php echo $ac_is_advanced_tracking_enabled ? '' : 'disabled="disabled"'; ?> /> 
-            Enable advanced statistics
-        </label><br />
-        Available posts: <?php echo $advanced_tracking_quota; ?>.
-        <?php if ( $ac_is_advanced_tracking_enabled == false ) { 
-            if ( $subscriptions_count == 0 ) { ?>
-                <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
-            <?php } else { ?>
-                <br>To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">upgrade your subscription</a> or wait for the next month
-            <?php } 
-        } ?>
-        <input type="hidden" name="atcontent_is_advanced_tracking_enabled" value="<?php echo $ac_is_advanced_tracking_enabled ? "1" : "0"; ?>">
-    </div>
-
     <script type="text/javascript">
         (function ($) {
             $(function () {

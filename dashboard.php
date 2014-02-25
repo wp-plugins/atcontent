@@ -1,7 +1,7 @@
 <?php
     $ref_url = "http://wordpress.org/plugins/atcontent/";
     $ajax_form_action = admin_url( 'admin-ajax.php' );
-    require( "include/atcontent_userinit.php" );
+    require_once( "include/atcontent_userinit.php" );
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
     if (strlen($_GET['connectas']) > 0)
@@ -20,16 +20,18 @@
 
 <div style="width: 100%; height: 40px;"></div>
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
-<div class="b-dashboard-info">
-    <a class="one_page_link" onclick="settings()">Show settings</a>
-</div>
 
 <script>
+
+    jQuery( function($){
+        $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
+        $('#footer-upgrade').prepend('<br>');
+    });
 
     jQuery("#contextual-help-link").hide();
 
     function beforechangeaccount() {
-        if (confirm("Are you sure you want to change account?")) {
+        if (confirm("Are you sure you want to change AtContent profile?")) {
             jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
 			    type: 'post',
 			    data: {
@@ -38,25 +40,13 @@
                 success: function(d)
                 {  
                     if (d.IsOK) {
-                        location.reload();
+                        window.location = 'admin.php?page=atcontent/dashboard.php&noauto=1';
                     } 
                 },                   
 			    dataType: "json"
 		    });
         }
     }
-
-    function hideSettings() {
-        jQuery('.one_page_link').html('Show settings');  
-        jQuery('.one_page_link').attr('onclick','settings()');
-        jQuery("#settings_step").hide();    
-    } 
-
-    function settings() {
-        jQuery('.one_page_link').html('Hide settings');        
-        jQuery('.one_page_link').attr('onclick','hideSettings()');
-        jQuery("#settings_step").show();
-    } 
     
     function Resync() {
         jQuery("#resync_button").removeClass('b_orange').addClass('b_enable');
@@ -87,10 +77,6 @@
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
-    <div id="settings_step">    
-        <?php include("settings.php"); ?>        
-        
-    </div>   
     <div class="b-dashboard-table b-dashboard-table-status" id="sync-process" style="width: 420px;">
         <table>
             <tr>

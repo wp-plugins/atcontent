@@ -1,39 +1,45 @@
 <?php
-        $posts = $wpdb->get_results( 
-            "
-            SELECT ID, post_title, post_author
-            FROM {$wpdb->posts}
-            WHERE post_status = 'publish' 
-                AND post_author = {$userid} AND post_type = 'post'
-            "
-        );
+    require_once( "include/atcontent_userinit.php" );
+    $posts = $wpdb->get_results( 
+        "
+        SELECT ID, post_title, post_author
+        FROM {$wpdb->posts}
+        WHERE post_status = 'publish' 
+            AND post_author = {$userid} AND post_type = 'post'
+        "
+    );
 
-        $posts_id = array();
+    $posts_id = array();
 
-        wp_cache_flush();
+    wp_cache_flush();
 
-        foreach ( $posts as $post ) 
-        {
-            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-            if ( strlen( $ac_postid ) > 0 ) { 
-                array_push( $posts_id, $ac_postid );
-            }
-            wp_cache_flush();
+    foreach ( $posts as $post ) 
+    {
+        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        if ( strlen( $ac_postid ) > 0 ) { 
+            array_push( $posts_id, $ac_postid );
         }
+        wp_cache_flush();
+    }
 
-        $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
+    $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 ?>
 <div class="b-cols">    
     <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px">
         <div id="tip_two_step" class="ac_tip_show" style="display: none; padding: 10px;">
-            <p> Well done!</p>
-            <p> Now you can repost others' blog posts on "Get Content" page and other bloggers can repost yours.
-            <p style="font-size: 1.4em">Follow the tips below to increase your audience.</p>
+            <p> Well done, <?php echo $ac_show_name; ?>!</p>
+            <ol style="font-size: 1.2em;">
+                <li>Repost relevant posts from “<a href="<?php echo admin_url( "admin.php?page=atcontent/repost.php" ); ?>">Get Content</a>” page.<br>
+                <small>Readers will come to your blog more often to read new content and share it on social networks.</small></li>
+                <li>Set tags and follow relevant bloggers in <br> your <a href="https://atcontent.com/Studio/Statistics?wp=1#tips" target="_blank">AtContent dashboard</a>.<br>
+                <small>You will get more chances to be reposted and reach a wider audience.</small></li>
+            </ol>
+            
             <p>
                 <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
                     Don't be puzzled of zeros.
                 <?php } ?>
-                Check this page in a few days and see how AtContent affects your readership! 
+                Check this page in a 7 days. 
             </p>
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
@@ -77,18 +83,6 @@
                     </div>
                     
                 </div>
-                <fieldset id="stat-fieldset"><legend>Tips to increase audience:</legend></fieldset>
-                <ul style="margin-left: 30px;">
-                    <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Set tags for your profile</a>
-                    </li>
-                    <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Follow relevant bloggers</a>
-                    </li>
-                    <li>
-                        &ndash;&nbsp;<a target="_blank" href="https://atcontent.com/Studio/Statistics?wp=1">Invite others to repost your posts</a>
-                    </li>
-                </ul>
                 <script src="//www.google.com/jsapi"></script>
                 <script>
                     google.load('visualization', '1.0', {

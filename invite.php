@@ -1,161 +1,42 @@
-<?php 
+<?php
+    wp_register_style( 'atcontentAdminStylesheetInvite', plugins_url( 'assets/invite.css?v=0', __FILE__ ) );
+    wp_enqueue_style( 'atcontentAdminStylesheetInvite' );
     $ajax_action = admin_url( 'admin-ajax.php' );
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
     $userid = $currentuser -> ID;
-    if (strlen($_GET['connectas']) > 0)
+    if ( strlen( $_GET['connectas'] ) > 0 )
     {
-        $userid = intval($_GET['connectas']);
+        $userid = intval( $_GET['connectas'] );
     }
-    $userinfo = get_userdata($userid);
+    $userinfo = get_userdata( $userid );
     $email = $userinfo -> user_email;
     $username = $userinfo -> display_name;
     $site = $_SERVER['HTTP_HOST']; 
     $loader_url = plugins_url( 'assets/loader.gif', __FILE__ );
-       
 ?>
 
-<style>
-    input {
-        padding: 3px 8px;
-        font-size: 1.7em;
-        line-height: 100%;
-        height: 1.7em;
-        width: 300px;
-        outline: 0;
-        margin: 0 0 0 0;
-    }
-
-    .caption {
-        font-size: 12px;
-        width: 300px;
-        margin: auto;
-        margin-top: 15px;        
-        text-align: left;    
-    }
-    
-    .blocked {
-        background-color: darkgrey;
-        padding-left: 10px;
-        width: 40%;
-        margin-left: 20%;
-        position: absolute;
-        opacity: 0.5;
-    }
-    
-    .blogs {
-        text-align: left;
-        width: 30%;
-        margin-left: 35%;
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
-
-    #blog_data_form {
-        margin-bottom: 20px;
-    }
-
-    #credential_show_block {
-        margin-bottom: 20px;
-    }
-    
-    .blogs > input
-    {
-        margin-top: 10px;
-        margin-bottom: 8px;
-    }
-    
-</style>
-<script>
-    var gate = '<?php echo admin_url('admin-ajax.php'); ?>';
-    var email = '<?php echo $email; ?>';    
-    var site = '<?php echo $site; ?>';
-    var userid = '<?php echo $userid; ?>';
-</script>
 <form id="connect_form" method="post" action="">
 <div class="atcontent_invite">
-    <?php if (strlen($ac_api_key) == 0) {     
-    ?>  
         <h1>Get quality posts for your site and boost readership 2,5x in 30 days!</h1>
-	    <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;">The connection will create an account on AtContent.com.</p>
-            <div id="user_data_form">
-                <p class="caption">Email</p>
-                <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
-                <p id="username_caption" class="caption">Username</p>
-                <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
-                <p id="password_caption" class="caption">Password</p>
-                <input id="password" type="password" name="password" value=""></input></br>
-                <p id="confirm_caption" class="caption">Confirm password</p>
-                <input id="confirm" type="password" name="confirm" value=""></input></br>                
-            </div>
-        <div id="sign_changer"><a href="#" onclick="signIn()">I already have an AtContent account</a></div>
-        <div id="ac_connect_result"></div>       
-	    <a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
-
-       <hr />           
-    <?php 
-    } else {  
-    ?>     
-        <h1>AtContent is a cross-blogging and content distribution platform that boosts your readership 2.5x in 30 days</h1>
-	
+	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
+                <div id="user_data_form" style="display: none;">
+                    <p class="caption"><label for="username">Username</label></p>
+                    <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
+                    <p class="caption"><label for="email">Email</label></p>
+                    <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
+                </div>
+            <div id="sign_changer" style="display: none;"><a href="#" id="ac_have_account">I already have an AtContent account</a></div>
         <div id="ac_connect_result">
             <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />  
-        </div>     
-	    <a id="b_connect" class="likebutton b_green b_big" href="#">Connect with AtContent</a>
-    <?php
-    }
-    ?>
+        </div>
+	    <a id="b_connect" class="likebutton b_green b_big" style="display: none;" href="#">Connect with AtContent</a>
+        <p id="ac_we_will_send">We will send your password by email</p>
+       <hr />
 <script type="text/javascript">
     var ConnectBlog;
-    var AutoSignIn;        
-
-    function signIn()
-    { 
-        jQuery('#user_data_form').css('height', '40px'); 
-        jQuery("#password").hide();
-        jQuery("#password_caption").hide();
-        jQuery("#confirm").hide();
-        jQuery("#confirm_caption").hide();
-        jQuery("#username").hide();
-        jQuery("#username_caption").hide();
-        jQuery("#sign_changer").html('<a href="#" onclick="signUp()">I want to sign up</a>');
-        jQuery("#b_connect").unbind('click').click(function() {
-            AutoSignIn();        
-        });
-    }
-
-    function signUp()
-    { 
-        jQuery('#user_data_form').css('height', '260px');
-        jQuery("#password").show();
-        jQuery("#password_caption").show();
-        jQuery("#confirm").show();
-        jQuery("#confirm_caption").show();
-        jQuery("#username").show();
-        jQuery("#username_caption").show();
-        jQuery("#sign_changer").html('<a href="#" onclick="signIn()">I already have an AtContent account</a>');
-        jQuery("#b_connect").unbind('click').click(function() {
-            Connect();        
-        });
-    }
-
-    function beforechangeaccount() {
-        if (confirm("Are you sure you want to change account?")) {
-            jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
-			    type: 'post',
-			    data: {
-					    action: 'atcontent_disconnect'
-				}, 
-                success: function(d) {  
-                    if (d.IsOK) {
-                        location.reload();
-                    }
-                },                   
-			    dataType: "json"
-		    });
-        }
-    }
-
+    var AutoSignIn;
+    
     function signInWindow() {
         email = document.getElementById("email").value;
         _window = window.open("http://atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
@@ -176,31 +57,76 @@
         var username = '<?php echo $ac_pen_name; ?>';
         var showname = '<?php echo $ac_show_name; ?>'
         var selectedBlog = '';
-        window.ac_connect_res = function (d) {
-            if (d) {   
-                document.getElementById("connect_form").submit();
-            } else {
-                $("#ac_connect_result").html(
-                    'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-            }    
-        }
 
+        $(function(){
+            $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
+            $('#footer-upgrade').prepend('<br>');
+    
+            <?php
+            if ( $_GET["noauto"] != "1" ) {
+                ?>
+                $("#b_connect").hide();
+                $("#ac_sign_fields").hide();
+                <?php 
+                $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+                if ( strlen( $ac_api_key ) == 0 ) {
+                ?>
+                AutoSignIn();
+                <?php            
+                }
+            } else {
+            ?>
+                initAuthForm();
+            <?php
+            }
+            ?>
+        });
 
         function DisableButton() {    
             $("#b_connect").removeClass('b_green').addClass('b_enable');
+            $('#email').prop('disabled', true);
+            $('#username').prop('disabled', true);
             buttonDisabled = true;
         }
-
-
-        $(document).keypress(function (e) {
-            if (e.which == 13) {
-                jQuery("#b_connect").click.call(jQuery("#b_connect"));  
-            }
-        });
         
         function EnableButton() {    
             $("#b_connect").addClass('b_green').removeClass('b_enable');
+            $('#email').prop('disabled', false);
+            $('#username').prop('disabled', false);
             buttonDisabled = false;
+        }
+    
+        function initAuthForm() {
+            $('#b_connect').show().unbind('click').click(function(e){
+                e.preventDefault();
+                Connect();
+            });
+            $('#ac_connect_result').html('');
+            $('#ac_sign_fields').show();
+            $('#user_data_form').show();
+            $('#connection_rules_title').show();
+            $('#disconnect').remove();
+            $('#ac_we_will_send').show();
+            EnableButton();
+        }
+
+        function beforechangeaccount() {
+            if (confirm("Are you sure you want to change account?")) {
+                $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
+                DisableButton();
+                jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
+			        type: 'post',
+			        data: {
+					        action: 'atcontent_disconnect'
+				    }, 
+                    success: function(d) {  
+                        if (d.IsOK) {
+                            initAuthForm();
+                        }
+                    },                   
+			        dataType: "json"
+		        });
+            }
         }
 
         function CreateBlogsPanel(blogs) {
@@ -223,7 +149,7 @@
                     blogs[i].BlogTitle + 
                     '</label><br>';
             }
-            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="email">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
+            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="site">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function() {
                 var blog = $('input:radio[name=blog]:checked').val();
@@ -232,8 +158,14 @@
                     ConnectBlog(blog);
                 } 
             });
-            $("#b_connect").after('<p style="text-align: center"><a href="#"  id="disconnect" onclick="beforechangeaccount();">Not you? Change account</a></p>');
-            $("#ac_connect_result").html(blogsHtml);
+            $('#disconnect').remove();
+            $('#ac_we_will_send').hide();
+            $('#b_connect').show().after('<p style="text-align: center"><a href="#" id="disconnect">Not you? Change account</a></p>');
+            $('#disconnect').click(function(e){
+                e.preventDefault();
+                beforechangeaccount();
+            });
+            $('#ac_connect_result').html(blogsHtml);
         }
         
         ConnectBlog = function (selectedBlog) {
@@ -248,10 +180,10 @@
 			    type: 'post',
                 data : {
                     action: 'atcontent_connect_blog',
-                    bloguserid : userid,
+                    bloguserid : '<?php echo $userid; ?>',
                     apikey : apikey,
                     sitetitle : '<?php echo bloginfo('name'); ?>',
-                    gate : gate,
+                    gate : '<?php echo $ajax_form_action; ?>',
                     blog: selectedBlog
                 },
                 success: function(d){
@@ -286,7 +218,7 @@
         }
         <?php 
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-            if (strlen($ac_api_key) != 0) {
+            if ( strlen( $ac_api_key ) > 0 ) {
         ?>
             apikey = '<?php echo($ac_api_key); ?>';
             ConnectBlog();
@@ -299,7 +231,7 @@
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
 			    data: {
-                        userid : userid,
+                        userid : '<?php echo $userid; ?>',
 					    action: 'atcontent_save_credentials',
                         apikey : credentials.APIKey,
                         nickname : credentials.Nickname,
@@ -315,7 +247,7 @@
                         avatar_20 = credentials.Avatar20;
                         ConnectBlog();
                     } else {
-                        $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                        somethingWrong();
                     }
                 },                   
 			    dataType: "json"
@@ -326,6 +258,7 @@
 		    $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
             DisableButton();
             var email = $("#email").val();
+            if (email == null || email.length == 0) return;
             $.ajax({
                 url: 'http://api.atcontent.com/v1/native/checkauth',
                 jsonp: 'jsonp_callback',
@@ -337,70 +270,85 @@
                         SaveCredentials(d);
                         $("#sign_changer").hide();
                     } else {
-                        EnableButton();                        
-				        $("#ac_connect_result").html('<h2>We have found an AtContent account associated with ' +
-                            email +
-                            '. Please <a onclick="signInWindow();" href="#">sign in</a> to your AtContent account</h2>'); 
+                        if (d.state == 'error') {
+                            somethingWrong();
+                            return;
+                        }
+                        if (d.state == 'unauth' || d.state == 'noemail') {
+                            initAuthForm();
+                            return;
+                        }
+                        showEmailExists();
                     }
                 },
                 error: function() {					
-					$("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+					somethingWrong();
 				},
 			    dataType: "jsonp"    
 		    });  
         }
+
+        function showEmailExists(){
+            var email = $("#email").val();
+            EnableButton();
+			$("#ac_connect_result").html('<div class="update-nag" style="margin:0 0 5px 0;">Profile with email “' +
+                email +
+                '” already exists. Please <a onclick="signInWindow();" href="#">sign in</a>.</div>' + 
+                '<p style="text-align: center">or <a id="ac_change_email" href="#">create a new AtContent profile</a>!</p>');
+            $('#ac_change_email').click(function(e){
+                e.preventDefault();
+                initAuthForm();
+                $('#email').focus();
+                $('#ac_connect_result').html('');
+            });
+        }
         
-        $("#b_connect").click(function(){
-            Connect()
-        });
-    
         function Connect() {
-            $(".discl").html('');
 		    $("#ac_connect_result").html('<img src="<?php echo($loader_url);?>" width="30">');
             if (buttonDisabled) {
                 return;
             }    
             DisableButton();
-            var password = $("#password").val();
-            var confirm = $("#confirm").val(); 
-            if (password != confirm) {         
-                $("#ac_connect_result").html('Passwords does not match');
-                EnableButton(); 
-            } else{
-                var email = $("#email").val();
-                var username = $("#username").val();
-                $.ajax({
-                    url: 'http://api.atcontent.com/v1/native/connect.jsonp',
-                    jsonp: 'jsonp_callback',
-			        data: {
-				        action: 'atcontent_connect',
-                        email : email,
-                        username : username,
-                        password : password
-			        },
-                    success: function(d){
-				        if (d.IsOK) {
-                            SaveCredentials(d);    
-                            $("#sign_changer").hide();
+            var email = $("#email").val();
+            var username = $("#username").val();
+            $.ajax({
+                url: 'http://api.atcontent.com/v1/native/connect.jsonp',
+                jsonp: 'jsonp_callback',
+			    data: {
+                    email : email,
+                    username : username
+			    },
+                success: function(d){
+				    if (d.IsOK) {
+                        SaveCredentials(d);    
+                        $("#sign_changer").hide();
+                    } else {
+                        if (d.Error == null){
+                            somethingWrong();
                         } else {
-                            if (d.Error == null){
-                                $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                            if (d.state == "emailexists") {
+                                showEmailExists();
+                                return;
+                            } else if (d.state == "usernameexists") {
+                                $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">Username “' + username + '” already exists. Please choose a different username.</div>');
+                                EnableButton();
+                                return;
                             } else {
-                                if (d.Error.indexOf("email already exist")!=-1) {
-                                    AutoSignIn();
-                                } else {
-                                    $("#ac_connect_result").html(d.Error);
-                                    EnableButton();
-                                }
+                                $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">' + d.Error + '</div>');
+                                EnableButton();
                             }
                         }
-			        },
-			        error: function() {
-				        $("#ac_connect_result").html('Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-			        },
-			        dataType: "jsonp"
-		        });
-            }
+                    }
+			    },
+			    error: function() {
+				    somethingWrong();
+			    },
+			    dataType: "jsonp"
+		    });
+        }
+
+        function somethingWrong(){
+            $("#ac_connect_result").html('<div class="update-nag" style="margin:0 0 25px 0;">Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.</div>');
         }
     })(jQuery);
 </script>

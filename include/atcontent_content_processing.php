@@ -1,321 +1,62 @@
 <?php
      function atcontent_the_content( $content = '' ) {
-
-        global $post, $wp_current_filter, $currentNumPost_ac;
-
-        if (preg_match_all('/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\/]+\/[^\/]+\/[^\"]+)/', $content, $matches))
-        {
+        global $post, $wp_current_filter;
+        if (preg_match_all('/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\/]+\/[^\/]+\/[^\"]+)/', $content, $matches)) {
             $script = "<script data-cfasync=\"false\" src=\"" . $matches[1][0] . "\"></script>";
-            for($index = 1; $index < count($matches[1]); $index++)
+            for ( $index = 1; $index < count( $matches[1] ); $index++ )
             {
                 $script = $script."<script data-cfasync=\"false\" data-ac-src=\"" . $matches[1][$index] . "\"></script>";
             }
             return $script;
         }
-        (!$currentNumPost_ac ? $currentNumPost_ac = 1 : $currentNumPost_ac++);
-
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
             return $content;
         }
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
 		    return $content;
-	    }
-        $ac_excerpt_no_process = get_user_meta( intval( $post->post_author ), "ac_excerpt_no_process", true );
-        if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
-        if ( !is_single() && $ac_excerpt_no_process == "1" ) return $content;
+	    }        
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
         $ac_embedid = get_post_meta( $post->ID, "ac_embedid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
-        $ac_comments_disable = "1";
-        $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
-        $ac_adtest = get_user_meta( intval( $post->post_author ), "ac_adtest", true );
-        $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
-        
-        $ac_additional_classes = "";
-        $isSinlgePost = is_single();
-        if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
-        if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
-
-
-        $ac_share_panel_disable = get_user_meta( intval( $post->post_author ), "ac_share_panel_disable", true );
-        $ac_share_panel_data_option = "";
-        if ( $ac_share_panel_disable == "1" ) $ac_share_panel_data_option = 'data-options="hide_shares"';
-
-        $ac_adtest_messages = array();
-        $ac_adtest_messages[] = "<h3>How online retailers solve the problem of reaching new buyers in a new way.</h3><p>Hi folks.<br/>My friend is an online retailer and he says that one of the largest problem that retailers face is the lack of methods to reach new buyers. He checked out a couple services and found Happy Retailer.  <br/>I think this is a very interesting idea to allow retailers upload inventory in one place and sell them simultaneously on Amazon, EBay, Bonanza and more than 1001 websites! <br />If you a retailer it might be interesting for you. <br/>You can get more details here <a href=\"http://happyretailer.com/?from=atcontent\" target=_blank>http://happyretailer.com</a></p>";
-
-		$ac_adtest_messages[] = "<h3>New types of services that make this world a better place.</h3><p>I recently learned of a new type of services. They allow to donate money to charity and in return you can get cool experiences, such as flights on a private plane, meetings with interesting personalities, ride in MR2 Spyder, advises & mentorships, try international cuisines, etc.</p><p>One of the services is SunnyKarma.com. They are based out of San Francisco & are having a huge fundraising networking mixer/party on July 17th where they will be raffling off a flight on a private plane, you can get more details here: <a href=\"http://bit.ly/169mChq\" target=_blank>http://sunnykarma.com</a></p>";
-
-        //print_r($ac_adtest_messages);
-
-        shuffle($ac_adtest_messages);
-
-        //$ac_adtest_message_randkeys = array_rand($ac_adtest_messages, 1);
-
-        //print_r($ac_adtest_message_randkeys);
-
-        //$ac_adtest_message = $ac_adtest_messages[$ac_adtest_message_randkeys[0]];
-        $ac_adtest_message = $ac_adtest_messages[0];
-
-        //print_r($ac_adtest_message);
-
-        $ac_adtest_numOfmsgApears = 2;
-
         if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
-            
-            $embedid = "";
+            $embedid = "-/00000000000/";
             if ( strlen( $ac_embedid ) > 0 ) {
-                $embedid .= "-/" . $ac_embedid . "/";
+                $embedid = "-/" . $ac_embedid . "/";
             }
-
             $code = <<<END
-<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script data-cfasync="false" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
+<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
+<script async="true" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Panel"></script>
 END;
-
-            if ( $isSinlgePost ) {
-                $code = <<<END
-<div {$ac_share_panel_data_option} class="atcontent_widget{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script data-cfasync="false" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-cfasync="false" data-ac-src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body"></script></div>
-END;
-            }
-
-            /*
-            if ($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears)) {
-				$code .= $ac_adtest_message;
-            }
-            //*/
-
             $code = str_replace( PHP_EOL, " ", $code );
-            $inline_style = "";
-            preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
-            foreach ( $style_matches[0] as $style_item ) {
-                $inline_style .= $style_item;
-            }
-            return $inline_style . $code;
+            return $content . $code;
         }
-
-        return $content.
-			(($ac_adtest == "1" && ($isSinlgePost || $currentNumPost_ac == $ac_adtest_numOfmsgApears))
-				?$ac_adtest_message
-				:"");
+        return $content;
     }
 
     function atcontent_the_excerpt( $content = '' ) {
         global $post, $wp_current_filter;
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+        $ac_embedid = get_post_meta( $post->ID, "ac_embedid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
-        if ( strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        $ac_excerpt_image_remove = get_user_meta( intval( $post->post_author ), "ac_excerpt_image_remove", true );
-        if ( strlen( $ac_excerpt_image_remove ) == 0 ) $ac_excerpt_image_remove = "0";
-        $ac_excerpt_no_process = get_user_meta( intval( $post->post_author ), "ac_excerpt_no_process", true );
-        if ( strlen( $ac_excerpt_no_process ) == 0 ) $ac_excerpt_no_process = AC_NO_PROCESS_EXCERPT_DEFAULT;
-        if ( $ac_excerpt_no_process == "1" ) return $content;
-        if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0 && $ac_excerpt_no_process == "0" ) {
-            $ac_comments_disable = "1";
-            $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
-            $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
-
-            $ac_share_panel_disable = get_user_meta( intval( $post->post_author ), "ac_share_panel_disable", true );
-            $ac_share_panel_data_option = "";
-            if ( $ac_share_panel_disable == "1" ) $ac_share_panel_data_option = 'data-options="hide_shares"';
-
-            $ac_additional_classes = "";
-            if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
-            if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
-            $ac_excerpt_class = "atcontent_excerpt";
-            if ( $ac_excerpt_image_remove == "1" ) $ac_excerpt_class = "atcontent_excerpt_no_image";
+        if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
+        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
+            $embedid = "-/00000000000/";
+            if ( strlen( $ac_embedid ) > 0 ) {
+                $embedid = "-/" . $ac_embedid . "/";
+            }
             $code = <<<END
-<div {$ac_share_panel_data_option} class="{$ac_excerpt_class}{$ac_additional_classes}"><script>var CPlaseE = CPlaseE || {}; CPlaseE.Author = CPlaseE.Author || {}; CPlaseE.Author['{$ac_postid}'] = 0;</script><script data-cfasync="false" src="https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face"></script><!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --></div>
+<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
+<script src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Panel"></script>
 END;
             $code = str_replace( PHP_EOL, " ", $code );
-            $inline_style = "";
-            preg_match_all( '@<style[^>]*?>.*?</style>@siu', do_shortcode( $content ), $style_matches );
-            foreach ( $style_matches[0] as $style_item ) {
-                $inline_style .= $style_item;
-            }
-            return $inline_style . $code;
+            return $content . $code;
         }
         return $content;
     }
-
-    function atcontent_the_content_after( $content = '' ) {
-        global $post, $wp_current_filter;
-        if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
-            return $content;
-        }
-        if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
-		    return $content;
-	    }
-
-        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-        $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
-        $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
-        $ac_comments_disable = "1";
-        $ac_hint_panel_disable = get_user_meta( intval( $post->post_author ), "ac_hint_panel_disable", true );
-        $ac_script_init = get_user_meta( intval( $post->post_author ), "ac_script_init", true );
-        $ac_additional_classes = "";
-        if ( $ac_comments_disable == "1" ) $ac_additional_classes .= " atcontent_no_comments";
-        if ( $ac_hint_panel_disable == "1" ) $ac_additional_classes .= " atcontent_no_hint_panel";
-        if ( !is_string( $ac_pen_name ) || strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "vadim";
-        if ( $ac_is_process == "1" && strlen( $ac_postid ) > 0) {
-             //Chameleon theme thumb fix
-            if (function_exists( 'get_thumbnail' ) && get_option( 'chameleon_thumbnails' ) == 'on' ) {
-                $ac_script_init .= <<<END
-(function($) {
-$(".CPlase_face").prepend($(".post-thumbnail").clone());
-$(".post-thumbnail:first").remove();
-})(jQuery)
-END;
-            }
-            //Chameleon theme thumb fix end
-
-            //RefTagger
-            if ( function_exists ( 'lbsFooter' ) ) {
-                $ac_script_init .= <<<END
-try { Logos.ReferenceTagging.tag(); } catch (ex) {}
-END;
-            }
-            //End RefTagger
-
-            //FancyBox for WordPress
-            if ( defined( 'FBFW_VERSION' ) ) {
-                $ac_script_init .= <<<END
-jQuery(function(){
-
-jQuery.fn.getTitle = function() { // Copy the title of every IMG tag and add it to its parent A so that fancybox can show titles
-	var arr = jQuery("a.fancybox");
-	jQuery.each(arr, function() {
-		var title = jQuery(this).children("img").attr("title");
-		jQuery(this).attr('title',title);
-	})
-}
-
-// Supported file extensions
-var thumbnails = jQuery("a:has(img)").not(".nolightbox").filter( function() { return /\.(jpe?g|png|gif|bmp)$/i.test(jQuery(this).attr('href')) });
-
-thumbnails.addClass("fancybox").attr("rel","fancybox").getTitle();
-jQuery("a.fancybox").fancybox({
-	'cyclic': false,
-	'autoScale': true,
-	'padding': 10,
-	'opacity': true,
-	'speedIn': 500,
-	'speedOut': 500,
-	'changeSpeed': 300,
-	'overlayShow': true,
-	'overlayOpacity': "0.3",
-	'overlayColor': "#666666",
-	'titleShow': true,
-	'titlePosition': 'inside',
-	'enableEscapeButton': true,
-	'showCloseButton': true,
-	'showNavArrows': true,
-	'hideOnOverlayClick': true,
-	'hideOnContentClick': false,
-	'width': 560,
-	'height': 340,
-	'transitionIn': "fade",
-	'transitionOut': "fade",
-	'centerOnScroll': true,
-});
-
-});
-END;
-            }
-
-            //End FancyBox for WordPress
-
-
-            //NextGEN Gallery
-            if ( is_array( get_option( 'ngg_options' ) ) ) {
-            $ac_script_init .= <<<END
-jQuery(".ngg-slideshow").each(function(){
-    var i = jQuery(this), id = i.attr("id"), galid = parseInt(id.substr(id.lastIndexOf("-") + 1));
-    jQuery("#" + id).nggSlideshow( {id: galid,fx:"fade",width:320,height:240,domain: "http://" + document.location.host + "/",timeout:10000});
-});
-END;
-            }
-            //End NextGEN Gallery
-
-            //eBible
-            if ( function_exists('includeJSHeader') ) {
-                $ac_script_init .= <<<END
-CPlase.l('http://www.ebible.com/assets/verselink/ebible.verselink.js');
-END;
-            }
-            //End eBible
-
-            //opinion stage
-            if (defined('OPINIONSTAGE_SERVER_BASE'))
-            {
-                $ac_script_init .= <<<END
-
-                var divs = document.querySelectorAll('div[id *= debate]');
-                if (divs.length != 0)
-                {
-                    id = '';
-                    divs.forEach(function (div) { var divId = div.id.split('_')[2]; if (divId != null && divId.length > 6) {id = divId; }})
-                    CPlase.l('http://www.opinionstage.com/polls/'+ id +'/embed.js');
-                }
-END;
-            }
-            //end opinion stage
-			
-			//poll daddy
-			if (defined('WP_POLLDADDY__CLASS'))
-            {
-                $ac_script_init .= <<<END
-                var div = document.querySelector('div[id ^= PDI_container][class = PDS_Poll]');
-                if (div != null){
-                    var id = div.id.replace('PDI_container','');
-                    CPlase.l('http://static.polldaddy.com/p/' + id + '.js');
-                }
-END;
-            }
-			//poll daddy end
-			
-            //Lightbox Plus ColorBox
-            if ( class_exists( 'wp_lightboxplus' ) ) {
-                global $wp_lightboxplus;
-                if ( ob_start() ) {
-                    $wp_lightboxplus->lightboxPlusColorbox();
-                    $lbp_script = ob_get_contents();
-                    ob_end_clean();
-                    if (preg_match_all("/<script[^>]+>([^<]*)<\/script>/mi", $lbp_script, $output_array)) {
-                        $ac_script_init .= $output_array[1][0];
-                    }
-                }
-            }
-            //End Lightbox Plus ColorBox
-
-            //Easy Media Gallery
-            if ( defined( 'EASYMEDIA_VERSION' ) ) {
-                $ac_script_init .= '
-(function( $, undefined ) {$.HoverDir=function(e,t){this.$el=$(t);this._init(e)};$.HoverDir.defaults={hoverDelay:0,reverse:false};$.HoverDir.prototype={_init:function(e){this.options=$.extend(true,{},$.HoverDir.defaults,e);this._loadEvents()},_loadEvents:function(){var e=this;this.$el.bind("mouseenter.hoverdir, mouseleave.hoverdir",function(t){var n=$(this),r=t.type,i=n.find("article"),s=e._getDir(n,{x:t.pageX,y:t.pageY}),o=e._getClasses(s);i.removeClass();if(r==="mouseenter"){i.hide().addClass(o.from);clearTimeout(e.tmhover);e.tmhover=setTimeout(function(){i.show(0,function(){$(this).addClass("da-animate").addClass(o.to)})},e.options.hoverDelay)}else{i.addClass("da-animate");clearTimeout(e.tmhover);i.addClass(o.from)}})},_getDir:function(e,t){var n=e.width(),r=e.height(),i=(t.x-e.offset().left-n/2)*(n>r?r/n:1),s=(t.y-e.offset().top-r/2)*(r>n?n/r:1),o=Math.round((Math.atan2(s,i)*(180/Math.PI)+180)/90+3)%4;return o},_getClasses:function(e){var t,n;switch(e){case 0:!this.options.reverse?t="da-slideFromTop":t="da-slideFromBottom";n="da-slideTop";break;case 1:!this.options.reverse?t="da-slideFromRight":t="da-slideFromLeft";n="da-slideLeft";break;case 2:!this.options.reverse?t="da-slideFromBottom":t="da-slideFromTop";n="da-slideTop";break;case 3:!this.options.reverse?t="da-slideFromLeft":t="da-slideFromRight";n="da-slideLeft";break}return{from:t,to:n}}};var logError=function(e){if(this.console){console.error(e)}};$.fn.hoverdir=function(e){if(typeof e==="string"){var t=Array.prototype.slice.call(arguments,1);this.each(function(){var n=$.data(this,"hoverdir");if(!n){logError("cannot call methods on hoverdir prior to initialization; "+"attempted to call method \'"+e+"\'");return}if(!$.isFunction(n[e])||e.charAt(0)==="_"){logError("no such method \'"+e+"\' for hoverdir instance");return}n[e].apply(n,t)})}else{this.each(function(){var t=$.data(this,"hoverdir");if(!t){$.data(this,"hoverdir",new $.HoverDir(e,this))}})}return this}})( jQuery );
-jQuery(function(){jQuery(window).scroll(function(){if(jQuery("#mbCenter").size()>0){var e=parseInt(jQuery(document).scrollTop());var t=jQuery("#mbCenter").offset();var n=parseInt(t.top+jQuery("#mbCenter").height()+90-e);var r=jQuery(window).height()-n;if(e<t.top-90){setTimeout(function(){jQuery("#mbCenter").stop().animate({top:jQuery(window).scrollTop()+340},500)},150)}if(r>1&&jQuery(window).height()<jQuery("#mbCenter").height()-90){setTimeout(function(){jQuery("#mbCenter").stop().animate({top:t.top+340},500)},150)}else if(r>1&&jQuery(window).height()>jQuery("#mbCenter").height()+90){setTimeout(function(){jQuery("#mbCenter").stop().animate({top:jQuery(window).scrollTop()+340},500)},150)}}})})
-jQuery(function($){$("div.da-thumbs").hoverdir(); $(".emgfittext").fitText(1.2,{ maxFontSize: "12px" });}); window.addEvent(\'domready\', function() { Easymedia.scanPage();});
-';
-            }
-            //End Easy Media Gallery
-            
-            if ( strlen( $ac_script_init ) > 0 ) {
-                $content .= <<<END
-<script type="text/javascript">
-CPlase = window.CPlase || {};
-CPlase.evt = CPlase.evt || [];
-CPlase.evt.push(function (event, p, w) {
-    {$ac_script_init}
-});
-</script>
-END;
-            }
-        }
-        return $content;
-    }
-
-
+    
     function atcontent_coexistense_fixes(){
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100 );

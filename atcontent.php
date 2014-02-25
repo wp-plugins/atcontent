@@ -27,8 +27,6 @@
     add_action( 'admin_init', 'atcontent_admin_init' );
     add_action( 'admin_menu', 'atcontent_add_tools_menu' );
     add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_content', 'atcontent_the_content_after', 100);
-    add_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'save_post', 'atcontent_save_post' );
     add_action( 'publish_post', 'atcontent_publish_publication' );
@@ -170,52 +168,6 @@ function ACgetCookie(name) {
 }
 </script>
 <?php
-        if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0) {
-            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
-            $img_url = plugins_url( 'assets/logo.png', __FILE__ );
-            $pointer_content = '<h3>Connect to AtContent</h3>';
-            $pointer_content .= '<p><img style="vertical-align:bottom;" src="' . $img_url .
-                '" alt=""> To activate AtContent features, please, <a href="' . $connect_url . '">connect</a> your blog to AtContent</p>';
-?>
-<script type="text/javascript">
-jQuery(document).ready( function($) {
-    if (window.location.href.indexOf("billbelew.com") != -1) return;
-    if (ACgetCookie("ac-connect-dismiss") != "1") {
-        $('#toplevel_page_atcontent-settings').pointer({
-            content: '<?php echo $pointer_content; ?>',
-            position: 'top',
-            close: function() {
-                ACsetCookie("ac-connect-dismiss", "1", null, "/");
-            }
-        }).pointer('open');
-    }
-});
-</script>
-<?php
-        } else {
-            $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
-            $ac_country = get_user_meta($userid, "ac_country", true );
-            if ( strlen( $ac_country ) == 0 ) {
-                $pointer_content = '<h3>Better Interaction with AtContent</h3>';
-                $pointer_content .= '<p>Please, <a href="' . $connect_url . '">select location</a> of your blog</p>';
-?>
-<script type="text/javascript">
-jQuery(document).ready( function($) {
-    if (window.location.href.indexOf("billbelew.com") != -1) return;
-    if (ACgetCookie("ac-location-dismiss") != "1") {
-        jQuery('#toplevel_page_atcontent-settings').pointer({
-            content: '<?php echo $pointer_content; ?>',
-            position: 'top',
-            close: function() {
-                ACsetCookie("ac-location-dismiss", "1", null, "/");
-            }
-        }).pointer('open');
-    }
-   });
-</script>
-<?php
-            }
-        }
     }
 
 ?>
