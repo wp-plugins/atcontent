@@ -131,23 +131,6 @@
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
 
-    <script type="text/javascript">
-        (function ($) {
-            $(function () {
-                $("#submitpost #delete-action").before('<p id="atcontent-tags-announce" class="update-nag" style="margin:5px 5px 15px 5px;">Set post <a id="atcontent-tags-link" href="javascript:">tags</a> and <a id="atcontent-categories-link" href="javascript:">categories</a> to get <b>free&nbsp;promotion</b> with AtContent!</p>');
-                $("#atcontent-tags-link").click(function () { 
-                    $('html, body').animate({
-                        scrollTop: $("#new-tag-post_tag").offset().top - 250
-                    }, 300);
-                });
-                $("#atcontent-categories-link").click(function () { 
-                    $('html, body').animate({
-                        scrollTop: $("#category-all input[type=checkbox]:first").offset().top - 250
-                    }, 300);
-                });
-            });
-        })(jQuery);
-    </script>
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
     }
