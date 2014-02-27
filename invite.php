@@ -26,6 +26,7 @@
                     <p class="caption"><label for="email">Email</label></p>
                     <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
                 </div>
+                <div id="blogs"></div>
             <div id="sign_changer" style="display: none;"><a href="#" id="ac_have_account">I already have an AtContent account</a></div>
         <div id="ac_connect_result">
             <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />  
@@ -113,6 +114,7 @@
         function beforechangeaccount() {
             if (confirm("Are you sure you want to change account?")) {
                 $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
+                $('#blogs').html('');
                 DisableButton();
                 jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
 			        type: 'post',
@@ -131,7 +133,6 @@
 
         function CreateBlogsPanel(blogs) {
             $("#connection_rules_title").hide();
-            $("#site").val('<?php echo bloginfo('name'); ?>');
             var blogsHtml = '<h2><a href="https://atcontent.com/Profile/' + 
                 username + 
                 '" target="_blank"><img src="' + 
@@ -149,12 +150,11 @@
                     blogs[i].BlogTitle + 
                     '</label><br>';
             }
-            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="site">New blog title </label></br><input id="site" type="text" name="site" value=""></input></br></div>'
+            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label></br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input></br></div>'
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function() {
                 var blog = $('input:radio[name=blog]:checked').val();
                 if (blog!=null) {
-                    DisableButton();
                     ConnectBlog(blog);
                 } 
             });
@@ -165,12 +165,18 @@
                 e.preventDefault();
                 beforechangeaccount();
             });
-            $('#ac_connect_result').html(blogsHtml);
+            $('#blogs').html(blogsHtml);
+            $('#ac_connect_result').html('');
+            $('#newblogtitle').val('<?php echo bloginfo('name'); ?>');
         }
         
         ConnectBlog = function (selectedBlog) {
+            if (buttonDisabled) {
+                return;
+            }
+            DisableButton();
             selectedBlog = selectedBlog || "";
-            if (selectedBlog!="") {
+            if (selectedBlog !== "") {
 		        $(".blogs").after('<img src="<?php echo($loader_url);?>" width="30">');
                 $('[name = blog]').attr('disabled', 'disabled');
             }
@@ -183,6 +189,7 @@
                     bloguserid : '<?php echo $userid; ?>',
                     apikey : apikey,
                     sitetitle : '<?php echo bloginfo('name'); ?>',
+                    blogtitle: $('#newblogtitle').val(),
                     gate : '<?php echo $ajax_form_action; ?>',
                     blog: selectedBlog
                 },
@@ -245,6 +252,7 @@
                         showname = credentials.Showname;
                         username = credentials.Nickname;
                         avatar_20 = credentials.Avatar20;
+                        EnableButton();
                         ConnectBlog();
                     } else {
                         somethingWrong();
