@@ -112,6 +112,11 @@
     
     
     <?php
+        // PingBack
+        if ( ! atcontent_pingback_inline() ) {
+            echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+        }
+        //End PingBack
         include("stat_block.php"); ?>
       <?php  if ($_GET["step"] == "1"){ ?>
             <script>

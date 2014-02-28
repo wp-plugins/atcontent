@@ -177,8 +177,9 @@
             DisableButton();
             selectedBlog = selectedBlog || "";
             if (selectedBlog !== "") {
-		        $(".blogs").after('<img src="<?php echo($loader_url);?>" width="30">');
-                $('[name = blog]').attr('disabled', 'disabled');
+		        $('#ac_connect_result').html('<img src="<?php echo($loader_url);?>" width="30">');
+                $('[name = blog]').prop('disabled', true);
+                $('#newblogtitle').prop('disabled', true);
             }
             var email = $("#email").val();
             $.ajax({

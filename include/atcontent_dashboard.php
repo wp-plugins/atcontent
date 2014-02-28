@@ -64,53 +64,54 @@ function atcontent_dashboard_widget_function() {
                     <div class="b-dashboard-brief__empty-chart"></div>
                     <?php } else { ?>
                     <div id="atcontent_chart" class="b-dashboard-brief__chart"></div>
+                    <script src="//www.google.com/jsapi"></script>
+                    <script>
+                        google.load('visualization', '1.0', {
+                            'packages': ['corechart', 'table']
+                        });
+                        google.setOnLoadCallback(function () {
+                            var options, data, chart, element, rows;
+                
+                            element = document.getElementById('atcontent_chart');
+
+                            options = {
+                                colors: ['#13669d', '#ee8900'],
+                                chartArea: {
+                                    width: '90%',
+                                    height: '90%'
+                                },
+                                title: '',
+                                titleTextStyle: {
+                                    bold: false
+                                },
+                                fontName: 'Segoe UI',
+                                legend: {
+                                    position: 'none'
+                                },
+                                pieSliceTextStyle: {
+                                    fontSize: 15
+                                }
+                            };
+
+                            data = new google.visualization.DataTable ();
+                            data.addColumn('string', 'Type');
+                            data.addColumn('number', 'Views');
+                
+                            rows = [
+                                ['Views on your blog', <?php echo $response["originalViews"]; ?>],
+                                ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
+                            ];
+                
+                            data.addRows(rows);
+
+                            chart = new google.visualization.PieChart (element);
+                            chart.draw(data, options);
+                        });
+                    </script>
                     <?php } ?>
                 </div>
             </div>
-        <script src="//www.google.com/jsapi"></script>
-        <script>
-            google.load('visualization', '1.0', {
-                'packages': ['corechart', 'table']
-            });
-            google.setOnLoadCallback(function () {
-                var options, data, chart, element, rows;
-                
-                element = document.getElementById('atcontent_chart');
-
-                options = {
-                    colors: ['#13669d', '#ee8900'],
-                    chartArea: {
-                        width: '90%',
-                        height: '90%'
-                    },
-                    title: '',
-                    titleTextStyle: {
-                        bold: false
-                    },
-                    fontName: 'Segoe UI',
-                    legend: {
-                        position: 'none'
-                    },
-                    pieSliceTextStyle: {
-                        fontSize: 15
-                    }
-                };
-
-                data = new google.visualization.DataTable ();
-                data.addColumn('string', 'Type');
-                data.addColumn('number', 'Views');
-                
-                rows = [
-                    ['Views on your blog', <?php echo $response["originalViews"]; ?>],
-                    ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
-                ];
-                
-                data.addRows(rows);
-
-                chart = new google.visualization.PieChart (element);
-                chart.draw(data, options);
-            });
-        </script>
+        
         <div class="clear"></div>
     <?php } ?>
     </div>
