@@ -152,7 +152,8 @@
             }
             blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label></br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input></br></div>'
             $("#user_data_form").hide();
-            $("#b_connect").unbind('click').click(function() {
+            $("#b_connect").unbind('click').click(function(e) {
+                e.preventDefault();
                 var blog = $('input:radio[name=blog]:checked').val();
                 if (blog!=null) {
                     ConnectBlog(blog);

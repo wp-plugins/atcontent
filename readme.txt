@@ -71,6 +71,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.3.2 =
+* Chorme browser fixes for connect process
+
 = 7.3.1 =
 * Connect blog process improvements
 
