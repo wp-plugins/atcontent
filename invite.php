@@ -280,12 +280,12 @@
                         SaveCredentials(d);
                         $("#sign_changer").hide();
                     } else {
-                        if (d.state == 'error') {
-                            somethingWrong();
-                            return;
-                        }
                         if (d.state == 'unauth' || d.state == 'noemail') {
                             initAuthForm();
+                            return;
+                        }                    
+                        if (d.state == 'error') {
+                            somethingWrong();
                             return;
                         }
                         showEmailExists();
