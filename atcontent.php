@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.3.2
+    Version: 7.3.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
