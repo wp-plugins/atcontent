@@ -115,9 +115,6 @@ function atcontent_dashboard_widget_function() {
         <div class="clear"></div>
     <?php } ?>
     </div>
-    <a href="https://atcontent.com/Studio/Statistics?wp=0" target="_blank">
-        <div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 100;">&nbsp;</div>
-    </a>
 </div>
 <?php
 }
