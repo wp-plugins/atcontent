@@ -1,13 +1,15 @@
 <?php
      function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter;
-        if (preg_match_all('/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\/]+\/[^\/]+\/[^\"]+)/', $content, $matches)) {
-            $script = "<script data-cfasync=\"false\" src=\"" . $matches[1][0] . "\"></script>";
-            for ( $index = 1; $index < count( $matches[1] ); $index++ )
+        if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $content, $matches ) ) {
+            for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
-                $script = $script."<script data-cfasync=\"false\" data-ac-src=\"" . $matches[1][$index] . "\"></script>";
+                $content = str_replace( 
+                    $matches[0][$index], 
+                    "<script data-cfasync=\"false\" " . ($index > 0 ? "data-ac-" : "") . "src=\"" . $matches[1][$index] . "\"", 
+                    $content );
             }
-            return $script;
+            return $content;
         }
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
             return $content;
@@ -26,7 +28,7 @@
                 $embedid = "-/" . $ac_embedid . "/";
             }
             $code = <<<END
-<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->
+<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://atcontent.com/Terms/) -->
 <script async="true" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Panel"></script>
 END;
             $code = str_replace( PHP_EOL, " ", $code );
