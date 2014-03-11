@@ -87,6 +87,18 @@ function atcontent_api_update_publication( $ac_api_key,
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/update', $post_content );
 }
 
+function atcontent_api_import_publication($ac_api_key, $blogId, $syncId, $postIdInApp, $appUserId)
+{
+    $post_content = 
+        'Key=' . urlencode( $ac_api_key ) . 
+        '&AppID=' . urlencode( 'WordPress' ) .
+        '&BlogId=' . urlencode( $blogId ) .
+        '&SyncId=' . urlencode( $syncId ) .
+        '&PostId=' . urlencode( $postIdInApp ) .
+        '&UserId=' . urlencode( $appUserId );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/importpost', $post_content );
+}
+
 function atcontent_api_update_publication_comments($ac_api_key, $post_id, $comments) {
     $post_content = 'Key='.
         urlencode($ac_api_key).'&AppID='.urlencode('WordPress').

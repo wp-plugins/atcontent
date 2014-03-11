@@ -13,6 +13,8 @@ function atcontent_publish_publication( $post_id ){
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
         $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
         if ( strlen( $ac_api_key ) > 0 ) {
+            atcontent_api_import_publication($ac_api_key, $ac_blogid, $ac_syncid, $post_id, $post->post_author);
+            return;
             $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
             if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
             
