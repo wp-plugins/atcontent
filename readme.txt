@@ -436,4 +436,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Administrator can connect blog contributors with his AtContent account!
+* Publish process improvements!
