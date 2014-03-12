@@ -84,7 +84,7 @@ END;
                     <td>
                         <select id="ac_state_sel" name="ac_state">
 <?php
-    foreach ($atcontent_states as $code => $description) {
+    foreach ( $atcontent_states as $code => $description ) {
         $item_selected = $ac_state == $code ? "selected=\"selected\"" : "";
         echo <<<END
 <option value="{$code}" {$item_selected}>{$description}</option>
