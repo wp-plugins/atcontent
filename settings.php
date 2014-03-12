@@ -129,7 +129,7 @@ END;
     if ( strlen( $ac_share_panel_disable ) == 0 ) $ac_share_panel_disable = "1";
 
     $ac_excerpt_no_process_checked = "";
-    if ($ac_excerpt_no_process == "0") $ac_excerpt_no_process_checked = "checked=\"checked\"";
+    if ( $ac_excerpt_no_process == "0" ) $ac_excerpt_no_process_checked = "checked=\"checked\"";
     $ac_share_panel_disable_checked = "";
     if ( $ac_share_panel_disable == "0" ) $ac_share_panel_disable_checked = "checked=\"checked\"";
 
