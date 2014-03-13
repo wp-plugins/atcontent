@@ -332,7 +332,7 @@ function atcontent_connect_blog(){
     }
     else
     {
-        if ($connect_answer["Error"] == "select")
+        if ( $connect_answer["Error"] == "select" )
         {
             echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", blogs => $connect_answer["blogs"] ) ); 
         }
@@ -416,7 +416,7 @@ function atcontent_ajax_get_sync_stat(){
 }
 
 function atcontent_ajax_repost(){
-        include("atcontent_userinit.php");
+        include( "atcontent_userinit.php" );
         $ac_postid = $_POST['ac_post'];
         $repost_title_answer = atcontent_api_get_title( $ac_postid );
         $repost_title = "Not found";
@@ -467,7 +467,7 @@ function atcontent_ajax_repost(){
 
 function atcontent_ajax_syncqueue(){
     global $wpdb;
-    include("atcontent_userinit.php");
+    include( "atcontent_userinit.php" );
     $posts_id = array();
     $syncid = get_user_meta( $userid, "ac_syncid", true ); 
     $posts = $wpdb->get_results( 
