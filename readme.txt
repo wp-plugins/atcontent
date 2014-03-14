@@ -1,7 +1,7 @@
-=== AtContent Plugin ===
+=== AtContent ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
-Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,links,plugin 
+Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,links,plugin
 Requires at least: 3.3
 Stable tag: trunk
 Tested up to: 3.8.1
