@@ -1,4 +1,4 @@
-=== AtContent ===
+=== AtContent — Grow Your Audience ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
 Tags: Post,posts,text,admin,widget,seo,repost,api,google,search engine optimization,links,plugin
@@ -8,7 +8,7 @@ Tested up to: 3.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Boost your audience 2.5x in 30 days by making your blog posts available for reposting!
+Boost your audience 2.5x in 30 days by making your blog posts available for reposting! It's free to join!
 
 == Description ==
 
@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 5. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.4.1 =
+* Quality imrovements
 
 = 7.4.0 =
 * Publish process update

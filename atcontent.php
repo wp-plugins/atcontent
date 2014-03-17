@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.4.0
+    Version: 7.4.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.4.0" );
+    define( 'AC_VERSION', "7.4.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -84,28 +84,16 @@
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
-
         $since = get_user_meta( wp_get_current_user()->ID, "ac_last_repost_visit", true );
         if ( strlen( $since ) == 0 ) $since = "2013-12-31";
-        
         $new_reposts_count_answer = atcontent_api_reposts_count( $since );
-
-
         $repost_title = "Get Content";
         if ( $new_reposts_count_answer["IsOK"] && $new_reposts_count_answer["Count"] > 0 ) {
             $repost_title .= "<span class='update-plugins count-{$new_reposts_count_answer['Count']}'><span class='plugin-count'>{$new_reposts_count_answer['Count']}</span></span>";
         }
-
         $repost_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Get Content', $repost_title, 'publish_posts', 'atcontent/repost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
-
-        $date_ad_campaign_end = strtotime("2014-02-18, 0:00");
-        if (time() < $date_ad_campaign_end) {
-            add_menu_page( 'Get Paid', "Monetize blog", 'publish_posts', 'atcontent/getpaid.php', '', 
-                plugins_url( 'assets/logo.png', __FILE__ ), atcontent_get_menu_key( 5.0 ));
-        }
-
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
         add_action( 'admin_print_footer_scripts', 'atcontent_footer_scripts' );
     }
@@ -123,7 +111,7 @@
 
     function atcontent_process_comments( $post_id ) {
         $post = get_post( $post_id );
-        if ($post == null) return;
+        if ( $post == null ) return;
         $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
         if ( strlen( $ac_api_key ) > 0 ) {
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
@@ -139,7 +127,6 @@
                 if( !empty( $comments ) ){
                     $comments_json .= json_encode( $comments );
                 }
-
                 atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
             }
         }
