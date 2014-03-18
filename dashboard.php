@@ -4,9 +4,9 @@
     require_once( "include/atcontent_userinit.php" );
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
-    if (strlen($_GET['connectas']) > 0)
+    if ( strlen( $_GET['connectas'] ) > 0 )
     {
-        $userid = intval($_GET['connectas']);
+        $userid = intval( $_GET['connectas'] );
     }
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
