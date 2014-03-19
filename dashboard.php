@@ -86,10 +86,10 @@
                     </a>
                 </th>
                 <td id="sync-status"><?php 
-                    if ($stats["IsSyncNow"]) {
+                    if ( $stats["IsSyncNow"] ) {
                         echo ('In process'); 
                     } 
-                    elseif ($stats["IsActive"]) {
+                    elseif ( $stats["IsActive"] ) {
                         echo ('Completed'); 
                     }
                     else {
