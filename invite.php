@@ -12,7 +12,7 @@
     $userinfo = get_userdata( $userid );
     $email = $userinfo -> user_email;
     $username = $userinfo -> display_name;
-    $site = $_SERVER['HTTP_HOST']; 
+    $site = $_SERVER['HTTP_HOST'];
     $loader_url = plugins_url( 'assets/loader.gif', __FILE__ );
 ?>
 
@@ -29,7 +29,7 @@
                 <div id="blogs"></div>
             <div id="sign_changer" style="display: none;"><a href="#" id="ac_have_account">I already have an AtContent account</a></div>
         <div id="ac_connect_result">
-            <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />  
+            <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />
         </div>
 	    <a id="b_connect" class="likebutton b_green b_big" style="display: none;" href="#">Connect with AtContent</a>
         <p id="ac_we_will_send">We will send your password by email</p>
@@ -51,7 +51,7 @@
         }, 10);
     }
 
-    (function ($) {  
+    (function ($) {
         var buttonDisabled = false;
         var apikey = '';  
         var avatar_20 = '<?php echo $ac_avatar_20; ?>';
@@ -73,7 +73,7 @@
                 if ( strlen( $ac_api_key ) == 0 ) {
                 ?>
                 AutoSignIn();
-                <?php            
+                <?php
                 }
             } else {
             ?>
@@ -83,7 +83,7 @@
             ?>
         });
 
-        function DisableButton() {    
+        function DisableButton() {
             $("#b_connect").removeClass('b_green').addClass('b_enable');
             $('#email').prop('disabled', true);
             $('#username').prop('disabled', true);
@@ -120,12 +120,12 @@
 			        type: 'post',
 			        data: {
 					        action: 'atcontent_disconnect'
-				    }, 
+				    },
                     success: function(d) {  
                         if (d.IsOK) {
                             initAuthForm();
                         }
-                    },                   
+                    },
 			        dataType: "json"
 		        });
             }
@@ -139,7 +139,7 @@
                 avatar_20 + 
                 '" alt="" width="16" height="16"> ' + 
                 showname + 
-                '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';            
+                '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';
             for (var i in blogs) {
                 blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').hide();" name="blog" class="blog_radio" id="blog_' + 
                     blogs[i].BlogId + 
@@ -197,41 +197,41 @@
                 },
                 success: function(d){
                     if (d.IsOK) {
-                        SyncQueue();                     
+                        SyncQueue();
                     } else {
                         if(d.Error == "select") {
-                            CreateBlogsPanel(d.blogs);     
-                            EnableButton();                       
+                            CreateBlogsPanel(d.blogs);
+                            EnableButton();
                         } else {
                             $("#ac_connect_result").html(
                                         'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-                            EnableButton();  
+                            EnableButton();
                         }
                     }
                 },
-			    dataType: "json"    
+			    dataType: "json"
 		    });  
         }
 
         function SyncQueue() {
-            $.ajax({url: '<?php echo $ajax_form_action; ?>', 
+            $.ajax({url: '<?php echo $ajax_form_action; ?>',
                 type: 'post', 
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
-                success: function(d) {                                
+                success: function(d) {
                     location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
                 },
                 error: function(d, s, e) {
                 }
-            });            
+            });
         }
-        <?php 
+        <?php
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             if ( strlen( $ac_api_key ) > 0 ) {
         ?>
             apikey = '<?php echo($ac_api_key); ?>';
             ConnectBlog();
-        <?php  
+        <?php
             }
         ?>
 
@@ -247,8 +247,8 @@
                         showname: credentials.Showname,
                         Avatar20 : credentials.Avatar20,
                         Avatar80 : credentials.Avatar80
-					}, 
-                success: function(d) {  
+					},
+                success: function(d) {
                     if (d.IsOK) {
                         apikey =  credentials.APIKey;   
                         showname = credentials.Showname;
@@ -259,7 +259,7 @@
                     } else {
                         somethingWrong();
                     }
-                },                   
+                },
 			    dataType: "json"
 		    });
         }
