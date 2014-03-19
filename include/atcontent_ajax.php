@@ -408,7 +408,7 @@ function atcontent_connect()
 
 function atcontent_ajax_get_sync_stat(){    
         $userid = wp_get_current_user()->ID;
-        $syncid = get_user_meta($userid, "ac_syncid", TRUE);        
+        $syncid = get_user_meta($userid, "ac_syncid", TRUE);
         $blogid = get_user_meta($userid, "ac_blogid", TRUE);
         $stats = atcontent_api_get_sync_stat($syncid, $blogid);
         echo json_encode( array ( "stats" => $stats));
@@ -469,7 +469,7 @@ function atcontent_ajax_syncqueue(){
     global $wpdb;
     include( "atcontent_userinit.php" );
     $posts_id = array();
-    $syncid = get_user_meta( $userid, "ac_syncid", true ); 
+    $syncid = get_user_meta( $userid, "ac_syncid", true );
     $posts = $wpdb->get_results( 
 	    "
 	    SELECT ID, post_author
