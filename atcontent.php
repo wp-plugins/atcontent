@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.4.1
+    Version: 7.5
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.4.1" );
+    define( 'AC_VERSION', "7.5" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -16,42 +16,48 @@
     require_once( "include/atcontent_api.php" );
     require_once( "include/atcontent_pingback.php" );
     require_once( "include/atcontent_ajax.php" );
-    require_once( "include/atcontent_dashboard.php" );
-    require_once( "include/atcontent_lists.php" );
-    require_once( "include/atcontent_post.php" );
+    if (is_admin()) {
+        require_once( "include/atcontent_dashboard.php" );
+        require_once( "include/atcontent_lists.php" );
+        require_once( "include/atcontent_post.php" );
+    }
     require_once( "include/atcontent_shortcodes.php" );
     require_once( "include/atcontent_content_processing.php" );
-    require_once( "include/atcontent_editor.php" );
-    require_once( "include/atcontent_coexistense.php" );
+    if (is_admin()) {
+        require_once( "include/atcontent_editor.php" );
+        require_once( "include/atcontent_coexistense.php" );
+    }
 
-    add_action( 'admin_init', 'atcontent_admin_init' );
-    add_action( 'admin_menu', 'atcontent_add_tools_menu' );
+    if (is_admin()) {
+        add_action( 'admin_init', 'atcontent_admin_init' );
+        add_action( 'admin_menu', 'atcontent_add_tools_menu' );
+        add_action( 'save_post', 'atcontent_save_post' );
+        add_action( 'publish_post', 'atcontent_publish_publication' );
+        add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
+        add_action( 'admin_head', 'atcontent_admin_head' );
+        add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
+        add_action( 'wp_ajax_atcontent_syncqueue', 'atcontent_ajax_syncqueue' );
+        add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
+        add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
+        add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
+        add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
+        add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
+        add_action( 'wp_ajax_atcontent_get_sync_stat', 'atcontent_ajax_get_sync_stat' );
+        add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
+        add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
+        add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
+        add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
+        add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
+    }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-    add_action( 'save_post', 'atcontent_save_post' );
-    add_action( 'publish_post', 'atcontent_publish_publication' );
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );    
     add_action( 'comment_post', 'atcontent_comment_post' );
     add_action( 'deleted_comment', 'atcontent_comment_post' );
     add_action( 'trashed_comment', 'atcontent_comment_post' );
-    add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
-    add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
-    add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
-    add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
-    add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
-    add_action( 'wp_ajax_atcontent_get_sync_stat', 'atcontent_ajax_get_sync_stat' );
-    add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
-    add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
-    add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
-    add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
-    add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
-    add_action( 'wp_ajax_atcontent_readership', 'atcontent_readership' );
+    add_action( 'wp_set_comment_status', 'atcontent_comment_post' );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
-    add_action( 'wp_ajax_atcontent_guestpost_check_url', 'atcontent_ajax_guestpost_check_url' );
-    add_action( 'wp_ajax_atcontent_syncqueue', 'atcontent_ajax_syncqueue' );
-    add_action( 'admin_head', 'atcontent_admin_head' );
-    add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
-
+    
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );

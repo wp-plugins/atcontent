@@ -50,52 +50,74 @@ function atcontent_pingback_inline(){
 function atcontent_activate() {
     try {
         global $wpdb;
-        $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");
-        foreach ( $wp_user_search as $user ) {
-            $userid = $user->ID;
-            $email = $user->user_email;
-            $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-            $ac_referral = get_user_meta( $userid, "ac_referral", true );
-            if ( user_can( $userid, 'edit_posts' ) ) {
-                $status = 'Activated';
-                if ( strlen( $ac_api_key ) > 0 ) {
-                    $status = 'Connected'; 
-                } else {
-                    $ac_pen_name = get_user_meta( intval( $userid ), "ac_pen_name", true );
-                    if ( strlen( $ac_pen_name ) > 0 ) { 
-                        $status = 'Disconnected';
+        $offset = 0;
+        $limit = 20;
+        do {
+            $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
+            foreach ( $wp_user_search as $user ) {
+                $userid = $user->ID;
+                $email = $user->user_email;
+                $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+                $ac_referral = get_user_meta( $userid, "ac_referral", true );
+                if ( user_can( $userid, 'edit_posts' ) ) {
+                    $status = 'Activated';
+                    if ( strlen( $ac_api_key ) > 0 ) {
+                        $status = 'Connected'; 
+                    } else {
+                        $ac_pen_name = get_user_meta( intval( $userid ), "ac_pen_name", true );
+                        if ( strlen( $ac_pen_name ) > 0 ) { 
+                            $status = 'Disconnected';
+                        }
                     }
+                    atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
                 }
-                atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
             }
-        }
-    } catch (Exception $ex) { }
+            $wpdb->flush();
+            $offset += $limit;
+        } while ( count( $wp_user_search ) > 0 );
+    } catch (Exception $e) { }
 }
 
 function atcontent_deactivate() {
-    global $wpdb;
-    $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");
-    foreach ( $wp_user_search as $user ) {
-        $userid = $user->ID;
-        $email = $user->user_email;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        if ( user_can( $userid, 'publish_posts' ) ) {
-            $status = 'Deactivated';
-            atcontent_api_pingback( $email, $status, $ac_api_key, "" );
-        }
-    }
+    try {
+        global $wpdb;
+        $offset = 0;
+        $limit = 20;
+        do {
+            $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
+            foreach ( $wp_user_search as $user ) {
+                $userid = $user->ID;
+                $email = $user->user_email;
+                $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+                if ( user_can( $userid, 'publish_posts' ) ) {
+                    $status = 'Deactivated';
+                    atcontent_api_pingback( $email, $status, $ac_api_key, "" );
+                }
+            }
+            $wpdb->flush();
+            $offset += $limit;
+        } while ( count( $wp_user_search ) > 0 );
+    } catch (Exception $e) { }
 }
 
 function atcontent_uninstall() {
-    global $wpdb;
-    $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM $wpdb->users ORDER BY ID");
-    foreach ( $wp_user_search as $user ) {
-        $userid = $user->ID;
-        $email = $user->user_email;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        if ( user_can( $userid, 'publish_posts' ) ) {
-            $status = 'Uninstalled';
-            atcontent_api_pingback( $email, $status, $ac_api_key, "" );
-        }
-    }
+    try {
+        global $wpdb;
+        $offset = 0;
+        $limit = 20;
+        do {
+            $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
+            foreach ( $wp_user_search as $user ) {
+                $userid = $user->ID;
+                $email = $user->user_email;
+                $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+                if ( user_can( $userid, 'publish_posts' ) ) {
+                    $status = 'Uninstalled';
+                    atcontent_api_pingback( $email, $status, $ac_api_key, "" );
+                }
+            }
+            $wpdb->flush();
+            $offset += $limit;
+        } while ( count( $wp_user_search ) > 0 );
+    } catch (Exception $e) { }
 }

@@ -1,27 +1,28 @@
 <?php
     require_once( "include/atcontent_userinit.php" );
-    $posts = $wpdb->get_results( 
-        "
-        SELECT ID, post_title, post_author
-        FROM {$wpdb->posts}
-        WHERE post_status = 'publish' 
-            AND post_author = {$userid} AND post_type = 'post'
-        "
-    );
-
+    $offset = 0;
+    $limit = 20;
     $posts_id = array();
-
-    wp_cache_flush();
-
-    foreach ( $posts as $post ) 
-    {
-        $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-        if ( strlen( $ac_postid ) > 0 ) { 
-            array_push( $posts_id, $ac_postid );
+    do {
+        $posts = $wpdb->get_results( 
+	        "
+	        SELECT ID, post_title, post_author
+	        FROM {$wpdb->posts}
+	        WHERE post_status = 'publish' 
+		        AND post_author = {$userid} AND post_type = 'post'
+            ORDER BY ID LIMIT {$offset},{$limit}
+	        "
+        );
+        foreach ( $posts as $post ) 
+        {
+            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
+            if ( strlen( $ac_postid ) > 0 ) { 
+                array_push( $posts_id, $ac_postid );
+            }
         }
-        wp_cache_flush();
-    }
-
+        $wpdb->flush();
+        $offset += $limit;
+    } while ( count( $posts ) > 0 );
     $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 ?>
 <div class="b-cols">    
