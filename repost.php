@@ -167,32 +167,32 @@
         <div class="asideCol">
             <h2>Categories</h2>
             <p>
-                <?php if ($currentcategory !== "1") { ?>
+                <?php if ( $currentcategory !== "1" ) { ?>
                     <a href="<?php echo $category1url; ?>">Business & Marketing</a><br>
                 <?php } else { ?>
                     <strong>Business &amp; Marketing</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "2") { ?>
+                <?php if ( $currentcategory !== "2" ) { ?>
                     <a href="<?php echo $category2url; ?>">Fashion & Style</a><br>
                 <?php } else { ?>
                     <strong>Fashion &amp; Style</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "7") { ?>
+                <?php if ( $currentcategory !== "7" ) { ?>
                     <a href="<?php echo $category3url; ?>">Self Improvement</a><br>
                 <?php } else { ?>
                     <strong>Self Improvement</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "4") { ?>
+                <?php if ( $currentcategory !== "4" ) { ?>
                     <a href="<?php echo $category4url; ?>">Tech</a><br>
                 <?php } else { ?>
                     <strong>Tech</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "5") { ?>
+                <?php if ( $currentcategory !== "5" ) { ?>
                     <a href="<?php echo $category5url; ?>">Politics</a><br>
                 <?php } else { ?>
                     <strong>Politics</strong><br>
                 <?php }?>
-                <?php if ($currentcategory !== "6") { ?>
+                <?php if ( $currentcategory !== "6" ) { ?>
                     <a href="<?php echo $category6url; ?>">Religion &amp; Spirituality</a><br>
                 <?php } else { ?>
                     <strong>Religion &amp; Spirituality</strong><br>
