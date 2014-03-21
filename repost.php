@@ -214,7 +214,7 @@ $email_body = "Hey AtContent team, \n" .
 
 ?>
 
-<a href="http://atcontent.com/Landing/featureposts/<?php echo(urldecode($_SERVER['HTTP_HOST']))?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
+<a href="http://atcontent.com/Landing/featureposts/<?php echo( urldecode( $_SERVER['HTTP_HOST'] ) ); ?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
 <br>
 <small>
 
