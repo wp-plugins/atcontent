@@ -442,4 +442,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Memory optimizations. Now works on small amount of memory!
+* Memory optimizations. Now works on small amount of memory! 
