@@ -436,11 +436,11 @@ function atcontent_ajax_repost(){
         $repost_result = atcontent_api_repost_publication($ac_postid, $new_post_id);
         $embedid = '';
         if ( $repost_result["IsOK"] == TRUE ) {
-            $embedid = "-/".$repost_result["EmbedId"]."/"; 
+            $embedid = "-/" . $repost_result["EmbedId"] . "/"; 
         }
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
-        remove_filter( 'the_content', 'atcontent_the_content_after', 100);
-        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
         $ac_content = 
         "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
@@ -459,7 +459,7 @@ function atcontent_ajax_repost(){
         kses_remove_filters();
         // Insert the post into the database
         remove_action( 'publish_post', 'atcontent_publish_publication' );
-        wp_update_post($new_post);
+        wp_update_post( $new_post );
         update_post_meta( $new_post_id, "ac_is_process", "0" );
         update_post_meta( $new_post_id, "ac_embedid", $embedid );
         update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
