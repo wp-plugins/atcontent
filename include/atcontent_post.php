@@ -148,132 +148,8 @@ function atcontent_save_meta( $post_id ) {
 
 }
 
-function atcontent_guest_post_preview( $posts ) {
-	global $wp_query;
-    global $wp;
-
-    $userid = wp_get_current_user()->ID;
-    $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-
-  	if ( $_GET['ac_guest_post'] != null ) {
-        $gp_request = atcontent_api_guestposts_preview( $ac_api_key, $_GET['ac_guest_post'], site_url() );
-        if ( $gp_request["IsOK"] != true ) { 
-            return $posts;
-        }
-        global $wp_filter;
-
-        $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
-        $guest_quota = 0;
-        if ( $quotas_result["IsOK"] == true ) {
-            $guest_quota = intval( $quotas_result["Quotas"]["GuestPost"]["Count"] );
-        }
-
-        $guest_enabled = $guest_quota > 0;
-
-        $guest_accept_button_disabled = "";
-
-        if ( $guest_enabled ) {
-            $guest_enabled_js = "true";
-        } else {
-            $guest_enabled_js = "false";
-            $guest_accept_button_disabled = "disabled=\"disabled\"";
-        }
-
-        remove_filter( 'the_content', 'atcontent_the_content', 1 );
-        remove_filter( 'the_content', 'atcontent_the_content_after', 100);
-        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
-        remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $accept_uri = admin_url("admin.php?page=atcontent/guestpost.php&postid=" . $_GET['ac_guest_post'] . "&action=accept");
-        $decline_uri = admin_url("admin.php?page=atcontent/guestpost.php&postid=" . $_GET['ac_guest_post'] . "&action=decline");
-        $post = new stdClass;
-        $post->post_author = 1;
-        $post->post_name = "ac_guest_post";
-        $post->guid = get_bloginfo('wpurl/ac_guest_post');
-        $post->post_title = 'Preview ' . $gp_request["Title"];
-        if ( $_GET['ac_guest_post_mode'] != "view" ) {
-            $view_url =  site_url( "?ac_guest_post=" . $_GET['ac_guest_post'] . "&ac_guest_post_mode=view" );
-            $post->post_content = <<<END
-<script src='https://atcontent.com/Ajax/Service/SetAccessSharingCookie.ashx?Id={$gp_request["Key"]}' type='text/javascript'></script>
-<p>Getting access...</p>
-<script type="text/javascript">
-function decodeuri(uri) {
-    var div = document.createElement('div');
-    div.innerHTML = uri;
-    return div.firstChild.nodeValue;
-}
-jQuery(function(){
-    document.location = decodeuri('{$view_url}');
-});
-</script>
-END;
-        } else {
-            $post->post_content = <<<END
-[atcontent id="{$gp_request["Post4gId"]}"]
-<script type="text/javascript">
-var processed = false;
-function accept_guest_post(){
-    if (processed) return;
-    processed = true;
-    if ( !{$guest_enabled_js} ) {
-        alert('Not enough credits for guest posts');
-        return;
-    }
-    window.location = decodeuri('{$accept_uri}');
-}
-function decline_guest_post(){
-    if (processed) return;
-    processed = true;
-    window.location = decodeuri('{$decline_uri}');
-}
-function decodeuri(uri) {
-    var div = document.createElement('div');
-    div.innerHTML = uri;
-    return div.firstChild.nodeValue;
-}
-</script>
-<p>
-END;
-            if ( $guest_quota > 0 ) {
-                $post->post_content .= <<<END
-<input type="button" onClick="accept_guest_post()" value="Accept"> or 
-END;
-            } 
-            $post->post_content .= <<<END
-<input type="button"  onClick="decline_guest_post()" value="Decline"></p>
-END;
-            if ( $guest_quota < 1 ) { 
-                $post->post_content .= <<<END
-<p>To accept guest posts you need to <a href="https://atcontent.com/Subscribe" target="_blank">upgrade to a bigger plan</a> or wait for the next month.</p>
-END;
-            }
-        }
-        $post->ID = -42;
-        $post->post_status = 'static';
-        $post->comment_status = 'closed';
-        $post->ping_status = 'closed';
-        $post->comment_count = 0;
-        $post->post_date = current_time('mysql');
-        $post->post_date_gmt = current_time('mysql',1);
-
-        $posts = NULL;
-        $posts[] = $post;
-
-        $wp_query->is_page = true;
-        $wp_query->is_singular = true;
-        $wp_query->is_home = false;
-        $wp_query->is_archive = false;
-        $wp_query->is_category = false;
-        unset($wp_query->query["error"]);
-        $wp_query->query_vars["error"]="";
-        $wp_query->is_404 = false;
-    }
-
-    return $posts;
-}
-add_filter('the_posts', 'atcontent_guest_post_preview' );
-
 function atcontent_repost_preview( $posts ) {
-	global $wp_query;
+    global $wp_query;
     global $wp;
     global $atcontent_reposts;
 
@@ -342,7 +218,6 @@ END;
         $wp_query->query_vars["error"]="";
         $wp_query->is_404 = false;
     }
-
     return $posts;
 }
 add_filter('the_posts', 'atcontent_repost_preview' );
