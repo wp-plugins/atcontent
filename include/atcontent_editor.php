@@ -121,7 +121,7 @@
                 Protect post from copy-paste
         </label><br>
         Available posts: <?php echo $plagiarism_quota; ?>.
-        <?php if ($ac_is_copyprotect_enabled == false) { 
+        <?php if ( $ac_is_copyprotect_enabled == false ) { 
             if ( $subscriptions_count == 0 ) { ?>
                 <br />To enable this feature, please <a href="https://atcontent.com/Subscribe" target="_blank">choose a suitable plan</a>
             <?php } else { ?>
