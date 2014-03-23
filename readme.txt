@@ -30,7 +30,6 @@ With AtContent's plugin, you can easily increase your audience by following 3 si
 * All the content is SEO & Google friendly, **NO GOOGLE PENALTIES**.
 * There is copy-paste protection on all of the content.
 * Backlinks to original sources increase their SEO.
- 
 
 == Examples ==
 
