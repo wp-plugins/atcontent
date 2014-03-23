@@ -142,6 +142,7 @@ function atcontent_ajax_gate() {
             $ac_postid = $_POST["postid"];
             $ac_embedid = $_POST["embedid"];
             $ac_published = $_POST["published"];
+            $repost_preview = $_POST["preview"];
             $embedid = '';
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid .= "-/" . $ac_embedid . "/"; 
@@ -153,9 +154,10 @@ function atcontent_ajax_gate() {
                 remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                 $ac_content = 
+                "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
                 "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
                 "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
                 // Create post object
                 $new_post = array(
                     'post_title'    => $title,
@@ -423,29 +425,32 @@ function atcontent_ajax_get_sync_stat(){
 function atcontent_ajax_repost(){
         include( "atcontent_userinit.php" );
         $ac_postid = $_POST['ac_post'];
-        $repost_title_answer = atcontent_api_get_title( $ac_postid );
         $repost_title = "Not found";
+        $repost_preview = "";
         if ( $repost_title_answer["IsOK"] == true ) {
             $repost_title = $repost_title_answer["Title"];
         }
         $new_post = array(
-            'post_title'    => $repost_title,
-            'post_content'  => '',
+            'post_title'    => 'New repost',
+            'post_content'  => ''
             );
         $new_post_id = wp_insert_post( $new_post );
-        $repost_result = atcontent_api_repost_publication($ac_postid, $new_post_id);
+        $repost_result = atcontent_api_repost_publication( $ac_postid, $new_post_id );
         $embedid = '';
         if ( $repost_result["IsOK"] == TRUE ) {
-            $embedid = "-/" . $repost_result["EmbedId"] . "/"; 
+            $embedid = "-/" . $repost_result["EmbedId"] . "/";
+            $repost_title = $repost_result["Title"];
+            $repost_preview = $repost_result["Preview"];
         }
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
         remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
         $ac_content = 
+        "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
         "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
         "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-        "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+        "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
         // Create post object
         $new_post = array(
             'ID'            => $new_post_id,

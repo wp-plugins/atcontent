@@ -1,4 +1,4 @@
-=== AtContent — Promote Your Content ===
+=== AtContent — Grow Your Audience ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
 Tags: Post, posts, text, admin, widget, seo, repost, api, google, search engine optimization, links, plugin
@@ -69,6 +69,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 5. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.5.1 =
+* Improved repost compatibility with featured themes.
 
 = 7.5 =
 * Memory usage optimization
@@ -441,4 +444,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Memory optimizations. Now works on small amount of memory! 
+* Now AtContent works better with featured themes!
