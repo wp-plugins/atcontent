@@ -41,9 +41,7 @@ With AtContent's plugin, you can easily increase your audience by following 3 si
 2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://bit.ly/LtC3hF),
 3. Choose options and click "Apply Settings" - [Screenshot](http://bit.ly/Lf4Qpu).
 
-
 **1, 2, 3: You're done!**
-
 
 == Frequently asked questions ==
 
