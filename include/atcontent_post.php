@@ -7,95 +7,40 @@ function atcontent_publish_publication( $post_id ){
 		$post_url = get_permalink( $post_id );
 		$post = get_post( $post_id );
         if ( $post == null ) return;
-
         $userid = intval( $post->post_author );
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
         $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
         if ( strlen( $ac_api_key ) > 0 ) {
-            atcontent_api_import_publication($ac_api_key, $ac_blogid, $ac_syncid, $post_id, $post->post_author);
-            return;
             $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
             if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
-            
             $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
             $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
             $ac_type = "free";
             $ac_cost = "2.50";
-
             if ( strlen( $ac_is_process ) == 0 ) { 
                 $ac_is_process = "1";
                 update_post_meta( $post_id, "ac_is_process", $ac_is_process );
             }
-            
             $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
             if ( strlen( $ac_is_copyprotect ) == 0 ) { 
                 $ac_is_copyprotect = $ac_user_copyprotect;
                 update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
             }
-
             $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
             if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
                 $ac_is_advanced_tracking = "1";
                 update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
             }
-
-            if ( $ac_is_process != "1" ) return;
-            
+            if ( $ac_is_process == "0" ) return;
             atcontent_coexistense_fixes();
-
             $testcontent = apply_filters( "the_content",  $post->post_content );
             $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
             $testcontent .= $post -> post_content;
-
             if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w\.atcontent\.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
                 update_post_meta( $post_id, "ac_is_process", "2" );
-                return;
             }
-            
-            $comments_json = "";
-            $comments = get_comments( array(
-                'post_id' => $post->ID,
-                'order' => 'ASC',
-                'orderby' => 'comment_date_gmt',
-                'status' => 'approve',
-            ) );
-            if ( !empty( $comments ) ) {
-                $comments_json .= json_encode( $comments );
-            }
-
-            $tags_json = json_encode( wp_get_post_tags( $post->ID,  array( 'fields' => 'slugs' ) ) );
-            $cats_json = json_encode( wp_get_post_categories( $post->ID, array( 'fields' => 'slugs' ) ) );
-            
-            if ( strlen( $ac_postid ) == 0 ) {
-                $api_answer = atcontent_api_create_publication( $ac_api_key, $post->post_title, 
-                        apply_filters( "the_content",  $post->post_content ) , 
-                        apply_filters( "the_content",  $ac_paid_portion ),  
-                        $ac_type, get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json, 
-                    $ac_blogid, $ac_syncid, $post->ID, $post->post_author );
-                if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
-                    $ac_postid = $api_answer["PublicationID"];
-                    $ac_embedid = $api_answer["EmbedId"];
-                    update_post_meta( $post->ID, "ac_postid", $ac_postid );
-                    update_post_meta( $post->ID, "ac_embedid", $ac_embedid );
-                } else {
-                    update_post_meta( $post->ID, "ac_is_process", "2" );
-                }
-            } else {
-                $api_answer = atcontent_api_update_publication( $ac_api_key, $ac_postid, $post->post_title, 
-                    apply_filters( "the_content", $post->post_content  ) , 
-                    apply_filters( "the_content",  $ac_paid_portion ), 
-                    $ac_type , get_gmt_from_date( $post->post_date ), get_permalink( $post->ID ),
-                    $ac_cost, $ac_is_copyprotect, $ac_is_advanced_tracking, $comments_json, $tags_json, $cats_json,
-                    $ac_blogid, $ac_syncid, $post->ID, $post->post_author );
-                if ( is_array( $api_answer ) && strlen( $api_answer["PublicationID"] ) > 0 ) {
-                    $ac_embedid = $api_answer["EmbedId"];
-                    update_post_meta( $post->ID, "ac_embedid", $ac_embedid );
-                } else {
-                    update_post_meta( $post->ID, "ac_is_process", "2" );
-                }
-            }
+            atcontent_api_import_publication( $ac_api_key, $ac_blogid, $ac_syncid, $post_id, $userid );
         }
 	}
 }
@@ -121,7 +66,7 @@ function atcontent_save_meta( $post_id ) {
     if ( $ac_is_process != "1" ) $ac_is_process = "0";
     update_post_meta( $post_id, "ac_is_process", $ac_is_process );
         
-    if ($ac_is_copyprotect != "1") $ac_is_copyprotect = "0";
+    if ( $ac_is_copyprotect != "1" ) $ac_is_copyprotect = "0";
     if ( $_POST["atcontent_is_copyprotect_enabled"] == "1" ) {
         update_post_meta( $post_id, "ac_is_copyprotect", $ac_is_copyprotect );
     }

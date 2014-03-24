@@ -106,15 +106,13 @@ function atcontent_ajax_gate() {
                 $post_original_url = get_permalink( $post->ID );
                 $repost_post_id = '';
                 $embedid = '';
-                if (preg_match_all('/<script[^<]+src="https?:\/\/w\.atcontent\.com\/(\-\/[^\/]+\/)?([^\/]+)\/([^\/]+)\/([^\"]+)/', $post->post_content, $matches))
+                if ( preg_match_all( '/<script[^<]+src="https?:\/\/w\.atcontent\.com\/(\-\/[^\/]+\/)?([^\/]+)\/([^\/]+)\/([^\"]+)/', $post->post_content, $matches ) )
                 {
-                    if (strpos($matches[1][0],'-') !== false) {
-                        $embedid = $matches[1][0];
-                        $embedid = str_replace('/', '', $embedid);
-                        $embedid = str_replace('-', '', $embedid);
+                    if ( strpos( $matches[1][0], "-/" ) === 0 ) {
+                        $embedid = substr( $matches[1][0], 2, strlen( $matches[1][0] ) - 3 );
                     }
                     $repost_post_id = $matches[3][0];
-                    update_post_meta($postid, "ac_repost_postid", $repost_post_id );                    
+                    update_post_meta( $postid, "ac_repost_postid", $repost_post_id );                    
                 }
                 echo json_encode( array( 
                     "IsOK" => true,
@@ -185,35 +183,46 @@ function atcontent_ajax_gate() {
             $postid = $_POST["blogpostid"];
             $embedid = $_POST["embedid"];
             $ac_published = $_POST["published"];
-            
             $ac_postid = $_POST["postid"];
-            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
-                $repost_post_id = get_post_meta(intval( $postid ), "ac_repost_postid", true );
-                if (strlen($repost_post_id) ==0)
+            if ( strlen( $ac_api_key ) > 0 && ( $ac_api_key == $_POST["key"] ) ) {
+                $repost_post_id = get_post_meta( intval( $postid ), "ac_repost_postid", true );
+                if ( strlen( $repost_post_id ) == 0 )
                 {
                     update_post_meta( intval( $postid ), "ac_postid", $ac_postid );
                     update_post_meta( intval( $postid ), "ac_is_process", "1" );
                 }
                 else
                 {
-                    update_post_meta( intval( $postid ), "ac_postid", '');
+                    update_post_meta( intval( $postid ), "ac_postid", '' );
                 }
                 update_post_meta( intval( $postid ), "ac_embedid", $embedid );
                 $post = get_post( $postid );
                 $post_content = $post -> post_content;
-                $repost_post_id = get_post_meta(intval( $postid ), "ac_repost_postid", true );
-                if (strlen($repost_post_id) > 0 )
+                $repost_post_id = get_post_meta( intval( $postid ), "ac_repost_postid", true );
+                if ( strlen( $repost_post_id ) > 0 )
                 {         
                     remove_filter( 'the_content', 'atcontent_the_content', 1 );
                     remove_filter( 'the_content', 'atcontent_the_content_after', 100);
                     remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
                     remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-                    $ac_pen_name = get_user_meta(intval($userid), "ac_pen_name", true);
-                    $embedid = '-/'.$embedid.'/';
-                    $post_content = 
-                    "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-                    "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>";
+                    $ac_pen_name = get_user_meta( intval( $userid ), "ac_pen_name", true );
+                    $embedid = '-/' . $embedid . '/';
+                    if ( preg_match_all( '/<script[^<]+src="https?:\/\/w\.atcontent\.com\/(\-\/[^\/]+\/)?([^\/]+)\/([^\/]+)\/([^\"]+)/', $post_content, $matches ) )
+                    {
+                        for ( $scriptIndex = 0; $scriptIndex < count( $matches[0] ); $scriptIndex++ ) {
+                            $scriptToReplace = "<script src=\"https://w.atcontent.com/{$embedid}{$matches[2][$scriptIndex]}/{$matches[3][$scriptIndex]}/{$matches[4][$scriptIndex]}";
+                            $post_content = str_replace( $matches[0][$scriptIndex], $scriptToReplace, $post_content );
+                        }
+                    }
+                    if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $post_content, $matches ) ) {
+                        for ( $index = 0; $index < count( $matches[1] ); $index++ )
+                        {
+                            $post_content = str_replace( 
+                                $matches[0][$index], 
+                                "<script " . ($index > 0 ? "data-ac-" : "") . "src=\"" . $matches[1][$index] . "\"", 
+                                $post_content );
+                        }
+                    }
                 }
                 kses_remove_filters();
                 remove_action( 'publish_post', 'atcontent_publish_publication' );
