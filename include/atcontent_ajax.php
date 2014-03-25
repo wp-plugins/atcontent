@@ -202,8 +202,8 @@ function atcontent_ajax_gate() {
                 if ( strlen( $repost_post_id ) > 0 )
                 {         
                     remove_filter( 'the_content', 'atcontent_the_content', 1 );
-                    remove_filter( 'the_content', 'atcontent_the_content_after', 100);
-                    remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+                    remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+                    remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
                     remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                     $ac_pen_name = get_user_meta( intval( $userid ), "ac_pen_name", true );
                     $embedid = '-/' . $embedid . '/';

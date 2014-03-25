@@ -1,4 +1,4 @@
-=== AtContent — Grow Your Audience ===
+=== AtContent — Grow Your Audience Reach ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
 Tags: Post, posts, text, admin, widget, seo, repost, api, google, search engine optimization, links, plugin
