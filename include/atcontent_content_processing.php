@@ -22,7 +22,7 @@
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
-        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
+        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 && is_single() ) {
             $embedid = "-/00000000000/";
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid = "-/" . $ac_embedid . "/";
@@ -44,7 +44,7 @@ END;
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
-        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 ) {
+        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 && is_single() ) {
             $embedid = "-/00000000000/";
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid = "-/" . $ac_embedid . "/";

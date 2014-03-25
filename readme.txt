@@ -68,6 +68,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.5.3 =
+* No repost button on main page.
+
 = 7.5.2 =
 * Repost processing fixes. Improved compatibility with AtContent Sync.
 
