@@ -219,7 +219,7 @@ function atcontent_ajax_gate() {
                         {
                             $post_content = str_replace( 
                                 $matches[0][$index], 
-                                "<script " . ($index > 0 ? "data-ac-" : "") . "src=\"" . $matches[1][$index] . "\"", 
+                                "<script " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
                                 $post_content );
                         }
                     }
@@ -228,7 +228,7 @@ function atcontent_ajax_gate() {
                 remove_action( 'publish_post', 'atcontent_publish_publication' );
                 wp_update_post( array(
                         'ID' => intval( $postid ),
-                        'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published )),
+                        'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
                         'post_content' => $post_content
                     ) );
                 kses_init_filters();
