@@ -1,47 +1,50 @@
-=== AtContent — Grow Your Audience Reach ===
+=== AtContent — Grow Audience & Monetize Blog ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
-Tags: Post, posts, text, admin, widget, seo, repost, api, google, search engine optimization, links, plugin
+Tags: Post, posts, admin, widget, seo, repost, google, search engine optimization, links, plugin, ads, advertising
 Requires at least: 3.3
 Stable tag: trunk
 Tested up to: 3.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Boost your audience 2.5x in 30 days by making your blog posts available for reposting! It's free to join!
+Easily monetize your blog with native advertisement and boost your audience 2.5x in 30 days. It's free to join!
 
 == Description ==
 
-With AtContent's plugin, you can easily increase your audience by following 3 simple steps, and you have already completed the first one! All you need to do now is to install the plugin and connect your blog with AtContent. It is worth noting that 5,000 sites have already increased their audiences by approximately 2.5x via AtContent and now is your chance to join them!
+With the AtContent plugin, you can easily **grow your audience reach** and **monetize your blog** by following 3 simple steps. And you have already completed the first one — found our plugin! Now, all you need to do now is to install the plugin and connect your blog with AtContent.
 
 #### What is AtContent? #### 
 
-[AtContent](http://bit.ly/1cRs7nA) is a cross-blogging and content distribution platform. Once you start using AtContent, not only will you be able to repost other people's blog posts on your site, they will also be able to repost yours without content duplication.
+[AtContent](http://bit.ly/1cRs7nA) is a content exchange platform. With AtContent you can repost other people's blog posts and thereby grow your user engagement, traffic and even earn on it! At the same time, you allow other bloggers to repost your posts, which increases your audience reach. You track the content path and get attribution from each repost.
 
-#### What are the benefits of AtContent? #### 
-* Reposts provide backlinks to your site. 
-* Other bloggers' reposted content will increase your site reader engagement.
-* You will be able to track your audience [growth](http://bit.ly/Kcvui4).
+#### Grow Your Audience ####
 
-#### With AtContent everybody wins because: #### 
-* You will reach out to people on other sites, which will therefore increase your audience by up to 860% in as little as [3 weeks](http://bit.ly/1didxf4)!
-* Bloggers who make reposts will not only get quality content and increase their sites reader engagement, they will also increase incoming traffic to their sites. 
-* Readers get content they are seeking on sites which they regularly view.
-* All the content is SEO & Google friendly, **NO GOOGLE PENALTIES**.
-* There is copy-paste protection on all of the content.
-* Backlinks to original sources increase their SEO.
+* [Grow](http://bit.ly/Kcvui4) your audience reach by up to 2.5x in just 4 weeks by being reposted to other blogs. Become popular among bloggers and get new followers!
+* Grow user engagement and traffic on your site by reposting other bloggers' relevant content right from your admin dashboard.
+* **SEO & Google friendly**, proven by thousands of bloggers.
 
-== Examples ==
+#### Monetize Your Site ####
 
-* **[Comments Demo example](http://bit.ly/1hzlqPg)**
+* Earn $10 per 1,000 views of sponsored posts on your blog.
+* Advertisers publish posts in our NativeAd Marketplace. You can [choose](http://bit.ly/1gYkq0Y) any relevant post and repost it in one click right from your admin dashboard. No need to write anything!
+* AtContent NativeAd is an additional source of revenue to you and doesn’t compete with other monetization technologies you use.
+* Withdraw earnings from your AtContent profile after a campaign ends. The minimum withdrawal is only $1!
+
+#### Promote Your Content on Relevant Blogs ####
+
+* Promote your best posts on hundreds of relevant blogs in a couple clicks! If your post is truly great it will go viral.
+* With AtContent, you can start promoting your posts in less than 3 minutes. The budget can be as small as $10!
+* Your post is tagged and displayed in [AtContent NativeAd Marketplace](http://bit.ly/1gYkq0Y). Only bloggers with the same tags as yours can see the post and place it on their sites.
+* You will be charged only when the relevant audience reads your post longer than 15 seconds. Thus, we guarantee that you pay only for views from real people who are interested in your content.
+
+[Contact us](http://bit.ly/OV9LOX) if you have any questions.
 
 == Installation ==
 
 1. Install the plugin on your blog and activate it,
 2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://bit.ly/LtC3hF),
-3. Choose options and click "Apply Settings" - [Screenshot](http://bit.ly/Lf4Qpu).
-
-**1, 2, 3: You're done!**
+3. You are done!
 
 == Frequently asked questions ==
 
@@ -63,10 +66,12 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 1. AtContent connection page. Clicking the button connects your blog to AtContent if you have an account or creates a new one if you haven't.
 2. If you already have AtContent blogs you can choose which one you want to connect.
 3. Results of using AtContent and 3 steps to improve them.
-4. Plugin settings popup.
-5. Get content page here you can repost featured posts on your blog.
+4. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.6 =
+* Open marketplace for bloggers!
 
 = 7.5.3 =
 * No repost button on main page.
@@ -448,4 +453,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Now AtContent works better with featured themes!
+* Now AtContent allows you to monetize your blog!
