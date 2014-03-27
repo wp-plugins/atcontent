@@ -363,9 +363,9 @@ function atcontent_connect_blog(){
 function atcontent_disconnect()
 {    
     $userid = wp_get_current_user()->ID;
-    update_user_meta( $userid, "ac_api_key", "");
-    update_user_meta( $userid, "ac_syncid", "");
-    echo json_encode ( array ( "IsOK" => true )); 
+    update_user_meta( $userid, "ac_api_key", "" );
+    update_user_meta( $userid, "ac_syncid", "" );
+    echo json_encode ( array ( "IsOK" => true ) ); 
     exit;
 }
 
