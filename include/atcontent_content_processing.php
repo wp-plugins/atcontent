@@ -208,7 +208,7 @@ END;
         ?>
         <script type="text/javascript">
             jQuery().ready(function () {
-                jQuery("#toplevel_page_atcontent-getpaid > a").attr('href', 'http://bit.ly/1lPpw50').attr('target', '_blank');
+                jQuery("#toplevel_page_atcontent-getpaid > a").attr('href', 'http://bit.ly/1j7vVbM').attr('target', '_blank');
             });
         </script>
         <?php
