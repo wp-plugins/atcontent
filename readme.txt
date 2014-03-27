@@ -1,7 +1,7 @@
 === AtContent — Grow Audience & Monetize Blog ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
-Tags: Post, posts, admin, widget, seo, repost, google, search engine optimization, links, plugin, ads, advertising
+Tags: Post, posts, admin, widget, seo, google, links, plugin, ad, ads, advertising, affiliate 
 Requires at least: 3.3
 Stable tag: trunk
 Tested up to: 3.8.1
