@@ -9,7 +9,7 @@
     font-style: normal;
 }
 
-.wp-menu-image.ac-logo:before {
+.wp-menu-image.ac-wp-logo:before {
   content: '1';
   font: normal normal 1.59em/1 ACLogo !important;
   speak: none;
