@@ -100,10 +100,10 @@ function atcontent_api_import_publication($ac_api_key, $blogId, $syncId, $postId
 }
 
 function atcontent_api_update_publication_comments($ac_api_key, $post_id, $comments) {
-    $post_content = 'Key='.
-        urlencode($ac_api_key).'&AppID='.urlencode('WordPress').
-        '&PublicationID='.urlencode($post_id).
-        '&Comments='.urlencode($comments);
+    $post_content = 'Key=' .
+        urlencode($ac_api_key) . '&AppID=' . urlencode('WordPress') .
+        '&PublicationID=' . urlencode($post_id) .
+        '&Comments=' . urlencode($comments);
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/update', $post_content );
 }
 
