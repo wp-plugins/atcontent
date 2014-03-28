@@ -162,11 +162,6 @@
         else
             return null;
     }
-    (function ($) {
-        $(function () {
-            $("#toplevel_page_atcontent-getpaid").
-        });
-    })(jQuery);
 </script>
 <?php
     }
