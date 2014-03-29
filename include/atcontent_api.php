@@ -127,12 +127,12 @@ function atcontent_api_get_key( $nounce, $grant ) {
 }
 
 function atcontent_api_pingback( $email, $status, $api_key, $referral ) {    
-    if (strlen($api_key) == 0)
+    if ( strlen($api_key) == 0 )
     {
         $userid = wp_get_current_user() -> ID;
-        $api_key = get_user_meta($userid, "ac_non_delete_api_key", true);        
+        $api_key = get_user_meta( $userid, "ac_non_delete_api_key", true );        
     }
-    $post_content = 'Email='. urlencode( $email ) . 
+    $post_content = 'Email=' . urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
