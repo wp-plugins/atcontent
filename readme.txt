@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.6.3 =
+* Connect process optimization
+
 = 7.6 =
 * Open marketplace for bloggers!
 

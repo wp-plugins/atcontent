@@ -37,7 +37,9 @@
 <script type="text/javascript">
     var ConnectBlog;
     var AutoSignIn;
-    
+    var AutoSignInCallback;
+    var ConnectCallback;
+
     function signInWindow() {
         email = document.getElementById("email").value;
         _window = window.open("http://atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
@@ -171,6 +173,7 @@
             $('#newblogtitle').val('<?php echo bloginfo('name'); ?>');
         }
         
+        var connectBlogTried = false;
         ConnectBlog = function (selectedBlog) {
             if (buttonDisabled) {
                 return;
@@ -203,9 +206,14 @@
                             CreateBlogsPanel(d.blogs);
                             EnableButton();
                         } else {
-                            $("#ac_connect_result").html(
-                                        'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
-                            EnableButton();
+                            if (d.ErrorCode == "101" && !connectBlogTried){
+                                connectBlogTried = true;
+                                AutoSignIn();
+                            } else{
+                                $("#ac_connect_result").html(
+                                            'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                                EnableButton();
+                            }
                         }
                     }
                 },
@@ -234,8 +242,7 @@
         <?php
             }
         ?>
-
-
+    
         function SaveCredentials(credentials) {
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
@@ -265,39 +272,33 @@
         }
 
         AutoSignIn = function() {
-		    $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
+            $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
             DisableButton();
             var email = $("#email").val();
             if (email == null || email.length == 0) return;
-            $.ajax({
-                url: 'http://api.atcontent.com/v1/native/checkauth',
-                jsonp: 'jsonp_callback',
-                data : {
-                    email : email
-                },
-                success: function(d){
-                    if (d.IsOK) {
-                        SaveCredentials(d);
-                        $("#sign_changer").hide();
-                    } else {
-                        if (d.state == 'unauth' || d.state == 'noemail') {
-                            initAuthForm();
-                            return;
-                        }                    
-                        if (d.state == 'error') {
-                            somethingWrong();
-                            return;
-                        }
-                        showEmailExists();
-                    }
-                },
-                error: function() {					
-					somethingWrong();
-				},
-			    dataType: "jsonp"    
-		    });  
+            var script = document.createElement('script');
+            script.src = "http://api.atcontent.com/v1/native/checkauth?email=" + encodeURIComponent(email) + "&jsonp_callback=AutoSignInCallback&r=" + Math.Random;
+            document.body.appendChild(script);
         }
 
+        AutoSignInCallback = function(d)
+        {
+            if (d.IsOK) {
+                SaveCredentials(d);
+                $("#sign_changer").hide();
+            } else {
+                if (d.state == 'unauth' || d.state == 'noemail') {
+                    initAuthForm();
+                    return;
+                }
+                if (d.state == 'error') {
+                    somethingWrong();
+                    return;
+                }
+                showEmailExists();
+            }
+        }
+    
         function showEmailExists(){
             var email = $("#email").val();
             EnableButton();
@@ -321,40 +322,33 @@
             DisableButton();
             var email = $("#email").val();
             var username = $("#username").val();
-            $.ajax({
-                url: 'http://api.atcontent.com/v1/native/connect.jsonp',
-                jsonp: 'jsonp_callback',
-			    data: {
-                    email : email,
-                    username : username
-			    },
-                success: function(d){
-				    if (d.IsOK) {
-                        SaveCredentials(d);    
-                        $("#sign_changer").hide();
+            var script = document.createElement('script');
+            script.src = "http://api.atcontent.com/v1/native/connect.jsonp?email=" + encodeURIComponent(email) + "&username=" + encodeURIComponent(username) + "&jsonp_callback=ConnectCallback&r=" + Math.Random;
+            document.body.appendChild(script);
+        }
+
+        ConnectCallback = function(d)
+        {
+            if (d.IsOK) {
+                SaveCredentials(d);    
+                $("#sign_changer").hide();
+            } else {
+                if (d.Error == null){
+                    somethingWrong();
+                } else {
+                    if (d.state == "emailexists") {
+                        showEmailExists();
+                        return;
+                    } else if (d.state == "usernameexists") {
+                        $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">Username “' + username + '” already exists. Please choose a different username.</div>');
+                        EnableButton();
+                        return;
                     } else {
-                        if (d.Error == null){
-                            somethingWrong();
-                        } else {
-                            if (d.state == "emailexists") {
-                                showEmailExists();
-                                return;
-                            } else if (d.state == "usernameexists") {
-                                $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">Username “' + username + '” already exists. Please choose a different username.</div>');
-                                EnableButton();
-                                return;
-                            } else {
-                                $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">' + d.Error + '</div>');
-                                EnableButton();
-                            }
-                        }
+                        $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">' + d.Error + '</div>');
+                        EnableButton();
                     }
-			    },
-			    error: function() {
-				    somethingWrong();
-			    },
-			    dataType: "jsonp"
-		    });
+                }
+            }
         }
 
         function somethingWrong(){

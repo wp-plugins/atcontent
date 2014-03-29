@@ -354,7 +354,14 @@ function atcontent_connect_blog(){
         }
         else
         {
-            echo json_encode ( array ( "IsOK" => FALSE, "Error" => $connect_answer["Error"]) ); 
+            if ($connect_answer["ErrorCode"] == "101")
+            {
+                echo json_encode ( array ( "IsOK" => FALSE, "ErrorCode" => $connect_answer["ErrorCode"]) ); 
+            }
+            else
+            {
+                echo json_encode ( array ( "IsOK" => FALSE, "Error" => $connect_answer["Error"]) ); 
+            }
         }
     }
     exit;
