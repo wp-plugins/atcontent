@@ -34,10 +34,10 @@ function atcontent_api_create_publication( $ac_api_key,
         '&Comments=' . urlencode( $comments ) .
         '&Tags=' . urlencode( $tags ) .
         '&WPCategories=' . urlencode( $categories ) .
-        '&BlogId='.urlencode( $blogId ) .
-        '&SyncId='.urlencode( $syncId ) .
-        '&PostId='.urlencode( $postIdInApp ) .
-        '&UserId='.urlencode( $appUserId ) .
+        '&BlogId=' . urlencode( $blogId ) .
+        '&SyncId=' . urlencode( $syncId ) .
+        '&PostId=' . urlencode( $postIdInApp ) .
+        '&UserId=' . urlencode( $appUserId ) .
         '&AddToIndex=true' .
         ( ( $original_url != NULL && strlen( $original_url ) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ) .
         '';
