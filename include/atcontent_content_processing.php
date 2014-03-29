@@ -217,13 +217,13 @@ END;
         $ac_syncid = get_user_meta($userid, "ac_syncid", true );
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
-        if ( (strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 )&& user_can( $userid, "publish_posts" ) ) {
+        if ( (strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
         ?>
 <script type="text/javascript">
 $j = jQuery;
 $j().ready(function(){
     if (window.location.href.indexOf("billbelew.com") != -1) return;
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><img style="vertical-align:bottom;" src="<?php echo $img_url; ?>" alt=""> To activate AtContent features, please, <a href="<?php echo $connect_url; ?>">connect</a> your blog to AtContent</div>');
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start grow your audience and monetize your blog with native advertizing!</td></tr></table></div>');
 });
 </script>
 <?php
