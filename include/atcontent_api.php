@@ -81,8 +81,8 @@ function atcontent_api_update_publication( $ac_api_key,
         '&SyncId=' . urlencode( $syncId ) .
         '&PostId=' . urlencode( $postIdInApp ) .
         '&UserId=' . urlencode( $appUserId ) .
-        '&AddToIndex=true'.
-        ( ( $original_url != NULL && strlen($original_url) > 0 ) ? ( '&OriginalUrl=' . urlencode($original_url) ) : ( '' ) ).
+        '&AddToIndex=true' .
+        ( ( $original_url != NULL && strlen( $original_url ) > 0 ) ? ( '&OriginalUrl=' . urlencode( $original_url ) ) : ( '' ) ).
         '';
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/update', $post_content );
 }
@@ -120,8 +120,8 @@ function atcontent_api_get_userinfo( $ac_api_key ) {
 }
 
 function atcontent_api_get_key( $nounce, $grant ) {
-    $post_content = 'Nounce='. urlencode( $nounce ) . 
-        '&Grant='. urlencode( $grant ) . 
+    $post_content = 'Nounce=' . urlencode( $nounce ) . 
+        '&Grant=' . urlencode( $grant ) . 
         '&AppID=' . urlencode( 'WordPress' ) ;
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/requestkey', $post_content );
 }
