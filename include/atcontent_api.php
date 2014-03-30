@@ -54,7 +54,7 @@ function atcontent_api_update_publication( $ac_api_key,
     $post_content = str_replace( "http://youtu.be", "https://youtu.be", $post_content );
     $post_splited_content = split( "<!--more-->", $post_content );
     $post_face = $post_splited_content[0];
-    $post_body = count($post_splited_content) > 0 ? $post_splited_content[1] : "";
+    $post_body = count( $post_splited_content ) > 0 ? $post_splited_content[1] : "";
     $post_paid_splited_content = split( "<!--more-->", $paid_portion );
     $paid_face = $post_paid_splited_content[0];
     $paid_content = count( $post_paid_splited_content ) > 0 ? $post_paid_splited_content[1] : "";
