@@ -158,7 +158,7 @@ function atcontent_api_readership( $siteuri, $postids, $api_key ) {
         '&PostIDs=' . urlencode( $postids ) .
         '&Key=' . urlencode( $api_key ) .
         '&v2=1' .
-        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+        '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
 }
 
