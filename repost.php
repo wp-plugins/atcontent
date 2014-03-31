@@ -57,9 +57,9 @@
 					    },
 			    dataType: "json"
 		    });  
-        }      
+        }
     })(jQuery);
-</script>      
+</script>
 <div class="atcontent_wrap">
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
     <?php include("invite.php"); ?>
@@ -90,8 +90,8 @@
                 <a class="hide dashed" style="font-size: 18px;" href="#">No, thanks</a>
             </p>
         </div>
-        <?php        
-    }    
+        <?php
+    }
  }
  
  ?>
