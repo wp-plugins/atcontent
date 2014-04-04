@@ -174,5 +174,20 @@
             <?php
         }
     }
+    
+
+    function atcontent_promote_button(){
+        global $post;
+        $ac_postid = get_post_meta($post -> ID, "ac_postid", true);
+        if (strlen($ac_postid) > 0){
+            $html  = '<div id="major-publishing-actions" style="overflow:hidden">';
+            $html .= '<div id="publishing-action">';
+            $html .= '<input type="button" accesskey="p" tabindex="5" value="' . __('Promote via AtContent') . '" class="button-primary" id="custom" name="publish" onclick="goToPromote()">';
+            $html .= '<script>function goToPromote(){window.open("https://atcontent.com/campaigns/create/'.$ac_postid.'" ,"_blank");}</script>';
+            $html .= '</div>';
+            $html .= '</div>';
+            echo $html;
+        }
+    }
 
 ?>

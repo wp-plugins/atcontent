@@ -64,7 +64,7 @@
         $(function(){
             $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
             $('#footer-upgrade').prepend('<br>');
-    
+
             <?php
             if ( $_GET["noauto"] != "1" ) {
                 ?>
@@ -172,7 +172,7 @@
             $('#ac_connect_result').html('');
             $('#newblogtitle').val('<?php echo bloginfo('name'); ?>');
         }
-        
+
         var connectBlogTried = false;
         ConnectBlog = function (selectedBlog) {
             if (buttonDisabled) {
@@ -242,7 +242,7 @@
         <?php
             }
         ?>
-    
+
         function SaveCredentials(credentials) {
             $.ajax({url: '<?php echo $ajax_action; ?>',
 			    type: 'post',
@@ -298,7 +298,7 @@
                 showEmailExists();
             }
         }
-    
+
         function showEmailExists(){
             var email = $("#email").val();
             EnableButton();
@@ -313,7 +313,7 @@
                 $('#ac_connect_result').html('');
             });
         }
-        
+
         function Connect() {
 		    $("#ac_connect_result").html('<img src="<?php echo($loader_url);?>" width="30">');
             if (buttonDisabled) {
