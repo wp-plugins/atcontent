@@ -6,7 +6,7 @@
             {
                 $content = str_replace( 
                     $matches[0][$index], 
-                    "<script data-cfasync=\"false\" " . ($index > 0 ? "data-ac-" : "") . "src=\"" . $matches[1][$index] . "\"", 
+                    "<script data-cfasync=\"false\" " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
                     $content );
             }
             return $content;
@@ -103,7 +103,7 @@ END;
 	        $flag = new flagLoad();
             //ini_set('display_errors', 1);
             //error_reporting(E_ALL ^ E_NOTICE);
-            $flag_dir = dirname(dirname(dirname (__FILE__))) . '/flash-album-gallery';
+            $flag_dir = dirname( dirname( dirname ( __FILE__ ) ) ) . '/flash-album-gallery';
             require_once ($flag_dir . '/lib/core.php');
             require_once ($flag_dir . '/lib/flag-db.php');
             require_once ($flag_dir . '/lib/image.php');
