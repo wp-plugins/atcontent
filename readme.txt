@@ -22,7 +22,7 @@ With the AtContent plugin, you can easily **grow your audience reach** and **mon
 
 * [Grow](http://bit.ly/Kcvui4) your audience reach by up to 2.5x in just 4 weeks by being reposted to other blogs. Become popular among bloggers and get new followers!
 * Grow user engagement and traffic on your site by reposting other bloggers' relevant content right from your admin dashboard.
-* **SEO & Google friendly**, proven by thousands of bloggers.
+* **SEO & Google friendly**, proven by thousands of bloggers. 
 
 #### Monetize Your Site ####
 
