@@ -241,15 +241,6 @@ $email_body = "Hey AtContent team, \n" .
                 </div>
             <?php } ?>
         </div>
-<div class="atcontent_widget">
-    <div class="atcontent_preview">
-        <p> Text text text Second paragraph Third paragraph Fourth paragraph. Long long long text. </p>
-    </div>
-    <script src="https://w.atcontent.com/-/3eXrDmoH-6z/331/0HeZK8Vz19y.text/Title/h3"></script>
-    <script data-ac-src="https://w.atcontent.com/-/3eXrDmoH-6z/331/0HeZK8Vz19y.text/Face"></script>
-    <!--more-->
-    <script data-ac-src="https://w.atcontent.com/-/3eXrDmoH-6z/331/0HeZK8Vz19y.text/Body"></script>
-</div>
 <script>
     (function ($) {
         $(function () {
