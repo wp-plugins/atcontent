@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.6.5 =
+* One-Click Repost better compatibility
+
 = 7.6.4 =
 * No rate notification at Get Content page
 
