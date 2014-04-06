@@ -441,9 +441,6 @@ function atcontent_ajax_repost(){
         $ac_postid = $_POST['ac_post'];
         $repost_title = "Not found";
         $repost_preview = "";
-        if ( $repost_title_answer["IsOK"] == true ) {
-            $repost_title = $repost_title_answer["Title"];
-        }
         $new_post = array(
             'post_title'    => 'New repost',
             'post_content'  => ''
@@ -477,12 +474,11 @@ function atcontent_ajax_repost(){
         );
         kses_remove_filters();
         // Insert the post into the database
-        remove_action( 'publish_post', 'atcontent_publish_publication' );
+        remove_all_actions( 'publish_post' );
         wp_update_post( $new_post );
         update_post_meta( $new_post_id, "ac_is_process", "0" );
         update_post_meta( $new_post_id, "ac_embedid", $embedid );
         update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
-        add_action( 'publish_post', 'atcontent_publish_publication' );
         kses_init_filters();
        
         echo json_encode ( array ( "IsOK" => true ) );
