@@ -51,8 +51,8 @@
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
-    add_filter( 'post_row_actions' , 'atcontent_promote_posts_page_link', 10, 2 );
-    add_action( 'post_submitbox_misc_actions', 'atcontent_promote_button', 1 ); 
+    add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
+    add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     add_action( 'comment_post', 'atcontent_comment_post' );
     add_action( 'deleted_comment', 'atcontent_comment_post' );
     add_action( 'trashed_comment', 'atcontent_comment_post' );
@@ -64,14 +64,22 @@
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
     
-    function atcontent_promote_posts_page_link($actions, $page_object)
-    {
-        global $post;        
-        $ac_postid = get_post_meta($post -> ID, "ac_postid", true);
-        if (strlen($ac_postid) > 0){
-            $actions["atcontent_promote"] = '<a href="https://atcontent.com/campaigns/create/'.$ac_postid.'" target="_blank" class="facebook_link">'. __('Promote via AtContent') . '</a>';
+    function atcontent_promote_posts_column( $columns ) {
+        $date = $columns['date'];
+        $columns['acpromoting'] = 'AtContent promoting';
+        unset ($columns['date']);
+        $columns['date'] = $date;
+        return $columns;
+    }
+
+    function atcontent_promote_posts_row ($colname, $post_id){
+        if ( $colname == 'acpromoting'){
+            global $post;
+            $ac_postid = get_post_meta( $post -> ID, "ac_postid", true );
+            if (strlen($ac_postid) > 0){
+                echo '<a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/'. $ac_postid.'" target="_blank">Promote post with AtContent NativeAd</a>';
+            }
         }
-        return $actions;
     }
 
     function atcontent_admin_init(){
