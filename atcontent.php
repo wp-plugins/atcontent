@@ -69,6 +69,13 @@
         $columns['acpromoting'] = 'AtContent promoting';
         unset ($columns['date']);
         $columns['date'] = $date;
+        ?>
+<style>
+    .column-acpromoting{
+        width: 180px;
+    }
+</style>
+<?php
         return $columns;
     }
 
@@ -77,7 +84,9 @@
             global $post;
             $ac_postid = get_post_meta( $post -> ID, "ac_postid", true );
             if (strlen($ac_postid) > 0){
-                echo '<a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/'. $ac_postid.'" target="_blank">Promote post with AtContent NativeAd</a>';
+              ?>   
+<a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/'. $ac_postid.'" target="_blank">Promote post</a>
+<?php
             }
         }
     }
