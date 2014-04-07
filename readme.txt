@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.7.0 =
+* Promote post with AtContent NativeAd
+
 = 7.6.5 =
 * One-Click Repost better compatibility
 

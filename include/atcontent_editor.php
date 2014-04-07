@@ -130,7 +130,13 @@
         } ?>
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
-
+    <?php
+        if (strlen($ac_postid) > 0){
+            ?>
+                <a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>" target="_blank">Promote post with AtContent NativeAd</a>
+            <?php
+        }
+    ?>
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
     }
@@ -174,5 +180,4 @@
             <?php
         }
     }
-
 ?>

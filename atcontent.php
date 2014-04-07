@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.6.5
+    Version: 7.7.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.6.5" );
+    define( 'AC_VERSION', "7.7.0" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -50,7 +50,9 @@
         add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );    
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
+    add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
+    add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     add_action( 'comment_post', 'atcontent_comment_post' );
     add_action( 'deleted_comment', 'atcontent_comment_post' );
     add_action( 'trashed_comment', 'atcontent_comment_post' );
@@ -61,9 +63,37 @@
     register_activation_hook( __FILE__, 'atcontent_activate' );
     register_deactivation_hook( __FILE__, 'atcontent_deactivate' );
     register_uninstall_hook( __FILE__, 'atcontent_uninstall' );
+    
+    function atcontent_promote_posts_column( $columns ) {
+        $date = $columns['date'];
+        $columns['acpromoting'] = 'AtContent NativeAd';
+        unset ($columns['date']);
+        $columns['date'] = $date;
+        return $columns;
+    }
+
+    function atcontent_promote_posts_row ($colname, $post_id){
+        if ( $colname == 'acpromoting'){
+            global $post;
+            
+            $ac_postid = get_post_meta( $post -> ID, "ac_postid", true ); 
+            if (strlen($ac_postid) == 0){
+                $ac_postid = get_post_meta( $post -> ID, "ac_repost_postid", true ); 
+            }           
+            if (strlen($ac_postid) > 0){
+                $img_url = plugins_url( 'assets/logo.png',  __FILE__ );
+              ?>   
+<a style="margin-top: -1px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
+    <span class="ac-logo"></span>
+    Promote post
+</a>
+<?php
+            }
+        }
+    }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=q', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=w', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
