@@ -1,7 +1,7 @@
 === AtContent — Grow Audience & Monetize Blog ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
-Tags: Post, posts, admin, widget, seo, google, links, plugin, ad, ads, advertising, affiliate 
+Tags: ad, ads, advertising, admin, affiliate, google, Post, posts, widget, seo, links, plugin
 Requires at least: 3.3
 Stable tag: trunk
 Tested up to: 3.8.1
@@ -22,7 +22,7 @@ With the AtContent plugin, you can easily **grow your audience reach** and **mon
 
 * [Grow](http://bit.ly/Kcvui4) your audience reach by up to 2.5x in just 4 weeks by being reposted to other blogs. Become popular among bloggers and get new followers!
 * Grow user engagement and traffic on your site by reposting other bloggers' relevant content right from your admin dashboard.
-* **SEO & Google friendly**, proven by thousands of bloggers.
+* **SEO & Google friendly**, proven by thousands of bloggers. 
 
 #### Monetize Your Site ####
 
@@ -69,6 +69,12 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 4. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.6.5 =
+* One-Click Repost better compatibility
+
+= 7.6.4 =
+* No rate notification at Get Content page
 
 = 7.6.3 =
 * Connect process optimization

@@ -137,7 +137,7 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
         ( $referral != NULL ? '&Referral=' . urlencode( $referral ) : '' ) .
-        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+        '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/pingback', $post_content );
 }
 
@@ -148,7 +148,7 @@ function atcontent_api_sitecategory( $siteuri, $category, $country, $state, $api
         '&Country=' . urlencode( $country ) . 
         '&State=' . urlencode( $state ) . 
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
-        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+        '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/sitecategory', $post_content );
 }
 
@@ -158,7 +158,7 @@ function atcontent_api_readership( $siteuri, $postids, $api_key ) {
         '&PostIDs=' . urlencode( $postids ) .
         '&Key=' . urlencode( $api_key ) .
         '&v2=1' .
-        ( defined('AC_VERSION') ? '&ExternalVersion=' . urlencode( AC_VERSION ) : '' );
+        '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
 }
 

@@ -1,11 +1,11 @@
 <?php
 
 function atcontent_shortcode( $atts ) {
-	extract( shortcode_atts( array(
-		'id' => '',
-		'nickname' => '',
-        'comments' => '1',
-	), $atts ) );
+    extract( shortcode_atts( array(
+      'id' => '',
+      'nickname' => '',
+      'comments' => '1',
+    ), $atts ) );
 
     if ( strlen( $id ) == 0 ) return '';
 

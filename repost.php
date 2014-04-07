@@ -40,25 +40,6 @@
 ?>
 <script>
 	var connected = true;
-	
-
-    (function ($) {
-        $(function () {
-            $(".hide").click(function() { hide(); });
-        });
-
-        function hide() {
-            document.getElementById('rate-block').style.visibility = 'hidden';
-            document.getElementById('popup-bg').style.visibility = 'hidden';
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
-			    type: 'post',
-			    data: {
-					    action: 'atcontent_hide_rate',
-					    },
-			    dataType: "json"
-		    });  
-        }
-    })(jQuery);
 </script>
 <div class="atcontent_wrap">
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
@@ -68,33 +49,7 @@
 		connected = false;
 	</script>
     <br>
-<?php } else
- {
-    $rated = get_user_meta($userid, "ac_rated", true );
-    $hide_form_action = "include/rate-hide.php";
-    $usermeta = atcontent_api_get_userinfo($ac_api_key); 
-    $unix_user_created = strtotime ($usermeta["UserCreated"]);
-    $unix_now = strtotime("now");
-    $days_diff = ($unix_now-$unix_user_created)/(60*60*24);    
-    if ($unix_user_created > 0 && $days_diff > 30 && $rated != 1) {
-        ?>
-        <div id="popup-bg" class="popup-bg">
-        </div>
-        <div id="rate-block" class="rate-hidden">
-            <p class="hide close-ico">&times;</p>
-            <h1>Like AtContent plugin?</h1>
-            <p>Please take a minute and rate it. Thanks for your support!</p>
-            <img class="stars" alt="*****" src="<?php echo(plugins_url( 'assets/stars.png', __FILE__ )); ?>" />
-            <p>                
-                <a class="hide likebutton b_green b_big" style="margin-bottom:15px;" href="http://wordpress.org/support/view/plugin-reviews/atcontent#postform" target="_blank">Rate now</a><br>
-                <a class="hide dashed" style="font-size: 18px;" href="#">No, thanks</a>
-            </p>
-        </div>
-        <?php
-    }
- }
- 
- ?>
+<?php } ?>
 <div class="wrap">
     <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
 </div>
@@ -214,7 +169,7 @@ $email_body = "Hey AtContent team, \n" .
 
 ?>
 
-<a href="http://atcontent.com/Landing/featureposts/<?php echo( urldecode( $_SERVER['HTTP_HOST'] ) ); ?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
+<a href="http://atcontent.com/landing/featureposts/<?php echo( urldecode( $_SERVER['HTTP_HOST'] ) ); ?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
 <br>
 <small>
 

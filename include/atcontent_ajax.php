@@ -71,7 +71,7 @@ function atcontent_ajax_gate() {
             $userid = $_POST["userid"];
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             $postid = $_POST["postid"];
-            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+            if ( strlen( $ac_api_key ) > 0 && ( $ac_api_key == $_POST["key"] ) ) {
                 $post = get_post( $postid );
                 if ($post == null) exit;
                 $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
@@ -167,12 +167,11 @@ function atcontent_ajax_gate() {
                 );
                 kses_remove_filters();
                 // Insert the post into the database
-                remove_action( 'publish_post', 'atcontent_publish_publication' );
+                remove_all_actions( 'publish_post' );
                 $new_post_id = wp_insert_post( $new_post );
                 update_post_meta( $new_post_id, "ac_is_process", "0" );
                 update_post_meta( $new_post_id, "ac_embedid", $embedid );
                 update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
-                add_action( 'publish_post', 'atcontent_publish_publication' );
                 kses_init_filters();
                 echo json_encode ( array ( "IsOK" => true, "PostId" => $new_post_id ) );
             }
@@ -225,14 +224,13 @@ function atcontent_ajax_gate() {
                     }
                 }
                 kses_remove_filters();
-                remove_action( 'publish_post', 'atcontent_publish_publication' );
+                remove_all_actions( 'publish_post' );
                 wp_update_post( array(
                         'ID' => intval( $postid ),
                         'post_date' => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
                         'post_content' => $post_content
                     ) );
                 kses_init_filters();
-                add_action( 'publish_post', 'atcontent_publish_publication' );
                 echo json_encode ( array ( "IsOK" => true ) );
             }
             break;
@@ -443,9 +441,6 @@ function atcontent_ajax_repost(){
         $ac_postid = $_POST['ac_post'];
         $repost_title = "Not found";
         $repost_preview = "";
-        if ( $repost_title_answer["IsOK"] == true ) {
-            $repost_title = $repost_title_answer["Title"];
-        }
         $new_post = array(
             'post_title'    => 'New repost',
             'post_content'  => ''
@@ -479,12 +474,11 @@ function atcontent_ajax_repost(){
         );
         kses_remove_filters();
         // Insert the post into the database
-        remove_action( 'publish_post', 'atcontent_publish_publication' );
+        remove_all_actions( 'publish_post' );
         wp_update_post( $new_post );
         update_post_meta( $new_post_id, "ac_is_process", "0" );
         update_post_meta( $new_post_id, "ac_embedid", $embedid );
         update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
-        add_action( 'publish_post', 'atcontent_publish_publication' );
         kses_init_filters();
        
         echo json_encode ( array ( "IsOK" => true ) );

@@ -110,15 +110,15 @@ function atcontent_repost_preview( $posts ) {
         
         global $wp_filter;
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
-        remove_filter( 'the_content', 'atcontent_the_content_after', 100);
-        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+        remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $accept_uri = admin_url("admin.php?page=atcontent/repost.php&postid=" . $_GET['ac_repost_post']);
-        $decline_uri = admin_url("admin.php?page=atcontent/repost.php");
+        $accept_uri = admin_url( "admin.php?page=atcontent/repost.php&postid=" . $_GET['ac_repost_post'] );
+        $decline_uri = admin_url( "admin.php?page=atcontent/repost.php" );
         $post = new stdClass;
         $post->post_author = 1;
         $post->post_name = "ac_guest_post";
-        $post->guid = get_bloginfo('wpurl/ac_guest_post');
+        $post->guid = get_bloginfo( 'wpurl/ac_guest_post' );
         $post->post_title = 'Preview ' . $repost_title;
         $post->post_content = '<p><input type="button" onClick="accept_post()" value="Accept"> or <input type="button" onClick="decline_post()" value="Decline"></p>' .
         '[atcontent id="' . $_GET['ac_repost_post'] . '"]' .

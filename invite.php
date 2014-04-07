@@ -340,6 +340,7 @@
                         showEmailExists();
                         return;
                     } else if (d.state == "usernameexists") {
+                        var username = $("#username").val();
                         $('#ac_connect_result').html('<div class="update-nag" style="margin:0 0 25px 0;">Username “' + username + '” already exists. Please choose a different username.</div>');
                         EnableButton();
                         return;
