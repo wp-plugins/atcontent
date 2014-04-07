@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.7.0
+    Version: 7.7.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.7.0" );
+    define( 'AC_VERSION', "7.7.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -72,15 +72,15 @@
         return $columns;
     }
 
-    function atcontent_promote_posts_row ($colname, $post_id){
-        if ( $colname == 'acpromoting'){
+    function atcontent_promote_posts_row ( $colname ){
+        if ( $colname == 'acpromoting' ) {
             global $post;
             
             $ac_postid = get_post_meta( $post -> ID, "ac_postid", true ); 
-            if (strlen($ac_postid) == 0){
+            if (strlen($ac_postid) == 0) {
                 $ac_postid = get_post_meta( $post -> ID, "ac_repost_postid", true ); 
             }           
-            if (strlen($ac_postid) > 0){
+            if (strlen($ac_postid) > 0) {
                 $img_url = plugins_url( 'assets/logo.png',  __FILE__ );
               ?>   
 <a style="margin-top: -1px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
