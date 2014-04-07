@@ -69,32 +69,6 @@
         $columns['acpromoting'] = 'AtContent NativeAd';
         unset ($columns['date']);
         $columns['date'] = $date;
-        ?>
-<style>
-    .column-acpromoting{
-        width: 140px;
-    }
-    .ac-logo{
-        display: inline-block!important;
-        font: normal 22px ACLogo!important;
-        padding: 0 0 0 4px;
-        vertical-align: middle!important;
-        color: #fff!important;
-        cursor: pointer;
-        height: 24px;
-        padding-top: 3px!important;
-    }
-    .ac-logo:before{
-        content: '1';
-    }
-    .promote-text{        
-        text-align: center;
-        color: white;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 12px;
-    } 
-</style>
-<?php
         return $columns;
     }
 
