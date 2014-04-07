@@ -109,10 +109,10 @@
             if (strlen($ac_postid) > 0){
                 $img_url = plugins_url( 'assets/logo.png',  __FILE__ );
               ?>   
-<div class="button-primary" style="margin-top: -2%;">
-    <a class="ac-logo"  name="publish" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>" target="_blank"></a>
-    <a href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>"><span class="promote-text">Promote post</span></a>
-</div>
+<a style="margin-top: -1px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
+    <span class="ac-logo"></span>
+    Promote post
+</a>
 <?php
             }
         }
