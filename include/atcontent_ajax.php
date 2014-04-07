@@ -71,7 +71,7 @@ function atcontent_ajax_gate() {
             $userid = $_POST["userid"];
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             $postid = $_POST["postid"];
-            if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
+            if ( strlen( $ac_api_key ) > 0 && ( $ac_api_key == $_POST["key"] ) ) {
                 $post = get_post( $postid );
                 if ($post == null) exit;
                 $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
