@@ -66,14 +66,33 @@
     
     function atcontent_promote_posts_column( $columns ) {
         $date = $columns['date'];
-        $columns['acpromoting'] = 'AtContent promoting';
+        $columns['acpromoting'] = 'AtContent NativeAd';
         unset ($columns['date']);
         $columns['date'] = $date;
         ?>
 <style>
     .column-acpromoting{
-        width: 180px;
+        width: 140px;
     }
+    .ac-logo{
+        display: inline-block!important;
+        font: normal 22px ACLogo!important;
+        padding: 0 0 0 4px;
+        vertical-align: middle!important;
+        color: #fff!important;
+        cursor: pointer;
+        height: 24px;
+        padding-top: 3px!important;
+    }
+    .ac-logo:before{
+        content: '1';
+    }
+    .promote-text{        
+        text-align: center;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12px;
+    } 
 </style>
 <?php
         return $columns;
@@ -82,10 +101,18 @@
     function atcontent_promote_posts_row ($colname, $post_id){
         if ( $colname == 'acpromoting'){
             global $post;
-            $ac_postid = get_post_meta( $post -> ID, "ac_postid", true );
+            
+            $ac_postid = get_post_meta( $post -> ID, "ac_postid", true ); 
+            if (strlen($ac_postid) == 0){
+                $ac_postid = get_post_meta( $post -> ID, "ac_repost_postid", true ); 
+            }           
             if (strlen($ac_postid) > 0){
+                $img_url = plugins_url( 'assets/logo.png',  __FILE__ );
               ?>   
-<a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/'. $ac_postid.'" target="_blank">Promote post</a>
+<div class="button-primary" style="margin-top: -2%;">
+    <a class="ac-logo"  name="publish" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>" target="_blank"></a>
+    <a href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>"><span class="promote-text">Promote post</span></a>
+</div>
 <?php
             }
         }
