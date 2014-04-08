@@ -75,14 +75,12 @@
     function atcontent_promote_posts_row ( $colname ){
         if ( $colname == 'acpromoting' ) {
             global $post;
-            
             $ac_postid = get_post_meta( $post -> ID, "ac_postid", true ); 
-            if (strlen($ac_postid) == 0) {
+            if ( strlen( $ac_postid ) == 0 ) {
                 $ac_postid = get_post_meta( $post -> ID, "ac_repost_postid", true ); 
             }           
-            if (strlen($ac_postid) > 0) {
-                $img_url = plugins_url( 'assets/logo.png',  __FILE__ );
-              ?>   
+            if ( strlen( $ac_postid ) > 0 ) {
+?>
 <a style="margin-top: -1px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
     <span class="ac-logo"></span>
     Promote post
