@@ -171,8 +171,8 @@
 
     function atcontent_footer_scripts() {
         $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
 ?>
 <script type="text/javascript">
     function ACsetCookie(name, value, expires, path, domain, secure) {
