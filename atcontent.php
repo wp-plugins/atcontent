@@ -16,19 +16,19 @@
     require_once( "include/atcontent_api.php" );
     require_once( "include/atcontent_pingback.php" );
     require_once( "include/atcontent_ajax.php" );
-    if (is_admin()) {
+    if ( is_admin() ) {
         require_once( "include/atcontent_dashboard.php" );
         require_once( "include/atcontent_lists.php" );
         require_once( "include/atcontent_post.php" );
     }
     require_once( "include/atcontent_shortcodes.php" );
     require_once( "include/atcontent_content_processing.php" );
-    if (is_admin()) {
+    if ( is_admin() ) {
         require_once( "include/atcontent_editor.php" );
         require_once( "include/atcontent_coexistense.php" );
     }
 
-    if (is_admin()) {
+    if ( is_admin() ) {
         add_action( 'admin_init', 'atcontent_admin_init' );
         add_action( 'admin_menu', 'atcontent_add_tools_menu' );
         add_action( 'save_post', 'atcontent_save_post' );
