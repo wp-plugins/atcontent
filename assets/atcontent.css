@@ -748,3 +748,19 @@ input[disabled] {background: #eee}
     height:40px !important;
     margin-right:20px !important;
 }
+
+ .column-acpromoting{
+        width: 85px;
+    }
+.ac-logo{
+    display: inline-block!important;
+    font: normal 22px ACLogo!important;
+    vertical-align: middle!important;
+    color: #fff!important;
+    cursor: pointer;
+    height: 24px;
+    padding-top: 3px!important;
+}
+.ac-logo:before{
+    content: '1';
+}

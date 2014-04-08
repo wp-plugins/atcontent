@@ -5,7 +5,7 @@
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
     $userid = $currentuser -> ID;
-    if ( strlen( $_GET['connectas'] ) > 0 )
+    if ( isset ( $_GET['connectas'] ) )
     {
         $userid = intval( $_GET['connectas'] );
     }

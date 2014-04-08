@@ -94,7 +94,7 @@
           $advanced_tracking_quota = 0;
           $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
           $subscriptions_count = 0;
-          if ( $quotas_result["IsOK"] == TRUE ) {
+          if ( isset( $quotas_result["IsOK"] ) && $quotas_result["IsOK"] == TRUE ) {
               $subscriptions_count = count ( $quotas_result["Subscriptions"] );
               $plagiarism_quota = intval( $quotas_result["Quotas"]["PlagiarismProtection"]["Count"] );
               $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
@@ -130,7 +130,13 @@
         } ?>
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
-
+    <?php
+        if (strlen($ac_postid) > 0){
+            ?>
+                <a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>" target="_blank">Promote post with AtContent NativeAd</a>
+            <?php
+        }
+    ?>
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
     }
@@ -174,5 +180,4 @@
             <?php
         }
     }
-
 ?>

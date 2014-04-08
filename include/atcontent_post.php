@@ -101,7 +101,7 @@ function atcontent_repost_preview( $posts ) {
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
 
-  	if ( $_GET['ac_repost_post'] != null ) {
+  	if ( isset( $_GET['ac_repost_post'] ) ) {
         $repost_title_answer = atcontent_api_get_title( $_GET['ac_repost_post'] );
         $repost_title = "Not found";
         if ( $repost_title_answer["IsOK"] == true ) {

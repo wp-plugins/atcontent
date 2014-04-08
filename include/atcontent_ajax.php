@@ -323,7 +323,10 @@ function atcontent_connect_blog(){
     $bloguserid = $_POST['bloguserid'];
     $apikey = $_POST['apikey'];
     $sitetitle = $_POST['sitetitle'];
-    $blogtitle = $_POST['blogtitle'];
+    $blogtitle = "";
+    if ( isset( $_POST['blogtitle'] ) ){
+        $blogtitle = $_POST['blogtitle'];
+    }
     $gate = $_POST['gate'];
     $blog = $_POST['blog'];
     $blog_url = get_site_url();
@@ -348,7 +351,7 @@ function atcontent_connect_blog(){
     {
         if ( $connect_answer["Error"] == "select" )
         {
-            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", blogs => $connect_answer["blogs"] ) ); 
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", "blogs" => $connect_answer["blogs"] ) ); 
         }
         else
         {

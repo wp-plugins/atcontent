@@ -4,7 +4,7 @@
     require_once( "include/atcontent_userinit.php" );
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
-    if ( strlen( $_GET['connectas'] ) > 0 )
+    if ( isset ( $_GET['connectas'] ) )
     {
         $userid = intval( $_GET['connectas'] );
     }
