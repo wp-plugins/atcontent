@@ -91,7 +91,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=w', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=x', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
@@ -106,11 +106,11 @@
 
     function atcontent_get_menu_key( $desired ) {
         global $menu;
-		$menukey = $desired;
-		while ( array_key_exists((string) $menukey,$menu) ) {
-			$menukey += 0.0000000001;
-		}
-		$menukey = (string) $menukey;  //If it's not a string it gets rounded to an int!
+        $menukey = $desired;
+        while ( array_key_exists((string) $menukey,$menu) ) {
+          $menukey += 0.0000000001;
+        }
+        $menukey = (string) $menukey;  //If it's not a string it gets rounded to an int!
         return $menukey;
     }
 
