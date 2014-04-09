@@ -79,12 +79,12 @@ function atcontent_ajax_gate() {
                 $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
                 if ( strlen( $ac_is_copyprotect ) == 0 ) { 
                     $ac_is_copyprotect = $ac_user_copyprotect;
-                    update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
+                    update_post_meta($postid, "ac_is_copyprotect", $ac_is_copyprotect);
                 }
                 $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
                 if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
                     $ac_is_advanced_tracking = "1";
-                    update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
+                    update_post_meta( $postid, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
                 }
                 $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
                 atcontent_coexistense_fixes();
@@ -472,7 +472,6 @@ function atcontent_ajax_repost(){
             'post_content'  => $ac_content,
             'post_status'   => 'publish',
             'post_author'   => $userid,
-            'post_date'     => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
             'post_category' => array()
         );
         kses_remove_filters();

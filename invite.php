@@ -66,7 +66,7 @@
             $('#footer-upgrade').prepend('<br>');
 
             <?php
-            if ( $_GET["noauto"] != "1" ) {
+            if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
                 ?>
                 $("#b_connect").hide();
                 $("#ac_sign_fields").hide();
