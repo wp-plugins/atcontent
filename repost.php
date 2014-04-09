@@ -16,12 +16,12 @@
 
     update_user_meta( $userid, "ac_last_repost_visit", date("Y-m-d H:i:s") );
     $currentcategory = "1";
-    if ( isset( $_GET["category"] ) ){
+    if ( isset( $_GET["category"] ) ) {
         $currentcategory = $_GET["category"];
     }
 
     $currentpage ="1";
-    if ( isset(  $_GET["pageNum"] ) ){
+    if ( isset( $_GET["pageNum"] ) ) {
         $currentpage = $_GET["pageNum"];
     }
 

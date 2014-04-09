@@ -16,19 +16,19 @@
     require_once( "include/atcontent_api.php" );
     require_once( "include/atcontent_pingback.php" );
     require_once( "include/atcontent_ajax.php" );
-    if (is_admin()) {
+    if ( is_admin() ) {
         require_once( "include/atcontent_dashboard.php" );
         require_once( "include/atcontent_lists.php" );
         require_once( "include/atcontent_post.php" );
     }
     require_once( "include/atcontent_shortcodes.php" );
     require_once( "include/atcontent_content_processing.php" );
-    if (is_admin()) {
+    if ( is_admin() ) {
         require_once( "include/atcontent_editor.php" );
         require_once( "include/atcontent_coexistense.php" );
     }
 
-    if (is_admin()) {
+    if ( is_admin() ) {
         add_action( 'admin_init', 'atcontent_admin_init' );
         add_action( 'admin_menu', 'atcontent_add_tools_menu' );
         add_action( 'save_post', 'atcontent_save_post' );
@@ -67,7 +67,7 @@
     function atcontent_promote_posts_column( $columns ) {
         $date = $columns['date'];
         $columns['acpromoting'] = 'AtContent NativeAd';
-        unset ($columns['date']);
+        unset ( $columns['date'] );
         $columns['date'] = $date;
         return $columns;
     }
@@ -81,8 +81,8 @@
             }           
             if ( strlen( $ac_postid ) > 0 ) {
 ?>
-<a style="margin-top: -1px;padding: 0 4px 0 4px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
-    <span class="ac-logo"></span>
+<a style="" class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo( $ac_postid ); ?>/">
+    <span class="ac-logo-promote"></span>
     Promote
 </a>
 <?php
@@ -91,7 +91,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=w', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=y', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
@@ -171,8 +171,8 @@
 
     function atcontent_footer_scripts() {
         $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta($userid, "ac_api_key", true );
-        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
 ?>
 <script type="text/javascript">
     function ACsetCookie(name, value, expires, path, domain, secure) {
