@@ -97,7 +97,7 @@ END;
                 <!--
                 <tr>
                     <th>Referral (optional)</th>
-                    <td><input type="text" name="ac_referral" value="<?php echo $ac_referral ?>"></td>
+                    <td><input type="text" name="ac_referral" value="<?php echo $ac_referral; ?>"></td>
                 </tr>
                 -->
             </table>
@@ -139,14 +139,14 @@ END;
                 <legend>Display settings</legend>
                 <div class="b-checkbox-row">
                     <label>
-                        <input type="checkbox" id="ac_excerpt_no_process" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked ?>>
+                        <input type="checkbox" id="ac_excerpt_no_process" name="ac_excerpt_no_process" value="Y" <?php echo $ac_excerpt_no_process_checked; ?>>
                         Enable plugin features for the home page
                     </label>
                     <div class="ac-small">Do not mark if your site has custom theme.</div>
                 </div>
                 <div class="b-checkbox-row" style="display: none">
                     <label>
-                        <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked ?>>
+                        <input type="checkbox" id="ac_share_panel_disable" name="ac_share_panel_disable" value="Y" <?php echo $ac_share_panel_disable_checked; ?>>
                         Enable share buttons
                     </label>
                     <div class="ac-small">Enables Facebook, Twitter, Linkedin and Google+ buttons under each post.<br>If you have another sharing plugin leave this unmarked.</div>

@@ -29,7 +29,7 @@ function atcontent_pingback() {
     exit;
 }
 
-function atcontent_pingback_inline(){
+function atcontent_pingback_inline() {
     $userid = wp_get_current_user()->ID;
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
