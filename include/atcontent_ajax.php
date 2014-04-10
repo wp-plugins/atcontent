@@ -339,7 +339,7 @@ function atcontent_connect_blog(){
         "&blog=" .urlencode($blog) . 
         "&appurl=" . $blog_url;
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
-    if ($connect_answer["IsOK"] == TRUE)
+    if (isset ( $connect_answer["IsOK"] ) && $connect_answer["IsOK"] == TRUE)
     {
         $userid = $bloguserid;
         update_user_meta( $userid, "ac_blogid", $connect_answer["BlogId"] );
@@ -349,13 +349,13 @@ function atcontent_connect_blog(){
     }
     else
     {
-        if ( $connect_answer["Error"] == "select" )
+        if ( isset ( $connect_answer["Error"] ) && $connect_answer["Error"] == "select" )
         {
             echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", "blogs" => $connect_answer["blogs"] ) ); 
         }
         else
         {
-            if ($connect_answer["ErrorCode"] == "101")
+            if ( isset ( $connect_answer["ErrorCode"] ) && $connect_answer["ErrorCode"] == "101")
             {
                 echo json_encode ( array ( "IsOK" => FALSE, "ErrorCode" => $connect_answer["ErrorCode"]) ); 
             }
