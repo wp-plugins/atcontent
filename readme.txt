@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.7.3 =
+* Monthly stats instead of last 12-hour stats
+
 = 7.7.2 =
 * Code cleanup and stability improvements
 

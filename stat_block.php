@@ -1,28 +1,6 @@
 <?php
     require_once( "include/atcontent_userinit.php" );
-    $offset = 0;
-    $limit = 20;
     $posts_id = array();
-    do {
-        $posts = $wpdb->get_results( 
-	        "
-	        SELECT ID, post_title, post_author
-	        FROM {$wpdb->posts}
-	        WHERE post_status = 'publish' 
-		        AND post_author = {$userid} AND post_type = 'post'
-            ORDER BY ID LIMIT {$offset},{$limit}
-	        "
-        );
-        foreach ( $posts as $post ) 
-        {
-            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-            if ( strlen( $ac_postid ) > 0 ) { 
-                array_push( $posts_id, $ac_postid );
-            }
-        }
-        $wpdb->flush();
-        $offset += $limit;
-    } while ( count( $posts ) > 0 );
     $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
 ?>
 <div class="b-cols">    
@@ -37,7 +15,7 @@
             </ol>
             
             <p>
-                <?php if ( intval( $response["repostViews"] ) == 0 ) { ?>
+                <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE && intval( $response["repostViews"] ) == 0 ) { ?>
                     Don't be puzzled of zeros. Check this page in a 7 days. 
                 <?php } ?>
             </p>
@@ -51,7 +29,7 @@
             </div>
             <div style="width:416px;">
                 <?php
-                    if ( $response["IsOK"] == true ) {
+                    if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE ) {
                 ?>
                     <div class="b-dashboard-brief">
                         <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
@@ -64,7 +42,7 @@
                         <div class="b-dashboard-brief__description">
                             view<span data-role="plural">s</span> via AtContent
                             <br>
-                            for the last 12 hours
+                            for the last <?php echo $response["days"] . " " . ( intval( $response["days"] > 1 ) ? "days" : "day" ); ?>
                         </div>
                         <div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">
                             <?php echo $response["originalViews"]; ?>
