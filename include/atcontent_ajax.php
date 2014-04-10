@@ -79,12 +79,12 @@ function atcontent_ajax_gate() {
                 $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
                 if ( strlen( $ac_is_copyprotect ) == 0 ) { 
                     $ac_is_copyprotect = $ac_user_copyprotect;
-                    update_post_meta($post_id, "ac_is_copyprotect", $ac_is_copyprotect);
+                    update_post_meta($postid, "ac_is_copyprotect", $ac_is_copyprotect);
                 }
                 $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
                 if ( strlen( $ac_is_advanced_tracking ) == 0 ) { 
                     $ac_is_advanced_tracking = "1";
-                    update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
+                    update_post_meta( $postid, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
                 }
                 $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
                 atcontent_coexistense_fixes();
@@ -323,7 +323,10 @@ function atcontent_connect_blog(){
     $bloguserid = $_POST['bloguserid'];
     $apikey = $_POST['apikey'];
     $sitetitle = $_POST['sitetitle'];
-    $blogtitle = $_POST['blogtitle'];
+    $blogtitle = "";
+    if ( isset( $_POST['blogtitle'] ) ){
+        $blogtitle = $_POST['blogtitle'];
+    }
     $gate = $_POST['gate'];
     $blog = $_POST['blog'];
     $blog_url = get_site_url();
@@ -336,7 +339,7 @@ function atcontent_connect_blog(){
         "&blog=" .urlencode($blog) . 
         "&appurl=" . $blog_url;
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
-    if ($connect_answer["IsOK"] == TRUE)
+    if ( isset ( $connect_answer["IsOK"] ) && $connect_answer["IsOK"] == TRUE)
     {
         $userid = $bloguserid;
         update_user_meta( $userid, "ac_blogid", $connect_answer["BlogId"] );
@@ -346,13 +349,13 @@ function atcontent_connect_blog(){
     }
     else
     {
-        if ( $connect_answer["Error"] == "select" )
+        if ( isset ( $connect_answer["Error"] ) && $connect_answer["Error"] == "select" )
         {
-            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", blogs => $connect_answer["blogs"] ) ); 
+            echo json_encode ( array ( "IsOK" => FALSE, "Error" => "select", "blogs" => $connect_answer["blogs"] ) ); 
         }
         else
         {
-            if ($connect_answer["ErrorCode"] == "101")
+            if ( isset ( $connect_answer["ErrorCode"] ) && $connect_answer["ErrorCode"] == "101")
             {
                 echo json_encode ( array ( "IsOK" => FALSE, "ErrorCode" => $connect_answer["ErrorCode"]) ); 
             }
@@ -469,7 +472,6 @@ function atcontent_ajax_repost(){
             'post_content'  => $ac_content,
             'post_status'   => 'publish',
             'post_author'   => $userid,
-            'post_date'     => get_date_from_gmt( date( "Y-m-d H:i:s", $ac_published ) ),
             'post_category' => array()
         );
         kses_remove_filters();

@@ -4,25 +4,24 @@
     require_once( "include/atcontent_userinit.php" );
     $currentuser = wp_get_current_user();
     $userid = intval( $currentuser->ID );
-    if ( strlen( $_GET['connectas'] ) > 0 )
+    if ( ( isset ( $_GET['connectas'] ) ) && ( strlen( $_GET['connectas'] ) > 0 ) )
     {
         $userid = intval( $_GET['connectas'] );
     }
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
-    if ( strlen($ac_api_key) != 0 && strlen($ac_syncid) != 0 ) {   
+    if ( strlen( $ac_api_key ) != 0 && strlen( $ac_syncid ) != 0 ) {   
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
     
         $currentuser = wp_get_current_user();
-        $userinfo = get_userdata($currentuser -> ID);
-        $stats = atcontent_api_get_sync_stat($ac_syncid, $ac_blogid);
+        $userinfo = get_userdata( $currentuser -> ID );
+        $stats = atcontent_api_get_sync_stat( $ac_syncid, $ac_blogid );
 ?>
 
 <div style="width: 100%; height: 40px;"></div>
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
 
 <script>
-
     jQuery( function($){
         $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
         $('#footer-upgrade').prepend('<br>');

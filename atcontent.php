@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.7.1
+    Version: 7.7.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.7.1" );
+    define( 'AC_VERSION', "7.7.2" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -67,7 +67,7 @@
     function atcontent_promote_posts_column( $columns ) {
         $date = $columns['date'];
         $columns['acpromoting'] = 'AtContent NativeAd';
-        unset ($columns['date']);
+        unset( $columns['date']);
         $columns['date'] = $date;
         return $columns;
     }
@@ -81,9 +81,9 @@
             }           
             if ( strlen( $ac_postid ) > 0 ) {
 ?>
-<a style="margin-top: -1px;" class="button-primary" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>">
-    <span class="ac-logo"></span>
-    Promote post
+<a class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>/">
+    <span class="ac-logo-promote"></span>
+    Promote
 </a>
 <?php
             }
@@ -91,7 +91,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=x', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=y', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );

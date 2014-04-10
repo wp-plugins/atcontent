@@ -15,12 +15,15 @@
     $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6");
 
     update_user_meta( $userid, "ac_last_repost_visit", date("Y-m-d H:i:s") );
+    $currentcategory = "1";
+    if ( isset( $_GET["category"] ) ) {
+        $currentcategory = $_GET["category"];
+    }
 
-    $currentcategory = $_GET["category"];
-    if ( strlen( $currentcategory ) == 0 ) $currentcategory = "1";
-
-    $currentpage = $_GET["pageNum"];
-    if ( strlen( $currentpage ) == 0 ) $currentpage = "1";
+    $currentpage ="1";
+    if ( isset( $_GET["pageNum"] ) ) {
+        $currentpage = $_GET["pageNum"];
+    }
 
     $pageAnswer = atcontent_api_reposts( $currentcategory, $currentpage );
     if ( $pageAnswer["IsOK"] != true ) {

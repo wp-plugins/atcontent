@@ -4,7 +4,7 @@ Donate link: https://atcontent.com/
 Tags: ad, ads, advertising, admin, affiliate, google, links, plugin, Post, posts, widget, seo
 Requires at least: 3.3
 Stable tag: trunk
-Tested up to: 3.8.1
+Tested up to: 3.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,12 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 4. Get content page here you can repost featured posts on your blog.
 
 == Changelog ==
+
+= 7.7.2 =
+* Code cleanup and stability improvements
+
+= 7.7.1 =
+* Quick fix for promote post button
 
 = 7.7.0 =
 * Promote post with AtContent NativeAd

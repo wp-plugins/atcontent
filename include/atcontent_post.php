@@ -35,7 +35,6 @@ function atcontent_publish_publication( $post_id ){
             if ( $ac_is_process == "0" ) return;
             atcontent_coexistense_fixes();
             $testcontent = apply_filters( "the_content",  $post->post_content );
-            $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
             $testcontent .= $post -> post_content;
             if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w\.atcontent\.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
                 update_post_meta( $post_id, "ac_is_process", "2" );
@@ -51,7 +50,7 @@ function atcontent_save_post( $post_id ){
 
 function atcontent_save_meta( $post_id ) {
 
-    if ( $_POST['atcontent_save_meta'] == null ) 
+    if (  ! isset( $_POST['atcontent_save_meta'] ) ) 
         return;
 
     if ( !current_user_can( 'edit_post', $post_id ) )
@@ -59,30 +58,38 @@ function atcontent_save_meta( $post_id ) {
 
     // OK, we're authenticated: we need to find and save the data
 
-    $ac_is_process = $_POST['atcontent_is_process'];
-    $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
-    $ac_is_advanced_tracking = $_POST["atcontent_is_advanced_tracking"];
+    $ac_is_process = "0";
+    if ( isset( $_POST['atcontent_is_process'] ) ) {
+        $ac_is_process = $_POST['atcontent_is_process'];
+    }
+    $ac_is_copyprotect =  "0";
+    if ( isset( $_POST['atcontent_is_copyprotect'] ) ) {
+        $ac_is_copyprotect = $_POST['atcontent_is_copyprotect'];
+    }
+    $ac_is_advanced_tracking = "0";
+    if ( isset( $_POST["atcontent_is_advanced_tracking"] ) ) {
+        $ac_is_advanced_tracking = $_POST["atcontent_is_advanced_tracking"];
+    }
 
     if ( $ac_is_process != "1" ) $ac_is_process = "0";
     update_post_meta( $post_id, "ac_is_process", $ac_is_process );
         
     if ( $ac_is_copyprotect != "1" ) $ac_is_copyprotect = "0";
-    if ( $_POST["atcontent_is_copyprotect_enabled"] == "1" ) {
+    if ( $ac_is_copyprotect == "1"){
         update_post_meta( $post_id, "ac_is_copyprotect", $ac_is_copyprotect );
     }
 
     if ( $ac_is_advanced_tracking != "1" ) $ac_is_advanced_tracking = "0";
-    if ( $_POST["atcontent_is_advanced_tracking_enabled"] == "1" ) {
+    if ( $ac_is_advanced_tracking == "1" ){
         update_post_meta( $post_id, "ac_is_advanced_tracking", $ac_is_advanced_tracking );
     }
-
+    
     remove_filter( 'the_content', 'atcontent_the_content', 1 );
     
     $post = get_post( $post_id );
     $testcontent = "";
     if ( $post != null ) {
         $testcontent = apply_filters( "the_content",  $post->post_content );
-        $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
     }
 
     add_filter( 'the_content', 'atcontent_the_content', 1 );
@@ -101,7 +108,7 @@ function atcontent_repost_preview( $posts ) {
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
 
-  	if ( $_GET['ac_repost_post'] != null ) {
+  	if ( isset( $_GET['ac_repost_post'] ) ) {
         $repost_title_answer = atcontent_api_get_title( $_GET['ac_repost_post'] );
         $repost_title = "Not found";
         if ( $repost_title_answer["IsOK"] == true ) {

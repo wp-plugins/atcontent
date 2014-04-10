@@ -5,7 +5,7 @@
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     $currentuser = wp_get_current_user();
     $userid = $currentuser -> ID;
-    if ( strlen( $_GET['connectas'] ) > 0 )
+    if ( isset ( $_GET['connectas'] ) && strlen( $_GET["connectas"] ) > 0 )
     {
         $userid = intval( $_GET['connectas'] );
     }
@@ -66,7 +66,7 @@
             $('#footer-upgrade').prepend('<br>');
 
             <?php
-            if ( $_GET["noauto"] != "1" ) {
+            if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
                 ?>
                 $("#b_connect").hide();
                 $("#ac_sign_fields").hide();
