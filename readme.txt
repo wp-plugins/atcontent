@@ -1,4 +1,4 @@
-=== AtContent — Monetize Blog & Grow Audience ===
+=== AtContent — Grow Audience & Monetize Blog ===
 Contributors: atcontent, ariser
 Donate link: https://atcontent.com/
 Tags: ad, ads, affiliate, admin, advertising, google, links, plugin, Post, posts, widget, seo
