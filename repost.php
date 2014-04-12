@@ -7,14 +7,14 @@
     }
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
 
-    $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1");
-    $category2url = admin_url( "admin.php?page=atcontent/repost.php&category=2");
-    $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=7");
-    $category4url = admin_url( "admin.php?page=atcontent/repost.php&category=4");
-    $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5");
-    $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6");
+    $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1" );
+    $category2url = admin_url( "admin.php?page=atcontent/repost.php&category=2" );
+    $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=7" );
+    $category4url = admin_url( "admin.php?page=atcontent/repost.php&category=4" );
+    $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5" );
+    $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6" );
 
-    update_user_meta( $userid, "ac_last_repost_visit", date("Y-m-d H:i:s") );
+    update_user_meta( $userid, "ac_last_repost_visit", date( "Y-m-d H:i:s" ) );
     $currentcategory = "1";
     if ( isset( $_GET["category"] ) ) {
         $currentcategory = $_GET["category"];
