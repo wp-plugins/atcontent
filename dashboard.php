@@ -74,7 +74,6 @@
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
-    
     <?php
         // PingBack
         if ( ! atcontent_pingback_inline() ) {
@@ -87,7 +86,5 @@
     {
         include( "invite.php" );
     }
-?>
-
-    
+?>    
 </div>
