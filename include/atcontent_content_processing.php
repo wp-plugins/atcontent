@@ -215,9 +215,13 @@ END;
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         $ac_syncid = get_user_meta($userid, "ac_syncid", true );
+
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
-        if ( (strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
+        if ( ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
+            if ( ! atcontent_pingback_inline() ) {
+                //echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+            }
         ?>
 <script type="text/javascript">
 $j = jQuery;

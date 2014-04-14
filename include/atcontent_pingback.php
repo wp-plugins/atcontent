@@ -5,7 +5,7 @@ function atcontent_pingback() {
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_referral = get_user_meta($userid, "ac_referral", true );
-    if ( current_user_can( 'publish_posts' ) ) {
+    if ( current_user_can( 'edit_posts' ) ) {
 
         $status = 'Installed';
 
@@ -69,7 +69,9 @@ function atcontent_activate() {
                             $status = 'Disconnected';
                         }
                     }
-                    atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
+                    if ( $status == 'Connected' || $status == 'Disconnected' ) {
+                        atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
+                    }
                 }
             }
             $wpdb->flush();
