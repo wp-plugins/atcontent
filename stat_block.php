@@ -13,7 +13,6 @@
                 <li>Set tags and follow relevant bloggers in <br> your <a href="https://atcontent.com/Studio/Statistics?wp=1#tips" target="_blank">AtContent dashboard</a>.<br>
                 <small>You will get more chances to be reposted and reach a wider audience.</small></li>
             </ol>
-            
             <p>
                 <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE && intval( $response["repostViews"] ) == 0 ) { ?>
                     Don't be puzzled of zeros. Check this page in a 7 days. 
@@ -99,9 +98,7 @@
                         </script>
                         <?php } ?>
                     </div>
-                    
                 </div>
-                
             <div class="clear"></div>
             <?php
                 } else {
