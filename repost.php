@@ -57,69 +57,6 @@
     <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
 </div>
     <br><br>
-    <style>
-        
-        .close-ico{
-            position: absolute;
-            top: -20px;
-            right: 0px;
-            font-size: 44px!important;
-            margin: 15px;
-            font-weight: 900;
-            
-        }
-        
-        .close-ico:hover{
-            cursor: pointer;
-        }
-        
-    .rate-hidden {
-        background: #fff;
-        width: 40%;
-        margin-left: 30%;
-        font-size: larger;
-        text-align: center;
-        position: absolute;
-        top: 200px;
-        z-index: 201;
-    }
-        .rate-hidden > p {
-            font-size: large;
-        }
-        
-        .stars{
-            width: 30%;
-        }
-    
-    .contentColumns:after {
-        clear: both;
-        content: "";
-        display: block;
-    }
-    .contentColumns {
-        margin-left: -5px;
-    }
-    .mainCol {
-        overflow: hidden;
-        padding-left: 5px;
-    }
-        
-    .asideCol {
-        float: left;
-        margin-left: 5px;
-        margin-right: 35px;
-        min-height: 1px;
-        position: relative;
-        width: 200px;
-    }
-    .article-inline {
-        display: inline-block;
-        margin-bottom: 50px;
-        min-width: 350px;
-        vertical-align: top;
-        width: 48%;
-    }
-    </style>
 
     <div class="contentColumns">
         <div class="asideCol">
@@ -160,19 +97,7 @@
             <br>
 <p style="line-height: 12px">
 
-<?php
-
-$email_subject = $_SERVER['HTTP_HOST'] . " would like to be featured";
-
-$email_body = "Hey AtContent team, \n" .
-	"I would like to submit my posts from " . $_SERVER['HTTP_HOST'] . " to be on the Featured page.\n\n\n\n" .
-	"%% You also can share your feedback right here - so, we'll be able to improve AtContent for you\n\n".
-	"Thanks,\n".
-	$_SERVER['HTTP_HOST'];
-
-?>
-
-<a href="http://atcontent.com/landing/featureposts/<?php echo( urldecode( $_SERVER['HTTP_HOST'] ) ); ?>" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
+<a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
 <br>
 <small>
 

@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
-    Version: 7.7.4
+    Version: 7.8
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.7.4" );
+    define( 'AC_VERSION', "7.8" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -45,6 +45,8 @@
         add_action( 'wp_ajax_atcontent_get_sync_stat', 'atcontent_ajax_get_sync_stat' );
         add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
         add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
+        add_action( 'wp_ajax_atcontent_save_tags', 'atcontent_save_tags' );
+        add_action( 'wp_ajax_atcontent_save_country', 'atcontent_save_country' );
         add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
         add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
         add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
@@ -91,7 +93,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=y', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0a', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );

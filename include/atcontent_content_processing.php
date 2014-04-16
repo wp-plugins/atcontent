@@ -205,13 +205,6 @@ END;
     }
 
     function atcontent_admin_head() {
-        ?>
-        <script type="text/javascript">
-            jQuery().ready(function () {
-                jQuery("#toplevel_page_atcontent-getpaid > a").attr('href', 'http://bit.ly/1j7vVbM').attr('target', '_blank');
-            });
-        </script>
-        <?php
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         $ac_syncid = get_user_meta($userid, "ac_syncid", true );

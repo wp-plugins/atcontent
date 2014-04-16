@@ -227,7 +227,11 @@
                 data: {action: 'atcontent_syncqueue'},
                 dataType: "json",
                 success: function(d) {
-                    location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                    <?php if ( isset( $_GET["marketplace"] ) && ( $_GET["marketplace"] == 1 ) ) {?>
+                        location.href = 'admin.php?page=atcontent/getpaid.php';
+                    <?php } else { ?>
+                        location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                    <?php }?>
                 },
                 error: function(d, s, e) {
                 }

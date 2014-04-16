@@ -119,6 +119,29 @@ function atcontent_api_get_userinfo( $ac_api_key ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/userinfo', $post_content );
 }
 
+function atcontent_api_settags( $ac_api_key, $tags ) {
+    $post_content = 
+        'Key=' . urlencode( $ac_api_key ) . 
+        '&Tags=' . urlencode( $tags ) . 
+        '&AppID=' . urlencode( 'WordPress' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/setuserinfo', $post_content );
+}
+
+function atcontent_api_setcountry( $ac_api_key, $country ) {
+    $post_content = 
+        'Key=' . urlencode( $ac_api_key ) . 
+        '&Country=' . urlencode( $country ) . 
+        '&AppID=' . urlencode( 'WordPress' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/setuserinfo', $post_content );
+}
+
+function atcontent_api_marketplace( $ac_api_key ) {
+    $post_content = 
+        'Key=' . urlencode( $ac_api_key ) .
+        '&AppID=' . urlencode( 'WordPress' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/marketplace', $post_content );
+}
+
 function atcontent_api_get_key( $nounce, $grant ) {
     $post_content = 'Nounce=' . urlencode( $nounce ) . 
         '&Grant=' . urlencode( $grant ) . 

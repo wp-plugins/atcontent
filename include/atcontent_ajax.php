@@ -488,4 +488,20 @@ function atcontent_ajax_syncqueue(){
     exit;
 }
 
+function atcontent_save_tags() {
+    include( "atcontent_userinit.php" );
+    $tags = $_POST["tags"];
+    $api_result = atcontent_api_settags( $ac_api_key, $tags );
+    echo json_encode( $api_result );
+    exit;
+}
+
+function atcontent_save_country() {
+    include( "atcontent_userinit.php" );
+    $country = $_POST["country"];
+    $api_result = atcontent_api_setcountry( $ac_api_key, $country );
+    echo json_encode( $api_result );
+    exit;
+}
+
 ?>
