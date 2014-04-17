@@ -64,7 +64,6 @@
         $(function(){
             $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
             $('#footer-upgrade').prepend('<br>');
-
             <?php
             if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
                 ?>
@@ -218,7 +217,7 @@
                     }
                 },
 			    dataType: "json"
-		    });  
+		    });
         }
 
         function SyncQueue() {
@@ -306,7 +305,7 @@
         function showEmailExists(){
             var email = $("#email").val();
             EnableButton();
-			$("#ac_connect_result").html('<div class="update-nag" style="margin:0 0 5px 0;">Profile with email “' +
+            $("#ac_connect_result").html('<div class="update-nag" style="margin:0 0 5px 0;">Profile with email “' +
                 email +
                 '” already exists. Please <a onclick="signInWindow();" href="#">sign in</a>.</div>' + 
                 '<p style="text-align: center">or <a id="ac_change_email" href="#">create a new AtContent profile</a>!</p>');
