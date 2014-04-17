@@ -4,7 +4,7 @@ Donate link: https://atcontent.com/
 Tags: ad, ads, affiliate, advertising, admin, google, links, Post, posts, plugin, widget, seo
 Requires at least: 3.3
 Stable tag: trunk
-Tested up to: 3.8.2
+Tested up to: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
