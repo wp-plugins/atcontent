@@ -6,8 +6,8 @@ function atcontent_readership() {
     if ( current_user_can( 'edit_posts' ) ) {
         $posts_id = array();
         $response = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
-	    header( "Content-Type: application/json" );
-	    echo json_encode( $response );
+        header( "Content-Type: application/json" );
+        echo json_encode( $response );
     }
     exit;
 }
