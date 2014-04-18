@@ -248,18 +248,18 @@
 
         function SaveCredentials(credentials) {
             $.ajax({url: '<?php echo $ajax_action; ?>',
-			    type: 'post',
-			    data: {
+                    type: 'post',
+                    data: {
                         userid : '<?php echo $userid; ?>',
-					    action: 'atcontent_save_credentials',
+                        action: 'atcontent_save_credentials',
                         apikey : credentials.APIKey,
                         nickname : credentials.Nickname,
                         showname: credentials.Showname,
                         Avatar20 : credentials.Avatar20,
                         Avatar80 : credentials.Avatar80
-					},
-                success: function(d) {
-                    if (d.IsOK) {
+                    },
+                    success: function(d) {
+                      if (d.IsOK) {
                         apikey =  credentials.APIKey;   
                         showname = credentials.Showname;
                         username = credentials.Nickname;
