@@ -121,8 +121,8 @@ function atcontent_ajax_gate() {
             $title = $_POST["title"];
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
                 remove_filter( 'the_content', 'atcontent_the_content', 1 );
-                remove_filter( 'the_content', 'atcontent_the_content_after', 100);
-                remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100);
+                remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+                remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
                 $ac_content = 
                 "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
@@ -403,12 +403,12 @@ function atcontent_connect()
     exit;
 }
 
-function atcontent_ajax_get_sync_stat(){    
+function atcontent_ajax_get_sync_stat() {    
         $userid = wp_get_current_user()->ID;
-        $syncid = get_user_meta($userid, "ac_syncid", TRUE);
-        $blogid = get_user_meta($userid, "ac_blogid", TRUE);
-        $stats = atcontent_api_get_sync_stat($syncid, $blogid);
-        echo json_encode( array ( "stats" => $stats));
+        $syncid = get_user_meta( $userid, "ac_syncid", TRUE );
+        $blogid = get_user_meta( $userid, "ac_blogid", TRUE );
+        $stats = atcontent_api_get_sync_stat( $syncid, $blogid );
+        echo json_encode( array ( "stats" => $stats ) );
         exit;
 }
 
