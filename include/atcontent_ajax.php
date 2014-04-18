@@ -226,7 +226,7 @@ function atcontent_ajax_gate() {
     exit;
 }
 
-function atcontent_ajax_guestpost_check_url(){
+function atcontent_ajax_guestpost_check_url() {
     $testurl = $_POST["url"];
     if ( strpos( $testurl, "http://" ) !== 0 &&
          strpos( $testurl, "https://" ) !== 0 ) {
@@ -253,8 +253,7 @@ function atcontent_ajax_guestpost_check_url(){
 }
 
 
-function atcontent_api_key()
-{
+function atcontent_api_key() {
     $userid = wp_get_current_user()->ID;
     if ( current_user_can( 'edit_posts' ) ) {
         $result = "";
@@ -285,14 +284,14 @@ END;
     exit;
 }
 
-function atcontent_hide_rate(){    
+function atcontent_hide_rate() {    
     $userid = wp_get_current_user()->ID;
     update_user_meta( $userid, "ac_rated", true );
     echo json_encode ( array ( "IsOK" => true ) );
     exit;
 }
 
-function atcontent_connect_blog(){
+function atcontent_connect_blog() {
     $bloguserid = $_POST['bloguserid'];
     $apikey = $_POST['apikey'];
     $sitetitle = $_POST['sitetitle'];
@@ -341,8 +340,7 @@ function atcontent_connect_blog(){
     exit;
 }
 
-function atcontent_disconnect()
-{    
+function atcontent_disconnect() {
     $userid = wp_get_current_user()->ID;
     update_user_meta( $userid, "ac_api_key", "" );
     update_user_meta( $userid, "ac_syncid", "" );
@@ -350,8 +348,7 @@ function atcontent_disconnect()
     exit;
 }
 
-function atcontent_save_settings()
-{
+function atcontent_save_settings() {
         $userid = wp_get_current_user()->ID;
         $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
         update_user_meta( $userid, "ac_sitecategory", $siteCategory );
@@ -373,8 +370,7 @@ function atcontent_save_settings()
         exit;
 }
 
-function atcontent_save_credentials()
-{
+function atcontent_save_credentials() {
     $userid = intval($_POST["userid"]);
     update_user_meta( $userid, "ac_api_key", $_POST["apikey"] );
     update_user_meta( $userid, "ac_non_delete_api_key", $_POST["apikey"] );
@@ -386,8 +382,7 @@ function atcontent_save_credentials()
     exit;
 }
 
-function atcontent_connect()
-{
+function atcontent_connect() {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $auth_data = "email=".urlencode($email)."&username=".urlencode($username);
@@ -412,7 +407,7 @@ function atcontent_ajax_get_sync_stat() {
         exit;
 }
 
-function atcontent_ajax_repost(){
+function atcontent_ajax_repost() {
         include( "atcontent_userinit.php" );
         $ac_postid = $_POST['ac_post'];
         $repost_title = "Not found";
@@ -460,7 +455,7 @@ function atcontent_ajax_repost(){
         exit;
     }
 
-function atcontent_ajax_syncqueue(){
+function atcontent_ajax_syncqueue() {
     global $wpdb;
     include( "atcontent_userinit.php" );
     $syncid = get_user_meta( $userid, "ac_syncid", true );
