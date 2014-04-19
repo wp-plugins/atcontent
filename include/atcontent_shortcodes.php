@@ -32,6 +32,5 @@ function atcontent_shortcode( $atts ) {
 END;
 }
 
-add_shortcode( 'atcontent', 'atcontent_shortcode' );    
-
+add_shortcode( 'atcontent', 'atcontent_shortcode' );
 ?>
