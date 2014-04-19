@@ -8,24 +8,11 @@
             'atcontent_inner_custom_box',
             'post', 'side', 'high'
         );
-
-        /*
-
-        add_meta_box(
-            'atcontent_repost_metabox',
-            __( 'AtContent Repost', 'atcontent_textdomain' ),
-            'atcontent_inner_repost_box',
-            'post'
-        );
-
-        // */
     }
 
     function atcontent_inner_custom_box( $post ) {
           // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
-
-          
           $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
           if ( strlen( $ac_api_key ) == 0 ) {
@@ -48,7 +35,6 @@
               <?php
               return;
           }
-
           $ac_pen_name = get_user_meta( $userid, "ac_pen_name", true );
           $ac_show_name = get_user_meta( $userid, "ac_showname", true );
           $ac_avatar_20 = get_user_meta( $userid, "ac_avatar_20", true );
@@ -63,33 +49,27 @@
           if ( strlen( $ac_avatar_200 ) == 0 ) {
               $ac_avatar_200 = "https://atcontent.blob.core.windows.net/avatar/{$ac_pen_name}/200-0.jpg";
           }
-
           $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
           $ac_is_process_checked = "";
           if ( $ac_is_process == "1" || $ac_is_process == "" ) {
               $ac_is_process_checked = "checked=\"checked\"";
           }
-
           $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
           $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
           if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
           $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
           if ( strlen( $ac_user_paidrepost ) == 0 ) $ac_user_paidrepost = "0";
-
           $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
           if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
           $ac_is_copyprotect_checked = "";
           if ( $ac_is_copyprotect == "1" ) {
-              $ac_is_copyprotect_checked = "checked=\"checked\"";
-          }
-
+              $ac_is_copyprotect_checked = "checked=\"checked\"";          }
           $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
           if ( strlen( $ac_is_advanced_tracking ) == 0 ) $ac_is_advanced_tracking = "1";
           $ac_is_advanced_tracking_checked = "";
           if ( $ac_is_advanced_tracking == "1" ) {
               $ac_is_advanced_tracking_checked = "checked=\"checked\"";
-          }
-          
+          }          
           $plagiarism_quota = 0;
           $advanced_tracking_quota = 0;
           $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
@@ -99,7 +79,6 @@
               $plagiarism_quota = intval( $quotas_result["Quotas"]["PlagiarismProtection"]["Count"] );
               $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
           }
-
           $ac_is_copyprotect_enabled = $plagiarism_quota > 0;
           $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
 
@@ -114,7 +93,6 @@
             <?php echo $ac_show_name; ?>
         </a>
     </div>
-
     <div class="misc-pub-section">
         <label>
             <input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> /> 
@@ -140,7 +118,6 @@
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
     }
-
     function atcontent_inner_repost_box( $post ) {
         atcontent_coexistense_fixes();
 
@@ -148,13 +125,10 @@
         $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
 
         $ac_is_repost = ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 );
-        if ($ac_is_repost) {
-
+        if ( $ac_is_repost ) {
             $ac_share_panel_data_option = "";
-            $ac_additional_classes = "";
-            
+            $ac_additional_classes = "";            
             $ac_additional_classes .= " atcontent_excerpt";
-
             ?>
 <script type="text/javascript">
     (function ($) {
