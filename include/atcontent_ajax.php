@@ -450,7 +450,6 @@ function atcontent_ajax_repost() {
         update_post_meta( $new_post_id, "ac_embedid", $embedid );
         update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
         kses_init_filters();
-       
         echo json_encode ( array ( "IsOK" => true ) );
         exit;
     }
