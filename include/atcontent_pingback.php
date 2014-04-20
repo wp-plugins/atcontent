@@ -6,25 +6,19 @@ function atcontent_pingback() {
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_referral = get_user_meta($userid, "ac_referral", true );
     if ( current_user_can( 'edit_posts' ) ) {
-
         $status = 'Installed';
-
         if ( strlen( $ac_api_key ) > 0 ) { 
             $status = 'Connected';
         } else {
             $status = 'Disconnected';
         }
-
         atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
-
 	    // generate the response
 	    $response = json_encode( array( 'IsOK' => true ) );
- 
 	    // response output
 	    header( "Content-Type: application/json" );
 	    echo $response;
     }
- 
     // IMPORTANT: don't forget to "exit"
     exit;
 }
