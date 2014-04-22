@@ -77,7 +77,7 @@
     <?php
         // PingBack
         if ( ! atcontent_pingback_inline() ) {
-            echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com" target="_blank">AtContent.com</a> server. Contact your hosting provider.' . "</div>";
+            echo "<div class=\"error\">" . 'Could not connect to AtContent server. Contact your hosting provider.' . "</div>";
         }
         //End PingBack
         include("stat_block.php");
