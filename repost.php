@@ -142,7 +142,7 @@
 
         function connect_error(p) {
 			var btn = document.getElementById('acRepostBtn' + p);
-			$(btn).parent().html('<div class="update-nag">Please connect your blog with AtContent</div>');
+			$(btn).parent().html('<div class="update-nag">Please connect your blog with <a href="http://atcontent.com" target=_blank>AtContent</a></div>');
 		}
 		
         window.repost_post = function(p) {
