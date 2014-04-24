@@ -54,7 +54,7 @@
                         <p>
                             Here you can get sponsored stories and post them on your blog.<br>
                             <?php if ( strlen( $ac_marketplace["Nickname"] ) == 0 ) { ?>
-                            To start please <a href="<?php echo $connect_url; ?>">connect plugin</a> to AtContent.
+                            To start please <a href="<?php echo $connect_url; ?>">connect the plugin</a> to AtContent.
                             <?php } ?>
                         </p>
                         <p>It’s only 3 simple steps to go!</p>
@@ -209,7 +209,7 @@
     </p>
 </script>
 <?php    } else { ?>
-<p>Something gets wrong. Please, reload page.</p>
+<p>Something went wrong. Please, reload page.</p>
 <?php    } ?>
 <script>
     var ajaxUrl = '<?php echo admin_url("admin-ajax.php"); ?>';
