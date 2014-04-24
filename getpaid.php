@@ -75,7 +75,7 @@
                             foreach( $ac_marketplace["Tags"] as $key => $value ) {
                                 $selected = ( $key == $ac_marketplace["UserTag1"] || $key == $ac_marketplace["UserTag2"] || $key == $ac_marketplace["UserTag3"] ) ? "selected" : "";
                                 echo "<option value=\"{$key}\" {$selected}>{$value}</option>";
-                            } 
+                            }
 ?>
                         </select>
                         <br>
@@ -94,7 +94,7 @@
                             foreach( $ac_marketplace["CountryList"] as $key => $value ) {
                                 $selected = ( $key == $ac_marketplace["Country"] ) ? "selected" : "";
                                 echo "<option value=\"{$key}\" {$selected}>{$value}</option>";
-                            } 
+                            }
 ?>
                         </select>
                         <br>

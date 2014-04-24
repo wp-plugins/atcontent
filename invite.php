@@ -158,7 +158,7 @@
                 var blog = $('input:radio[name=blog]:checked').val();
                 if (blog!=null) {
                     ConnectBlog(blog);
-                } 
+                }
             });
             $('#disconnect').remove();
             $('#ac_we_will_send').hide();
