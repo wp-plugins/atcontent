@@ -88,7 +88,7 @@
                     <strong>Politics</strong><br>
                 <?php }?>
                 <?php if ( $currentcategory !== "6" ) { ?>
-                    <a href="<?php echo $category6url; ?>">Religion &amp; Spirituality</a><br>
+                    <a href="<?php echo $category6url; ?>">Religion&nbsp;&amp;&nbsp;Spirituality</a><br>
                 <?php } else { ?>
                     <strong>Religion &amp; Spirituality</strong><br>
                 <?php }?>
