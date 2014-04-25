@@ -33,7 +33,7 @@
                     if ( $_GET["afterconnect"] == "1" ) {
                 ?>
                 <div class="b-note success">
-                    Well done, now you have connected your blog with AtContent<br>
+                    Well done, now you have connected your blog to AtContent<br>
                 </div>
             <?php
                 }
