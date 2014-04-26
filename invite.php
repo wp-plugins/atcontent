@@ -18,7 +18,7 @@
 
 <form id="connect_form" method="post" action="">
 <div class="atcontent_invite">
-        <h1>Easily monetize your blog with native advertisement and boost your audience 2.5x in 30 days. It's free to join!</h1>
+        <h1>Easily monetize your blog with sponsored posts and boost your audience 2.5x in 30 days. It's free to join!</h1>
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
                     <p class="caption"><label for="username">Username</label></p>
