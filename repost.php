@@ -34,7 +34,7 @@
 
     // PingBack
     if ( ! atcontent_pingback_inline() ) {
-        echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
+        echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com">AtContent.com</a>. Contact your hosting provider.' . "</div>";
     }
     //End PingBack
 
