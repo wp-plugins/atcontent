@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.8.1 =
+* Improved structure of files.
+
 = 7.8 =
 * Marketplace into plugin.
 
