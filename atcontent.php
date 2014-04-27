@@ -2,7 +2,7 @@
     /*
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
-    Description: Provides backlinks, posts distribution, guest posting and analytics. Make your posts available for promoting on other sites and boost your audience by 250% in just 30 days!
+    Description: Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
     Version: 7.8.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
