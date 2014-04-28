@@ -102,7 +102,7 @@
             <div class="clear"></div>
             <?php
                 } else {
-                    echo '<tr><th>Error getting data</th></tr>';
+                    echo '<tr><th>Error getting data.</th></tr>';
                 }                
             ?>
             </div>
