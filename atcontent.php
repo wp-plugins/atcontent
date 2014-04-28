@@ -50,6 +50,7 @@
         add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
         add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
         add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
+        add_action( 'wp_ajax_atcontent_reposts_count', 'atcontent_ajax_reposts_count' );
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
@@ -120,13 +121,7 @@
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
-        $since = get_user_meta( wp_get_current_user()->ID, "ac_last_repost_visit", true );
-        if ( strlen( $since ) == 0 ) $since = "2013-12-31";
-        $new_reposts_count_answer = atcontent_api_reposts_count( $since );
         $repost_title = "Get Content";
-        if ( $new_reposts_count_answer["IsOK"] && $new_reposts_count_answer["Count"] > 0 ) {
-            $repost_title .= "<span class='update-plugins count-{$new_reposts_count_answer['Count']}'><span class='plugin-count'>{$new_reposts_count_answer['Count']}</span></span>";
-        }
         $repost_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Get Content', $repost_title, 'publish_posts', 'atcontent/repost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
@@ -191,6 +186,18 @@
         else
             return null;
     }
+
+    (function( $ ) {
+        $(function() {
+            $.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', {
+                action: 'atcontent_reposts_count'
+            }, function(r){
+                if (r && r.IsOK) {
+                    $('#toplevel_page_atcontent-repost .wp-menu-name').append('<span class="update-plugins count-' + r.Count + '"><span class="plugin-count">' + r.Count + '</span></span>');
+                }
+            }, 'json');
+        });
+    })(jQuery);
 </script>
 <?php
     }

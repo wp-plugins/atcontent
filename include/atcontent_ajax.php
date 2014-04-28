@@ -454,6 +454,14 @@ function atcontent_ajax_repost() {
         exit;
     }
 
+function atcontent_ajax_reposts_count() {
+    $since = get_user_meta( wp_get_current_user()->ID, "ac_last_repost_visit", true );
+    if ( strlen( $since ) == 0 ) $since = "2013-12-31";
+    $new_reposts_count_answer = atcontent_api_reposts_count( $since );
+    echo json_encode( $new_reposts_count_answer );
+    exit;
+}
+
 function atcontent_ajax_syncqueue() {
     global $wpdb;
     include( "atcontent_userinit.php" );
