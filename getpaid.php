@@ -86,10 +86,10 @@
 
                 <div class="b-hints__item" id="hint_country">
                     <h3>Well done! Now, where are you from?</h3>
-                    <p>Please specify your country. This will help us show geographically relevant posts.</p>
+                    <p>Please specify your country. This will help us show geographically relevant posts</p>
                     <form action="./" method="post" class="" id="countryHint">
                         <select name="country">
-                            <option value="0">Not selected</option>
+                            <option value="0">[Not selected]</option>
 <?php 
                             foreach( $ac_marketplace["CountryList"] as $key => $value ) {
                                 $selected = ( $key == $ac_marketplace["Country"] ) ? "selected" : "";
@@ -105,7 +105,7 @@
 
                 <div class="b-hints__item" id="hint_earnings">
                     <h4>How to use it?</h4>
-                    <p>Click “Repost” button under any article you like.</p>
+                    <p>Click “Repost” button under any article you like</p>
                     <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank" data-role="linkToRules">the rules of AtContent NativeAd</a>.</div>
                 </div>
 
