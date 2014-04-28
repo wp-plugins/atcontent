@@ -195,8 +195,8 @@
 <p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
     <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
-    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
     <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
+    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
 </p>
 
 </div>
