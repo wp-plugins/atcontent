@@ -1,5 +1,5 @@
 === AtContent — Promote & Monetize Your Blog ===
-Contributors: atcontent, ariser
+Contributors: atcontent, ariser, vadnov
 Donate link: https://atcontent.com/
 Tags: ad, ads, advertising, affiliate, admin, google, promote, post, plugin, posts, widget, monetize
 Requires at least: 3.3
