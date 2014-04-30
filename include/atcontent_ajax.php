@@ -1,6 +1,5 @@
 <?php
 function atcontent_readership() {
-    global $wpdb;
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     if ( current_user_can( 'edit_posts' ) ) {

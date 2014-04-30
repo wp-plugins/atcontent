@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
-    Version: 7.8.1
+    Version: 7.8.2
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.8.1" );
+    define( 'AC_VERSION', "7.8.2" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -56,10 +56,6 @@
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
     add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
     add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
-    add_action( 'comment_post', 'atcontent_comment_post' );
-    add_action( 'deleted_comment', 'atcontent_comment_post' );
-    add_action( 'trashed_comment', 'atcontent_comment_post' );
-    add_action( 'wp_set_comment_status', 'atcontent_comment_post' );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
     

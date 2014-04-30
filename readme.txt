@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.8.2 =
+* Better speed of work.
+
 = 7.8.1 =
 * Improved structure of files.
 
@@ -483,4 +486,4 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Upgrade notice ==
 
-* Now AtContent allows you to monetize your blog!
+* Better speed of work.
