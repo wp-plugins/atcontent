@@ -1,5 +1,5 @@
 === AtContent — Grow Audience & Monetize Blog ===
-Contributors: atcontent, ariser, vadnov
+Contributors: atcontent, ariser, vadnov, berd
 Donate link: https://atcontent.com/
 Tags: ad, ads, advertising, affiliate, admin, google, promote, post, plugin, posts, widget, monetize
 Requires at least: 3.3
