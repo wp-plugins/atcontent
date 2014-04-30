@@ -201,7 +201,7 @@
 <script type="text/template" id="tmpl_congrats">
     <h3>How to publish sponsored stories on your blog</h3>
     <ol class="p-usageTips">
-        <li>Click “Repost” button under any article you like.</li>
+        <li>Click <i>“Repost”</i> button under any article you like.</li>
     </ol>
     <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank" data-role="linkToRules">the rules of AtContent NativeAd</a>.</div>
     <p class="centerAlgn">
@@ -209,7 +209,7 @@
     </p>
 </script>
 <?php    } else { ?>
-<p>Something went wrong. Please, reload page.</p>
+<p>Something went wrong. Please, <a href="javascript:window.location.reload();">reload page</a>.</p>
 <?php    } ?>
 <script>
     var ajaxUrl = '<?php echo admin_url("admin-ajax.php"); ?>';
