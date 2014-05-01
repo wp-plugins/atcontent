@@ -51,7 +51,7 @@
 	<script>
 		connected = false;
 	</script>
-    <br>
+    <br />
 <?php } ?>
 <div class="wrap">
     <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
@@ -98,7 +98,7 @@
 <p style="line-height: 12px">
 
 <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
-<br>
+<br />
 <small>
 
 
@@ -191,12 +191,12 @@
         </div>
     </div>
 
-<br><br><br>
+<br /><br /><br />
 <p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
     <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
-    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
     <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
+    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
 </p>
 
 </div>

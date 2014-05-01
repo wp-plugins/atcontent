@@ -70,7 +70,7 @@
     You are connected to AtContent as 
     <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
         <img style="margin-right: 2px; vertical-align: middle" src="<?php echo $ac_avatar_20; ?>" onerror="this.parentNode.removeChild(this)" alt="" width="18" height="18"><?php echo $ac_show_name; ?>
-    </a></br>
+    </a><br />
     <a href="#" style="float: right;font-size: 0.7em;" onclick="beforechangeaccount()">Not you?</a>
 </div>
 <div class="atcontent_wrap">
