@@ -95,23 +95,16 @@ function atcontent_dashboard_widget_function() {
 }
 
 function atcontent_add_dashboard_widgets() {
-
     $userid = wp_get_current_user()->ID;
-    if ( !user_can( $userid, "publish_posts" ) ) return;
-
+    if ( !user_can( $userid, "edit_posts" ) ) return;
     $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
-	wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:middle;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
-
+    wp_add_dashboard_widget('atcontent_dashboard_widget', '<img style="vertical-align:middle;" src="' . $img_url . '" alt=""> AtContent', 'atcontent_dashboard_widget_function');
     global $wp_meta_boxes;
-	
-	$normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
-	
-	$atcontent_dashboard_widget = array('atcontent_dashboard_widget' => $normal_dashboard['atcontent_dashboard_widget']);
-	unset($normal_dashboard['atcontent_dashboard_widget']);
-
-	$sorted_dashboard = array_merge($atcontent_dashboard_widget, $normal_dashboard);
-
-	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+    $normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+    $atcontent_dashboard_widget = array('atcontent_dashboard_widget' => $normal_dashboard['atcontent_dashboard_widget']);
+    unset($normal_dashboard['atcontent_dashboard_widget']);
+    $sorted_dashboard = array_merge($atcontent_dashboard_widget, $normal_dashboard);
+    $wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
 }
 
 ?>
