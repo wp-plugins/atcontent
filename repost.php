@@ -63,12 +63,12 @@
             <h2>Categories</h2>
             <p>
                 <?php if ( $currentcategory !== "1" ) { ?>
-                    <a href="<?php echo $category1url; ?>">Business & Marketing</a><br>
+                    <a href="<?php echo $category1url; ?>">Business &amp; Marketing</a><br>
                 <?php } else { ?>
                     <strong>Business &amp; Marketing</strong><br>
                 <?php }?>
                 <?php if ( $currentcategory !== "2" ) { ?>
-                    <a href="<?php echo $category2url; ?>">Fashion & Style</a><br>
+                    <a href="<?php echo $category2url; ?>">Fashion &amp; Style</a><br>
                 <?php } else { ?>
                     <strong>Fashion &amp; Style</strong><br>
                 <?php }?>
@@ -195,8 +195,9 @@
 <p><a href="http://wordpress.org/extend/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
     <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
-    <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
     <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
+    <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
+</p>
 </p>
 
 </div>

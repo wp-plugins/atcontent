@@ -6,6 +6,7 @@
     wp_register_script( 'atcontentAdminTmpl',  plugins_url( 'assets/tmpl.js?v=1', __FILE__ ), array(), true );
     wp_enqueue_script( 'atcontentAdminTmpl' );
     wp_register_script( 'atcontentAdminCustomSelect',  plugins_url( 'assets/customSelect.js?v=1', __FILE__ ), array(), true );
+    
     wp_enqueue_script( 'atcontentAdminCustomSelect' );
     wp_register_style( 'atcontentAdminIcons',  plugins_url( 'assets/icons.css?v=1', __FILE__ ), array(), true );
     wp_enqueue_style( 'atcontentAdminIcons' );
