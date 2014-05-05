@@ -21,8 +21,8 @@
 
 <script>
     jQuery( function($){
-        $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
-        $('#footer-upgrade').prepend('<br>');
+        $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br />');
+        $('#footer-upgrade').prepend('<br />');
     });
 
     jQuery("#contextual-help-link").hide();

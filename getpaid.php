@@ -18,9 +18,9 @@
 ?>
 <div class="atcontent_wrap">
     <div class="wrap">
-        <div class="icon32" id="icon-link"><br></div><h2>NativeAd Marketplace</h2>
+        <div class="icon32" id="icon-link"><br /></div><h2>NativeAd Marketplace</h2>
     </div>
-    <br><br>
+    <br /><br />
     <div class="contentColumns">
         <div class="asideCol">
             <section class="b-hints b-hints_no-border b-hints_aside" id="tips">
@@ -53,7 +53,7 @@
                 <div class="b-hints__item centerAlgn" id="hint_join">
                         <h3>Welcome to AtContent NativeAd!</h3>
                         <p>
-                            Here you can get sponsored stories and post them on your blog.<br>
+                            Here you can get sponsored stories and post them on your blog.<br />
                             <?php if ( strlen( $ac_marketplace["Nickname"] ) == 0 ) { ?>
                             To start please <a href="<?php echo $connect_url; ?>">connect the plugin</a> to AtContent.
                             <?php } ?>
@@ -79,7 +79,7 @@
                             }
 ?>
                         </select>
-                        <br>
+                        <br />
                         <button type="submit" class="button-color-green" id="tagsSubmit">Set tags</button>
                         <div class="fieldsetNote" id="tagsSaved" style="display: none">Saved!</div>
                     </form>
@@ -98,7 +98,7 @@
                             }
 ?>
                         </select>
-                        <br>
+                        <br />
                         <button type="submit" class="button-color-green" id="countrySubmit">Set country</button>
                         <div class="fieldsetNote" id="countrySaved" style="display: none">Saved!</div>
                     </form>
