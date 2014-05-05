@@ -54,55 +54,55 @@
     <br />
 <?php } ?>
 <div class="wrap">
-    <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
+    <div class="icon32" id="icon-link"><br /></div><h2>Content&nbsp;for&nbsp;reposting</h2>
 </div>
-    <br><br>
+    <br /><br />
 
     <div class="contentColumns">
         <div class="asideCol">
             <h2>Categories</h2>
             <p>
                 <?php if ( $currentcategory !== "1" ) { ?>
-                    <a href="<?php echo $category1url; ?>">Business &amp; Marketing</a><br>
+                    <a href="<?php echo $category1url; ?>">Business &amp; Marketing</a><br />
                 <?php } else { ?>
-                    <strong>Business &amp; Marketing</strong><br>
+                    <strong>Business &amp; Marketing</strong><br />
                 <?php }?>
                 <?php if ( $currentcategory !== "2" ) { ?>
-                    <a href="<?php echo $category2url; ?>">Fashion &amp; Style</a><br>
+                    <a href="<?php echo $category2url; ?>">Fashion &amp; Style</a><br />
                 <?php } else { ?>
-                    <strong>Fashion &amp; Style</strong><br>
+                    <strong>Fashion &amp; Style</strong><br />
                 <?php }?>
                 <?php if ( $currentcategory !== "7" ) { ?>
-                    <a href="<?php echo $category3url; ?>">Self Improvement</a><br>
+                    <a href="<?php echo $category3url; ?>">Self Improvement</a><br />
                 <?php } else { ?>
-                    <strong>Self Improvement</strong><br>
+                    <strong>Self Improvement</strong><br />
                 <?php }?>
                 <?php if ( $currentcategory !== "4" ) { ?>
-                    <a href="<?php echo $category4url; ?>">Tech</a><br>
+                    <a href="<?php echo $category4url; ?>">Tech</a><br />
                 <?php } else { ?>
-                    <strong>Tech</strong><br>
+                    <strong>Tech</strong><br />
                 <?php }?>
                 <?php if ( $currentcategory !== "5" ) { ?>
-                    <a href="<?php echo $category5url; ?>">Politics</a><br>
+                    <a href="<?php echo $category5url; ?>">Politics</a><br />
                 <?php } else { ?>
-                    <strong>Politics</strong><br>
+                    <strong>Politics</strong><br />
                 <?php }?>
                 <?php if ( $currentcategory !== "6" ) { ?>
-                    <a href="<?php echo $category6url; ?>">Religion&nbsp;&amp;&nbsp;Spirituality</a><br>
+                    <a href="<?php echo $category6url; ?>">Religion&nbsp;&amp;&nbsp;Spirituality</a><br />
                 <?php } else { ?>
-                    <strong>Religion &amp; Spirituality</strong><br>
+                    <strong>Religion &amp; Spirituality</strong><br />
                 <?php }?>
             </p>
             
-            <br>
+            <br />
 <p style="line-height: 12px">
 
-<a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
+<a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br />
 <br />
 <small>
 
 
-<span style="padding-left:13px">* Submit your posts to be</span><br>
+<span style="padding-left:13px">* Submit your posts to be</span><br />
 <span style="padding-left:20px">featured on this page</span>
 
 </small></p>
