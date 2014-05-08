@@ -71,7 +71,7 @@ function atcontent_activate() {
             $wpdb->flush();
             $offset += $limit;
         } while ( count( $wp_user_search ) > 0 );
-    } catch (Exception $e) { }
+    } catch ( Exception $e ) { }
 }
 
 function atcontent_deactivate() {
@@ -93,7 +93,7 @@ function atcontent_deactivate() {
             $wpdb->flush();
             $offset += $limit;
         } while ( count( $wp_user_search ) > 0 );
-    } catch (Exception $e) { }
+    } catch ( Exception $e ) { }
 }
 
 function atcontent_uninstall() {
@@ -115,5 +115,5 @@ function atcontent_uninstall() {
             $wpdb->flush();
             $offset += $limit;
         } while ( count( $wp_user_search ) > 0 );
-    } catch (Exception $e) { }
+    } catch ( Exception $e ) { }
 }

@@ -173,5 +173,4 @@ END;
     return $posts;
 }
 add_filter('the_posts', 'atcontent_repost_preview' );
-
 ?>
