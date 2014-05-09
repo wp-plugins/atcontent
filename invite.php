@@ -201,7 +201,7 @@
                     if (d.IsOK) {
                         SyncQueue();
                     } else {
-                        if(d.Error == "select") {
+                        if (d.Error == "select") {
                             CreateBlogsPanel(d.blogs);
                             EnableButton();
                         } else {

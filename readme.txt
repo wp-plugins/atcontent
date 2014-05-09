@@ -70,6 +70,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 
 == Changelog ==
 
+= 7.8.3 =
+* Connect process small fixes.
+
 = 7.8.2 =
 * Better speed of work.
 

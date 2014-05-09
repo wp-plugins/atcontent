@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
-    Version: 7.8.2
+    Version: 7.8.3
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.8.2" );
+    define( 'AC_VERSION', "7.8.3" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 

@@ -328,7 +328,7 @@ function atcontent_connect_blog() {
         {
             if ( isset ( $connect_answer["ErrorCode"] ) && $connect_answer["ErrorCode"] == "101")
             {
-                echo json_encode ( array ( "IsOK" => FALSE, "ErrorCode" => $connect_answer["ErrorCode"]) ); 
+                echo json_encode ( array ( "IsOK" => FALSE, "ErrorCode" => 101 ) ); 
             }
             else
             {
