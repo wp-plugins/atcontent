@@ -220,7 +220,7 @@ END;
 $j = jQuery;
 $j().ready(function(){
     if (window.location.href.indexOf("billbelew.com") != -1) return;
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start grow your audience and monetize your blog with native advertizing!</td></tr></table></div>');
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start grow your audience and monetize your blog with sponsored posts!</td></tr></table></div>');
 });
 </script>
 <?php
