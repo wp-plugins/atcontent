@@ -351,18 +351,13 @@ function atcontent_save_settings() {
         $userid = wp_get_current_user()->ID;
         $siteCategory = isset( $_POST["ac_sitecategory"] ) ? $_POST["ac_sitecategory"] : "";
         update_user_meta( $userid, "ac_sitecategory", $siteCategory );
-
         $country = isset( $_POST["ac_country"] ) ? $_POST["ac_country"] : "";
         update_user_meta( $userid, "ac_country", $country );
-
         $state = isset( $_POST["ac_state"] ) ? $_POST["ac_state"] : "";
         update_user_meta( $userid, "ac_state", $state );
-
         atcontent_api_sitecategory( site_url(), $siteCategory, $country, $state, $ac_api_key );
-
         $ac_share_panel_disable = $_POST["ac_share_panel_disable"] == 'y' ? 0 : 1;
         update_user_meta( $userid, "ac_share_panel_disable", $ac_share_panel_disable );
-
         $ac_excerpt_no_process = $_POST[ "ac_excerpt_no_process" ] == 'y'  ? "0" : "1";
         update_user_meta( $userid, "ac_excerpt_no_process", $ac_excerpt_no_process );
         echo json_encode ( array ( "IsOK" => true )); 
@@ -407,51 +402,51 @@ function atcontent_ajax_get_sync_stat() {
 }
 
 function atcontent_ajax_repost() {
-        include( "atcontent_userinit.php" );
-        $ac_postid = $_POST['ac_post'];
-        $repost_title = "Not found";
-        $repost_preview = "";
-        $new_post = array(
-            'post_title'    => 'New repost',
-            'post_content'  => ''
-            );
-        $new_post_id = wp_insert_post( $new_post );
-        $repost_result = atcontent_api_repost_publication( $ac_postid, $new_post_id );
-        $embedid = '';
-        if ( $repost_result["IsOK"] == TRUE ) {
-            $embedid = "-/" . $repost_result["EmbedId"] . "/";
-            $repost_title = $repost_result["Title"];
-            $repost_preview = $repost_result["Preview"];
-        }
-        remove_filter( 'the_content', 'atcontent_the_content', 1 );
-        remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
-        remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
-        remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-        $ac_content = 
-        "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
-        "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-        "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-        "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
-        // Create post object
-        $new_post = array(
-            'ID'            => $new_post_id,
-            'post_title'    => $repost_title,
-            'post_content'  => $ac_content,
-            'post_status'   => 'publish',
-            'post_author'   => $userid,
-            'post_category' => array()
-        );
-        kses_remove_filters();
-        // Insert the post into the database
-        remove_all_actions( 'publish_post' );
-        wp_update_post( $new_post );
-        update_post_meta( $new_post_id, "ac_is_process", "0" );
-        update_post_meta( $new_post_id, "ac_embedid", $embedid );
-        update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
-        kses_init_filters();
-        echo json_encode ( array ( "IsOK" => true ) );
-        exit;
-    }
+      include( "atcontent_userinit.php" );
+      $ac_postid = $_POST['ac_post'];
+      $repost_title = "Not found";
+      $repost_preview = "";
+      $new_post = array(
+          'post_title'    => 'New repost',
+          'post_content'  => ''
+          );
+      $new_post_id = wp_insert_post( $new_post );
+      $repost_result = atcontent_api_repost_publication( $ac_postid, $new_post_id );
+      $embedid = '';
+      if ( $repost_result["IsOK"] == TRUE ) {
+          $embedid = "-/" . $repost_result["EmbedId"] . "/";
+          $repost_title = $repost_result["Title"];
+          $repost_preview = $repost_result["Preview"];
+      }
+      remove_filter( 'the_content', 'atcontent_the_content', 1 );
+      remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
+      remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
+      remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
+      $ac_content = 
+      "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
+      "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+      "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+      "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+      // Create post object
+      $new_post = array(
+          'ID'            => $new_post_id,
+          'post_title'    => $repost_title,
+          'post_content'  => $ac_content,
+          'post_status'   => 'publish',
+          'post_author'   => $userid,
+          'post_category' => array()
+      );
+      kses_remove_filters();
+      // Insert the post into the database
+      remove_all_actions( 'publish_post' );
+      wp_update_post( $new_post );
+      update_post_meta( $new_post_id, "ac_is_process", "0" );
+      update_post_meta( $new_post_id, "ac_embedid", $embedid );
+      update_post_meta( $new_post_id, "ac_repost_postid", $ac_postid );
+      kses_init_filters();
+      echo json_encode ( array ( "IsOK" => true ) );
+      exit;
+}
 
 function atcontent_ajax_reposts_count() {
     $since = get_user_meta( wp_get_current_user()->ID, "ac_last_repost_visit", true );
