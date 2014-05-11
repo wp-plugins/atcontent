@@ -253,23 +253,23 @@ function atcontent_api_get_sync_stat($syncId, $blogId  ) {
 function atcontent_do_post( $url, $data ) {
     $wp_response = wp_remote_post( $url, array(
         'method' => 'POST',
-	    'timeout' => 300,
-	    'redirection' => 5,
-	    'httpversion' => '1.0',
-	    'blocking' => true,
-	    'headers' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL . 'User-Agent: IE 10.00' . PHP_EOL,
-	    'body' => $data,
-	    'cookies' => array()
+        'timeout' => 300,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'blocking' => true,
+        'headers' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+        'body' => $data,
+        'cookies' => array()
         )    
      );
-    if (is_wp_error($wp_response)){
-        $out_array = array( 'IsOK' => FALSE, 'error' =>  $res );
+    if ( is_wp_error( $wp_response ) ){
+        $out_array = array( 'IsOK' => FALSE, 'Error' =>  $res );
     } else {
         try {
             $out_array = json_decode( $wp_response['body'], true );
         } catch (Exception $e) { }
         if ( !is_array( $out_array ) ) {
-            $out_array = array( 'IsOK' => FALSE, 'error' =>  $wp_response );
+            $out_array = array( 'IsOK' => FALSE, 'Error' =>  $wp_response );
         }
     }
     return $out_array;
