@@ -41,7 +41,6 @@
         add_action( 'wp_ajax_atcontent_api_key', 'atcontent_api_key' );
         add_action( 'wp_ajax_atcontent_pingback', 'atcontent_pingback' );
         add_action( 'wp_ajax_atcontent_repost', 'atcontent_ajax_repost' );
-        add_action( 'wp_ajax_atcontent_hide_rate', 'atcontent_hide_rate' );
         add_action( 'wp_ajax_atcontent_get_sync_stat', 'atcontent_ajax_get_sync_stat' );
         add_action( 'wp_ajax_atcontent_save_credentials', 'atcontent_save_credentials' );
         add_action( 'wp_ajax_atcontent_connect_blog', 'atcontent_connect_blog' );
@@ -130,36 +129,6 @@
 
     function atcontent_admin_styles(){
         wp_enqueue_style( 'atcontentAdminStylesheet' );
-    }
-
-    function atcontent_comment_post( $comment_id, $status = 1 ) {
-        $comment = get_comment( $comment_id );
-        if ( $comment != NULL ) {
-            atcontent_process_comments( $comment->comment_post_ID );
-        }
-    }
-
-    function atcontent_process_comments( $post_id ) {
-        $post = get_post( $post_id );
-        if ( $post == null ) return;
-        $ac_api_key = get_user_meta( intval( $post->post_author ), "ac_api_key", true );
-        if ( strlen( $ac_api_key ) > 0 ) {
-            $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-            $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
-            if ( $ac_is_process == "1" ) {
-                $comments_json = "";
-                $comments = get_comments( array(
-                    'post_id' => $post->ID,
-                    'order' => 'ASC',
-                    'orderby' => 'comment_date_gmt',
-                    'status' => 'approve',
-                ) );
-                if( !empty( $comments ) ){
-                    $comments_json .= json_encode( $comments );
-                }
-                atcontent_api_update_publication_comments( $ac_api_key, $ac_postid, $comments_json );
-            }
-        }
     }
 
     function atcontent_footer_scripts() {
