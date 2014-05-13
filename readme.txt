@@ -1,4 +1,4 @@
-=== AtContent — Grow Audience & Monetize Blog ===
+=== AtContent — Monetize Blog & Grow Audience ===
 Contributors: atcontent, ariser, vadnov, berd
 Donate link: https://atcontent.com/
 Tags: ad, ads, advertising, affiliate, admin, google, promote, post, plugin, posts, widget, monetize
@@ -8,7 +8,7 @@ Tested up to: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
+Easily monetize your blog with sponsored posts and boost your audience 2.5x in 30 days. It's free to join!
 
 == Description ==
 
