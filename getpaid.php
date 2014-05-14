@@ -18,7 +18,7 @@
 ?>
 <div class="atcontent_wrap">
     <div class="wrap">
-        <div class="icon32" id="icon-link"><br /></div><h2>NativeAd Marketplace</h2>
+        <div class="icon32" id="icon-link"><br /></div><h2>NativeAd Sponsored Posts</h2>
     </div>
     <br /><br />
     <div class="contentColumns">
@@ -55,7 +55,7 @@
                         <p>
                             Here you can get sponsored stories and post them on your blog.<br />
                             <?php if ( strlen( $ac_marketplace["Nickname"] ) == 0 ) { ?>
-                            To start please <a href="<?php echo $connect_url; ?>">connect the plugin</a> to AtContent.
+                            To start please <a href="<?php echo $connect_url; ?>">connect plugin</a> to AtContent.
                             <?php } ?>
                         </p>
                         <p>It’s only 3 simple steps to go!</p>
@@ -107,7 +107,7 @@
                 <div class="b-hints__item" id="hint_earnings">
                     <h4>How to use it?</h4>
                     <p>Click “Repost” button under any article you like.</p>
-                    <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank" data-role="linkToRules">the rules of AtContent NativeAd</a>.</div>
+                    <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank">the rules of AtContent NativeAd</a>.</div>
                 </div>
 
                 <div class="b-hints__list-arrow" id="hintsArrow"></div>
@@ -167,7 +167,7 @@
 					dataType: "json",
 					success: function(d) {
 						if (d.IsOK) {
-							$(btn).parent().parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
+							$(btn).parent().parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
 						}
 					},
 					error: function(d, s, e) {
@@ -204,9 +204,9 @@
     <ol class="p-usageTips">
         <li>Click “Repost” button under any article you like.</li>
     </ol>
-    <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank" data-role="linkToRules">the rules of AtContent NativeAd</a>.</div>
+    <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank">the rules of AtContent NativeAd</a>.</div>
     <p class="centerAlgn">
-        <button type="button" id="startBtn" class="button-color-orange button-size-big">Start reposting!</button>
+        <button type="button" id="startBtn" class="button-color-orange button-size-big">Start earning!</button>
     </p>
 </script>
 <?php    } else { ?>
