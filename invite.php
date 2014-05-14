@@ -31,7 +31,7 @@
         <div id="ac_connect_result">
             <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />
         </div>
-	    <a id="b_connect" class="likebutton b_green b_big" style="display: none;" href="#">Connect with AtContent</a>
+	    <a id="b_connect" class="likebutton b_green b_big" style="display: none;" href="#">Connect to AtContent</a>
         <p id="ac_we_will_send">We will send your password by email</p>
        <hr />
 <script type="text/javascript">
