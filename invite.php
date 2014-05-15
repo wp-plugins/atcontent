@@ -22,9 +22,9 @@
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
                     <p class="caption"><label for="username">Username</label></p>
-                    <input id="username" type="text" name="username" value="<?php echo $username?>"></input></br>
+                    <input id="username" type="text" name="username" value="<?php echo $username?>"></input><br>
                     <p class="caption"><label for="email">Email</label></p>
-                    <input id="email" type="text" name="email" value="<?php echo $email?>"></input></br>
+                    <input id="email" type="text" name="email" value="<?php echo $email?>"></input><br>
                 </div>
                 <div id="blogs"></div>
             <div id="sign_changer" style="display: none;"><a href="#" id="ac_have_account">I already have an AtContent account</a></div>
@@ -62,8 +62,8 @@
         var selectedBlog = '';
 
         $(function(){
-            $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br />');
-            $('#footer-upgrade').prepend('<br />');
+            $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
+            $('#footer-upgrade').prepend('<br>');
             <?php
             if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
                 ?>
@@ -149,9 +149,9 @@
                     '" /><label for="blog_' + 
                     blogs[i].BlogId + '">' + 
                     blogs[i].BlogTitle + 
-                    '</label><br />';
+                    '</label><br>';
             }
-            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br /></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label></br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input></br></div>'
+            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label><br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input><br></div>'
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function(e) {
                 e.preventDefault();
