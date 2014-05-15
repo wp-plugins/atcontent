@@ -1,7 +1,6 @@
 <?php
 
     function atcontent_add_meta_boxes() {
-
         add_meta_box(
             'atcontent_sectionid',
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
@@ -81,7 +80,6 @@
           }
           $ac_is_copyprotect_enabled = $plagiarism_quota > 0;
           $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
-
           ?>
     <div class="misc-pub-section">
         <label>
