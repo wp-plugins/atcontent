@@ -199,7 +199,7 @@ END;
 
         //Social Media Feather
         if ( function_exists( 'synved_social_wp_the_content' ) ) {
-            remove_filter('the_content', 'synved_social_wp_the_content', 10, 2);
+            remove_filter( 'the_content', 'synved_social_wp_the_content', 10, 2 );
         }
         //end Social Media Feather
     }
