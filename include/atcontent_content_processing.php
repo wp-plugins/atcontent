@@ -212,15 +212,12 @@ END;
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         if ( ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
-            if ( ! atcontent_pingback_inline() ) {
-                //echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Contact your hosting provider.' . "</div>";
-            }
         ?>
 <script type="text/javascript">
 $j = jQuery;
 $j().ready(function(){
     if (window.location.href.indexOf("billbelew.com") != -1) return;
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start grow your audience and monetize your blog with sponsored posts!</td></tr></table></div>');
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start monetize your blog with sponsored posts and grow your audience!</td></tr></table></div>');
 });
 </script>
 <?php
