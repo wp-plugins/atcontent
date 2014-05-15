@@ -85,7 +85,7 @@ function atcontent_deactivate() {
                 $userid = $user->ID;
                 $email = $user->user_email;
                 $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-                if ( user_can( $userid, 'publish_posts' ) ) {
+                if ( user_can( $userid, 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
                     $status = 'Deactivated';
                     atcontent_api_pingback( $email, $status, $ac_api_key, "" );
                 }
@@ -107,7 +107,7 @@ function atcontent_uninstall() {
                 $userid = $user->ID;
                 $email = $user->user_email;
                 $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-                if ( user_can( $userid, 'publish_posts' ) ) {
+                if ( user_can( $userid, 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
                     $status = 'Uninstalled';
                     atcontent_api_pingback( $email, $status, $ac_api_key, "" );
                 }
