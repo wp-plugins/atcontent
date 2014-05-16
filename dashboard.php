@@ -15,18 +15,14 @@
         $currentuser = wp_get_current_user();
         $userinfo = get_userdata( $currentuser -> ID );
 ?>
-
 <div style="width: 100%; height: 40px;"></div>
 <div id="popup-bg" class="popup-bg" style="display: none"></div>
-
 <script>
     jQuery( function($){
         $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
         $('#footer-upgrade').prepend('<br>');
     });
-
     jQuery("#contextual-help-link").hide();
-
     function beforechangeaccount() {
         if (confirm("Are you sure you want to change AtContent profile?")) {
             jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
