@@ -51,7 +51,7 @@
           $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
           $ac_is_process_checked = "";
           if ( $ac_is_process == "1" || $ac_is_process == "" ) {
-              $ac_is_process_checked = "checked=\"checked\"";
+              $ac_is_process_checked = 'checked="checked"';
           }
           $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
           $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
