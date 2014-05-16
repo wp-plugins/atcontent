@@ -109,7 +109,7 @@ function atcontent_uninstall() {
                 $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
                 if ( user_can( $userid, 'edit_posts' ) && strlen( $ac_api_key ) > 0 ) {
                     $status = 'Uninstalled';
-                    atcontent_api_pingback( $email, $status, $ac_api_key, "" );
+                    atcontent_api_pingback( $email, $status, $ac_api_key, '' );
                 }
             }
             $wpdb->flush();
