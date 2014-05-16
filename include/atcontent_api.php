@@ -201,7 +201,7 @@ function atcontent_api_reposts( $category, $page ) {
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/general/repost', $post_content );
 }
-/////////////////////////////////////////////////////////////////////
+
 function atcontent_api_repost_publication($postid, $post_id_in_app){
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true ); 
