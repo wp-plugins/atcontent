@@ -3,12 +3,10 @@
 function atcontent_dashboard_widget_function() {
     wp_register_script( 'atcontentAdminGoogleAPI',  '//www.google.com/jsapi', array(), true );
     wp_enqueue_script( 'atcontentAdminGoogleAPI' );
-	$userid = wp_get_current_user()->ID;
+    $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_syncid = get_user_meta($userid, "ac_syncid", true );
-    
     echo '<div class="atcontent_wrap" id="atcontent_dashboard_inside">';
-
     if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0  ) {
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
