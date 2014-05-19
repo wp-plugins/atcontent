@@ -10,7 +10,6 @@
     }
 
     function atcontent_inner_custom_box( $post ) {
-          // Use nonce for verification
           wp_nonce_field( plugin_basename( __FILE__ ), 'atcontent_noncename' );
           $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
