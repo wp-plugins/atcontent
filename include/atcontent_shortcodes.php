@@ -6,9 +6,7 @@ function atcontent_shortcode( $atts ) {
       'nickname' => '',
       'comments' => '1',
     ), $atts ) );
-
     if ( strlen( $id ) == 0 ) return '';
-
     $ac_postid = $id;
     if ( strlen( $nickname ) == 0 ) {
         $userid = wp_get_current_user()->ID;
