@@ -17,27 +17,20 @@
     if ( isset( $_GET["category"] ) ) {
         $currentcategory = $_GET["category"];
     }
-
     $currentpage ="1";
     if ( isset( $_GET["pageNum"] ) ) {
         $currentpage = $_GET["pageNum"];
     }
-
     $pageAnswer = atcontent_api_reposts( $currentcategory, $currentpage );
     if ( $pageAnswer["IsOK"] != true ) {
         wp_die( "Something gets wrong" . var_dump( $pageAnswer ) );
     }
-
     $atcontent_reposts = $pageAnswer["Page"]["PostIDs"];
-
-    // PingBack
     if ( ! atcontent_pingback_inline() ) {
         echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com">AtContent.com</a>. Contact your hosting provider.' . "</div>";
     }
-    //End PingBack
-
     $currentuser = wp_get_current_user();
-    $userinfo = get_userdata($currentuser -> ID);
+    $userinfo = get_userdata( $currentuser -> ID );
 ?>
 <script>
 	var connected = true;
