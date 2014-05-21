@@ -49,7 +49,6 @@
                 </ul>
             </div>
             <div class="b-hints__list" id="hintsList">
-
                 <div class="b-hints__item centerAlgn" id="hint_join">
                         <h3>Welcome to AtContent NativeAd!</h3>
                         <p>
@@ -63,7 +62,6 @@
                         <p style="margin-top: 1em"><a href="<?php echo $connect_url; ?>" class="likebutton b_big b_green">Connect</a></p>
                         <?php } ?>
                 </div>
-
                 <div class="b-hints__item" id="hint_tags">
                     <h3>Choose tags for your profile</h3>
                     <p>
@@ -84,7 +82,6 @@
                         <div class="fieldsetNote" id="tagsSaved" style="display: none">Saved!</div>
                     </form>
                 </div>
-
                 <div class="b-hints__item" id="hint_country">
                     <h3>Well done! Now, where are you from?</h3>
                     <p>Please specify your country. This will help us show geographically relevant posts.</p>
@@ -103,7 +100,6 @@
                         <div class="fieldsetNote" id="countrySaved" style="display: none">Saved!</div>
                     </form>
                 </div>
-
                 <div class="b-hints__item" id="hint_earnings">
                     <h4>How to use it?</h4>
                     <p>Click “Repost” button under any article you like.</p>
@@ -147,46 +143,45 @@
         });
 
         function connect_error(p) {
-			var btn = document.getElementById('acRepostBtn' + p);
-			$(btn).parent().html('<div class="update-nag">Please complete all steps</div>');
-		}
+          var btn = document.getElementById('acRepostBtn' + p);
+          $(btn).parent().html('<div class="update-nag">Please complete all steps</div>');
+        }
 		
         window.repost_post = function(p) {
-			if (ac_allow_repost)
-			{
-				var btn = document.getElementById('acRepostBtn' + p);
-				btn.href = "javascript:";
-				var btnCaption = document.getElementById('acRepostBtnCaption' + p);
-				btnCaption.innerHTML = "Reposting...";
-				$.ajax({url: '<?php echo $ajax_form_action; ?>',
-					type: 'post',
-					data: {
-							action: 'atcontent_repost',
-							ac_post: p
-						  },
-					dataType: "json",
-					success: function(d) {
-						if (d.IsOK) {
-							$(btn).parent().parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
-						}
-					},
-					error: function(d, s, e) {
-						btnCaption.innerHTML = "Repost";
-						btn.href = "javascript:repost_post('" + p + "');";
-						$(btn).addClass("b_orange").removeClass("b_white");
-					}
-				});
-			}
-			else
-			{
-				connect_error(p);
-			}
+          if (ac_allow_repost)
+          {
+            var btn = document.getElementById('acRepostBtn' + p);
+            btn.href = "javascript:";
+            var btnCaption = document.getElementById('acRepostBtnCaption' + p);
+            btnCaption.innerHTML = "Reposting...";
+            $.ajax({url: '<?php echo $ajax_form_action; ?>',
+              type: 'post',
+              data: {
+                  action: 'atcontent_repost',
+                  ac_post: p
+                  },
+              dataType: "json",
+              success: function(d) {
+                if (d.IsOK) {
+                  $(btn).parent().parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
+                }
+              },
+              error: function(d, s, e) {
+                btnCaption.innerHTML = "Repost";
+                btn.href = "javascript:repost_post('" + p + "');";
+                $(btn).addClass("b_orange").removeClass("b_white");
+              }
+            });
+          }
+          else
+          {
+            connect_error(p);
+          }
         }
     })(jQuery);
 </script>
         </div>
     </div>
-
 </div>
 <input type="hidden" id="_nickname" value="<?php echo $ac_marketplace["Nickname"]; ?>">
 <script type="text/template" id="tmpl_repost">
