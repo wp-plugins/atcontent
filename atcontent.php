@@ -100,6 +100,12 @@
             wp_register_script( 'atcontentAdminScript38',  plugins_url( 'assets/atcontent38.js?v=1', __FILE__ ), array(), true );
             wp_enqueue_script( 'atcontentAdminScript38' );
         }
+        if ( !get_option('atcontent_inited') )
+        {
+          update_option('atcontent_inited', 'true');
+          wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
+          exit;
+        }
     }
 
     function atcontent_get_menu_key( $desired ) {
@@ -166,5 +172,4 @@
 </script>
 <?php
     }
-
 ?>
