@@ -48,7 +48,6 @@
     <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
 </div>
     <br><br>
-
     <div class="contentColumns">
         <div class="asideCol">
             <h2>Categories</h2>
