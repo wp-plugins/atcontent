@@ -185,5 +185,4 @@
     <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
     <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
 </p>
-</p>
 </div>
