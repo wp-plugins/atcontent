@@ -176,7 +176,6 @@
         <?php } ?>
         </div>
     </div>
-
 <br><br><br>
 <p><a href="http://wordpress.org/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
     <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
