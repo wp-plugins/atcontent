@@ -83,7 +83,6 @@
                     <strong>Religion &amp; Spirituality</strong><br>
                 <?php }?>
             </p>
-            
             <br>
 <p style="line-height: 12px">
   <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
