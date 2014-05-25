@@ -96,7 +96,6 @@
     <style>
         .CPlase_panel { display: none; }
     </style>
-
     <div class="mainCol">
         <h3>Posts below can be published on your blog. Click "Repost to my blog" to try it.</h3>
         <div class="postList b-publications-columns">
