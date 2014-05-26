@@ -107,7 +107,6 @@
                 </div>
             <?php } ?>
         </div>
-
 <script>
     (function ($) {
         $(function () {
