@@ -103,7 +103,6 @@
                 <div class="article-inline" data-options="hide_shares" >
 <script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
 <script data-ac-src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
-
                 </div>
             <?php } ?>
         </div>
@@ -117,8 +116,8 @@
                 hdl.html('<a href="http://p.atcontent.com/' + p + '/">' + hdl.html() + '</a>');
                 var o = $(document.getElementById('CPlase_' + p + '_' + w + '_panel'));
                 if (!o.prev('.CPlase_publicationLink').size()) {
-					o.before('<div style="margin: 1em 0 0" class="CPlase_publicationLink"><a id="acRepostBtn' + p + '" class="likebutton b_orange" href="javascript:repost_post(\'' + p + '\');">Repost to my blog</a></div>');
-				}
+                  o.before('<div style="margin: 1em 0 0" class="CPlase_publicationLink"><a id="acRepostBtn' + p + '" class="likebutton b_orange" href="javascript:repost_post(\'' + p + '\');">Repost to my blog</a></div>');
+                }
             });
         });
 
