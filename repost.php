@@ -127,35 +127,35 @@
         }
 		
         window.repost_post = function(p) {
-			if (connected)
-			{
-				var btn = document.getElementById('acRepostBtn' + p);
-				btn.href = "javascript:";
-				btn.innerHTML = "Reposting...";
-				$(btn).removeClass("b_orange").addClass("b_white");
-				$.ajax({url: '<?php echo $ajax_form_action; ?>',
-					type: 'post',
-					data: {
-							action: 'atcontent_repost',
-							ac_post: p
-						  },
-					dataType: "json",
-					success: function(d) {
-						if (d.IsOK) {
-							$(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
-						}
-					},
-					error: function(d, s, e) {
-						btn.innerHTML = "Repost to my blog";
-						btn.href = "javascript:repost_post('" + p + "');";
-						$(btn).addClass("b_orange").removeClass("b_white");
-					}
-				});
-			}
-			else
-			{
-				connect_error(p);
-			}
+          if (connected)
+          {
+            var btn = document.getElementById('acRepostBtn' + p);
+            btn.href = "javascript:";
+            btn.innerHTML = "Reposting...";
+            $(btn).removeClass("b_orange").addClass("b_white");
+            $.ajax({url: '<?php echo $ajax_form_action; ?>',
+              type: 'post',
+              data: {
+                  action: 'atcontent_repost',
+                  ac_post: p
+                  },
+              dataType: "json",
+              success: function(d) {
+                if (d.IsOK) {
+                  $(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
+                }
+              },
+              error: function(d, s, e) {
+                btn.innerHTML = "Repost to my blog";
+                btn.href = "javascript:repost_post('" + p + "');";
+                $(btn).addClass("b_orange").removeClass("b_white");
+              }
+            });
+          }
+          else
+          {
+            connect_error(p);
+          }
         }
     })(jQuery);
 </script>
