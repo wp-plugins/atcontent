@@ -127,8 +127,7 @@
         }
 		
         window.repost_post = function(p) {
-          if (connected)
-          {
+          if (connected) {
             var btn = document.getElementById('acRepostBtn' + p);
             btn.href = "javascript:";
             btn.innerHTML = "Reposting...";
@@ -138,7 +137,7 @@
               data: {
                   action: 'atcontent_repost',
                   ac_post: p
-                  },
+              },
               dataType: "json",
               success: function(d) {
                 if (d.IsOK) {
