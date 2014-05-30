@@ -16,7 +16,7 @@
     if ( isset( $_GET["category"] ) ) {
         $currentcategory = $_GET["category"];
     }
-    $currentpage ="1";
+    $currentpage = "1";
     if ( isset( $_GET["pageNum"] ) ) {
         $currentpage = $_GET["pageNum"];
     }
