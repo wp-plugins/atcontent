@@ -105,7 +105,6 @@
                     <p>Click “Repost” button under any article you like.</p>
                     <div class="toolsInfo">Please be sure you follow <a href="http://atcontent.com/nativead-rules/" target="_blank">the rules of AtContent NativeAd</a>.</div>
                 </div>
-
                 <div class="b-hints__list-arrow" id="hintsArrow"></div>
             </div>
         </section>
