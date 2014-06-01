@@ -8,7 +8,7 @@ Tested up to: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
+Easily monetize your blog with sponsored posts and boost your audience 2.5x in 30 days. It's free to join!
 
 == Description ==
 
