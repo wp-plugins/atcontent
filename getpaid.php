@@ -19,7 +19,8 @@
     <div class="wrap">
         <div class="icon32" id="icon-link"><br /></div><h2>NativeAd Sponsored Posts</h2>
     </div>
-    <br><br>
+    <br>
+    <br>
     <div class="contentColumns">
         <div class="asideCol">
             <section class="b-hints b-hints_no-border b-hints_aside" id="tips">
