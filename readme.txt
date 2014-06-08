@@ -53,16 +53,8 @@ You can see your AtContent feed right in your WordPress Admin, on a "Content Fee
 
 = Why wouldn't Google penalize my site for content duplication? =
 
-We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag and "rel=canonical" link to your site. While indexing reposted content,
+We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag, "nofollow" tag, and "rel=canonical" link to your site. While indexing reposted content,
 search engines will get your site up in their rankings, but not AtContent.
-
-All reposted content has author's name and the link to the original source.
-If anyone of your readers wants to get your article on his own site, he/she needs to repost the article, because AtContent disables browser Copy-Paste functions. Each repost gives you a backlink from the site where article is reposted, with "rel=canonical" tag pointing on your website.
-
-= I have an issue with "selling" content that is not mine (I have guest authors on my site who may not appreciate the appearance of me selling their content without their permission). I'll get back to you on this. =
-
-AtContent settings are different for each user in WordPress blog. If you have two different users in your blog you should setup API Key for each user separately. And posts from each author will be in different AtContent accounts.
-If you have "guest" posts on your blog, you can not use AtContent plugin for it. Each publication has AtContent plugin settings in editing mode and you can turn it on or off as, as you need. [Screenshot](http://bit.ly/1bV0GZT)
 
 == Screenshots ==
 
