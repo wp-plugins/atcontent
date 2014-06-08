@@ -67,9 +67,9 @@ If you have "guest" posts on your blog, you can not use AtContent plugin for it.
 == Screenshots ==
 
 1. AtContent connection page. Clicking the button connects your blog to AtContent if you have an account or creates a new one if you haven't.
-2. If you already have AtContent blogs you can choose which one you want to connect.
-3. Results of using AtContent and 3 steps to improve them.
-4. Get content page here you can repost featured posts on your blog.
+2. A short guide shows you advantages of using AtContent plugin.
+3. How to get maximum of AtContent plugin.
+4. AtContent plugin settings to fit your blog perfectly.
 
 == Changelog ==
 
