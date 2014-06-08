@@ -18,7 +18,11 @@
 
 <form id="connect_form" method="post" action="">
 <div class="atcontent_invite">
-        <h1>Easily monetize your blog with sponsored posts and boost your audience 2.5x in 30 days. It's free to join!</h1>
+        <?php if ( isset( $_GET["repost"] ) && $_GET["repost"] == "1" ) { ?>
+            <h1>To get posts from Content Feed you need to connect<br> your profile to AtContent.</h1>
+        <?php } else { ?>
+            <h1>AtContent helps dramatically increase your audience and drive more traffic to your blog. You can monetize your blog with relevant sponsored posts. It's free to join!</h1>
+        <?php }?>
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
                     <p class="caption"><label for="username">Username</label></p>
@@ -39,6 +43,8 @@
     var AutoSignIn;
     var AutoSignInCallback;
     var ConnectCallback;
+
+    ac_ga_s('connectTab', 'view');
 
     function signInWindow() {
         email = document.getElementById("email").value;
@@ -62,8 +68,8 @@
         var selectedBlog = '';
 
         $(function(){
-            $('#footer-thankyou').before('<a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
-            $('#footer-upgrade').prepend('<br>');
+            $('#footer-thankyou').before('<small>We collect anonymous usage data to improve plugin\'s performance.<br>If it bother you, feel free to contact us.</small><br><a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
+            $('#footer-upgrade').prepend('<br><br><br>');
             <?php
             if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
                 ?>
@@ -114,6 +120,7 @@
 
         function beforechangeaccount() {
             if (confirm("Are you sure you want to change account?")) {
+                ac_ga_s('connectTab', 'changeaccount');
                 $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
                 $('#blogs').html('');
                 DisableButton();

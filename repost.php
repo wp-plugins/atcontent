@@ -1,179 +1,249 @@
 <?php
+    wp_register_style( 'atcontentSettingsPage',  plugins_url( 'assets/settings.css?v=1', __FILE__ ), array(), true );
+    wp_enqueue_style( 'atcontentSettingsPage' );
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require_once( "include/atcontent_userinit.php" );
     if ( strlen( $ac_pen_name ) == 0 ) {
         $ac_pen_name = "AtContent";
     }
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
-    $category1url = admin_url( "admin.php?page=atcontent/repost.php&category=1" );
-    $category2url = admin_url( "admin.php?page=atcontent/repost.php&category=2" );
-    $category3url = admin_url( "admin.php?page=atcontent/repost.php&category=7" );
-    $category4url = admin_url( "admin.php?page=atcontent/repost.php&category=4" );
-    $category5url = admin_url( "admin.php?page=atcontent/repost.php&category=5" );
-    $category6url = admin_url( "admin.php?page=atcontent/repost.php&category=6" );
+    // PingBack
+    if ( ! atcontent_pingback_inline() ) {
+        echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com">AtContent.com</a>. Contact your hosting provider.' . "</div>";
+    }
+    //End PingBack            
+    include( 'include/atcontent_analytics.php' );
+?>
+<script>
+    ac_ga_s('repostTab', 'view');
+    ac_ga_s('repostTab', 'tag ' + '<?php echo $currenttag; ?>');
+</script>
+<div class="b-ac-page b-ac-page_fluid" id="ac-page">
+<?php if ( strlen( $ac_api_key ) == 0 ) { ?>
+<script>
+        window.location = "admin.php?page=atcontent/dashboard.php&repost=1";
+</script>    
+<?php } else { 
     update_user_meta( $userid, "ac_last_repost_visit", date( "Y-m-d H:i:s" ) );
-    $currentcategory = "1";
-    if ( isset( $_GET["category"] ) ) {
-        $currentcategory = $_GET["category"];
+    $currenttag = "";
+    if ( isset( $_GET["tag"] ) ) {
+        $currenttag = $_GET["tag"];
     }
     $currentpage = "1";
     if ( isset( $_GET["pageNum"] ) ) {
         $currentpage = $_GET["pageNum"];
     }
-    $pageAnswer = atcontent_api_reposts( $currentcategory, $currentpage );
+    $pageAnswer = atcontent_api_feed( $ac_api_key, $currenttag, $currentpage );
     if ( $pageAnswer["IsOK"] != true ) {
         wp_die( "Something gets wrong" . var_dump( $pageAnswer ) );
-    }
-    $atcontent_reposts = $pageAnswer["Page"]["PostIDs"];
-    if ( ! atcontent_pingback_inline() ) {
-        echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com">AtContent.com</a>. Contact your hosting provider.' . "</div>";
-    }
-    $currentuser = wp_get_current_user();
-    $userinfo = get_userdata( $currentuser -> ID );
+    }    
+    $atcontent_reposts = $pageAnswer["Page"]["EntityList"];
 ?>
-<script>
-	var connected = true;
-</script>
-<div class="atcontent_wrap">
-<?php if ( strlen( $ac_api_key ) == 0 ) { ?>
-    <?php include("invite.php"); ?>
-    <hr />
-	<script>
-		connected = false;
-	</script>
-    <br>
-<?php } ?>
-<div class="wrap">
-    <div class="icon32" id="icon-link"><br></div><h2>Content&nbsp;for&nbsp;reposting</h2>
-</div>
-    <br><br>
-    <div class="contentColumns">
-        <div class="asideCol">
-            <h2>Categories</h2>
-            <p>
-                <?php if ( $currentcategory !== "1" ) { ?>
-                    <a href="<?php echo $category1url; ?>">Business &amp; Marketing</a><br>
-                <?php } else { ?>
-                    <strong>Business &amp; Marketing</strong><br>
-                <?php }?>
-                <?php if ( $currentcategory !== "2" ) { ?>
-                    <a href="<?php echo $category2url; ?>">Fashion &amp; Style</a><br>
-                <?php } else { ?>
-                    <strong>Fashion &amp; Style</strong><br>
-                <?php }?>
-                <?php if ( $currentcategory !== "7" ) { ?>
-                    <a href="<?php echo $category3url; ?>">Self Improvement</a><br>
-                <?php } else { ?>
-                    <strong>Self Improvement</strong><br>
-                <?php }?>
-                <?php if ( $currentcategory !== "4" ) { ?>
-                    <a href="<?php echo $category4url; ?>">Tech</a><br>
-                <?php } else { ?>
-                    <strong>Tech</strong><br>
-                <?php }?>
-                <?php if ( $currentcategory !== "5" ) { ?>
-                    <a href="<?php echo $category5url; ?>">Politics</a><br>
-                <?php } else { ?>
-                    <strong>Politics</strong><br>
-                <?php }?>
-                <?php if ( $currentcategory !== "6" ) { ?>
-                    <a href="<?php echo $category6url; ?>">Religion&nbsp;&amp;&nbsp;Spirituality</a><br>
-                <?php } else { ?>
-                    <strong>Religion &amp; Spirituality</strong><br>
-                <?php }?>
-            </p>
+
+    <div class="b-ac-mobile-menu">
+        <div class="b-ac-mobile-menu__tags-toggle" id="ac-tags-toggle"></div>
+        <div class="b-ac-mobile-menu__nav">
+            <a href="admin.php?page=atcontent/repost.php&tag=feed" class="b-ac-mobile-menu__link<?php if ( $currenttag == "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">My Feed</a>
+            <a href="admin.php?page=atcontent/repost.php" class="b-ac-mobile-menu__link<?php if ( $currenttag != "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">AtContent Featued</a>
+        </div>
+    </div>
+    
+    <div class="l-ac-grid">
+
+        <div class="l-ac-grid__col-left">
+            <ul class="b-ac-main-menu">
+                <li class="b-ac-main-menu__item<?php if ( $currenttag == "feed" ) echo " b-ac-main-menu__item_current"; ?>">
+                    <a href="admin.php?page=atcontent/repost.php&tag=feed">My Feed</a>
+                </li>
+                <li class="b-ac-main-menu__item<?php if ( $currenttag != "feed" ) echo " b-ac-main-menu__item_current"; ?>">
+                    <a href="admin.php?page=atcontent/repost.php">AtContent Featured</a>
+                </li>
+            </ul>
+
+            <?php if ( $currenttag != "feed" ) { ?>
+            <nav class="b-tags-list b-tags-list_aside">
+                <?php foreach ( $pageAnswer["Tags"] as $tagId => $tagValue ) { ?>
+                    <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent/repost.php&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
+                <?php } ?>
+            </nav>
             <br>
             <p style="line-height: 12px">
-              <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Submit my Posts</a><br>
-              <br>
-              <small>
-                <span style="padding-left:13px">* Submit your posts to be</span><br>
-                <span style="padding-left:20px">featured on this page</span>
-              </small>
+                <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Feature my Posts</a>
+                <br>
+                <br>
+                <small>
+                    <span style="padding-left:13px">* Submit your posts to be</span>
+                    <br>
+                    <span style="padding-left:20px">featured on this page</span>
+                </small>
             </p>
-        </div>
-    <style>
-        .CPlase_panel { display: none; }
-    </style>
-    <div class="mainCol">
-        <h3>Posts below can be published on your blog. Click "Repost to my blog" to try it.</h3>
-        <div class="postList b-publications-columns">
-            <?php foreach ( $atcontent_reposts as $postid ) { ?>
-                <div class="article-inline" data-options="hide_shares" >
-<script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
-<script data-ac-src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
-                </div>
             <?php } ?>
+
         </div>
-<script>
-    (function ($) {
-        $(function () {
+
+        <div class="l-ac-grid__col-right">
+
+            <h3>Posts below can be published on your blog. Click "Repost" to try it.</h3>
+            
+            <div class="postList b-publications-columns">
+                <?php 
+                    foreach ( $atcontent_reposts as $post ) { 
+                    $postid = $post["PostIdString"];
+                ?>
+                    <div class="article-inline" data-options="hide_shares" >
+    <script src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Title/h3"></script>
+    <script data-ac-src="https://w.atcontent.com/CPlase/<?php echo $postid; ?>/Face"></script>
+
+                    </div>
+                <?php } ?>
+            </div>
+
+            <style>
+                .CPlase_fixedWidget .CPlase_face .CPlase_fixedWidget_firstImg {
+                    height: 0 !important;
+                    margin: 0 -1em 1em !important;
+                    padding-top: 56.25%;
+                    
+                    background: 0 33% / cover no-repeat;
+                }
+                .article-inline {
+                    width: 45%;
+                    margin-right: 5%;
+                    padding: 1em;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                
+                    background: white;
+                    box-shadow: 0 0 4px rgba(0,0,0,.2);
+                    
+                    letter-spacing: normal;
+                    word-spacing: normal;
+                }
+                .postList {
+                    letter-spacing: -.31em;
+                    word-spacing: -.43em;
+                }
+                .CPlase_fixedWidget {
+                    max-width: none;
+                    margin: 0 !important;
+                    overflow: visible !important;
+                }
+                .CPlase_panel { display: none; }
+            </style>
+    <script>
+        (function ($) {
+            $(function () {
+                var $acMobileButton = $('#ac-tags-toggle'),
+                    $acPage = $('#ac-page'),
+                    
+                    CLASS_NAME_ASIDE_OPEN = 'b-ac-page_aside-open';
+                    
+                $acMobileButton.on('click', function () {
+                    $acPage.toggleClass(CLASS_NAME_ASIDE_OPEN);
+                    $(window).scrollTop(0);
+                });
+            });
+
             CPlase = window.CPlase || {};
             CPlase.evt = CPlase.evt || [];
             CPlase.evt.push(function (event, p, w) {
-                var hdl = $('h1,h2,h3,h4,h5,h6', document.getElementById('CPlase_' + p + '_' + w + '_title'));
-                hdl.html('<a href="http://p.atcontent.com/' + p + '/">' + hdl.html() + '</a>');
-                var o = $(document.getElementById('CPlase_' + p + '_' + w + '_panel'));
-                if (!o.prev('.CPlase_publicationLink').size()) {
-                  o.before('<div style="margin: 1em 0 0" class="CPlase_publicationLink"><a id="acRepostBtn' + p + '" class="likebutton b_orange" href="javascript:repost_post(\'' + p + '\');">Repost to my blog</a></div>');
-                }
-            });
-        });
+                var titleTag = CPlase.t[p][w],
+                    title = CPlase.id(CPlase.CPID(p, w, 'title')).getElementsByTagName(titleTag)[0],
+                    
+                    panel = CPlase.id(CPlase.CPID(p, w, 'panel')),
+                    linkWrapper, repostWrapper, repostButton, repostsCounter;
+                    
+                title.innerHTML = CPlase.tmpl('<a href="http://p.atcontent.com/{p}/" target="_blank">{html}</a>', { p: p, html: title.innerHTML });
 
-        function connect_error(p) {
-          var btn = document.getElementById('acRepostBtn' + p);
-          $(btn).parent().html('<div class="update-nag">Please connect your blog with <a href="http://atcontent.com" target=_blank>AtContent</a></div>');
-        }
-		
-        window.repost_post = function(p) {
-          if (connected) {
-            var btn = document.getElementById('acRepostBtn' + p);
-            btn.href = "javascript:";
-            btn.innerHTML = "Reposting...";
-            $(btn).removeClass("b_orange").addClass("b_white");
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
-              type: 'post',
-              data: {
-                  action: 'atcontent_repost',
-                  ac_post: p
-              },
-              dataType: "json",
-              success: function(d) {
-                if (d.IsOK) {
-                  $(btn).parent().html('<div class="b-note success">Great! Post reposted! You are awesome!</div>');
+                if (!CPlase.getByClass(panel.parentNode, 'CPlase_publicationLink').length) {
+                    linkWrapper = CPlase.elem('div', {
+                        className: 'CPlase_publicationLink'
+                    });
+                    repostWrapper = CPlase.elem('div', {
+                        className: 'ac-rpst-b',
+                        id: 'acRepostBtn' + p
+                    });
+                    repostButton = CPlase.elem('div', {
+                        html: '<div class="ac-rpst-b__l" id="acRepostBtn' + p + '"></div><div class="ac-rpst-b__t" id="acRepostBtnCaption' + p + '">Repost</div>',
+                        className: 'ac-rpst-b__b'
+                    });
+                    
+                    CPlase.events.add(repostButton, 'click', function () {
+                        repost_post(p);
+                    });
+                    
+                    repostWrapper.appendChild(repostButton);
+                    linkWrapper.appendChild(repostWrapper);
+                    
+                    panel.parentNode.insertBefore(linkWrapper, panel);
                 }
-              },
-              error: function(d, s, e) {
-                btn.innerHTML = "Repost to my blog";
-                btn.href = "javascript:repost_post('" + p + "');";
-                $(btn).addClass("b_orange").removeClass("b_white");
-              }
+                    
+                var featuredImgContainer = CPlase.getByClass(CPlase.id(CPlase.CPID(p, w, 'face')), 'CPlase_fixedWidget_firstImg')[0],
+                    featuredImg = featuredImgContainer ? featuredImgContainer.getElementsByTagName('img')[0] : null;
+                    
+                    if (featuredImg) {    
+                        featuredImgContainer.style.backgroundImage = 'url(' + featuredImg.src + ')';
+                        featuredImgContainer.innerHTML = '';
+                    }
             });
-          }
-          else
-          {
-            connect_error(p);
-          }
-        }
-    })(jQuery);
-</script>
-        <?php if ( $currentpage > 1 ) { 
-            $prevPageUrl = admin_url( "admin.php?page=atcontent/repost.php&category=" . $currentcategory . "&pageNum=" . ( intval( $currentpage ) - 1 ) );
-        ?>
-            <a href="<?php echo $prevPageUrl; ?>" class="likebutton b_green">&larr; Previous page</a>
-        <?php } ?>
-        <?php if ( $pageAnswer["Page"]["HasNext"] == true ) { 
-            $nextPageUrl = admin_url( "admin.php?page=atcontent/repost.php&category=" . $currentcategory . "&pageNum=" . ( intval( $currentpage ) + 1 ) );
-        ?>
-            <a href="<?php echo $nextPageUrl; ?>" class="likebutton b_green">Next page &rarr;</a>
-        <?php } ?>
+		
+            window.repost_post = function(p) {
+				var btn = document.getElementById('acRepostBtn' + p);
+                btn.href = "javascript:";
+                var btnCaption = document.getElementById('acRepostBtnCaption' + p);
+                btnCaption.innerHTML = "Reposting...";
+                $.ajax({url: '<?php echo $ajax_form_action; ?>',
+                    type: 'post',
+                    data: {
+                        action: 'atcontent_repost',
+                        ac_post: p
+                    },
+                    dataType: "json",
+                    success: function(d) {
+                        if (d.IsOK) {
+                            $(btn).parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
+                        }
+                    },
+                    error: function(d, s, e) {
+                        btnCaption.innerHTML = "Repost";
+                        btn.href = "javascript:repost_post('" + p + "');";
+                        $(btn).addClass("b_orange").removeClass("b_white");
+                    }
+                });
+            }
+        })(jQuery);
+    </script>
+            <?php if ( count( $atcontent_reposts ) == 0 ) { ?>
+                <p>To get posts in your feed</p>
+                <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
+            <?php } ?>
+            <?php if ( $currentpage > 1 ) { 
+                $prevPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) - 1 ) );
+            ?>
+                <a href="<?php echo $prevPageUrl; ?>" class="likebutton b_green">&larr; Previous page</a>
+            <?php } ?>
+            <?php if ( $pageAnswer["Page"]["HasNext"] == true ) { 
+                $nextPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) + 1 ) );
+            ?>
+                <a href="<?php echo $nextPageUrl; ?>" class="likebutton b_green">Next page &rarr;</a>
+            <?php } else if ( $currenttag == "feed" ) { ?>
+                <p>Here are displayed only latest posts from bloggers you follow. Click author's name or avatar to see the full list.</p>
+            <?php } ?>
+            
+            <br>
+            <br>
+            <br>
+            <p>
+                <a href="http://wordpress.org/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp;
+                <a href="http://atcontent.com/support/" target="_blank">Support</a> &nbsp;
+                <a href="http://atcontent.com/about/" target="_blank">About AtContent</a> &nbsp;
+                <a href="http://atcontent.com/privacy/" target="_blank">Privacy Policy</a> &nbsp;
+                <a href="http://atcontent.com/terms/" target="_blank">Terms and Conditions</a> &nbsp;
+            </p>
+            
         </div>
+
     </div>
-<br><br><br>
-<p><a href="http://wordpress.org/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp; 
-    <a href="http://atcontent.com/Support/" target="_blank">Support</a> &nbsp; 
-    <a href="http://atcontent.com/About/" target="_blank">About AtContent</a> &nbsp; 
-    <a href="http://atcontent.com/Privacy/" target="_blank">Privacy Policy</a> &nbsp; 
-    <a href="http://atcontent.com/Terms/" target="_blank">Terms and Conditions</a> &nbsp; 
-</p>
+<?php } ?>
 </div>

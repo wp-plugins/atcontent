@@ -13,6 +13,7 @@
     $ac_marketplace = atcontent_api_marketplace( $ac_api_key );
     $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php&marketplace=1" );
     $ajax_form_action = admin_url( 'admin-ajax.php' );
+    include( 'include/atcontent_analytics.php' );
     if ( isset( $ac_marketplace["IsOK"] ) && $ac_marketplace["IsOK"] == TRUE ) {
 ?>
 <div class="atcontent_wrap">
@@ -111,6 +112,7 @@
         </div>
 <script>
     var costPerMille = {};
+    ac_ga_s('getpaidTab', 'view');
 </script>
         <div class="mainCol">
         <div class="postList b-publications-columns blocked" id="postsList">
@@ -147,35 +149,35 @@
         }
 		
         window.repost_post = function(p) {
-          if (ac_allow_repost)
-          {
-            var btn = document.getElementById('acRepostBtn' + p);
-            btn.href = "javascript:";
-            var btnCaption = document.getElementById('acRepostBtnCaption' + p);
-            btnCaption.innerHTML = "Reposting...";
-            $.ajax({url: '<?php echo $ajax_form_action; ?>',
-              type: 'post',
-              data: {
-                  action: 'atcontent_repost',
-                  ac_post: p
-                  },
-              dataType: "json",
-              success: function(d) {
-                if (d.IsOK) {
-                  $(btn).parent().parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
-                }
-              },
-              error: function(d, s, e) {
-                btnCaption.innerHTML = "Repost";
-                btn.href = "javascript:repost_post('" + p + "');";
-                $(btn).addClass("b_orange").removeClass("b_white");
-              }
-            });
-          }
-          else
-          {
-            connect_error(p);
-          }
+            if (ac_allow_repost)
+            {
+                var btn = document.getElementById('acRepostBtn' + p);
+                btn.href = "javascript:";
+                var btnCaption = document.getElementById('acRepostBtnCaption' + p);
+                btnCaption.innerHTML = "Reposting...";
+                $.ajax({url: '<?php echo $ajax_form_action; ?>',
+                    type: 'post',
+                    data: {
+                        action: 'atcontent_repost',
+                        ac_post: p
+                    },
+                    dataType: "json",
+                    success: function(d) {
+                        if (d.IsOK) {
+                            $(btn).parent().parent().html('<div class="b-note success">Great! Story reposted! You are awesome!</div>');
+                        }
+                    },
+                    error: function(d, s, e) {
+                        btnCaption.innerHTML = "Repost";
+                        btn.href = "javascript:repost_post('" + p + "');";
+                        $(btn).addClass("b_orange").removeClass("b_white");
+                    }
+                });
+            }
+            else
+            {
+                connect_error(p);
+            }
         }
     })(jQuery);
 </script>

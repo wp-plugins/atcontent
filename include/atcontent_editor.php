@@ -106,9 +106,16 @@
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
     <?php
-        if ( strlen ( $ac_postid ) > 0 ) {
+        $ac_postid_to_promote = $ac_postid;
+        if ( strlen( $ac_postid_to_promote ) == 0 ) {
+            $ac_postid_to_promote = get_post_meta( $post->ID, "ac_repost_postid", true ); 
+        }
+        if ( strlen ( $ac_postid_to_promote ) > 0 ) {
             ?>
-                <a class="button-primary" id="custom" name="publish" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>" target="_blank">Promote post with AtContent NativeAd</a>
+                <a class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>/">
+                    <span class="ac-logo-promote"></span>
+                    Promote with NativeAd
+                </a>
             <?php
         }
     ?>

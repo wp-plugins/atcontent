@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
-    Version: 7.8.4
+    Version: 7.9
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.8.4" );
+    define( 'AC_VERSION', "7.9" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -49,7 +49,9 @@
         add_action( 'wp_ajax_atcontent_disconnect', 'atcontent_disconnect' );
         add_action( 'wp_ajax_atcontent_save_settings', 'atcontent_save_settings' );
         add_action( 'wp_ajax_atcontent_connect', 'atcontent_connect' );
-        add_action( 'wp_ajax_atcontent_reposts_count', 'atcontent_ajax_reposts_count' );
+        add_action( 'wp_ajax_atcontent_send_invites', 'atcontent_send_invites' );
+        add_action( 'wp_ajax_atcontent_feed_count', 'atcontent_ajax_feed_count' );
+        add_action( 'wp_ajax_atcontent_settings_tab', 'atcontent_ajax_settings_tab' );
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
@@ -101,11 +103,11 @@
             wp_enqueue_script( 'atcontentAdminScript38' );
         }
         if ( !get_option('atcontent_inited') )
-        {
-          update_option('atcontent_inited', 'true');
-          wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
-          exit;
-        }
+	    {
+		    update_option('atcontent_inited', 'true');
+		    wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
+            exit;
+	    }
     }
 
     function atcontent_get_menu_key( $desired ) {
@@ -122,9 +124,9 @@
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
-        $repost_title = "Get Content";
+        $repost_title = "Content Feed";
         $repost_key = atcontent_get_menu_key( 5.0 );
-        add_menu_page( 'Get Content', $repost_title, 'publish_posts', 'atcontent/repost.php', '', 
+        add_menu_page( $repost_title, $repost_title, 'publish_posts', 'atcontent/repost.php', '', 
             plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
         $getpaid_key = atcontent_get_menu_key( 5.0 );
         add_menu_page( 'Monetize Blog', 'Monetize Blog<span class="ac-dollar" title="Monetize your blog"><span class="ac-dollar__val">$</span></span>', 'publish_posts', 'atcontent/getpaid.php', '', 
@@ -135,6 +137,25 @@
 
     function atcontent_admin_styles(){
         wp_enqueue_style( 'atcontentAdminStylesheet' );
+    }
+
+    function atcontent_admin_head() {
+        $userid = wp_get_current_user()->ID;
+        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
+
+        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
+        $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
+        if ( ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
+        ?>
+<script type="text/javascript">
+$j = jQuery;
+$j().ready(function(){
+	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start growing your audience, increase traffic on your blog and monetize it with sponsored posts!</td></tr></table></div>');
+});
+</script>
+<?php
+        }
     }
 
     function atcontent_footer_scripts() {
@@ -161,10 +182,11 @@
     (function( $ ) {
         $(function() {
             $.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', {
-                action: 'atcontent_reposts_count'
+                action: 'atcontent_feed_count'
             }, function(r){
                 if (r && r.IsOK) {
-                    $('#toplevel_page_atcontent-repost .wp-menu-name').append('<span class="update-plugins count-' + r.Count + '"><span class="plugin-count">' + r.Count + '</span></span>');
+                    var cnt = r.Count > 99 ? '99+' : r.Count;
+                    $('#toplevel_page_atcontent-repost .wp-menu-name').append('<span class="update-plugins count-' + r.Count + '"><span class="plugin-count">' + cnt + '</span></span>');
                 }
             }, 'json');
         });
@@ -172,4 +194,5 @@
 </script>
 <?php
     }
+
 ?>

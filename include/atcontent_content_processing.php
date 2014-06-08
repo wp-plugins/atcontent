@@ -1,6 +1,7 @@
 <?php
      function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter;
+        $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( intval( $post->post_author ) );
         if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $content, $matches ) ) {
             for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
@@ -8,6 +9,9 @@
                     $matches[0][$index], 
                     "<script data-cfasync=\"false\" " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
                     $content );
+            }
+            if ( !is_single() && $ac_mainpage_repost == "0" ) {
+                $content .= "<style>.CPlase_panel {display:none;}</style>";
             }
             return $content;
         }
@@ -22,7 +26,7 @@
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
         $ac_pen_name = get_user_meta( intval( $post->post_author ), "ac_pen_name", true );
         if ( is_string ( $ac_pen_name ) && strlen( $ac_pen_name ) == 0 ) $ac_pen_name = "AtContent";
-        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 && is_single() ) {
+        if ( $ac_is_process == "1" && is_string ( $ac_postid ) && strlen( $ac_postid ) > 0 && ( is_single() || ( $ac_mainpage_repost == "1" ) ) ) {
             $embedid = "-/00000000000/";
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid = "-/" . $ac_embedid . "/";
@@ -32,7 +36,10 @@
 <script async="true" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Panel"></script>
 END;
             $code = str_replace( PHP_EOL, " ", $code );
-            return $content . $code;
+            $content .= $code;
+        }
+        if ( !is_single() && $ac_mainpage_repost == "0" ) {
+            $content .= "<style>.CPlase_panel {display:none;}</style>";
         }
         return $content;
     }
@@ -204,24 +211,6 @@ END;
         //end Social Media Feather
     }
 
-    function atcontent_admin_head() {
-        $userid = wp_get_current_user()->ID;
-        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
-
-        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
-        $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
-        if ( ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
-        ?>
-<script type="text/javascript">
-$j = jQuery;
-$j().ready(function(){
-    if (window.location.href.indexOf("billbelew.com") != -1) return;
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start monetize your blog with sponsored posts and grow your audience!</td></tr></table></div>');
-});
-</script>
-<?php
-        }
-    }
+    
 
 ?>

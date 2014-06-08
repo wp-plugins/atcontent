@@ -744,12 +744,11 @@ input[disabled] {background: #eee}
 }
 .ac-logo-promote {
     display: inline-block !important;
-    font: normal 22px ACLogo !important;
+    font: normal 1.7em/1em ACLogo !important;
     vertical-align: middle !important;
     color: #fff !important;
     cursor: pointer;
-    height: 24px;
-    padding-top: 3px !important;
+    height: 1.1em;
 }
 .ac-logo-promote:before {
     content: '1';
@@ -1275,4 +1274,14 @@ input[disabled] {background: #eee}
 
 .b-green-text {
     color: #36AE1E;
+}
+
+.b-ac-acc__pane-content .spinner {
+    display: inline-block;
+    float:none;
+    vertical-align:middle;
+}
+
+.b-ac-acc__pane-content .updated {
+    display: inline-block;
 }
