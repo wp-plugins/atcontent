@@ -322,6 +322,7 @@ function atcontent_save_settings() {
     $ac_oneclick_repost = $_POST["ac_oneclick_repost"];
     if ( $ac_oneclick_repost != "0" && $ac_oneclick_repost != "1" ) $ac_oneclick_repost = "1";
     atcontent_set_user_settings_oneclick_repost( $userid, $ac_oneclick_repost );
+    update_user_meta( intval( $current_user->ID ), "ac_settings_tab_settings", "1" );
     $ac_mainpage_repost = "1";
     if ( !isset( $_POST["ac_mainpage_repost"] ) ) $ac_mainpage_repost = "0";
     atcontent_set_user_settings_mainpage_repost( $userid, $ac_mainpage_repost );
@@ -505,7 +506,7 @@ function atcontent_send_invites() {
 function atcontent_ajax_settings_tab() {
     $current_user = wp_get_current_user();
     $tab_id = $_POST["id"];
-    //update_user_meta( intval( $current_user->ID ), "ac_settings_tab_" . $tab_id, "1" );
+    update_user_meta( intval( $current_user->ID ), "ac_settings_tab_" . $tab_id, "1" );
     echo json_encode( array( "IsOK" => true ) );
     exit;
 }

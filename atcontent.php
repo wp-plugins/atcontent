@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Increase your audience reach by 150% in 2 weeks and easily monetize your blog with sponsored posts. Free to join and easy to start!
-    Version: 7.9
+    Version: 7.9.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.9" );
+    define( 'AC_VERSION', "7.9.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -122,7 +122,9 @@
 
     function atcontent_add_tools_menu() {
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
-        add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent/dashboard.php', '',
+        $unread_settings_tab_count = atcontent_get_settings_unread_count( intval( wp_get_current_user()->ID ) );
+        add_menu_page( 'AtContent', 'AtContent' . 
+            '<span class="update-plugins count-' . $unread_settings_tab_count . '"><span class="plugin-count">' . $unread_settings_tab_count . '</span></span>', 'edit_posts', 'atcontent/dashboard.php', '',
             plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
         $repost_title = "Content Feed";
         $repost_key = atcontent_get_menu_key( 5.0 );

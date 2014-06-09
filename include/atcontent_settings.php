@@ -10,9 +10,9 @@
     $ac_settings_tab_fourways = get_user_meta( $userid, "ac_settings_tab_fourways", true );
     $ac_settings_tab_settings = get_user_meta( $userid, "ac_settings_tab_settings", true );
 
-    $guide_unread =  ""; //" b-ac-acc__pane_unread";
-    $fourways_unread = "";//" b-ac-acc__pane_unread";
-    $settings_unread = "";//" b-ac-acc__pane_unread";
+    $guide_unread = " b-ac-acc__pane_unread";
+    $fourways_unread = " b-ac-acc__pane_unread";
+    $settings_unread = " b-ac-acc__pane_unread";
     $settings_opened = "open";
     $guide_opened = "";
     $fourways_opened = "";
@@ -38,12 +38,10 @@
         $fourways_opened = "";
         $settings_opened = "";
     }
-
 ?>
 
 <div class="b-ac-page b-ac-page_incomplete" id="ac-page">
     <h1>AtContent</h1>
-
     <?php if ( isset( $_GET["step"] ) &&  $_GET["step"] == "1" ) { ?>
     <div class="update-nag">
         Congratulations, <?php echo $ac_show_name; ?>! Now you are connected to AtContent network of tens of thousands bloggers!

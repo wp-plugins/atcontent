@@ -36,13 +36,13 @@
         $currentPanel.addClass(CLASS_NAME_OPEN_ACC_PANEL);
         ac_ga_s('settings', 'openpanel' + $panel.attr('data-id'));
 
-        //if ($currentPanel.attr('data-id') != 'guide') {
-        //    $currentPanel.removeClass(CLASS_NAME_PANELS_UNREAD);
-        //    $.post('admin-ajax.php', {
-        //        action: 'atcontent_settings_tab',
-        //        id: $currentPanel.attr('data-id')
-        //    });
-        //}
+        if ($currentPanel.attr('data-id') != 'guide' && !$currentPanel.hasClass(CLASS_NAME_PANELS_BLOCKED) ) {
+            $currentPanel.removeClass(CLASS_NAME_PANELS_UNREAD);
+            $.post('admin-ajax.php', {
+                action: 'atcontent_settings_tab',
+                id: $currentPanel.attr('data-id')
+            });
+        }
     }
 
     function closePanel($panel) {
@@ -52,11 +52,11 @@
     function releasePanels() {
         $page.removeClass(CLASS_NAME_PANELS_BLOCKED);
         ac.setCookie(COOKIE_GUIDE_NAME, COOKIE_GUIDE_VALUE, 1923);
-        //$.post('admin-ajax.php', {
-        //    action: 'atcontent_settings_tab',
-        //    id: 'guide'
-        //});
-        //$('#ac_tab_guide').removeClass(CLASS_NAME_PANELS_UNREAD);
+        $.post('admin-ajax.php', {
+            action: 'atcontent_settings_tab',
+            id: 'guide'
+        });
+        $('#ac_tab_guide').removeClass(CLASS_NAME_PANELS_UNREAD);
     }
 
     $(function () {
