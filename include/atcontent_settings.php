@@ -71,13 +71,13 @@
                                 <div class="b-ac-repost__text">
                                     <h3>A new object at the bottom of your posts.</h3>
                                     <ul class="b-ac-list">
-                                        <li>It allows to do reposts<span style="color: #62B551">*</span>.</li>
+                                        <li>It allows readers to repost your content on other blogs.<span style="color: #62B551">*</span>.</li>
                                         <li>It indicates how popular your posts are.</li>
-                                        <li>It looks nice with your posts. You can adjust the look in settings later.</li>
+                                        <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
                                     </ul>
                                     <p>
-                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your posts on other site or
-                                        app in a couple clicks using AtContent. It dramatically increase your content's audience and helps to drive more traffic to your blog through links in reposts.
+                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on another site or
+                                        app in a couple clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
                                     </p>
                                 </div>
                             </div>
@@ -89,15 +89,15 @@
                                     <h3>AtContent Benefits</h3>
                                     <ul class="b-ac-list">
                                         <li>
-                                            It helps to build your audience and brings a whole host of lovely new people to visit your site through links in your reposted posts.
+                                            It helps to build your audience and brings a whole host of lovely new people to your site through links in your reposted content.
                                         </li>
                                         <li>
                                             It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.
                                         </li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Author attribution follows the reposted post.</li>
+                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">The original author is credited after the reposted content.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts and how many times.</li>
+                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral as they can be reposted from any site and to any site.*</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts have "nofollow" and "canonical" tags. Thus, it doesn't affect your SEO.</li>
                                     </ul>
@@ -137,10 +137,10 @@
                                 <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
                             </p>
                             <p>
-                                Bloggers whom you follow will follow you back and get your content recommended in their feeds for reposting.
+                                Bloggers you follow will follow you back and see your content recommended in their feeds for reposting.
                             </p>
                             <p>
-                                The more reposts you get, the faster your audience and traffic grow.
+                                The more reposts you get, the faster your audience and traffic will grow.
                             </p>
                         </div>
                     </div>
