@@ -122,40 +122,5 @@
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
     }
-    function atcontent_inner_repost_box( $post ) {
-        atcontent_coexistense_fixes();
-
-        $testcontent = apply_filters( "the_content",  $post->post_content );
-        $testcontent .= apply_filters( "the_content",  $ac_paid_portion );
-
-        $ac_is_repost = ( preg_match_all("/<script[^<]+src=\"https?:\/\/w.atcontent.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 );
-        if ( $ac_is_repost ) {
-            $ac_share_panel_data_option = "";
-            $ac_additional_classes = "";            
-            $ac_additional_classes .= " atcontent_excerpt";
-            ?>
-<script type="text/javascript">
-    (function ($) {
-        $(function () {
-            $("#atcontent_sectionid").hide();
-            $("#atcontent-tags-announce").remove();
-            var repostbox = $("#atcontent_repost_metabox").detach();
-            $("#postdivrich").hide().before(repostbox);
-        });
-    })(jQuery);
-</script>
-<p <?php echo $ac_share_panel_data_option ?> class="atcontent_widget<?php echo $ac_additional_classes ?>"><?php echo $post->post_content; ?></p>
-            <?php
-        } else {
-            ?>
-<script type="text/javascript">
-    (function ($) {
-        $(function () {
-            $("#atcontent_repost_metabox").hide();
-        });
-    })(jQuery);
-</script>
-            <?php
-        }
-    }
+    
 ?>

@@ -2,9 +2,9 @@
     $ref_url = "http://wordpress.org/plugins/atcontent/";
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require_once( "include/atcontent_userinit.php" );
-    wp_register_style( 'atcontentSettingsPage',  plugins_url( 'assets/settings.css?v=1', __FILE__ ), array(), true );
+    wp_register_style( 'atcontentSettingsPage',  plugins_url( 'assets/settings.css?v=2', __FILE__ ), array(), true );
     wp_enqueue_style( 'atcontentSettingsPage' );
-    wp_register_script( 'atcontentSettingsScript',  plugins_url( 'assets/settings.js?v=1', __FILE__ ), array(), true );
+    wp_register_script( 'atcontentSettingsScript',  plugins_url( 'assets/settings.js?v=2', __FILE__ ), array(), true );
     wp_enqueue_script( 'atcontentSettingsScript' );
     include( 'include/atcontent_analytics.php' );
     $currentuser = wp_get_current_user();

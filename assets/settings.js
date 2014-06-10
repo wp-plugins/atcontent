@@ -25,18 +25,14 @@
         if ($currentPanel) {
             closePanel($currentPanel);
         }
-
         if ($panel.is($currentPanel)) {
             $currentPanel = null;
             return;
         }
-
         $currentPanel = $panel;
-
         $currentPanel.addClass(CLASS_NAME_OPEN_ACC_PANEL);
-        ac_ga_s('settings', 'openpanel' + $panel.attr('data-id'));
-
-        if ($currentPanel.attr('data-id') != 'guide' && !$currentPanel.hasClass(CLASS_NAME_PANELS_BLOCKED) ) {
+        ac_ga_s('settingsTab', 'openpanel' + $panel.attr('data-id'));
+        if ($currentPanel.attr('data-id') != 'guide' && !$currentPanel.hasClass(CLASS_NAME_PANELS_BLOCKED)) {
             $currentPanel.removeClass(CLASS_NAME_PANELS_UNREAD);
             $.post('admin-ajax.php', {
                 action: 'atcontent_settings_tab',

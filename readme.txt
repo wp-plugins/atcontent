@@ -65,6 +65,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.9.2 =
+* UI fixes
+
 = 7.9.1 =
 * Help and notifications for new users.
 
