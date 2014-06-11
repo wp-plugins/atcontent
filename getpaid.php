@@ -60,7 +60,9 @@
                         </p>
                         <p>It’s only 3 simple steps to go!</p>
                         <?php if ( strlen( $ac_marketplace["Nickname"] ) == 0 ) { ?>
-                        <p style="margin-top: 1em"><a href="<?php echo $connect_url; ?>" class="likebutton b_big b_green">Connect</a></p>
+                        <p style="margin-top: 1em">
+						<a href="<?php echo $connect_url; ?>" class="likebutton b_big b_green">Connect</a>
+						</p>
                         <?php } ?>
                 </div>
                 <div class="b-hints__item" id="hint_tags">
