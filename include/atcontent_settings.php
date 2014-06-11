@@ -94,7 +94,7 @@
                                         <li>
                                             It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.
                                         </li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Author attribution follows the reposted post.</li>
+                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">The original author is credited after the reposted content.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
