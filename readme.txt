@@ -23,6 +23,7 @@ Simply, install the plugin and connect your blog to AtContent.
 A *repost* is when someone literally reposts your blog posts on other site/app in a couple clicks using AtContent.
 
 At AtContent we use "no-follow" and "canonical" tags for all links in reposts. We also avoid content duplication. Thus, it never harms your SEO. Reposts work as free and very effective promotion:
+
 * The more reposts you have, the larger audience you reach and the more people visit your blog through links in your reposts.
 * You can repost other bloggers’ posts on your blog as well. It instantly increases page views and time people spend on your blog!
 
