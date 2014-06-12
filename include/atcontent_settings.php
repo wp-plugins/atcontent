@@ -71,7 +71,7 @@
                                 <div class="b-ac-repost__text">
                                     <h3>A new object at the bottom of your posts.</h3>
                                     <ul class="b-ac-list">
-                                        <li>It allows readers to repost your content on other blogs.<span style="color: #62B551">*</span>.</li>
+                                        <li>It allows to do reposts.<span style="color: #62B551">*</span>.</li>
                                         <li>It indicates how popular your posts are.</li>
                                         <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
                                     </ul>
