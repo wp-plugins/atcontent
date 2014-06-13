@@ -61,8 +61,8 @@
             </ul>
             <?php if ( $currenttag == "feed" && count( $atcontent_reposts ) != 0  ){ ?>               
                <p style="line-height: 12px"> <a href="http://atcontent.com/following-wp/" class="likebutton b_orange" target="_blank">Follow more bloggers</a>               
-                    <br>
-                    <br>
+                    <br />
+                    <br />
                     <small>
                         <span style="padding-left:13px">* Follow more bloggers to get</span>
                         <br>
