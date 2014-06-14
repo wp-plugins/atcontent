@@ -76,8 +76,8 @@
                                         <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
                                     </ul>
                                     <p>
-                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your posts on other site or
--                                        app in a couple clicks using AtContent. It dramatically increase your content's audience and helps to drive more traffic to your blog through links in reposts.
+                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on another site or
+-                                        app in a couple clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
                                     </p>
                                 </div>
                             </div>
