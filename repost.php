@@ -77,11 +77,11 @@
                     <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent/repost.php&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
                 <?php } ?>
             </nav>
-            <br>
+            <br />
             <p style="line-height: 12px">
                 <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Feature my Posts</a>
-                <br>
-                <br>
+                <br />
+                <br />
                 <small>
                     <span style="padding-left:13px">* Submit your posts to be</span>
                     <br>
