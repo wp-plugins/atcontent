@@ -89,7 +89,7 @@
                                     <h3>AtContent Benefits</h3>
                                     <ul class="b-ac-list">
                                         <li>
-                                            It helps to build your audience and brings a whole host of lovely new people to visit your site through links in your reposted posts.
+                                            It helps to build your audience and brings a whole host of lovely new people to your site through links in your reposted content.
                                         </li>
                                         <li>
                                             It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.
