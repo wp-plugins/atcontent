@@ -298,7 +298,7 @@
                     <form id="f-invite">
                     <input type="hidden" name="action" value="atcontent_send_invites">
                     <p>
-                        Invite all authors of your blog to connect their profiles with AtContent.<br>
+                        Invite all authors of your blog to connect their profiles with AtContent.<br />
                         Thus your blog posts will get more reposts, reach a wider audience and drive more traffic!
                     </p>
                     <p>
