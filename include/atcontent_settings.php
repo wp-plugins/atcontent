@@ -137,7 +137,7 @@
                                 <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
                             </p>
                             <p>
-                                Bloggers you follow will follow you back and see your content recommended in their feeds for reposting.
+                                Bloggers whom you follow will follow you back and get your content recommended in their feeds for reposting.
                             </p>
                             <p>
                                 The more reposts you get, the faster your audience and traffic will grow.
