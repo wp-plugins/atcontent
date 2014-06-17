@@ -83,7 +83,7 @@
     <div class="misc-pub-section">
         <label>
             <input type="checkbox" id="atcontent_is_process" name="atcontent_is_process" value="1" <?php echo $ac_is_process_checked; ?> /> Use AtContent for this post
-        </label><br>
+        </label><br />
         as 
         <a href="https://atcontent.com/Profile/<?php echo $ac_pen_name; ?>" target="_blank">
             <img style="vertical-align: middle;  margin-right: .3em" src="<?php echo $ac_avatar_20; ?>"  onerror="this.parentNode.removeChild(this)" alt="">
@@ -94,7 +94,7 @@
         <label>
             <input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> /> 
                 Protect post from copy-paste
-        </label><br>
+        </label><br />
         Available posts: <?php echo $plagiarism_quota; ?>.
         <?php if ( $ac_is_copyprotect_enabled == false ) { 
             if ( $subscriptions_count == 0 ) { ?>
