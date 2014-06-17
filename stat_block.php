@@ -24,7 +24,7 @@
                 <legend>Results of using AtContent</legend>
             </fieldset>             
             <div id="follow_steps_block" >
-                <p>On average, bloggers increase audience by 1.5x in just 2 weeks.</p>      
+                <p>On average, bloggers increase audience by 2.5x in just 1 month.</p> 
             </div>
             <div style="width:416px;">
                 <?php
