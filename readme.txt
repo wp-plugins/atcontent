@@ -29,7 +29,7 @@ At AtContent we use "no-follow" and "canonical" tags for all links in reposts. W
 
 [vimeo http://vimeo.com/97195778]
 
-#### How AtContent Works ###
+#### How AtContent Works ####
 
 After you install the plugin and connect it to AtContent platform in a couple clicks, your content becomes available for reposting. 
 
