@@ -1,4 +1,4 @@
-=== AtContent — Grow Audience & Blog Traffic ===
+﻿=== AtContent — Grow Audience & Blog Traffic ===
 Contributors: atcontent, ariser, vadnov, berd
 Donate link: https://atcontent.com/
 Tags: ads, advertise, affiliate, admin, google, promote, post, posts, plugin, monetize, widget, wordpress 
@@ -29,9 +29,9 @@ At AtContent we use "no-follow" and "canonical" tags for all links in reposts. W
 
 [vimeo http://vimeo.com/97195778]
 
-#### How AtContent Works ####
+#### How AtContent Works ###
 
-After you install the plugin and connect it to AtContent platform in a couple clicks, you content become available for reposting. 
+After you install the plugin and connect it to AtContent platform in a couple clicks, your content becomes available for reposting. 
 
 Simply follow bloggers with relevant content. Bloggers who like your content will follow you back and get your content recommended for reposting in their feeds. The more reposts you get, the faster your audience and traffic grow!
 
