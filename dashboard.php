@@ -18,11 +18,8 @@
     if ( strlen( $ac_api_key ) != 0 && strlen( $ac_syncid ) != 0 ) {
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
         $currentuser = wp_get_current_user();
-        $userinfo = get_userdata( $currentuser -> ID );
-        
+        $userinfo = get_userdata( $currentuser -> ID );        
 ?>
-
-
 <div class="atcontent_wrap">
     <?php
         // PingBack
