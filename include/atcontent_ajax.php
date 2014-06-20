@@ -447,7 +447,7 @@ function atcontent_ajax_syncqueue() {
 	        FROM {$wpdb->posts}
 	        WHERE post_status = 'publish' 
 		        AND post_author = {$userid} AND post_type = 'post'
-            ORDER BY ID LIMIT {$offset},{$limit}
+            ORDER BY post_date DESC LIMIT {$offset},{$limit}
 	        "
         );
         foreach ( $posts as $post ) 
