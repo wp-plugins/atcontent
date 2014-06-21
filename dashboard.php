@@ -24,7 +24,7 @@
     <?php
         // PingBack
         if ( ! atcontent_pingback_inline() ) {
-            echo "<div class=\"error\">" . 'Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent</a> server. Contact your hosting provider.' . "</div>";
+            echo "<div class=\"error\">" . 'Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.' . "</div>";
         }
         //End PingBack
         include("include/atcontent_settings.php");
