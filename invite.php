@@ -277,8 +277,8 @@
                         somethingWrong();
                     }
                 },
-			    dataType: "json"
-		    });
+                dataType: "json"
+            });
         }
 
         AutoSignIn = function() {
