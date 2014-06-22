@@ -1,5 +1,4 @@
 <?php
-
     function atcontent_add_meta_boxes() {
         add_meta_box(
             'atcontent_sectionid',
