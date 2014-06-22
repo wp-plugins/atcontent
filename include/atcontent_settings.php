@@ -2,14 +2,11 @@
     require_once( "atcontent_userinit.php" );
     $posts_id = array();
     $stat_responce = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
-
     $ac_oneclick_repost = atcontent_get_user_settings_oneclick_repost( $userid );
     $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( $userid );
-
     $ac_settings_tab_guide = get_user_meta( $userid, "ac_settings_tab_guide", true );
     $ac_settings_tab_fourways = get_user_meta( $userid, "ac_settings_tab_fourways", true );
     $ac_settings_tab_settings = get_user_meta( $userid, "ac_settings_tab_settings", true );
-
     $guide_unread = " b-ac-acc__pane_unread";
     $fourways_unread = " b-ac-acc__pane_unread";
     $settings_unread = " b-ac-acc__pane_unread";
@@ -292,13 +289,13 @@
                     
                 </div>
                 </form>
-                <?php if ( current_user_can( 'manage_options' ) ) {?>
+                <?php if ( current_user_can( 'manage_options' ) ) { ?>
                 <div class="b-ac-settings-section">
                     <h3>Administration</h3>
                     <form id="f-invite">
                     <input type="hidden" name="action" value="atcontent_send_invites">
                     <p>
-                        Invite all authors of your blog to connect their profiles with AtContent.<br />
+                        Invite all authors of your blog to connect their profiles with AtContent.<br>
                         Thus your blog posts will get more reposts, reach a wider audience and drive more traffic!
                     </p>
                     <p>
@@ -322,7 +319,7 @@
                                 </div>
                                 <div class="b-ac-user__about">
                                     <span class="b-ac-user__name"><?php echo $ac_show_name; ?></span>
-                                    <br />
+                                    <br>
                                     <a href="#" id="b-change-account">change account</a>
                                 </div>
                             </div>
