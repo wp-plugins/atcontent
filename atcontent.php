@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.9.4.6
+    Version: 7.9.4.7
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.9.4.6" );
+    define( 'AC_VERSION', "7.9.4.7" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -26,9 +26,6 @@
     if ( is_admin() ) {
         require_once( "include/atcontent_editor.php" );
         require_once( "include/atcontent_coexistense.php" );
-    }
-
-    if ( is_admin() ) {
         add_action( 'admin_init', 'atcontent_admin_init' );
         add_action( 'admin_menu', 'atcontent_add_tools_menu' );
         add_action( 'save_post', 'atcontent_save_post' );
@@ -52,11 +49,11 @@
         add_action( 'wp_ajax_atcontent_send_invites', 'atcontent_send_invites' );
         add_action( 'wp_ajax_atcontent_feed_count', 'atcontent_ajax_feed_count' );
         add_action( 'wp_ajax_atcontent_settings_tab', 'atcontent_ajax_settings_tab' );
+        add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
+        add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );  
-    add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
-    add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );    
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
     
