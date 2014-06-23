@@ -253,7 +253,7 @@
                                     <input type="radio" name="ac_oneclick_repost" value="1" <?php echo $ac_oneclick_repost == "1" ? "checked=\"\"" : ""; ?> />
                                     Publish immediately
                                 </label>
-                                <br />
+                                <br>
                                 <label>
                                     <input type="radio" name="ac_oneclick_repost" value="0" <?php echo $ac_oneclick_repost == "0" ? "checked=\"\"" : ""; ?> />
                                     Save as a draft
