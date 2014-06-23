@@ -108,11 +108,11 @@
                                                 <img src="http://atcontent.blob.core.windows.net/avatar/ChMa6975/80-0.jpg" width="80" height="80" alt=""/>
                                             </div>
                                             <div class="b-ac-user__about">
-                                                <span class="b-ac-user__name">Christine Macaulay</span><br />
+                                                <span class="b-ac-user__name">Christine Macaulay</span><br>
                                                 thefabuloustimes.com
                                                 <div class="b-ac-user__metrics">
-                                                    <small><b>Average monthly results:</b></small><br/>
-                                                    <span class="b-ac-user__metrics-num">124</span> reposts on other blogs<br />
+                                                    <small><b>Average monthly results:</b></small><br>
+                                                    <span class="b-ac-user__metrics-num">124</span> reposts on other blogs<br>
                                                     <span class="b-ac-user__metrics-num">5,857</span> views of her reposts
                                                 </div>
                                             </div>
