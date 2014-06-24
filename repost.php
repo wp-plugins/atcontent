@@ -242,9 +242,9 @@
                 <p>Here are displayed only latest posts from bloggers you follow. Click author's name or avatar to see the full list.</p>
             <?php } ?>
             
-            <br />
-            <br />
-            <br />
+            <br>
+            <br>
+            <br>
             <p>
                 <a href="http://wordpress.org/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp;
                 <a href="http://atcontent.com/support/" target="_blank">Support</a> &nbsp;
