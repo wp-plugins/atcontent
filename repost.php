@@ -80,8 +80,8 @@
             <br>
             <p style="line-height: 12px">
                 <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Feature my Posts</a>
-                <br />
-                <br />
+                <br>
+                <br>
                 <small>
                     <span style="padding-left:13px">* Submit your posts to be</span>
                     <br>
