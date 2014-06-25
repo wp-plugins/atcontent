@@ -48,7 +48,7 @@
 
     function signInWindow() {
         email = document.getElementById("email").value;
-        _window = window.open("http://atcontent.com/Auth/SignInWP?email="+email, "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
+        _window = window.open("http://atcontent.com/Auth/SignInWP?email="+encodeURIComponent(email), "ac_auth", "width=460, height=420, resizable=no, scrollbars=no, status=yes, menubar=no, toolbar=no,  location=yes, directories=no ");
         _window.opener = window;
         setTimeout(function () {
             if (_window.closed) {
