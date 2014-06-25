@@ -228,13 +228,13 @@
             <?php if ( count( $atcontent_reposts ) == 0 ) { ?>
                 <p>To get posts in your feed</p>
                 <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
-            <?php } ?>
-            <?php if ( $currentpage > 1 ) { 
+            <?php } 
+            if ( $currentpage > 1 ) { 
                 $prevPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) - 1 ) );
             ?>
                 <a href="<?php echo $prevPageUrl; ?>" class="likebutton b_green">&larr; Previous page</a>
-            <?php } ?>
-            <?php if ( $pageAnswer["Page"]["HasNext"] == true ) { 
+            <?php }
+            if ( $pageAnswer["Page"]["HasNext"] == true ) { 
                 $nextPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) + 1 ) );
             ?>
                 <a href="<?php echo $nextPageUrl; ?>" class="likebutton b_green">Next page &rarr;</a>
