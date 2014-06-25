@@ -262,23 +262,23 @@ END;
 
 function atcontent_connect_blog() {
     $bloguserid = $_POST['bloguserid'];
-    $apikey = $_POST['apikey'];
+    $apikey = get_user_meta( intval( $bloguserid ), 'ac_api_key', true );
     $sitetitle = $_POST['sitetitle'];
-    $blogtitle = "";
+    $blogtitle = '';
     if ( isset( $_POST['blogtitle'] ) ){
         $blogtitle = $_POST['blogtitle'];
     }
     $gate = $_POST['gate'];
     $blog = $_POST['blog'];
-    $blog_url = get_site_url();
+    $blog_url = home_url();
     $connect_data = 
         "bloguserid=" . urlencode($bloguserid) . 
         "&apikey=" . urlencode($apikey) . 
         "&sitetitle=" . urlencode($sitetitle) . 
         "&blogtitle=" . urlencode($blogtitle) . 
         "&gate=" . urlencode($gate) . 
-        "&blog=" .urlencode($blog) . 
-        "&appurl=" . $blog_url;
+        "&blog=" . urlencode($blog) . 
+        "&appurl=" . urlencode( $blog_url );
     $connect_answer = atcontent_do_post( 'http://api.atcontent.com/v1/native/connectblog', $connect_data );
     if ( isset ( $connect_answer["IsOK"] ) && $connect_answer["IsOK"] == TRUE)
     {

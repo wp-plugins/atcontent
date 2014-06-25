@@ -183,7 +183,7 @@ function atcontent_do_post( $url, $data ) {
         )    
      );
     if ( is_wp_error( $wp_response ) ){
-        $out_array = array( 'IsOK' => FALSE, 'Error' =>  $res );
+        $out_array = array( 'IsOK' => FALSE, 'Error' => json_encode( $wp_response ) );
     } else {
         try {
             $out_array = json_decode( $wp_response['body'], true );

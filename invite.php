@@ -61,7 +61,6 @@
 
     (function ($) {
         var buttonDisabled = false;
-        var apikey = '';  
         var avatar_20 = '<?php echo $ac_avatar_20; ?>';
         var username = '<?php echo $ac_pen_name; ?>';
         var showname = '<?php echo $ac_show_name; ?>'
@@ -198,7 +197,6 @@
                 data : {
                     action: 'atcontent_connect_blog',
                     bloguserid : '<?php echo $userid; ?>',
-                    apikey : apikey,
                     sitetitle : '<?php echo bloginfo('name'); ?>',
                     blogtitle: $('#newblogtitle').val(),
                     gate : '<?php echo $ajax_form_action; ?>',
@@ -217,7 +215,8 @@
                                 AutoSignIn();
                             } else{
                                 $("#ac_connect_result").html(
-                                            'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.');
+                                            'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.<br><br>' + 
+                                            'If you get this error multiple times, please send email to support@atcontent.com with following details:<br>' + d.Error );
                                 EnableButton();
                             }
                         }
@@ -247,7 +246,6 @@
             $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
             if ( strlen( $ac_api_key ) > 0 ) {
         ?>
-            apikey = '<?php echo($ac_api_key); ?>';
             ConnectBlog();
         <?php
             }
@@ -267,7 +265,6 @@
                     },
                     success: function(d) {
                       if (d.IsOK) {
-                        apikey =  credentials.APIKey;   
                         showname = credentials.Showname;
                         username = credentials.Nickname;
                         avatar_20 = credentials.Avatar20;
