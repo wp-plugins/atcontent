@@ -15,7 +15,7 @@
             </ol>
             <p>
                 <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE && intval( $response["repostViews"] ) == 0 ) { ?>
-                    Don't be puzzled of zeros. Check this page in a 7 days. 
+                    Don't be puzzled of zeros. Check this page in a 3 days.
                 <?php } ?>
             </p>
         </div>  
