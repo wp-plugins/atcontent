@@ -394,16 +394,16 @@ function atcontent_ajax_repost() {
       "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
       "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
       $ac_repost_setting = atcontent_get_user_settings_oneclick_repost( intval( $userid ) );
-        $post_status = $ac_repost_setting == "1" ? "publish" : "draft";
-        // Create post object
-        $new_post = array(
-            'ID'            => $new_post_id,
-            'post_title'    => $repost_title,
-            'post_content'  => $ac_content,
-            'post_status'   => $post_status,
-            'post_author'   => $userid,
-            'post_category' => array()
-        );
+      $post_status = $ac_repost_setting == "1" ? "publish" : "draft";
+      // Create post object
+      $new_post = array(
+          'ID'            => $new_post_id,
+          'post_title'    => $repost_title,
+          'post_content'  => $ac_content,
+          'post_status'   => $post_status,
+          'post_author'   => $userid,
+          'post_category' => array()
+      );
       kses_remove_filters();
       // Insert the post into the database
       remove_all_actions( 'publish_post' );
