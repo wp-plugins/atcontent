@@ -353,7 +353,7 @@ function atcontent_connect() {
     } 
     else 
     {
-        echo json_encode ( array ( "IsOK" => false , "Error" => $connect_answer["Error"])); 
+        echo json_encode ( array ( "IsOK" => false , "Error" => $connect_answer["Error"] ) ); 
     }
     exit;
 }
