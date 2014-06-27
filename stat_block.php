@@ -14,7 +14,7 @@
                 <small>You will get a better chance to be reposted and reach a much wider audience.</small></li>
             </ol>
             <p>
-                <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE && intval( $response["repostViews"] ) == 0 ) { ?>
+                <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == true && intval( $response["repostViews"] ) == 0 ) { ?>
                     Don't be puzzled of zeros. Check this page in a 3 days.
                 <?php } ?>
             </p>
@@ -28,7 +28,7 @@
             </div>
             <div style="width:416px;">
                 <?php
-                    if ( isset( $response["IsOK"] ) && $response["IsOK"] == TRUE ) {
+                    if ( isset( $response["IsOK"] ) && $response["IsOK"] == true ) {
                 ?>
                     <div class="b-dashboard-brief">
                         <div class="b-dashboard-brief__left b-dashboard-brief__left_front">
