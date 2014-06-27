@@ -66,7 +66,7 @@ END;
         return $content;
     }
     
-    function atcontent_coexistense_fixes(){
+    function atcontent_coexistense_fixes() {
         remove_filter( 'the_content', 'atcontent_the_content', 1 );
         remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
         remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
@@ -210,7 +210,5 @@ END;
         }
         //end Social Media Feather
     }
-
-    
 
 ?>
