@@ -1,7 +1,7 @@
 ﻿=== AtContent — Grow Audience & Blog Traffic ===
 Contributors: atcontent, ariser, vadnov, berd
 Donate link: https://atcontent.com/
-Tags: ads, advertise, affiliate, admin, google, promote, post, posts, plugin, monetize, widget, wordpress
+Tags: ads, advertise, affiliate, admin, google, promote, post, posts, plugin, monetize, wordpress, widget
 Requires at least: 3.3
 Stable tag: trunk
 Tested up to: 3.9
