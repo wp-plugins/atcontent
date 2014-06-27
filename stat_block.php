@@ -39,7 +39,7 @@
                             <?php echo $response["repostViews"]; ?>
                         </div>
                         <div class="b-dashboard-brief__description">
-                            view<span data-role="plural">s</span> via AtContent
+                            view<span data-role="plural">s</span> via AtContent network
                             <br>
                             for the last <?php echo $response["days"] . " " . ( intval( $response["days"] > 1 ) ? "days" : "day" ); ?>
                         </div>
