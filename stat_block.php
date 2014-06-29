@@ -15,7 +15,7 @@
             </ol>
             <p>
                 <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == true && intval( $response["repostViews"] ) == 0 ) { ?>
-                    Don't be puzzled of zeros. Check this page in a 7 days.
+                    Don't be puzzled of zeros. Check this page in a 3 days.
                 <?php } ?>
             </p>
         </div>  
@@ -24,7 +24,7 @@
                 <legend>Results of using AtContent</legend>
             </fieldset>             
             <div id="follow_steps_block" >
-                <p>On average, bloggers increase audience by 2.5x in just 3 weeks.</p> 
+                <p>On average, bloggers increase audience by 2.5x in just 2 weeks.</p> 
             </div>
             <div style="width:416px;">
                 <?php
