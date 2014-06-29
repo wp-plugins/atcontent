@@ -102,7 +102,7 @@
             <div class="clear"></div>
             <?php
                 } else {
-                    echo '<tr><th>Error getting data. Please, reload page.</th></tr>';
+                    echo '<tr><th>Error getting data. Please, <a href="javascript:location.reload();">reload</a> page.</th></tr>';
                 }                
             ?>
             </div>
