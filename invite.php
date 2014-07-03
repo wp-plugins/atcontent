@@ -148,7 +148,7 @@
                 showname + 
                 '</a>, please choose a blog.</h2><div id="blocker"></div><div class="blogs">';
             for (var i in blogs) {
-                blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').hide();" name="blog" class="blog_radio" id="blog_' + 
+                blogsHtml += '<input type="radio" onclick="javascript:afterSelectBlog(\'' + blogs[i].BlogId + '\');" name="blog" class="blog_radio" id="blog_' + 
                     blogs[i].BlogId + 
                     '" value="' + 
                     blogs[i].BlogId + 
@@ -157,7 +157,9 @@
                     blogs[i].BlogTitle + 
                     '</label><br>';
             }
-            blogsHtml += '<input type="radio" onclick="javascript:jQuery(\'#blog_data_form\').show();" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label><br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input><br></div>'
+            blogsHtml += '<input type="radio" onclick="javascript:afterSelectBlog(\'new\');" name="blog" class="blog_radio" id="blog_new" value="-1" /><label for="blog_new">Create new blog</label><br></div><div id="blog_data_form" style="display: none;"><label for="newblogtitle">New blog title </label><br><input id="newblogtitle" type="text" name="newblogtitle" value=""></input><br></div>' + 
+            '<div id="blog_caution"" style="width:450px;margin:0 auto 30px auto;">Please, don\'t connect your second blog to the existing one if you don\'t want your posts copied from one blog to another and vice versa.<br><br>' +
+            'For the correct appearancre please select "Create new blog" when connecting your second blog to AtContent.</div>';
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function(e) {
                 e.preventDefault();
@@ -176,6 +178,16 @@
             $('#blogs').html(blogsHtml);
             $('#ac_connect_result').html('');
             $('#newblogtitle').val('<?php echo bloginfo('name'); ?>');
+        }
+        
+        window.afterSelectBlog = function(blogId) {
+            if (blogId == 'new') {
+                jQuery('#blog_data_form').show();
+                jQuery('#blog_caution').hide();
+            } else {
+                jQuery('#blog_data_form').hide();
+                jQuery('#blog_caution').show();
+            }
         }
 
         var connectBlogTried = false;
