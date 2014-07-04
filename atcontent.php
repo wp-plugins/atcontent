@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.9.5.4
+    Version: 7.9.6
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.9.5.4" );
+    define( 'AC_VERSION', "7.9.6" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -19,8 +19,10 @@
     if ( is_admin() ) {
         require_once( "include/atcontent_dashboard.php" );
         require_once( "include/atcontent_lists.php" );
-        require_once( "include/atcontent_post.php" );
     }
+    require_once( "include/atcontent_post.php" );    
+    add_action( 'save_post', 'atcontent_save_post' );
+    add_action( 'publish_post', 'atcontent_publish_publication' );
     require_once( "include/atcontent_shortcodes.php" );
     require_once( "include/atcontent_content_processing.php" );
     if ( is_admin() ) {
@@ -28,8 +30,6 @@
         require_once( "include/atcontent_coexistense.php" );
         add_action( 'admin_init', 'atcontent_admin_init' );
         add_action( 'admin_menu', 'atcontent_add_tools_menu' );
-        add_action( 'save_post', 'atcontent_save_post' );
-        add_action( 'publish_post', 'atcontent_publish_publication' );
         add_action( 'add_meta_boxes', 'atcontent_add_meta_boxes' );
         add_action( 'admin_head', 'atcontent_admin_head' );
         add_action( 'wp_dashboard_setup', 'atcontent_add_dashboard_widgets' );
@@ -53,7 +53,7 @@
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     }
     add_filter( 'the_content', 'atcontent_the_content', 1 );
-    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );    
+    add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
     add_action( 'wp_ajax_atcontent_gate', 'atcontent_ajax_gate' );
     
