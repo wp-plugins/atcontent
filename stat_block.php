@@ -6,7 +6,7 @@
 <div class="b-cols">    
     <div id="dashboard-table" class="b-dashboard-table_nonbg b-dashboard-table" style="margin-bottom: 0px">
         <div id="tip_two_step" class="ac_tip_show" style="padding: 10px;">
-            <p> Well done, <?php echo $ac_show_name; ?>! You are awesome!</p>
+            <p> Well done, <?php echo $ac_show_name; ?>!</p>
             <ol style="font-size: 1.2em;">
                 <li>Get relevant posts from “<a href="<?php echo admin_url( "admin.php?page=atcontent/repost.php" ); ?>">Content Feed</a>” page.<br>
                 <small>Readers will come to your blog more often to read brand new content and share it on social networks!</small></li>
