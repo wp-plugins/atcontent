@@ -67,6 +67,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.9.6 =
+* Future post publish fix. Now scheduled posts are processed by AtContent.
+
 = 7.9.5 =
 * More diagnostics data through connection.
 
