@@ -11,7 +11,7 @@
                 <li>Get relevant posts from “<a href="<?php echo admin_url( "admin.php?page=atcontent/repost.php" ); ?>">Content Feed</a>” page.<br>
                 <small>Readers will come to your blog more often to read brand new content and share it on social networks!</small></li>
                 <li>Set tags and follow relevant bloggers in <br> your <a href="https://atcontent.com/studio/statistics?wp=1#tips" target="_blank">AtContent dashboard</a>.<br>
-                <small>You will get a better chance on repost and reach a much wider audience.</small></li>
+                <small>You will get a perfect chance on repost and reach a much wider audience.</small></li>
             </ol>
             <p>
                 <?php if ( isset( $response["IsOK"] ) && $response["IsOK"] == true && intval( $response["repostViews"] ) == 0 ) { ?>
