@@ -5,6 +5,8 @@
     width: 860px;
     margin:0px auto;
     text-align:center;
+    position: relative;
+    z-index: 100;
 }
 .atcontent_invite.footer {
     width: 860px;

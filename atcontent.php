@@ -88,7 +88,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0a', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0b', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
