@@ -80,7 +80,7 @@
                                         position: 'none'
                                     },
                                     pieSliceTextStyle: {
-                                        fontSize: 15
+                                        fontSize: 16
                                     }
                                 };
                                 data = new google.visualization.DataTable ();
