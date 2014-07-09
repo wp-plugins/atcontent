@@ -49,7 +49,7 @@
                         <div class="b-dashboard-brief__description b-dashboard-brief__description_small">
                             views on your blog
                         </div>
-                        <p><a class="button" href="https://atcontent.com/studio/statistics?wp=0" target="_blank" >Get details</a></p>
+                        <p><a class="button" href="http://atcontent.com/studio/statistics?wp=0" target="_blank" >Get details</a></p>
                     </div>
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
