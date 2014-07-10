@@ -1,12 +1,10 @@
 <?php
     
 function atcontent_dashboard_widget_function() {
-    wp_register_script( 'atcontentAdminGoogleAPI',  '//www.google.com/jsapi', array(), true );
-    wp_enqueue_script( 'atcontentAdminGoogleAPI' );
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_syncid = get_user_meta($userid, "ac_syncid", true );
-    echo '<div class="atcontent_wrap" id="atcontent_dashboard_inside">';
+    echo '<div id="atcontent_dashboard_inside">';
     if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0  ) {
         $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
@@ -23,62 +21,56 @@ function atcontent_dashboard_widget_function() {
                 action: 'atcontent_readership'
             }, function(r) {
                 if (r && r.IsOK) {
-                    var html = '<div style="position: relative"><div class="b-dashboard-brief"><div class="b-dashboard-brief__left b-dashboard-brief__left_front">' + 
-                                '<div class="b-dashboard-brief__value b-dashboard-brief__value_orange">';
-                    if (r.repostViews > 0) {
-                        html += '<span class="b-dashboard-brief__plus">+</span>';
-                    }
-                    html += r.repostViews + '</div>';
-                    html += '<div class="b-dashboard-brief__description">view<span data-role="plural">s</span> via AtContent';
-                    html += '<br>for the last ' + r.days + ' ' + (r.days > 1 ? 'days' : 'day') + '</div>';
-                    html += '<div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.originalViews + '</div>';
-                    html += '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">views on your blog</div>';
-                    html += '<p><a class="button" href="https://atcontent.com/studio/statistics/?wp=1" target="_blank">Get details</a></p></div>';
-                    html += '<div class="b-dashboard-brief__right b-dashboard-brief__right_front">';
-                    if (r.repostViews + r.originalViews == 0) {
-                        html += '<div class="b-dashboard-brief__empty-chart"></div>';
-                    } else {
-                        html += '<div id="atcontent_chart" class="b-dashboard-brief__chart"></div>';
-                        google.load('visualization', '1.0', {
-                            'packages': ['corechart', 'table'],
-                            'callback': function(){
-                                var options, data, chart, element, rows;                
-                                element = document.getElementById('atcontent_chart');
-                                options = {
-                                    colors: ['#13669d', '#ee8900'],
-                                    chartArea: {
-                                        width: '90%',
-                                        height: '90%'
-                                    },
-                                    title: '',
-                                    titleTextStyle: {
-                                        bold: false
-                                    },
-                                    fontName: 'Segoe UI',
-                                    legend: {
-                                        position: 'none'
-                                    },
-                                    pieSliceTextStyle: {
-                                        fontSize: 15
-                                    }
-                                };
-                                data = new google.visualization.DataTable ();
-                                data.addColumn('string', 'Type');
-                                data.addColumn('number', 'Views');                
-                                rows = [
-                                    ['Views on your blog', r.originalViews],
-                                    ['Views via AtContent', r.repostViews]
-                                ];
-                                data.addRows(rows);
-                                chart = new google.visualization.PieChart (element);
-                                chart.draw(data, options);
-                            }
-                        });
-                    }
-                    html += '</div>';
-                    html += '</div>';
+                    var html = '';
+                    html += '<div class="ac-dashboard-brief"><table><tr><th><a id="ac-dashboard-monthly-stats" href="#">Monthly Stats</a></th>' + 
+                            '<th class="ac-dashboard-brief__tab-inactive"><a id="ac-dashboard-cumulative-stats" href="#">Cumulative Stats</a></th></tr>';
+                    html += '<tr id="ac-dashboard-monthly-row">' +                             
+                            '<td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_orange">' + r.monthlyBlogReposts + '</div>' + 
+                            '<div class="b-dashboard-brief__description">repost' + (r.monthlyBlogReposts == 1 ? '' : 's' ) + ' of your content' + 
+                            '<br>for the last ' + r.days + ' ' + (r.days > 1 ? 'days' : 'day') + '</div>' + 
+                            '<div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.monthlyBlogRepostViews + '</div>' + 
+                            '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">views</div>' + 
+                            '</div></td>' + 
+                            '<td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_orange">' + r.monthlyReposts + '</div>' + 
+                            '<div class="b-dashboard-brief__description">repost' + (r.monthlyReposts == 1 ? '' : 's' ) + ' on your blog' + 
+                            '<br>for the last ' + r.days + ' ' + (r.days > 1 ? 'days' : 'day') + '</div>' + 
+                            '<div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.monthlyRepostViews + '</div>' +
+                            '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">views</div>' +
+                            '</div></td>' + 
+                            '</tr>';
+                    html += '<tr id="ac-dashboard-cumulative-row">' + 
+                            '<td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_orange">' + r.totalBlogReposts + '</div>' + 
+                            '<div class="b-dashboard-brief__description">repost' + (r.totalBlogReposts == 1 ? '' : 's' ) + ' of your content' + 
+                            '<br>since you joined AtContent</div>' + 
+                            '<div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.totalBlogRepostViews + '</div>' + 
+                            '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">views</div>' + 
+                            '</div></td>' + 
+                            '<td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_orange">' + r.totalReposts + '</div>' + 
+                            '<div class="b-dashboard-brief__description">repost' + (r.totalReposts == 1 ? '' : 's' ) + ' on your blog' + 
+                            '<br>since you joined AtContent</div>' + 
+                            '<div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.totalRepostViews + '</div>' +
+                            '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">views</div>' +
+                            '</div></td>' + 
+                            '</tr>';
+                    
+                    html += '</table></div>';
+                    html += '<p class="b-dashboard-brief__left"><a class="button" href="http://atcontent.com/studio/statistics/?wp=1" target="_blank">Get details</a></p>';
                     html += '<div class="clear"></div></div>';
                     $('#atcontent_dashboard_inside').html(html);
+                    $('#ac-dashboard-cumulative-stats').on('click', function(e){
+                        e.preventDefault();
+                        $(this).parent().removeClass('ac-dashboard-brief__tab-inactive');
+                        $('#ac-dashboard-monthly-stats').parent().addClass('ac-dashboard-brief__tab-inactive');
+                        $('#ac-dashboard-monthly-row').hide();
+                        $('#ac-dashboard-cumulative-row').show();
+                    });
+                    $('#ac-dashboard-monthly-stats').on('click', function(e){
+                        e.preventDefault();
+                        $(this).parent().removeClass('ac-dashboard-brief__tab-inactive');
+                        $('#ac-dashboard-cumulative-stats').parent().addClass('ac-dashboard-brief__tab-inactive');
+                        $('#ac-dashboard-monthly-row').show();
+                        $('#ac-dashboard-cumulative-row').hide();
+                    });
                 } else {
                     $('#atcontent_dashboard_inside').html('');
                 }
