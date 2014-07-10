@@ -22,8 +22,8 @@ function atcontent_dashboard_widget_function() {
             }, function(r) {
                 if (r && r.IsOK) {
                     var html = '';
-                    html += '<div class="ac-dashboard-brief"><table><tr><th><a id="ac-dashboard-monthly-stats" href="#">Last ' + (r.days > 1 ? r.days + ' Days' : 'Day') + '</a></th>' + 
-                            '<th class="ac-dashboard-brief__tab-inactive"><a id="ac-dashboard-cumulative-stats" href="#">All Time</a></th></tr>';
+                    html += '<div class="ac-dashboard-brief"><table><tr><th class="ac-dashboard-brief__tab-inactive"><a id="ac-dashboard-monthly-stats" href="#">Last ' + (r.days > 1 ? r.days + ' Days' : 'Day') + '</a></th>' + 
+                            '<th><a id="ac-dashboard-cumulative-stats" href="#">All Time</a></th></tr>';
                     html += '<tr id="ac-dashboard-monthly-row">' +                             
                             '<td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_orange">' + r.monthlyBlogReposts + '</div>' + 
                             '<div class="b-dashboard-brief__description">repost' + (r.monthlyBlogReposts == 1 ? '' : 's' ) + ' of your content' + 

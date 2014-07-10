@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.9.7
+    Version: 7.9.7.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.9.7" );
+    define( 'AC_VERSION', "7.9.7.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -88,7 +88,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0d', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0e', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
