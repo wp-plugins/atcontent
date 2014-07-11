@@ -21,7 +21,7 @@
         </div>  
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
-                <legend>Your AtContent Results</legend>
+                <legend>Your AtContent Stats</legend>
             </fieldset>             
             <div id="follow_steps_block" >
                 <p>On average, bloggers increase audience by 2.5x in just 1 month.</p> 
