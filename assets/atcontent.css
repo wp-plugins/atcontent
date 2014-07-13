@@ -1294,3 +1294,47 @@ input[disabled] {background: #eee}
 .b-ac-acc__pane-content .updated {
     display: inline-block;
 }
+
+.b-alert {
+    overflow: hidden;
+  position: relative;
+  margin-bottom: 1.2em;
+  padding: 0.8em; }
+  .b-alert > :first-child {
+    margin-top: 0; }
+  .b-alert > :last-child {
+    margin-bottom: 0; }
+
+.b-alert a {
+  text-decoration: none; color: #222; }
+.b-alert a:hover {
+  text-decoration: none; }
+
+.b-alert .b-tools-hide, .b-alert .b-alert__hide {
+  position: absolute;
+  right: 0.8em;
+  top: 0.8em; }
+
+
+.b-alert_hidable {
+  padding-right: 2.5em; }
+
+.b-alert_info, .toolsInfo {
+  background: #ebf8ff;
+  border: 1px solid #c7e0ee; }
+
+    .b-alert p,
+    .b-alert ul,
+    .b-alert ol {
+        margin: 0 0 .7em;
+    }
+
+        .b-alert li {
+            margin: 0.2em 0;
+        }
+
+    .b-alert .b-alert__hide {
+        position: absolute;
+        right: .8em;
+        top: .8em;
+    }

@@ -41,4 +41,16 @@
         if ( $ac_settings_tab_settings != "1" ) $count += 1;
         return $count;
     }
+
+    function atcontent_get_user_settings_value( $userid, $id ) {
+        $ac_value = get_user_meta( $userid, "ac_settings_" . $id, true );
+        if ( strlen( $ac_value ) == 0 ) {
+            $ac_value = 0;
+        }
+        return $ac_value;
+    }
+
+    function atcontent_set_user_settings_value( $userid, $id, $value ) {
+        update_user_meta( $userid, "ac_settings_" . $id, $value );
+    }
 ?>

@@ -9,15 +9,11 @@
     $img_url = plugins_url( 'assets/logo.png', __FILE__ );
     // PingBack
     if ( ! atcontent_pingback_inline() ) {
-        echo "<div class=\"error\">" . 'Could not connect to <a href="http://atcontent.com">AtContent.com</a>. Contact your hosting provider.' . "</div>";
+        echo "<div class=\"error\">" . 'Could not connect to atcontent.com. Please, contact your hosting provider.' . "</div>";
     }
     //End PingBack            
     include( 'include/atcontent_analytics.php' );
 ?>
-<script>
-    ac_ga_s('repostTab', 'view');
-    ac_ga_s('repostTab', 'tag ' + '<?php echo $currenttag; ?>');
-</script>
 <div class="b-ac-page b-ac-page_fluid" id="ac-page">
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
 <script>
@@ -39,6 +35,10 @@
     }    
     $atcontent_reposts = $pageAnswer["Page"]["EntityList"];
 ?>
+<script>
+    ac_ga_s('repostTab', 'view');
+    ac_ga_s('repostTab', 'tag ' + '<?php echo $currenttag; ?>');
+</script>
 
     <div class="b-ac-mobile-menu">
         <div class="b-ac-mobile-menu__tags-toggle" id="ac-tags-toggle"></div>
@@ -95,6 +95,23 @@
         <div class="l-ac-grid__col-right">
 
             <h3>Posts below can be published on your blog. Click "Repost" to try it.</h3>
+
+<?php
+    $rpst_hint = atcontent_get_user_settings_value( $userid, "rpst_hint" );
+    if ( $rpst_hint == 0 ) {
+?>
+             <div class="b-alert b-alert_hidable b-alert_info" id="rpstValue">
+                <figure style="float: left; margin: 0 .8em 0 0">
+                    <img src="http://i.imgur.com/VaBiTn4.png" alt="" width="330" style="display: block">
+                </figure>
+                <p>By reposting some content on your blog you can almost double your page views and social sharing simply because you have more content on your blog.</p>
+                <p>Reposts look super-native to your blog. You and your readers will love it!</p>
+                <p>Simply click <span class="ac-rpst-b" style="margin: 0;"><span class="ac-rpst-b__b"><span class="ac-rpst-b__l"></span><span class="ac-rpst-b__t">Repost</span></span></span> under any post you like. You can always edit repost title, tags, etc. in your WordPress editor.</p>
+                <a href="#" class="b-btn b-btn_plain b-alert__hide" id="rpstHide">&times;</a>
+            </div>
+<?php    
+    }
+?>
             
             <div class="postList b-publications-columns">
                 <?php 
@@ -147,12 +164,24 @@
             $(function () {
                 var $acMobileButton = $('#ac-tags-toggle'),
                     $acPage = $('#ac-page'),
-                    
+                    $rpstHide = $('#rpstHide'),
                     CLASS_NAME_ASIDE_OPEN = 'b-ac-page_aside-open';
                     
                 $acMobileButton.on('click', function () {
                     $acPage.toggleClass(CLASS_NAME_ASIDE_OPEN);
                     $(window).scrollTop(0);
+                });
+                
+                $rpstHide.on('click', function(e) {
+                    e.preventDefault();
+                    $('#rpstValue').hide();
+                    $.post('admin-ajax.php', {
+                        'action': 'atcontent_settings_val',
+                        'id': 'rpst_hint',
+                        'val': '1'
+                    }, function(d) {
+                        
+                    }, "json");
                 });
             });
 
@@ -204,6 +233,7 @@
                 btn.href = "javascript:";
                 var btnCaption = document.getElementById('acRepostBtnCaption' + p);
                 btnCaption.innerHTML = "Reposting...";
+                ac_ga_s('repostTab', 'doRepost');
                 $.ajax({url: '<?php echo $ajax_form_action; ?>',
                     type: 'post',
                     data: {

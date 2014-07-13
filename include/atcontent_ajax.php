@@ -511,4 +511,13 @@ function atcontent_ajax_settings_tab() {
     exit;
 }
 
+function atcontent_ajax_settings_val() {
+    $current_user = wp_get_current_user();
+    $id = $_POST["id"];
+    $val = $_POST["val"];
+    atcontent_set_user_settings_value( intval( $current_user->ID ), $id, $val );
+    echo json_encode( array( "IsOK" => true ) );
+    exit;
+}
+
 ?>
