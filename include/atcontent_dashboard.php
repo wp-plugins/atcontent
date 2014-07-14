@@ -11,10 +11,13 @@ function atcontent_dashboard_widget_function() {
         echo '<a class="button button-primary ac-connect-button" href="' . $connect_url . '">Connect your account to AtContent</a> <br><br>and get advanced analytics of your blog<div class="clear"></div></div>';
         return;
     }
+
+    include( 'atcontent_analytics.php' );
     
     if ( current_user_can( 'edit_posts' ) ) {
         ?>
 <script>
+    ac_ga_s('dashboard', 'view');
     (function( $ ) {
         $(function() {
             $.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', {
