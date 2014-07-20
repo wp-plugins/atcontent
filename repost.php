@@ -38,6 +38,7 @@
 <script>
     ac_ga_s('repostTab', 'view');
     ac_ga_s('repostTab', 'tag ' + '<?php echo $currenttag; ?>');
+    ac_ga_s('repostTab', 'page ' + '<?php echo $currentpage; ?>');
 </script>
 
     <div class="b-ac-mobile-menu">
