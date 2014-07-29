@@ -18,8 +18,6 @@ Comparison:
 100 followers on AtContent = 1000x readers,  
 100 followers on Facebook/Twitter = ~10 readers.
 
-Simply, install the plugin and connect your blog to AtContent.
-
 #### How AtContent Works ####
 
 1. Simply, install the plugin and connect your blog to AtContent in a couple of clicks. 
@@ -30,7 +28,7 @@ The more followers your have, the more reposts you get. The more reposts you get
 
 By reposting content on your blog you can almost double your page views and social sharing, just because you have more content on your blog!
 
-#### Easily Promote Your Content and Monetize Your Blog with Relevant Sponsored Posts ####
+#### How Repost Works ####
 
 At AtContent we use "no-follow" and "canonical" tags for all links in reposts. We avoid content duplication and show search engines the original source of content. Thus, reposts never harm your SEO. Each repost is signed with the author’s name and looks native on any blog. If author updates content, it will be updated on all sites where it is reposted. 
 
