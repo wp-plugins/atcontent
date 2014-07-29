@@ -8,40 +8,33 @@ Tested up to: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
+Dramatically increase audience and drive more traffic to your blog by sharing content with relevant bloggers. It’s free to use! 
 
 == Description ==
 
-AtContent helps you dramatically increase the amount of people reading your content and drive more traffic to your blog. Also, you can promote your content and monetize your blog with relevant sponsored posts. It’s free to join and takes no time to start.
+AtContent makes your blog go viral by allowing you to share content with relevant bloggers. Thus, you dramatically increase audience and drive more traffic to your blog. It’s free to join and takes no time to start! 
+
+Comparison:  
+100 followers on AtContent = 1000x readers,  
+100 followers on Facebook/Twitter = ~10 readers.
 
 Simply, install the plugin and connect your blog to AtContent.
 
-#### What is AtContent? #### 
-
-[AtContent](http://bit.ly/1cRs7nA) is a blogging platform. It allows to do reposts.
-
-A *repost* is when someone literally reposts your blog posts on other site/app in a couple clicks using AtContent.
-
-At AtContent we use "no-follow" and "canonical" tags for all links in reposts. We also avoid content duplication. Thus, it never harms your SEO. Reposts work as free and very effective promotion:
-
-* The more reposts you have, the larger audience you reach and the more people visit your blog through links in your reposts.
-* You can repost other bloggers’ posts on your blog as well. It instantly increases page views and time people spend on your blog!
-
-[vimeo http://vimeo.com/97195778]
-
 #### How AtContent Works ####
 
-After you install the plugin and connect it to AtContent platform in a couple clicks, your content becomes available for reposting. 
+1. Simply, install the plugin and connect your blog to AtContent in a couple of clicks. 
+2. Follow bloggers with relevant content.  
+3. Bloggers follow you back and see your content recommended for reposting in their feeds. A *repost* is when someone literally reposts your blog posts on other blog a couple clicks using AtContent. 
 
-Simply follow bloggers with relevant content. Bloggers who like your content will follow you back and get your content recommended for reposting in their feeds. The more reposts you get, the faster your audience and traffic grow!
+The more followers your have, the more reposts you get. The more reposts you get, the wider audience you reach and the more traffic you drive to your blog through the links in reposts. 
 
-You can see your AtContent feed right in your WordPress Admin, on a "Content Feed" page.
+By reposting content on your blog you can almost double your page views and social sharing, just because you have more content on your blog!
 
 #### Easily Promote Your Content and Monetize Your Blog with Relevant Sponsored Posts ####
 
-* [Promote your best posts](http://bit.ly/atcontent-native-advertising-wordpress-plugin-description) across relevant blogs with AtContent NativeAd. Reach a wider audience in a flash, drive traffic to your blog! Higher response rate in comparison with desktop and mobile banner ads. [Learn more](http://bit.ly/atcontent-native-advertising-wordpress-plugin-description).
-* [Monetize your blog](http://bit.ly/atcontent-wordpress-plugin-monetization) in a very natural way by reposting relevant sponsored posts from AtContent NativeAd Marketplace. It is an additional source of income with high payouts, which doesn’t compete with other sources. Readers stay on your site to read content you didn’t need to write!
-[Learn more](http://bit.ly/atcontent-wordpress-plugin-monetization).
+At AtContent we use "no-follow" and "canonical" tags for all links in reposts. We avoid content duplication and show search engines the original source of content. Thus, reposts never harm your SEO. Each repost is signed with the author’s name and looks native on any blog. If author updates content, it will be updated on all sites where it is reposted. 
+
+[vimeo http://vimeo.com/97195778]
 
 [Contact us](http://bit.ly/OV9LOX) if you have any questions.
 
