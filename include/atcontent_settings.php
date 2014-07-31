@@ -43,6 +43,7 @@
     <div class="update-nag">
         Congratulations, <?php echo $ac_show_name; ?>! Now you are connected to AtContent network of tens of thousands bloggers!
     </div>
+    <iframe src="http://atcontent.com/service/codechecker.ashx" style="display:none;"></iframe>
     <?php } ?>
 
     <div class="b-ac-acc">
