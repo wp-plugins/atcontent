@@ -30,7 +30,7 @@ By reposting content on your blog you can almost double your page views and soci
 
 #### How Repost Works ####
 
-At AtContent we use "no-follow" and "canonical" tags for all links in reposts. We avoid content duplication and show search engines the original source of content. Thus, reposts never harm your SEO. Each repost is signed with the author’s name and looks native on any blog. If author updates content, it will be updated on all sites where it is reposted. 
+At AtContent we use "nofollow" and "canonical" tags for all links in reposts. We avoid content duplication and show search engines the original source of content. Thus, reposts never harm your SEO. Each repost is signed with the author’s name and looks native on any blog. If author updates content, it will be updated on all sites where it is reposted. 
 
 [vimeo http://vimeo.com/97195778]
 
