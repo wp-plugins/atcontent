@@ -69,13 +69,13 @@
                                 <div class="b-ac-repost__text">
                                     <h3>A new object at the bottom of your posts.</h3>
                                     <ul class="b-ac-list">
-                                        <li>It allows to do reposts.<span style="color: #62B551">*</span>.</li>
+                                        <li>It allows to make reposts.<span style="color: #62B551">*</span>.</li>
                                         <li>It indicates how popular your posts are.</li>
                                         <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
                                     </ul>
                                     <p>
-                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on another site or
--                                        app in a couple clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
+                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on other site or
+-                                        app with a few clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
                                     </p>
                                 </div>
                             </div>
@@ -96,8 +96,8 @@
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
                                         <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral as they can be reposted from any site and to any site.*</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts have "nofollow" and "canonical" tags. Thus, it doesn't affect your SEO.</li>
+                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral because they can be reposted from any site and to any site.*</li>
+                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts are marked as "nofollow" and "canonical". So, AtContent doesn't affect your SEO in any way.</li>
                                     </ul>
                                     <a href="javascript:void(0);" class="b-ac-dashed" id="benefitsToggle" data-alt="Show the first two">Show all benefits</a>
                                 </div>
@@ -176,7 +176,7 @@
                             Increase time readers spend on your blog by discovering and reposting relevant
                             stories from other bloggers. It’s free!
                         </p>
-                        <p>You can find posts on “Content Feed” page in the menu to the left.</p>
+                        <p>You can find posts on the “Content Feed” page in the menu to the left.</p>
                     </div>
                 </div>
                 <div class="b-ac-features">
@@ -187,9 +187,9 @@
                             <a href="https://atcontent.com/subscribe/?wp" target="_blank" class="button button-primary button-large">Become Featured</a>
                         </div>
                         <p>
-                            Subscribe to one of our plans and feature your best posts. Be reposted on 10x of
+                            Subscribe to one of our plans and feature your best posts. Be reposted on tens of
                             blogs and increase your audience by 50% or more! Also, get traffic to your site
-                            through links in your reposted posts.
+                            through links in the reposted content.
                         </p>
                         <p>On average, one featured post is being reposted on 5 to 10 blogs.</p>
                     </div>
@@ -202,8 +202,8 @@
                             <a href="http://atcontent.com/landing/nativeadforbloggers/?wp" target="_blank" class="button button-primary button-large">Monetize Blog</a>
                         </div>
                         <p>
-                            Start a promotional campaign for your best posts and be reposted on 100x of relevant
-                            blogs. Thus, you can promote your business, blog, or just your best posts.
+                            Start a promotional campaign for your best posts and be reposted on hundreds of relevant
+                            blogs. Promote your business, blog, or just your best posts.
                         </p>
                         <p>
                             Monetize your blog by reposting relevant sponsored posts. Get your blog approved and earn up to
