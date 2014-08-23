@@ -18,6 +18,8 @@
 
 <form id="connect_form" method="post" action="">
 <div class="atcontent_invite">
+        <input type="hidden" id="email" value="<?php echo $email; ?>">
+        <input type="hidden" id="username" value="<?php echo $username; ?>">
         <?php if ( isset( $_GET["repost"] ) && $_GET["repost"] == "1" ) { ?>
             <h1>To get posts from Content Feed you need to connect<br> your profile to AtContent.</h1>
         <?php } else { ?>
@@ -25,10 +27,6 @@
         <?php }?>
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
-                    <p class="caption"><label for="username">Username</label></p>
-                    <input id="username" type="text" name="username" value="<?php echo $username?>"></input><br>
-                    <p class="caption"><label for="email">Email</label></p>
-                    <input id="email" type="text" name="email" value="<?php echo $email?>"></input><br>
                 </div>
                 <div id="blogs"></div>
             <div id="sign_changer" style="display: none;"><a href="#" id="ac_have_account">I already have an AtContent account</a></div>
@@ -36,7 +34,6 @@
             <img alt="loading..." src="<?php echo($loader_url);?>" width="30" />
         </div>
 	    <a id="b_connect" class="likebutton b_green b_big" style="display: none;" href="#">Connect to AtContent</a>
-        <p id="ac_we_will_send">We will send your password by email</p>
        <hr />
 <script type="text/javascript">
     var ConnectBlog,
@@ -71,24 +68,7 @@
         $(function(){
             $('#footer-thankyou').before('<small>We collect anonymous usage data to improve plugin\'s performance.<br>If it bother you, feel free to contact us.</small><br><a href="https://atcontent.zendesk.com/anonymous_requests/new" target="_blank">AtContent Support Center</a><br>');
             $('#footer-upgrade').prepend('<br><br><br>');
-            <?php
-            if ( ! isset( $_GET["noauto"] ) || $_GET["noauto"] != "1" ) {
-                ?>
-                $("#b_connect").hide();
-                $("#ac_sign_fields").hide();
-                <?php 
-                $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-                if ( strlen( $ac_api_key ) == 0 ) {
-                ?>
-                AutoSignIn();
-                <?php
-                }
-            } else {
-            ?>
-                initAuthForm();
-            <?php
-            }
-            ?>
+            initAuthForm();
         });
 
         function DisableButton() {
@@ -106,17 +86,22 @@
         }
     
         function initAuthForm() {
-            $('#b_connect').show().unbind('click').click(function(e){
-                e.preventDefault();
-                Connect();
-            });
             $('#ac_connect_result').html('');
-            $('#ac_sign_fields').show();
-            $('#user_data_form').show();
-            $('#connection_rules_title').show();
+            var email = $('#email').val();
+            var username = $('#username').val();
+            $('#user_data_form').html('<iframe src="//atcontent.com/auth/wpiframe/?email=' + encodeURIComponent(email) + '&username=' + encodeURIComponent(username) + 
+                '&back=' + encodeURIComponent('<?php echo admin_url("admin-ajax.php"); ?>') + '" style="width:500px;height:500px;"></iframe>').show();
+            //$('#connection_rules_title').show();
             $('#disconnect').remove();
-            $('#ac_we_will_send').show();
+            //$('#ac_we_will_send').show();
             EnableButton();
+        }
+
+        window.followup = function(key){
+            ac_ga_s('connectTab', 'followup');
+            var script = document.createElement('script');
+            script.src = "http://api.atcontent.com/v1/native/followupkey?key=" + encodeURIComponent(key) + "&jsonp_callback=followUpCallback&r=" + Math.random();
+            document.body.appendChild(script);
         }
 
         function beforechangeaccount() {
@@ -124,7 +109,7 @@
                 ac_ga_s('connectTab', 'changeaccount');
                 $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
                 $('#blogs').html('');
-                DisableButton();
+                $('#b_connect').hide();
                 jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
 			        type: 'post',
 			        data: {
@@ -311,34 +296,6 @@
             });
         }
 
-        AutoSignIn = function() {
-            $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
-            DisableButton();
-            var email = $("#email").val();
-            if (email == null || email.length == 0) return;
-            var script = document.createElement('script');
-            script.src = "http://api.atcontent.com/v1/native/checkauth?email=" + encodeURIComponent(email) + "&jsonp_callback=AutoSignInCallback&r=" + Math.random();
-            document.body.appendChild(script);
-        }
-
-        AutoSignInCallback = function(d)
-        {
-            if (d.IsOK) {
-                SaveCredentials(d);
-                $("#sign_changer").hide();
-            } else {
-                if (d.state == 'unauth' || d.state == 'noemail') {
-                    initAuthForm();
-                    return;
-                }
-                if (d.state == 'error') {
-                    somethingWrong();
-                    return;
-                }
-                showEmailExists();
-            }
-        }
-
         function showEmailExists(){
             var email = $("#email").val();
             EnableButton();
@@ -366,6 +323,14 @@
             script.src = "http://api.atcontent.com/v1/native/connect.jsonp?email=" + encodeURIComponent(email) + "&username=" + encodeURIComponent(username) + "&jsonp_callback=ConnectCallback&r=" + Math.random();
             document.body.appendChild(script);
         }
+
+        window.followUpCallback = function(d){
+            if (d.IsOK) {
+                SaveCredentials(d);
+            } else {
+                initAuthForm();
+            }
+        };
 
         ConnectCallback = function(d)
         {
@@ -400,3 +365,4 @@
 </div>
     <div class="clear"></div>
 </form>
+<div class="clear"></div>

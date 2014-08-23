@@ -520,4 +520,13 @@ function atcontent_ajax_settings_val() {
     exit;
 }
 
+function atcontent_ajax_invitefollowup() {
+    echo <<<END
+<script>
+window.parent.parent.followup('{$_GET['key']}');
+</script>
+END;
+    exit;
+}
+
 ?>
