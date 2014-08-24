@@ -230,7 +230,7 @@
                         } else {
                             if (d.ErrorCode == "101" && !connectBlogTried){
                                 connectBlogTried = true;
-                                AutoSignIn();
+                                initAuthForm();
                             } else{
                                 $("#ac_connect_result").html(
                                             'Something is wrong. <a href="javascript:window.location.reload();">Reload page</a> and try again, please.<br><br>' + 
@@ -366,3 +366,4 @@
     <div class="clear"></div>
 </form>
 <div class="clear"></div>
+<?php echo $ac_api_key; ?>
