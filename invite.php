@@ -366,4 +366,3 @@
     <div class="clear"></div>
 </form>
 <div class="clear"></div>
-<?php echo $ac_api_key; ?>
