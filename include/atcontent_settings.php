@@ -50,97 +50,37 @@
         
         <div class="b-ac-acc__pane<?php echo $guide_unread; ?>" <?php echo $guide_opened; ?> id="ac_tab_guide" data-id="guide">
             <h2 class="b-ac-acc__pane-title">
-                <div class="b-ac-acc__pane-title-add">
-                    <div class="b-ac-slider__nav" data-slider="slider">
-                        <!--<button type="button" class="button button-secondary" data-role="prev">Prev</button>-->
-                        <div class="b-ac-slider__nav-dots"></div>
-                        <button type="button" class="button button-nav" data-role="next">Next</button>
-                    </div>
-                </div>
                 A Short Guide
             </h2>
-            
+
             <div class="b-ac-acc__pane-content">
-                <div class="b-ac-slider" id="slider">
-                    <div class="b-ac-slider__content">
-                        <div class="b-ac-slider__pane">
-                            <div class="b-ac-repost">
-                                <div class="b-ac-repost__img"></div>
-                                <div class="b-ac-repost__text">
-                                    <h3>A new object at the bottom of your posts.</h3>
-                                    <ul class="b-ac-list">
-                                        <li>It allows to make reposts.<span style="color: #62B551">*</span>.</li>
-                                        <li>It indicates how popular your posts are.</li>
-                                        <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
-                                    </ul>
-                                    <p>
-                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on other site or
--                                        app with a few clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="b-ac-slider__pane">
-                            <div class="b-ac-benefits">
-                                <div class="b-ac-benefits__list">
-                                    <h3>AtContent Benefits</h3>
-                                    <ul class="b-ac-list">
-                                        <li>
-                                            It helps to build your audience and brings a whole host of lovely new people to your site through links in your reposted content.
-                                        </li>
-                                        <li>
-                                            It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.
-                                        </li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">The original author is credited after the reposted content.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral because they can be reposted from any site and to any site.*</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts are marked as "nofollow" and "canonical". So, AtContent doesn't affect your SEO in any way.</li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="b-ac-dashed" id="benefitsToggle" data-alt="Show the first two">Show all benefits</a>
-                                </div>
-                                <div class="b-ac-benefits__example">
-                                    <h3>What Bloggers Say</h3>
-                                    <div class="b-ac-user">
-                                        <div class="b-ac-user__info">
-                                            <div class="b-ac-user__photo">
-                                                <img src="http://atcontent.blob.core.windows.net/avatar/ChMa6975/80-0.jpg" width="80" height="80" alt=""/>
-                                            </div>
-                                            <div class="b-ac-user__about">
-                                                <span class="b-ac-user__name">Christine Macaulay</span><br>
-                                                thefabuloustimes.com
-                                                <div class="b-ac-user__metrics">
-                                                    <small><b>Average monthly results:</b></small><br>
-                                                    <span class="b-ac-user__metrics-num">124</span> reposts on other blogs<br>
-                                                    <span class="b-ac-user__metrics-num">5,857</span> views of her reposts
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="b-ac-user__testimonial">
-                                            AtContent is super easy to use, helps to share your content, build your audience
-                                            and brings a whole host of lovely new people to visit your site!
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="b-ac-repost">
+                    <div class="b-ac-repost__img"></div>
+                    <div class="b-ac-repost__text">
+                        <h3><b>AtContent panel</b> at the bottom of your posts.</h3>
+                        <ul class="b-ac-list">
+                            <li>It allows to make reposts and shows how popular your posts are!</li>
+                            <li>When other bloggers repost your content, you dramatically increase the audience and drive traffic to your blog through the links in reposts.</li>
+                            <li>By reposting content from other bloggers, you increase page views, social sharing and time people spend on your blog.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">It helps to build your audience and brings a whole host of lovely new people to your site through links in your reposted content.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">The original author is credited after the reposted content.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral because they can be reposted from any site and to any site.*</li>
+                            <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts are marked as "nofollow" and "canonical". So, AtContent doesn't affect your SEO in any way.</li>
+                        </ul>
+                        <a href="javascript:void(0);" class="b-ac-dashed" id="benefitsToggle" data-alt="Show the first three">Show all benefits</a>
                     </div>
+                </div>
 
-                    <div class="b-ac-slider__pane">
-                        <div class="b-ac-following">
-                            <h3>The Next Step:</h3>
-                            <p>
-                                <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
-                            </p>
-                            <p>
-                                Bloggers you follow will follow you back and see your content recommended in their feeds for reposting.
-                            </p>
-                            <p>
-                                The more reposts you get, the faster your audience and traffic will grow.
-                            </p>
-                        </div>
+                <div class="b-ac-following">
+                    <div class="b-ac-following__img"></div>
+                    <div class="b-ac-following__text">
+                        <h3>The Next Step:</h3>
+                        <p><a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a></p>
+                        <p>Bloggers you follow will follow you back and see your content recommended in their feeds for reposting.</p>
                     </div>
                 </div>
             </div>

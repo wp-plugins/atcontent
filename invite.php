@@ -23,7 +23,7 @@
         <?php if ( isset( $_GET["repost"] ) && $_GET["repost"] == "1" ) { ?>
             <h1>To get posts from Content Feed you need to connect<br> your profile to AtContent.</h1>
         <?php } else { ?>
-            <h1>AtContent helps dramatically increase your audience and drive more traffic to your blog. You can monetize your blog with relevant sponsored posts.<br>It's free to join!</h1>
+            <h1 id="connection_header">AtContent helps dramatically increase your audience and drive more traffic to your blog. You can monetize your blog with relevant sponsored posts.<br>It's free to join!</h1>
         <?php }?>
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
@@ -109,6 +109,7 @@
                 ac_ga_s('connectTab', 'changeaccount');
                 $("#ac_connect_result").html('<img src="<?php echo ($loader_url);?>" width="30">');
                 $('#blogs').html('');
+                $('#connection_header').show();
                 $('#b_connect').hide();
                 jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
 			        type: 'post',
@@ -127,6 +128,7 @@
 
         CreateBlogsPanel = function(blogs, isReconnect) {
             $("#connection_rules_title").hide();
+            $("#connection_header").hide();
             var blogsHtml = isReconnect ? getBlogsPanelHtml(blogs) : getNewBlogPanelHtml();
             $("#user_data_form").hide();
             $("#b_connect").unbind('click').click(function(e) {
@@ -144,6 +146,7 @@
                 beforechangeaccount();
             });
             $('#blogs').html(blogsHtml);
+            $('#connection_header').hide();
             $('#ac_connect_result').html('');
             $('#newblogtitle').val('<?php echo bloginfo('name'); ?>');
         }

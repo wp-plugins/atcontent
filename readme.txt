@@ -58,6 +58,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.9.8 =
+Connect process and settings update
+
 = 7.9.7 =
 * AtContent dashboard panel with amount of reposts.
 
