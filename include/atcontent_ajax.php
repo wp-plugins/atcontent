@@ -520,6 +520,13 @@ function atcontent_ajax_settings_val() {
     exit;
 }
 
+function atcontent_ajax_highlighted_hide() {
+    include( "atcontent_userinit.php" );
+    atcontent_api_highlighted_hide( $ac_api_key, $_POST["postId"] );
+    echo json_encode( array( "IsOK" => true ) );
+    exit;
+}
+
 function atcontent_ajax_invitefollowup() {
     echo <<<END
 <script>

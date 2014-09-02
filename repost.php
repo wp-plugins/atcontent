@@ -19,7 +19,7 @@
 <script>
         window.location = "admin.php?page=atcontent/dashboard.php&repost=1";
 </script>    
-<?php } else { 
+<?php } else {
     update_user_meta( $userid, "ac_last_repost_visit", date( "Y-m-d H:i:s" ) );
     $currenttag = "";
     if ( isset( $_GET["tag"] ) ) {
@@ -34,11 +34,16 @@
         wp_die( "Something gets wrong" . var_dump( $pageAnswer ) );
     }    
     $atcontent_reposts = $pageAnswer["Page"]["EntityList"];
+    $atcontent_second_reposts = $pageAnswer["SecondPage"]["EntityList"];
+    $atcontent_highlighted = $pageAnswer["Highlighted"];
 ?>
 <script>
     ac_ga_s('repostTab', 'view');
     ac_ga_s('repostTab', 'tag ' + '<?php echo $currenttag; ?>');
     ac_ga_s('repostTab', 'page ' + '<?php echo $currentpage; ?>');
+    var ac_highlighted = <?php echo json_encode( $atcontent_highlighted ); ?>;
+    var ac_highlighted_cached = <?php echo json_encode( $atcontent_highlighted ); ?>;
+    var ac_posts_page = <?php echo json_encode($atcontent_second_reposts); ?>;
 </script>
 
     <div class="b-ac-mobile-menu">
@@ -116,6 +121,19 @@
             
             <div class="postList b-publications-columns">
                 <?php 
+                    if ( count( $atcontent_highlighted ) > 1 ) {
+                        for ( $i = 0; $i < 2; $i++ ) {
+                            ?>
+                            <div class="article-inline article-highlighted" id="ac-highlighted-<?php echo $i; ?>" data-options="hide_shares" data-num="<?php echo $i ?>">
+                                <div class="b-post-highlight">
+                                    Hightlighted post
+                                    <div class="b-post-highlight__refresh" data-num="<?php echo $i; ?>">&times;</div>
+                                </div>
+                                <div id="ac-highlighted-post-<?php echo $i; ?>"></div>
+                            </div>
+                            <?php
+                        }
+                    } 
                     foreach ( $atcontent_reposts as $post ) { 
                     $postid = $post["PostIdString"];
                 ?>
@@ -184,7 +202,55 @@
                         
                     }, "json");
                 });
+                
+                $('.article-highlighted').each(function(){
+                    ac_highlighted_show($(this).attr('data-num'));
+                });
+                
+                $('.b-post-highlight__refresh').on('click', function(e) {
+                   e.preventDefault();
+                   var hNum = $(this).attr('data-num'),
+                       postId = $(this).attr('data-id');
+                   $('#ac-highlighted-post-' + hNum).html('');
+                   ac_highlighted_show(hNum);
+                   ac_highlighted_hide(postId);
+                });
             });
+            
+            window.ac_highlighted_hide = function(postId) {
+                $.post('admin-ajax.php', {
+                       'action': 'atcontent_highlighted_hide',
+                       'postId': postId,
+                   }, function(d){
+                       
+                   }, 'json');
+            };
+            
+            window.ac_highlighted_show = function(i) {
+                var postNum, postId, $ac_highlighted = $('#ac-highlighted-' + i);
+                if (ac_highlighted.length == 0) {
+                    postNum = parseInt(Math.floor(Math.random() * ac_posts_page.length));
+                    postId = ac_posts_page.splice(postNum, 1)[0].PostIdString;
+                    $ac_highlighted.find('.b-post-highlight').remove();
+                } else {
+                    postNum = parseInt(Math.floor(Math.random() * ac_highlighted.length));
+                    postId = ac_highlighted.splice(postNum, 1)[0];
+                }
+                
+                
+                $ac_highlighted.find('.b-post-highlight__refresh')
+                        .attr('data-id', postId);
+                var sc1 = document.createElement("SCRIPT");
+                sc1.setAttribute('data-ac-src', 'http://w.atcontent.com/CPlase/' + postId + '/Title/h3');
+                var sc2 = document.createElement("SCRIPT");
+                sc2.setAttribute('src', 'http://w.atcontent.com/CPlase/' + postId + '/Face');
+                var container = document.getElementById('ac-highlighted-post-' + i);
+                container.appendChild(sc1);
+                container.appendChild(sc2);
+                try {
+                    CPlase.text.init();
+                } catch (e) { }
+            };
 
             CPlase = window.CPlase || {};
             CPlase.evt = CPlase.evt || [];
@@ -230,11 +296,14 @@
             });
 		
             window.repost_post = function(p) {
-				var btn = document.getElementById('acRepostBtn' + p);
+                var btn = document.getElementById('acRepostBtn' + p);
                 btn.href = "javascript:";
                 var btnCaption = document.getElementById('acRepostBtnCaption' + p);
                 btnCaption.innerHTML = "Reposting...";
                 ac_ga_s('repostTab', 'doRepost');
+                if (ac_highlighted_cached.indexOf(p) != -1) {
+                    ac_highlighted_hide(p);
+                }
                 $.ajax({url: '<?php echo $ajax_form_action; ?>',
                     type: 'post',
                     data: {

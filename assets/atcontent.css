@@ -1338,3 +1338,16 @@ input[disabled] {background: #eee}
         right: .8em;
         top: .8em;
     }
+    
+ .b-post-highlight {
+    display: block;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: .5em;
+    padding-bottom: .5em;
+    color: #999;
+    font-size: .8em;
+}
+.b-post-highlight__refresh {
+    float: right;
+    cursor: pointer;
+}

@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.9.9.0
+    Version: 7.9.9.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', "7.9.9.0" );
+    define( 'AC_VERSION', "7.9.9.1" );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -50,6 +50,7 @@
         add_action( 'wp_ajax_atcontent_feed_count', 'atcontent_ajax_feed_count' );
         add_action( 'wp_ajax_atcontent_settings_tab', 'atcontent_ajax_settings_tab' );
         add_action( 'wp_ajax_atcontent_settings_val', 'atcontent_ajax_settings_val' );
+        add_action( 'wp_ajax_atcontent_highlighted_hide', 'atcontent_ajax_highlighted_hide' );
         add_action( 'wp_ajax_atcontent_invitefollowup', 'atcontent_ajax_invitefollowup' );
         add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
@@ -90,7 +91,7 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0f', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0g', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );

@@ -103,6 +103,7 @@ function atcontent_api_feed( $api_key, $tag,  $page ) {
         '&Tag=' . urlencode( $tag ) .
         '&Page=' . urlencode( $page ) .
         '&AppID=' . urlencode( 'WordPress' ) .
+        '&Highlighted=1' .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/feed', $post_content );
 }
@@ -148,7 +149,7 @@ function atcontent_api_syncqueue( $api_key, $syncid, $userid, $postids ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/syncqueue', $post_content );
 }
 
-function atcontent_api_get_sync_stat($syncId, $blogId  ) {
+function atcontent_api_get_sync_stat( $syncId, $blogId ) {
     $post_content = 
         'syncid=' . urlencode( $syncId ) .
         '&blogid=' . urlencode( $blogId );
@@ -168,6 +169,15 @@ function atcontent_api_sendinvite( $api_key, $name, $toemail, $toname ) {
         '&sitetitle=' . urlencode( $sitetitle ) .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/invite', $post_content );
+}
+
+function atcontent_api_highlighted_hide( $api_key, $postid ) {
+    $post_content =
+        'AppID=' . urlencode( 'WordPress' ) .
+        '&PostId=' . urlencode( $postid ) .
+        '&Key=' . urlencode( $api_key ) .
+        '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/highlightedhide', $post_content );
 }
 
 function atcontent_do_post( $url, $data ) {
