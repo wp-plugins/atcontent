@@ -153,7 +153,7 @@
 <script type="text/javascript">
 $j = jQuery;
 $j().ready(function(){
-	$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to AtContent!</td></tr></table></div>');
+		$j('.wrap > h2').parent().prev().after('<div class="update-nag"><table><tr><td><a class="button button-primary ac-connect-button" href="<?php echo $connect_url; ?>">Connect your account to AtContent</a></td><td>Almost done — connect your account to start growing your audience, increase traffic on your blog and monetize it with sponsored posts!</td></tr></table></div>');
 });
 </script>
 <?php
