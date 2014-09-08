@@ -85,12 +85,16 @@
             buttonDisabled = false;
         }
     
-        function initAuthForm() {
+        function initAuthForm(makeSignOut) {
             $('#ac_connect_result').html('');
             var email = $('#email').val();
             var username = $('#username').val();
-            $('#user_data_form').html('<iframe src="//atcontent.com/auth/wpiframe/?email=' + encodeURIComponent(email) + '&username=' + encodeURIComponent(username) + 
-                '&back=' + encodeURIComponent('<?php echo admin_url("admin-ajax.php"); ?>') + '" style="width:500px;height:700px;"></iframe>').show();
+            var iframeUrl = "//atcontent.com/auth/wpiframe/?email=" + encodeURIComponent(email) + "&username=" + encodeURIComponent(username) + 
+				            "&back=" + encodeURIComponent('<?php echo admin_url("admin-ajax.php"); ?>');
+			if (makeSignOut) {
+				iframeUrl = "//atcontent.com/signout/?redirect=" + encodeURIComponent(iframeUrl);
+			}
+            $('#user_data_form').html('<iframe src="' + iframeUrl + '" style="width:500px;height:700px;"></iframe>').show();
             //$('#connection_rules_title').show();
             $('#disconnect').remove();
             //$('#ac_we_will_send').show();
@@ -118,7 +122,7 @@
 				    },
                     success: function(d) {  
                         if (d.IsOK) {
-                            initAuthForm();
+                            initAuthForm(true);
                         }
                     },
 			        dataType: "json"
