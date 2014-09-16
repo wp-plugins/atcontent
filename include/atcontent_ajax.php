@@ -89,6 +89,7 @@ function atcontent_ajax_gate() {
                     $repost_post_id = $matches[3][0];
                     update_post_meta( $postid, "ac_repost_postid", $repost_post_id );                    
                 }
+                $ac_vglink_apikey = get_user_meta(intval( $userid ), "ac_vglink_apikey", true );
                 echo json_encode( array( 
                     "IsOK" => true,
                     "Title" => $post_title,
@@ -104,6 +105,7 @@ function atcontent_ajax_gate() {
                     "RepostPostId" => $repost_post_id,
                     "EmbedId" => $embedid,
                     "SiteUrl" => get_site_url(),
+                    "VigLinkApiKey" => $ac_vglink_apikey
                     ) );
             }
             break;
@@ -322,10 +324,26 @@ function atcontent_save_settings() {
     $ac_oneclick_repost = $_POST["ac_oneclick_repost"];
     if ( $ac_oneclick_repost != "0" && $ac_oneclick_repost != "1" ) $ac_oneclick_repost = "1";
     atcontent_set_user_settings_oneclick_repost( $userid, $ac_oneclick_repost );
-    update_user_meta( intval( $current_user->ID ), "ac_settings_tab_settings", "1" );
+    update_user_meta( intval( $userid ), "ac_settings_tab_settings", "1" );
     $ac_mainpage_repost = "1";
     if ( !isset( $_POST["ac_mainpage_repost"] ) ) $ac_mainpage_repost = "0";
     atcontent_set_user_settings_mainpage_repost( $userid, $ac_mainpage_repost );
+
+    $ac_use_vglink = "0";
+    if ( isset($_POST["ac_use_vglink"])) 
+    {
+        $ac_use_vglink = $_POST["ac_use_vglink"];
+        if ( $ac_use_vglink != "on" ) $ac_use_vglink = "0";
+        else $ac_use_vglink = "1";
+    }
+
+    $ac_vglink_apikey = "";
+    $ac_vglink_apikey = $_POST["ac_vglink_apikey"];
+    if ($ac_use_vglink == "0") $ac_vglink_apikey = "";
+    atcontent_set_user_settings_use_viglink($userid, $ac_use_vglink);
+    atcontent_set_user_settings_viglink_apikey($userid, $ac_vglink_apikey);
+    atcontent_api_set_viglink_api_key( $ac_vglink_apikey );
+    
     echo json_encode ( array ( "IsOK" => true )); 
     exit;
 }

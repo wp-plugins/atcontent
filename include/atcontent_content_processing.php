@@ -35,6 +35,12 @@
 <!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://atcontent.com/Terms/) -->
 <script async="true" src="https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Panel"></script>
 END;
+            $ac_use_vglink = get_user_meta(intval( $post->post_author ), "ac_use_vglink", true );
+            if ($ac_use_vglink == "1")
+            {
+                $ac_vglink_apikey = get_user_meta(intval( $post->post_author ), "ac_vglink_apikey", true );
+                $code = "<div data-ac-options=\"viglink-key\" data-ac-viglink-key=\"".$ac_vglink_apikey."\">".$code."</div>";
+            }
             $code = str_replace( PHP_EOL, " ", $code );
             $content .= $code;
         }

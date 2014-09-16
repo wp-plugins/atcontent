@@ -180,6 +180,19 @@ function atcontent_api_highlighted_hide( $api_key, $postid ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/highlightedhide', $post_content );
 }
 
+
+function atcontent_api_set_viglink_api_key( $viglink_api_key ) {    
+    $userid = wp_get_current_user() -> ID;
+    $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
+    $ac_api_key = get_user_meta( $userid, "ac_api_key", true ); 
+    $post_content = 
+        'Key='. urlencode( $ac_api_key ) . 
+         '&VigLinkApiKey=' .  urlencode( $viglink_api_key ) .
+         '&blogId=' . urlencode( $ac_blogid ) . 
+         '&AppID=' . urlencode( 'WordPress' );
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/setviglinkapikey', $post_content );
+}
+
 function atcontent_do_post( $url, $data ) {
     $wp_response = wp_remote_post( $url, array(
         'method' => 'POST',

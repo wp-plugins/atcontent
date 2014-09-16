@@ -26,6 +26,16 @@
         }
         return $ac_mainpage_repost;
     }
+    
+    function atcontent_set_user_settings_use_viglink($userid, $value)
+    {
+        update_user_meta( $userid, "ac_use_vglink", $value );
+    }
+
+    function atcontent_set_user_settings_viglink_apikey($userid, $value)
+    {
+        update_user_meta( $userid, "ac_vglink_apikey", $value );   
+    }
 
     function atcontent_set_user_settings_mainpage_repost( $userid, $value ) {
         update_user_meta( $userid, "ac_mainpage_repost", $value );

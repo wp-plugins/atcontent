@@ -7,6 +7,8 @@
     $ac_settings_tab_guide = get_user_meta( $userid, "ac_settings_tab_guide", true );
     $ac_settings_tab_fourways = get_user_meta( $userid, "ac_settings_tab_fourways", true );
     $ac_settings_tab_settings = get_user_meta( $userid, "ac_settings_tab_settings", true );
+    $ac_use_vglink = get_user_meta( $userid, "ac_use_vglink", true );
+    $ac_vglink_apikey = get_user_meta( $userid, "ac_vglink_apikey", true );
     $guide_unread = " b-ac-acc__pane_unread";
     $fourways_unread = " b-ac-acc__pane_unread";
     $settings_unread = " b-ac-acc__pane_unread";
@@ -280,7 +282,15 @@
                             </td>
                         </tr>
                     </table>
-                    
+                    <h4 class="b-ac-settings__hdl">Vglink settings</h4>
+                            <label>
+                                <input id="f-settings_vglink_checkbox" type="checkbox" name="ac_use_vglink" <?php echo $ac_use_vglink == "1" ? "checked=\"\"" : ""; ?> />
+                                Use vglink in reposts
+                            </label>
+                            <br /><br />
+                            <label>
+                                <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type vglink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
+                            </label>  
                     <p>
                         <button id="b-save-settings" type="button" class="button button-primary">Save Settings</button>
                         <span class="b-ac-settings__note b-ac-settings__note_aside" id="save-settings-success" style="display: none;">
@@ -361,6 +371,18 @@
                     $("#invite-loader").remove();
                     $("#invite-success").show().delay(6000).fadeOut(300);
                 });
+            }
+        });
+    
+        $('#f-settings_vglink_checkbox').on('click', function(e)
+        {
+            if ($('#f-settings_vglink_checkbox').is(':checked'))
+            {
+                $('#f-settings_vglink_textbox').show();
+            }
+            else 
+            {        
+                $('#f-settings_vglink_textbox').hide();
             }
         });
 
