@@ -46,7 +46,7 @@ At AtContent we use "nofollow" and "canonical" tags for all links in reposts. We
 
 = Why wouldn't Google penalize my site for content duplication? =
 
-We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "original-source" meta tag, "nofollow" tag, and "rel=canonical" link to your site. While indexing reposted content,
+We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "nofollow" tag for each link, and "rel=canonical" link to your site. While indexing reposted content,
 search engines will get your site up in their rankings, but not AtContent.
 
 == Screenshots ==
@@ -58,11 +58,14 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.11.1 =
+* Impact Radius compatibility.
+
 = 7.11.0 =
-Update for viglink users 
+* Update for viglink users.
 
 = 7.9.8 =
-Connect process and settings update
+* Connect process and settings update.
 
 = 7.9.7 =
 * AtContent dashboard panel with amount of reposts.
@@ -74,7 +77,7 @@ Connect process and settings update
 * More diagnostics data through connection.
 
 = 7.9.2 =
-* UI fixes
+* UI fixes.
 
 = 7.9.1 =
 * Help and notifications for new users.
@@ -83,7 +86,7 @@ Connect process and settings update
 * Brand new interface. More settings to fit your blog perfectly.
 
 = 7.8.4 =
-* Code cleanup and stability improvements
+* Code cleanup and stability improvements.
 
 = 7.8.3 =
 * Connect process small fixes.

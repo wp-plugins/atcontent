@@ -118,6 +118,8 @@ function atcontent_ajax_gate() {
             $ac_embedid = $_POST["embedid"];
             $ac_published = $_POST["published"];
             $repost_preview = $_POST["preview"];
+            $impactradiusid = $_POST["impactradiusid"];
+            $impactradiustrackingurl = $_POST["imactradiusurl"];
             $embedid = '';
             if ( strlen( $ac_embedid ) > 0 ) {
                 $embedid .= "-/" . $ac_embedid . "/"; 
@@ -128,11 +130,21 @@ function atcontent_ajax_gate() {
                 remove_filter( 'the_content', 'atcontent_the_content_after', 100 );
                 remove_filter( 'the_excerpt', 'atcontent_the_content_after', 100 );
                 remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
-                $ac_content = 
-                "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
-                "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-                "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+                if ( $impactradiusid != null && strlen( $impactradiusid ) > 0 ) {
+                    $embedid_ir = str_replace( "/", "%2F", $embedid );
+                    $ac_content = 
+                    "<div class=\"atcontent_widget\" data-ac-options=\"impct-rad-id\" data-ac-impct-rad-id=\"{$impactradiusid}\"><div class=\"atcontent_preview\"><p>" . 
+                       $repost_preview . "</p></div>" .
+                    "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+                    "<script src=\"{$impactradiustrackingurl}?u=https%3A%2F%2Fw.atcontent.com%2F-%2F{$embedid_ir}{$ac_pen_name}%2F{$ac_postid}%2FTitle%2Fh3\"></script><!--more-->" . 
+                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+                } else {
+                    $ac_content = 
+                    "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
+                    "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+                    "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+                }
                 $ac_repost_setting = atcontent_get_user_settings_oneclick_repost( intval( $userid ) );
                 $post_status = $ac_repost_setting == "1" ? "publish" : "draft";
                 // Create post object
@@ -270,7 +282,7 @@ function atcontent_connect_blog() {
     if ( isset( $_POST['blogtitle'] ) ){
         $blogtitle = $_POST['blogtitle'];
     }
-    $gate = $_POST['gate'];
+    $gate = admin_url('admin-ajax.php');
     $blog = $_POST['blog'];
     $blog_url = home_url();
     $connect_data = 
