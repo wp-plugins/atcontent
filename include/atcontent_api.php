@@ -61,11 +61,13 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
         $userid = wp_get_current_user() -> ID;
         $api_key = get_user_meta( $userid, "ac_non_delete_api_key", true );        
     }
+    $siteuri = get_bloginfo( 'url' );
     $post_content = 'Email=' . urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
         ( $api_key != NULL ? '&APIKey=' . urlencode( $api_key ) : '' ) .
         ( $referral != NULL ? '&Referral=' . urlencode( $referral ) : '' ) .
+        '&Url=' . urlencode( $siteuri ) .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/pingback', $post_content );
 }
