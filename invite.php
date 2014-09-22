@@ -318,7 +318,7 @@
             var email = $("#email").val();
             if (email == null || email.length == 0) return;
             var script = document.createElement('script');
-            script.src = "http://api.atcontent.com/v1/native/checkauth?email=" + encodeURIComponent(email) + "&jsonp_callback=AutoSignInCallback&r=" + Math.random();
+            script.src = "https://api.atcontent.com/v1/native/checkauth?email=" + encodeURIComponent(email) + "&jsonp_callback=AutoSignInCallback&r=" + Math.random();
             document.body.appendChild(script);
         }
 
@@ -364,7 +364,7 @@
             var email = $("#email").val();
             var username = $("#username").val();
             var script = document.createElement('script');
-            script.src = "http://api.atcontent.com/v1/native/connect.jsonp?email=" + encodeURIComponent(email) + "&username=" + encodeURIComponent(username) + "&jsonp_callback=ConnectCallback&r=" + Math.random();
+            script.src = "https://api.atcontent.com/v1/native/connect.jsonp?email=" + encodeURIComponent(email) + "&username=" + encodeURIComponent(username) + "&jsonp_callback=ConnectCallback&r=" + Math.random();
             document.body.appendChild(script);
         }
 
