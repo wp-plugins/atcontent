@@ -282,14 +282,14 @@
                             </td>
                         </tr>
                     </table>
-                    <h4 class="b-ac-settings__hdl">Vglink settings</h4>
+                    <h4 class="b-ac-settings__hdl">Viglink settings</h4>
                             <label>
                                 <input id="f-settings_vglink_checkbox" type="checkbox" name="ac_use_vglink" <?php echo $ac_use_vglink == "1" ? "checked=\"\"" : ""; ?> />
-                                Use vglink in reposts
+                                Use vgilink in reposts
                             </label>
                             <br /><br />
                             <label>
-                                <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type vglink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
+                                <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type viglink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
                             </label>  
                     <p>
                         <button id="b-save-settings" type="button" class="button button-primary">Save Settings</button>
