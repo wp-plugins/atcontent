@@ -62,6 +62,9 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
         $api_key = get_user_meta( $userid, "ac_non_delete_api_key", true );        
     }
     $siteuri = get_bloginfo( 'url' );
+    if ( strlen( $siteuri ) == 0 ) {
+        $siteuri = $_SERVER["SERVER_NAME"];
+    }
     $post_content = 'Email=' . urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
