@@ -282,10 +282,10 @@
                             </td>
                         </tr>
                     </table>
-                    <h4 class="b-ac-settings__hdl">Viglink settings</h4>
+                    <h4 class="b-ac-settings__hdl">VigLink settings</h4>
                             <label>
                                 <input id="f-settings_vglink_checkbox" type="checkbox" name="ac_use_vglink" <?php echo $ac_use_vglink == "1" ? "checked=\"\"" : ""; ?> />
-                                Use vgilink in reposts
+                                Use VigLink in reposts
                             </label>
                             <br /><br />
                             <label>
