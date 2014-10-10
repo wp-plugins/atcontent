@@ -108,7 +108,7 @@
                                     <div class="b-ac-user">
                                         <div class="b-ac-user__info">
                                             <div class="b-ac-user__photo">
-                                                <img src="http://atcontent.blob.core.windows.net/avatar/ChMa6975/80-0.jpg" width="80" height="80" alt=""/>
+                                                <img src="http://atcontent.blob.core.windows.net/avatar/ChMa6975/80-0.jpg" width="80" height="80" alt="" />
                                             </div>
                                             <div class="b-ac-user__about">
                                                 <span class="b-ac-user__name">Christine Macaulay</span><br>
@@ -326,7 +326,7 @@
                         <div class="b-ac-user">
                             <div class="b-ac-user__info">
                                 <div class="b-ac-user__photo">
-                                    <a href="http://atcontent.com/profile/<?php echo $ac_pen_name; ?>/" target="_blank"><img src="<?php echo $ac_avatar_80; ?>" width="80" height="80" alt=""/></a>
+                                    <a href="http://atcontent.com/profile/<?php echo $ac_pen_name; ?>/" target="_blank"><img src="<?php echo $ac_avatar_80; ?>" width="80" height="80" alt="" /></a>
                                 </div>
                                 <div class="b-ac-user__about">
                                     <span class="b-ac-user__name"><?php echo $ac_show_name; ?></span>
