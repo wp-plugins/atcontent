@@ -99,6 +99,11 @@
         </div>
 
         <div class="l-ac-grid__col-right">
+            <div style="text-align: right; padding: 10px;">
+                <form action="http://atcontent.com/search" method="get" target="_blank">
+                    <input type="text" name="q" placeholder="Find posts..."> <input type="submit" value="Search" class="button button-primary">
+                </form>
+            </div>
 
             <h3>Posts below can be published on your blog. Click "Repost" to try it.</h3>
 
