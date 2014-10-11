@@ -58,6 +58,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.11.4 =
+* Search posts.
+
 = 7.11.1 =
 * Impact Radius compatibility.
 
