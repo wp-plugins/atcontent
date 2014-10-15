@@ -55,7 +55,7 @@ function atcontent_api_get_key( $nounce, $grant ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/requestkey', $post_content );
 }
 
-function atcontent_api_pingback( $email, $status, $api_key, $referral ) {    
+function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
     if ( strlen($api_key) == 0 )
     {
         $userid = wp_get_current_user() -> ID;
@@ -75,11 +75,34 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/pingback', $post_content );
 }
 
+function atcontent_api_activate() {
+    $ac_blog_api_key = get_option('ac_blog_api_key');
+    $gate_url = admin_url("admin-ajax.php");
+    $siteuri = get_bloginfo( 'url' );
+    $blog_title = get_bloginfo( 'name' );
+    if ( strlen( $siteuri ) == 0 ) {
+        $siteuri = $_SERVER["SERVER_NAME"];
+    }
+    $userid = wp_get_current_user()->ID;
+    $blogid = get_user_meta( $userid, 'ac_blogid', true );
+    $syncid = get_user_meta( $userid, "ac_syncid", true );
+    $data = 'key=' . urlencode( $ac_blog_api_key ) . 
+            '&appId=' . urlencode( 'WordPress' ) . 
+            '&gate=' . urlencode( $gate_url ) . 
+            '&url=' . urlencode( $siteuri ) . 
+            '&title=' . urlencode( $blog_title ) . 
+            '&userId=' . urlencode( $userid ) . 
+            '&blogId=' . urlencode( $blogid ) . 
+            '&syncId=' . urlencode( $syncid ) . 
+            '&externalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( "https://api.atcontent.com/v2/blog/activate", $data );
+}
+
 function atcontent_api_readership( $siteuri, $postids, $api_key ) {
     $post_content = 'SiteUri=' . urlencode( $siteuri ) . 
-        '&AppID=' . urlencode( 'WordPress' ) .
-        '&PostIDs=' . urlencode( $postids ) .
-        '&Key=' . urlencode( $api_key ) .
+        '&AppID=' . urlencode( 'WordPress' ) . 
+        '&PostIDs=' . urlencode( $postids ) . 
+        '&Key=' . urlencode( $api_key ) . 
         '&v4=1' .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
@@ -116,7 +139,7 @@ function atcontent_api_feed( $api_key, $tag,  $page ) {
 function atcontent_api_repost_publication($postid, $post_id_in_app){
     $userid = wp_get_current_user()->ID;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true ); 
-    $syncid = get_user_meta( $userid, "ac_syncid", true ); 
+    $syncid = get_user_meta( $userid, "ac_syncid", true );
     $ac_blogid = get_user_meta( $userid, "ac_blogid", true ); 
     $post_content =
         'PostId=' . urlencode( $postid ) .
@@ -196,6 +219,17 @@ function atcontent_api_set_viglink_api_key( $viglink_api_key ) {
          '&blogId=' . urlencode( $ac_blogid ) . 
          '&AppID=' . urlencode( 'WordPress' );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/setviglinkapikey', $post_content );
+}
+
+function atcontent_api_renewinfo(){
+    $userid = wp_get_current_user() -> ID;
+    $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
+    $post_content = 
+            'syncId=' . urlencode($ac_syncid) . 
+            '&userId=' . urlencode($userid) .
+            '&AppID=' . urlencode( 'WordPress' ) . 
+            '&ExternalVersion=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v2/blog/renewinfo', $post_content );
 }
 
 function atcontent_do_post( $url, $data ) {

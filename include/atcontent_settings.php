@@ -71,7 +71,7 @@
                                 <div class="b-ac-repost__text">
                                     <h3>A new object at the bottom of your posts.</h3>
                                     <ul class="b-ac-list">
-                                        <li>It allows to make reposts.<span style="color: #62B551">*</span>.</li>
+                                        <li>It allows to make reposts.<span style="color: #62B551">*</span></li>
                                         <li>It indicates how popular your posts are.</li>
                                         <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
                                     </ul>
@@ -289,7 +289,7 @@
                             </label>
                             <br /><br />
                             <label>
-                                <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type viglink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
+                                <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type VigLink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
                             </label>  
                     <p>
                         <button id="b-save-settings" type="button" class="button button-primary">Save Settings</button>
@@ -300,42 +300,27 @@
                     
                 </div>
                 </form>
-                <?php if ( current_user_can( 'manage_options' ) ) { ?>
                 <div class="b-ac-settings-section">
-                    <h3>Administration</h3>
-                    <form id="f-invite">
-                    <input type="hidden" name="action" value="atcontent_send_invites">
+                    <h3>You are connected to AtContent as</h3>
+                    
+                    <div class="b-ac-user">
+                        <div class="b-ac-user__info">
+                            <div class="b-ac-user__photo">
+                                <a href="http://atcontent.com/profile/<?php echo $ac_pen_name; ?>/" target="_blank"><img src="<?php echo $ac_avatar_80; ?>" width="80" height="80" alt=""/></a>
+                            </div>
+                            <div class="b-ac-user__about">
+                                <span class="b-ac-user__name"><?php echo $ac_show_name; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <p>
-                        Invite all authors of your blog to connect their profiles with AtContent.<br>
-                        Thus your blog posts will get more reposts, reach a wider audience and drive more traffic!
-                    </p>
-                    <p>
-                        <button id="b-invite" type="button" class="button button-primary">Invite all authors</button>
-                        <span class="b-ac-settings__note b-ac-settings__note_aside" id="invite-success" style="display: none;">
-                            Congtats, the invitation sent. We have sent its copy to <?php echo wp_get_current_user()->user_email; ?> for you to check it.
+                        <button id="b-ac__renewinfo" type="button" class="button ">Update</button>
+                        <span class="b-ac-settings__note b-ac-settings__note_aside" id="b-ac__renewsuccess" style="display: none;">
+                            Congrats, AtContent profile was updated on your blog.
                         </span>
                     </p>
                     
-                    </form>
-                </div>
-                <?php } ?>
-
-                <div class="b-ac-settings-section">
-                    <h3>You are connected to AtContent as</h3>
-                    <p>
-                        <div class="b-ac-user">
-                            <div class="b-ac-user__info">
-                                <div class="b-ac-user__photo">
-                                    <a href="http://atcontent.com/profile/<?php echo $ac_pen_name; ?>/" target="_blank"><img src="<?php echo $ac_avatar_80; ?>" width="80" height="80" alt=""/></a>
-                                </div>
-                                <div class="b-ac-user__about">
-                                    <span class="b-ac-user__name"><?php echo $ac_show_name; ?></span>
-                                    <br>
-                                    <a href="#" id="b-change-account">change account</a>
-                                </div>
-                            </div>
-                        </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -359,20 +344,7 @@
                     $("#save-settings-success").show().delay(3000).fadeOut(300);
                 });
             }
-        });
-
-        $('#b-invite').on('click', function(e){
-            e.preventDefault();
-            if ($("#invite-loader").length == 0) {
-                ac_ga_s( 'settingsTab', 'invite' );
-                $('#b-invite').after('<span id="invite-loader" class="spinner"></span>');
-                $("#invite-success").hide();
-                $.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', $("#f-invite").serialize() , function(r) {
-                    $("#invite-loader").remove();
-                    $("#invite-success").show().delay(6000).fadeOut(300);
-                });
-            }
-        });
+        });        
     
         $('#f-settings_vglink_checkbox').on('click', function(e)
         {
@@ -385,27 +357,16 @@
                 $('#f-settings_vglink_textbox').hide();
             }
         });
-
-        $('#b-change-account').on('click', function(e){
-            e.preventDefault();
-            ac_ga_s( 'settingsTab', 'disconnectQuestion' );
-            if (confirm("Are you sure you want to change AtContent profile?")) {
-                ac_ga_s( 'settingsTab', 'disconnect' );
-                jQuery.ajax({url: '<?php echo $ajax_form_action; ?>',
-			        type: 'post',
-			        data: {
-					    action: 'atcontent_disconnect'
-					}, 
-                    success: function(d)
-                    {  
-                        if (d.IsOK) {
-                            window.location = 'admin.php?page=atcontent/dashboard.php&noauto=1';
-                        } 
-                    },                   
-			        dataType: "json"
-		        });
-            }
+        
+        $('#b-ac__renewinfo').on('click', function(e){
+            ac_ga_s( 'settingsTab', 'renewinfo' );
+            $('#b-ac__renewinfo').after('<span id="renewinfo-loader" class="spinner"></span>');
+            $.post('admin-ajax.php', {'action' : 'atcontent_renewinfo'}, function(ee){
+                $("#renewinfo-loader").remove();
+                $("#b-ac__renewsuccess").show().delay(3000).fadeOut(300);
+            }, 'json');
         });
+        
     });
 })(jQuery);
 </script>

@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.11.4.4
+    Version: 7.12.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', '7.11.4.4' );
+    define( 'AC_VERSION', '7.12.0' );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -52,6 +52,8 @@
         add_action( 'wp_ajax_atcontent_settings_val', 'atcontent_ajax_settings_val' );
         add_action( 'wp_ajax_atcontent_highlighted_hide', 'atcontent_ajax_highlighted_hide' );
         add_action( 'wp_ajax_atcontent_invitefollowup', 'atcontent_ajax_invitefollowup' );
+        add_action( 'wp_ajax_atcontent_blogactivate', 'atcontent_ajax_blogactivate' );
+        add_action( 'wp_ajax_atcontent_renewinfo', 'atcontent_ajax_renewinfo' );
         add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     }
@@ -102,12 +104,18 @@
             wp_register_script( 'atcontentAdminScript38',  plugins_url( 'assets/atcontent38.js?v=1', __FILE__ ), array(), true );
             wp_enqueue_script( 'atcontentAdminScript38' );
         }
-        if ( !get_option('atcontent_inited') )
-	    {
-		    update_option('atcontent_inited', 'true');
-		    wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
+        if ( get_option( 'atcontent_inited' ) != 'true' )
+        {
+            update_option( 'atcontent_inited', 'true' );
+            wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
             exit;
-	    }
+        }
+        $ac_blog_api_key = get_option( 'ac_blog_api_key' );
+        if ( strlen( $ac_blog_api_key ) == 0 ) {
+            $ac_blog_api_key = md5( time() . mt_rand() );
+            update_option( 'ac_blog_api_key', $ac_blog_api_key );
+            update_option( 'ac_main_userid', wp_get_current_user()->ID );
+        }
     }
 
     function atcontent_get_menu_key( $desired ) {

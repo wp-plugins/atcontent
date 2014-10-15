@@ -58,6 +58,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.12.0 =
+* Connect the whole blog to AtContent.
+
 = 7.11.4 =
 * Search posts.
 
@@ -510,4 +513,4 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Upgrade notice ==
 
-* Brand new plugin interface!
+* Connect the whole blog to AtContent.

@@ -23,7 +23,6 @@ function atcontent_ajax_gate() {
             if ( strlen( $ac_api_key ) > 0 && ($ac_api_key == $_POST["key"]) ) {
                 $repost_title = $_POST["title"];
                 $ac_content = "<!-- Copying this AtContent publication you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) --><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more--><script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$ac_pen_name}/{$ac_postid}/Body\"></script>";
-                //$ac_content = "[atcontent id=\"{$ac_postid}\"]";
                 $ac_repost_setting = atcontent_get_user_settings_oneclick_repost( intval( $userid ) );
                 $post_status = $ac_repost_setting == "1" ? "publish" : "draft";
                 // Create post object
@@ -238,6 +237,98 @@ function atcontent_ajax_gate() {
                     echo json_encode ( array ( "IsOK" => false ) );
                 }
             }
+            break;
+        case 'getusers':
+            $key = $_POST['key'];
+            $ac_blog_api_key = get_option( 'ac_blog_api_key' );
+            if ( strlen( $ac_blog_api_key ) == 0 || $key != $ac_blog_api_key ) break;
+            global $wpdb;
+            $blog_users = array();
+            $offset = 0;
+            $limit = 20;
+            do {
+                $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
+                foreach ( $wp_user_search as $user ) {
+                    $userid = $user->ID;
+                    $email = $user->user_email;
+                    if ( user_can( $userid, 'edit_posts' ) ) {
+                        $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+                        $ac_fake_key = get_user_meta( $userid, "ac_fake_key", true );
+                        $userinfo = get_userdata( $userid );
+                        $username = $userinfo -> display_name;
+                        $blog_users[] = array( "Email" => $email, "Id" => $userid, "Key" => $ac_api_key, 'Fake' => $ac_fake_key, 'Username' => $username );
+                    }
+                }
+                $wpdb->flush();
+                $offset += $limit;
+            } while ( count( $wp_user_search ) > 0 );
+            echo json_encode( $blog_users );
+            break;
+        case 'updateuserinfo':
+            $key = $_POST['key'];
+            $ac_blog_api_key = get_option( 'ac_blog_api_key' );
+            if ( strlen( $ac_blog_api_key ) == 0 || $key != $ac_blog_api_key ) break;
+            $userid = intval( $_POST['userid'] );
+            $apikey = $_POST['apikey'];
+            $nickname = $_POST["nickname"];
+            $showname = $_POST['showname'];
+            $avatar_20 = $_POST['avatar20'];
+            $avatar_80 = $_POST['avatar80'];
+            $avatar_200 = $_POST['avatar200'];
+            $fake_key = $_POST['fakekey'];
+            $ac_blogid = $_POST["blogid"];
+            $ac_syncid = $_POST["syncid"];
+            update_user_meta( $userid, 'ac_api_key', $apikey );
+            update_user_meta( $userid, 'ac_pen_name', $nickname );
+            update_user_meta( $userid, 'ac_showname', $showname );
+            update_user_meta( $userid, 'ac_avatar_20', $avatar_20 );
+            update_user_meta( $userid, 'ac_avatar_80', $avatar_80 );
+            update_user_meta( $userid, 'ac_avatar_200', $avatar_200 );
+            update_user_meta( $userid, 'ac_fake_key', $fake_key );
+            update_user_meta( $userid, 'ac_blogid', $ac_blogid );
+            update_user_meta( $userid, 'ac_syncid', $ac_syncid );
+            echo json_encode( array( 'IsOK' => true ) );
+            break;
+        case 'updatebloginfo':
+            $key = $_POST['key'];
+            $ac_blog_api_key = get_option( 'ac_blog_api_key' );
+            if ( strlen( $ac_blog_api_key ) == 0 || $key != $ac_blog_api_key ) break;
+            $blogid = $_POST["blogId"];
+            $syncid = $_POST["syncId"];
+            update_option( "ac_blog_id", $blogid );
+            update_option( "ac_sync_id", $syncid );
+            echo json_encode( array( 'IsOK' => true ) );
+            break;
+        case 'getposts':
+            $key = $_POST['key'];
+            $userid = intval( $_POST['userid'] );
+            $ac_api_key = get_user_meta( $userid, 'ac_api_key', true );
+            if ( strlen( $ac_api_key ) == 0 || $ac_api_key != $key ) break;
+            global $wpdb;
+            $offset = 0;
+            $limit = 20;
+            $posts_id = array();
+            do {
+                $posts = $wpdb->get_results( 
+	        "
+	        SELECT ID, post_title, post_author
+	        FROM {$wpdb->posts}
+	        WHERE post_status = 'publish' 
+		        AND post_author = {$userid} AND post_type = 'post'
+                ORDER BY post_date DESC LIMIT {$offset},{$limit}
+	        "
+                );
+                foreach ( $posts as $post ) 
+                {
+                    array_push( $posts_id, $post->ID );
+                }
+                $wpdb->flush();
+                $offset += $limit;
+            } while ( count( $posts ) > 0 );
+            echo json_encode( $posts_id );
+            break;
+        case 'getversion':
+            echo AC_VERSION;
             break;
     }
     exit;
@@ -563,6 +654,16 @@ function atcontent_ajax_invitefollowup() {
 window.parent.parent.followup('{$_GET['key']}');
 </script>
 END;
+    exit;
+}
+
+function atcontent_ajax_blogactivate(){
+    echo json_encode(atcontent_api_activate());
+    exit;
+}
+
+function atcontent_ajax_renewinfo(){
+    echo json_encode(atcontent_api_renewinfo());
     exit;
 }
 

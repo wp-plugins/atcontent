@@ -76,6 +76,7 @@ function atcontent_activate() {
 
 function atcontent_deactivate() {
     try {
+        update_option( 'atcontent_inited', 'false' );
         global $wpdb;
         $offset = 0;
         $limit = 20;

@@ -14,23 +14,30 @@
         $userid = intval( $_GET['connectas'] );
     }
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
+    if ( strlen( $ac_api_key ) == 0 ) {
+        $ac_non_delete_key = get_user_meta( $userid, "ac_non_delete_api_key", true );
+        if ( strlen( $ac_non_delete_key ) == 0 ) {
+            update_user_meta( $userid, "ac_fake_key", "inited" );
+        }
+    }
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
-    if ( strlen( $ac_api_key ) != 0 && strlen( $ac_syncid ) != 0 ) {
+    $ac_fakekey = get_user_meta( $userid, "ac_fake_key", true );
+?>
+<div class="atcontent_wrap">
+<?php
+    if ( ( strlen( $ac_api_key ) != 0 && ( strlen( $ac_syncid ) != 0 || $ac_fakekey == 'cleared' ) ) ) {
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
         $currentuser = wp_get_current_user();
         $userinfo = get_userdata( $currentuser -> ID );        
-?>
-<div class="atcontent_wrap">
-    <?php
         // PingBack
         if ( ! atcontent_pingback_inline() ) {
             echo "<div class=\"error\">" . 'Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.' . "</div>";
         }
         //End PingBack
         include("include/atcontent_settings.php");
-    }
-    else
-    {
+    } else if ( strlen( $ac_fakekey ) > 0 ) {
+        include( 'include/atcontent_connect.php' );
+    } else {
         include( "invite.php" );
     }
 ?>    

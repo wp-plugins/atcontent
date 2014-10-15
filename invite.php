@@ -44,7 +44,8 @@
         AutoSignInCallback,
         ConnectCallback,
         CreateBlogsPanel,
-        blogsCache;
+        blogsCache,
+        _window;
 
     ac_ga_s('connectTab', 'view');
 
