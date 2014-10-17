@@ -8,29 +8,29 @@ Tested up to: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Dramatically increase audience and drive more traffic to your blog by sharing content with relevant bloggers. It’s free to use! 
+Easily grow audience and traffic to your blog by reposting content with relevant bloggers. It’s free to use and takes no time to start!
 
 == Description ==
 
-AtContent makes your blog go viral by allowing you to share content with relevant bloggers. Thus, you dramatically increase audience and drive more traffic to your blog. It’s free to join and takes no time to start! 
-
-Comparison:  
-100 followers on AtContent = 1000x readers,  
-100 followers on Facebook/Twitter = ~10 readers.
-
 #### How AtContent Works ####
 
-1. Simply, install the plugin and connect your blog to AtContent in a couple of clicks. 
-2. Follow bloggers with relevant content.  
-3. Bloggers follow you back and see your content recommended for reposting in their feeds. A *repost* is when someone literally reposts your blog posts on other blog a couple clicks using AtContent. 
+1.	Simply, install the plugin and connect your blog to AtContent in a couple of clicks. 
+2.	Discover and follow bloggers by relevant tags.
+3.	Bloggers follow you back and see your content recommended for reposting in their feeds. The “repost” is an equivalent to a full size blog post.
+
+When other bloggers repost your content, you grow the audience and drive free traffic to your blog through the links in reposts. Additionally, you see who reposts your content, how many times it’s been reposted, and the amount of views it’s gotten. If you update the content, it updates automatically on all blogs.
+
+By reposting content, you increase page views, social sharing and time people spend on your blog, simply because now you have more content on your blog!
+
+[Some of our bloggers with quality content get 100x reposts and over 100,000 views in just 2 months](http://bit.ly/1pj4lbV)!
 
 The more followers your have, the more reposts you get. The more reposts you get, the wider audience you reach and the more traffic you drive to your blog through the links in reposts. 
 
 By reposting content on your blog you can almost double your page views and social sharing, just because you have more content on your blog!
 
-#### How Repost Works ####
+#### About Reposts ####
 
-At AtContent we use "nofollow" and "canonical" tags for all links in reposts. We avoid content duplication and show search engines the original source of content. Thus, reposts never harm your SEO. Each repost is signed with the author’s name and looks native on any blog. If author updates content, it will be updated on all sites where it is reposted. 
+Each repost is signed with the author’s name and looks native on any blog. AtContent uses JavaScript (to avoid content duplication), nofollow and canonical tags for all reposts, therefore not affecting SEO.
 
 [vimeo http://vimeo.com/97195778]
 
