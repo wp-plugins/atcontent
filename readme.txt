@@ -24,10 +24,6 @@ By reposting content, you increase page views, social sharing and time people sp
 
 [Some of our bloggers with quality content get 100x reposts and over 100,000 views in just 2 months](http://bit.ly/1pj4lbV)!
 
-The more followers your have, the more reposts you get. The more reposts you get, the wider audience you reach and the more traffic you drive to your blog through the links in reposts. 
-
-By reposting content on your blog you can almost double your page views and social sharing, just because you have more content on your blog!
-
 #### About Reposts ####
 
 Each repost is signed with the author’s name and looks native on any blog. AtContent uses JavaScript (to avoid content duplication), nofollow and canonical tags for all reposts, therefore not affecting SEO.
