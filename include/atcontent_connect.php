@@ -114,7 +114,7 @@
         function doActivate(){
             $.post('<?php echo admin_url('admin-ajax.php') ?>', { 'action' : 'atcontent_blogactivate' }, function(d){
                 if (d.IsOK) {
-                    location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                    location.href = 'admin.php?page=atcontent&step=1';
                 } else {
                     
                 }

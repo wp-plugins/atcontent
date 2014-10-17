@@ -6,7 +6,7 @@ function atcontent_dashboard_widget_function() {
     $ac_syncid = get_user_meta($userid, "ac_syncid", true );
     echo '<div id="atcontent_dashboard_inside">';
     if ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0  ) {
-        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         echo '<a class="button button-primary ac-connect-button" href="' . $connect_url . '">Connect your account to AtContent</a> <br><br>and get advanced analytics of your blog<div class="clear"></div></div>';
         return;

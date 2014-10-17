@@ -13,7 +13,7 @@
           $userid = $post->post_author;
           $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
           if ( strlen( $ac_api_key ) == 0 ) {
-              $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
+              $connect_url = admin_url( "admin.php?page=atcontent" );
               if ( current_user_can( 'manage_options' ))
               {
                     $connect_url .= '&connectas='.$userid;

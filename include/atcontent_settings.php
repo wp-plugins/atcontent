@@ -1,228 +1,71 @@
 <?php
     require_once( "atcontent_userinit.php" );
-    $posts_id = array();
-    $stat_responce = atcontent_api_readership( site_url(), json_encode( $posts_id ), $ac_api_key );
     $ac_oneclick_repost = atcontent_get_user_settings_oneclick_repost( $userid );
     $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( $userid );
-    $ac_settings_tab_guide = get_user_meta( $userid, "ac_settings_tab_guide", true );
-    $ac_settings_tab_fourways = get_user_meta( $userid, "ac_settings_tab_fourways", true );
     $ac_settings_tab_settings = get_user_meta( $userid, "ac_settings_tab_settings", true );
     $ac_use_vglink = get_user_meta( $userid, "ac_use_vglink", true );
-    $ac_vglink_apikey = get_user_meta( $userid, "ac_vglink_apikey", true );
-    $guide_unread = " b-ac-acc__pane_unread";
-    $fourways_unread = " b-ac-acc__pane_unread";
-    $settings_unread = " b-ac-acc__pane_unread";
-    $settings_opened = "open";
-    $guide_opened = "";
-    $fourways_opened = "";
-    if ( $ac_settings_tab_settings != "1" ) {
-        $guide_opened = "";
-        $fourways_opened = "";
-        $settings_opened = "open";
-    } else {
-        $guide_unread = "";
-    }
-    if ( $ac_settings_tab_fourways != "1" ) {
-        $guide_opened = "";
-        $fourways_opened = "open";
-        $settings_opened = "";
-    } else {
-        $fourways_unread = "";
-    }
-    if ($ac_settings_tab_settings == "1") {
-        $settings_unread = "";
-    }
-    if ( ( isset( $_GET["step"] ) && $_GET["step"] == "1" ) || $ac_settings_tab_guide != "1" ) {
-        $guide_opened = "open";
-        $fourways_opened = "";
-        $settings_opened = "";
-    }
+    $ac_vglink_apikey = get_user_meta( $userid, "ac_vglink_apikey", true );    
 ?>
 
 <div class="b-ac-page b-ac-page_incomplete" id="ac-page">
-    <h1>AtContent</h1>
-    <?php if ( isset( $_GET["step"] ) &&  $_GET["step"] == "1" ) { ?>
-    <div class="update-nag">
-        Congratulations, <?php echo $ac_show_name; ?>! Now you are connected to AtContent network of tens of thousands bloggers!
-    </div>
+    <?php if ( isset( $_GET["step"] ) &&  $_GET["step"] == "1" ) { ?>    
+   
     <iframe src="http://atcontent.com/service/codechecker.ashx" style="display:none;"></iframe>
-    <?php } ?>
-
+    
     <div class="b-ac-acc">
-        
-        <div class="b-ac-acc__pane<?php echo $guide_unread; ?>" <?php echo $guide_opened; ?> id="ac_tab_guide" data-id="guide">
-            <h2 class="b-ac-acc__pane-title">
-                <div class="b-ac-acc__pane-title-add">
-                    <div class="b-ac-slider__nav" data-slider="slider">
-                        <!--<button type="button" class="button button-secondary" data-role="prev">Prev</button>-->
-                        <div class="b-ac-slider__nav-dots"></div>
-                        <button type="button" class="button button-nav" data-role="next">Next</button>
-                    </div>
-                </div>
-                A Short Guide
-            </h2>
+        <div class="b-ac-acc__pane b-ac-acc__pane_open">
             
             <div class="b-ac-acc__pane-content">
-                <div class="b-ac-slider" id="slider">
-                    <div class="b-ac-slider__content">
-                        <div class="b-ac-slider__pane">
-                            <div class="b-ac-repost">
-                                <div class="b-ac-repost__img"></div>
-                                <div class="b-ac-repost__text">
-                                    <h3>A new object at the bottom of your posts.</h3>
-                                    <ul class="b-ac-list">
-                                        <li>It allows to make reposts.<span style="color: #62B551">*</span></li>
-                                        <li>It indicates how popular your posts are.</li>
-                                        <li>It's visually appealing and looks good on your blog. You can adjust the appearance in "settings" later.</li>
-                                    </ul>
-                                    <p>
-                                        <span style="float: left;margin-left: -.8em;color: #62B551">*</span>A repost is when someone literally reposts your content on other site or
--                                        app with a few clicks using AtContent. It dramatically increases your audience and helps to drive more traffic to your blog.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="b-ac-slider__pane">
-                            <div class="b-ac-benefits">
-                                <div class="b-ac-benefits__list">
-                                    <h3>AtContent Benefits</h3>
-                                    <ul class="b-ac-list">
-                                        <li>
-                                            It helps to build your audience and brings a whole host of lovely new people to your site through links in your reposted content.
-                                        </li>
-                                        <li>
-                                            It shows what of your content is shared by AtContent users and indicates which posts are most shareable and engaging.
-                                        </li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">The original author is credited after the reposted content.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">If you update the post, it is updated on all sites.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see how many views your posts get on all sites.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">You see who reposts your content and how many times it is reposted.</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">Your posts can go viral because they can be reposted from any site and to any site.*</li>
-                                        <li class="b-ac-togglable-benefit b-ac-togglable-benefit_hidden">All links in reposts are marked as "nofollow" and "canonical". So, AtContent doesn't affect your SEO in any way.</li>
-                                    </ul>
-                                    <a href="javascript:void(0);" class="b-ac-dashed" id="benefitsToggle" data-alt="Show the first two">Show all benefits</a>
-                                </div>
-                                <div class="b-ac-benefits__example">
-                                    <h3>What Bloggers Say</h3>
-                                    <div class="b-ac-user">
-                                        <div class="b-ac-user__info">
-                                            <div class="b-ac-user__photo">
-                                                <img src="http://atcontent.blob.core.windows.net/avatar/ChMa6975/80-0.jpg" width="80" height="80" alt=""/>
-                                            </div>
-                                            <div class="b-ac-user__about">
-                                                <span class="b-ac-user__name">Christine Macaulay</span><br>
-                                                thefabuloustimes.com
-                                                <div class="b-ac-user__metrics">
-                                                    <small><b>Average monthly results:</b></small><br>
-                                                    <span class="b-ac-user__metrics-num">124</span> reposts on other blogs<br>
-                                                    <span class="b-ac-user__metrics-num">5,857</span> views of her reposts
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="b-ac-user__testimonial">
-                                            AtContent is super easy to use, helps to share your content, build your audience
-                                            and brings a whole host of lovely new people to visit your site!
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="b-ac-slider__pane">
-                        <div class="b-ac-following">
-                            <h3>The Next Step:</h3>
-                            <p>
-                                <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
-                            </p>
-                            <p>
-                                Bloggers you follow will follow you back and see your content recommended in their feeds for reposting.
-                            </p>
-                            <p>
-                                The more reposts you get, the faster your audience and traffic will grow.
-                            </p>
-                        </div>
+                <div class="b-ac-settings-section">
+                     <div class="update-nag">
+        Congratulations, <?php echo $ac_show_name; ?>! Now you are connected to AtContent network of tens of thousands bloggers!
+    </div>
+                    <div class="b-ac-following">
+                        <p>
+                            <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Discover and Follow Bloggers</a>
+                        </p>
+                        <p>
+                            Discover and follow bloggers by relevant tags to create your AtContent Feed for reposting.
+                        </p>
+                        <p>
+                            Bloggers will follow you back and repost your content, growing your audience and traffic!
+                        </p>
                     </div>
                 </div>
+                <div style="text-align:right;"><a style="color:#767676;" href="admin.php?page=atcontent&step=2">Skip it</a></div>
             </div>
         </div>
-
-        <div class="b-ac-acc__pane<?php echo $fourways_unread; ?>" <?php echo $fourways_opened; ?> data-id="fourways">
-            <h2 class="b-ac-acc__pane-title">
-                4 Ways to Get Maximum of AtContent
-            </h2>
-
+        
+    </div>
+    
+    <?php } else if ( isset( $_GET["step"] ) &&  $_GET["step"] == "2" ) { ?>
+    
+    <div class="b-ac-acc">
+        <div class="b-ac-acc__pane b-ac-acc__pane_open">
             <div class="b-ac-acc__pane-content">
-                <div class="b-ac-features">
-                    <div class="b-ac-features__col">
-                        <div class="b-ac-features__col-img b-ac-features__col-img_chart"></div>
-                        <h3 class="b-ac-features__title b-ac-features__title_chart">Follow Relevant Bloggers to Grow Your Audience and Drive More Traffic</h3>
-                        <div class="b-ac-features__cta">
-                            <a href="https://atcontent.com/following-wp/" target="_blank" class="button button-primary button-large">Follow Bloggers</a>
-                        </div>
+                <div class="b-ac-settings-section">
+                    <br><br>
+                    <div class="b-ac-following">
                         <p>
-                            Bloggers who like your content will follow you back and get your content recommended in their feeds for reposting.
+                            <a href="http://atcontent.com/profile/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Complete Your AtContent Profile</a>
                         </p>
                         <p>
-                            The more reposts you get, the faster your audience and traffic grow.
-                        </p>
-                    </div>
-                    <div class="b-ac-features__col">
-                        <div class="b-ac-features__col-img b-ac-features__col-img_book"></div>
-                        <h3 class="b-ac-features__title b-ac-features__title_book">Repost Relevant Content and Increase Page Views on Your Blog</h3>
-                        <div class="b-ac-features__cta">
-                            <a href="admin.php?page=atcontent/repost.php" class="button button-primary button-large">Get Content</a>
-                        </div>
-                        <p>
-                            Increase time readers spend on your blog by discovering and reposting relevant
-                            stories from other bloggers. It’s free!
-                        </p>
-                        <p>You can find posts on the “Content Feed” page in the menu to the left.</p>
-                    </div>
-                </div>
-                <div class="b-ac-features">
-                    <div class="b-ac-features__col">
-                        <div class="b-ac-features__col-img b-ac-features__col-img_post"></div>
-                        <h3 class="b-ac-features__title b-ac-features__title_post">Feature Your Posts to Speed Up Audience Reach and Traffic Growth</h3>
-                        <div class="b-ac-features__cta">
-                            <a href="https://atcontent.com/subscribe/?wp" target="_blank" class="button button-primary button-large">Become Featured</a>
-                        </div>
-                        <p>
-                            Subscribe to one of our plans and feature your best posts. Be reposted on tens of
-                            blogs and increase your audience by 50% or more! Also, get traffic to your site
-                            through links in the reposted content.
-                        </p>
-                        <p>On average, one featured post is being reposted on 5 to 10 blogs.</p>
-                    </div>
-                    <div class="b-ac-features__col">
-                        <div class="b-ac-features__col-img b-ac-features__col-img_wallet"></div>
-                        <h3 class="b-ac-features__title b-ac-features__title_wallet">Skyrocket Your Promotion and Monetize Your Blog</h3>
-                        <div class="b-ac-features__cta">
-                            <a href="http://atcontent.com/landing/nativead/promote-blog-1/?wp&s=1" target="_blank" class="button button-primary button-large">Promote Post</a>
-                            <span class="b-ac-features__cta-or">or</span>
-                            <a href="http://atcontent.com/landing/nativeadforbloggers/?wp" target="_blank" class="button button-primary button-large">Monetize Blog</a>
-                        </div>
-                        <p>
-                            Start a promotional campaign for your best posts and be reposted on hundreds of relevant
-                            blogs. Promote your business, blog, or just your best posts.
-                        </p>
-                        <p>
-                            Monetize your blog by reposting relevant sponsored posts. Get your blog approved and earn up to
-                            $50 per 1,000 views!
+                            Complete your AtContent profile, so other bloggers can find and repost your content, </p><p>growing your audience and traffic.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <?php } else { ?>
+    <h1>AtContent Settings</h1>
+    <div class="b-ac-acc">
 
-        <div class="b-ac-acc__pane<?php echo $settings_unread; ?>" <?php echo $settings_opened; ?> data-id="settings">
-            <h2 class="b-ac-acc__pane-title">
-                Settings &amp; Administration
-            </h2>
+        <div class="b-ac-acc__pane b-ac-acc__pane_open" data-id="settings">
 
             <div class="b-ac-acc__pane-content">
-                <h3>Settings</h3>
+                <br><br>
                 <form id="f-settings">
                 <input type="hidden" name="action" value="atcontent_save_settings">
                 <div class="b-ac-settings-section">
@@ -325,6 +168,7 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <script type="text/javascript">
@@ -333,6 +177,11 @@
     'use strict';
     
     $(function () {
+        
+        $('#follow_bloggers_button').on('click', function(e){
+            window.location = 'admin.php?page=atcontent';
+        });
+        
         $('#b-save-settings').on('click', function(e){
             e.preventDefault();
             if ($("#save-settings-loader").length == 0) {

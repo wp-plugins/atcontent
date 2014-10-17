@@ -11,7 +11,7 @@
     wp_enqueue_style( 'atcontentAdminIcons' );
     require_once( "include/atcontent_userinit.php" );
     $ac_marketplace = atcontent_api_marketplace( $ac_api_key );
-    $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php&marketplace=1" );
+    $connect_url = admin_url( "admin.php?page=atcontent&marketplace=1" );
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     include( 'include/atcontent_analytics.php' );
     if ( isset( $ac_marketplace["IsOK"] ) && $ac_marketplace["IsOK"] == TRUE ) {

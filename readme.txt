@@ -54,6 +54,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.12.1 =
+* User interface simplification.
+
 = 7.12.0 =
 * Connect the whole blog to AtContent.
 

@@ -11,7 +11,7 @@
                     $content );
             }
             if ( !is_single() && $ac_mainpage_repost == "0" ) {
-                $content .= "<style>.CPlase_panel {display:none;}</style>";
+                $content .= "<style>#post-{$post->ID} .CPlase_panel {display:none;}</style>";
             }
             return $content;
         }
@@ -19,8 +19,8 @@
             return $content;
         }
         if ( in_array( 'get_the_excerpt', (array) $wp_current_filter ) ) {
-		    return $content;
-	    }        
+            return $content;
+        }        
         $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
         $ac_embedid = get_post_meta( $post->ID, "ac_embedid", true );
         $ac_is_process = get_post_meta( $post->ID, "ac_is_process", true );
@@ -45,7 +45,7 @@ END;
             $content .= $code;
         }
         if ( !is_single() && $ac_mainpage_repost == "0" ) {
-            $content .= "<style>.CPlase_panel {display:none;}</style>";
+            $content .= "<style>#post-{$post->ID} .CPlase_panel {display:none;}</style>";
         }
         return $content;
     }

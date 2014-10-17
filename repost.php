@@ -17,7 +17,7 @@
 <div class="b-ac-page b-ac-page_fluid" id="ac-page">
 <?php if ( strlen( $ac_api_key ) == 0 ) { ?>
 <script>
-        window.location = "admin.php?page=atcontent/dashboard.php&repost=1";
+        window.location = "admin.php?page=atcontent&repost=1";
 </script>    
 <?php } else {
     update_user_meta( $userid, "ac_last_repost_visit", date( "Y-m-d H:i:s" ) );
@@ -49,8 +49,8 @@
     <div class="b-ac-mobile-menu">
         <div class="b-ac-mobile-menu__tags-toggle" id="ac-tags-toggle"></div>
         <div class="b-ac-mobile-menu__nav">
-            <a href="admin.php?page=atcontent/repost.php&tag=feed" class="b-ac-mobile-menu__link<?php if ( $currenttag == "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">My Feed</a>
-            <a href="admin.php?page=atcontent/repost.php" class="b-ac-mobile-menu__link<?php if ( $currenttag != "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">AtContent Featued</a>
+            <a href="admin.php?page=atcontent_reposts&tag=feed" class="b-ac-mobile-menu__link<?php if ( $currenttag == "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">My Feed</a>
+            <a href="admin.php?page=atcontent_reposts" class="b-ac-mobile-menu__link<?php if ( $currenttag != "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">AtContent Featued</a>
         </div>
     </div>
     
@@ -59,42 +59,33 @@
         <div class="l-ac-grid__col-left">
             <ul class="b-ac-main-menu">
                 <li class="b-ac-main-menu__item<?php if ( $currenttag == "feed" ) echo " b-ac-main-menu__item_current"; ?>">
-                    <a href="admin.php?page=atcontent/repost.php&tag=feed">My Feed</a>
+                    <a href="admin.php?page=atcontent_reposts&tag=feed">My Feed</a>
                 </li>
                 <li class="b-ac-main-menu__item<?php if ( $currenttag != "feed" ) echo " b-ac-main-menu__item_current"; ?>">
-                    <a href="admin.php?page=atcontent/repost.php">AtContent Featured</a>
+                    <a href="admin.php?page=atcontent_reposts">AtContent Featured</a>
                 </li>
             </ul>
-            <?php if ( $currenttag == "feed" && count( $atcontent_reposts ) != 0  ){ ?>               
-               <p style="line-height: 12px"> <a href="http://atcontent.com/following-wp/" class="likebutton b_orange" target="_blank">Follow more bloggers</a>               
-                    <br>
-                    <br>
-                    <small>
-                        <span style="padding-left:13px">* Follow more bloggers to get</span>
-                        <br>
-                        <span style="padding-left:20px">more content in your feed!</span>
-                    </small>
-                </p>
-            <?php }?>
-
+            
             <?php if ( $currenttag != "feed" ) { ?>
             <nav class="b-tags-list b-tags-list_aside">
                 <?php foreach ( $pageAnswer["Tags"] as $tagId => $tagValue ) { ?>
-                    <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent/repost.php&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
+                    <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent_reposts&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
                 <?php } ?>
             </nav>
             <br>
             <p style="line-height: 12px">
-                <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="likebutton b_green">Feature my Posts</a>
-                <br>
-                <br>
-                <small>
-                    <span style="padding-left:13px">* Submit your posts to be</span>
-                    <br>
-                    <span style="padding-left:20px">featured on this page</span>
-                </small>
+                <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="button button-nav button-large">Feature My Posts</a>
+            </p>
+            <?php } else { ?>
+            <?php if ( count ( $atcontent_reposts ) > 0 ) { ?>
+            <p>
+                <a href="http://atcontent.com/following-wp/" class="button button-nav button-large" target="_blank" id="follow_bloggers_button_2">Follow Bloggers</a>
             </p>
             <?php } ?>
+            <?php } ?>
+            
+
+            
 
         </div>
 
@@ -105,8 +96,9 @@
                 </form>
             </div>
 
+            <?php if ( count( $atcontent_reposts ) > 0 ) { ?>
             <h3>Posts below can be published on your blog. Click "Repost" to try it.</h3>
-
+            <?php } ?>
 <?php
     $rpst_hint = atcontent_get_user_settings_value( $userid, "rpst_hint" );
     if ( $rpst_hint == 0 ) {
@@ -331,32 +323,41 @@
         })(jQuery);
     </script>
             <?php if ( count( $atcontent_reposts ) == 0 ) { ?>
-                <p>To get posts in your feed</p>
-                <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Follow bloggers with relevant content</a>
+
+    <div class="b-ac-acc">
+        <div class="b-ac-acc__pane b-ac-acc__pane_open">
+            <div class="b-ac-acc__pane-content">
+                <div class="b-ac-settings-section">
+                    <br><br><br>
+                    <div class="b-ac-following">
+                        <p>
+                            <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Discover and Follow Bloggers</a>
+                        </p>
+                        <p>
+                            Discover and follow bloggers by relevant tags to create your AtContent Feed for reposting.
+                        </p>
+                        <p>
+                            Bloggers will follow you back and repost your content, growing your audience and traffic!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <?php } 
             if ( $currentpage > 1 ) { 
-                $prevPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) - 1 ) );
+                $prevPageUrl = admin_url( "admin.php?page=atcontent_reposts&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) - 1 ) );
             ?>
                 <a href="<?php echo $prevPageUrl; ?>" class="likebutton b_green">&larr; Previous page</a>
             <?php }
             if ( $pageAnswer["Page"]["HasNext"] == true ) { 
-                $nextPageUrl = admin_url( "admin.php?page=atcontent/repost.php&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) + 1 ) );
+                $nextPageUrl = admin_url( "admin.php?page=atcontent_reposts&tag=" . $currenttag . "&pageNum=" . ( intval( $currentpage ) + 1 ) );
             ?>
                 <a href="<?php echo $nextPageUrl; ?>" class="likebutton b_green">Next page &rarr;</a>
-            <?php } else if ( $currenttag == "feed" ) { ?>
+            <?php } else if ( $currenttag == "feed" && count( $atcontent_reposts ) > 0 ) { ?>
                 <p>Here are displayed only latest posts from bloggers you follow. Click author's name or avatar to see the full list.</p>
             <?php } ?>
-            
-            <br>
-            <br>
-            <br>
-            <p>
-                <a href="http://wordpress.org/plugins/atcontent/" target="_blank">AtContent plugin page</a> &nbsp;
-                <a href="http://atcontent.com/support/" target="_blank">Support</a> &nbsp;
-                <a href="http://atcontent.com/about/" target="_blank">About AtContent</a> &nbsp;
-                <a href="http://atcontent.com/privacy/" target="_blank">Privacy Policy</a> &nbsp;
-                <a href="http://atcontent.com/terms/" target="_blank">Terms and Conditions</a> &nbsp;
-            </p>
             
         </div>
 

@@ -268,9 +268,9 @@
                 dataType: "json",
                 success: function(d) {
                     <?php if ( isset( $_GET["marketplace"] ) && ( $_GET["marketplace"] == 1 ) ) {?>
-                        location.href = 'admin.php?page=atcontent/getpaid.php';
+                        location.href = 'admin.php?page=atcontent_monetize';
                     <?php } else { ?>
-                        location.href = 'admin.php?page=atcontent/dashboard.php&step=1';
+                        location.href = 'admin.php?page=atcontent&step=1';
                     <?php }?>
                 },
                 error: function(d, s, e) {

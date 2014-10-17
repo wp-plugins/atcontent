@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.0.1
+    Version: 7.12.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', '7.12.0.1' );
+    define( 'AC_VERSION', '7.12.1' );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -93,21 +93,14 @@
     }
 
     function atcontent_admin_init(){
-        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0g', __FILE__ ) );
+        wp_register_style( 'atcontentAdminStylesheet', plugins_url( 'assets/atcontent.css?v=0h', __FILE__ ) );
         wp_enqueue_style( 'atcontentAdminStylesheet' );
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
-        global $wp_version;
-        if ( version_compare ( $wp_version, "3.8" ) >= 0 ) {
-            wp_register_style( 'atcontentAdminStylesheet38', plugins_url( 'assets/atcontent38.css?v=8', __FILE__ ) );
-            wp_enqueue_style( 'atcontentAdminStylesheet38' );
-            wp_register_script( 'atcontentAdminScript38',  plugins_url( 'assets/atcontent38.js?v=1', __FILE__ ), array(), true );
-            wp_enqueue_script( 'atcontentAdminScript38' );
-        }
         if ( get_option( 'atcontent_inited' ) != 'true' )
         {
             update_option( 'atcontent_inited', 'true' );
-            wp_redirect( admin_url( 'admin.php?page=atcontent/dashboard.php' ) );
+            wp_redirect( admin_url( 'admin.php?page=atcontent' ) );
             exit;
         }
         $ac_blog_api_key = get_option( 'ac_blog_api_key' );
@@ -129,21 +122,47 @@
     }
 
     function atcontent_add_tools_menu() {
+        global $wp_version;
         $atcontent_dashboard_key = atcontent_get_menu_key( 2.0 );
-        $unread_settings_tab_count = atcontent_get_settings_unread_count( intval( wp_get_current_user()->ID ) );
-        add_menu_page( 'AtContent', 'AtContent' . 
-            '<span class="update-plugins count-' . $unread_settings_tab_count . '"><span class="plugin-count">' . $unread_settings_tab_count . '</span></span>', 'edit_posts', 'atcontent/dashboard.php', '',
-            plugins_url( 'assets/logo.png', __FILE__ ), $atcontent_dashboard_key );
+        $ac_logo = plugins_url( 'assets/logo.png', __FILE__ );
+        if ( version_compare ( $wp_version, "3.8" ) >= 0 ) {
+            $ac_logo = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiPg0KICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEuMjUsMCwwLC0xLjI1LC00My40NzYwODQsMTU4LjcxNTg2KSI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEuMDgyMDc1NCwwLDAsMS4wODIwNzU0LDc0Ljc3ODcwMiw0Ni45NzI2OTMpIj4NCiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMxMzY2OWQiIGQ9Im0wLDBjOS4xODYsMCwxNy41ODYsMy4zNTEsMjQuMDUxLDguODk1bC0xLjUyNSwzLjMwMS0xLjc1NiwzLjgwOC0xOC4yMjIsMzkuNDg1aC0yLjc0Ni0yLjQwMi0wLjA3OWwtMTUuMzI0LTMzLjIwNi0yLjg1Ni02LjE4OWMtNS4zNDQsNS4zNDEtOC42NSwxMi43MTktOC42NSwyMC44NzIsMCwxNi4zLDEzLjIwOSwyOS41MTEsMjkuNTA5LDI5LjUxMSwyLjk1NSwwLDUuODAzLTAuNDM3LDguNDk2LTEuMjQ0bDIuNzg3LDYuOTQyYy0zLjU1NSwxLjEzOC03LjM0NywxLjc1Ny0xMS4yODMsMS43NTctMjAuNDE3LDAtMzYuOTY0LTE2LjU0OC0zNi45NjQtMzYuOTY2LDAtMjAuNDE3LDE2LjU0Ny0zNi45NjYsMzYuOTY0LTM2Ljk2Nm0wLDIwLjMzM2MzLjUzNiwwLDYuODE1LDEuMTAzLDkuNTExLDIuOTgzbDAuMTkxLTAuNDE1LDAuMDE0LDAuMDExLDAuMjM0LTAuNTA2LDIuMzEzLTUuMTg1LDIuNTg1LTUuNzYyYy00LjM2Mi0yLjU0NC05LjQzNC00LjAwMi0xNC44NDgtNC4wMDItNS40ODEsMC0xMC42MTEsMS40OTYtMTUuMDA3LDQuMDk3bDQuNTUsOS44NjIsMC44OTUsMS45MzhjMi43MDUtMS45MDMsNi4wMDItMy4wMjEsOS41NjItMy4wMjFtNi40MTQsOS43M2MtMS42OC0xLjU2NC0zLjkzNS0yLjUyMS02LjQxNC0yLjUyMS0yLjQ5NiwwLTQuNzY1LDAuOTctNi40NTEsMi41NTRsMC4xOCwwLjM4OSwwLjEzNywwLjI5OSw2LjA2OSwxNC4wNjgsMi4zNjMtNS4yOTYsMy43NjktOC43NCwwLjM0Ny0wLjc1M3oiLz4NCiAgICAgICAgPC9nPg0KICAgIDwvZz4NCjwvc3ZnPg0KDQo=';
+        }
         $repost_title = "Content Feed";
-        $repost_key = atcontent_get_menu_key( 5.0 );
-        add_menu_page( $repost_title, $repost_title, 'publish_posts', 'atcontent/repost.php', '', 
-            plugins_url( 'assets/logo.png', __FILE__ ), $repost_key );
-        $getpaid_key = atcontent_get_menu_key( 5.0 );
-        add_menu_page( 'Monetize Blog', 'Monetize Blog<span class="ac-dollar" title="Monetize your blog"><span class="ac-dollar__val">$</span></span>', 'publish_posts', 'atcontent/getpaid.php', '', 
-            plugins_url( 'assets/logo.png', __FILE__ ), $getpaid_key );
+        add_submenu_page( 'atcontent', $repost_title, $repost_title, 'publish_posts', 'atcontent_reposts', 'atcontent_reposts_callback' );
+        add_submenu_page( 'atcontent', 'AtContent Settings', 'Settings', 'edit_posts', 'atcontent', 'atcontent_settings_callback' );
+        add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent', 'atcontent_settings_callback', $ac_logo, $atcontent_dashboard_key );
+        add_submenu_page( 'atcontent', 'Monetize Blog', 'Monetize Blog<span class="ac-dollar" title="Monetize your blog"><span class="ac-dollar__val">$</span></span>', 'publish_posts', 'atcontent_monetize', 'atcontent_monetize_callback' );
+        atcontent_fix_menu( 'atcontent_reposts', 'atcontent', 'atcontent_reposts_callback' );
+                
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );
         add_action( 'admin_print_footer_scripts', 'atcontent_footer_scripts' );
     }
+    
+    function atcontent_fix_menu( $slug, $parentslug, $function ){
+        global $_registered_pages;
+        $hookname = get_plugin_page_hookname( $slug, $parentslug );
+        if (!empty ( $hookname ))
+            add_action( $hookname, $function );
+        $_registered_pages[$hookname] = true;
+    }
+    
+    function atcontent_plugin_callback(){
+        include_once( 'dashboard.php' );
+    }
+    
+    function atcontent_settings_callback(){
+        include_once( 'dashboard.php' );
+    }
+    
+    function atcontent_reposts_callback(){
+        include_once( 'repost.php' );
+    }
+    
+    function atcontent_monetize_callback(){
+        include_once( 'getpaid.php' );
+    }
+    
 
     function atcontent_admin_styles(){
         wp_enqueue_style( 'atcontentAdminStylesheet' );
@@ -154,7 +173,7 @@
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
         $ac_syncid = get_user_meta($userid, "ac_syncid", true );
 
-        $connect_url = admin_url( "admin.php?page=atcontent/dashboard.php" );
+        $connect_url = admin_url( "admin.php?page=atcontent" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );
         if ( ( strlen( $ac_api_key ) == 0 || strlen( $ac_syncid ) == 0 ) && user_can( $userid, "edit_posts" ) ) {
         ?>
@@ -196,7 +215,7 @@ $j().ready(function(){
             }, function(r){
                 if (r && r.IsOK) {
                     var cnt = r.Count > 99 ? '99+' : r.Count;
-                    $('#toplevel_page_atcontent-repost .wp-menu-name').append('<span class="update-plugins count-' + r.Count + '"><span class="plugin-count">' + cnt + '</span></span>');
+                    $('#toplevel_page_atcontent .wp-menu-name').append('<span class="update-plugins count-' + r.Count + '"><span class="plugin-count">' + cnt + '</span></span>');
                 }
             }, 'json');
         });
