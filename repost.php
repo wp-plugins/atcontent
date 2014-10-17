@@ -67,15 +67,15 @@
             </ul>
             
             <?php if ( $currenttag != "feed" ) { ?>
+            <p style="line-height: 12px">
+                <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="button button-nav button-large">Feature My Posts</a>
+            </p>
+            <br>
             <nav class="b-tags-list b-tags-list_aside">
                 <?php foreach ( $pageAnswer["Tags"] as $tagId => $tagValue ) { ?>
                     <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent_reposts&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
                 <?php } ?>
             </nav>
-            <br>
-            <p style="line-height: 12px">
-                <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="button button-nav button-large">Feature My Posts</a>
-            </p>
             <?php } else { ?>
             <?php if ( count ( $atcontent_reposts ) > 0 ) { ?>
             <p>
