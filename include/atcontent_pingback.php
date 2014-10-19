@@ -28,6 +28,10 @@ function atcontent_pingback_inline() {
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
     $ac_referral = get_user_meta( $userid, "ac_referral", true );
+    $ac_blog_key = get_option( 'ac_blog_api_key' );
+    if (strlen( $ac_blog_key ) > 0 ) {
+        atcontent_api_blog_ping( $ac_blog_key, 'connected' );
+    }
     if ( current_user_can( 'edit_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
@@ -46,6 +50,10 @@ function atcontent_activate() {
         global $wpdb;
         $offset = 0;
         $limit = 20;
+        $ac_blog_key = get_option( 'ac_blog_api_key' );
+        if (strlen( $ac_blog_key ) > 0 ) {
+            atcontent_api_blog_ping( $ac_blog_key, 'connected' );
+        }
         do {
             $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
             foreach ( $wp_user_search as $user ) {
@@ -77,6 +85,10 @@ function atcontent_activate() {
 function atcontent_deactivate() {
     try {
         update_option( 'atcontent_inited', 'false' );
+        $ac_blog_key = get_option( 'ac_blog_api_key' );
+        if (strlen( $ac_blog_key ) > 0 ) {
+            atcontent_api_blog_ping( $ac_blog_key, '' );
+        }
         global $wpdb;
         $offset = 0;
         $limit = 20;
@@ -99,6 +111,10 @@ function atcontent_deactivate() {
 
 function atcontent_uninstall() {
     try {
+        $ac_blog_key = get_option( 'ac_blog_api_key' );
+        if (strlen( $ac_blog_key ) > 0 ) {
+            atcontent_api_blog_ping( $ac_blog_key, '' );
+        }
         global $wpdb;
         $offset = 0;
         $limit = 20;

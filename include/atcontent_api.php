@@ -232,6 +232,15 @@ function atcontent_api_renewinfo(){
     return atcontent_do_post( 'http://api.atcontent.com/v2/blog/renewinfo', $post_content );
 }
 
+function atcontent_api_blog_ping( $ac_blog_key, $state ) {
+    $post_content = 
+            'key=' . urlencode( $ac_blog_key ) . 
+            '&state=' . urlencode( $state ) . 
+            '&appId=' . urlencode( 'WordPress' ) .
+            '&extVer=' . urlencode( AC_VERSION );
+    return atcontent_do_post( 'http://api.atcontent.com/v2/blog/ping', $post_content );
+}
+
 function atcontent_do_post( $url, $data ) {
     $wp_response = wp_remote_post( $url, array(
         'method' => 'POST',
