@@ -63,4 +63,15 @@
     function atcontent_set_user_settings_value( $userid, $id, $value ) {
         update_user_meta( $userid, "ac_settings_" . $id, $value );
     }
+    
+    function atcontent_get_blog_url(){
+        $siteuri = get_bloginfo( 'url' );
+        if ( strlen( $siteuri ) == 0 ) {
+            $siteuri = get_bloginfo( 'wpurl' );
+        }
+        if ( strlen( $siteuri ) == 0 ) {
+            $siteuri = $_SERVER["SERVER_NAME"];
+        }
+        return $siteuri;
+    }
 ?>

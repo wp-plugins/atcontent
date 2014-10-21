@@ -61,10 +61,7 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
         $userid = wp_get_current_user() -> ID;
         $api_key = get_user_meta( $userid, "ac_non_delete_api_key", true );        
     }
-    $siteuri = get_bloginfo( 'url' );
-    if ( strlen( $siteuri ) == 0 ) {
-        $siteuri = $_SERVER["SERVER_NAME"];
-    }
+    $siteuri = atcontent_get_blog_url();
     $post_content = 'Email=' . urlencode( $email ) . 
         '&AppID=' . urlencode( 'WordPress' ) .
         ( $status != NULL ? '&Status=' . urlencode( $status ) : '' ) .
@@ -78,11 +75,8 @@ function atcontent_api_pingback( $email, $status, $api_key, $referral ) {
 function atcontent_api_activate() {
     $ac_blog_api_key = get_option('ac_blog_api_key');
     $gate_url = admin_url("admin-ajax.php");
-    $siteuri = get_bloginfo( 'url' );
+    $siteuri = atcontent_get_blog_url();
     $blog_title = get_bloginfo( 'name' );
-    if ( strlen( $siteuri ) == 0 ) {
-        $siteuri = $_SERVER["SERVER_NAME"];
-    }
     $userid = wp_get_current_user()->ID;
     $blogid = get_user_meta( $userid, 'ac_blogid', true );
     $syncid = get_user_meta( $userid, "ac_syncid", true );
@@ -224,11 +218,17 @@ function atcontent_api_set_viglink_api_key( $viglink_api_key ) {
 function atcontent_api_renewinfo(){
     $userid = wp_get_current_user() -> ID;
     $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
+    $gate = admin_url( 'admin-ajax.php' );
+    $siteuri = atcontent_get_blog_url();
+    $ac_blog_api_key = get_option( 'ac_blog_api_key' );
     $post_content = 
-            'syncId=' . urlencode($ac_syncid) . 
-            '&userId=' . urlencode($userid) .
-            '&AppID=' . urlencode( 'WordPress' ) . 
-            '&ExternalVersion=' . urlencode( AC_VERSION );
+            'syncId=' . urlencode( $ac_syncid ) . 
+            '&userId=' . urlencode( $userid ) . 
+            '&gate=' . urlencode( $gate ) . 
+            '&url=' . urlencode( $siteuri ) . 
+            '&blogKey=' . urlencode( $ac_blog_api_key ) . 
+            '&appId=' . urlencode( 'WordPress' ) . 
+            '&extVer=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v2/blog/renewinfo', $post_content );
 }
 
