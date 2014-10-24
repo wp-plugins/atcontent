@@ -10,7 +10,7 @@
             <p> Well done, <?php echo $ac_show_name; ?></p>
             <ol style="font-size: 1.2em;">
                 <li>Get relevant posts from "<a href="<?php echo admin_url( "admin.php?page=atcontent_reposts" ); ?>">Content Feed</a>" page!<br>
-                <small>Readers will come to your blog more often to read fresh content and share it on social networks. It almost double your readers engangment!</small></li>
+                <small>Readers will come to your blog more often to read fresh content and share it on social networks. It almost double your readers engangment.</small></li>
                 <li>Set tags and follow relevant bloggers at <br> <a href="http://atcontent.com/following-wp/" target="_blank">this page!</a><br>
                 <small>You will get a better chance on repost and reach a much wider quality audience!</small></li>
             </ol>
