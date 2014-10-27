@@ -113,7 +113,7 @@
             ?>
                 <a class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>/">
                     <span class="ac-logo-promote"></span>
-                    Promote with NativeAd
+                    Promote with AtContent
                 </a>
             <?php
         }
