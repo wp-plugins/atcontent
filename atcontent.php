@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.1.8
+    Version: 7.12.1.9
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', '7.12.1.8' );
+    define( 'AC_VERSION', '7.12.1.9' );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -68,7 +68,7 @@
     
     function atcontent_promote_posts_column( $columns ) {
         $date = $columns['date'];
-        $columns['acpromoting'] = 'AtContent NativeAd';
+        $columns['acpromoting'] = 'AtContent';
         unset( $columns['date']);
         $columns['date'] = $date;
         return $columns;
