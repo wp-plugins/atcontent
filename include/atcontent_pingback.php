@@ -12,9 +12,13 @@ function atcontent_pingback() {
         } else {
             $status = 'Disconnected';
         }
-        atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
+        $res = atcontent_api_pingback( $email, $status, $ac_api_key, $ac_referral );
 	    // generate the response
-	    $response = json_encode( array( 'IsOK' => true ) );
+        if ( is_array( $res ) && $res["IsOK"] == TRUE ) {
+	        $response = json_encode( array( 'IsOK' => true ) );
+        } else {
+            $response = json_encode( array( 'IsOK' => false ) );
+        }
 	    // response output
 	    header( "Content-Type: application/json" );
 	    echo $response;

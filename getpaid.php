@@ -17,6 +17,20 @@
     if ( isset( $ac_marketplace["IsOK"] ) && $ac_marketplace["IsOK"] == TRUE ) {
 ?>
 <div class="atcontent_wrap">
+    <div id="ac_pingback_error" style="display:none" class="error">Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.</div>
+    <script>
+        (function ($) {
+            $(function () {
+                $.post("admin-ajax.php", {
+                    "action": "atcontent_pingback"
+                }, function (d) {
+                    if (d.IsOK == false) {
+                        $("#ac_pingback_error").show();
+                    }
+                }, "json");
+            });
+        })(jQuery);
+    </script>
     <div class="wrap">
         <div class="icon32" id="icon-link"><br></div><h2>NativeAd Sponsored Posts</h2>
     </div>

@@ -30,9 +30,22 @@
         $currentuser = wp_get_current_user();
         $userinfo = get_userdata( $currentuser -> ID );        
         // PingBack
-        if ( ! atcontent_pingback_inline() ) {
-            echo "<div class=\"error\">" . 'Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.' . "</div>";
-        }
+        ?>
+    <div id="ac_pingback_error" style="display:none" class="error">Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.</div>
+    <script>
+        (function ($) {
+            $(function () {
+                $.post("admin-ajax.php", {
+                    "action": "atcontent_pingback"
+                }, function (d) {
+                    if (d.IsOK == false) {
+                        $("#ac_pingback_error").show();
+                    }
+                }, "json");
+            });
+        })(jQuery);
+    </script>
+<?php
         //End PingBack
         include("include/atcontent_settings.php");
     } else if ( strlen( $ac_fakekey ) > 0 ) {
