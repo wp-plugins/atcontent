@@ -5,6 +5,10 @@ function atcontent_pingback() {
     $email = wp_get_current_user()->user_email;
     $ac_api_key = get_user_meta($userid, "ac_api_key", true );
     $ac_referral = get_user_meta($userid, "ac_referral", true );
+    $ac_blog_key = get_option( 'ac_blog_api_key' );
+    if (strlen( $ac_blog_key ) > 0 ) {
+        atcontent_api_blog_ping( $ac_blog_key, 'connected' );
+    }
     if ( current_user_can( 'edit_posts' ) ) {
         $status = 'Installed';
         if ( strlen( $ac_api_key ) > 0 ) { 
