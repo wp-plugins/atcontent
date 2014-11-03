@@ -56,6 +56,10 @@ function atcontent_pingback_inline() {
 function atcontent_activate() {
     try {
         global $wpdb;
+        if (defined("AC_IS_ENVATO_VERSION"))
+        {        
+            update_user_meta(intval( wp_get_current_user() -> ID ), "ac_is_envato_version", "1" );
+        }
         $offset = 0;
         $limit = 20;
         $ac_blog_key = get_option( 'ac_blog_api_key' );

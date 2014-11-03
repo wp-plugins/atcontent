@@ -54,6 +54,9 @@ search engines will get your site up in their rankings, but not AtContent.
 
 == Changelog ==
 
+= 7.12.3 =
+* Envato plugin version compatibility.
+
 = 7.12.2 =
 * Speed improvement.
 

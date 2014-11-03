@@ -241,6 +241,15 @@ function atcontent_api_blog_ping( $ac_blog_key, $state ) {
     return atcontent_do_post( 'http://api.atcontent.com/v2/blog/ping', $post_content );
 }
 
+function atcontent_api_set_envato_purchase($ac_api_key, $envato_key){
+    $post_content = 
+            'key=' . urlencode( $ac_api_key ) . 
+            '&envatopurchaseid=' . urlencode( $envato_key ) . 
+            '&appId=' . urlencode( 'WordPress' ) .
+            '&extVer=' . urlencode( AC_VERSION );    
+    return atcontent_do_post( 'http://api.atcontent.com/v1/native/envatoconfirmpurchase', $post_content );
+}
+
 function atcontent_do_post( $url, $data ) {
     $wp_response = wp_remote_post( $url, array(
         'method' => 'POST',

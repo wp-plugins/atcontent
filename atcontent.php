@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.2.2
+    Version: 7.12.3.0
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
@@ -53,6 +53,7 @@
         add_action( 'wp_ajax_atcontent_highlighted_hide', 'atcontent_ajax_highlighted_hide' );
         add_action( 'wp_ajax_atcontent_invitefollowup', 'atcontent_ajax_invitefollowup' );
         add_action( 'wp_ajax_atcontent_blogactivate', 'atcontent_ajax_blogactivate' );
+        add_action( 'wp_ajax_atcontent_set_envato_purchase', 'atcontent_ajax_set_envato_purchase' );
         add_action( 'wp_ajax_atcontent_renewinfo', 'atcontent_ajax_renewinfo' );
         add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );

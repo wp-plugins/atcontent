@@ -4,7 +4,8 @@
     $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( $userid );
     $ac_settings_tab_settings = get_user_meta( $userid, "ac_settings_tab_settings", true );
     $ac_use_vglink = get_user_meta( $userid, "ac_use_vglink", true );
-    $ac_vglink_apikey = get_user_meta( $userid, "ac_vglink_apikey", true );    
+    $ac_vglink_apikey = get_user_meta( $userid, "ac_vglink_apikey", true );
+    $ac_is_envato_user = get_user_meta( $userid, "ac_is_envato_version", true );
 ?>
 
 <div class="b-ac-page b-ac-page_incomplete" id="ac-page">
@@ -57,6 +58,72 @@
             </div>
         </div>
     </div>
+
+    <?php } else if ( $ac_is_envato_user == "1"  && isset( $_GET["step"] ) &&  $_GET["step"] == "envatoUser" ) { ?>
+    
+    <div class="b-ac-acc">
+        <div class="b-ac-acc__pane b-ac-acc__pane_open">
+            <div class="b-ac-acc__pane-content">
+                <div class="b-ac-settings-section">
+                    <br><br>
+                    <div class="b-ac-following">                        
+                        <p>
+                            Dear Envato Market user,<br> Please enter purchase code to get premium bonuses!
+                        </p>
+                        <form id="f-envato_purchase">                            
+                            <input type="hidden" name="action" value="atcontent_set_envato_purchase" />
+                            <input type="hidden" name="ac_envato_purchase_id" id="ac_envato_purchase_id" value="" />
+                            <input type="text" placeholder="Purchase Code" id="ac_envato_purchase_id_show" />
+                        </form>
+                        <p>
+                            <button onclick="sendPuchaseId()" class="button button-nav button-hero" id="b-send-purchase_id" >Activate Envato Purchase</button>
+                        </p>
+                        <div id="b-ac-user__signuperror" class="f-settings_envato_error error" style="display:none" ></div>
+                        <span class="update-nag" id="envato-settings-success" style="display: none;">
+                            Congrats, from now you are a premium user!
+                        </span>
+                        <div id="envato-settings-next" style="margin-top: 10px; display: none;">
+                            <a href="admin.php?page=atcontent&step=1" class="button button-nav button-hero" id="b-send-purchase_id" >Next Step</a>
+                        </div>
+                        <p><small>If you don't know your purchase code, you can find it in the mailbox linked with Envato Market.</small></p>
+                    </div>
+                </div>
+                <div id="envato-settings-skipit_link" style="text-align:right;"><a style="color:#767676;" href="admin.php?page=atcontent&step=1">Skip it</a></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var sending = false;
+        function sendPuchaseId()
+        {      
+            if (sending)
+            {
+                return;
+            } else{
+                sending = true;
+                jQuery("#ac_envato_purchase_id_show").attr("disabled", "");
+                jQuery("#b-ac-user__signuperror").hide();
+                jQuery("#ac_envato_purchase_id").val(jQuery("#ac_envato_purchase_id_show").val());
+                jQuery('#b-send-purchase_id').after('<span id="save-settings-loader" class="spinner fixed_spinner" ></span>');
+                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', jQuery("#f-envato_purchase").serialize() , function(r) {
+                    jQuery("#save-settings-loader").remove();
+                    r = JSON.parse(r);
+                    if (r.IsOK){
+                        jQuery("#envato-settings-success").show();
+                        jQuery("#envato-settings-next").show();
+                        jQuery("#b-send-purchase_id").hide();
+                        jQuery("#envato-settings-skipit_link").hide();
+                    }
+                    else {        
+                        sending = false;
+                        jQuery("#ac_envato_purchase_id_show").attr("disabled", null);
+                        jQuery('#b-ac-user__signuperror').html('<p>' + r.Error + '</p>');
+                        jQuery("#b-ac-user__signuperror").show().delay(5000).fadeOut(300);
+                    }
+                });
+            }
+        }
+    </script>
     
     <?php } else { ?>
     <h1>AtContent Settings</h1>
@@ -140,9 +207,69 @@
                             Congtats, settings saved!
                         </span>
                     </p>
-                    
+					
                 </div>
                 </form>
+                <?php if( $ac_is_envato_user == "1" ){
+                    ?> <div class="d-settings_envato_block"><h4 class="b-ac-settings__hdl">Envato Premium Bonus</h4> <?php
+                    $last_purchase_id = get_user_meta($userid, "ac_envato_purchase_id", TRUE);
+                    $ac_envato_activate_date = get_user_meta($userid, "ac_envato_activate_date", TRUE);
+                    $is_ok = get_user_meta($userid, "ac_envato_is_ok", TRUE);
+                    if ($is_ok["IsOK"]){ ?>
+                        <p style="margin: 0px 0px 30px;">
+                             Activated with purchase code <?php echo($last_purchase_id); ?> on <?php echo($ac_envato_activate_date -> format('m.d.Y')); ?>.
+                        </p>                      
+                    <?php } else{ ?>                                              
+                        <p>
+                             Enter your purchase code here and get premium bonuses!
+                        </p>
+                        <form id="f-envato_purchase">                            
+                            <input type="hidden" name="action" value="atcontent_set_envato_purchase" />
+                            <input type="hidden" name="ac_envato_purchase_id" id="ac_envato_purchase_id" value="" />
+                            <input type="text" placeholder="Purchase Code" id="ac_envato_purchase_id_show" value="<?php echo($last_purchase_id); ?>" />
+                        </form>
+                        <p>
+                            <button onclick="sendPuchaseId()" class="button button-nav button-hero" id="b-send-purchase_id" >Activate Envato Purchase</button>
+                        </p>
+                        <div id="b-ac-user__signuperror" class="d-settings_envato_error error" style="display:none" ></div>                                
+                        <span class="update-nag" id="save-envato-success" style="display: none;">
+                            Congrats, from now you are a premium user.
+                        </span>
+                        <p><small>If you don't know your purchase code, you can find it in the mailbox linked with Envato Market.</small></p>                                       
+                        <script type="text/javascript">
+                            var sending = false;
+                            function sendPuchaseId()
+                            {      
+                                if (sending) 
+                                {
+                                    return;
+                                } else{
+                                    sending = true;
+                                    jQuery("#ac_envato_purchase_id_show").attr("disabled", "");
+                                    jQuery("#b-ac-user__signuperror").hide();
+                                    jQuery("#ac_envato_purchase_id").val(jQuery("#ac_envato_purchase_id_show").val());
+                                    jQuery('#b-send-purchase_id').after('<span id="save-settings-loader" class="spinner fixed_spinner"></span>');
+                                    jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', jQuery("#f-envato_purchase").serialize() , function(r) {
+                                        jQuery("#save-settings-loader").remove();
+                                        r = JSON.parse(r);
+                                        if (r.IsOK){
+                                            jQuery("#save-envato-success").show();
+                                            jQuery("#b-send-purchase_id").hide();
+                                            location.reload();
+                                        }
+                                        else {        
+                                            sending = false;
+                                            jQuery("#ac_envato_purchase_id_show").attr("disabled", null);
+                                            jQuery('#b-ac-user__signuperror').html('<p>' + r.Error + '</p>');
+                                            jQuery("#b-ac-user__signuperror").show().delay(5000).fadeOut(300);
+                                        }
+                                    });
+                                }
+                            }
+                        </script>                        
+                    <?php } ?>
+                </div>  
+                <?php } ?>
                 <div class="b-ac-settings-section">
                     <h3>You are connected to AtContent as</h3>
                     

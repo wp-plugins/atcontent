@@ -590,6 +590,17 @@ function atcontent_save_tags() {
     exit;
 }
 
+function atcontent_ajax_set_envato_purchase(){
+    include( "atcontent_userinit.php" );
+    $envato_purchase_id = $_POST["ac_envato_purchase_id"];
+    $api_result = atcontent_api_set_envato_purchase( $ac_api_key, $envato_purchase_id );
+    update_user_meta(intval( $userid ), "ac_envato_is_ok", $api_result );
+    update_user_meta(intval( $userid ), "ac_envato_purchase_id", $envato_purchase_id);
+    update_user_meta(intval( $userid ), "ac_envato_activate_date", new DateTime); 
+    echo json_encode( $api_result );
+    exit;
+}
+
 function atcontent_save_country() {
     include( "atcontent_userinit.php" );
     $country = $_POST["country"];
