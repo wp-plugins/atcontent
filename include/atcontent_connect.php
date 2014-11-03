@@ -26,7 +26,7 @@
             <p>creating profile on AtContent</p>
         </div>
         <div id="b-ac-user__signuperror" style="display:none">
-            
+
         </div>
         <p><small>You can <a href="#" id="b-ac-user-data__signinsmall">sign in</a> AtContent if you already have profile.</small></p>
     </div>
@@ -52,15 +52,15 @@
         <img src="<?php echo $loader_url ?>"><br>
         <p>connecting blog to AtContent</p>
     </div>
-    
+
 </div>
 <script type="text/javascript">
     ac_ga_s('connectTab', 'view');
     (function ($) {
     'use strict';
-    
+
         var _window, signUpInProcess = false;
-        
+
         $("#b_connect").on('click', function(e){
             if (signUpInProcess) return;
             disableSignUp();            
