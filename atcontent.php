@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.3.0
+    Version: 7.12.3.1
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */

@@ -257,7 +257,7 @@
                                             jQuery("#b-send-purchase_id").hide();
                                             location.reload();
                                         }
-                                        else {        
+                                        else {
                                             sending = false;
                                             jQuery("#ac_envato_purchase_id_show").attr("disabled", null);
                                             jQuery('#b-ac-user__signuperror').html('<p>' + r.Error + '</p>');
@@ -266,7 +266,7 @@
                                     });
                                 }
                             }
-                        </script>                        
+                        </script>
                     <?php } ?>
                 </div>  
                 <?php } ?>
