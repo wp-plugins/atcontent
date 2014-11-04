@@ -239,7 +239,7 @@
                         <script type="text/javascript">
                             var sending = false;
                             function sendPuchaseId()
-                            {      
+                            {
                                 if (sending) 
                                 {
                                     return;
