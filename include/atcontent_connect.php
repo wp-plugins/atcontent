@@ -114,13 +114,13 @@
         function doActivate(){
             $.post('<?php echo admin_url('admin-ajax.php') ?>', { 'action' : 'atcontent_blogactivate' }, function(d){
                 if (d.IsOK) {
-                      <?php 
-                        $ac_is_envato_user = get_user_meta( wp_get_current_user() -> ID, "ac_is_envato_version", true );
-                        if($ac_is_envato_user == "1" ){?>
-                          location.href = 'admin.php?page=atcontent&step=envatoUser';
-                      <?php } else{?>
-                          location.href = 'admin.php?page=atcontent&step=1';
-                      <?php }?>
+				  <?php 
+					$ac_is_envato_user = get_user_meta( wp_get_current_user() -> ID, "ac_is_envato_version", true );
+					if($ac_is_envato_user == "1" ){?>
+					  location.href = 'admin.php?page=atcontent&step=envatoUser';
+				  <?php } else{?>
+					  location.href = 'admin.php?page=atcontent&step=1';
+				  <?php }?>
                 } else {
                     
                 }
