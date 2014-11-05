@@ -1,4 +1,3 @@
-
 <?php
     require_once( "include/atcontent_userinit.php" );
     $posts_id = array();
