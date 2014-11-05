@@ -235,12 +235,12 @@
                         <span class="update-nag" id="save-envato-success" style="display: none;">
                             Congrats, from now you are a premium user.
                         </span>
-                        <p><small>If you don't know your purchase code, you can find it in the mailbox linked with Envato Market.</small></p>                                       
+                        <p><small>If you don't know your purchase code, you can find it in the mailbox linked with Envato Market.</small></p>
                         <script type="text/javascript">
                             var sending = false;
                             function sendPuchaseId()
                             {
-                                if (sending) 
+                                if (sending)
                                 {
                                     return;
                                 } else{
