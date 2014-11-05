@@ -200,7 +200,7 @@
                             <br /><br />
                             <label>
                                 <input <?php echo $ac_use_vglink != "1"?"style=\"display: none\"":""; ?> id="f-settings_vglink_textbox" placeholder="Type VigLink API key here" type="text" name="ac_vglink_apikey" value="<?php echo $ac_vglink_apikey ?>" />
-                            </label>  
+                            </label>
                     <p>
                         <button id="b-save-settings" type="button" class="button button-primary">Save Settings</button>
                         <span class="b-ac-settings__note b-ac-settings__note_aside" id="save-settings-success" style="display: none;">

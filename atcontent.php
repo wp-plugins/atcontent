@@ -8,7 +8,7 @@
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', '7.12.2.2' );
+    define( 'AC_VERSION', '7.12.2.3' );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
