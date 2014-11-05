@@ -218,8 +218,8 @@
                     if ($is_ok["IsOK"]){ ?>
                         <p style="margin: 0px 0px 30px;">
                              Activated with purchase code <?php echo($last_purchase_id); ?> on <?php echo($ac_envato_activate_date -> format('m.d.Y')); ?>.
-                        </p>                      
-                    <?php } else{ ?>                                              
+                        </p>
+                    <?php } else{ ?>
                         <p>
                              Enter your purchase code here and get premium bonuses!
                         </p>
