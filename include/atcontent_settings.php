@@ -233,7 +233,7 @@
                         <p>
                             <button onclick="sendPuchaseId()" class="button button-nav button-hero" id="b-send-purchase_id" >Activate Envato Purchase</button>
                         </p>
-                        <div id="b-ac-user__signuperror" class="d-settings_envato_error error" style="display:none" ></div>                                
+                        <div id="b-ac-user__signuperror" class="d-settings_envato_error error" style="display:none" ></div>
                         <span class="update-nag" id="save-envato-success" style="display: none;">
                             Congrats, from now you are a premium user.
                         </span>
