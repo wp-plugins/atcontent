@@ -211,7 +211,9 @@
                 </div>
                 </form>
                 <?php if( $ac_is_envato_user == "1" ){
-                    ?> <div class="d-settings_envato_block"><h4 class="b-ac-settings__hdl">Envato Premium Bonus</h4> <?php
+                    ?> 
+						<div class="d-settings_envato_block"><h4 class="b-ac-settings__hdl">Envato Premium Bonus</h4> 
+					<?php
                     $last_purchase_id = get_user_meta($userid, "ac_envato_purchase_id", TRUE);
                     $ac_envato_activate_date = get_user_meta($userid, "ac_envato_activate_date", TRUE);
                     $is_ok = get_user_meta($userid, "ac_envato_is_ok", TRUE);
