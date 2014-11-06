@@ -26,7 +26,6 @@
             <p>creating profile on AtContent</p>
         </div>
         <div id="b-ac-user__signuperror" style="display:none">
-
         </div>
         <p><small>You can <a href="#" id="b-ac-user-data__signinsmall">sign in</a> AtContent if you already have profile.</small></p>
     </div>
@@ -45,7 +44,6 @@
             <a href="#" id="b-ac-user__changeaccount" class="button button-large">Change profile</a>
             <a href="#" id="b-ac-user__continue" class="button button-primary button-large">Continue</a><br><br>
             <small>or <a href="#" id="b-createnewaccount">create new one</a></small>
-            
         </div>
     </div>
     <div id="loader_process">
