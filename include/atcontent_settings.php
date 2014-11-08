@@ -274,7 +274,7 @@
                 <?php } ?>
                 <div class="b-ac-settings-section">
 				
-                    <h3>You are connected to AtContent as</h3>                    
+                    <h3>You are connected to AtContent as</h3>
                     <div class="b-ac-user">
                         <div class="b-ac-user__info">
                             <div class="b-ac-user__photo">
