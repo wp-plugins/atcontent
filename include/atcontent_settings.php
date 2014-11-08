@@ -273,6 +273,7 @@
                 </div>  
                 <?php } ?>
                 <div class="b-ac-settings-section">
+				
                     <h3>You are connected to AtContent as</h3>                    
                     <div class="b-ac-user">
                         <div class="b-ac-user__info">
@@ -284,6 +285,7 @@
                             </div>
                         </div>
                     </div>                    
+					
                     <p>
                         <button id="b-ac__renewinfo" type="button" class="button ">Update</button>
                         <span class="b-ac-settings__note b-ac-settings__note_aside" id="b-ac__renewsuccess" style="display: none;">
