@@ -18,7 +18,7 @@
                     Don't be puzzled of zeros. Check this page in a week or so
                 <?php } ?>
             </p>
-        </div>  
+        </div>
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
                 <legend>Your AtContent Stats</legend>
@@ -103,7 +103,7 @@
             <?php
                 } else {
                     echo '<tr><th>Error getting data. Please, reload page</th></tr>';
-                }                
+                }
             ?>
             </div>
         </div>
