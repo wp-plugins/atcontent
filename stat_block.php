@@ -85,11 +85,11 @@
                                 };
                                 data = new google.visualization.DataTable ();
                                 data.addColumn('string', 'Type');
-                                data.addColumn('number', 'Views');                
+                                data.addColumn('number', 'Views');
                                 rows = [
                                     ['Views on your blog', <?php echo $response["originalViews"]; ?>],
                                     ['Views via AtContent', <?php echo $response["repostViews"]; ?>]
-                                ];                
+                                ];
                                 data.addRows(rows);
                                 chart = new google.visualization.PieChart (element);
                                 chart.draw(data, options);
