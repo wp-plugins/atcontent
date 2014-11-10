@@ -22,7 +22,7 @@
         <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
                 <legend>Your AtContent Stats</legend>
-            </fieldset>             
+            </fieldset>
             <div id="follow_steps_block" >
                 <p>On average, bloggers increase audience at least 2.53x in just 3 weeks</p> 
             </div>
@@ -93,7 +93,7 @@
                                 data.addRows(rows);
                                 chart = new google.visualization.PieChart (element);
                                 chart.draw(data, options);
-                                jQuery('rect').attr('fill', '#f1f1f1');                        
+                                jQuery('rect').attr('fill', '#f1f1f1');
                             });
                         </script>
                         <?php } ?>
