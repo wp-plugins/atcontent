@@ -19,7 +19,7 @@
                 <?php } ?>
             </p>
         </div>
-        <div id="stat_text_step" style="float: left; margin-left: 15px;margin-bottom: 20px;">
+        <div id="stat_text_step" style="float: left; margin-left: 15px; margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
                 <legend>Your AtContent Stats</legend>
             </fieldset>
@@ -62,7 +62,7 @@
                                 'packages': ['corechart']
                             });
                             google.setOnLoadCallback(function () {
-                                var options, data, chart, element, rows;                
+                                var options, data, chart, element, rows;
                                 element = document.getElementById('atcontent_chart');
                                 options = {
                                     colors: ['#13669d', '#ee8900'],
