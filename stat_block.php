@@ -18,8 +18,7 @@
                     Don't be puzzled of zeros. Check this page in a week or so
                 <?php } ?>
             </p>
-        </div>
-		
+        </div>		
         <div id="stat_text_step" style="float: left; margin-left: 15px; margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
                 <legend>Your AtContent Stats</legend>
@@ -52,8 +51,7 @@
                             views on your blog
                         </div>
                         <p><a class="button" href="http://atcontent.com/studio/statistics?wp=0" target="_blank" >Get details</a></p>
-                    </div>
-					
+                    </div>					
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
                         <div class="b-dashboard-brief__empty-chart"></div>
@@ -101,8 +99,7 @@
                         </script>
                         <?php } ?>
                     </div>
-                </div>
-				
+                </div>				
             <div class="clear"></div>
             <?php
                 } else {
