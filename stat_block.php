@@ -19,6 +19,7 @@
                 <?php } ?>
             </p>
         </div>
+		
         <div id="stat_text_step" style="float: left; margin-left: 15px; margin-bottom: 20px;">
             <fieldset id="stat-fieldset">
                 <legend>Your AtContent Stats</legend>
@@ -26,6 +27,7 @@
             <div id="follow_steps_block" >
                 <p>On average, bloggers increase audience at least 2.53x in just 3 weeks</p> 
             </div>
+			
             <div style="width:417px;">
                 <?php
                     if ( isset( $response["IsOK"] ) && $response["IsOK"] == true ) {
@@ -51,6 +53,7 @@
                         </div>
                         <p><a class="button" href="http://atcontent.com/studio/statistics?wp=0" target="_blank" >Get details</a></p>
                     </div>
+					
                     <div class="b-dashboard-brief__right b-dashboard-brief__right_front">
                         <?php if ( intval( $response["originalViews"] ) + intval( $response["repostViews"] ) == 0 ) { ?>
                         <div class="b-dashboard-brief__empty-chart"></div>
@@ -99,6 +102,7 @@
                         <?php } ?>
                     </div>
                 </div>
+				
             <div class="clear"></div>
             <?php
                 } else {
