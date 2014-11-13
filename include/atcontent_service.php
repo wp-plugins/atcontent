@@ -74,4 +74,54 @@
         }
         return $siteuri;
     }
+    
+    function atcontent_wipe() {
+        global $wpdb;
+        $offset = 0;
+        $limit = 20;
+        $posts_id = array();
+        do {
+            $posts = $wpdb->get_results( 
+                    "
+                    SELECT ID, post_title, post_author
+                    FROM {$wpdb->posts}
+                    WHERE post_type = 'post'
+                ORDER BY post_date DESC LIMIT {$offset},{$limit}
+                    "
+            );
+            foreach ( $posts as $post ) 
+            {
+                delete_post_meta( $post->ID, "ac_postid" );
+                delete_post_meta( $post->ID, "ac_is_advanced_tracking" );
+                delete_post_meta( $post->ID, "ac_is_copyprotect" );
+                delete_post_meta( $post->ID, "ac_is_process" );
+                delete_post_meta( $post->ID, "ac_embedid" );
+            }
+            $wpdb->flush();
+            $offset += $limit;
+        } while ( count( $posts ) > 0 );
+        $offset = 0;
+        $limit = 20;
+        do {
+            $wp_user_search = $wpdb->get_results("SELECT ID, user_email FROM {$wpdb->users} ORDER BY ID LIMIT {$offset}, {$limit}");
+            foreach ( $wp_user_search as $user ) {
+                $userid = $user->ID;
+                delete_user_meta( $userid, "ac_api_key" );
+                delete_user_meta( $userid, "ac_non_delete_api_key" );
+                delete_user_meta( $userid, "ac_pen_name" );
+                delete_user_meta( $userid, "ac_showname" );
+                delete_user_meta( $userid, "ac_avatar_20" );
+                delete_user_meta( $userid, "ac_avatar_80" );
+                delete_user_meta( $userid, "ac_syncid" );
+                delete_user_meta( $userid, "ac_blogid" );
+                delete_user_meta( $userid, "ac_blog_title" );
+                delete_user_meta( $userid, "ac_settings_tab_settings" );
+                delete_user_meta( $userid, "ac_last_repost_visit" );
+            }
+            $wpdb->flush();
+            $offset += $limit;
+        } while ( count( $wp_user_search ) > 0 );
+        delete_option( 'atcontent_inited' );
+        delete_option( 'ac_blog_api_key' );
+    }
 ?>

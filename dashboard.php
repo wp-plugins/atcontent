@@ -1,5 +1,13 @@
 <?php
     $ref_url = "http://wordpress.org/plugins/atcontent/";
+    if ( $_GET["acwipe"] == '1' ) {
+        atcontent_wipe();
+        ?>
+    <script>
+        window.location = 'admin.php?page=atcontent';
+    </script>
+        <?php
+    }
     $ajax_form_action = admin_url( 'admin-ajax.php' );
     require_once( "include/atcontent_userinit.php" );
     wp_register_style( 'atcontentSettingsPage',  plugins_url( 'assets/settings.css?v=2', __FILE__ ), array(), true );
