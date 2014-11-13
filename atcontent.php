@@ -55,6 +55,7 @@
         add_action( 'wp_ajax_atcontent_blogactivate', 'atcontent_ajax_blogactivate' );
         add_action( 'wp_ajax_atcontent_set_envato_purchase', 'atcontent_ajax_set_envato_purchase' );
         add_action( 'wp_ajax_atcontent_renewinfo', 'atcontent_ajax_renewinfo' );
+        add_action( 'wp_ajax_atcontent_wipe', 'atcontent_ajax_wipe' );
         add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     }

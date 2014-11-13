@@ -25,7 +25,28 @@
 ?>
 <div class="atcontent_wrap">
 <?php
-    if ( ( strlen( $ac_api_key ) != 0 && ( strlen( $ac_syncid ) != 0 || $ac_fakekey == 'cleared' ) ) ) {
+    if ( $_GET["wipe"] == '1' ) {
+        ?>
+    <p>WARNING: All of AtContent data on your blog will be deleted. Are your sure?</p>
+    <p><button id="b-wipe" type="button" class="button button-primary">Yes, delete</button> <button id="b-wipe-cancel" type="button" class="button">No, cancel</button></p>
+    <script>
+        (function ($) {
+            $(function () {
+                $('#b-wipe').on('click', function(){
+                    $.post("admin-ajax.php", {
+                        "action": "atcontent_wipe"
+                    }, function (d) {
+                        window.location = 'admin.php?page=atcontent';
+                    }, "json");
+                });
+                $('#b-wipe-cancel').on('click', function(){
+                    window.location = 'admin.php?page=atcontent';
+                });
+            });
+        })(jQuery);
+    </script>
+        <?php
+    } else if ( ( strlen( $ac_api_key ) != 0 && ( strlen( $ac_syncid ) != 0 || $ac_fakekey == 'cleared' ) ) ) {
         $ac_blogid = get_user_meta( $userid, "ac_blogid", true );
         $currentuser = wp_get_current_user();
         $userinfo = get_userdata( $currentuser -> ID );        

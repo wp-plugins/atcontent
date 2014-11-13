@@ -678,4 +678,9 @@ function atcontent_ajax_renewinfo(){
     exit;
 }
 
+function atcontent_ajax_wipe(){
+    atcontent_wipe();
+    exit;
+}
+
 ?>
