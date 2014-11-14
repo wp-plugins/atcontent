@@ -24,7 +24,7 @@
                 <legend>Your AtContent Stats</legend>
             </fieldset>
             <div id="follow_steps_block" >
-                <p>On average, bloggers increase audience at least 2.53x in just 3 weeks</p> 
+                <p>On average, bloggers increase audience at least 2.5x in just 3 weeks</p> 
             </div>
 			
             <div style="width:417px;">
