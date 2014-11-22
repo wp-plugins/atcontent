@@ -8,25 +8,28 @@ Tested up to: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily grow audience and traffic to your blog by reposting content with relevant bloggers. It’s free to use and takes no time to start!
+Grow your audience and traffic with just a few clicks. Easily repost content via relevant blogs, across all blogging platforms!
 
 == Description ==
 
 #### How AtContent Works ####
 
-1.	Simply, install the plugin and connect your blog to AtContent in a couple of clicks. 
-2.	Discover and follow bloggers by relevant tags.
-3.	Bloggers follow you back and see your content recommended for reposting in their feeds. The “repost” is an equivalent to a full size blog post.
+1.	Sign up and connect your blog to AtContent with a few clicks. 
+2.	Discover and follow like-minded bloggers in your niche, creating a personal AtContent Feed for reposting.
+3.	Repost content from AtContent Feed to increase page views and the amount of time people spend on your blog.
 
-When other bloggers repost your content, you grow the audience and drive free traffic to your blog through the links in reposts. Additionally, you see who reposts your content, how many times it’s been reposted, and the amount of views it’s gotten. If you update the content, it updates automatically on all blogs.
+AtContent enables bloggers to make reposts.
+The “repost” is equivalent to a full size blog post.
+
+You can see who reposts your content, how many times it has been reposted, and the number of views it has received. If you update the content, all reposts will be updated automatically.
 
 By reposting content, you increase page views, social sharing and time people spend on your blog, simply because now you have more content on your blog!
 
-[Some of our bloggers with quality content get 100x reposts and over 100,000 views in just 2 months](http://bit.ly/1pj4lbV)!
+[Our bloggers with quality content get up to 100x reposts and 100,000 views in 2 months](http://bit.ly/1pj4lbV)!
 
 #### About Reposts ####
 
-Each repost is signed with the author’s name and looks native on any blog. AtContent uses JavaScript (to avoid content duplication), nofollow and canonical tags for all reposts, therefore not affecting SEO.
+Each repost is signed with the author’s name and looks native on any blog. AtContent uses JavaScript, nofollow and canonical tags for all reposts. Therefore, it doesn’t affect SEO.
 
 [vimeo http://vimeo.com/97195778]
 
@@ -34,16 +37,15 @@ Each repost is signed with the author’s name and looks native on any blog. AtC
 
 == Installation ==
 
-1. Install the plugin on your blog and activate it,
-2. Connect AtContent plugin to AtContent to start using it - [Screenshot](http://bit.ly/LtC3hF),
+1. Install the AtContent plugin on your blog and activate it,
+2. Connect the plugin to AtContent to start using it - [Screenshot](http://bit.ly/LtC3hF),
 3. You are done!
 
 == Frequently asked questions ==
 
 = Why wouldn't Google penalize my site for content duplication? =
 
-We repost your posts AtContent to give you backlinks and hosting failure backup. All reposts contain Google's "nofollow" tag for each link, and "rel=canonical" link to your site. While indexing reposted content,
-search engines will get your site up in their rankings, but not AtContent.
+At AtContent we use “nofollow” and “canonical” tags for all links in reposts. We avoid content duplication by using JavaScript technology and show search engines the original source of content. Thus, reposts don’t affect your SEO at all.
 
 == Screenshots ==
 
