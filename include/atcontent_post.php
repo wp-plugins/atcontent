@@ -2,9 +2,9 @@
 
 function atcontent_publish_publication( $post_id ) {
     atcontent_save_meta( $post_id );
-	if ( !wp_is_post_revision( $post_id ) ) {
-		atcontent_process_publication( $post_id );
-	}
+    if ( !wp_is_post_revision( $post_id ) ) {
+            atcontent_process_publication( $post_id );
+    }
 }
 
 function atcontent_process_publication( $post_id ) {
@@ -43,7 +43,9 @@ function atcontent_process_publication( $post_id ) {
         if ( preg_match_all("/<script[^<]+src=\"https?:\/\/w\.atcontent\.com/", $testcontent, $ac_scripts_test ) && count( $ac_scripts_test ) > 0 ) {
             update_post_meta( $post_id, "ac_is_process", "2" );
         }
-        atcontent_api_import_publication( $ac_api_key, $ac_blogid, $ac_syncid, $post_id, $userid );
+        if ( !ac_isjsonly() ) {
+            atcontent_api_import_publication( $ac_api_key, $ac_blogid, $ac_syncid, $post_id, $userid );
+        }
     }
 }
 
@@ -58,8 +60,6 @@ function atcontent_save_meta( $post_id ) {
 
     if ( !current_user_can( 'edit_post', $post_id ) )
         return;
-
-    // OK, we're authenticated: we need to find and save the data
 
     $ac_is_process = "0";
     if ( isset( $_POST['atcontent_is_process'] ) ) {

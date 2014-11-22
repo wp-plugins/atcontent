@@ -327,6 +327,18 @@ function atcontent_ajax_gate() {
             } while ( count( $posts ) > 0 );
             echo json_encode( $posts_id );
             break;
+        case 'getinfo':
+            $key = $_POST['key'];
+            $userid = intval( $_POST['userid'] );
+            $ac_blog_api_key = get_option( 'ac_blog_api_key' );
+            if ( strlen( $ac_blog_api_key ) == 0 || $key != $ac_blog_api_key ) break;
+            echo json_encode( array( 
+                    'Url' => atcontent_get_blog_url(),
+                    'Title' => get_bloginfo( 'name' ),
+                    'BlogId' => get_user_meta( $userid, 'ac_blogid', true ),
+                    'SyncId' => get_user_meta( $userid, 'ac_syncid', true )
+                ) );
+            break;
         case 'getversion':
             echo AC_VERSION;
             break;
@@ -669,7 +681,11 @@ END;
 }
 
 function atcontent_ajax_blogactivate(){
-    echo json_encode(atcontent_api_activate());
+    $activate = atcontent_api_activate();
+    if ( !is_array( $activate ) || $activate["IsOK"] == false ) {
+        update_option( 'ac_jsonly', '1' );
+    }
+    echo json_encode( $activate );
     exit;
 }
 

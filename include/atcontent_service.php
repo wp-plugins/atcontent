@@ -123,5 +123,10 @@
         } while ( count( $wp_user_search ) > 0 );
         delete_option( 'atcontent_inited' );
         delete_option( 'ac_blog_api_key' );
+        delete_option( 'ac_jsonly' );
+    }
+    
+    function ac_isjsonly() {
+       return get_option( 'ac_jsonly' ) == '1';
     }
 ?>

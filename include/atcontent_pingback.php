@@ -63,7 +63,7 @@ function atcontent_activate() {
         $offset = 0;
         $limit = 20;
         $ac_blog_key = get_option( 'ac_blog_api_key' );
-        if (strlen( $ac_blog_key ) > 0 ) {
+        if ( strlen( $ac_blog_key ) > 0 ) {
             atcontent_api_blog_ping( $ac_blog_key, 'connected' );
         }
         do {

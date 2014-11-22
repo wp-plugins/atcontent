@@ -10,11 +10,18 @@
     wp_register_style( 'atcontentAdminIcons',  plugins_url( 'assets/icons.css?v=1', __FILE__ ), array(), true );
     wp_enqueue_style( 'atcontentAdminIcons' );
     require_once( "include/atcontent_userinit.php" );
-    $ac_marketplace = atcontent_api_marketplace( $ac_api_key );
-    $connect_url = admin_url( "admin.php?page=atcontent&marketplace=1" );
-    $ajax_form_action = admin_url( 'admin-ajax.php' );
-    include( 'include/atcontent_analytics.php' );
-    if ( isset( $ac_marketplace["IsOK"] ) && $ac_marketplace["IsOK"] == TRUE ) {
+    if (ac_isjsonly()) {
+?>
+<script>
+    window.location = 'http://atcontent.com/marketplace/';
+</script>
+<?php
+    } else {
+        $ac_marketplace = atcontent_api_marketplace( $ac_api_key );
+        $connect_url = admin_url( "admin.php?page=atcontent&marketplace=1" );
+        $ajax_form_action = admin_url( 'admin-ajax.php' );
+        include( 'include/atcontent_analytics.php' );
+        if ( isset( $ac_marketplace["IsOK"] ) && $ac_marketplace["IsOK"] == TRUE ) {
 ?>
 <div class="atcontent_wrap">
     <div id="ac_pingback_error" style="display:none" class="error">Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.</div>
@@ -223,7 +230,8 @@
 </script>
 <?php    } else { ?>
 <p>Something went wrong. Please, reload page.</p>
-<?php    } ?>
+<?php    }
+    }?>
 <script>
     var ajaxUrl = '<?php echo admin_url("admin-ajax.php"); ?>';
 </script>

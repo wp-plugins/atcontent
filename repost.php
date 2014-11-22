@@ -6,8 +6,20 @@
     if ( strlen( $ac_pen_name ) == 0 ) {
         $ac_pen_name = "AtContent";
     }
-    $img_url = plugins_url( 'assets/logo.png', __FILE__ );
-    // PingBack
+    $img_url = plugins_url( 'assets/logo.png', __FILE__ );  
+    include( 'include/atcontent_analytics.php' );
+?>
+<div class="b-ac-page b-ac-page_fluid" id="ac-page">
+<?php if ( ac_isjsonly() ) { ?>
+<script>
+    window.location = 'http://atcontent.com/posts/';
+</script>
+<?php } else if ( strlen( $ac_api_key ) == 0 ) { ?>
+<script>
+        window.location = "admin.php?page=atcontent&repost=1";
+</script>    
+<?php } else {
+// PingBack
     ?>
     <div id="ac_pingback_error" style="display:none" class="error">Could not connect to the <a href="http://atcontent.com" target=_blank>AtContent.com</a> server. Please, contact your hosting provider to solve this issue.</div>
     <script>
@@ -24,15 +36,7 @@
         })(jQuery);
     </script>
 <?php
-    //End PingBack  
-    include( 'include/atcontent_analytics.php' );
-?>
-<div class="b-ac-page b-ac-page_fluid" id="ac-page">
-<?php if ( strlen( $ac_api_key ) == 0 ) { ?>
-<script>
-        window.location = "admin.php?page=atcontent&repost=1";
-</script>    
-<?php } else {
+    //End PingBack
     update_user_meta( $userid, "ac_last_repost_visit", date( "Y-m-d H:i:s" ) );
     $currenttag = "";
     if ( isset( $_GET["tag"] ) ) {

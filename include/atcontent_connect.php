@@ -120,9 +120,25 @@
 					  location.href = 'admin.php?page=atcontent&step=1';
 				  <?php }?>
                 } else {
-                    
+                    var script = document.createElement('script');
+                    script.src = 'https://api.atcontent.com/v2/blog/activatejs?key=' + encodeURIComponent('<?php echo $ac_blog_api_key ?>') + '&userId=<?php echo $userid ?>&gate=' + encodeURIComponent('<?php echo admin_url('admin-ajax.php') ?>') + '&jsonp_callback=ac_activate_callback&r=' + Math.random();
+                    document.body.appendChild(script);
                 }
             }, "json");
+        }
+        
+        window.ac_activate_callback = function(e) {
+            if (e.state == 'ok') {
+                <?php 
+					$ac_is_envato_user = get_user_meta( wp_get_current_user() -> ID, "ac_is_envato_version", true );
+					if($ac_is_envato_user == "1" ){?>
+					  location.href = 'admin.php?page=atcontent&step=envatoUser';
+				  <?php } else{?>
+					  location.href = 'admin.php?page=atcontent&step=1';
+				  <?php }?>
+            } else {
+                alert('Sorry, your blog is isolated from AtContent service.');
+            }
         }
         
         function disableSignUp() {

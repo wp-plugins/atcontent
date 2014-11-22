@@ -52,32 +52,6 @@
               $ac_is_process_checked = 'checked="checked"';
           }
           $ac_postid = get_post_meta( $post->ID, "ac_postid", true );
-          $ac_user_copyprotect = get_user_meta( $userid, "ac_copyprotect", true );
-          if ( strlen( $ac_user_copyprotect ) == 0 ) $ac_user_copyprotect = "1";
-          $ac_user_paidrepost = get_user_meta( $userid, "ac_paidrepost", true );
-          if ( strlen( $ac_user_paidrepost ) == 0 ) $ac_user_paidrepost = "0";
-          $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
-          if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = $ac_user_copyprotect;
-          $ac_is_copyprotect_checked = "";
-          if ( $ac_is_copyprotect == "1" ) {
-              $ac_is_copyprotect_checked = "checked=\"checked\"";          }
-          $ac_is_advanced_tracking = get_post_meta( $post->ID, "ac_is_advanced_tracking", true );
-          if ( strlen( $ac_is_advanced_tracking ) == 0 ) $ac_is_advanced_tracking = "1";
-          $ac_is_advanced_tracking_checked = "";
-          if ( $ac_is_advanced_tracking == "1" ) {
-              $ac_is_advanced_tracking_checked = "checked=\"checked\"";
-          }          
-          $plagiarism_quota = 0;
-          $advanced_tracking_quota = 0;
-          $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
-          $subscriptions_count = 0;
-          if ( isset( $quotas_result["IsOK"] ) && $quotas_result["IsOK"] == TRUE ) {
-              $subscriptions_count = count ( $quotas_result["Subscriptions"] );
-              $plagiarism_quota = intval( $quotas_result["Quotas"]["PlagiarismProtection"]["Count"] );
-              $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
-          }
-          $ac_is_copyprotect_enabled = $plagiarism_quota > 0;
-          $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
           ?>
     <div class="misc-pub-section">
         <label>
@@ -89,6 +63,30 @@
             <?php echo $ac_show_name; ?>
         </a>
     </div>
+<?php
+          $ac_is_copyprotect = get_post_meta( $post->ID, "ac_is_copyprotect", true );
+          if ( strlen( $ac_is_copyprotect ) == 0 ) $ac_is_copyprotect = '1';
+          $ac_is_copyprotect_checked = '';
+          if ( $ac_is_copyprotect == '1' ) {
+              $ac_is_copyprotect_checked = "checked=\"checked\"";
+          }          
+          $plagiarism_quota = 0;
+          $advanced_tracking_quota = 0;
+        if ( ac_isjsonly() ) {
+        ?>
+        <?php
+        } else {
+            $quotas_result = atcontent_api_get_quotas ( $ac_api_key );
+            $subscriptions_count = 0;
+            if ( isset( $quotas_result["IsOK"] ) && $quotas_result["IsOK"] == TRUE ) {
+                $subscriptions_count = count ( $quotas_result["Subscriptions"] );
+                $plagiarism_quota = intval( $quotas_result["Quotas"]["PlagiarismProtection"]["Count"] );
+                $advanced_tracking_quota = intval( $quotas_result["Quotas"]["DetailedStat"]["Count"] );
+            }
+            $ac_is_copyprotect_enabled = $plagiarism_quota > 0;
+            $ac_is_advanced_tracking_enabled = $advanced_tracking_quota > 0;
+            ?>
+    
     <div class="misc-pub-section">
         <label>
             <input type="checkbox" id="atcontent_is_copyprotect" name="atcontent_is_copyprotect" value="1" <?php echo $ac_is_copyprotect_checked; ?> <?php echo $ac_is_copyprotect_enabled ? '' : 'disabled="disabled"'; ?> /> 
@@ -105,6 +103,7 @@
         <input type="hidden" name="atcontent_is_copyprotect_enabled" value="<?php echo $ac_is_copyprotect_enabled ? "1" : "0"; ?>" />
     </div>
     <?php
+        }
         $ac_postid_to_promote = $ac_postid;
         if ( strlen( $ac_postid_to_promote ) == 0 ) {
             $ac_postid_to_promote = get_post_meta( $post->ID, "ac_repost_postid", true ); 
