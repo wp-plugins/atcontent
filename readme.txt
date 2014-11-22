@@ -14,14 +14,14 @@ Grow your audience and traffic with just a few clicks. Easily repost content via
 
 #### How AtContent Works ####
 
-1.	Sign up and connect your blog to AtContent with a few clicks. 
-2.	Discover and follow like-minded bloggers in your niche, creating a personal AtContent Feed for reposting.
-3.	Repost content from AtContent Feed to increase page views and the amount of time people spend on your blog.
-
 AtContent enables bloggers to make reposts.
 The “repost” is equivalent to a full size blog post.
 
 You can see who reposts your content, how many times it has been reposted, and the number of views it has received. If you update the content, all reposts will be updated automatically.
+
+1.	Sign up and connect your blog to AtContent with a few clicks. 
+2.	Discover and follow like-minded bloggers in your niche, creating a personal AtContent Feed for reposting.
+3.	Repost content from AtContent Feed to increase page views and the amount of time people spend on your blog.
 
 By reposting content, you increase page views, social sharing and time people spend on your blog, simply because now you have more content on your blog!
 
