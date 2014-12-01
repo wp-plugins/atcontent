@@ -339,6 +339,18 @@ function atcontent_ajax_gate() {
                     'SyncId' => get_user_meta( $userid, 'ac_syncid', true )
                 ) );
             break;
+        case 'getuserinfo':
+            $key = $_POST['key'];
+            $userid = intval( $_POST['userid'] );
+            $ac_api_key = get_user_meta( $userid, 'ac_api_key', true );
+            if ( strlen( $ac_api_key ) == 0 || $ac_api_key != $key ) break;
+            echo json_encode( array(
+                'BlogId' => get_user_meta( $userid, 'ac_blogid', true ),
+                'SyncId' => get_user_meta( $userid, 'ac_syncid', true ),
+                'BlogKey' => get_option( 'ac_blog_api_key' ),
+                'Main' => get_option( 'ac_main_userid' )
+            ) );
+            break;
         case 'getversion':
             echo AC_VERSION;
             break;
