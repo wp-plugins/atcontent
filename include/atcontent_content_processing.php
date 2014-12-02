@@ -13,6 +13,9 @@
             if ( !is_single() && $ac_mainpage_repost == "0" ) {
                 $content .= "<style>#post-{$post->ID} .CPlase_panel {display:none;}</style>";
             }
+            if ( has_post_thumbnail ( $post->ID ) ) {
+                $content = '<div data-ac-options="hide_cover">' . $content . '</div>';
+            }
             return $content;
         }
         if ( in_array( 'the_excerpt', (array) $wp_current_filter ) ) {
