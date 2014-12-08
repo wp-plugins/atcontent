@@ -135,14 +135,15 @@ function atcontent_ajax_gate() {
                     "<div class=\"atcontent_widget\" data-ac-options=\"impct-rad-id\" data-ac-impct-rad-id=\"{$impactradiusid}\"><div class=\"atcontent_preview\"><p>" . 
                        $repost_preview . "</p></div>" .
                     "<!-- Copying the code of this post you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-                    "<script src=\"{$impactradiustrackingurl}?u=https%3A%2F%2Fw.atcontent.com%2F-%2F{$embedid_ir}{$ac_pen_name}%2F{$ac_postid}%2FTitle%2Fh3\"></script><!--more-->" . 
+                    "<script src=\"{$impactradiustrackingurl}?u=https%3A%2F%2Fw.atcontent.com%2F-%2F{$embedid_ir}{$ac_pen_name}%2F{$ac_postid}%2FFace%2Fh3\"></script><!--more-->" . 
                     "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
                 } else {
                     $ac_content = 
-                    "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
-                    "<!-- Copying the code of this post you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+                    "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>\r\n" . 
                     "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>\r\n" . 
+                    "<!-- Copying the code of this post you agree with Terms of services AtContent™ (http://atcontent.com/terms/) -->\r\n" .
+                    "</div>";
                 }
                 $ac_repost_setting = atcontent_get_user_settings_oneclick_repost( intval( $userid ) );
                 $post_status = $ac_repost_setting == "1" ? "publish" : "draft";
@@ -535,7 +536,7 @@ function atcontent_ajax_repost() {
       remove_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
       $ac_content = 
       "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>" .
-      "<!-- Copying the code of this post you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
+      "<!-- Copying the code of this post you agree with Terms of services AtContent™ (http://atcontent.com/terms/) -->" .
       "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
       "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
       $ac_repost_setting = atcontent_get_user_settings_oneclick_repost( intval( $userid ) );
