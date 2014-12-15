@@ -3,12 +3,12 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.5.17
+    Version: 7.12.6
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
 
-    define( 'AC_VERSION', '7.12.5.17' );
+    define( 'AC_VERSION', '7.12.6' );
     define( 'AC_NO_PROCESS_EXCERPT_DEFAULT', "1" );
     define( 'AC_NO_COMMENTS_DEFAULT', "1" );
 
@@ -59,6 +59,7 @@
         add_filter( 'manage_edit-post_columns', 'atcontent_promote_posts_column' );
         add_action( 'manage_posts_custom_column', 'atcontent_promote_posts_row' );
     }
+    add_filter( 'wp_default_editor', 'atcontent_disable_rich_editor', 1);
     add_filter( 'the_content', 'atcontent_the_content', 1 );
     add_filter( 'the_excerpt', 'atcontent_the_excerpt', 1 );
     add_action( 'wp_ajax_nopriv_atcontent_gate', 'atcontent_ajax_gate' );
@@ -74,6 +75,16 @@
         unset( $columns['date']);
         $columns['date'] = $date;
         return $columns;
+    }
+
+    function atcontent_disable_rich_editor($r) {
+        global $post;
+        if ($post != NULL ) {
+            if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $post->post_content, $matches ) ) {
+                return 'html';
+            }
+        }        
+        return $r;
     }
 
     function atcontent_promote_posts_row ( $colname ){

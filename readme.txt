@@ -56,6 +56,9 @@ At AtContent we use “nofollow” and “canonical” tags for all links in rep
 
 == Changelog ==
 
+= 7.12.6 =
+* Better reposts handling.
+
 = 7.12.4 =
 * More options to connect AtContent.
 

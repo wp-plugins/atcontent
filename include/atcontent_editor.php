@@ -110,11 +110,22 @@
         }
         if ( strlen ( $ac_postid_to_promote ) > 0 ) {
             ?>
-                <a class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid)?>/">
+                <a class="button-primary ac-button-promote" target="_blank" href="https://atcontent.com/campaigns/create/<?php echo($ac_postid_to_promote)?>/">
                     <span class="ac-logo-promote"></span>
                     Promote with AtContent
                 </a>
             <?php
+        }
+        if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $post->post_content, $matches ) ) {
+            ?>
+<script>
+    (function ($) {
+        $(function () {
+            $(".wp-editor-tabs").remove();
+        });
+    })(jQuery);
+</script>
+<?php
         }
     ?>
     <input type="hidden" name="atcontent_save_meta" value="1">
