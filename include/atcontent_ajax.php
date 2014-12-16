@@ -135,13 +135,13 @@ function atcontent_ajax_gate() {
                     "<div class=\"atcontent_widget\" data-ac-options=\"impct-rad-id\" data-ac-impct-rad-id=\"{$impactradiusid}\"><div class=\"atcontent_preview\"><p>" . 
                        $repost_preview . "</p></div>" .
                     "<!-- Copying the code of this post you agree with Terms of services AtContent™ (https://www.atcontent.com/Terms/) -->" .
-                    "<script src=\"{$impactradiustrackingurl}?u=https%3A%2F%2Fw.atcontent.com%2F-%2F{$embedid_ir}{$ac_pen_name}%2F{$ac_postid}%2FFace%2Fh3\"></script><!--more-->" . 
-                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
+                    "<script data-cfasync=\"false\" src=\"{$impactradiustrackingurl}?u=https%3A%2F%2Fw.atcontent.com%2F{$embedid_ir}{$ac_pen_name}%2F{$ac_postid}%2FFace\"></script><!--more-->" . 
+                    "<script data-cfasync=\"false\" data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script></div>";
                 } else {
                     $ac_content = 
                     "<div class=\"atcontent_widget\"><div class=\"atcontent_preview\"><p>" . $repost_preview . "</p></div>\r\n" . 
-                    "<script src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
-                    "<script data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>\r\n" . 
+                    "<script data-cfasync=\"false\" src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Face\"></script><!--more-->" . 
+                    "<script data-cfasync=\"false\" data-ac-src=\"https://w.atcontent.com/{$embedid}{$ac_pen_name}/{$ac_postid}/Body\"></script>\r\n" . 
                     "<!-- Copying the code of this post you agree with Terms of services AtContent™ (http://atcontent.com/terms/) -->\r\n" .
                     "</div>";
                 }

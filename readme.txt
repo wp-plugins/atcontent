@@ -56,6 +56,9 @@ At AtContent we use “nofollow” and “canonical” tags for all links in rep
 
 == Changelog ==
 
+= 7.12.7 =
+* Impact radius and cloudflare fix.
+
 = 7.12.6 =
 * Better reposts handling.
 
