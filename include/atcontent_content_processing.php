@@ -5,13 +5,9 @@
         if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $content, $matches ) ) {
             for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
-                $cfasync = '';
-                if ( strpos( $matches[0][$index], 'data-cfasync="false"') == FALSE ) {
-                    $cfasync = 'data-cfasync="false"';
-                }
                 $content = str_replace( 
                     $matches[0][$index], 
-                    "<script {$cfasync} " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
+                    "<script data-cfasync=\"false\" " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
                     $content );
             }
             if ( !is_single() && $ac_mainpage_repost == "0" ) {
