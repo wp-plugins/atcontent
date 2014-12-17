@@ -2,7 +2,7 @@
      function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter;
         $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( intval( $post->post_author ) );
-        if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+)\"/', $content, $matches ) ) {
+        if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+|https?:\/\/[^/]+\/c\/\d+\/\d+\/\d+\?u=https?%3A%2F%2Fw\.atcontent\.com(.+))\"/', $content, $matches ) ) {
             for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
                 $content = str_replace( 
