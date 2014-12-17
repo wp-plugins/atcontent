@@ -6,7 +6,7 @@
             $scriptsCount = 0;
             for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
-                if ( preg_match( '/https?:\/\/[^\/]+\/c\/\d+\/\d+\/\d+\?u=(.+)/', $matches[1] ) || preg_match( '/https?:\/\/w\.atcontent\.com\//', $matches[1] ) ) {
+                if ( preg_match( '/https?:\/\/[^\/]+\/c\/\d+\/\d+\/\d+\?u=(.+)/', $matches[1][$index] ) || preg_match( '/https?:\/\/w\.atcontent\.com\//', $matches[1][$index] ) ) {
                     $content = str_replace( 
                         $matches[0][$index], 
                         "<script data-cfasync=\"false\" " . ( $scriptsCount > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
