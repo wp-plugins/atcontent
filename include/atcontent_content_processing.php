@@ -2,13 +2,17 @@
      function atcontent_the_content( $content = '' ) {
         global $post, $wp_current_filter;
         $ac_mainpage_repost = atcontent_get_user_settings_mainpage_repost( intval( $post->post_author ) );
-        if ( preg_match_all( '/<script[^<]+src="(https?:\/\/w\.atcontent\.com\/[^\"]+|https?:\/\/[^/]+\/c\/\d+\/\d+\/\d+\?u=https?%3A%2F%2Fw\.atcontent\.com(.+))\"/', $content, $matches ) ) {
+        if ( preg_match_all( '/<script[^<]+src="([^\"]+)\"/', $content, $matches ) ) {
+            $scriptsCount = 0;
             for ( $index = 0; $index < count( $matches[1] ); $index++ )
             {
-                $content = str_replace( 
-                    $matches[0][$index], 
-                    "<script data-cfasync=\"false\" " . ( $index > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
-                    $content );
+                if ( preg_match( '/https?:\/\/[^\/]+\/c\/\d+\/\d+\/\d+\?u=(.+)/', $matches[1] ) || preg_match( '/https?:\/\/w\.atcontent\.com\//', $matches[1] ) ) {
+                    $content = str_replace( 
+                        $matches[0][$index], 
+                        "<script data-cfasync=\"false\" " . ( $scriptsCount > 0 ? "data-ac-" : "" ) . "src=\"" . $matches[1][$index] . "\"", 
+                        $content );
+                    $scriptsCount += 1;
+                }
             }
             if ( !is_single() && $ac_mainpage_repost == "0" ) {
                 $content .= "<style>#post-{$post->ID} .CPlase_panel {display:none;}</style>";
