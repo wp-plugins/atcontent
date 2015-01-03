@@ -184,7 +184,7 @@
     function atcontent_admin_head() {
         $userid = wp_get_current_user()->ID;
         $ac_api_key = get_user_meta( $userid, "ac_api_key", true );
-        $ac_syncid = get_user_meta($userid, "ac_syncid", true );
+        $ac_syncid = get_user_meta( $userid, "ac_syncid", true );
 
         $connect_url = admin_url( "admin.php?page=atcontent" );
         $img_url = plugins_url( 'assets/logo.png', dirname( __FILE__ ) );

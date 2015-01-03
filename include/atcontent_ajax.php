@@ -516,7 +516,7 @@ function atcontent_ajax_get_sync_stat() {
 function atcontent_ajax_repost() {
       include( "atcontent_userinit.php" );
       $ac_postid = $_POST['ac_post'];
-      $repost_title = "Not found";
+      $repost_title = "";
       $repost_preview = "";
       $new_post = array(
           'post_title'    => 'New repost',
