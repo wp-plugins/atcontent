@@ -3,7 +3,7 @@
     Plugin Name: AtContent
     Plugin URI: http://atcontent.com/
     Description: Dramatically increase audience and drive more traffic to your blog by connecting with relevant bloggers. It’s free to join!
-    Version: 7.12.8.11
+    Version: 7.12.9
     Author: AtContent, IFFace, Inc.
     Author URI: http://atcontent.com/
     */
@@ -145,7 +145,7 @@
         add_submenu_page( 'atcontent', $repost_title, $repost_title, 'publish_posts', 'atcontent_reposts', 'atcontent_reposts_callback' );
         add_submenu_page( 'atcontent', 'AtContent Settings', 'Settings', 'edit_posts', 'atcontent', 'atcontent_settings_callback' );
         add_menu_page( 'AtContent', 'AtContent', 'edit_posts', 'atcontent', 'atcontent_settings_callback', $ac_logo, $atcontent_dashboard_key );
-        add_submenu_page( 'atcontent', 'Monetize Blog', 'Monetize Blog<span class="ac-dollar" title="Monetize your blog"><span class="ac-dollar__val">$</span></span>', 'publish_posts', 'atcontent_monetize', 'atcontent_monetize_callback' );
+        //add_submenu_page( 'atcontent', 'Monetize Blog', 'Monetize Blog<span class="ac-dollar" title="Monetize your blog"><span class="ac-dollar__val">$</span></span>', 'publish_posts', 'atcontent_monetize', 'atcontent_monetize_callback' );
         atcontent_fix_menu( 'atcontent_reposts', 'atcontent', 'atcontent_reposts_callback' );
                 
         add_action( 'admin_print_styles', 'atcontent_admin_styles' );

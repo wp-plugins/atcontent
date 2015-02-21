@@ -55,6 +55,8 @@ At AtContent we use “nofollow” and “canonical” tags for all links in rep
 4. AtContent plugin settings to fit your blog perfectly.
 
 == Changelog ==
+= 7.12.9 =
+* "Monetize Blog" page transferred to http://snapad.co
 
 = 7.12.7 =
 * Impact radius and cloudflare fix.
