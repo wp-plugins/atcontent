@@ -516,7 +516,7 @@ function atcontent_ajax_get_sync_stat() {
 function atcontent_ajax_repost() {
       include( "atcontent_userinit.php" );
       $ac_postid = $_POST['ac_post'];
-      $matches = preg_grep("/[0-9a-zA-Z\-_]{11}\.text/", explode("\n", $ac_postid));
+      $matches = preg_grep("/^[0-9a-zA-Z\-_]{11}\.text$/", explode("\n", $ac_postid));
       if ( count( $matches) !== 1 ) return;
       $repost_title = "";
       $repost_preview = "";
