@@ -56,8 +56,13 @@ function atcontent_dashboard_widget_function() {
                             '</div></td>' + 
                             '</tr>';
                     
+                    if (r.subscription == 'Free' && parseInt(r.newPostQuota) > -1) {
+                        html += '<tr><td><div class="b-dashboard-brief__left"><div class="b-dashboard-brief__value b-dashboard-brief__value_small b-dashboard-brief__value_blue">' + r.newPostQuota + '</div>' + 
+                                '<div class="b-dashboard-brief__description b-dashboard-brief__description_small">posts to be published<br> on AtContent this month<br><br></div></div></td><td></td></tr>';
+                    }
+                    
                     html += '</table></div>';
-                    html += '<p class="b-dashboard-brief__left"><a class="button" href="http://atcontent.com/studio/statistics/?wp=1" target="_blank">Get details</a></p>';
+                    
                     html += '<div class="clear"></div></div>';
                     $('#atcontent_dashboard_inside').html(html);
                     $('#ac-dashboard-cumulative-stats').on('click', function(e){

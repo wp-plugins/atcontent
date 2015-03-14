@@ -97,7 +97,7 @@ function atcontent_api_readership( $siteuri, $postids, $api_key ) {
         '&AppID=' . urlencode( 'WordPress' ) . 
         '&PostIDs=' . urlencode( $postids ) . 
         '&Key=' . urlencode( $api_key ) . 
-        '&v4=1' .
+        '&v5=1' .
         '&ExternalVersion=' . urlencode( AC_VERSION );
     return atcontent_do_post( 'http://api.atcontent.com/v1/native/readership', $post_content );
 }
