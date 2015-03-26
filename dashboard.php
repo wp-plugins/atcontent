@@ -25,7 +25,7 @@
 ?>
 <div class="atcontent_wrap">
 <?php
-    if ( $_GET["wipe"] == '1' ) {
+    if ( isset($_GET["wipe"]) && $_GET["wipe"] == '1' ) {
         ?>
     <p>WARNING: All of AtContent data on your blog will be deleted. Are your sure?</p>
     <p><button id="b-wipe" type="button" class="button button-primary">Yes, delete</button> <button id="b-wipe-cancel" type="button" class="button">No, cancel</button></p>
