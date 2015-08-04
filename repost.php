@@ -87,7 +87,7 @@
             <p style="line-height: 12px">
                 <a href="http://atcontent.com/subscribe/?wp=1" target="_blank" class="button button-nav button-large">Feature My Posts</a>
             </p>
-            <br>
+            <br/>
             <nav class="b-tags-list b-tags-list_aside">
                 <?php foreach ( $pageAnswer["Tags"] as $tagId => $tagValue ) { ?>
                     <a class="b-tag<?php if ( $currenttag == $tagId ) echo " b-tag_current"; if ( in_array( $tagId, $pageAnswer["UserTags"] )) echo " b-tag_my"; ?>" href="admin.php?page=atcontent_reposts&tag=<?php echo $tagId ?>"><?php echo $tagValue ?></a>
@@ -345,7 +345,7 @@
         <div class="b-ac-acc__pane b-ac-acc__pane_open">
             <div class="b-ac-acc__pane-content">
                 <div class="b-ac-settings-section">
-                    <br><br><br>
+                    <br/><br/><br/>
                     <div class="b-ac-following">
                         <p>
                             <a href="http://atcontent.com/following-wp/" class="button button-nav button-hero" target="_blank" id="follow_bloggers_button">Discover and Follow Bloggers</a>

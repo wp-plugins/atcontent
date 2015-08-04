@@ -21,7 +21,7 @@
         <?php if ( isset( $_GET["repost"] ) && $_GET["repost"] == "1" ) { ?>
             <h1>To get posts from Content Feed you need to connect<br> your profile to AtContent.</h1>
         <?php } else { ?>
-            <h1 id="connection_header">AtContent helps dramatically increase your audience and drive more traffic to your blog. You can monetize your blog with relevant sponsored posts.<br>It's free to join!</h1>
+            <h1 id="connection_header">AtContent helps increase your audience and drive more traffic to your blog. You can monetize your blog with relevant sponsored posts.<br>It's free to join!</h1>
         <?php }?>
 	        <p id="connection_rules_title" style="font-size: 1.6em; font-weight: 300;display: none;">The connection will create an account on AtContent.com.</p>
                 <div id="user_data_form" style="display: none;">
@@ -400,5 +400,5 @@
     })(jQuery);
 </script>
 </div>
-    <div class="clear"></div>
+    <div class="clear"></div> 
 </form>
