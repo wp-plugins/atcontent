@@ -66,7 +66,7 @@
     <div class="b-ac-mobile-menu">
         <div class="b-ac-mobile-menu__tags-toggle" id="ac-tags-toggle"></div>
         <div class="b-ac-mobile-menu__nav">
-            <a href="admin.php?page=atcontent_reposts&tag=feed" class="b-ac-mobile-menu__link<?php if ( $currenttag == "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">My Feed</a>
+            <a href="admin.php?page=atcontent_reposts&tag=feed&" class="b-ac-mobile-menu__link<?php if ( $currenttag == "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">My Feed</a>
             <a href="admin.php?page=atcontent_reposts" class="b-ac-mobile-menu__link<?php if ( $currenttag != "feed" ) echo " b-ac-mobile-menu__link_current"; ?>">AtContent Featued</a>
         </div>
     </div>
@@ -76,7 +76,7 @@
         <div class="l-ac-grid__col-left">
             <ul class="b-ac-main-menu">
                 <li class="b-ac-main-menu__item<?php if ( $currenttag == "feed" ) echo " b-ac-main-menu__item_current"; ?>">
-                    <a href="admin.php?page=atcontent_reposts&tag=feed">My Feed</a>
+                    <a href="admin.php?page=atcontent_reposts&tag=feed&">My Feed</a>
                 </li>
                 <li class="b-ac-main-menu__item<?php if ( $currenttag != "feed" ) echo " b-ac-main-menu__item_current"; ?>">
                     <a href="admin.php?page=atcontent_reposts">AtContent Featured</a>

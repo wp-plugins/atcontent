@@ -1,7 +1,7 @@
 <?php
     function atcontent_add_meta_boxes() {
         add_meta_box(
-            'atcontent_sectionid',
+            'atcontent_sectionid', 
             __( 'AtContent Post Settings', 'atcontent_textdomain' ),
             'atcontent_inner_custom_box',
             'post', 'side', 'high'
@@ -126,7 +126,7 @@
     })(jQuery);
 </script>
 <?php
-        }
+        } 
     ?>
     <input type="hidden" name="atcontent_save_meta" value="1">
     <?php
